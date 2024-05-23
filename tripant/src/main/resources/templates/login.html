@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="text-center">
+	    <a th:href="@{https://kauth.kakao.com/oauth/authorize(client_id=${kakaoApiKey}, redirect_uri=${kakaoRedirectUri}, response_type='code', prompt='login')}">
+	        <img src="/images/kakao_login_medium.png">
+	    </a>
+	</div>
+	<div class="text-center">
+	    <a th:href="@{https://kauth.kakao.com/oauth/logout(client_id=${kakaoApiKey}, logout_redirect_uri=${kakaoLogoutRedirectUri})}">
+	        카카오 로그아웃
+	    </a>
+	</div>
+	<div class="text-center">
+	    <a th:href="@{https://nid.naver.com/oauth2.0/authorize(response_type='code', client_id=${naverClientId}, redirect_uri=${naverRedirectUri}, state=${state})}">
+	        <img src="/images/naver_login.png">
+	    </a>
+	</div>
+	<div class="text-center">
+	    <a th:href="@{https://kauth.kakao.com/oauth/logout(client_id=${kakaoApiKey}, logout_redirect_uri=${logoutRedirectUri})}">
+	        네이버 로그아웃
+	    </a>
+	</div>
+</body>
+</html>
