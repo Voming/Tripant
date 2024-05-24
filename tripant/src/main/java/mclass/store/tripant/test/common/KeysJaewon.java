@@ -14,27 +14,33 @@ import lombok.Getter;
 @PropertySource("classpath:/keyproperties/apikeys.properties")
 public class KeysJaewon {
 	
+	private final String isLocal = "local";// local, tripant
+	
 	//도메인
-	@Value("${domain.local}")
-	private String localDomain;
-	@Value("${domain.tripant}")
-	private String tripantDomain;
+	@Value("${domain."+isLocal+"}")
+	private String domain;
 	
 	//카카오 로그인/로그아웃
-	@Value("${kakao.login.local.url}")
-	private String kakaoLoginLocalUrl;
+	@Value("${kakao.login."+isLocal+".url}")
+	private String kakaoLoginUrl;
 	@Value("${kakao.login.clientid}")
 	private String kakaoClientId;
 	@Value("${kakao.login.clientsecret}")
 	private String kakaoClientSecret;
-	@Value("${kakao.login.local.redirecturi}")
+	@Value("${kakao.login."+isLocal+".redirecturi}")
 	private String kakaoLoginRedirectUri;
-	@Value("${kakao.logout.local.redirecturi}")
+	@Value("${kakao.logout."+isLocal+".redirecturi}")
 	private String kakaoLogoutRedirectUri;
 	
 	//네이버 로그인/로그아웃
-	@Value("${naver.login.local.url}")
-	private String naverLoginLocalUrlPre;
+	@Value("${naver.login."+isLocal+".url}")
+	private String naverLoginUrl;
+	@Value("${naver.login.clientid}")
+	private String naverLoginClientId;
+	@Value("${naver.login.clientsecret}")
+	private String naverLoginClientSecret;
+	@Value("${naver.login."+isLocal+".callbackurl}")
+	private String naverCallbackUrl;
 	
 	
 }
