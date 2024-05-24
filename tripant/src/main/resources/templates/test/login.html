@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="text-center">
+	    <a th:href="@{/login/kakao}">
+	        <img src="/images/kakao_login_medium.png" width="105px" height="45px">
+	    </a>
+	</div>
+	<div class="text-center">
+	    <a th:href="@{/logout/kakao}">
+	        카카오 로그아웃
+	    </a>
+	</div>
+	<div class="text-center">
+	    <a th:href="@{/login/naver}">
+	        <img src="/images/naver_login.png" width="105px" height="45px">
+	    </a>
+	</div>
+	<div class="text-center">
+	    <a th:href="@{/logout/naver}">
+	        네이버 로그아웃
+	    </a>
+	</div>
+</body>
+</html>
