@@ -19,12 +19,12 @@ public class LoginController {
 	
 	@GetMapping("/login/kakao")
 	public String kakaoLogin() {
-		return "redirect:"+keysJaewon.getKakaoLoginLocalUrl();
+		return "redirect:"+keysJaewon.getKakaoLoginUrl();
 	}
 	
 	@GetMapping("/login/naver")
 	public String naverLogin() {
-		return "redirect:"+keysJaewon.getNaverLoginLocalUrlPre();
+		return "redirect:"+keysJaewon.getNaverLoginUrl();
 	}
 	
 }

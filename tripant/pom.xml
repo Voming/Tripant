@@ -31,14 +31,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
@@ -102,7 +102,8 @@
 		    <version>2.10.1</version>
 		</dependency>
 		
-		<!-- logback 라이브러리 제외 -->
+		<!-- 
+		logback 라이브러리 제외
 		<dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-web</artifactId>
@@ -113,12 +114,15 @@
 		    </exclusion>
 		  </exclusions>
 		</dependency>
+		 -->
 		
-		<!--2.1 logging -->
+		<!-- 
+		2.1 logging
 		<dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
+		 -->
 		
 	</dependencies>
 
