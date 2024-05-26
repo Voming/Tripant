@@ -25,6 +25,7 @@ public class KakaoApi {
 	
 	private final KeysJaewon keysJaewon;
 	
+	//토큰 받기
 	public String getAccessToken(String code) {
 		String accessToken = "";
 		String refreshToken = "";
@@ -40,6 +41,7 @@ public class KakaoApi {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			
+			//파라미터 입력
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=").append(keysJaewon.getKakaoClientId());
 			sb.append("&client_secret=").append(keysJaewon.getKakaoClientSecret());
@@ -80,6 +82,7 @@ public class KakaoApi {
 		return accessToken;
 	}
 	
+	//사용자 정보 가져오기
 	public HashMap<String, Object> getUserInfo(String accessToken){
 		HashMap<String, Object> userInfo = new HashMap<>();
 		String reqUrl = "https://kapi.kakao.com/v2/user/me";
@@ -87,6 +90,7 @@ public class KakaoApi {
 			URL url = new URL(reqUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
+			//파라미터 입력
 			conn.setRequestProperty("Authorization", "Bearer "+accessToken);
 			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;utf-8");
 			
@@ -112,7 +116,7 @@ public class KakaoApi {
 			
 			HashMap<String, Object> resultMap = gson.fromJson(result, HashMap.class);
 			
-			
+			Object userId = resultMap.get("id");
 			String propertiesStr = gson.toJson(resultMap.get("properties"));
 			System.out.println(propertiesStr);
 			String kakaoAccountStr = gson.toJson(resultMap.get("kakao_account"));
@@ -123,6 +127,7 @@ public class KakaoApi {
 			String nickname = (String)properties.get("nickname");
 			String email = (String)kakaoAccount.get("email");
 			
+			userInfo.put("userId", userId);
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
 			
@@ -133,7 +138,8 @@ public class KakaoApi {
 		
 		return userInfo;
 	}
-	
+
+	//로그아웃 처리
 	public void kakaoLogout(String accessToken) {
 		String reqUrl = "https://kapi.kakao.com/v1/user/logout";
 		
@@ -141,6 +147,7 @@ public class KakaoApi {
 			URL url = new URL(reqUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
+			//파라미터 입력
 			conn.setRequestProperty("Authorization", "Bearer "+accessToken);
 			
 			int responseCode = conn.getResponseCode();
@@ -160,6 +167,41 @@ public class KakaoApi {
 		    }
 		    String result = responseSb.toString();
 		    System.out.println("kakao logout - responseBody = "+result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	//카카오 연동 해제
+	public void kakaoUnlink(String accessToken) {
+		String reqUrl = "https://kapi.kakao.com/v1/user/unlink";
+		try {
+			URL url = new URL(reqUrl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			//파라미터 입력
+			conn.setRequestProperty("Authorization", "Bearer "+accessToken);
+			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;utf-8");
+			
+			int responseCode = conn.getResponseCode();
+			System.out.println("[KakaoApi.getUserInfo] responseCode : "+responseCode);
+			
+			BufferedReader br;
+			if (responseCode >= 200 && responseCode <= 300) {
+	            br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        } else {
+	            br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	        }
+			
+			String line = "";
+			StringBuilder responseSb = new StringBuilder();
+			while((line = br.readLine())!=null) {
+				responseSb.append(line);
+			}
+			String result = responseSb.toString();
+			System.out.println("responseBody = "+result);
+			
+			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
