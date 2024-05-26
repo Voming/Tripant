@@ -23,7 +23,7 @@ public class KakaoController {
 
 	//카카오 로그인
 	@GetMapping("/login/oauth2/code/kakao")
-	public String login(@RequestParam String code, HttpSession session) {
+	public String login(String code, HttpSession session) {
 		//1. 인가 코드 받기
 		
 		//2. 토큰 받기
@@ -51,7 +51,7 @@ public class KakaoController {
 		String kakaoToken = (String) session.getAttribute("kakaoToken");
 		System.out.println("[kakaoToken] = "+kakaoToken);
 		if(kakaoToken != null) {
-			kakaoApi.logout((String)session.getAttribute("kakaoToken"));
+			kakaoApi.logout(kakaoToken);
 			session.removeAttribute("kakaoToken");
 		}
 		return "redirect:/login";
