@@ -140,7 +140,7 @@ public class KakaoApi {
 	}
 
 	//로그아웃 처리
-	public void kakaoLogout(String accessToken) {
+	public void logout(String accessToken) {
 		String reqUrl = "https://kapi.kakao.com/v1/user/logout";
 		
 		try {
@@ -151,7 +151,7 @@ public class KakaoApi {
 			conn.setRequestProperty("Authorization", "Bearer "+accessToken);
 			
 			int responseCode = conn.getResponseCode();
-			System.out.println("[KakaoApi.kakaoLogout] responseCode : "+responseCode);
+			System.out.println("[KakaoApi.Logout] responseCode : "+responseCode);
 			
 			BufferedReader br;
 		    if (responseCode >= 200 && responseCode <= 300) {
@@ -173,7 +173,7 @@ public class KakaoApi {
 	}
 
 	//카카오 연동 해제
-	public void kakaoUnlink(String accessToken) {
+	public void unlink(String accessToken) {
 		String reqUrl = "https://kapi.kakao.com/v1/user/unlink";
 		try {
 			URL url = new URL(reqUrl);
@@ -184,7 +184,7 @@ public class KakaoApi {
 			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;utf-8");
 			
 			int responseCode = conn.getResponseCode();
-			System.out.println("[KakaoApi.getUserInfo] responseCode : "+responseCode);
+			System.out.println("[KakaoApi.unlink] responseCode : "+responseCode);
 			
 			BufferedReader br;
 			if (responseCode >= 200 && responseCode <= 300) {
