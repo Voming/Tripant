@@ -206,4 +206,43 @@ public class KakaoApi {
 			e.printStackTrace();
 		}
 	}
+
+	//카카오 친구목록 가져오기
+//	public String[] getFriends()
+	
+	//카카오 나한테 링크 보내기
+	public void sendLink(String accessToken) {
+		String reqUrl = "https://kapi.kakao.com/v2/api/talk/memo/scrap/send";
+		try {
+			URL url = new URL(reqUrl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			//파라미터 입력
+			conn.setRequestProperty("Authorization", "Bearer "+accessToken);
+			conn.setRequestProperty("request_url", "http://tripant.store/login");
+			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;utf-8");
+			
+			int responseCode = conn.getResponseCode();
+			System.out.println("[KakaoApi.getUserInfo] responseCode : "+responseCode);
+			
+			BufferedReader br;
+			if (responseCode >= 200 && responseCode <= 300) {
+	            br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        } else {
+	            br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	        }
+			
+			String line = "";
+			StringBuilder responseSb = new StringBuilder();
+			while((line = br.readLine())!=null) {
+				responseSb.append(line);
+			}
+			String result = responseSb.toString();
+			System.out.println("responseBody = "+result);
+			
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

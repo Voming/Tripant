@@ -12,6 +12,10 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.test.common.KeysJaewon;
 import mclass.store.tripant.test.login.LoginController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+
 
 @RequiredArgsConstructor
 @Controller
@@ -52,7 +56,7 @@ public class KakaoController {
 		System.out.println("[kakaoToken] = "+kakaoToken);
 		if(kakaoToken != null) {
 			kakaoApi.logout(kakaoToken);
-			session.removeAttribute("kakaoToken");
+			session.invalidate();
 		}
 		return "redirect:/login";
 	}
@@ -64,11 +68,23 @@ public class KakaoController {
 		System.out.println("[kakaoToken] = "+kakaoToken);
 		if(kakaoToken != null) {
 			kakaoApi.unlink(kakaoToken);
-			session.removeAttribute("kakaoToken");
+			session.invalidate();
 			return "redirect:/main";
 		}else {
 			return "redirect:/login";
 		}
+	}
+	
+	//카카오 나한테 링크 보내기
+	@GetMapping("/sendmsg/me")
+	public String getMethodName(HttpSession session) {
+		String kakaoToken = (String) session.getAttribute("kakaoToken");
+		sendLinkPost("http://tripant.store/login", "Bearer "+kakaoToken);
+		return kakaoToken;
+	}
+	@PostMapping("https://kapi.kakao.com/v2/api/talk/memo/scrap/send")
+	public String sendLinkPost(@RequestBody String request_url, @RequestHeader String Authorization) {
+		return "redirect:/login";
 	}
 	
 }
