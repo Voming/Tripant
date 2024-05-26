@@ -1,7 +1,9 @@
 package mclass.store.tripant.test.login.naver;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -29,11 +31,26 @@ public class NaverApi {
 			URL url = new URL(reqUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("client_id", keysJaewon.getNaverLoginClientId());
-			conn.setRequestProperty("client_secret", keysJaewon.getNaverLoginClientSecret());
-			conn.setRequestProperty("code", code);
-			conn.setRequestProperty("grant_type", "authorization_code");
+			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			conn.setDoOutput(true);
+			
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			StringBuilder sb = new StringBuilder();
+			
+			sb.append("grant_type=authorization_code");
+			sb.append("&client_id=").append(keysJaewon.getNaverLoginClientId());
+			sb.append("&client_secret=").append(keysJaewon.getNaverLoginClientSecret());
+			sb.append("&code=").append(code);
+			sb.append("&state=");
+			
+			bw.write(sb.toString());
+			bw.flush();
+			
+//			conn.setRequestMethod("POST");
+//			conn.setRequestProperty("client_id", keysJaewon.getNaverLoginClientId());
+//			conn.setRequestProperty("client_secret", keysJaewon.getNaverLoginClientSecret());
+//			conn.setRequestProperty("code", code);
+//			conn.setRequestProperty("grant_type", "authorization_code");
 //			conn.setRequestProperty("state", state);
 			
 			int responseCode = conn.getResponseCode();
@@ -59,6 +76,7 @@ public class NaverApi {
 			refreshToken = resultMap.get("refresh_token");
 			
 			br.close();
+			bw.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,6 +92,7 @@ public class NaverApi {
 			
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Authorization", "Bearer "+accessToken);
+			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;utf-8");
 			
 			int responseCode = conn.getResponseCode();
 			System.out.println("[NaverApi.getUserInfo] responseCode = "+responseCode);
