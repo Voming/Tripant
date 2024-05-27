@@ -6,13 +6,13 @@ footer .inner li {
 }
 
 footer .inner .tf {
-    font-family: "Gangwong_Light";
+    font-family: "GangwonEdu_OTFBoldA";
     font-size: var(--font3);
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 footer .inner .to {
-    font-family: "Gangwong_Light";
+    font-family: "GangwonEdu_OTFBoldA";
     font-size: var(--font3);
 }
 

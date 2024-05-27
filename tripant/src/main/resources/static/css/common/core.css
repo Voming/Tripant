@@ -35,19 +35,14 @@ h5 {
 
 /* 공통폰트 */
 @font-face {
-	font-family: 'Gangwong_Bold';
-	src: url("../../fonts/Gangwongyoyukmodu_Bold.ttf")format("truetype");
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
-@font-face {
-	font-family: 'Gangwong_Light';
-	src: url("../../fonts/Gangwongyoyukmodu_Light.ttf")format("truetype");
-	font-weight: normal;
-    font-style: normal;
-}
 /* 구매폰트 */
+
 :root {
 	--color_day1_red: #E54B4B;
 	--color_day2_purple: #C943CC;
