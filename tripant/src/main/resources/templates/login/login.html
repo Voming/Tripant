@@ -1,60 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link th:href="@{/css/common/reset.css}" rel="stylesheet">
-<link th:href="@{/css/common/core.css}" rel="stylesheet">
-<link th:href="@{/css/common/layout.css}" rel="stylesheet">
-<style>
-.wrap-main .grid{
-	display: grid;
-}
-.wrap-main .center{
-	justify-items: center;
-}
-.wrap-main .grid.login{
-	width: 340px;
-	margin: 0 auto;
-	row-gap: 35px;
-}
-.wrap-main .grid.login *{
-	width: 100%;
-}
-.wrap-main .grid.snslogin{
-	grid-template-columns: 1fr 1fr;
-}
-.wrap-main .grid.snslogo{
-	grid-template-columns: 1fr 1fr 1fr;
-}
-</style>
-</head>
+<link th:href="@{/css/login/login.css}" rel="stylesheet" type="text/css">
+<head th:replace="~{common/header :: head('로그인')}"></head>
 <body>
+	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
 		<form id="frm-login">
-			<section class="grid login">
+			<section class="flex login">
 				<div class="login title"><h1>로그인</h1></div>
 				<div><h2>이메일</h2></div>
-				<div><input type="email" name="username" id="email"></div>
+				<div class="flex input"><input type="email" name="username" id="email"></div>
 				<div><h2>비밀번호</h2></div>
-				<div><input type="password" name="password" id="password"></div>
+				<div class="flex input"><input type="password" name="password" id="password"></div>
 				<div><button type="button" class="btn login"><h2>로그인</h2></button></div>
-				<div class="grid center findpwd"><a href="#">비밀번호 찾기</a></div>
-				<div class="grid join">
+				<div class="recaptcha" style="background-color: lightgrey;">로봇?</div>
+				<div class="flex center findpwd"><a href="#">비밀번호 찾기</a></div>
+				<div class="flex join">
 					<div>아직 회원이 아니세요?</div>
 					<div><a href="#">이메일 회원가입</a></div>
 				</div>
-				<div class="grid snslogin">
+				<div class="flex snslogin">
 					<div>SNS 간편 로그인</div>
-					<div class="grid snslogo">
-						<a href="#"><img th:src="@{/images/login/login_kakao.png}" style="width: 34px; height: 34px;"></a>
-						<a href="#"><img th:src="@{/images/login/login_naver.png}" style="width: 34px; height: 34px;"></a>
-						<a href="#"><img th:src="@{/images/login/login_google.png}" style="width: 34px; height: 34px;"></a>
+					<div class="flex snslogo">
+						<a th:href="@{/login/kakao}"><img th:src="@{/images/login/login_kakao.png}" style="width: 34px; height: 34px;"></a>
+						<a th:href="@{/login/naver}"><img th:src="@{/images/login/login_naver.png}" style="width: 34px; height: 34px;"></a>
+						<a th:href="@{/login/google}"><img th:src="@{/images/login/login_google.png}" style="width: 34px; height: 34px;"></a>
 					</div>
 				</div>
 			</section>
 		</form>
 	</div>
+	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	
 	
 	
