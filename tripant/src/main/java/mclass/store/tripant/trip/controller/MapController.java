@@ -12,4 +12,10 @@ public class MapController {
 		//model.addAttribute();
 		return "trip/trip";
 	}
+	
+	@GetMapping("/sample")
+	public String sample(Model model) {
+		//model.addAttribute();
+		return "sample_layout";
+	}
 }
