@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('diary')}">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/board.css" />
-    <title> 여행기 게시판 </title>    
+   <link th:href="@{/css/common/reset.css}" rel="stylesheet">
+  <link th:href="@{/css/common/core.css}" rel="stylesheet">
+  <link th:href="@{/css/common/layout.css}" rel="stylesheet">
+  <link th:href="@{/css/diary/diaryboard.css}" rel="stylesheet">
+    <title> 여행기 게시판 </title>       
 </head>
+
 <body>
+ <div class="header" th:insert="~{common/header :: wrap-header}"></div>
     <!-- 버튼 클릭 이벤트로 지역 태그 클릭 시 이동 시키기 -->
    <div class="tags">
     <span class="tag">전체</span>
@@ -90,6 +95,10 @@
    
 </table>
 </div>
+<div class="btn-more">
 <button class="learn-more">더보기</button>
+</div>
+<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
+
 </html>
