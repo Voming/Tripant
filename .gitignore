@@ -32,4 +32,3 @@ build/
 
 ### VS Code ###
 .vscode/
-/tripant/src/main/java/mclass/store/tripant/apikeys/**
