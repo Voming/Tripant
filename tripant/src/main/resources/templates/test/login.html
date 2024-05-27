@@ -3,43 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/css/reset.css" rel="stylesheet">
+<link th:href="@{/css/common/reset.css}" rel="stylesheet">
+<link th:href="@{/css/common/core.css}" rel="stylesheet">
+<link th:href="@{/css/common/layout.css}" rel="stylesheet">
+<style>
+.wrap-main .grid{
+	display: grid;
+}
+.wrap-main .center{
+	justify-items: center;
+}
+.wrap-main .grid.login{
+	width: 340px;
+	margin: 0 auto;
+	row-gap: 35px;
+}
+.wrap-main .grid.login *{
+	width: 100%;
+}
+.wrap-main .grid.snslogin{
+	grid-template-columns: 1fr 1fr;
+}
+.wrap-main .grid.snslogo{
+	grid-template-columns: 1fr 1fr 1fr;
+}
+</style>
 </head>
 <body>
-	<div class="text-center">
-	    <a th:href="@{/login/kakao}">
-	        <img src="/images/kakao_login_medium.png" width="105px" height="45px">
-	    </a>
+	<div class="wrap-main">
+		<form id="frm-login">
+			<section class="grid login">
+				<div class="login title"><h1>로그인</h1></div>
+				<div><h2>이메일</h2></div>
+				<div><input type="email" name="username" id="email"></div>
+				<div><h2>비밀번호</h2></div>
+				<div><input type="password" name="password" id="password"></div>
+				<div><button type="button" class="btn login"><h2>로그인</h2></button></div>
+				<div class="grid center findpwd"><a href="#">비밀번호 찾기</a></div>
+				<div class="grid join">
+					<div>아직 회원이 아니세요?</div>
+					<div><a href="#">이메일 회원가입</a></div>
+				</div>
+				<div class="grid snslogin">
+					<div>SNS 간편 로그인</div>
+					<div class="grid snslogo">
+						<a href="#"><img th:src="@{/images/login/login_kakao.png}" style="width: 34px; height: 34px;"></a>
+						<a href="#"><img th:src="@{/images/login/login_naver.png}" style="width: 34px; height: 34px;"></a>
+						<a href="#"><img th:src="@{/images/login/login_google.png}" style="width: 34px; height: 34px;"></a>
+					</div>
+				</div>
+			</section>
+		</form>
 	</div>
-	<div class="text-center">
-	    <a th:href="@{/logout/kakao}">
-	        카카오 로그아웃
-	    </a>
-	</div>
-	<div class="text-center">
-	    <a th:href="@{/unlink/kakao}">
-	        카카오 회원 탈퇴
-	    </a>
-	</div>
-	<div class="text-center">
-	    <a th:href="@{/sendmsg/me}">
-	        카카오 나한테 링크 보내기
-	    </a>
-	</div>
-	<div class="text-center">
-	    <a th:href="@{/login/naver}">
-	        <img src="/images/naver_login.png" width="105px" height="45px">
-	    </a>
-	</div>
-	<div class="text-center">
-	    <a th:href="@{/logout/naver}">
-	        네이버 로그아웃
-	    </a>
-	</div>
-	<div class="text-center">
-	    <a th:href="@{/unlink/naver}">
-	        네이버 회원 탈퇴
-	    </a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="trash">
+		<div class="text-center">
+		    <a th:href="@{/login/kakao}">
+		        <img th:src="@{/images/login/login_kakao.png}" width="34px" height="34px">
+		    </a>
+		</div>
+		<div class="text-center">
+		    <a th:href="@{/logout/kakao}">
+		        카카오 로그아웃
+		    </a>
+		</div>
+		<div class="text-center">
+		    <a th:href="@{/unlink/kakao}">
+		        카카오 회원 탈퇴
+		    </a>
+		</div>
+		<div class="text-center">
+		    <a th:href="@{/sendmsg/me}">
+		        카카오 나한테 링크 보내기
+		    </a>
+		</div>
+		<div class="text-center">
+		    <a th:href="@{/login/naver}">
+		        <img th:src="@{/images/login/login_naver.png}" width="34px" height="34px">
+		    </a>
+		</div>
+		<div class="text-center">
+		    <a th:href="@{/logout/naver}">
+		        네이버 로그아웃
+		    </a>
+		</div>
+		<div class="text-center">
+		    <a th:href="@{/unlink/naver}">
+		        네이버 회원 탈퇴
+		    </a>
+		</div>
 	</div>
 </body>
 </html>
