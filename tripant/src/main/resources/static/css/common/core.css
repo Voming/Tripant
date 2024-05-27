@@ -39,9 +39,17 @@ p {
 /* 공통폰트 */
 @font-face {
     font-family: 'GangwonEdu_OTFBoldA';
+
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+	font-family: 'GangwonEdu_OTFLightA';
+	src: url('/fonts/GangwonEdu_OTFLightA.ttf') format('woff'); 
+	font-weight: normal;
+	font-style: normal;
 }
 
 /* 구매폰트 */
