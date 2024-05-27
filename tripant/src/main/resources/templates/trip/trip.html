@@ -6,6 +6,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
     <link rel="stylesheet" th:href="@{/css/common/core.css}">
+    <link rel="stylesheet" th:href="@{/css/common/layout.css}">
     <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script> -->
     <style type="text/css"> #map{width:100%;height:350px;}</style>
     <style type="text/css"> 
@@ -14,29 +15,32 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            color: black;
+            transform: translate(-50%, -80%);
+            color: white;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 17px;
         }
         .sc{
-        font-family:  "Gangwongyoyukmodu_Bold";
+        font-family:  "Gangwong_Bold";
         }
     </style>
 </head>
 <body>
-    <h1 class="sc">카카오맵</h1>
-    <div id="map"></div>
-    <p><em>지도를 움직여 주세요!</em></p> 
-    <!-- 중심좌표  -->
-	<p id="result"></p>
-	<p><button onclick="setBounds()">지도 범위 재설정 하기</button></p>
-	<form></form> 
-	<div>x <input type="text" class="mapx"/></div>
-	<div>y <input type="text" class="mapy"/></div>
-	<div><button class="mapbtn">center</button></div>
-	
-
+	<div class="main-wrapper">
+		<div class="schedule-wrapper"></div>
+		<div class="map-wrapper">
+		    <h1 class="sc">카카오맵</h1>
+		    <div id="map"></div>
+		    <p><em>지도를 움직여 주세요!</em></p> 
+		    <!-- 중심좌표  -->
+			<p id="result"></p>
+			<p><button onclick="setBounds()">지도 범위 재설정 하기</button></p>
+			<form></form> 
+			<div>x <input type="text" class="mapx"/></div>
+			<div>y <input type="text" class="mapy"/></div>
+			<div><button class="mapbtn">center</button></div>
+		</div>
+	</div>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".mapbtn").click(panTo);
@@ -78,8 +82,8 @@ var bounds = new kakao.maps.LatLngBounds();
 
 /*마커 추가 및 생성*/
 var i, marker;
-var imageSrc = '/images/location/location1.png', // 마커이미지의 주소입니다    
-	imageSize = new kakao.maps.Size(34, 39); // 마커이미지의 크기입니다
+var imageSrc = '/images/loacation/location1.png', // 마커이미지의 주소입니다    
+	imageSize = new kakao.maps.Size(30, 32); // 마커이미지의 크기입니다
 //var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize);
 
@@ -91,12 +95,11 @@ for (i = 0; i < points.length; i++) {
 //	    image : markerImage });
 
      // customOverlay 생성 - 마커위에 숫자 올리기
-    var content = `
-        <div class="custom-marker">
-            <img src="${imageSrc}" style="width: 34px; height: 39px;">
-            <span>${i + 1}</span>
-        </div>
-    `;
+    var content = `       
+	    <div class="custom-marker" th:fragment="markernum(i)">
+	        <img src="${imageSrc}" style="width: 30px; height: 32px;">
+	        <span>${i + 1}</span>
+	    </div>`;
 
     var customOverlay = new kakao.maps.CustomOverlay({
         position: points[i],
@@ -110,7 +113,7 @@ for (i = 0; i < points.length; i++) {
  	/*지도에 표시할 선을 생성합니다*/ 
     var polyline = new kakao.maps.Polyline({
         path: points, // 선을 구성하는 좌표배열 입니다
-        strokeWeight: 3, // 선의 두께 입니다
+        strokeWeight: 2, // 선의 두께 입니다
         strokeColor: '#E54B4B', // 선의 색깔입니다
         strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
         strokeStyle: 'shortdash' // 선의 스타일입니다
