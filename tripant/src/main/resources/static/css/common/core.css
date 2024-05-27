@@ -42,6 +42,63 @@ h5 {
 }
 
 /* 구매폰트 */
+/*밑미 폰트*/
+@font-face {
+    font-family: 'Ownglyph_meetme-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/Ownglyph_meetme-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/*온글잎 매일옥자체*/
+@font-face {
+    font-family: 'Ownglyph_Dailyokja-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403@1.0/Ownglyph_Dailyokja-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/*잉크립퀴드체*/
+@font-face {
+    font-family: 'InkLipquid';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/*제주돌담체*/
+@font-face {
+    font-family: 'InkLipquid';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/*둥근모꼴+ Fixedsys*/
+@font-face {
+     font-family: 'DungGeunMo';
+     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+/*코트라 희망체*/
+@font-face {
+    font-family: 'KOTRAHOPE';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/*교보손글씨 2019*/
+@font-face {
+    font-family: 'KyoboHand';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/*산돌 삼립호빵체 Outline*/
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 :root {
 	--color_day1_red: #E54B4B;
@@ -54,6 +111,9 @@ h5 {
 	--color_day8_green: #2EB67D;
 	--color_day9_blue: #4B76E5;
 	--color_day10_navy: #13358F;
+	
+	--color_light_gray: #F6F6F6;
+	--color_gray: #D4D4D4;
 	
 	--font1: 20px;
 	--font2: 17px;

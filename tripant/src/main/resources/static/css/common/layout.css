@@ -13,7 +13,7 @@
 }
 
 footer {
-    background-color: lightgray;
+    background-color: var(--color_light_gray);
 
     height: 280px; /* footer의 높이*/
     position: relative;
