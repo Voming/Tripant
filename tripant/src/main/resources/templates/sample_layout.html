@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- reset.css -->
-    <link href="/css/reset.css" rel="stylesheet">
+    <link th:href="@{/css/common/reset.css}" rel="stylesheet">
     <!-- 레이아웃 설정 -->
-    <link href="/css/core.css" rel="stylesheet">
-    <link href="/css/layout.css" rel="stylesheet">
+    <link th:href="@{/css/common/core.css}" rel="stylesheet">
+    <link th:href="@{/css/common/layout.css}" rel="stylesheet">
 
-    <link href="/css/header.css" rel="stylesheet">
-    <link href="/css/footer.css" rel="stylesheet">
+    <link th:href="@{/css/common/header.css}" rel="stylesheet">
+    <link th:href="@{/css/common/footer.css}" rel="stylesheet">
 
     <title>TripAnt</title>
 </head>
@@ -23,7 +23,7 @@
                     <div class="nav1-wrap">
                         <div class="logo-side">
                             <a href="#">
-                                <img src="/Images/tripant_logo.png" alt>
+                                <img th:src="@{/images/tripant_logo.png}" alt="로고">
                             </a>
                         </div>
                         <div class="log">
