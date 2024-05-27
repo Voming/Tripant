@@ -1,4 +1,4 @@
-package mclass.store.tripant.test.common;
+package mclass.store.tripant.apikeys;
 
 import java.net.URLEncoder;
 

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import mclass.store.tripant.test.common.KeysJaewon;
+import mclass.store.tripant.apikeys.KeysJaewon;
 
 //WebMvcConfigurer -> url 관련 설정
 //@Configuration
