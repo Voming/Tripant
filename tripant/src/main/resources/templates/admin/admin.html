@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>admin</title>
-<link href="css/admin/sidebar.css" rel="stylesheet">
+<!-- reset.css -->
+<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
+<!-- 레이아웃 설정 -->
+<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 </head>
 <body>
-
-      <div class="admin">
-            <nav class="sidebar">
-            	<img>
-                <div>관리자 메뉴</div>
-                <div class="sidebar-menu">
-                    <div>
-                        <span>회원조회</span>
-                    </div>
-                </div>
-           </nav>
-        </div>
-
-
+<div class="wrap-admain">
+	<div class="ad-sidebar">
+		<p> 관리자메뉴</p>
+	</div>
+	<div class="ad-header">
+	
+	</div>
+	
+</div>
 </body>
 </html>
+
