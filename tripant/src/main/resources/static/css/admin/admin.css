@@ -1,12 +1,16 @@
 @charset "UTF-8";
 
 
+.wrap-admain *{
+	font-family: 'GangwonEdu_OTFBoldA';
+}
+
 .wrap-admain{
 	display:flex;
 	flex-direction:row;
 	width: 1440px;
     margin: 0 auto;
-    font-family: 'Gangwong_Light';
+    
 }
 
 .wrap-admain .ad-header{
@@ -21,19 +25,9 @@
     height: 1025px;
     background: black;
     color:white;
+    
 }
 
-/* .wrap-admain .admin .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 240px;
-    height: 1025px;
-    overflow-y: auto;
-    background: black;
-    color:white;
-    transition: 0.5s;
-    z-index: 999;
+.wrap-admain .ad-sidebar .ad-menu{
+	text-align: center;
 }
- */
