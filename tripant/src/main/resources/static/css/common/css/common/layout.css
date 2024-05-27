@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.wrap-header .tn {
+    /* 중앙 배치 */
+    width: 960px;
+    margin: 0 auto;
+}
+
+.wrapper {
+    height: auto;
+    min-height: 100%;
+  /* footer의 높이*/
+    min-height: 450px;  /* 나머지들의 최소 높이*/
+}
+
+footer {
+    background-color: lightgray;
+
+    height: 280px; /* footer의 높이*/
+    position: relative;
+
+    transform: translateY(0%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer .inner {
+    width: 960px;
+    margin: 0 auto;
+}

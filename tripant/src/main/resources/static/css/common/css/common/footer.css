@@ -1,0 +1,21 @@
+@charset "UTF-8";
+footer .inner li {
+    display: inline-block;
+    margin: 0 80px 0 0;
+    vertical-align: top;
+}
+
+footer .inner .tf {
+    font-family: "IM_Hyemin-Bold";
+    font-size: var(--font3);
+}
+
+footer .inner .to {
+    font-family: "IM_Hyemin-Regular";
+    font-size: var(--font3);
+}
+
+footer .inner  p {
+    color: black;
+    margin: 10px 0 10px 0;
+}
