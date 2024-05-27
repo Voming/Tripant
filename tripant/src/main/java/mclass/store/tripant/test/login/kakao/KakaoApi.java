@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.test.common.KeysJaewon;
+import mclass.store.tripant.apikeys.KeysJaewon;
 
 @RequiredArgsConstructor
 @Component

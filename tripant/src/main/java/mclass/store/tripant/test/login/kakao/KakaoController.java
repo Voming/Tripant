@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.test.common.KeysJaewon;
+import mclass.store.tripant.apikeys.KeysJaewon;
 import mclass.store.tripant.test.login.LoginController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

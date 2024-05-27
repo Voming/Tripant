@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.test.common.KeysJaewon;
+import mclass.store.tripant.apikeys.KeysJaewon;
 
 @RequiredArgsConstructor
 @Component
