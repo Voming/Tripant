@@ -7,29 +7,28 @@
  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
     <link rel="stylesheet" th:href="@{/css/common/core.css}">
     <link rel="stylesheet" th:href="@{/css/common/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/trip/tripMap.css}">
     <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script> -->
-    <style type="text/css"> #map{width:100%;height:350px;}</style>
-    <style type="text/css"> 
-		/* 마커 위에 순서 표시 */
-        .custom-marker span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -80%);
-            color: white;
-            font-weight: bold;
-            font-size: 17px;
-        }
-        .sc{
-        font-family:  "Gangwong_Bold";
-        }
-    </style>
 </head>
 <body>
 	<div class="main-wrapper">
-		<div class="schedule-wrapper"></div>
-		<div class="map-wrapper">
-		    <h1 class="sc">카카오맵</h1>
+		<aside class="nav-wrapper">
+			<nav class="nav">
+				<img class="logo" src="/images/tripant_logo_text.png">
+				<button type="button" class="dayn btn">전체일정</button>
+				<button type="button" class="dayn btn">1일차</button>
+				<button type="button" class="dayn btn">2일차</button>
+			</nav>
+			<div class="plan_update">
+				<button type="button" class="btn">편집</button>
+				<button type="button" class="btn">저장</button>
+			</div>
+		</aside>
+		<div class="schedule-wrapper">
+		여기는 일정
+		</div>
+		
+		<div class="map-wrapper" >
 		    <div id="map"></div>
 		    <p><em>지도를 움직여 주세요!</em></p> 
 		    <!-- 중심좌표  -->
