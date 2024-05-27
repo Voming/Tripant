@@ -1,0 +1,66 @@
+ul,
+ol,
+li {
+   /* 속성 리셋 */
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+a {
+    /* a 속성 리셋 */
+    color: black;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: "IM_Hyemin-Bold";
+    src: url(/fonts/IM_Hyemin-Bold.ttf);
+}
+
+@font-face {
+    font-family: "IM_Hyemin-Regular";
+    src: url(/fonts/IM_Hyemin-Regular.ttf);
+}
+
+@font-face {
+    font-family: "LaundryGothic-Bold";
+    src: url(/fonts/LaundryGothic-Bold.ttf);
+}
+
+@font-face {
+    font-family: "LaundryGothic-Regular";
+    src: url(/fonts/LaundryGothic-Regular.ttf);
+}
+
+:root {
+    --color_purple_1: #8066FF;
+    --color_purple_2: #BF80FF;
+    --color_purple_3: #DDCCFF;
+  
+    --color_blue_1: #6680FF;
+    --color_blue_2: #99BBFF;
+    --color_blue_3: #CCDDFF;
+  
+    --color_pink_1: #EE99FF;
+    --color_pink_2: #FFB3E5;
+
+    --color_yellow_1: #FDFD96;
+    --color_yellow_2: #FFE16F;
+
+    --color_green_1: #DDFFDD;
+    --color_green_2: #AED581;
+    --color_green_3: #C5E1A5;
+
+    --font1: 20px;
+    --font2: 17px;
+    --font3: 15px;
+    --font4: 13px;
+    --font5: 11px;
+    /*  사용
+    #a {
+    color : var(--color1);
+    font-size: var(--font1);
+    }
+    */
+  }

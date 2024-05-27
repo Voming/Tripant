@@ -1,0 +1,30 @@
+header .tn {
+    /* 자식들의 기준점 */
+    position: relative;
+}
+
+header .logo-side {
+    margin-top: 15px;
+}
+
+header .tn .log {
+    /* 로그인 오른쪽 고정 */
+    font-size: 15px;
+    position: absolute;
+    top: 8px;
+    right: 0;
+}
+
+header .log li {
+    /* 로그인 정렬 */
+    display: inline-block;
+    text-align: center;
+    margin: 0 15px 0 15px;
+}
+
+header .log a {
+    /* 로그인 폰트 세팅 */
+    font-family: "IM_Hyemin-Bold";
+    font-size: var(--font4);
+    font-weight: bolder;
+}
