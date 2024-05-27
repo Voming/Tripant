@@ -1,0 +1,13 @@
+@charset "UTF-8";
+body{
+    margin: 0;
+}
+div{
+    text-align: center;
+    display: flex;
+    
+}
+.tag{
+    border-radius: 5px 5px 5px;
+    border: 1px solid;
+}
