@@ -25,7 +25,7 @@ header .log li {
 
 header .log a {
     /* 로그인 폰트 세팅 */
-    font-family: "Gangwong_Bold";
+    font-family: "Gangwong_Light";
     font-size: var(--font4);
     font-weight: bolder;
 }

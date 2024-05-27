@@ -36,16 +36,16 @@ h5 {
 /* 공통폰트 */
 @font-face {
 	font-family: 'Gangwong_Bold';
-	src: url("../../fonts/Gangwongyoyukmodu_Bold.ttf");
-	font-weight: 700;
-	font-style: normal;
+	src: url("../../fonts/Gangwongyoyukmodu_Bold.ttf")format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
 	font-family: 'Gangwong_Light';
-	src: url("../../fonts/Gangwongyoyukmodu_Light.ttf");
-	font-weight: 400;
-	font-style: normal;
+	src: url("../../fonts/Gangwongyoyukmodu_Light.ttf")format("truetype");
+	font-weight: normal;
+    font-style: normal;
 }
 /* 구매폰트 */
 :root {

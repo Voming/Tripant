@@ -1,11 +1,11 @@
 @charset "UTF-8";
-.wrap-header .tn {
+.wrap-head .tn {
     /* 중앙 배치 */
     width: 960px;
     margin: 0 auto;
 }
 
-.wrapper {
+.wrap-head {
     height: auto;
     min-height: 100%;
   /* footer의 높이*/

@@ -1,86 +1,11 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- reset.css -->
-    <link th:href="@{/css/common/reset.css}" rel="stylesheet">
-    <!-- 레이아웃 설정 -->
-    <link th:href="@{/css/common/core.css}" rel="stylesheet">
-    <link th:href="@{/css/common/layout.css}" rel="stylesheet">
-
-    <link th:href="@{/css/common/header.css}" rel="stylesheet">
-    <link th:href="@{/css/common/footer.css}" rel="stylesheet">
-
-    <title>TripAnt</title>
+<head th:replace="~{common/header :: head('trippppppp')}">
 </head>
 <body>
-    <div class="wrapper">
-        <div class="wrap-header">
-            <header>
-                <div class="tn">
-                    <!-- 최상단 네비(로고 및 회원가입, 로그인) -->
-                    <div class="nav1-wrap">
-                        <div class="logo-side">
-                            <a href="#">
-                                <img th:src="@{/images/tripant_logo.png}" alt="로고">
-                            </a>
-                        </div>
-                        <div class="log">
-                            <ul>
-                                <li><a href="#">나의 일정</a></li>
-                                <li><a href="#">여행기</a></li>
-                                <li><a href="#">스토어</a></li>
-                                <li><a href="#">로그인</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </div>
-        <div class="wrap-body">
-           
-          
-        </div>
-    </div>
-
-    <div class="wrap-footer">
-        <footer>
-            <div class="inner">
-                <ul>
-                    <li>
-                        <div class="tf">
-                            <p>트립앤트</p>
-                        </div>
-                        <div class="to">
-                            <p>서울 강남구 테헤란로10길 9 5층</p>
-                            <p>문의하기  tripant1004@gmail.com</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tf">
-                            <p>법적고지</p>
-                        </div>
-                        <div class="to">
-                            <p>개인정보 처리방침</p>
-                            <p>운영정책</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tf">
-                            <p>제작자</p>
-                        </div>
-                        <div class="to">
-                            <p>김보민    github.com/Voming</p>
-                            <p>김은진    github.com/eunjin0522</p>
-                            <p>배소진    github.com/sobae17</p>
-                            <p>서재원    github.com/seojw0730</p>
-                            <p>오예인    github.com/OYeeee</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </footer>
-    </div>
+    <div class="header" th:insert="~{common/header :: wrap-header}"></div>
+    <div></div>
+	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+   
 </body>
 </html>

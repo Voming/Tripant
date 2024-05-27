@@ -20,7 +20,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	/* font: inherit; */
+	font: inherit;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -33,7 +33,6 @@ body {
 }
 ol, ul {
 	list-style: none;
-    /* ul, ol에 나오던 번호. 점 없애줌 */
 }
 blockquote, q {
 	quotes: none;
@@ -44,7 +43,6 @@ q:before, q:after {
 	content: none;
 }
 table {
-    /* 표 선 1개만... */
 	border-collapse: collapse;
 	border-spacing: 0;
 }

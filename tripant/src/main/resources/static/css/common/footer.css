@@ -6,8 +6,9 @@ footer .inner li {
 }
 
 footer .inner .tf {
-    font-family: "Gangwong_Bold";
+    font-family: "Gangwong_Light";
     font-size: var(--font3);
+    font-weight: bolder;
 }
 
 footer .inner .to {

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+
+<!-- reset.css -->
+<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
+<!-- 레이아웃 설정 -->
+<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/common/layout.css}" rel="stylesheet" type="text/css">
+
+<link th:href="@{/css/common/header.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/common/footer.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div th:fragment="wrap-header">
+	<div class="wrap-head">
+		<header>
+			<div class="tn">
+				<!-- 최상단 네비(로고 및 회원가입, 로그인) -->
+				<div class="nav1-wrap">
+					<div class="logo-side">
+						<a href="#"> <img th:src="@{/images/tripant_logo.png}"
+							alt="로고">
+						</a>
+					</div>
+					<div class="log">
+						<ul>
+							<li><a href="#">나의 일정</a></li>
+							<li><a href="#">여행기</a></li>
+							<li><a href="#">스토어</a></li>
+							<li><a href="#">로그인</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		</div>
+	</div>
+</body>
+</html>
