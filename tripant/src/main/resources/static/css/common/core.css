@@ -32,6 +32,9 @@ h4 {
 h5 {
 	font-size: 11px;
 }
+p {
+	font-family: 'GangwonEdu_OTFBoldA';
+}
 
 /* 공통폰트 */
 @font-face {
