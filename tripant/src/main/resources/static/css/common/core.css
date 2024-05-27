@@ -14,3 +14,31 @@ h4{
 h5{
 	font-size: 11px;
 }
+/* 공통폰트 */
+@font-face {
+	font-family: 'Gangwongyoyukmodu_Bold';
+	src: url('/fonts/gangwongyoyukmodu_Bold.ttf'); 
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gangwongyoyukmodu_Light';
+	src: url('/fonts/Gangwongyoyukmodu_Light.ttf'); 
+	font-weight: 400;
+	font-style: normal;
+}
+/* 구매폰트 */
+
+
+:root{
+	--color_day_1: #E54B4B ;	
+	--color_day_2: #C943CC ;	
+	--color_day_3: #FFA7C5 ;	
+	--color_day_4: #E5794B ;	
+	--color_day_5: #4BC9E5 ;	
+	--color_day_6: #E5C34B ;	
+	--color_day_7: #CDF263 ;	
+	--color_day_8: #2EB67D ;	
+	--color_day_9: #4B76E5 ;	
+	--color_day_10: #13358F ;	
+}
