@@ -12,6 +12,7 @@ public class LoginController {
 	
 	private final KeysJaewon keysJaewon; 
 	
+	//로그인 페이지
 	@GetMapping("/login")
 	public String login() {
 		return "test/login";
