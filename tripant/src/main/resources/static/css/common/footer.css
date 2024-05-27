@@ -6,12 +6,12 @@ footer .inner li {
 }
 
 footer .inner .tf {
-    font-family: "IM_Hyemin-Bold";
+    font-family: "Gangwong_Bold";
     font-size: var(--font3);
 }
 
 footer .inner .to {
-    font-family: "IM_Hyemin-Regular";
+    font-family: "Gangwong_Light";
     font-size: var(--font3);
 }
 
