@@ -7,5 +7,9 @@
 <body>
 
 
+        <div class="custom-marker" th:fragment="~{ping_num(i)}">
+            <img src="${imageSrc}" style="width: 34px; height: 39px;">
+            <span style="color : white;" th:text="${i + 1}"> </span>
+        </div>
 </body>
 </html>

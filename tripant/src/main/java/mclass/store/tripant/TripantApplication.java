@@ -9,5 +9,4 @@ public class TripantApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TripantApplication.class, args);
 	}
-
 }
