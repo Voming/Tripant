@@ -1,6 +1,7 @@
-body{
-    margin: 10px;
-    padding: 10px;
+@charset "UTF-8";
+
+/* body{
+    padding: 80px;
     
 }
 div{
@@ -8,6 +9,9 @@ div{
     display: flex;
     
 }
+td{
+    padding: 10px;
+} */
 .tag{
     border-radius: 5px 5px 5px;
     border: 1px solid;
@@ -22,4 +26,15 @@ div{
 .board-piece{
     padding-top: 20px;
     padding-bottom: 20px;
+}
+.learn-more{
+    width: 200px;
+    border-style: none;
+    color: darkgrey;
+}
+.btn-more{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
 }

@@ -3,22 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>admin</title>
-<link href="css/admin/sidebar.css" rel="stylesheet">
+<!-- reset.css -->
+<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
+<!-- 레이아웃 설정 -->
+<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 </head>
 <body>
-
-      <div class="admin">
-            <nav class="sidebar">
-            	<img>
-                <div>관리자 메뉴</div>
-                <div class="sidebar-menu">
-                    <div>
-                        <span>회원조회</span>
-                    </div>
-                </div>
-           </nav>
-        </div>
-
-
+<div class="wrap-admain">
+	<div class="ad-sidebar">
+		<div class="ad-menu"> 관리자메뉴</div>
+		<div class="ad-menumember1">회원관리</div>
+		<div class="ad-menumember2">회원관리</div>
+		<div class="ad-menumember3">회원통계</div>
+		
+		<div class="ad-menuboard">게시글 관리</div>
+		<div class="ad-menuboard1">전체게시글</div>
+		<div class="ad-menuboard2">신고 게시글 관리</div>
+		<div class="ad-menuboard3">게시글 통계</div>
+		
+		<div class="ad-menustore">스토어 관리</div>
+		<div class="ad-menustore1">결제 취소</div>
+		
+	</div>
+	<div>
+		<div class="ad-header">
+			<h1>회원관리 </h1>
+		</div>
+		<div class="ad-content">
+			<p>게시글 넣기</p>
+		</div>
+	</div>
+	
+</div>
 </body>
 </html>
+

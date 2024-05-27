@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DiaryController {
 	@GetMapping("/diary")
 	public String diary(){
-		return "diary/diary";
+		return "diary/diaryboard";
 	}
 	
 }

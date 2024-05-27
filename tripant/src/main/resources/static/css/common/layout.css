@@ -7,9 +7,9 @@
 
 .wrap-head {
     height: auto;
+    min-height: 450px;  /* 나머지들의 최소 높이*/
     min-height: 100%;
   /* footer의 높이*/
-    min-height: 450px;  /* 나머지들의 최소 높이*/
 }
 
 footer {

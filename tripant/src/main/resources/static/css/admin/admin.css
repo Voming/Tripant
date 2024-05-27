@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+
+.wrap-admain *{
+	font-family: 'GangwonEdu_OTFBoldA';
+}
+
+.wrap-admain{
+	display:flex;
+	flex-direction:row;
+	width: 1440px;
+    margin: 0 auto;
+    
+}
+
+.wrap-admain .ad-header{
+ background-color:rgb(128, 128, 128);
+ height	:70px;
+ width:1200px;
+ color:white;
+}
+
+.wrap-admain .ad-sidebar{
+	width: 240px;
+    height: 1025px;
+    background: black;
+    color:white;
+    
+}
+
+.wrap-admain .ad-sidebar .ad-menu{
+	text-align: center;
+	font-size:25px;
+}
+
+
