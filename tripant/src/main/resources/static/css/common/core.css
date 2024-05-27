@@ -17,28 +17,27 @@ h5{
 /* 공통폰트 */
 @font-face {
 	font-family: 'Gangwongyoyukmodu_Bold';
-	src: url('/fonts/gangwongyoyukmodu_Bold.ttf'); 
+	src: url('/fonts/gangwongyoyukmodu_Bold.ttf') format('truetype'); 
 	font-weight: 700;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Gangwongyoyukmodu_Light';
-	src: url('/fonts/Gangwongyoyukmodu_Light.ttf'); 
+	src: url('/fonts/Gangwongyoyukmodu_Light.ttf') format('truetype'); 
 	font-weight: 400;
 	font-style: normal;
 }
 /* 구매폰트 */
 
-
 :root{
-	--color_day_1: #E54B4B ;	
-	--color_day_2: #C943CC ;	
-	--color_day_3: #FFA7C5 ;	
-	--color_day_4: #E5794B ;	
-	--color_day_5: #4BC9E5 ;	
-	--color_day_6: #E5C34B ;	
-	--color_day_7: #CDF263 ;	
-	--color_day_8: #2EB67D ;	
-	--color_day_9: #4B76E5 ;	
-	--color_day_10: #13358F ;	
+	--color_day1_red: #E54B4B ;	
+	--color_day2_purple: #C943CC ;	
+	--color_day3_pink: #FFA7C5 ;	
+	--color_day4_orange: #E5794B ;	
+	--color_day5_skyblue: #4BC9E5 ;	
+	--color_day6_yellow: #E5C34B ;	
+	--color_day7_lime: #CDF263 ;	
+	--color_day8_green: #2EB67D ;	
+	--color_day9_blue: #4B76E5 ;	
+	--color_day10_navy: #13358F ;	
 }
