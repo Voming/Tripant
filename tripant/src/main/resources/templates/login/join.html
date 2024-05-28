@@ -44,11 +44,11 @@ function loadedHandler(){
 			<section class="flex join">
 				<div class="join title"><h1>회원가입</h1></div>
 				<div class="join explain"><h4>회원가입을 위한 정보를 입력해주세요.</h4></div>
-				<div th:replace="~{login/template :: inputbtn(이메일, email, email, '이메일 주소', 인증, 1)}"></div>
+				<div th:replace="~{login/fragment :: inputbtn(이메일, email, email, '이메일 주소', 인증)}"></div>
 				<div><h4 style="color: red;">* 이메일을 입력해주세요.</h4></div>
-				<div th:replace="~{login/template :: inputbtn('이메일 인증번호', code, text, '', 확인, 1)}"></div>
-				<div th:replace="~{login/template :: inputbtn(닉네임, nick, text, '한글 2~8자', 중복확인, 1)}"></div>
-				<div th:replace="~{login/template :: inputlbl(비밀번호, password, password, 1)}"></div>
+				<div th:replace="~{login/fragment :: inputbtn('이메일 인증번호', code, text, '', 확인)}"></div>
+				<div th:replace="~{login/fragment :: inputbtn(닉네임, nick, text, '한글 2~8자', 중복확인)}"></div>
+				<div th:replace="~{login/fragment :: inputlbl(비밀번호, password, password)}"></div>
 				<div><h1>트립앤트 회원 약관 동의</h1></div>
 				<div class="flex agree">
 					<input type="checkbox" name="agree" id="agree-all"><h4>전체 동의</h4>
