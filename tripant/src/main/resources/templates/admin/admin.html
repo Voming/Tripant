@@ -10,9 +10,9 @@
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 </head>
 <body>
-<div class="wrap-admain">
-	<div class="ad-sidebar">
-		<img th:src="@{/images/tripant_logo_text.png}" alt="로고" >
+<div class="wrap-main">
+	<div class="wrap-sidebar">
+		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
 		<div class="ad-menu"> 관리자메뉴</div>
 		<div class="ad-menumember1">회원관리</div>
 		<div class="ad-menumember2">회원관리</div>
@@ -25,31 +25,34 @@
 		
 		<div class="ad-store">스토어 관리</div>
 		<div class="ad-menustore1">결제 취소</div>
-		
 	</div>
-	<div>
+	
+	<div class="wrap-body">
 		<div class="ad-header">
 			<h1>회원관리 </h1>
 		</div>
+		
 		<div class="ad-content">
 			<ul class="boardlist">
 				<li>	
-					<ul>
+					<ul class="col">
 						<li>닉네임</li>
 						<li>이메일</li>
 						<li>가입일자</li>
 						<li>탈퇴일자</li>
 						<li>등급</li>
+						<li></li>
 					</ul>
 				</li>
 				
 				<li>
-					<ul>
+					<ul class="col">
 						<li>oyeee</li>
 						<li>tripant@gmail.com</li>
 						<li>2024.05.20</li>
 						<li>2024.05.20</li>
 						<li>관리자</li>
+						<li><button type="button" class="btn write">편집</button></li>
 					</ul>
 				</li>
 			</ul>	

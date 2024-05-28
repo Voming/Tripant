@@ -12,6 +12,10 @@
   /* footer의 높이*/
 }
 
+body{
+	margin: 0;
+}
+
 footer {
     background-color: var(--color_light_gray);
 
