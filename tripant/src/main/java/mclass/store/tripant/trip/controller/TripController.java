@@ -8,10 +8,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class TripController {
@@ -28,6 +31,7 @@ public class TripController {
 	private String apikey;
 	
 	@GetMapping("/map/getduration")
+	//@ResponseBody
 	public String getduration(
 			@RequestParam double startLng,
 			@RequestParam double startLat,
@@ -58,20 +62,21 @@ public class TripController {
 				StringBuilder response = new StringBuilder();
 				while((inputLine = br.readLine()) != null) {
 					response.append(inputLine);
-					
 				}
-				System.out.println("\n response \n "+response);
+				System.out.println("\n response \n "+response.toString());
 				br.close();
 				
-				model.addAttribute("directions", response.toString() );
+                // 추출한 duration 값을 model에 저장
+				
+                model.addAttribute("result", response.toString());
 			}else {
 				model.addAttribute("directions", " \n >>>> 에러났어요 : " + responseCode);
 			}
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("\n\n >>>>>>>>>>>>>>>>ERROR 확인해주세요<<<<<<<<<<<<<<<<");
-		}
+		} 
 		return "trip/trip";
 	}
 }
