@@ -2,16 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/login/login.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('로그인')}"></head>
+<script>
+$(loadedHandler);
+function loadedHandler(){
+	$(".btn.login").on("click", loginHandler);
+}
+function loginHandler(){
+	
+}
+</script>
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
 		<form id="frm-login">
 			<section class="flex login">
 				<div class="login title"><h1>로그인</h1></div>
-				<div><h2>이메일</h2></div>
-				<div class="flex input-email"><input type="email" name="username" id="email"></div>
-				<div><h2>비밀번호</h2></div>
-				<div class="flex input-password"><input type="password" name="password" id="password"></div>
+				<div th:replace="~{login/template :: inputlbl(이메일, memEmail, email)}"></div>
+				<div th:replace="~{login/template :: inputlbl(비밀번호, memPassword, password)}"></div>
 				<div><button type="button" class="btn login"><h2>로그인</h2></button></div>
 				<div class="recaptcha" style="background-color: lightgrey;">로봇?</div>
 				<div class="flex center findpwd"><h2><a href="#">비밀번호 찾기</a></h2></div>
@@ -24,30 +31,14 @@
 					<div class="flex snslogo">
 						<a th:href="@{/login/kakao}"><img th:src="@{/images/login/login_kakao.png}" style="width: 34px; height: 34px;"></a>
 						<a th:href="@{/login/naver}"><img th:src="@{/images/login/login_naver.png}" style="width: 34px; height: 34px;"></a>
-						<a th:href="@{/login/google}"><img th:src="@{/images/login/login_google.png}" style="width: 34px; height: 34px;"></a>
+						<a th:href="@{/login/google}"><img th:src="@{/images/login/login_google.png}" style="width: 34px; height: 34px; background-color: white;"></a>
 					</div>
 				</div>
 			</section>
 		</form>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="trash">
+	<div class="trash" style="display: none;">
 		<div class="text-center">
 		    <a th:href="@{/login/kakao}">
 		        <img th:src="@{/images/login/login_kakao.png}" width="34px" height="34px">
