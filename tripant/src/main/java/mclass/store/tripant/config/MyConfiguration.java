@@ -1,4 +1,4 @@
-package mclass.store.tripant.test.config;
+package mclass.store.tripant.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
