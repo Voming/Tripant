@@ -42,7 +42,7 @@
 									</li>
 									<li>
 										<a th:href="@{/login}" sec:authorize="isAnonymous()">로그인</a>
-										<a href="#" sec:authorize="isAuthenticated()">로그아웃</a>
+										<a th:href="@{/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
 									</li>
 								</ul>
 							</div>

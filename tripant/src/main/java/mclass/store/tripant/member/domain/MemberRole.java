@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum MemberRole {
-	OWNER("OWNER"), ADMIN("ADMIN"), FONTUSER("VIP"), USER("MEM");
+	OWNER("owner"), ADMIN("admin"), FONTUSER("vip"), USER("mem");
 	
 	private String value;
 	

@@ -9,6 +9,6 @@ import mclass.store.tripant.member.domain.MemberEntity;
 
 @Mapper
 public interface MemberRepository {
-	public LoginEntity login(String memEmail);
+	public MemberEntity login(String memEmail);
 	public MemberEntity insert(HashMap<String, Object> map);
 }
