@@ -56,8 +56,8 @@
 }
 
 .wrap-body .ad-content .col{
-  	display:flex; 
-	
+  	 display:flex;
+  	 margin-top:10px;  
 } 
 
 
@@ -88,10 +88,10 @@
 	width:30%;
 }
 .boardlist > li> .col >li:first-child+li+li{
-	width:15%;
+	width:18%;
 }
 .boardlist > li> .col >li:first-child+li+li+li{
-	width:15%;
+	width:18%;
 }
 .boardlist > li> .col >li:first-child+li+li+li+li{
 	width:15%;
