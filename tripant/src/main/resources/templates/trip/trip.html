@@ -42,7 +42,7 @@
 			
 			
 		    <h1>카카오모빌리티 길찾기</h1>
-		    <div id="duration">소요 시간: </div>
+		    <div id="duration" th:text="${result}">소요 시간: </div>
 		    <form action="/map/getduration" method="get">
 		        <label for="startLat">출발지 위도:</label>
 		        <input type="text" id="startLat" name="startLat" value="33.4871087881" required>
@@ -56,7 +56,7 @@
 		    </form>
 		</div>
 	</div>
-<script type="text/javascript">
+<script th:inline="javascript">
 $(document).ready(function(){
 	$(".mapbtn").click(panTo);
 });
@@ -165,9 +165,12 @@ function panTo() {
 
 
 //js안에서 controller가 setattribute로 보낸 값을 꺼낼 때 '${controller에서 보낼 때 쓴 이름}'
-const directionsData = '\${directions}';
+/* const directionsData = '\${duration}';
+const resultData ='${result}';
 console.log(">>>>>>>>>   ");
 console.log(directionsData);
+console.log('${result}');
+console.log(resultData);
 if (directionsData) {
     const data = JSON.parse(directionsData);
     const duration = data.routes[0].summary.duration;
@@ -176,7 +179,7 @@ if (directionsData) {
     document.getElementById('duration').innerText = `소요 시간: ${durationInMinutes}분`;
 } else {
     document.getElementById('duration').innerText = '데이터를 불러오지 못했습니다.';
-}
+} */
 </script>
 </body>
 </html>
