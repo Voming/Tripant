@@ -3,9 +3,14 @@ package mclass.store.tripant.login.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.apikeys.KeysJaewon;
+import mclass.store.tripant.member.domain.MemberEntity;
 
 @RequiredArgsConstructor
 @Controller
@@ -23,6 +28,12 @@ public class LoginController {
 	@GetMapping("/join")
 	public String join() {
 		return "login/join";
+	}
+	
+	//회원가입
+	@PostMapping("/join")
+	@ResponseBody
+	public void joinMember() {
 	}
 	
 	//카카오 로그인

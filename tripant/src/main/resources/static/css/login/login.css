@@ -9,6 +9,8 @@
 }
 .wrap-main .btn{
 	cursor: pointer;
+	border-radius: 8px;
+	border: 0;
 	/* font-family: 'GangwonEdu_OTFBoldA'; */
 }
 .wrap-main .flex{
@@ -19,6 +21,7 @@
 }
 .wrap-main .flex.input-email, .wrap-main .flex.input-password{
 	width: 100%;
+	border-radius: 8px;
 }
 .wrap-main .flex.login{
 	width: 340px;
@@ -27,18 +30,20 @@
 	row-gap: 20px;
 	padding: 15px;
 	background-color: #f6f6f6;
+	border-radius: 10px;
 }
 .wrap-main .login.title{
 	margin-bottom: 10px;
 	text-align: center;
 }
-.wrap-main .flex.login input, .wrap-main .flex.login button{
+.wrap-main .inputlbl input, .wrap-main .flex.login button{
 	width: 100%;
+	box-sizing: border-box;
 }
 .wrap-main .flex.input-password{
 	margin-bottom: 10px;
 }
-.wrap-main .flex.findpwd>h2>a, .wrap-main .email-join>h2>a{
+.wrap-main .flex.findpwd>a, .wrap-main .email-join>a{
 	color: #4bc9e5;
 }
 .wrap-main .flex.join{
