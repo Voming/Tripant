@@ -41,9 +41,9 @@
 	padding-bottom: 30px;
 	font-size: var(--font5);
 }
-/* 소개 문구   */
-.diary-wrap-main .diary-introduction {
-	font-size: var(--font4);
+/* 소개 문구 폰트 크기   */
+.diary-introduction {
+	font-size: var(--font2);
 }
 
 /* 글 리스트 */
@@ -60,4 +60,21 @@
 	position: absolute;
 	top: 0;
 	right: 0;
+}
+/* 제목, 날짜, 미리보기  */
+.diary-title{
+	font-size: var(--font3);
+	margin: 10px;
+}
+.diary-date{
+	font-size: var(--font4);
+	margin: 8px;
+}
+.diary-preview{
+	font-size: var(--font5);
+	margin: 8px;
+}
+/*글 가운데로 넓이 줘서 고정시키기  */
+.diary-content{
+	width: 500px;
 }
