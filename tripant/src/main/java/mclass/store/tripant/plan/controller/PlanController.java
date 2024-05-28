@@ -13,9 +13,9 @@ public class PlanController {
 		return "sample_layout";
 	}
 	
-	@GetMapping("/home")
+	@GetMapping("/main")
 	public String home(Model model) {
 		//model.addAttribute();
-		return "plan/home";
+		return "plan/main/main";
 	}
 }

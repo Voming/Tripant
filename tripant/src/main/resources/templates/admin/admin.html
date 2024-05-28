@@ -12,18 +12,18 @@
 <body>
 <div class="wrap-admain">
 	<div class="ad-sidebar">
-		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
+		<img th:src="@{/images/tripant_logo_text.png}" alt="로고" >
 		<div class="ad-menu"> 관리자메뉴</div>
 		<div class="ad-menumember1">회원관리</div>
 		<div class="ad-menumember2">회원관리</div>
 		<div class="ad-menumember3">회원통계</div>
 		
-		<div class="ad-menuboard">게시글 관리</div>
+		<div class="ad-board">게시글 관리</div>
 		<div class="ad-menuboard1">전체게시글</div>
 		<div class="ad-menuboard2">신고 게시글 관리</div>
 		<div class="ad-menuboard3">게시글 통계</div>
 		
-		<div class="ad-menustore">스토어 관리</div>
+		<div class="ad-store">스토어 관리</div>
 		<div class="ad-menustore1">결제 취소</div>
 		
 	</div>
@@ -32,10 +32,29 @@
 			<h1>회원관리 </h1>
 		</div>
 		<div class="ad-content">
-			<p>게시글 넣기</p>
-		</div>
+			<ul class="boardlist">
+				<li>	
+					<ul>
+						<li>닉네임</li>
+						<li>이메일</li>
+						<li>가입일자</li>
+						<li>탈퇴일자</li>
+						<li>등급</li>
+					</ul>
+				</li>
+				
+				<li>
+					<ul>
+						<li>oyeee</li>
+						<li>tripant@gmail.com</li>
+						<li>2024.05.20</li>
+						<li>2024.05.20</li>
+						<li>관리자</li>
+					</ul>
+				</li>
+			</ul>	
+		</div> 
 	</div>
-	
 </div>
 </body>
 </html>
