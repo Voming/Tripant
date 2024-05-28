@@ -5,7 +5,7 @@
 <style>
 	.wrap-main{
 		width: 960px;
-		margin: 112px auto;
+		margin: 120px auto;
 	}
 	.wrap-main *{
 		font-family: 'GangwonEdu_OTFBoldA';
@@ -26,9 +26,17 @@
 		width: 340px;
 		margin: 0 auto;
 		flex-direction: column;
-		row-gap: 30px;
+		row-gap: 20px;
+		padding: 15px;
+		background-color: #f6f6f6;
 	}
 </style>
+<script>
+$(loadedHandler);
+function loadedHandler(){
+	$(".btn.join").on("click", insertMemHandler);
+}
+</script>
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
@@ -36,41 +44,47 @@
 			<section class="flex join">
 				<div class="join title"><h1>회원가입</h1></div>
 				<div class="join explain"><h4>회원가입을 위한 정보를 입력해주세요.</h4></div>
-				<div><h4>이메일</h4></div>
-				<div class="flex input">
-					<input type="email" name="username" id="email" placeholder="이메일 주소">
-					<button type="button" class="btn sendCode">인증</button>
-					<button type="button" class="btn checked">완료</button>
-				</div>
-				<div>
-					<h4>* 이메일을 입력해주세요.</h4>
-				</div>
-				<div><h4>이메일 인증번호</h4></div>
-				<div class="flex write-code">
-					<input type="text" name="code" id="code">
-					<button type="button" class="btn check">확인</button>
-				</div>
-				<div><h4>닉네임</h4></div>
-				<div class="flex nick">
-					<input type="text" name="nick" id="nick" placeholder="한글 2~8자">
-					<button type="button" class="btn nick-check">중복확인</button>
-				</div>
-				<div><h4>비밀번호</h4></div>
-				<div><input type="password" name="password" id="password" placeholder="영문, 숫자 포함 8~20자"></div>
-				<div><h4>생년월일 설정</h4></div>
-				<div><input type="date" name="birth" id="birth"></div>
+				<div th:replace="~{login/template :: inputbtn(이메일, email, email, '이메일 주소', 인증, 1)}"></div>
+				<div><h4 style="color: red;">* 이메일을 입력해주세요.</h4></div>
+				<div th:replace="~{login/template :: inputbtn('이메일 인증번호', code, text, '', 확인, 1)}"></div>
+				<div th:replace="~{login/template :: inputbtn(닉네임, nick, text, '한글 2~8자', 중복확인, 1)}"></div>
+				<div th:replace="~{login/template :: inputlbl(비밀번호, password, password, 1)}"></div>
 				<div><h1>트립앤트 회원 약관 동의</h1></div>
-				<div><input type="checkbox" name="agree" id="agree-all"><h4>전체 동의</h4></div>
-				<div><input type="checkbox" name="agree" id="agree-first"><h4>동의</h4></div>
+				<div class="flex agree">
+					<input type="checkbox" name="agree" id="agree-all"><h4>전체 동의</h4>
+				</div>
+				<div class="flex agree">
+					<input type="checkbox" name="agree" id="agree-first"><h4>동의</h4>
+				</div>
 				<div><textarea>약관입니다111111111</textarea></div>
-				<div><input type="checkbox" name="agree" id="agree-second"><h4>동의</h4></div>
+				<div class="flex agree">
+					<input type="checkbox" name="agree" id="agree-second"><h4>동의</h4>
+				</div>
 				<div><textarea>약관입니다222222222</textarea></div>
 				<div class="recaptcha" style="background-color: lightgrey;">로봇?</div>
-				<div><button type="button" class="btn join">회원가입</button></div>
+				<div><button type="submit" class="btn join">회원가입</button></div>
 				<div><h4><a href="#">로그인 화면가기</a></h4></div>
 			</section>
 		</form>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
+<script>
+function insertMemHandler(){
+	console.log($("#frm-join").serialize());
+	$.ajax({
+		url: '/join', 
+		type: 'POST', 
+		data: $('#frm-join').serialize(), 
+		success: function (result){
+			alert('성공');
+		}, 
+		error: function (request, status, error){
+			alert("code: "+request.status + "\n" + "message: " 
+					+ request.responseText + "\n"
+					+ "error: "+error);
+		}
+	});
+}
+</script>
 </html>
