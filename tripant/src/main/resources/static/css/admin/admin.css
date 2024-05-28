@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 
-.wrap-admain *{
+.wrap-main *{
 	font-family: 'GangwonEdu_OTFBoldA';
 }
 
-.wrap-admain{
+.wrap-main{
 	display:flex;
 	flex-direction:row;
 	width: 1440px;
@@ -13,14 +13,14 @@
     
 }
 
-.wrap-admain .ad-header{
+.wrap-main .ad-header{
  background-color:rgb(128, 128, 128);
  height	:70px;
  width:1200px;
  color:white;
 }
 
-.wrap-admain .ad-sidebar{
+.wrap-main .ad-sidebar{
 	width: 240px;
     height: 1025px;
     background: black;
@@ -28,37 +28,42 @@
     
 }
 
-.wrap-admain .ad-sidebar .ad-menu{
+.wrap-main .ad-sidebar .ad-menu{
 	text-align: center;
 	font-size:25px;
 }
 
 /* 게시글 리스트 */
-.ad-content{
+.wrap-body .ad-content{
 	 margin: 0 auto;
 }
 
-.ad-content>ul>li:first-child{
+.wrap-body .ad-content>ul>li:first-child{
 	 text-align: center;
 	 /* 수직정렬 */
 	 vertical-align:middle;  
 }
 
-.ad-content{
+.wrap-body .ad-content{
 	display:flex;
+	width:100%;
 }
 
-.ad-content .boardlist{
-	margin-top: 20px;
+.wrap-body .ad-content .boardlist{
+	/* margin-top: 25px; */
+	margin: 0 auto;
+	width:100%;
+}
+
+.wrap-body .ad-content .col{
+  	display:flex; 
 	
-}
-
+} 
 
 
 .boardlist> ul>li{
 	 float:left;  
-	/* text-align:center; */
-	
+	 text-align:center; 
 }
 
 .boardlist > li >ul{
@@ -67,9 +72,27 @@
      position:relative;  */
 }
 
-.boardlist > li >ul>li{
- 	 float:left; 
+
+
+.boardlist > li> ul >li{
+	 float:left;
 	 vertical-align:baseline;
+	 text-align: center;
 }
 
+.boardlist > li> .col >li:first-child{
+	width:15%;
+}
 
+.boardlist > li> .col >li:first-child+li{
+	width:30%;
+}
+.boardlist > li> .col >li:first-child+li+li{
+	width:15%;
+}
+.boardlist > li> .col >li:first-child+li+li+li{
+	width:15%;
+}
+.boardlist > li> .col >li:first-child+li+li+li+li{
+	width:15%;
+}
