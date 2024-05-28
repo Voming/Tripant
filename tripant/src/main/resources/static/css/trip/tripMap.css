@@ -6,13 +6,16 @@
 	display: flex;
     flex-direction: row;
 }
+.main-wrapper .btn,
+.main-wrapper a{
+	cursor: pointer;
+}
 /* 버튼 nav */
 .main-wrapper .nav-wrapper{
 	display : flex;
  	flex-direction : column;
 	justify-content: space-between; 
 	width: 100px;
-    /* background-color: #fafafa; */
 	padding : 15px 5px;
 }
 .main-wrapper .logo{
@@ -61,7 +64,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -80%);
+    transform: translate(-50%, -65%);
     color: white;
     font-weight: bold;
     font-size: 17px; }
