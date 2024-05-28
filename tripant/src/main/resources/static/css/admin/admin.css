@@ -10,7 +10,6 @@
 	flex-direction:row;
 	width: 1440px;
     margin: 0 auto;
-    
 }
 
 .wrap-main .ad-header{
@@ -20,7 +19,7 @@
  color:white;
 }
 
-.wrap-main .ad-sidebar{
+.wrap-main .wrap-sidebar{
 	width: 240px;
     height: 1025px;
     background: black;
@@ -28,7 +27,7 @@
     
 }
 
-.wrap-main .ad-sidebar .ad-menu{
+.wrap-main .wrap-sidebar .ad-menu{
 	text-align: center;
 	font-size:25px;
 }
