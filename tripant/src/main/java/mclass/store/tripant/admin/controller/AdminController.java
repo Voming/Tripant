@@ -1,4 +1,4 @@
-package mclass.store.tripant.admin;
+package mclass.store.tripant.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
