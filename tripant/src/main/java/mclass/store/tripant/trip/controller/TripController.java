@@ -13,6 +13,7 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,20 +31,17 @@ public class TripController {
 	@Value("${kakao.map.rest.api}")
 	private String apikey;
 	
-	@GetMapping("/map/getduration")
-	//@ResponseBody
+	@PostMapping("/map/postduration")
+	//@GetMapping("/map/getduration")
+	@ResponseBody
 	public String getduration(
 			@RequestParam double startLng,
 			@RequestParam double startLat,
 			@RequestParam double endLng,
 			@RequestParam double endLat,
 			Model model) {
-		System.out.println(">>>>>>>>>>controller 들어옴");
-		System.out.println(endLat);
 		String aurlStr= String.format("https://apis-navi.kakaomobility.com/v1/directions?origin=%f,%f&destination=%f,%f&priority=TIME", startLng,startLat,endLng,endLat);
-		System.out.println(aurlStr);
-		System.out.println(apikey);
-		
+		String duration ="";
 		try {
 			URL url = new URL(aurlStr);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -51,11 +49,7 @@ public class TripController {
 			conn.setRequestProperty("Authorization", apikey);
 			conn.setRequestProperty("Content-Type", "application/json");
 			
-			System.out.println(">>>>>>>>>>>>>>>>>>> conn \n\n");
-			
 			int responseCode = conn.getResponseCode();
-			System.out.println("******************             아래 확인");
-			System.out.println(responseCode);
 			if (responseCode == HttpURLConnection.HTTP_OK) {
 				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				String inputLine;
@@ -65,18 +59,17 @@ public class TripController {
 				}
 				System.out.println("\n response \n "+response.toString());
 				br.close();
+				 // JSON 파싱하여 duration 값만 추출
+                JSONObject jsonObject = new JSONObject(response.toString());
+                duration = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("summary").getString("duration");
 				
-                // 추출한 duration 값을 model에 저장
-				
-                model.addAttribute("result", response.toString());
 			}else {
-				model.addAttribute("directions", " \n >>>> 에러났어요 : " + responseCode);
+				return " \n >>>> 에러났어요 : " + responseCode;
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("\n\n >>>>>>>>>>>>>>>>ERROR 확인해주세요<<<<<<<<<<<<<<<<");
 		} 
-		return "trip/trip";
+		return duration;
 	}
 }
