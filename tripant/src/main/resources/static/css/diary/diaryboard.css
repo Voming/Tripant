@@ -1,48 +1,63 @@
 @charset "UTF-8";
 /* 폰트 적용 */
 /* 레이아웃 규격 정하기 */
-.Diary-wrap-main{
+.diary-wrap-main {
 	width: 960px;
-	 margin: auto;
-    padding-top: 10%;
-    padding-bottom: 10%;
-    font-family: 'GangwonEdu_OTFBoldA';
+	margin: auto;
+	padding-top: 10%;
+	padding-bottom: 10%;
+	font-family: 'GangwonEdu_OTFBoldA';
 }
 /*지역 태그  */
-.Diary-wrap-main .tag{
+.diary-wrap-main .tag {
 	border-radius: 5px 5px 5px;
 	border: 1px solid;
 	padding: 5px;
-	
 }
 
-.Diary-wrap-main .D-select{
-	display: grid;
-	justify-content: end;
-
+.diary-wrap-main .d-select {
+	display: flex;
+	justify-content: flex-end;
 }
 
-.Diary-wrap-main .tags{
+.diary-wrap-main .tags {
 	display: inline-block;
-	
 }
 
-.Diary-wrap-main .board-piece{
-	padding-top: 20px;
-	padding-bottom: 20px;
-	
-}
-
-.Diary-wrap-main .learn-more{
+.diary-wrap-main .learn-more {
 	width: 200px;
 	border-style: none;
 	color: darkgrey;
-	
 }
 
-.Diary-wrap-main .btn-more{
+.diary-wrap-main .btn-more {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	
+	padding-top: 30px;
+}
+/*글 리스트 깨짐 가운데 정렬로  */
+.diary-wrap-main .board-search-inner {
+	padding-bottom: 30px;
+	font-size: var(--font5);
+}
+/* 소개 문구   */
+.diary-wrap-main .diary-introduction {
+	font-size: var(--font4);
+}
+
+/* 글 리스트 */
+.wrap-diary {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.board-list{
+	 position: relative;
+}
+
+.diary-like{
+	position: absolute;
+	top: 0;
+	right: 0;
 }

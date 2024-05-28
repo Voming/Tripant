@@ -10,5 +10,8 @@ public class DiaryController {
 	public String diary(){
 		return "diary/diaryboard";
 	}
-	
+	@GetMapping("/mydiary")
+	public String mydiary() {
+		return "mydiary/diarymyboard";
+	}
 }
