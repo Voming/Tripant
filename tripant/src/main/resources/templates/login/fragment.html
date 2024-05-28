@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="inputlbl" th:fragment="inputlbl(label, name, type)">
+	<div class="flex inputlbl"><label th:for="${name}" th:id="${name}+'-Lbl'" th:text="${label}">label</label></div>
+	<div style="margin-top: 10px;"><input th:type="${type}" th:name="${name}" th:id="${name}"></div>
+</div>
+<div class="inputbtn" th:fragment="inputbtn(label, name, type, placeholder, btn, size)">
+	<div class="flex input"><label th:for="${name}" th:text="${label}"></label></div>
+	<div class="flex input">
+		<input th:type="${type}" th:name="${name}" th:id="${name}" th:placeholder="${placeholder}">
+		<button type="button" class="btn sendCode" th:text="${btn}"></button>
+	</div>
+</div>
+</body>
+</html>
