@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/diary/diaryboard.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}">
-
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 
 <body>
@@ -70,9 +70,12 @@
 								<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
 									미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
 							</div>
+
 							<div class="diary-like">
 								<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
 							</div>
+							<div id="like" class="diary-icons">favorite</div>
+							</button>
 						</div>
 					</div>
 					<div class="board-list">
@@ -82,7 +85,7 @@
 							</div>
 							<div class="wrap-content">
 								<div class="diary-content">
-									
+
 									<p class="diary-title">제주 여행</p>
 									<p class="diary-date">yyyy-mm-dd</p>
 									<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
@@ -165,7 +168,7 @@
 										</div>
 
 										<div class="btn-more">
-											<button class="learn-more">더보기</button>
+											<button type="button" class="learn-more">더보기</button>
 										</div>
 									</div>
 								</div>
@@ -174,5 +177,6 @@
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
 </body>
+
 
 </html>

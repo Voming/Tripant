@@ -24,18 +24,6 @@
 	display: inline-block;
 }
 
-.diary-wrap-main .learn-more {
-	width: 200px;
-	border-style: none;
-	color: darkgrey;
-}
-
-.diary-wrap-main .btn-more {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding-top: 30px;
-}
 /*글 리스트 깨짐 가운데 정렬로  */
 .diary-wrap-main .board-search-inner {
 	padding-bottom: 30px;
@@ -77,4 +65,29 @@
 /*글 가운데로 넓이 줘서 고정시키기  */
 .diary-content{
 	width: 500px;
+}
+/* 버튼 가운데 정렬 */
+.btn-more{
+	display: flex;
+	justify-content: center;
+}
+/* 버튼 깜빡이 호버 기능  */
+.btn-more button{
+	width: 130px;
+	height: 30px;
+	font-family: "GangwonEdu_OTFBoldA";
+	font-size: var(--font4);
+	background: black;
+	color: white;
+	border: 0;
+	border-radius: 8px;
+	text-align: center;
+	padding-top: 7px;
+}
+
+
+.btn-more button:hover{
+	background: var(--color_light_gray);
+	color: black;
+	cursor: pointer;
 }
