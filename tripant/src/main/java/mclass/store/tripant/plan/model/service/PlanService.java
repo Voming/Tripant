@@ -10,7 +10,12 @@ import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 public class PlanService {
 	@Autowired
 	private PlanRepository boardRepository;
+	
 	public int selectPlanCount(){
 		return boardRepository.selectPlanCount();
+	}
+	
+	public int selectMemCount(){
+		return boardRepository.selectMemCount();
 	}
 }

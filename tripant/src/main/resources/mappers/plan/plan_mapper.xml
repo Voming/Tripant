@@ -4,4 +4,8 @@
 	<select id="selectPlanCount" resultType="_int">
 		SELECT COUNT(*) FROM PLAN
 	</select>
+	
+	<select id="selectMemCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
 </mapper>
