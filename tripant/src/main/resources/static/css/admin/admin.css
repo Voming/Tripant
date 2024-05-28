@@ -33,4 +33,43 @@
 	font-size:25px;
 }
 
+/* 게시글 리스트 */
+.ad-content{
+	 margin: 0 auto;
+}
+
+.ad-content>ul>li:first-child{
+	 text-align: center;
+	 /* 수직정렬 */
+	 vertical-align:middle;  
+}
+
+.ad-content{
+	display:flex;
+}
+
+.ad-content .boardlist{
+	margin-top: 20px;
+	
+}
+
+
+
+.boardlist> ul>li{
+	 float:left;  
+	/* text-align:center; */
+	
+}
+
+.boardlist > li >ul{
+	 clear:both;
+	/*   padding:0px auto; 
+     position:relative;  */
+}
+
+.boardlist > li >ul>li{
+ 	 float:left; 
+	 vertical-align:baseline;
+}
+
 
