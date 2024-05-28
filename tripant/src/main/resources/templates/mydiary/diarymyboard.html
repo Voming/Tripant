@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/diary/diarymyboard.css}" rel="stylesheet">
+<head th:replace="~{common/header :: head('diaryboard')}">
+
+</head>
+<body>
+	<header>
+		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	</header>
+	<section>
+	<div class="board-list">
+			<div class="wrap-diary">
+				<div class="diary-img">
+					<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+				</div>
+				<div class="wrap-content">
+					<div class="diary-content">
+						<p>제주 여행</p>
+						<p>yyyy-mm-dd</p>
+					</div>
+				</div>
+			</div>
+			<div class="wrap-diary">
+				<div class="diary-img">
+					<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+				</div>
+				<div class="wrap-content">
+					<div class="diary-content">
+						<p>제주 여행</p>
+						<p>yyyy-mm-dd</p>
+					</div>
+				</div>
+			</div>
+			<div class="wrap-diary">
+				<div class="diary-img">
+					<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+				</div>
+				<div class="wrap-content">
+					<div class="diary-content">
+						<p>제주 여행</p>
+						<p>yyyy-mm-dd</p>
+					</div>
+				</div>
+			</div>
+			<div class="wrap-diary">
+				<div class="diary-img">
+					<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+				</div>
+				<div class="wrap-content">
+					<div class="diary-content">
+						<p>제주 여행</p>
+						<p>yyyy-mm-dd</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="btn-more">
+				<button class="learn-more">더보기</button>
+			</div>
+		</div>
+
+	</section>
+
+	<footer>
+		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+	</footer>
+</body>
+</html>
