@@ -4,6 +4,7 @@
 	type="text/css">
 <head th:replace="~{common/header :: head('home')}">
 </head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-body">
@@ -22,9 +23,9 @@
 				<img th:src="@{/images/area/SEOUL.jpg}" alt="로고">
 				<div class="make-info">
 					<p style="font-size: var(--font5);"> 생성된 일정 수 </p>
-					<p style="font-size: var(--font3);"> 80 </p>
+					<p style="font-size: var(--font3);" th:text="${planCount}"></p>
 					<p style="font-size: var(--font5);"> 여행자 수 </p>
-					<p style="font-size: var(--font3);"> 43 </p>
+					<p style="font-size: var(--font3);" th:text="${memCount}"></p>
 				</div>
 			</li>
 		</ul>
