@@ -16,6 +16,6 @@ public class PlanController {
 	@GetMapping("/main")
 	public String home(Model model) {
 		//model.addAttribute();
-		return "plan/main/main";
+		return "plan/main/home";
 	}
 }

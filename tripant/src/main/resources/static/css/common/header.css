@@ -1,4 +1,9 @@
 @charset "UTF-8";
+header{
+	height: 55px;
+}
+
+
 header .tn {
     /* 자식들의 기준점 */
     position: relative;

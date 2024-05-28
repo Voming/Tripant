@@ -14,7 +14,7 @@
 	<div class="main-wrapper">
 		<aside class="nav-wrapper">
 			<nav class="nav">
-				<a href="#"><img class="logo" src="/images/tripant_logo.png"></a>
+				<a href="#"><img class="logo" src="/images/tripant_logo_text.png"></a>
 				<button type="button" class="dayn btn">전체일정</button>
 				<button type="button" class="dayn btn">1일차</button>
 				<button type="button" class="dayn btn">2일차</button>
@@ -57,7 +57,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 /* 2. 지도의 중심좌표 */
 // 마우스 드래그로 지도 이동이 완료되었을 때 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
 kakao.maps.event.addListener(map, 'dragend', function() {        
-    
     // 지도 중심좌표를 얻어옵니다 
     var latlng = map.getCenter(); 
     
