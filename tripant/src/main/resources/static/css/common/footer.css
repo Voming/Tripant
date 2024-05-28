@@ -8,7 +8,7 @@ footer .inner li {
 footer .inner .tf {
     font-family: "GangwonEdu_OTFBoldA";
     font-size: var(--font4);
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 footer .inner .to {
