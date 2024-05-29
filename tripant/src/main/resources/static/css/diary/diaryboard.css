@@ -4,15 +4,19 @@
 .diary-wrap-main {
 	width: 960px;
 	margin: auto;
-	padding-top: 10%;
-	padding-bottom: 10%;
+	padding-top: 3%;
+	padding-bottom: 5%;
 	font-family: 'GangwonEdu_OTFBoldA';
 }
 /*지역 태그  */
 .diary-wrap-main .tag {
 	border-radius: 5px 5px 5px;
 	border: 1px solid;
-	padding: 5px;
+	padding: 8px;
+}
+
+.diary-wrap-main .tag a {
+	padding-top: 5px;
 }
 
 .diary-wrap-main .d-select {
@@ -40,39 +44,42 @@
 	flex-wrap: wrap;
 }
 
-.board-list{
-	 position: relative;
+.board-list {
+	position: relative;
 }
 
-.diary-like{
+.diary-like {
 	position: absolute;
 	top: 0;
 	right: 0;
 }
 /* 제목, 날짜, 미리보기  */
-.diary-title{
+.diary-title {
 	font-size: var(--font3);
 	margin: 10px;
 }
-.diary-date{
+
+.diary-date {
 	font-size: var(--font4);
 	margin: 8px;
 }
-.diary-preview{
+
+.diary-preview {
 	font-size: var(--font5);
 	margin: 8px;
 }
 /*글 가운데로 넓이 줘서 고정시키기  */
-.diary-content{
+.diary-content {
 	width: 500px;
 }
 /* 버튼 가운데 정렬 */
-.btn-more{
+.btn-more {
 	display: flex;
 	justify-content: center;
+	padding-top: 45px;
 }
 /* 버튼 깜빡이 호버 기능  */
-.btn-more button{
+.btn-more button {
 	width: 130px;
 	height: 30px;
 	font-family: "GangwonEdu_OTFBoldA";
@@ -85,8 +92,7 @@
 	padding-top: 7px;
 }
 
-
-.btn-more button:hover{
+.btn-more button:hover {
 	background: var(--color_light_gray);
 	color: black;
 	cursor: pointer;
