@@ -30,6 +30,7 @@
 }
 .main-wrapper .nav-wrapper .nav .dayn{
       box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
+      height : 40px;
 }
 /* .main-wrapper .nav-wrapper .nav .dayn:active{
       background-color: #08D57F;
@@ -52,7 +53,16 @@
 .main-wrapper .schedule-wrapper{
 	width: 30%;
 	background-color: var(--color_day6_yellow); 
+	padding : 30px 30px;
 }
+.main-wrapper .schedule-wrapper .plan-title{
+	font-size: var(--font2);
+	margin: 30px 0 10px 0 ;
+}
+.main-wrapper .schedule-wrapper .plan-location{
+	margin-right : 15px;
+	font-size:var(--font3);
+} 
 /* 지도 */
 .main-wrapper .map-wrapper{
 	width: 70%;
