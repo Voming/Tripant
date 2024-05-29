@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
 <meta charset="UTF-8">
 <title th:text="${title}"></title>
 
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <!-- reset.css -->
 <link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
 <!-- 레이아웃 설정 -->
@@ -26,37 +28,22 @@
 							</div>
 							<div class="log">
 								<ul>
-									<li><a href="#">나의 일정</a></li>
-									<li><a href="#">여행기</a></li>
-									<li><a href="#">스토어</a></li>
-									<li><a th:href="@{/login}">로그인</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</header>
-			</div>
-		</div>
-	</div>
-	<div th:fragment="wrap-header-login">
-		<div class="wrap-head">
-			<div>
-				<header>
-					<div class="tn">
-						<!-- 최상단 네비(로고 및 회원가입, 로그인) -->
-						<div class="nav1-wrap">
-							<div class="logo-side">
-								<a href="#"> <img th:src="@{/images/tripant_logo.png}"
-									alt="로고">
-								</a>
-							</div>
-							<div class="log">
-								<ul>
-									<li><a href="#">나의 일정</a></li>
-									<li><a href="#">여행기</a></li>
-									<li><a href="#">스토어</a></li>
-									<li><a href="#">마이페이지</a></li>
-									<li><a href="#">로그아웃</a></li>
+									<li>
+										<a href="#" sec:authorize="isAuthenticated()">나의 일정</a>
+									</li>
+									<li>
+										<a href="#" sec:authorize="isAuthenticated()">여행기</a>
+									</li>
+									<li>
+										<a href="#">스토어</a>
+									</li>
+									<li>
+										<a href="#" sec:authorize="isAuthenticated()">마이페이지</a>
+									</li>
+									<li>
+										<a th:href="@{/login}" sec:authorize="isAnonymous()">로그인</a>
+										<a th:href="@{/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
+									</li>
 								</ul>
 							</div>
 						</div>

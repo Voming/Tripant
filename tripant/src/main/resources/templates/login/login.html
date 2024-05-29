@@ -14,12 +14,12 @@ function loginHandler(){
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
-		<form id="frm-login">
+		<form id="frm-login" action="/login" method="post">
 			<section class="flex login">
 				<div class="login title"><h1>로그인</h1></div>
-				<div th:replace="~{login/template :: inputlbl(이메일, memEmail, email)}"></div>
-				<div th:replace="~{login/template :: inputlbl(비밀번호, memPassword, password)}"></div>
-				<div><button type="button" class="btn login"><h2>로그인</h2></button></div>
+				<div th:replace="~{login/fragment :: inputlbl(이메일, memEmail, text)}"></div>
+				<div th:replace="~{login/fragment :: inputlbl(비밀번호, memPassword, password)}"></div>
+				<div><button type="submit" class="btn login"><h2>로그인</h2></button></div>
 				<div class="recaptcha" style="background-color: lightgrey;">로봇?</div>
 				<div class="flex center findpwd"><h2><a href="#">비밀번호 찾기</a></h2></div>
 				<div class="flex join">
