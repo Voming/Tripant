@@ -5,6 +5,7 @@
 	margin: auto;
 	padding-top: 3%;
 	padding-bottom: 5%;
+	font-family: 'GangwonEdu_OTFBoldA';
 }
 /* 나의 글 리스트 배열 글 밑으로 가게 */
 .board-list {
@@ -36,4 +37,17 @@
 	background: var(--color_light_gray);
 	color: black;
 	cursor: pointer;
+}
+/* 이미지 밑에 제목 날짜 간격 조절 */
+.diary-date {
+	margin-top: 10px;
+	font-size: var(--font6);
+}
+.diary-title{
+		margin-top: 10px;
+		font-size: var(--font5);
+}
+/* 여행일지 밑 간격 띄우기 */
+.wrap-diary{
+	padding-bottom: 20px;
 }
