@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin</title>
+<title>boardlist</title>
 <!-- reset.css -->
 <link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
 <!-- 레이아웃 설정 -->
 <link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
-<link th:href="@{/css/admin/admin_member.css}" rel="stylesheet">
+<link th:href="@{/css/admin/admin-board.css}" rel="stylesheet">
 </head>
 <body>
 <div class="wrap-main">
@@ -30,58 +30,25 @@
 	
 	<div class="wrap-body">
 		<div class="ad-header">
-			<div class="ad-text">회원관리</div>
+			<div class="ad-text">게시글관리</div>
 		</div>
 		<div class="ad-search">
-			<input class="search" type="text" placeholder="회원검색">
+			<input class="search" type="text" placeholder="게시글검색">
 		</div>
-
 		<div class="ad-content">
-			<ul class="memberlist">
+			<ul class="boardlist">
 				<li>	
 					<ul class="col">
+						<li>번호</li>
+						<li>제목</li>
 						<li>닉네임</li>
-						<li>이메일</li>
-						<li>가입일자</li>
-						<li>탈퇴일자</li>
-						<li>등급</li>
-						<li></li>
+						<li>날짜</li>
+						<li>조회수</li>
+						<li>좋아요</li>
 					</ul>
 				</li>
-				
-				<li>
-					<ul class="col list">
-						<li>oyeee</li>
-						<li>tripant@gmail.com</li>
-						<li>2024.05.20</li>
-						<li>2024.05.20</li>
-						<li>관리자</li>
-						<li><button type="button" class="btn">편집</button></li>
-					</ul>
-					
-					<ul class="col list">
-
-						<li>oyeee</li>
-						<li>tripant@gmail.com</li>
-						<li>2024.05.20</li>
-						<li>2024.05.20</li>
-						<li>관리자</li>
-						<li><button type="button" class="btn">편집</button></li>
-					</ul>
-					
-					<ul class="col list">
-						<li>oyeee</li>
-						<li>tripant@gmail.com</li>
-						<li>2024.05.20</li>
-						<li>2024.05.20</li>
-						<li>관리자</li>
-						<li><button type="button" class="btn">편집</button></li>
-					</ul>
-				</li>
-			</ul>	
-		</div> 
-	</div>
-</div>
+			</ul>
+		
+		</div>
 </body>
 </html>
-
