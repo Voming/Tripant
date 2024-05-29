@@ -20,8 +20,9 @@
 	width:95%;
 	border-radius:20px;
 	height:30px;
-
-	margin:15px 0 10px 20px; 
+	border: solid black 1px;
+	margin:40px 0 20px 30px; 
+	
 } 
 
 .wrap-body .ad-content .memberlist{

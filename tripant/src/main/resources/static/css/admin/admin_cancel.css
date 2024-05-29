@@ -3,6 +3,7 @@
 /*회원 리스트 */
 .wrap-body .ad-content{
 	 margin: 0 auto;
+	 font-size:17px;
 }
 
 .wrap-body .ad-content>ul>li:first-child{
@@ -20,8 +21,8 @@
 	width:95%;
 	border-radius:20px;
 	height:30px;
-
-	margin:15px 0 10px 20px; 
+	border: solid black 1px;
+	margin:40px 0 20px 30px; 
 } 
 
 .wrap-body .ad-content .memberlist{
@@ -36,7 +37,6 @@
   	border-bottom:1px solid black;
   	align-items:center;
 } 
-
 
 
 .wrap-body .ad-content .list>li{
@@ -61,7 +61,7 @@
 }
 
 .memberlist > li> .col >li:first-child{
-	width:20%;
+	width:15%;
 }
 
 .memberlist > li> .col >li:first-child+li{
@@ -71,7 +71,7 @@
 	width:25%;
 }
 .memberlist > li> .col >li:first-child+li+li+li{
-	width:15%;
+	width:25%;
 }
 /*  */
 
