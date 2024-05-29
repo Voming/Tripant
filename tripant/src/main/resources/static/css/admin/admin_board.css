@@ -1,9 +1,15 @@
 @charset "UTF-8";
 
+.wrap-body {
+	width:100%;
+}
 
 /* 게시글 리스트 */
+
+
 .wrap-body .ad-content{
-	 margin: 0 auto;
+	display:flex;
+	width:100%;
 }
 
 .wrap-body .ad-content>ul>li:first-child{
@@ -70,11 +76,11 @@
 	width:18%;
 }
 .boardlist > li> .col >li:first-child+li+li+li{
-	width:28%;
+	width:25%;
 }
 .boardlist > li> .col >li:first-child+li+li+li+li{
-	width:13%;
+	width:15%;
 }
 .boardlist > li> .col >li:first-child+li+li+li+li+li{
-	width:13%;
+	width:15%;
 }

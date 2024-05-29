@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 /*회원 리스트 */
-.wrap-body .ad-content{
-	 margin: 0 auto;
+.wrap-body {
+	width:100%;
 }
 
 .wrap-body .ad-content>ul>li:first-child{
@@ -65,7 +65,7 @@
 }
 
 .memberlist > li> .col >li:first-child+li{
-	width:30%;
+	width:25%;
 }
 .memberlist > li> .col >li:first-child+li+li{
 	width:18%;
@@ -74,7 +74,7 @@
 	width:18%;
 }
 .memberlist > li> .col >li:first-child+li+li+li+li{
-	width:15%;
+	width:18%;
 }
 
 /*  */
