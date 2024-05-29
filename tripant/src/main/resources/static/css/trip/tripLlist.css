@@ -1,0 +1,32 @@
+@charset "UTF-8";
+.main-wrapper{
+ 	height: 59vh; 
+    min-height: 450px;  /* 나머지들의 최소 높이 */
+    min-height: 100%; 
+    width: 960px;
+    margin: 0 auto;
+    background-color: lime; /* test */
+    font-family: 'GangwonEdu_OTFBoldA';
+    display: flex;
+    flex-direction: column;
+}
+.main-wrapper .title{
+	padding: 50px 0 10px 0;	
+}
+.main-wrapper .full{
+	width:100%;
+}
+.main-wrapper .trip-list{
+	cursor:pointer;
+    background-color: #fafafa;
+    box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
+    border-radius: 10px;
+    border-color: solid 1px var(--color_gray);
+    height: 200px;
+    width: 900px;
+	margin : 10px 0px;
+	/* display: flex; */
+}
+.main-wrapper .trip-list .location-img{
+	border-radius: 8px;
+}
