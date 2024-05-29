@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>admin board</title>
+<!-- reset.css -->
+<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
+<!-- 레이아웃 설정 -->
 <link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
+<link th:href="@{/css/admin/admin_board.css}" rel="stylesheet">
 </head>
 <body>
 <div class="wrap-main">
@@ -26,9 +30,36 @@
 	
 	<div class="wrap-body">
 		<div class="ad-header">
-			<div class="ad-text">게시글통계</div>
+			<div class="ad-text">게시글관리</div>
 		</div>
-		
-	
+		<div class="ad-search">
+			<input class="search" type="text" placeholder="게시글검색">
+		</div>
+		<div class="ad-content">
+			<ul class="boardlist">
+				<li>	
+					<ul class="col">
+						<li>번호</li>
+						<li>제목</li>
+						<li>닉네임</li>
+						<li>날짜</li>
+						<li>조회수</li>
+						<li>좋아요</li>
+					</ul>
+				</li>
+				<li>
+					<ul class="col list">
+							<li>1</li>
+							<li>안녕하세요</li>
+							<li>oyeee</li>
+							<li>2024.05.20</li>
+							<li>4</li>
+							<li>77</li>
+						</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>	
 </body>
 </html>

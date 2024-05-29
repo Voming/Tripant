@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>member chart</title>
+<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/admin/admin.css}" rel="stylesheet">
+<!--chart.js CDN  -->
+<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js}"  rel="stylesheet">
+<script th:src="@{https://fastly.jsdelivr.net/npm/chart.js}"></script>
+</head>
+<body>
+<div class="wrap-main">
+	<div class="wrap-sidebar">
+		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
+		<div class="ad-menu"> 관리자메뉴</div>
+		<div class="ad-member">회원관리</div>
+		<div class="ad-menumember a">회원관리</div>
+		<div class="ad-menumember b">회원통계</div>
+		
+		<div class="ad-board">게시글 관리</div>
+		<div class="ad-menuboard a">전체게시글</div>
+		<div class="ad-menuboard b">신고 게시글 관리</div>
+		<div class="ad-menuboard c">게시글 통계</div>
+		
+		<div class="ad-store">스토어 관리</div>
+		<div class="ad-menustorea">결제 취소</div>
+	</div>
+	
+	<div class="wrap-body">
+		<div class="ad-header">
+			<div class="ad-text">회원통계</div>
+		</div>
+		<canvas id="myChart2" ></canvas>
+	</div>
+	
+</div>
+			
+		
+		
+		
+<script>
+var ctx2 = document.getElementById('myChart2').getContext('2d');
+var myChart2 = new Chart(ctx2, {
+		  type: 'bubble',
+		  data: {        
+				labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],        
+				datasets: [{           
+					label: '회원수',       
+					 data: [{x:20,y:30,r:15},{x:30,y:10,r:10}],            
+					backgroundColor: [                
+						'rgba(255, 99, 132, 0.2)',                
+						'rgba(54, 162, 235, 0.2)',                
+						'rgba(255, 206, 86, 0.2)',                
+						'rgba(75, 192, 192, 0.2)',                
+						'rgba(153, 102, 255, 0.2)',               
+						'rgba(255, 159, 64, 0.2)'            
+						],            
+							}]    
+						}
+		 ,
+		  options: {
+		    responsive: true,
+		    plugins: {
+		    	legend: {
+		    	position: 'top',
+		      },
+		    title: {
+		    	display: true,
+		    	text: '월 가입자수/일정생성 통계'
+		      }
+		    }
+		  },
+		});
+</script>
+</body>
+</html>
