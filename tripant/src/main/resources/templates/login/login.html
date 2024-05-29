@@ -2,29 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/login/login.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('로그인')}"></head>
-<script>
-$(loadedHandler);
-function loadedHandler(){
-	$(".btn.login").on("click", loginHandler);
-}
-function loginHandler(){
-	
-}
-</script>
+<script type="text/javascript" th:src="@{/js/login/button-hover.js}"></script>
 <body>
-	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
 		<form id="frm-login" action="/login" method="post">
 			<section class="flex login">
-				<div class="login title"><h1>로그인</h1></div>
+				<div class="login title">로그인</div>
 				<div th:replace="~{login/fragment :: inputlbl(이메일, memEmail, text)}"></div>
 				<div th:replace="~{login/fragment :: inputlbl(비밀번호, memPassword, password)}"></div>
-				<div><button type="submit" class="btn login"><h2>로그인</h2></button></div>
+				<div th:if="${error}">
+		            <p style="color:red;" th:text="${exception}"></p>
+		        </div>
+				<div><button type="submit" class="btn login">로그인</button></div>
 				<div class="recaptcha" style="background-color: lightgrey;">로봇?</div>
-				<div class="flex center findpwd"><h2><a href="#">비밀번호 찾기</a></h2></div>
+				<div class="flex center findpwd"><a href="#">비밀번호 찾기</a></div>
 				<div class="flex join">
-					<div><h2>아직 회원이 아니세요?</h2></div>
-					<div class="email-join"><h2><a th:href="@{/join}">이메일 회원가입</a></h2></div>
+					<div class="memyn">아직 회원이 아니세요?</div>
+					<div class="email-join"><a th:href="@{/join}">이메일 회원가입</a></div>
 				</div>
 				<div class="flex snslogin">
 					<div>SNS 간편 로그인</div>
@@ -37,7 +32,7 @@ function loginHandler(){
 			</section>
 		</form>
 	</div>
-	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
 	<div class="trash" style="display: none;">
 		<div class="text-center">
 		    <a th:href="@{/login/kakao}">
