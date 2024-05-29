@@ -32,3 +32,8 @@
 	text-align: center;
 	padding-top: 7px;
 }
+.btn-more button:hover {
+	background: var(--color_light_gray);
+	color: black;
+	cursor: pointer;
+}
