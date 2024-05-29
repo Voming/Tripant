@@ -9,8 +9,8 @@
 		<form id="frm-login" action="/login" method="post">
 			<section class="flex login">
 				<div class="login title">로그인</div>
-				<div th:replace="~{login/fragment :: inputlbl(이메일, memEmail, text)}"></div>
-				<div th:replace="~{login/fragment :: inputlbl(비밀번호, memPassword, password)}"></div>
+				<div th:replace="~{login/fragment :: inputlbl(이메일, memEmail, text, 3, '이메일 주소')}"></div>
+				<div th:replace="~{login/fragment :: inputlbl(비밀번호, memPassword, password, 3, 비밀번호)}"></div>
 				<div th:if="${error}">
 		            <p style="color:red;" th:text="${exception}"></p>
 		        </div>
