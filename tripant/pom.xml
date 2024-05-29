@@ -127,6 +127,14 @@
 		  <artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		 -->
+		 
+		 <!-- javax.mail -->
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -5,16 +5,39 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="inputlbl" th:fragment="inputlbl(label, name, type)">
-	<div class="flex inputlbl"><label th:for="${name}" th:id="${name}+'-Lbl'" th:text="${label}">label</label></div>
-	<div style="margin-top: 10px;"><input th:type="${type}" th:name="${name}" th:id="${name}"></div>
+<!-- 입력창만 -->
+<div class="inputlbl" th:fragment="inputlbl(label, name, type, size, placeholder)">
+	<div class="flex inputlbl1"><label th:style="'font-size: var(--font'+${size}+')'" th:for="${name}" th:id="${name}+'-lbl'" th:text="${label}">label</label></div>
+	<div class="flex inputlbl2" style="margin-top: 10px;"><input style="line-height: 1.5em;" th:type="${type}" th:name="${name}" th:id="${name}" th:placeholder="${placeholder}"></div>
 </div>
-<div class="inputbtn" th:fragment="inputbtn(label, name, type, placeholder, btn)">
-	<div class="flex input"><label th:for="${name}" th:text="${label}"></label></div>
-	<div class="flex input">
-		<input th:type="${type}" th:name="${name}" th:id="${name}" th:placeholder="${placeholder}">
-		<button type="button" class="btn sendCode" th:text="${btn}"></button>
+<!-- 입력창+버튼 -->
+<div th:class="'inputbtn '+${class}" th:fragment="inputbtn(class, label, name, type, placeholder, btn, btnclass, size)">
+	<div><label th:style="'font-size: var(--font'+${size}+')'" th:for="${name}" th:id="${name}+'-lbl'" th:text="${label}"></label></div>
+	<div class="flex inputbtn" style="margin-top: 10px;">
+		<div class="inputbtn1">
+			<input style="line-height: 1.5em;" th:type="${type}" th:name="${name}" th:id="${name}" th:placeholder="${placeholder}">
+		</div>
+		<div class="inputbtn2">
+			<button type="button" th:class="'btn '+${btnclass}" th:text="${btn}"></button>
+		</div>
 	</div>
+</div>
+<!-- 입력창+체크 -->
+<div th:class="'inputbtn '+${class}" th:fragment="inputbtn(class, label, name, type, placeholder, btn, btnclass, size)">
+	<div><label th:style="'font-size: var(--font'+${size}+')'" th:for="${name}" th:id="${name}+'-lbl'" th:text="${label}"></label></div>
+	<div class="flex inputbtn" style="margin-top: 10px;">
+		<div class="inputbtn1">
+			<input style="line-height: 1.5em;" th:type="${type}" th:name="${name}" th:id="${name}" th:placeholder="${placeholder}">
+		</div>
+		<div class="inputbtn2">
+			<button type="button" th:class="'btn '+${btnclass}" th:text="${btn}"></button>
+		</div>
+	</div>
+</div>
+<!-- 체크박스+동의 -->
+<div class="flex agree" th:fragment="agree(range, text)">
+	<div><input type="checkbox" name="agree" th:id="'agree-'+${range}"></div>
+	<div th:text="${text}"></div>
 </div>
 </body>
 </html>
