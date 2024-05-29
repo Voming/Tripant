@@ -1,8 +1,15 @@
 @charset "UTF-8";
 
-/*회원 리스트 */
 .wrap-body {
 	width:100%;
+}
+
+
+/*회원 리스트 */
+.wrap-body .ad-content{
+	display:flex;
+	width:100%;
+	 font-size:17px;
 }
 
 .wrap-body .ad-content>ul>li:first-child{
@@ -22,7 +29,6 @@
 	height:30px;
 	border: solid black 1px;
 	margin:40px 0 20px 30px; 
-	
 } 
 
 .wrap-body .ad-content .memberlist{
@@ -38,9 +44,9 @@
   	align-items:center;
 } 
 
+
 .wrap-body .ad-content .list>li{
 	 margin:15px 0 15px 0; 
-	
 }
 
 .boardlist> ul>li{
@@ -65,24 +71,30 @@
 }
 
 .memberlist > li> .col >li:first-child+li{
-	width:25%;
+	width:28%;
 }
 .memberlist > li> .col >li:first-child+li+li{
-	width:18%;
+	width:25%;
 }
 .memberlist > li> .col >li:first-child+li+li+li{
-	width:18%;
+	width:23%;
 }
-.memberlist > li> .col >li:first-child+li+li+li+li{
-	width:18%;
+/*  */
+
+.btn-cancel{
+	border-radius:8px;
+	border:none;
+	background-color:black;
+	color:white;
+	height:30px;
+	width:70px;
 }
 
-/*  */
 
 .col.list .btn{
 	border-radius:8px;
 	border:solid black 1px;
-	height:30px;
-	width:50px;
 	background-color:white;
+	height:30px;
+	width:70px;
 }

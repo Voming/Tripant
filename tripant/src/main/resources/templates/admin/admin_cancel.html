@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>게시글관리</title>
+<title>결제취소</title>
 <!-- reset.css -->
 <link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
 <!-- 레이아웃 설정 -->
 <link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
-<link th:href="@{/css/admin/admin_board.css}" rel="stylesheet">
+<link th:href="@{/css/admin/admin_cancel.css}" rel="stylesheet">
 </head>
 <body>
 <div class="wrap-main">
@@ -31,37 +31,43 @@
 	<div class="wrap-body">
 		<form>
 			<div class="ad-header">
-				<div class="ad-text">전체 게시글</div>
+				<div class="ad-text">결제취소</div>
 			</div>
 			<div class="ad-search">
-				<input class="search" type="text" placeholder="게시글검색">
+				<input class="search" type="text" placeholder="회원검색">
 			</div>
+			
 			<div class="ad-content">
-				<ul class="boardlist">
+				<ul class="memberlist">
 					<li>	
 						<ul class="col">
-							<li>번호</li>
-							<li>제목</li>
 							<li>닉네임</li>
-							<li>날짜</li>
-							<li>조회수</li>
-							<li>좋아요</li>
+							<li>이메일</li>
+							<li>상품명</li>
+							<li>구매일자</li>
+							<li></li>
 						</ul>
 					</li>
 					<li>
 						<ul class="col list">
-								<li>1</li>
-								<li>안녕하세요</li>
-								<li>oyeee</li>
-								<li>2024.05.20</li>
-								<li>4</li>
-								<li>77</li>
-							</ul>
+							<li>oyeee</li>
+							<li>tripant@gmail.com</li>
+							<li>폰트 1개월</li>
+							<li>2024.05.20</li>
+							<li><button type="button" class="btn">결제취소</button></li>
+						</ul>
+						<ul class="col list">
+							<li>오예</li>
+							<li>tripant@gmail.com</li>
+							<li>테마-색상</li>
+							<li>2024.05.20</li>
+							<li><button type="button" class="btn-cancel">취소완료</button></li>
+						</ul>
 					</li>
-				</ul>
-			</div>
+				</ul>	
+			</div> 
 		</form>
 	</div>
-</div>	
+</div>
 </body>
 </html>

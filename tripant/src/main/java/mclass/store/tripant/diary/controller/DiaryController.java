@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DiaryController {
 	@GetMapping("/diary")
 	public String diary(){
-		return "diary/diaryboard";
+		return "diary/diary_board";
 	}
 	@GetMapping("/mydiary")
 	public String mydiary() {
-		return "mydiary/diarymyboard";
+		return "mydiary/diary_my_board";
 	}
 }

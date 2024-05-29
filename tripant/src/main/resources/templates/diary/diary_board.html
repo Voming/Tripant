@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/diary/diaryboard.css}" rel="stylesheet">
+<link th:href="@{/css/diary/diary_board.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
-
 <body>
 	<header>
 		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
@@ -13,20 +12,9 @@
 		<!-- 버튼 클릭 이벤트로 지역 태그 클릭 시 이동 시키기 -->
 		<div class="diary-wrap-main">
 			<div class="board-search-inner">
-				<div class="tags">
-					<span class="tag"><a href="#">전체</a></span> <span class="tag">
-						<a href="#">서울</a>
-					</span> <span class="tag"><a href="#"> 부산</a></span> <span class="tag"><a
-						href="#"> 대구</a></span> <span class="tag"><a href="#"> 인천</a></span> <span
-						class="tag"><a href="#"> 광주</a></span> <span class="tag"> <a
-						href="#">대전</a></span> <span class="tag"><a href="#"> 울산</a></span> <span
-						class="tag"><a href="#"> 세종</a></span> <span class="tag"><a
-						href="#"> 경기</a></span> <span class="tag"><a href="#"> 강원</a></span> <span
-						class="tag"> <a href="#">충북</a></span> <span class="tag"><a
-						href="#"> 충남</a></span> <span class="tag"><a href="#"> 전북</a></span> <span
-						class="tag"><a href="#"> 전남</a></span> <span class="tag"> <a
-						href="#">경북</a></span> <span class="tag"><a href="#"> 경남</a></span> <span
-						class="tag"><a href="#"> 제주</a></span>
+				<!-- 소개 문구 -->
+				<div class="diary-introduction">
+					<span><strong> 하트가 많이 눌린 개미들의 인기 여행지를 소개합니다.</strong></span>
 				</div>
 				<!-- 순서 옵션 -->
 				<div class="d-select">
@@ -34,70 +22,30 @@
 						<option value="popularity">인기순</option>
 					</select>
 				</div>
-
-				<!-- 소개 문구 -->
-				<div class="diary-introduction">
-					<span><strong> 하트가 많이 눌린 개미들의 인기 여행지를 소개합니다.</strong></span>
-				</div>
-			</div>
-			<!-- 글 리스트 7개씩 하고 for문으로 더보기 하기 -->
-			<div class="board-list">
-				<div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제주 여행</p>
-							<p class="diary-date">yyyy-mm-dd</p>
-							<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
-								미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
-						</div>
-						<div class="diary-like">
-							<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
-						</div>
-					</div>
-				</div>
-				<div class="board-list">
-					<div class="wrap-diary">
-						<div class="diary-img">
-							<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
-						</div>
-						<div class="wrap-content">
-							<div class="diary-content">
-								<p class="diary-title">제주 여행</p>
-								<p class="diary-date">yyyy-mm-dd</p>
-								<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
-									미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
-							</div>
-
-							<div class="diary-like">
-								<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
-							</div>
-							<div id="like" class="diary-icons">favorite</div>
-							</button>
-						</div>
-					</div>
-					<div class="board-list">
+				<ul class="area-tab-nav">
+					<li class="tags"><a href="#tab01">전체</a></li>
+					<li class="tags"><a href="#tab02">서울</a></li>
+					<li class="tags"><a href="#tab03">부산</a></li>
+					<li class="tags"><a href="#tab04">대구</a></li>
+					<li class="tags"><a href="#tab05">인천</a></li>
+					<li class="tags"><a href="#tab06">광주</a></li>
+					<li class="tags"><a href="#tab07">대전</a></li>
+					<li class="tags"><a href="#tab08">울산</a></li>
+					<li class="tags"><a href="#tab09">세종</a></li>
+					<li class="tags"><a href="#tab10">경기</a></li>
+					<li class="tags"><a href="#tab11">강원</a></li>
+					<li class="tags"><a href="#tab12">충북</a></li>
+					<li class="tags"><a href="#tab13">충남</a></li>
+					<li class="tags"><a href="#tab14">전북</a></li>
+					<li class="tags"><a href="#tab15">전남</a></li>
+					<li class="tags"><a href="#tab16">경북</a></li>
+					<li class="tags"><a href="#tab17">경남</a></li>
+					<li class="tags"><a href="#tab18">제주</a></li>
+				</ul>
+				<div class="diary-tab-content">
+					<div id="tab01">
 						<div class="wrap-diary">
-							<div class="diary-img">
-								<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
-							</div>
-							<div class="wrap-content">
-								<div class="diary-content">
-
-									<p class="diary-title">제주 여행</p>
-									<p class="diary-date">yyyy-mm-dd</p>
-									<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
-										미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
-								</div>
-								<div class="diary-like">
-									<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
-								</div>
-							</div>
-						</div>
-						<div class="board-list">
-							<div class="wrap-diary">
+							<div class="wrap-d-content">
 								<div class="diary-img">
 									<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
 								</div>
@@ -113,69 +61,150 @@
 									</div>
 								</div>
 							</div>
-							<div class="board-list">
-								<div class="wrap-diary">
-									<div class="diary-img">
-										<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
+							<div class="wrap-d-content">
+								<div class="diary-img">
+									<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
+								</div>
+								<div class="wrap-content">
+									<div class="diary-content">
+										<p class="diary-title">제주 여행</p>
+										<p class="diary-date">yyyy-mm-dd</p>
+										<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
+											미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
 									</div>
-									<div class="wrap-content">
-										<div class="diary-content">
-											<p class="diary-title">제주 여행</p>
-											<p class="diary-date">yyyy-mm-dd</p>
-											<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
-												미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
-										</div>
-										<div class="diary-like">
-											<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
-										</div>
+									<div class="diary-like">
+										<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
 									</div>
 								</div>
-								<div class="board-list">
-									<div class="wrap-diary">
-										<div class="diary-img">
-											<img src="https://dummyimage.com/350x200/000/fff"
-												alt="대표 이미지">
-										</div>
-										<div class="wrap-content">
-											<div class="diary-content">
-												<p class="diary-title">제주 여행</p>
-												<p class="diary-date">yyyy-mm-dd</p>
-												<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글
-													미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
-											</div>
-											<div class="diary-like">
-												<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
-											</div>
-										</div>
-									</div>
-									<div class="board-list">
-										<div class="wrap-diary">
-											<div class="diary-img">
-												<img src="https://dummyimage.com/350x200/000/fff"
-													alt="대표 이미지">
-											</div>
-											<div class="wrap-content">
-												<div class="diary-content">
-													<p class="diary-title">제주 여행</p>
-													<p class="diary-date">yyyy-mm-dd</p>
-													<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글
-														미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
-												</div>
-												<div class="diary-like">
-													<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
-												</div>
-											</div>
-										</div>
+							</div>
+						</div>
+					</div>
+					<!--2번째 탭  -->
+					<div id="tab02">
+						<div class="wrap-diary">
+							<h1>2번</h1>
+						</div>
+					</div>
+					<!--3번째 탭  -->
+					<div id="tab03">
+						<div class="wrap-diary">
+							<h1>3번</h1>
+						</div>
+					</div>
+					<!--4번째 탭  -->
+					<div id="tab04">
+						<div class="wrap-diary">
+							<h1>4번</h1>
+						</div>
+					</div>
+					<!--5번째 탭  -->
+					<div id="tab05">
+						<div class="wrap-diary">
+							<h1>5번</h1>
+						</div>
+					</div>
+					
+					<!--6번째 탭  -->
+					<div id="tab06">
+						<div class="wrap-diary">
+							<h1>6번</h1>
+						</div>
+					</div>
+					<!--7번째 탭  -->
+					<div id="tab07">
+						<div class="wrap-diary">
+							<h1>7번</h1>
+						</div>
+					</div>
+					<!--8번째 탭  -->
+					<div id="tab08">
+						<div class="wrap-diary">
+							<h1>8번</h1>
+						</div>
+					</div>
+					<!--9번째 탭  -->
+					<div id="tab09">
+						<div class="wrap-diary">
+							<h1>9번</h1>
+						</div>
+					</div>
+					<!--10번째 탭  -->
+					<div id="tab10">
+						<div class="wrap-diary">
+							<h1>10번</h1>
+						</div>
+					</div>
+					<!--11번째 탭  -->
+					<div id="tab11">
+						<div class="wrap-diary">
+							<h1>11번</h1>
+						</div>
+					</div>
+					<!--12번째 탭  -->
+					<div id="tab12">
+						<div class="wrap-diary">
+							<h1>12번</h1>
+						</div>
+					</div>
+					<!--13번째 탭  -->
+					<div id="tab13">
+						<div class="wrap-diary">
+							<h1>13번</h1>
+						</div>
+					</div>
+					<!--14번째 탭  -->
+					<div id="tab14">
+						<div class="wrap-diary">
+							<h1>14번</h1>
+						</div>
+					</div>
+					<!--15번째 탭  -->
+					<div id="tab15">
+						<div class="wrap-diary">
+							<h1>15번</h1>
+						</div>
+					</div>
+					<!--16번째 탭  -->
+					<div id="tab16">
+						<div class="wrap-diary">
+							<h1>16번</h1>
+						</div>
+					</div>
+					<!--17번째 탭  -->
+					<div id="tab17">
+						<div class="wrap-diary">
+							<h1>17번</h1>
+						</div>
+					</div>
+					<!--18번째 탭  -->
+					<div id="tab18">
+						<div class="wrap-diary">
+							<h1>18번</h1>
+						</div>
+					</div>
+					
+				</div>
+				<!-- 글 리스트 7개씩 하고 for문으로 더보기 하기 -->
+				<div class="btn-more">
+					<button type="button" class="learn-more">더보기</button>
+				</div>
+			</div>
+		</div>
 
-										<div class="btn-more">
-											<button type="button" class="learn-more">더보기</button>
-										</div>
-									</div>
-								</div>
 	</section>
 	<footer>
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
+	<script>
+		$('.area-tab-nav a').click(function() {
+			$('.diary-tab-content > div').hide().filter(this.hash).fadeIn();
+			$('.area-tab-nav a').removeClass('active');
+			$(this).addClass('active');
+			return false;
+		}).filter(':eq(0)').click();
+		
+	
+	</script>
 </body>
 
 

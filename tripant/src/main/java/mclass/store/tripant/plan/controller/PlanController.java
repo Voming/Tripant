@@ -8,6 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import mclass.store.tripant.plan.domain.AreaNameEntity;
 import mclass.store.tripant.plan.model.service.PlanService;
@@ -34,5 +37,14 @@ public class PlanController {
 		model.addAttribute("areaNameList", planService.selectAreaNameList());
 		
 		return "plan/main/home";
+	}
+	
+	@PostMapping("/find")
+	@ResponseBody
+	public List<AreaNameEntity> find(@RequestParam("findArea") String findArea) {
+		System.out.println("findArea :" + findArea);
+		List<AreaNameEntity> areaList = planService.selectAreaFindList(findArea);
+		System.out.println(areaList);
+		return areaList;
 	}
 }

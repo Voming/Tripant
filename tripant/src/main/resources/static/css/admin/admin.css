@@ -6,7 +6,6 @@
 .wrap-main{
 	display:flex;
 	flex-direction:row;
-	width: 1440px;
     margin: 0 auto;
 }
 
@@ -14,7 +13,9 @@ body{
 	margin:0;
 }
 
-
+a{
+	color:white;
+}
 /* 사이드바 */
 .wrap-main .wrap-sidebar{
 	padding:15px;
@@ -60,7 +61,6 @@ body{
 .wrap-main .ad-header{
  background-color:rgb(128, 128, 128);
  height	:70px;
- width:1200px;
  color:white;
 }
 
