@@ -40,89 +40,34 @@
 	.wrap-main .flex.inputbtn{
 		justify-content: space-between;
 	}
-	.wrap-main .inputbtn1{
+	.wrap-main .inputbtn1, .wrap-main .inputchk1{
 		width: 70%;
 	}
-	.wrap-main .inputbtn1 input{
+	.wrap-main .inputbtn1 input, .wrap-main .inputchk1 input{
 		width: 100%;
 	}
-	.wrap-main .inputbtn2{
+	.wrap-main .inputbtn2, .wrap-main .inputchk2{
 		width: 30%;
 		display: flex;
 		justify-content: center;
 	}
-	.wrap-main .flex.input{
+	.wrap-main textarea{
+		resize: none;
 		width: 100%;
+		box-sizing: border-box;
+		overflow: scroll;
+		color: black;
+		background-color: white;
 	}
 </style>
 <script>
 $(loadedHandler);
 function loadedHandler(){
-	$(".btn.join").on("click", insertMemHandler);
 	$("#email").on("keyup", writeEmailHandler);
-	
 	$(".inputbtn.check").hide();
 	$(".btn.sendCode").on("click", codeSendHandler);
 	$(".btn.checkCode").on("click", codeCheckHandler);
-}
-
-//이메일 공란 시 문구 표시
-function writeEmailHandler(){
-	if($("#email").val().trim().length == 0){
-		$(this).parents(".inputbtn").next().show();
-	}else{
-		$(this).parents(".inputbtn").next().hide();
-	}
-}
-
-//인증번호 발송 및 입력창 표시
-function codeSendHandler(){
-	$(".inputbtn.check").show();
-	var userEmail = $("#email").val();
-	$.ajax({
-		url: "/code/send", 
-		type: "post", 
-		async: false, 
-		data: {userEmail: userEmail}, 
-		success: function(result){
-			$("#tempCode").val(result);
-			if(result == null){
-				alert('인증번호 발송 중 오류가 발생했습니다.');
-			}else{
-				console.log(result);
-				alert("발송되었습니다.");
-			}
-		},  
-		error: function (request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
-	});
-}
-
-//인증번호 확인
-function codeCheckHandler(){
-	var inputCode = $("#code").val();
-	var sendCode = $("#tempCode").val();
-	$.ajax({
-		url: "/code/check", 
-		type: "post", 
-		data: {inputCode: inputCode, sendCode: sendCode}, 
-		success: function(result){
-			if(result == 1){
-				alert("인증 성공하였습니다.");
-				$(".inputbtn.check").hide();
-			}else{
-				alert('인증번호가 일치하지 않습니다.');
-			}
-		}, 
-		error: function (request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
-	});
+	$(".btn.join").on("click", insertMemHandler);
 }
 </script>
 <body>
@@ -136,15 +81,15 @@ function codeCheckHandler(){
 				<div style="color: red;">* 이메일을 입력해주세요.</div>
 				<div th:replace="~{login/fragment :: inputbtn(check, '이메일 인증번호', code, text, '', 확인, checkCode, 4)}"></div>
 				<input type="hidden" id="tempCode">
-				<div th:replace="~{login/fragment :: inputbtn('', 닉네임, nick, text, '한글 2~8자', 중복확인, checkNick, 4)}"></div>
-				<div th:replace="~{login/fragment :: inputlbl(비밀번호, password, password, 4, '영문, 숫자 포함 8~20자')}"></div>
+				<div th:replace="~{login/fragment :: inputchk('', 닉네임, nick, text, '한글 2~8자', 4)}"></div>
+				<div th:replace="~{login/fragment :: inputchk('', 비밀번호, password, password, '영문, 숫자 포함 8~20자', 4)}"></div>
 				<div th:replace="~{login/fragment :: inputlbl('생년월일 설정', birth, date, 4, '')}"></div>
 				<div>트립앤트 회원 약관 동의</div>
 				<div th:replace="~{login/fragment :: agree(all, '전체 동의')}"></div>
 				<div th:replace="~{login/fragment :: agree(first, '동의')}"></div>
-				<div><textarea>약관입니다111111111</textarea></div>
+				<div><textarea rows="10" disabled="disabled">약관입니다111111111</textarea></div>
 				<div th:replace="~{login/fragment :: agree(second, '동의')}"></div>
-				<div><textarea>약관입니다222222222</textarea></div>
+				<div><textarea rows="10" disabled="disabled">약관입니다222222222</textarea></div>
 				<div class="recaptcha" style="background-color: lightgrey;">로봇?</div>
 				<div><button type="submit" class="btn join">회원가입</button></div>
 				<div><a th:href="@{/login}">로그인 화면가기</a></div>
@@ -153,12 +98,14 @@ function codeCheckHandler(){
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
+<script type="text/javascript" th:src="@{/js/login/join_email_alert.js}"></script>
+<script type="text/javascript" th:src="@{/js/login/join_send_code.js}"></script>
 <script>
 function insertMemHandler(){
 	console.log($("#frm-join").serialize());
 	$.ajax({
 		url: '/join', 
-		type: 'POST', 
+		type: 'post', 
 		data: $('#frm-join').serialize(), 
 		success: function (result){
 			alert('성공');
