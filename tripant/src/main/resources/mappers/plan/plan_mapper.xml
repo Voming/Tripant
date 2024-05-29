@@ -13,7 +13,13 @@
 	</select>
 
 	<select id="selectAreaNameList" resultType="AreaNameEntity">
-		SELECT AREA_CODE, AREA_NAME, AREA_SHORT_NAME, AREA_ENG_NAME, AREA_FILE_NAME 
+		SELECT AREA_CODE, AREA_NAME, AREA_SHORT_NAME, AREA_ENG_NAME, AREA_FILE_NAME
 		FROM AREA
+	</select>
+
+	<select id="selectAreaFindList" parameterType="string" resultType="AreaNameEntity">
+		SELECT AREA_CODE, AREA_NAME,AREA_SHORT_NAME,AREA_ENG_NAME,AREA_FILE_NAME 
+		FROM AREA 
+		WHERE AREA_NAME LIKE '%'||#{findArea}||'%'
 	</select>
 </mapper>

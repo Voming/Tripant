@@ -25,6 +25,7 @@
 .wrap-example .example-right h2,
 .wrap-example .example-right h6{
 	margin-left: 40px;
+	padding: 2px;
 }
 .wrap-body .example-img img {
 	width: 470px;

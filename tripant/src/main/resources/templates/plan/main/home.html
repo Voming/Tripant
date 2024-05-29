@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/plan/main/home_make.css}" rel="stylesheet"
-	type="text/css">
-<link th:href="@{/css/plan/main/home_example.css}" rel="stylesheet"
-	type="text/css">
-<link th:href="@{/css/plan/main/home_search.css}" rel="stylesheet"
-	type="text/css">
+<link th:href="@{/css/plan/main/home_make.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/plan/main/home_example.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/plan/main/home_search.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('home')}">
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script th:src="@{/js/plan/plan_home.js}" ></script>
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-body">
@@ -54,11 +52,9 @@
 				<h2>어디로 여행을 떠나시나요?</h2>
 				<div class="search">
 					<form id="frm-find">
-						<input type="text" name="find"
-							placeholder="&nbsp;&nbsp;지역명을 입력하세요">
+						<input type="text" name="find" placeholder="&nbsp;&nbsp;지역명을 입력하세요">
 						<button type="button" class="btn find">
-							<img class="search-btn" th:src="@{/images/icons/search.png}"
-alt="찾기">
+							<img class="search-btn" th:src="@{/images/icons/search.png}" alt="찾기">
 						</button>
 					</form>
 				</div>
@@ -71,8 +67,8 @@ alt="찾기">
 								<div class="area_btn">
 									<img th:src="@{|/images/area/${area.areaFileName}|}"alt="지역">
 									<div class="description">
-										<p style="font-size: var(--font3); " th:text="${area.areaEngName}"></p>
-										<p style="font-size: var(--font4);" th:text="${area.areaName}"></p>
+										<p style="font-size: var(--font3); " th:text="${area.areaName}"></p>
+										<p style="font-size: var(--font5);" th:text="${area.areaEngName}"></p>
 									</div>
 								</div>
 							</li>

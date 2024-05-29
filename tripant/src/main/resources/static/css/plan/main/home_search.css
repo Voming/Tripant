@@ -46,10 +46,11 @@
     right:20%;
 }
 
-.area-box {
+.wrap-area .area-box {
 	/* 가로 정렬 */
 	display: flex;
 	flex-wrap: wrap;
+	margin-bottom: 100px;
 }
 
 .area-box li{
@@ -60,6 +61,7 @@
 	width: 200px;
 	height: 200px;
 	border-radius: 8px;
+	object-fit: cover;
 }
 
 .description p{

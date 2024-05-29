@@ -12,4 +12,5 @@ public interface PlanRepository {
 	public int selectPlanCount();
 	public int selectMemCount();
 	public List<AreaNameEntity> selectAreaNameList();
+	public List<AreaNameEntity> selectAreaFindList(String findArea);
 }

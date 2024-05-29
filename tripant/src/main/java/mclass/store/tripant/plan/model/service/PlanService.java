@@ -25,4 +25,8 @@ public class PlanService {
 	public List<AreaNameEntity> selectAreaNameList(){
 		return boardRepository.selectAreaNameList();
 	}
+	
+	public List<AreaNameEntity> selectAreaFindList(String findArea){
+		return boardRepository.selectAreaFindList(findArea);
+	}
 }
