@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+
 public class TripController {
 	
-	@GetMapping("/map")
+	@GetMapping("/trip")
 	public String mapMain(Model model) {
 		//model.addAttribute();
 		return "trip/trip";
@@ -31,9 +32,9 @@ public class TripController {
 	@Value("${kakao.map.rest.api}")
 	private String apikey;
 	
+	//지점 간 이동시간 구하기 ajax
 	@PostMapping("/map/postduration")
-	//@GetMapping("/map/getduration")
-	@ResponseBody
+	@ResponseBody //ajax 사용
 	public String getduration(
 			@RequestParam double startLng,
 			@RequestParam double startLat,

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/trip/tripLlist.css}" type="text/css">
+<head th:replace="~{common/header :: head('나의 여행 목록')}"></head>
+<body>
+	<header class="header" th:insert="~{common/header :: wrap-header}"></header>
+	<div class="main-wrapper">
+		<h1 class="title"> 나의 기록</h1>
+		<!-- 일정있습 -->
+		<div class="full">
+		<div class="trip-list" >
+			<a th:href="@{#}"><!-- 해당 정보에 대한 trip 페이지로 이동 -->
+				<img alt="img" src="#" class="location-img"/>
+				1번째 여행
+			</a>
+			<button class="revise-btn">::</button>
+		</div>
+		</div>
+		<!-- 여행일정없음 -->
+		<div class="nothing" style="display: none;" >작성된 여행 일정이 없습니다</div>
+	</div>
+	<footer class="footer" th:replace="~{common/footer :: wrap-footer}"></footer>
+</body>
+</html>

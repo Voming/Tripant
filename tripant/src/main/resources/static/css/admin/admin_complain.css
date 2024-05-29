@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+/* 게시글 리스트 */
+.wrap-body .ad-content{
+	 margin: 0 auto;
+}
+
+.wrap-body .ad-content>ul>li:first-child{
+	 text-align: center;
+	 /* 수직정렬 */
+	 vertical-align:middle;  
+}
+
+.wrap-body .ad-content{
+	display:flex;
+	width:100%;
+}
+
+ .wrap-body .ad-search .search{
+	width:95%;
+	border-radius:20px;
+	border: solid black 1px;
+	height:30px;
+	margin:40px 0 20px 30px;  
+} 
+
+.wrap-body .ad-content .boardlist{
+	/* margin-top: 25px; */
+	margin: 0 auto;
+	width:100%;
+}
+
+.wrap-body .ad-content .col{
+  	display:flex;
+  	padding:15px 0 15px 0;  
+  	border-bottom:1px solid black;
+  	align-items:center;
+} 
+ 
+
+.wrap-body .ad-content .list>li{
+	 margin:15px 0 15px 0; 
+}
+
+.boardlist> ul>li{
+	 float:left;  
+	 text-align:center; 
+}
+
+.boardlist > li >ul{
+	 clear:both;
+	/*   padding:0px auto; 
+     position:relative;  */
+}
+
+.boardlist > li> ul >li{
+	 float:left;
+	 vertical-align:baseline;
+	 text-align: center;
+}
+.boardlist > li> .col >li:first-child{
+	width:10%;
+}
+
+.boardlist > li> .col >li:first-child+li{
+	width:15%;
+}
+.boardlist > li> .col >li:first-child+li+li{
+	width:30%;
+}
+.boardlist > li> .col >li:first-child+li+li+li{
+	width:28%;
+}
+.boardlist > li> .col >li:first-child+li+li+li+li{
+	width:30%;
+}
+.boardlist > li> .col >li:first-child+li+li+li+li+li{
+	width:13%;
+}
+
+
+.btn-reset{
+	border-radius:8px;
+	border:none;
+	height:30px;
+	width:70px;
+	float:right;
+	background-color:black;
+	color:white;
+	margin-top:10px;
+}

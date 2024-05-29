@@ -10,21 +10,31 @@ public class AdminController {
 
 	@GetMapping("/member")
 	public String admin() {
-		return "admin/admin-member";
+		return "admin/admin_member";
 	}
 	
 	@GetMapping("/board")
 	public String adminlist() {
-		return "admin/admin-board";
+		return "admin/admin_board";
+	}
+	
+	@GetMapping("/complain")
+	public String complain() {
+		return "admin/admin_complain";
+	}
+	
+	@GetMapping("/cancel")
+	public String cancel() {
+		return "admin/admin_cancel";
 	}
 	
 	@GetMapping("/mchart")
 	public String adminmchart() {
-		return "admin/admin-mchart";
+		return "admin/admin_mchart";
 	}
 	
 	@GetMapping("/bchart")
 	public String adminbchart() {
-		return "admin/admin-bchart";
+		return "admin/admin_bchart";
 	}
 }

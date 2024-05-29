@@ -4,9 +4,8 @@
 	<select id="login" parameterType="string" resultType="MemberEntity">
 		select mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_quit_date from member where mem_email = #{memEmail}
 	</select>
-	<insert id="insert" parameterType="map">
+	<insert id="join" parameterType="MemberEntity">
 		insert into member values 
-		(mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, null)  
-		where mem_email = #{memEmail}
+		(mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, default, null)  
 	</insert>
 </mapper>

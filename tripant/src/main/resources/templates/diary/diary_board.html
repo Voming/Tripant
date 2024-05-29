@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/diary/diary_board.css}" rel="stylesheet">
+<head th:replace="~{common/header :: head('diaryboard')}">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+	<header>
+		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	</header>
+	<section>
+		<!-- 버튼 클릭 이벤트로 지역 태그 클릭 시 이동 시키기 -->
+		<div class="diary-wrap-main">
+			<div class="board-search-inner">
+				<!-- 소개 문구 -->
+				<div class="diary-introduction">
+					<span><strong> 하트가 많이 눌린 개미들의 인기 여행지를 소개합니다.</strong></span>
+				</div>
+				<!-- 순서 옵션 -->
+				<div class="d-select">
+					<select><option value="latest">최신순</option>
+						<option value="popularity">인기순</option>
+					</select>
+				</div>
+				<ul class="area-tab-nav">
+					<li class="tags"><a href="#tab01">전체</a></li>
+					<li class="tags"><a href="#tab02">서울</a></li>
+					<li class="tags"><a href="#tab03">부산</a></li>
+					<li class="tags"><a href="#tab04">대구</a></li>
+					<li class="tags"><a href="#tab05">인천</a></li>
+					<li class="tags"><a href="#tab06">광주</a></li>
+					<li class="tags"><a href="#tab07">대전</a></li>
+					<li class="tags"><a href="#tab08">울산</a></li>
+					<li class="tags"><a href="#tab09">세종</a></li>
+					<li class="tags"><a href="#tab10">경기</a></li>
+					<li class="tags"><a href="#tab11">강원</a></li>
+					<li class="tags"><a href="#tab12">충북</a></li>
+					<li class="tags"><a href="#tab13">충남</a></li>
+					<li class="tags"><a href="#tab14">전북</a></li>
+					<li class="tags"><a href="#tab15">전남</a></li>
+					<li class="tags"><a href="#tab16">경북</a></li>
+					<li class="tags"><a href="#tab17">경남</a></li>
+					<li class="tags"><a href="#tab18">제주</a></li>
+				</ul>
+				<div class="diary-tab-content">
+					<div id="tab01">
+						<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제주 여행</p>
+									<p class="diary-date">yyyy-mm-dd</p>
+									<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
+										미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
+								</div>
+								<div class="diary-like">
+									<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab02">
+						<div class="wrap-diary">
+							<h1>2번</h1>
+						</div>
+					</div>
+					<div id="tab03">
+						<div class="wrap-diary">
+							<h1>3번</h1>
+						</div>
+					</div>
+				</div>
+				<!-- 글 리스트 7개씩 하고 for문으로 더보기 하기 -->
+				<div class="btn-more">
+					<button type="button" class="learn-more">더보기</button>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+	<footer>
+		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+	</footer>
+	<script>
+	   $('.area-tab-nav a').click(function () {
+                $('.diary-tab-content > div').hide().filter(this.hash).fadeIn();
+                $('.area-tab-nav a').removeClass('active');
+                $(this).addClass('active');
+                return false;
+            }).filter(':eq(0)').click();
+	</script>
+</body>
+
+
+</html>

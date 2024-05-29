@@ -9,23 +9,27 @@
 	font-family: 'GangwonEdu_OTFBoldA';
 }
 /*지역 태그  */
-.diary-wrap-main .tag {
+.tags {
 	border-radius: 5px 5px 5px;
 	border: 1px solid;
-	padding: 8px;
+	padding-top: 13px;
+	padding-bottom: 5px;
+	padding-left: 7px;
+	padding-right: 7px;
 }
 
-.diary-wrap-main .tag a {
-	padding-top: 5px;
+.area-tab-nav {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 80px;
+	margin-bottom: 24px;
 }
-
+/*인기순, 최신순  */
 .diary-wrap-main .d-select {
 	display: flex;
 	justify-content: flex-end;
-}
-
-.diary-wrap-main .tags {
-	display: inline-block;
+	margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 /*글 리스트 깨짐 가운데 정렬로  */
