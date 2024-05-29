@@ -59,12 +59,13 @@ public class TripController {
 				}
 				System.out.println("\n response \n "+response.toString());
 				br.close();
+				
 				 // JSON 파싱하여 duration 값만 추출
                 JSONObject jsonObject = new JSONObject(response.toString());
                 duration = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("summary").getString("duration");
 				
 			}else {
-				return " \n >>>> 에러났어요 : " + responseCode;
+				return ">>>> 에러났어요 : " + responseCode;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
