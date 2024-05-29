@@ -9,6 +9,11 @@
 <link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_member.css}" rel="stylesheet">
+<!-- CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
+<!--쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 <div class="wrap-main">
@@ -29,59 +34,94 @@
 	</div>
 	
 	<div class="wrap-body">
-		<div class="ad-header">
-			<div class="ad-text">회원관리</div>
-		</div>
-		<div class="ad-search">
-			<input class="search" type="text" placeholder="회원검색">
-		</div>
-
-		<div class="ad-content">
-			<ul class="memberlist">
-				<li>	
-					<ul class="col">
-						<li>닉네임</li>
-						<li>이메일</li>
-						<li>가입일자</li>
-						<li>탈퇴일자</li>
-						<li>등급</li>
-						<li></li>
-					</ul>
-				</li>
-				
-				<li>
-					<ul class="col list">
-						<li>oyeee</li>
-						<li>tripant@gmail.com</li>
-						<li>2024.05.20</li>
-						<li>2024.05.20</li>
-						<li>관리자</li>
-						<li><button type="button" class="btn">편집</button></li>
-					</ul>
+	 	<form>
+			<div class="ad-header">
+				<div class="ad-text">회원관리</div>
+			</div>
+			<div class="ad-search">
+				<input class="search" type="text" placeholder="회원검색">
+			</div>
+	
+			<div class="ad-content">
+				<ul class="memberlist">
+					<li>	
+						<ul class="col">
+							<li>닉네임</li>
+							<li>이메일</li>
+							<li>가입일자</li>
+							<li>탈퇴일자</li>
+							<li>등급</li>
+							<li></li>
+						</ul>
+					</li>
 					
-					<ul class="col list">
-
-						<li>oyeee</li>
-						<li>tripant@gmail.com</li>
-						<li>2024.05.20</li>
-						<li>2024.05.20</li>
-						<li>관리자</li>
-						<li><button type="button" class="btn">편집</button></li>
-					</ul>
-					
-					<ul class="col list">
-						<li>oyeee</li>
-						<li>tripant@gmail.com</li>
-						<li>2024.05.20</li>
-						<li>2024.05.20</li>
-						<li>관리자</li>
-						<li><button type="button" class="btn">편집</button></li>
-					</ul>
-				</li>
-			</ul>	
-		</div> 
+					<li>
+						<ul class="col list">
+							<li>oyeee</li>
+							<li>tripant@gmail.com</li>
+							<li>2024.05.20</li>
+							<li>2024.05.20</li>
+							<li>관리자</li>
+							<li><button type="button" class="btn">편집</button></li>
+						</ul>
+						
+						<ul class="col list">
+	
+							<li>oyeee</li>
+							<li>tripant@gmail.com</li>
+							<li>2024.05.20</li>
+							<li>2024.05.20</li>
+							<li>관리자</li>
+							<li><button type="button" class="btn">편집</button></li>
+						</ul>
+						
+						<ul class="col list">
+							<li>oyeee</li>
+							<li>tripant@gmail.com</li>
+							<li>2024.05.20</li>
+							<li>2024.05.20</li>
+							<li>관리자</li>
+							<li><button type="button" class="btn">편집</button></li>
+						</ul>
+					</li>
+				</ul>	
+			</div> 
+		</form>
 	</div>
 </div>
+
+
+
+<script>
+$(loadedHandler);
+function loadedHandler() {
+	$(".btn").on("click", ClickHandler);
+}
+
+function ClickHandler() {
+	console.log("++");
+	 Swal.fire({
+         title: '등급수정',
+         html: `
+             <select name="selectRole" id="selectRole">
+                 <option value="1">일반회원</option>
+                 <option value="2">관리자</option>
+                 <option value="3">소유자</option>
+                 <option value="4">폰트적용회원</option>
+             </select>
+         `,
+         focusConfirm: false,
+         preConfirm: () => {
+             const selectedRole = document.getElementById('selectRole').value;
+             return { selectedRole: selectedRole };
+         }
+     }).then((result) => {
+         if (result.isConfirmed) {
+             console.log('Selected Role:', result.value.selectedRole);
+         }
+     });
+}
+</script>
 </body>
 </html>
 
