@@ -45,32 +45,144 @@
 				<div class="diary-tab-content">
 					<div id="tab01">
 						<div class="wrap-diary">
-							<div class="diary-img">
-								<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
-							</div>
-							<div class="wrap-content">
-								<div class="diary-content">
-									<p class="diary-title">제주 여행</p>
-									<p class="diary-date">yyyy-mm-dd</p>
-									<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
-										미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
+							<div class="wrap-d-content">
+								<div class="diary-img">
+									<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
 								</div>
-								<div class="diary-like">
-									<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
+								<div class="wrap-content">
+									<div class="diary-content">
+										<p class="diary-title">제주 여행</p>
+										<p class="diary-date">yyyy-mm-dd</p>
+										<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
+											미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
+									</div>
+									<div class="diary-like">
+										<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
+									</div>
+								</div>
+							</div>
+							<div class="wrap-d-content">
+								<div class="diary-img">
+									<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
+								</div>
+								<div class="wrap-content">
+									<div class="diary-content">
+										<p class="diary-title">제주 여행</p>
+										<p class="diary-date">yyyy-mm-dd</p>
+										<p class="diary-preview">글 미리보기입니다. 글 미리보기입니다.글 미리보기입니다.글
+											미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.글 미리보기입니다.</p>
+									</div>
+									<div class="diary-like">
+										<img th:src="@{/images/diary/diary_like_none.png}" alt="로고">
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!--2번째 탭  -->
 					<div id="tab02">
 						<div class="wrap-diary">
 							<h1>2번</h1>
 						</div>
 					</div>
+					<!--3번째 탭  -->
 					<div id="tab03">
 						<div class="wrap-diary">
 							<h1>3번</h1>
 						</div>
 					</div>
+					<!--4번째 탭  -->
+					<div id="tab04">
+						<div class="wrap-diary">
+							<h1>4번</h1>
+						</div>
+					</div>
+					<!--5번째 탭  -->
+					<div id="tab05">
+						<div class="wrap-diary">
+							<h1>5번</h1>
+						</div>
+					</div>
+					
+					<!--6번째 탭  -->
+					<div id="tab06">
+						<div class="wrap-diary">
+							<h1>6번</h1>
+						</div>
+					</div>
+					<!--7번째 탭  -->
+					<div id="tab07">
+						<div class="wrap-diary">
+							<h1>7번</h1>
+						</div>
+					</div>
+					<!--8번째 탭  -->
+					<div id="tab08">
+						<div class="wrap-diary">
+							<h1>8번</h1>
+						</div>
+					</div>
+					<!--9번째 탭  -->
+					<div id="tab09">
+						<div class="wrap-diary">
+							<h1>9번</h1>
+						</div>
+					</div>
+					<!--10번째 탭  -->
+					<div id="tab10">
+						<div class="wrap-diary">
+							<h1>10번</h1>
+						</div>
+					</div>
+					<!--11번째 탭  -->
+					<div id="tab11">
+						<div class="wrap-diary">
+							<h1>11번</h1>
+						</div>
+					</div>
+					<!--12번째 탭  -->
+					<div id="tab12">
+						<div class="wrap-diary">
+							<h1>12번</h1>
+						</div>
+					</div>
+					<!--13번째 탭  -->
+					<div id="tab13">
+						<div class="wrap-diary">
+							<h1>13번</h1>
+						</div>
+					</div>
+					<!--14번째 탭  -->
+					<div id="tab14">
+						<div class="wrap-diary">
+							<h1>14번</h1>
+						</div>
+					</div>
+					<!--15번째 탭  -->
+					<div id="tab15">
+						<div class="wrap-diary">
+							<h1>15번</h1>
+						</div>
+					</div>
+					<!--16번째 탭  -->
+					<div id="tab16">
+						<div class="wrap-diary">
+							<h1>16번</h1>
+						</div>
+					</div>
+					<!--17번째 탭  -->
+					<div id="tab17">
+						<div class="wrap-diary">
+							<h1>17번</h1>
+						</div>
+					</div>
+					<!--18번째 탭  -->
+					<div id="tab18">
+						<div class="wrap-diary">
+							<h1>18번</h1>
+						</div>
+					</div>
+					
 				</div>
 				<!-- 글 리스트 7개씩 하고 for문으로 더보기 하기 -->
 				<div class="btn-more">
@@ -78,18 +190,20 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</section>
 	<footer>
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
 	<script>
-	   $('.area-tab-nav a').click(function () {
-                $('.diary-tab-content > div').hide().filter(this.hash).fadeIn();
-                $('.area-tab-nav a').removeClass('active');
-                $(this).addClass('active');
-                return false;
-            }).filter(':eq(0)').click();
+		$('.area-tab-nav a').click(function() {
+			$('.diary-tab-content > div').hide().filter(this.hash).fadeIn();
+			$('.area-tab-nav a').removeClass('active');
+			$(this).addClass('active');
+			return false;
+		}).filter(':eq(0)').click();
+		
+	
 	</script>
 </body>
 
