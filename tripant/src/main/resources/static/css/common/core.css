@@ -14,24 +14,38 @@ a {
 }
 
 h1 {
-	font-size: 20px;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 30px;
+	font-weight: bolder;
 }
 
 h2 {
-	font-size: 17px;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 25px;
+	font-weight: bolder;
 }
 
 h3 {
-	font-size: 15px;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 20px;
+	font-weight: bolder;
 }
 
 h4 {
-	font-size: 13px;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 17px;
 }
 
 h5 {
-	font-size: 11px;
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 15px;
 }
+
+h6 {
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: 13px;
+}
+
 
 p {
 	font-family: 'GangwonEdu_OTFBoldA';
@@ -40,7 +54,6 @@ p {
 /* 공통폰트 */
 @font-face {
     font-family: 'GangwonEdu_OTFBoldA';
-
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -51,6 +64,30 @@ p {
 	src: url('/fonts/GangwonEdu_OTFLightA.ttf') format('woff'); 
 	font-weight: normal;
 	font-style: normal;
+}
+
+:root {
+	--color_day1_red: #E54B4B;
+	--color_day2_purple: #C943CC;
+	--color_day3_pink: #FFA7C5;
+	--color_day4_orange: #E5794B;
+	--color_day5_skyblue: #4BC9E5;
+	--color_day6_yellow: #E5C34B;
+	--color_day7_lime: #CDF263;
+	--color_day8_green: #2EB67D;
+	--color_day9_blue: #4B76E5;
+	--color_day10_navy: #13358F;
+	
+	--color_light_gray: #F6F6F6;
+	--color_gray: #D4D4D4;
+	
+	--font1: 30px;
+	--font2: 25px;
+	--font3: 20px;
+	--font4: 17px;
+	--font5: 15px;
+	--font6: 13px;
+	--font7: 11px;
 }
 
 /* 구매폰트 */
@@ -109,29 +146,4 @@ p {
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
-
-
-:root {
-	--color_day1_red: #E54B4B;
-	--color_day2_purple: #C943CC;
-	--color_day3_pink: #FFA7C5;
-	--color_day4_orange: #E5794B;
-	--color_day5_skyblue: #4BC9E5;
-	--color_day6_yellow: #E5C34B;
-	--color_day7_lime: #CDF263;
-	--color_day8_green: #2EB67D;
-	--color_day9_blue: #4B76E5;
-	--color_day10_navy: #13358F;
-	
-	--color_light_gray: #F6F6F6;
-	--color_gray: #D4D4D4;
-	
-	--font1: 30px;
-	--font2: 25px;
-	--font3: 20px;
-	--font4: 17px;
-	--font5: 15px;
-	--font6: 13px;
-	--font7: 11px;
 }
