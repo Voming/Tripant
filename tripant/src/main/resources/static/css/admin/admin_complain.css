@@ -30,10 +30,12 @@
 }
 
 .wrap-body .ad-content .col{
-  	 display:flex;
-  	 margin:20px 0 20px 0;  
-  	 border-bottom:1px solid black;
+  	display:flex;
+  	padding:15px 0 15px 0;  
+  	border-bottom:1px solid black;
+  	align-items:center;
 } 
+ 
 
 .wrap-body .ad-content .list>li{
 	 margin:15px 0 15px 0; 
@@ -73,4 +75,16 @@
 }
 .boardlist > li> .col >li:first-child+li+li+li+li+li{
 	width:13%;
+}
+
+
+.btn-reset{
+	border-radius:8px;
+	border:none;
+	height:30px;
+	width:70px;
+	float:right;
+	background-color:black;
+	color:white;
+	margin-top:10px;
 }
