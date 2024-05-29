@@ -14,7 +14,9 @@ body{
 	margin:0;
 }
 
-
+a{
+	color:white;
+}
 /* 사이드바 */
 .wrap-main .wrap-sidebar{
 	padding:15px;
