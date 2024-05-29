@@ -1,13 +1,9 @@
 @charset "UTF-8";
 
-
-.wrap-main *{
-	font-family: 'GangwonEdu_OTFBoldA';
+.wrap-body .ad-header .ad-text{
+	padding:30px;
 }
 
-.wrap-body .ad-content{
-	 margin: 0 auto;
-}
 
 /* 게시글 리스트 */
 .wrap-body .ad-content{

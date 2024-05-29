@@ -1,4 +1,4 @@
-package mclass.store.tripant.test.login.kakao;
+package mclass.store.tripant.login.kakao;
 
 import java.util.Map;
 

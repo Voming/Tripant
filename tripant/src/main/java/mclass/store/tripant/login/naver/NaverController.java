@@ -1,4 +1,4 @@
-package mclass.store.tripant.test.login.naver;
+package mclass.store.tripant.login.naver;
 
 import java.util.Map;
 

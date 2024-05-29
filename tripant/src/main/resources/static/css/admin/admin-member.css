@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
-
-.wrap-main *{
-	font-family: 'GangwonEdu_OTFBoldA';
+.wrap-body .ad-header .ad-text{
+	padding:30px;
 }
 
 /*회원 리스트 */
@@ -38,7 +37,6 @@
 .wrap-body .ad-content .col{
   	 display:flex;
   	 margin:20px 0 20px 0;  
-
   	 border-bottom:1px solid black;
 } 
 
