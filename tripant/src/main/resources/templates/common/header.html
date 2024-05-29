@@ -29,16 +29,17 @@
 							<div class="log">
 								<ul>
 									<li>
-										<a href="/triplist" sec:authorize="isAuthenticated()">나의 일정</a>
+										<a href="#" sec:authorize="isAuthenticated()">마이페이지</a>
 									</li>
 									<li>
-										<a href="#" sec:authorize="isAuthenticated()">여행기</a>
+										<a href="@{/triplist}" sec:authorize="isAuthenticated()">나의 일정</a>
+
+									</li>
+									<li>
+										<a href="#">여행기</a>
 									</li>
 									<li>
 										<a href="#">스토어</a>
-									</li>
-									<li>
-										<a href="#" sec:authorize="isAuthenticated()">마이페이지</a>
 									</li>
 									<li>
 										<a th:href="@{/login}" sec:authorize="isAnonymous()">로그인</a>

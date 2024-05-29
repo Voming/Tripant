@@ -2,6 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/plan/main/home_make.css}" rel="stylesheet"
 	type="text/css">
+<link th:href="@{/css/plan/main/home_example.css}" rel="stylesheet"
+	type="text/css">
+<link th:href="@{/css/plan/main/home_search.css}" rel="stylesheet"
+	type="text/css">
 <head th:replace="~{common/header :: head('home')}">
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -10,32 +14,73 @@
 	<div class="wrap-body">
 		<ul class="wrap-make">
 			<li class="make-left">
-				<div class="make_text" style="font-size: var(--font1); font-weight: bolder;">
+				<div class="make_text"
+					style="font-size: var(--font1); font-weight: bolder;">
 					<p>기존에 경험하지 못한 새로운</p>
 					<p>개미의 여행</p>
 				</div>
-				<ul class="make-plan" style="font-size: var(--font3);  font-weight: bolder;">
-					<li><p style="margin: 20px 20px 0 0 ;">일정을 생성해볼까요?</p></li>
+				<ul class="make-plan"
+					style="font-size: var(--font3); font-weight: bolder;">
+					<li><p style="margin: 20px 20px 0 0;">일정을 생성해볼까요?</p></li>
 					<li><button type="button">일정 만들기</button></li>
 				</ul>
 			</li>
-			<li class="make-img">
-				<img th:src="@{/images/area/SEOUL.jpg}" alt="로고">
+			<li class="make-img"><img th:src="@{/images/area/SEOUL.jpg}"
+				alt="서울">
 				<div class="make-info">
-					<p style="font-size: var(--font5);"> 생성된 일정 수 </p>
+					<p style="font-size: var(--font5);">생성된 일정 수</p>
 					<p style="font-size: var(--font3);" th:text="${planCount}"></p>
-					<p style="font-size: var(--font5);"> 여행자 수 </p>
+					<p style="font-size: var(--font5);">여행자 수</p>
 					<p style="font-size: var(--font3);" th:text="${memCount}"></p>
-				</div>
-			</li>
+				</div></li>
 		</ul>
-		<div class="wrap-example"></div>
-		<div class="wrap-area"></div>
-
-
-
-
-
+		<div class="wrap-example">
+			<div class="wrap-example-content">
+				<ul class="example-content">
+					<li class="example-img"><img th:src="@{/images/area/JEJU.jpg}"
+						alt="제주"></li>
+					<li class="example-right">
+						<h2>여행을 준비하는 개미님은</h2>
+						<h2>트립앤트의 스케줄링을 통해</h2>
+						<h2>10시간 이상을 절약셨어요</h2>
+						<h6>제주여행을 준비하는 개미님은 트립앤트 덕분에 위치, 동선, 영업일, 식사시간 등을</h6>
+						<h6>고려하며 평균 10시간에 걸쳐 며칠동안 짜야 할 일정 계획을 단 5분만에 만들었어요!</h6>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="wrap-area">
+			<div class="wrap-search">
+				<h2>어디로 여행을 떠나시나요?</h2>
+				<div class="search">
+					<form id="frm-find">
+						<input type="text" name="find"
+							placeholder="&nbsp;&nbsp;지역명을 입력하세요">
+						<button type="button" class="btn find">
+							<img class="search-btn" th:src="@{/images/icons/search.png}"
+								alt="찾기">
+						</button>
+					</form>
+				</div>
+			</div>
+			<div class="wrap-area">
+				<ul class="area-box">
+					<!-- <th:block  th:if="${variable.something} != null">
+						<th:block  th:each="prod : ${prods}">
+							<li>
+								<div class="area_btn">
+									<img class="img_g" src="${groupDto.sgroupImgPath}" alt="그룹 사진">
+									<div class="description">
+										<p class="" style="display: none;">${groupDto.sgroupId}</p>
+										<p class="name" style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</p>
+									</div>
+								</div>
+							</li>
+						</th:block>
+					</th:block> -->
+				</ul>
+			</div>
+		</div>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>

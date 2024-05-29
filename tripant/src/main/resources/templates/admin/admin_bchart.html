@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>board chart</title>
+<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/admin/admin.css}" rel="stylesheet">
+<!--chart.js CDN  -->
+<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js}"  rel="stylesheet">
+<script th:src="@{https://fastly.jsdelivr.net/npm/chart.js}"></script>
+</head>
+<body>
+<div class="wrap-main">
+	<div class="wrap-sidebar">
+		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
+		<div class="ad-menu"> 관리자메뉴</div>
+		<div class="ad-member">회원관리</div>
+		<div class="ad-menumember a">회원관리</div>
+		<div class="ad-menumember b">회원통계</div>
+		
+		<div class="ad-board">게시글 관리</div>
+		<div class="ad-menuboard a">전체게시글</div>
+		<div class="ad-menuboard b">신고 게시글 관리</div>
+		<div class="ad-menuboard c">게시글 통계</div>
+		
+		<div class="ad-store">스토어 관리</div>
+		<div class="ad-menustorea">결제 취소</div>
+	</div>
+	
+	<div class="wrap-body">
+		<div class="ad-header">
+			<div class="ad-text">게시글통계</div>
+		</div>
+	</div>
+	
+</div>		
+		
+<script>
+
+
+</script>
+	
+</body>
+</html>

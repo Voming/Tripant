@@ -1,0 +1,76 @@
+@charset "UTF-8";
+.wrap-main *{
+	font-family: 'GangwonEdu_OTFBoldA';
+}
+
+.wrap-main{
+	display:flex;
+	flex-direction:row;
+	width: 1440px;
+    margin: 0 auto;
+}
+
+body{
+	margin:0;
+}
+
+
+/* 사이드바 */
+.wrap-main .wrap-sidebar{
+	padding:15px;
+}
+
+.wrap-sidebar .ad-menu{
+	font-size:25px;
+	margin:30px 0 50px 0;
+}
+
+.wrap-sidebar .ad-member{
+	margin-bottom:20px; 
+	font-size:17px;
+}
+
+.wrap-sidebar .ad-menumember{
+	margin-bottom:10px; 
+	font-size:13px;
+}
+
+.wrap-sidebar .ad-board{
+	margin-bottom:20px; 
+	margin-top:30px;
+	font-size:17px;
+}
+
+.wrap-sidebar .ad-menuboard{
+	margin-bottom:10px; 
+	font-size:13px;
+}
+
+.wrap-sidebar .ad-store{
+	margin-bottom:20px; 
+	margin-top:30px;
+	font-size:17px;
+}
+
+.wrap-sidebar .ad-menustorea{
+	font-size:13px;
+}
+
+/* main 헤더 */
+.wrap-main .ad-header{
+ background-color:rgb(128, 128, 128);
+ height	:70px;
+ width:1200px;
+ color:white;
+}
+
+.wrap-body .ad-header .ad-text{
+	padding:30px;
+}
+
+.wrap-main .wrap-sidebar{
+	width: 240px;
+    height: 1025px;
+    background: black;
+    color:white;
+}
