@@ -18,6 +18,11 @@ public class AdminController {
 		return "admin/admin_board";
 	}
 	
+	@GetMapping("/complain")
+	public String complain() {
+		return "admin/admin_complain";
+	}
+	
 	@GetMapping("/mchart")
 	public String adminmchart() {
 		return "admin/admin_mchart";

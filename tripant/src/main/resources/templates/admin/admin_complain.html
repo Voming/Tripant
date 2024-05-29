@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- reset.css -->
+<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
+<!-- 레이아웃 설정 -->
+<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/admin/admin.css}" rel="stylesheet">
+<link th:href="@{/css/admin/admin_complain.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrap-main">
+	<div class="wrap-sidebar">
+		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
+		<div class="ad-menu"> 관리자메뉴</div>
+		<div class="ad-member">회원관리</div>
+		<div class="ad-menumember a"><a href="/admin/member">회원관리</a></div>
+		<div class="ad-menumember b"><a href="/admin/mchart">회원통계</a></div>
+		
+		<div class="ad-board">게시글 관리</div>
+		<div class="ad-menuboard a"><a href="/admin/board">전체게시글</a></div>
+		<div class="ad-menuboard b"><a href="/admin/complain">신고 게시글 관리</a></div>
+		<div class="ad-menuboard c"><a href="/admin/bchart">게시글 통계</a></div>
+		
+		<div class="ad-store">스토어 관리</div>
+		<div class="ad-menustorea"><a href="f">결제 취소</a></div>
+	</div>
+	
+	<div class="wrap-body">
+		<div class="ad-header">
+			<div class="ad-text">신고게시글 관리</div>
+		</div>
+		<div class="ad-search">
+			<input class="search" type="text" placeholder="신고글 검색">
+		</div>
+		<div class="ad-content">
+			<ul class="boardlist">
+				<li>	
+					<ul class="col">
+						<li>선택</li>
+						<li>번호</li>
+						<li>제목</li>
+						<li>닉네임</li>
+						<li>날짜</li>
+						<li>신고수</li>
+					</ul>
+				</li>
+				<li>
+					<ul class="col list">
+							<li><input type="checkbox" class="check"></li>
+							<li>1</li>
+							<li>안녕하세요</li>
+							<li>oyeee</li>
+							<li>2024.05.20</li>
+							<li>4</li>
+						</ul>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</div>
+</body>
+</html>
