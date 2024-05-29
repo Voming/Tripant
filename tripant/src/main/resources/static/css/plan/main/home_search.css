@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-.wrap-body .wrap-area {
+.wrap-body .wrap-area , 
+.wrap-body .area-box{
 	/* 중앙 배치 */
 	width: 960px;
 	margin: 0 auto;
@@ -44,3 +45,25 @@
     top: 20%;
     right:20%;
 }
+
+.area-box {
+	/* 가로 정렬 */
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.area-box li{
+	margin: 20px;
+}
+
+.area_btn img{
+	width: 200px;
+	height: 200px;
+	border-radius: 8px;
+}
+
+.description p{
+	margin: 8px 0;
+}
+
+

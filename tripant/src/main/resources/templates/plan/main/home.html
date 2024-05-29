@@ -58,26 +58,26 @@
 							placeholder="&nbsp;&nbsp;지역명을 입력하세요">
 						<button type="button" class="btn find">
 							<img class="search-btn" th:src="@{/images/icons/search.png}"
-								alt="찾기">
+alt="찾기">
 						</button>
 					</form>
 				</div>
 			</div>
 			<div class="wrap-area">
 				<ul class="area-box">
-					<!-- <th:block  th:if="${variable.something} != null">
-						<th:block  th:each="prod : ${prods}">
+					<th:block  th:if="${areaNameList} != null">
+						<th:block  th:each="area : ${areaNameList}">
 							<li>
 								<div class="area_btn">
-									<img class="img_g" src="${groupDto.sgroupImgPath}" alt="그룹 사진">
+									<img th:src="@{|/images/area/${area.areaFileName}|}"alt="지역">
 									<div class="description">
-										<p class="" style="display: none;">${groupDto.sgroupId}</p>
-										<p class="name" style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</p>
+										<p style="font-size: var(--font3); " th:text="${area.areaEngName}"></p>
+										<p style="font-size: var(--font4);" th:text="${area.areaName}"></p>
 									</div>
 								</div>
 							</li>
 						</th:block>
-					</th:block> -->
+					</th:block>
 				</ul>
 			</div>
 		</div>
