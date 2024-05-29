@@ -6,4 +6,8 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<setting name="callSettersOnNulls" value="true"/>
 	</settings>
+	<typeAliases>
+		<package name="mclass.store.tripant.member.domain"/>
+		<package name="mclass.store.tripant.plan.domain"/>
+	</typeAliases>
 </configuration>

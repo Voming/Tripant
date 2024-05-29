@@ -1,4 +1,3 @@
-<script>
 $(loadedHandler);
 function loadedHandler(){
 	//버튼 호버 css
@@ -10,4 +9,3 @@ function loadedHandler(){
 		$(this).css('color', 'black');
 	});
 }
-</script>

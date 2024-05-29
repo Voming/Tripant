@@ -64,42 +64,21 @@
 				</div>
 			</div>
 			<div class="wrap-area">
-				<div class="tab-body">
-					<p class="all-txt">전체그룹</p>
-					<ul class="group-tab-nav">
-						<li><a href="#tab01">공개 그룹</a></li>
-						<li><a href="#tab02">추천 그룹</a></li>
-					</ul>
-					<div class="group-tab-content">
-						<div id="tab01">
-							<ul class="group-box t1">
-								<c:if test="${not empty OpenGrouplist }">
-									<c:forEach items="${OpenGrouplist}" var="groupDto">
-										<li>
-											<div class="modal_btn">
-												<img class="img_g" src="${groupDto.sgroupImgPath}"
-													alt="그룹 사진">
-												<div class="tag">
-													<p
-														style="background-color: black; padding: 3px; font-size: var(--font5);">
-														<c:if test="${groupDto.sgroupOpen == '0'}">공개</c:if>
-														<c:if test="${groupDto.sgroupOpen == '1'}">비공개</c:if>
-													</p>
-												</div>
-												<div class="description">
-													<p class="for-modal" style="display: none;">${groupDto.sgroupId}</p>
-													<p class="name"
-														style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</p>
-													<p class="name-sub" style="font-size: var(--font5);">${groupDto.sgroupEx}</p>
-												</div>
-											</div>
-										</li>
-									</c:forEach>
-								</c:if>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<ul class="area-box">
+					<!-- <th:block  th:if="${variable.something} != null">
+						<th:block  th:each="prod : ${prods}">
+							<li>
+								<div class="area_btn">
+									<img class="img_g" src="${groupDto.sgroupImgPath}" alt="그룹 사진">
+									<div class="description">
+										<p class="" style="display: none;">${groupDto.sgroupId}</p>
+										<p class="name" style="font-size: var(--font4); font-weight: bold;">${groupDto.sgroupName}</p>
+									</div>
+								</div>
+							</li>
+						</th:block>
+					</th:block> -->
+				</ul>
 			</div>
 		</div>
 	</div>
