@@ -29,8 +29,37 @@
 		<div class="plan-title">개미와 함꼐 떠나는 신나는 제주여행</div>
 		<span class="plan-location">제주</span><span class="plan-priod">2024.06.01~2024.06.02</span>
 		</div>
-		
 		<!-- 일자별 일정 리스트 -->
+		 	<div class="container">
+		        <div class="draggable" draggable="true">
+		            <span class="ico-drag"></span>
+		            <div class="el">HTML</div>
+		        </div>
+		        <div class="draggable" draggable="true">
+		            <span class="ico-drag"></span>    
+		            <div class="el">CSS</div>
+		        </div>
+		        <div class="draggable" draggable="true">
+		            <span class="ico-drag"></span>
+		            <div class="el">JavaScript</div>
+		        </div>
+		    </div>
+		
+		    <div class="container">
+		        <div class="draggable" draggable="true">
+		            <span class="ico-drag"></span>
+		            <div class="el">React</div>
+		        </div>
+		        <div class="draggable" draggable="true">
+		            <span class="ico-drag"></span>
+		            <div class="el">Vue</div>
+		        </div>
+		        <div class="draggable" draggable="true">
+		            <span class="ico-drag"></span>
+		            <div class="el">Next JS</div>
+		        </div>
+		    </div>
+		    <!-- 더미 -->
 		</div>
 		
 		<div class="map-wrapper" >
@@ -64,7 +93,52 @@
 $(document).ready(function(){
 	$(".mapbtn").click(panTo);
 	$(".test-btn").click(durationHandler);
+	dragAndDrop();
 });
+//드래그 앤 드랍
+function dragAndDrop(){
+    const draggables = $('.draggable');
+    const containers = $('.container');
+
+    draggables.each(function() {
+        $(this).on('dragstart', function() {
+            $(this).addClass('dragging');
+        });
+
+        $(this).on('dragend', function() {
+            $(this).removeClass('dragging');
+        });
+    });
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = $(container).find('.draggable').not('.dragging').toArray();
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    containers.each(function() {
+        $(this).on('dragover', function(e) {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(this, e.originalEvent.clientY);
+            const draggable = $('.dragging')[0];
+            if (afterElement == null) {
+                $(this).append(draggable);
+            } else {
+                $(draggable).insertBefore(afterElement);
+            }
+        });
+    });
+}
+//드래그앤드랍 <<
+//이동시간 가져오기
 function durationHandler(){
 	var startLat = $(this).parent().find("#startLat").val();
 	var startLng = $(this).parent().find("#startLng").val();
