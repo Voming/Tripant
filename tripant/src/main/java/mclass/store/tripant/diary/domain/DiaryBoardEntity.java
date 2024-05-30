@@ -23,4 +23,6 @@ public class DiaryBoardEntity {
 	private String diaryContent;
 	private String diaryDate;
 	private String diaryOpen;
+	private Integer diaryViews;
+	private String diaryTheme;
 }

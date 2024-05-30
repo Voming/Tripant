@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 /* 폰트 적용 */
 /* 레이아웃 규격 정하기 */
@@ -94,8 +95,8 @@
 
 .wrap-d-content:nth-child(2n) .diary-like {
 	position: absolute;
-	bottom: 0px;
-	left: 0;
+	bottom: 0;
+	right: 0;
 }
 /* 제목, 날짜, 미리보기  */
 .diary-title {
