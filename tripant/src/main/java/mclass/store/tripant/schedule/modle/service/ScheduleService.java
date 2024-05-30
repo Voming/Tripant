@@ -2,7 +2,7 @@ package mclass.store.tripant.schedule.modle.service;
 
 import java.util.Date;
 
-import org.springframework.scheduling.annotation.Scheduled;
+//import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class ScheduleService {
 	
 	
 	
-	@Scheduled(cron = "*/10 * * * * *")
+	//@Scheduled(cron = "*/10 * * * * *")
 	public void updatePlace(){
 		System.out.println("####################scheduled############" + new Date());
 		
