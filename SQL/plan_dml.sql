@@ -76,7 +76,6 @@ EXEC pro_INSERT_SCHEDULE(2);
 
 
 
-
 CREATE OR REPLACE NONEDITIONABLE PROCEDURE pro_INSERT_SPOT (
     schedule_plan_id plan.plan_id%TYPE
 ) IS
@@ -117,3 +116,6 @@ EXCEPTION
         RAISE;
 END;
 /
+
+commit;
+
