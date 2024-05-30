@@ -1,24 +1,81 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{/css/trip/tripLlist.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/trip/tripList.css}" type="text/css">
+<!-- modal CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
 <head th:replace="~{common/header :: head('나의 여행 목록')}"></head>
 <body>
 	<header class="header" th:insert="~{common/header :: wrap-header}"></header>
 	<div class="main-wrapper">
-		<h1 class="title"> 나의 기록</h1>
+		<h1 class="title"> 나의 여행 </h1>
 		<!-- 일정있습 -->
 		<div class="full">
-		<div class="trip-list" >
-			<a th:href="@{#}"><!-- 해당 정보에 대한 trip 페이지로 이동 -->
-				<img alt="img" src="#" class="location-img"/>
-				1번째 여행
-			</a>
-			<button class="revise-btn">::</button>
-		</div>
-		</div>
+			<div class="trip-list wfull" >
+				<a class="ntip wfull" th:href="@{#}"><!-- 해당 정보에 대한 trip 페이지로 이동 -->
+					<img alt="img" src="https://placehold.co/180x180/000000/FFFFFF.png" class="location-img"/>
+					<div class="trip-info">
+						<div class="trip-location">제주</div>
+						<div class="trip-title">개미와 함꼐 떠나는 신나는 제주여행</div>
+						<div class="trip-period">2024.06.01~2024.06.02</div>
+					</div>
+				</a>
+				<button class="info btn" > 
+					<img class="wfull img" src="/images/icons/kebabIcon.png"/>
+					<div id="mini-modal" class="mini-modal mini1" > 
+						<div class="show-detail">일정 보기</div>
+						<div class="share-plan">공유</div>
+						<div class="delete-plan">삭제</div>
+					</div>
+				</button>
+			</div>
+			<div class="trip-list wfull" >
+				<a class="ntip wfull" th:href="@{#}"><!-- 해당 정보에 대한 trip 페이지로 이동 -->
+					<img alt="img" src="https://placehold.co/180x180/000000/FFFFFF.png" class="location-img"/>
+					<div class="trip-info">
+						<div class="trip-location">제주</div>
+						<div class="trip-title">개미와 함꼐 떠나는 신나는 제주여행</div>
+						<div class="trip-period">2024.06.01~2024.06.02</div>
+					</div>
+				</a>
+				<button class="info btn" > 
+					<img class="wfull img" src="/images/icons/kebabIcon.png"/>
+					<div id="mini-modal" class="mini-modal mini1" > 
+						<div class="show-detail">일정 보기</div>
+						<div class="share-plan">공유</div>
+						<div class="delete-plan">삭제</div>
+					</div>
+				</button>
+			</div>
+			<div style="height: 100px;" ></div>
+		</div> <!-- full -->
 		<!-- 여행일정없음 -->
-		<div class="nothing" style="display: none;" >작성된 여행 일정이 없습니다</div>
+		<div class="nothing"  style="display: none;">작성된 여행 일정이 없습니다</div>
 	</div>
-	<footer class="footer" th:replace="~{common/footer :: wrap-footer}"></footer>
+<script th:inline="javascript">
+$(loaededHandler);
+function loaededHandler(){
+	$('.info').on("click",modalBtnHandler);
+    $(document).on('click', function(event) {
+        // 클릭한 요소가 '.info' 클래스의 버튼 내부 요소나 '.mini-modal' 클래스가 아닌 경우에만 실행
+        if (!$(event.target).closest('.info').length && !$(event.target).closest('.mini-modal').length) {
+            $('.mini-modal').css('visibility', 'hidden');
+        }
+    });
+}
+function modalBtnHandler(){
+	var mbtn = $(this).children('#mini-modal');
+     // 클릭된 버튼의 자식 요소 중 '.mini-modal' 클래스를 가진 요소를 찾습니다.
+	if(mbtn.css('visibility') === 'hidden'){
+		mbtn.css('visibility','visible');
+	}else{
+		mbtn.css('visibility','hidden');
+	}
+    // event.stopPropagation();
+     // 이벤트 전파를 막아 document 클릭 이벤트가 실행되지 않도록 합니다.
+}
+
+
+</script>
 </body>
 </html>

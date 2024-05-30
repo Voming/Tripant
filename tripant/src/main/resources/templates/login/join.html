@@ -19,9 +19,6 @@
 	.wrap-main .flex.center{
 		justify-content: center;
 	}
-	.wrap-main .flex.input{
-		width: 100%;
-	}
 	.wrap-main .flex.join{
 		width: 340px;
 		margin: 0 auto;
@@ -29,11 +26,47 @@
 		row-gap: 20px;
 		padding: 15px;
 		background-color: #f6f6f6;
+		border-radius: 10px;
+	}
+	.wrap-main .join.title{
+		font-size: var(--font1);
+	}
+	.wrap-main .inputlbl input, .wrap-main .inputbtn input, .wrap-main .flex.login button{
+		box-sizing: border-box;
+	}
+	.wrap-main .inputbtn{
+		width: 100%;
+	}
+	.wrap-main .flex.inputbtn{
+		justify-content: space-between;
+	}
+	.wrap-main .inputbtn1, .wrap-main .inputchk1{
+		width: 70%;
+	}
+	.wrap-main .inputbtn1 input, .wrap-main .inputchk1 input{
+		width: 100%;
+	}
+	.wrap-main .inputbtn2, .wrap-main .inputchk2{
+		width: 30%;
+		display: flex;
+		justify-content: center;
+	}
+	.wrap-main textarea{
+		resize: none;
+		width: 100%;
+		box-sizing: border-box;
+		overflow: scroll;
+		color: black;
+		background-color: white;
 	}
 </style>
 <script>
 $(loadedHandler);
 function loadedHandler(){
+	$("#email").on("keyup", writeEmailHandler);
+	$(".inputbtn.check").hide();
+	$(".btn.sendCode").on("click", codeSendHandler);
+	$(".btn.checkCode").on("click", codeCheckHandler);
 	$(".btn.join").on("click", insertMemHandler);
 }
 </script>
@@ -42,39 +75,37 @@ function loadedHandler(){
 	<div class="wrap-main">
 		<form id="frm-join">
 			<section class="flex join">
-				<div class="join title"><h1>회원가입</h1></div>
-				<div class="join explain"><h4>회원가입을 위한 정보를 입력해주세요.</h4></div>
-				<div th:replace="~{login/fragment :: inputbtn(이메일, email, email, '이메일 주소', 인증)}"></div>
-				<div><h4 style="color: red;">* 이메일을 입력해주세요.</h4></div>
-				<div th:replace="~{login/fragment :: inputbtn('이메일 인증번호', code, text, '', 확인)}"></div>
-				<div th:replace="~{login/fragment :: inputbtn(닉네임, nick, text, '한글 2~8자', 중복확인)}"></div>
-				<div th:replace="~{login/fragment :: inputlbl(비밀번호, password, password)}"></div>
-				<div><h1>트립앤트 회원 약관 동의</h1></div>
-				<div class="flex agree">
-					<input type="checkbox" name="agree" id="agree-all"><h4>전체 동의</h4>
-				</div>
-				<div class="flex agree">
-					<input type="checkbox" name="agree" id="agree-first"><h4>동의</h4>
-				</div>
-				<div><textarea>약관입니다111111111</textarea></div>
-				<div class="flex agree">
-					<input type="checkbox" name="agree" id="agree-second"><h4>동의</h4>
-				</div>
-				<div><textarea>약관입니다222222222</textarea></div>
+				<div class="join title">회원가입</div>
+				<div class="join explain">회원가입을 위한 정보를 입력해주세요</div>
+				<div th:replace="~{login/fragment :: inputbtn('', 이메일, email, email, '이메일 주소', 인증, sendCode, 4)}"></div>
+				<div style="color: red;">* 이메일을 입력해주세요.</div>
+				<div th:replace="~{login/fragment :: inputbtn(check, '이메일 인증번호', code, text, '', 확인, checkCode, 4)}"></div>
+				<input type="hidden" id="tempCode">
+				<div th:replace="~{login/fragment :: inputchk('', 닉네임, nick, text, '한글 2~8자', 4)}"></div>
+				<div th:replace="~{login/fragment :: inputchk('', 비밀번호, password, password, '영문, 숫자 포함 8~20자', 4)}"></div>
+				<div th:replace="~{login/fragment :: inputlbl('생년월일 설정', birth, date, 4, '')}"></div>
+				<div>트립앤트 회원 약관 동의</div>
+				<div th:replace="~{login/fragment :: agree(all, '전체 동의')}"></div>
+				<div th:replace="~{login/fragment :: agree(first, '동의')}"></div>
+				<div><textarea rows="10" disabled="disabled">약관입니다111111111</textarea></div>
+				<div th:replace="~{login/fragment :: agree(second, '동의')}"></div>
+				<div><textarea rows="10" disabled="disabled">약관입니다222222222</textarea></div>
 				<div class="recaptcha" style="background-color: lightgrey;">로봇?</div>
 				<div><button type="submit" class="btn join">회원가입</button></div>
-				<div><h4><a href="#">로그인 화면가기</a></h4></div>
+				<div><a th:href="@{/login}">로그인 화면가기</a></div>
 			</section>
 		</form>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
+<script type="text/javascript" th:src="@{/js/login/join_email_alert.js}"></script>
+<script type="text/javascript" th:src="@{/js/login/join_send_code.js}"></script>
 <script>
 function insertMemHandler(){
 	console.log($("#frm-join").serialize());
 	$.ajax({
 		url: '/join', 
-		type: 'POST', 
+		type: 'post', 
 		data: $('#frm-join').serialize(), 
 		success: function (result){
 			alert('성공');

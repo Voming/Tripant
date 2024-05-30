@@ -33,17 +33,21 @@
 	border-radius: 10px;
 }
 .wrap-main .login.title{
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	text-align: center;
+	font-size: var(--font1);
+}
+.wrap-main .inputlbl, .wrap-main .btn{
+	font-size: var(--font3);
+}
+.wrap-main .btn.login{
+	background-color: lightgrey;
 }
 .wrap-main .inputlbl input, .wrap-main .flex.login button{
 	width: 100%;
 	box-sizing: border-box;
 }
-.wrap-main .flex.input-password{
-	margin-bottom: 10px;
-}
-.wrap-main .flex.findpwd>a, .wrap-main .email-join>a{
+.wrap-main .flex.findpwd a, .wrap-main .email-join a{
 	color: #4bc9e5;
 }
 .wrap-main .flex.join{

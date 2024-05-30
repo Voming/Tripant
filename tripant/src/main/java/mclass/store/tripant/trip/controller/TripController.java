@@ -14,14 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-
+@RequestMapping(value = "/plan/edit")
 public class TripController {
 	
-	@GetMapping("/trip")
+	@GetMapping("")
 	public String mapMain(Model model) {
 		//model.addAttribute();
 		return "trip/trip";
@@ -33,7 +34,7 @@ public class TripController {
 	private String apikey;
 	
 	//지점 간 이동시간 구하기 ajax
-	@PostMapping("/map/postduration")
+	@PostMapping("duration")
 	@ResponseBody //ajax 사용
 	public String getduration(
 			@RequestParam double startLng,
