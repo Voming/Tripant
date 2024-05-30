@@ -52,7 +52,7 @@ BEGIN
         INSERT INTO plan_schedule VALUES (
             (start_day + I),
             schedule_plan_id,
-            ( to_date(to_char(start_day, 'YYYY-MM-DD')
+            ( to_date(to_char(start_day+I, 'YYYY-MM-DD')
                       || ' 11:00:00', 'YYYY-MM-DD HH24:MI:SS') ),
             ( to_date(to_char(start_day+I, 'YYYY-MM-DD')
                       || ' 22:00:00', 'YYYY-MM-DD HH24:MI:SS') )
@@ -75,4 +75,47 @@ END;
 EXEC pro_INSERT_SCHEDULE(2);
 
 
+
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE pro_INSERT_SPOT (
+    schedule_plan_id plan.plan_id%TYPE
+) IS
+    start_day  DATE;
+    end_day    DATE;
+BEGIN
+    -- 다음 시퀀스 값을 선택합니다.
+    SELECT
+        plan_start_day,
+        plan_end_day
+    INTO
+        start_day,
+        end_day
+    FROM
+        plan
+    WHERE
+        plan_id = schedule_plan_id;
+
+    FOR i IN 0..end_day-start_day LOOP
+        INSERT INTO plan_schedule VALUES (
+            (start_day + I),
+            schedule_plan_id,
+            ( to_date(to_char(start_day, 'YYYY-MM-DD')
+                      || ' 11:00:00', 'YYYY-MM-DD HH24:MI:SS') ),
+            ( to_date(to_char(start_day+I, 'YYYY-MM-DD')
+                      || ' 22:00:00', 'YYYY-MM-DD HH24:MI:SS') )
+        );
+
+    END LOOP;
+        -- 트랜잭션을 커밋합니다.
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        -- 필요한 경우 예외를 처리합니다.
+        ROLLBACK;
+        -- 이전에 정의된 예외를 발생
+        RAISE;
+END;
+/
+
 commit;
+
