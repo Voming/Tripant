@@ -51,6 +51,9 @@
 
 /* 일정 */
 .main-wrapper .schedule-wrapper{
+	display:flex;
+	flex-direction:column;
+	height:100%;
 	width: 30%;
 	background-color: var(--color_day6_yellow); 
 	padding : 30px 30px;
@@ -63,6 +66,45 @@
 	margin-right : 15px;
 	font-size:var(--font3);
 } 
+.main-wrapper .schedule-wrapper .list-box{
+	height: 100%;
+	padding:10px;
+}
+.main-wrapper .schedule-wrapper .list-box .tourlist{
+	display: flex;
+	/* height: 100%; */
+}
+.main-wrapper .schedule-wrapper .list-box .tourlist .column{
+	display: flex;
+	flex-direction: column;
+	width: 275px;
+	padding: 0 8px;
+}
+.main-wrapper .tourlist .column .sub-title{
+	display: flex;
+	align-content: space-between;
+	margin-bottom:20px;
+}
+.main-wrapper .sub-title .nday{
+	font-size: var(--font4);
+}
+.main-wrapper .sub-title .date{
+	font-size: var(--font7);
+	color: var(--color_gray);
+}
+.main-wrapper .tourlist .column .container{
+	display: flex;
+	flex-direction: column;	
+	background-color: var(--color_gray);
+	border-radius: 8px;
+	padding:0 5px;
+}
+.main-wrapper .tourlist .column .container .spot{
+	background-color: #fff;
+	border-radius: 8px;
+	padding:5px;
+	height:50px;
+}
 /* 지도 */
 .main-wrapper .map-wrapper{
 	width: 70%;
