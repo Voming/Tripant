@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/triplist")
+@RequestMapping(value = "/plan/list")
 public class TripListController {
 	
 	@GetMapping("")

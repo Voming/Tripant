@@ -73,8 +73,8 @@ function durationHandler(){
 	
 	$.ajax({
 		type : "post",
-		url : "/map/postduration",
-		data : {startLat : startLat, startLng : startLng, endLat : endLat, endLng : endLng },
+		url : "/plan/edit/duration",
+		data : {startLat : startLat, startLng : sartLng, endLat : endLat, endLng : endLng },
 		error : function (request, status, error){
 			alert("code: "+request.status + "\n" + "message: " 
 					+ request.responseText + "\n"
