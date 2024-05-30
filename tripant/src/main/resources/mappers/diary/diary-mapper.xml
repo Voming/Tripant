@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
+	<select id="selectDiaryList" parameterType="string"
+		resultType="DiaryBoardEntity">
+		select diary_id, diary_mem_email, diary_plan_id, diary_title,
+		diary_content, diary_date, diary_open, diary_views,diary_theme) from diary where
+		diary_id = #{diaryId}
+	</select>
+	
+</mapper>
