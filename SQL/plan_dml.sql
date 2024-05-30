@@ -52,7 +52,7 @@ BEGIN
         INSERT INTO plan_schedule VALUES (
             (start_day + I),
             schedule_plan_id,
-            ( to_date(to_char(start_day, 'YYYY-MM-DD')
+            ( to_date(to_char(start_day+I, 'YYYY-MM-DD')
                       || ' 11:00:00', 'YYYY-MM-DD HH24:MI:SS') ),
             ( to_date(to_char(start_day+I, 'YYYY-MM-DD')
                       || ' 22:00:00', 'YYYY-MM-DD HH24:MI:SS') )
