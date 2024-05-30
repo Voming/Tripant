@@ -28,12 +28,12 @@ public class MyConfiguration implements WebMvcConfigurer {
 //				
 //				Object obj = session.getAttribute("sslogin");
 //				
-////				if(obj==null) {
-////					response.sendRedirect(request.getContextPath()+"/login");
-////					return false;
-////				}else {
+//				if(obj==null) {
+//					response.sendRedirect(request.getContextPath()+"/login");
+//					return false;
+//				}else {
 //					return true;
-////				}
+//				}
 //			}
 //		})
 //		.addPathPatterns("/**")

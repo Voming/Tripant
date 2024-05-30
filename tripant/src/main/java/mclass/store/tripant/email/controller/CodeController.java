@@ -39,7 +39,7 @@ public class CodeController {
 	//인증번호 발송
 	@PostMapping("/send")
 	@ResponseBody
-	public void sendCode(HttpServletResponse response,@RequestParam String userEmail) {
+	public void sendCode(HttpServletResponse response,@RequestParam String memEmail) {
 		// 랜덤 문자열
 		int leftLimit = 97; // 'a'
 		int rightLimit = 122; // 'z'
@@ -54,7 +54,7 @@ public class CodeController {
 		
 		// 사용자 인증 이메일 발송 내용
 		String from = email;
-		String to = userEmail;
+		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
 		String content = "인증번호: "+code; 
 		

@@ -1,4 +1,4 @@
-package mclass.store.tripant.member.service;
+package mclass.store.tripant.member.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
