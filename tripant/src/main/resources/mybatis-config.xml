@@ -9,5 +9,6 @@
 	<typeAliases>
 		<package name="mclass.store.tripant.member.domain"/>
 		<package name="mclass.store.tripant.plan.domain"/>
+		<package name="mclass.store.tripant.trip.domain"/> 
 	</typeAliases>
 </configuration>
