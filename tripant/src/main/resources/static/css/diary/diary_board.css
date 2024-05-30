@@ -35,7 +35,6 @@
 }
 
 .area-tab-nav li a {
-	
 	display: block;
 	background: #f8f8f8;
 	color: #000;
@@ -77,7 +76,6 @@
 
 .wrap-content {
 	position: relative;
-	
 }
 
 .wrap-d-content:nth-child(2n) {
@@ -143,4 +141,10 @@
 	background: var(--color_light_gray);
 	color: black;
 	cursor: pointer;
+}
+/* 좋아요 버튼  */
+.diary-like .like-icon {
+	cursor: pointer;
+	width: 32px; /* 아이콘 크기 조절 */
+	height: 32px;
 }
