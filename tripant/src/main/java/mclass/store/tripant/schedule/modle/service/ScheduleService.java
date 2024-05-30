@@ -14,7 +14,7 @@ public class ScheduleService {
 	
 	
 	
-	//@Scheduled(cron = "*/10 * * * * *")
+	//@Scheduled(cron = "*/20 * * * * *")
 	public void updatePlace(){
 		System.out.println("####################scheduled############" + new Date());
 		
