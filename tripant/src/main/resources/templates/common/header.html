@@ -38,6 +38,9 @@
 
 									</li>
 									<li>
+										<a href="@{/mydiary}" sec:authorize="isAuthenticated()">나의 여행기</a>
+									</li>
+									<li>
 										<a href="@{/diary}" sec:authorize="isAnonymous()">여행기</a>
 									</li>
 									<li>
