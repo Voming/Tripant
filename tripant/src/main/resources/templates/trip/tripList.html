@@ -23,8 +23,8 @@
 				<button class="info btn" > 
 					<img class="wfull img" src="/images/icons/kebabIcon.png"/>
 					<div id="mini-modal" class="mini-modal mini1" > 
-						<div class="show-detail">일정 보기</div>
-						<div class="share-plan">공유</div>
+						<div><a th:href="@{#route}" class="show-detail" >일정보기</a></div>
+						<div><a th:href="@{#share}" class="share-plan" >공유</a></div>
 						<div class="delete-plan">삭제</div>
 					</div>
 				</button>
@@ -34,15 +34,15 @@
 					<img alt="img" src="https://placehold.co/180x180/000000/FFFFFF.png" class="location-img"/>
 					<div class="trip-info">
 						<div class="trip-location">제주</div>
-						<div class="trip-title">개미와 함꼐 떠나는 신나는 제주여행</div>
+						<div class="trip-title">개미와 함꼐 떠나는 신나는 제주여행2</div>
 						<div class="trip-period">2024.06.01~2024.06.02</div>
 					</div>
 				</a>
 				<button class="info btn" > 
 					<img class="wfull img" src="/images/icons/kebabIcon.png"/>
 					<div id="mini-modal" class="mini-modal mini1" > 
-						<div class="show-detail">일정 보기</div>
-						<div class="share-plan">공유</div>
+						<div class="show-detail"><a th:href="@{#route2}" >일정보기</a></div>
+						<div class="share-plan"><a th:href="@{#share2}" >공유</a></div>
 						<div class="delete-plan">삭제</div>
 					</div>
 				</button>
@@ -55,6 +55,10 @@
 <script th:inline="javascript">
 $(loaededHandler);
 function loaededHandler(){
+	//삭제
+	$('.delete-plan').on("click",deleteHandler);
+	
+	//케밥 아이콘 이벤트
 	$('.info').on("click",modalBtnHandler);
     $(document).on('click', function(event) {
         // 클릭한 요소가 '.info' 클래스의 버튼 내부 요소나 '.mini-modal' 클래스가 아닌 경우에만 실행
@@ -74,7 +78,28 @@ function modalBtnHandler(){
     // event.stopPropagation();
      // 이벤트 전파를 막아 document 클릭 이벤트가 실행되지 않도록 합니다.
 }
-
+//일정삭제
+function deleteHandler() {
+	//TODO data ajax로 넘기기
+	Swal.fire({
+		  title: "[제목]",
+		  text: "삭제하시겠습니까?",
+		  //icon: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "삭제",
+		  cancelButtonText: "취소"
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire({
+		      title: "삭제완료",
+		      text: "[제목]삭제가 완료되었습니다",
+		      //icon: "success"
+		    });
+		  }
+		});
+}
 
 </script>
 </body>
