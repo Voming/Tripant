@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/plan/edit")
+@RequestMapping(value = "/trip/edit")
 public class TripController {
 	
 	@GetMapping("")

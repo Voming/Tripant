@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/plan/list")
+@RequestMapping(value = "/trip/list")
 public class TripListController {
 	
 	@GetMapping("")
