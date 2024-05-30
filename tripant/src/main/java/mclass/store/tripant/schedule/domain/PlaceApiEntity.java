@@ -1,9 +1,10 @@
-package mclass.store.tripant.plan.domain;
+package mclass.store.tripant.schedule.domain;
 
 
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
+import mclass.store.tripant.plan.domain.PlanEntity;
 
 @Data
 @Component
