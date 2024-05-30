@@ -24,6 +24,29 @@
 	margin-right: 80px;
 	margin-bottom: 24px;
 }
+/* 탭 누르면 글자색 변경되는 효과 */
+.area-tab-nav li a:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0px;
+	width: 100%;
+	height: 3px;
+}
+
+.area-tab-nav li a {
+	
+	display: block;
+	background: #f8f8f8;
+	color: #000;
+	text-decoration: none;
+	font-size: 16px;
+}
+
+.area-tab-nav li a:hover, .area-tab-nav li a.active {
+	background: #fff;
+	color: #4b76e5;
+}
 
 /*인기순, 최신순  */
 .diary-wrap-main .d-select {
