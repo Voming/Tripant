@@ -13,6 +13,14 @@ public class KeysJaewon {
 	
 	private final String isLocal = "local";// local, tripant
 	
+	//DB 연결
+	@Value("${spring.datasource.hikari.jdbc-url}")
+	private String hikariUrl;
+	@Value("${spring.datasource.hikari.username}")
+	private String hikariUsername;
+	@Value("${spring.datasource.hikari.password}")
+	private String hikariPassword;
+	
 	//도메인
 	@Value("${domain."+isLocal+"}")
 	private String domain;
@@ -39,5 +47,15 @@ public class KeysJaewon {
 	@Value("${naver.login."+isLocal+".callbackurl}")
 	private String naverCallbackUrl;
 	
+	//구글 이메일 발송
+	@Value("${email.username}")
+	private String gmail;
+	@Value("${email.password}")
+	private String gmailPwd;
 	
+	//구글 리캡챠
+	@Value("${robot.key}")
+	private String robotKey;
+	@Value("${robot.secret}")
+	private String robotSecret;
 }

@@ -7,5 +7,6 @@ import mclass.store.tripant.member.domain.MemberEntity;
 @Mapper
 public interface MemberRepository {
 	public MemberEntity login(String memEmail);
-	public int join(MemberEntity newMem);
+	public int joinEmail(MemberEntity newMem);
+	public int existNick(String memNick);
 }

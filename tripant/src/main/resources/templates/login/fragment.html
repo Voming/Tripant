@@ -30,14 +30,14 @@
 			<input style="line-height: 1.5em;" th:type="${type}" th:name="${name}" th:id="${name}" th:placeholder="${placeholder}">
 		</div>
 		<div class="inputchk2">
-			<img th:src=@{/images/login/yes.png} alt="중복없음" style="width: 1.5em; height: 1.5em;" id="nick-yes">
-			<img th:src=@{/images/login/no.png} alt="사용불가" style="width: 1.5em; height: 1.5em;" id="nick-no">
+			<img th:src=@{/images/login/yes.png} alt="중복없음" style="width: 1.5em; height: 1.5em;" th:id="${name}+'-yes'" class="hide">
+			<img th:src=@{/images/login/no.png} alt="사용불가" style="width: 1.5em; height: 1.5em;" th:id="${name}+'-no'">
 		</div>
 	</div>
 </div>
 <!-- 체크박스+동의 -->
 <div class="flex agree" th:fragment="agree(range, text)" style="align-items: center;">
-	<div><input type="checkbox" name="agree" th:id="'agree-'+${range}"></div>
+	<div><input type="checkbox" name="agree" th:class="'agree '+${range}"></div>
 	<div th:text="${text}"></div>
 </div>
 </body>

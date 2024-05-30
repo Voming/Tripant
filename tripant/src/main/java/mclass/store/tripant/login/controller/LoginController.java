@@ -1,30 +1,29 @@
 package mclass.store.tripant.login.controller;
 
-import java.nio.charset.StandardCharsets;
-
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.apikeys.KeysJaewon;
 import mclass.store.tripant.member.domain.MemberEntity;
+import mclass.store.tripant.member.model.service.MemberService;
 
 @RequiredArgsConstructor
 @Controller
 public class LoginController {
 	
-	private final KeysJaewon keysJaewon; 
+	private final KeysJaewon keysJaewon;
+	
+	private final MemberService memberService;
+	
+	@Autowired
+	private MemberEntity memberEntity;
 	
 	//로그인 페이지
 	@GetMapping("/login")
@@ -51,7 +50,7 @@ public class LoginController {
 				break;
 			}
 		}
-		
+		model.addAttribute("robotKey", keysJaewon.getRobotKey());
 		model.addAttribute("error", error);
 		model.addAttribute("exception", msg);
 		return "login/login";
@@ -63,10 +62,37 @@ public class LoginController {
 		return "login/join";
 	}
 	
+	// 닉네임 중복 검사
+	@PostMapping("/join/nick/check")
+	@ResponseBody
+	public Integer nickCheck(@RequestParam String memNick) {
+		int result = memberService.existNick(memNick);
+		return result;
+	}
+	
 	//회원가입
 	@PostMapping("/join")
 	@ResponseBody
-	public void joinMember() {
+	public int joinMember(MemberEntity memberEntity, String recaptcha) {
+		
+		memberEntity.setMemPassword(new BCryptPasswordEncoder().encode(memberEntity.getMemPassword()));
+		memberEntity.setMemEnabled(1);
+		memberEntity.setMemRole("ROLE_MEM");
+		memberEntity.setMemType("T");
+		System.out.println("mem = "+memberEntity);
+		
+		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
+		try {
+			if(RecaptchaConfig.verify(recaptcha)) {
+				memberService.joinEmail(memberEntity);
+				return 1;
+			}else {
+				return 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 	
 	//카카오 로그인
@@ -82,3 +108,4 @@ public class LoginController {
 	}
 	
 }
+

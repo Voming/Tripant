@@ -1,7 +1,5 @@
 package mclass.store.tripant.member.domain;
 
-import java.sql.Date;
-
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -15,6 +13,7 @@ public class MemberEntity {
 	private String memRole;
 	private Integer memEnabled;
 	private String memType;
-	private Date memJoinDate;
-	private Date memQuitDate;
+	private String memJoinDate;
+	private String memQuitDate;
+	private String memBirth;
 }
