@@ -7,8 +7,8 @@ import mclass.store.tripant.diary.model.repository.DiaryRepository;
 
 @Service
 public class DiaryService {
-	@Autowired
-	private DiaryRepository diaryRepository;
+//	@Autowired
+//	private DiaryRepository diaryRepository;
 	
 	
 }

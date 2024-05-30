@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Component
 public class PlanEntity {
+	//일정
 //	PLAN_ID         NOT NULL NUMBER        
 //	PLAN_AREA_CODE  NOT NULL NUMBER        
 //	PLAN_TITLE      NOT NULL VARCHAR2(100) 
