@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/diary/diary_board.css}" rel="stylesheet">
-<head th:replace="~{common/header :: head('diaryboard')}">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-</head>
+<head th:replace="~{common/header :: head('diaryboard')}"></head>
 <body>
 	<header>
-		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+		<div class="header" th:insert="~{common/header :: wrap-header}"/>
 	</header>
-
+    <!-- <aside th:insert="~{common/diary_aside :: wrap-diary-aside}"></aside> -->
 	<section>
 		<!-- 버튼 클릭 이벤트로 지역 태그 클릭 시 이동 시키기 -->
 		<div class="diary-wrap-main">
+    		<aside th:insert="~{common/diary_aside :: wrap-diary-aside}"></aside>
 			<div class="board-search-inner">
 				<!-- 소개 문구 -->
 				<div class="diary-introduction">

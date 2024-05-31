@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/* 레이아웃 규격 정하기 */
+aside {
+	position: fixed;
+	left : calc(100vw-960px-180px);
+	width: 160px;
+	top: 180px;
+	font-family: 'GangwonEdu_OTFBoldA';
+}
+.diary-aside {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	/* width: 100px; */
+	background: #f4f5f7;
+	/* height: 100%; */
+	overflow: auto;
+
+	height: 200px;
+	border-radius: 10px;
+	color: #0a0a0a;
+}
+
+.diary-aside .borad, .myborad, .write {
+	text-decoration: none;
+	padding: 10px;
+	display: block;
+	color: #000;
+	font-weight: bold;
+}
+
+.diary-aside a:hover {
+	background: #fff;
+	color: #333;
+}
+
+.diary-aside .diary-aside-title span {
+	font-size: larger;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.diary-aside .aside-inner {
+	font-family: 'GangwonEdu_OTFBoldA';
+}
+
+.diary-aside .section-content {
+	margin-left: 180px; /* 사이드바와의 여백 */
+	padding: 20px;
+} /* 콘텐츠와의 여백 */
+
