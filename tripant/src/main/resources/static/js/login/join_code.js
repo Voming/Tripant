@@ -25,7 +25,6 @@ function codeSendHandler(){
 }
 //인증코드 확인
 function codeCheckHandler(){
-	clearTimeout(time_id);
 	var inputCode = $("#code").val();
 	$.ajax({
 		url: "/code/check", 
