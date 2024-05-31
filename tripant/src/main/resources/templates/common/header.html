@@ -33,7 +33,7 @@
 							<div class="log">
 								<ul>
 									<li>
-										<a href="#" sec:authorize="isAuthenticated()">마이페이지</a>
+										<a th:href="@{/my/home}" sec:authorize="isAuthenticated()">마이페이지</a>
 									</li>
 									<li>
 										<a href="@{/triplist}" sec:authorize="isAuthenticated()">나의 일정</a>
@@ -41,8 +41,6 @@
 									</li>
 									<li>
 										<a th:href="@{/mydiary}" sec:authorize="isAuthenticated()">나의 여행기</a>
-									</li>
-									<li>
 										<a th:href="@{/diary}" sec:authorize="isAnonymous()">여행기</a>
 									</li>
 									<li>
