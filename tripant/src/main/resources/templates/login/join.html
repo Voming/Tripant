@@ -118,7 +118,6 @@ function codeSendHandler(){
 		async: false, 
 		data: {memEmail: memEmail}, 
 		success: function(result){
-			console.log(result);
 			if(result === "1"){
 				alert("인증번호가 발송되었습니다.");
 				$(".inputbtn.check").removeClass('hide');
@@ -282,7 +281,6 @@ function joinActive(){
 				<div th:replace="~{login/fragment :: inputbtn('', 이메일, memEmail, email, '이메일 주소', 인증, sendCode, 4)}"></div>
 				<div style="color: red;">* 이메일을 입력해주세요.</div>
 				<div th:replace="~{login/fragment :: inputbtn(check, '이메일 인증번호', code, text, '', 확인, checkCode, 4)}"></div>
-				<input type="hidden" id="tempCode">
 				<div th:replace="~{login/fragment :: inputchk('', 닉네임, memNick, text, '한글 2~8자', 4)}"></div>
 				<div id="exist-nick" class="hide"><p style="color:red;">중복된 닉네임입니다.</p></div>
 				<div th:replace="~{login/fragment :: inputchk('', 비밀번호, memPassword, password, '영문, 숫자 포함 8~20자', 4)}"></div>
