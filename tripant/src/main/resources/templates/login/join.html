@@ -1,80 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- <link th:href="@{/css/login/join.css}" rel="stylesheet" type="text/css"> -->
-<head th:replace="~{common/header :: head('회원가입')}">
-<script type="text/javascript" th:src="@{/js/login/join_send_code.js}"></script>
+<link th:href="@{/css/login/join.css}" rel="stylesheet" type="text/css">
 <script type="text/javascript" th:src="@{/js/login/join_email_alert.js}"></script>
-</head>
-<style>
-	.wrap-main{
-		width: 960px;
-		margin: 120px auto;
-	}
-	.wrap-main *{
-		font-family: 'GangwonEdu_OTFBoldA';
-	}
-	.wrap-main .hide{
-		display: none;
-	}
-	.wrap-main .btn{
-		cursor: pointer;
-	}
-	.wrap-main .flex{
-		display: flex;
-	}
-	.wrap-main .flex.center{
-		justify-content: center;
-	}
-	.wrap-main .flex.join{
-		width: 340px;
-		margin: 0 auto;
-		flex-direction: column;
-		row-gap: 20px;
-		padding: 15px;
-		background-color: #f6f6f6;
-		border-radius: 10px;
-	}
-	.wrap-main .join.title{
-		font-size: var(--font1);
-	}
-	.wrap-main .inputlbl input, .wrap-main .inputbtn input, .wrap-main .flex.login button{
-		box-sizing: border-box;
-	}
-	.wrap-main .inputbtn{
-		width: 100%;
-	}
-	.wrap-main .flex.inputbtn{
-		justify-content: space-between;
-	}
-	.wrap-main .inputbtn1, .wrap-main .inputchk1{
-		width: 70%;
-	}
-	.wrap-main .inputbtn1 input, .wrap-main .inputchk1 input{
-		width: 100%;
-	}
-	.wrap-main .inputbtn2, .wrap-main .inputchk2{
-		width: 30%;
-		display: flex;
-		justify-content: center;
-	}
-	.wrap-main textarea{
-		resize: none;
-		width: 100%;
-		box-sizing: border-box;
-		overflow: scroll;
-		color: black;
-		background-color: white;
-	}
-	.wrap-main .g-recaptcha{
-		display: flex;
-    	justify-content: center;
-	}
-	.wrap-main div.btn.join, .wrap-main div.back{
-		text-align: center;
-	}
-</style>
-<!-- 
- -->
+<script type="text/javascript" th:src="@{/js/login/join_code.js}"></script>
+<script type="text/javascript" th:src="@{/js/login/join_check.js}"></script>
+<script type="text/javascript" th:src="@{/js/login/join_active.js}"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<head th:replace="~{common/header :: head('회원가입')}"></head>
 <script th:inline="javascript">
 $(loadedHandler);
 function loadedHandler(){
@@ -101,124 +33,6 @@ function loadedHandler(){
 	
 }
 
-//이메일 공란 시 문구 표시
-function writeEmailHandler(){
-	if($("#memEmail").val().trim().length == 0){
-		$(this).parents(".inputbtn").next().removeClass('hide');
-	}else{
-		$(this).parents(".inputbtn").next().addClass('hide');
-	}
-}
-//인증코드 발송 및 입력창 표시
-function codeSendHandler(){
-	var memEmail = $("#memEmail").val();
-	$.ajax({
-		url: "/code/send", 
-		type: "post", 
-		async: false, 
-		data: {memEmail: memEmail}, 
-		success: function(result){
-			if(result === "1"){
-				alert("인증번호가 발송되었습니다.");
-				$(".inputbtn.check").removeClass('hide');
-			}else if(result === "0"){
-				alert('인증번호 발송 중 오류가 발생했습니다.');
-			}else if(result === "-1"){
-				alert('이미 가입된 회원입니다.');
-			}
-		},  
-		error: function (request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
-	});
-}
-//인증코드 확인
-function codeCheckHandler(){
-	clearTimeout(time_id);
-	var inputCode = $("#code").val();
-	$.ajax({
-		url: "/code/check", 
-		type: "post", 
-		async: false, 
-		data: {inputCode: inputCode}, 
-		success: function(result){
-			if(result == 1){
-				alert("이메일 인증에 성공하였습니다.");
-				$(".inputbtn.check").addClass('hide');
-				$(".btn.sendCode").addClass('hide');
-				$("#memEmail").attr("readonly", true);
-				joinActive();
-			}else{
-				alert('인증번호가 일치하지 않습니다.');
-			}
-		}, 
-		error: function (request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
-	});
-}
-
-//닉네임 검사
-function nickCheckHandler(){
-	const nickExp = /^[가-힣]{2,8}$/;
-	const nickInput = $("input#memNick").val();
-	$.ajax({
-		url: '/join/nick/check', 
-		type: 'post', 
-		data: {memNick: nickInput}, 
-		success: function(result){
-			if(nickExp.test(nickInput) == true){
-				if(result == 0){
-					$("#memNick-yes").removeClass('hide');
-					$("#memNick-no").addClass('hide');
-					$("#exist-memNick").addClass('hide');
-					joinActive();
-				}else{
-					$("#memNick-yes").addClass('hide');
-					$("#memNick-no").removeClass('hide');
-					$("#exist-memNick").removeClass('hide');
-					joinActive();
-				}
-			}else{
-				$("#memNick-yes").addClass('hide');
-				$("#memNick-no").removeClass('hide');
-				$("#exist-memNick").addClass('hide');
-				joinActive();
-			}
-		}, 
-		error: function (request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
-	});
-}
-
-//비밀번호 검사
-function pwdCheckHandler(){
-	const pwdExp1 = /^[0-9A-Za-z]{8,20}$/;
-	const pwdExp2 = /^.*[0-9].*$/;
-	const pwdExp3 = /^.*[A-Z].*$/;
-	const pwdExp4 = /^.*[a-z].*$/;
-	const pwdInput = $("input#memPassword").val();
-	if(pwdExp1.test(pwdInput) == true && 
-	   pwdExp2.test(pwdInput) == true && 
-	   pwdExp3.test(pwdInput) == true && 
-	   pwdExp4.test(pwdInput) == true){
-		$("#memPassword-yes").removeClass('hide');
-		$("#memPassword-no").addClass('hide');
-		joinActive();
-	}else{
-		$("#memPassword-yes").addClass('hide');
-		$("#memPassword-no").removeClass('hide');
-		joinActive();
-	}
-}
-
 //비밀번호 보기
 $(function(){
 	$("#seePwd").click(function(){
@@ -230,7 +44,7 @@ $(function(){
 	});
 });
 
-//약관 버튼
+//약관 동의
 $(function() {
 	//전체 동의 클릭
 	$("#agree-all").click(function() {
@@ -258,55 +72,7 @@ $(function() {
 	});
 });
 
-//회원가입 버튼 활성화
-function joinActive(){
-	if($(".btn.sendCode").hasClass('hide') &&
-			$("#memNick-no").hasClass('hide') && 
-			$("#memPassword-no").hasClass('hide') && 
-			$("#memBirth").val() != '' &&
-			$("#agree-all").is(":checked")){
-		$("button.btn.join").attr("disabled", false);
-	}else{
-		$("button.btn.join").attr("disabled", true);
-	}
-};
-</script>
-<body>
-	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
-	<div class="wrap-main">
-		<form id="frm-join" action="/join" method="post">
-			<section class="flex join">
-				<div class="join title">회원가입</div>
-				<div class="join explain">회원가입을 위한 정보를 입력해주세요</div>
-				<div th:replace="~{login/fragment :: inputbtn('', 이메일, memEmail, email, '이메일 주소', 인증, sendCode, 4)}"></div>
-				<div style="color: red;">* 이메일을 입력해주세요.</div>
-				<div th:replace="~{login/fragment :: inputbtn(check, '이메일 인증번호', code, text, '', 확인, checkCode, 4)}"></div>
-				<div th:replace="~{login/fragment :: inputchk('', 닉네임, memNick, text, '한글 2~8자', 4)}"></div>
-				<div id="exist-nick" class="hide"><p style="color:red;">중복된 닉네임입니다.</p></div>
-				<div th:replace="~{login/fragment :: inputchk('', 비밀번호, memPassword, password, '영문, 숫자 포함 8~20자', 4)}"></div>
-				<div><input type="checkbox" id="seePwd">비밀번호 보기</div>
-				<div th:replace="~{login/fragment :: inputlbl('생년월일 설정', memBirth, date, 4, '')}"></div>
-				<div>트립앤트 회원 약관 동의</div>
-				<div class="flex" style="align-items: center;">
-					<div><input type="checkbox" id="agree-all"></div>
-					<div>전체 동의</div>
-				</div>
-				<div th:replace="~{login/fragment :: agree(first, '동의')}"></div>
-				<div><textarea rows="10" disabled="disabled">약관입니다111111111</textarea></div>
-				<div th:replace="~{login/fragment :: agree(second, '동의')}"></div>
-				<div><textarea rows="10" disabled="disabled">약관입니다222222222</textarea></div>
-				<div class="g-recaptcha" data-sitekey="6LcOX-wpAAAAAH3Ov3DYEz5zhW7oIWjn5nEuaGET">
-				</div>
-				<div class="btn join"><button type="submit" class="btn join" disabled>회원가입</button></div>
-				<div class="back"><a th:href="@{/login}">로그인 화면가기</a></div>
-			</section>
-		</form>
-	</div>
-	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
-</body>
-<!-- Google reCAPTCHA js -->
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script type="text/javascript">
+//구글 리캡챠 v2
 $(function() {
 	$('#frm-join').submit(function() {
 		let memberEntity = $("#frm-join").serialize();
@@ -339,4 +105,37 @@ $(function() {
 	});
 });
 </script>
+<body>
+	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	<div class="wrap-main">
+		<form id="frm-join" action="/join" method="post">
+			<section class="flex join">
+				<div class="join title">회원가입</div>
+				<div class="join explain">회원가입을 위한 정보를 입력해주세요</div>
+				<div th:replace="~{login/fragment :: inputbtn('', 이메일, memEmail, email, '이메일 주소', 인증, sendCode, 4)}"></div>
+				<div style="color: red;">* 이메일을 입력해주세요.</div>
+				<div th:replace="~{login/fragment :: inputbtn(check, '이메일 인증번호', code, text, '', 확인, checkCode, 4)}"></div>
+				<div th:replace="~{login/fragment :: inputchk('', 닉네임, memNick, text, '한글 2~8자', 4)}"></div>
+				<div id="exist-nick" class="hide"><p style="color:red;">중복된 닉네임입니다.</p></div>
+				<div th:replace="~{login/fragment :: inputchk('', 비밀번호, memPassword, password, '영문 대문자, 소문자, 숫자 포함 8~20자', 4)}"></div>
+				<div><input type="checkbox" id="seePwd">비밀번호 보기</div>
+				<div th:replace="~{login/fragment :: inputlbl('생년월일 설정', memBirth, date, 4, '')}"></div>
+				<div>트립앤트 회원 약관 동의</div>
+				<div class="flex" style="align-items: center;">
+					<div><input type="checkbox" id="agree-all"></div>
+					<div>전체 동의</div>
+				</div>
+				<div th:replace="~{login/fragment :: agree(first, '동의')}"></div>
+				<div><textarea rows="10" disabled="disabled">약관입니다111111111</textarea></div>
+				<div th:replace="~{login/fragment :: agree(second, '동의')}"></div>
+				<div><textarea rows="10" disabled="disabled">약관입니다222222222</textarea></div>
+				<div class="g-recaptcha" data-sitekey="6LcOX-wpAAAAAH3Ov3DYEz5zhW7oIWjn5nEuaGET">
+				</div>
+				<div class="btn join"><button type="submit" class="btn join" disabled>회원가입</button></div>
+				<div class="back"><a th:href="@{/login}">로그인 화면가기</a></div>
+			</section>
+		</form>
+	</div>
+	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+</body>
 </html>

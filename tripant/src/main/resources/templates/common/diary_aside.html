@@ -1,60 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{common/header :: head('aside')}">
-<style type="text/css">
-ul {
-	list-style-type: none;
-	padding: 0px;
-	margin: 0px;
-	width: 100px;
-	background: #4b76e5;
-	height: 100%;
-	overflow: auto;
-	position: fixed;
-	width: 160px;
-	height: 200px;
-	border-radius: 10px;
-}
-
-li a {
-	text-decoration: none;
-	padding: 10px;
-	display: block;
-	color: #000;
-	font-weight: bold;
-}
-
-li a:hover {
-	background: #fff;
-	color: #333;
-}
-
-li span {
-	font-size: larger;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.aside-inner {
-	font-family: 'GangwonEdu_OTFBoldA';
-}
-</style>
+<head>
+<link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div th:fragment="wrap-diary-aside">
+	<div class="wrap-diary-aside" th:fragment="wrap-diary-aside">
 		<div class="aside-inner">
 			<ul class="diary-aside">
-
-				<li class="diary-aside-title"><span> 여행기 </span></li>
-				<li class="diary-aside-board"><a th:href="#">여행기 게시판</a></li>
-				<li class="diary-aside-myboard"><a th:href="#">나의 여행기</a></li>
-				<li class="diary-aside-write"><a th:href="#">여행기 작성하기</a></li>
+				<li class="diary-aside-title"><span class="title-text"> 여행기 </span></li>
+				<li class="diary-aside-board"><a th:href="@{/diary}" sec:authorize="isAnonymous()" class="borad">여행기
+						게시판</a></li>
+				<li class="diary-aside-myboard"><a th:href="@{/mydiary}"  class="myborad">나의
+						여행기</a></li>
+				<li class="diary-aside-write"><a href="#" class="write">여행기
+						작성하기</a></li>
 			</ul>
 		</div>
 	</div>
 </body>
 </html>
->

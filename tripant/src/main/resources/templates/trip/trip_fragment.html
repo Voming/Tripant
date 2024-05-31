@@ -6,18 +6,19 @@
 </head>
 <body>
 	<!-- tourlist -->
-	<div th:fragment="tourlist" class="tourlist">
-		<div>이거 보입니까??</div>
+	<div th:fragment="tourlist" class="tourlist ">
+		<div class="flex">
+		<div>이거 보입니까??</div></div>
 	</div>
 	
 	<!-- edit trip list -->
-	<div th:fragment="edit-tourlist" class="edit-tourlist" style="display: none;">
-		<div class="column">
-			<div class="sub-title">
+	<div th:fragment="edit-tourlist" class="edit-tourlist hide" > <div class="flex">
+		<div class="column  flex">
+			<div class="sub-title flex">
 				<div class="nday">1일차</div>
 				<div class="date">2024-06-01(토)</div>
 			</div>
-		 	<div class="container">
+		 	<div class="container flex">
 			 	<div class="spot wfull">
 			        <div class="draggable spot-info" draggable="true">
 			            <span class="ico-drag">1번</span>
@@ -50,12 +51,12 @@
 		    </div> <!-- container  -->
 		</div>	<!-- column -->
 		
-		<div class="column">
-			<div class="sub-title">
+		<div class="column flex">
+			<div class="sub-title flex">
 				<div class="nday">2일차</div>
 				<div class="date">2024-06-01(토)</div>
 			</div>
-		    <div class="container">
+		    <div class="container flex">
 			 	<div class="spot wfull">
 			        <div class="draggable spot-info" draggable="true">
 			            <span class="ico-drag">1번</span>
@@ -87,6 +88,6 @@
 			    </div>
 		    </div> <!-- container  -->
 		</div>	<!-- column -->
-	</div>
+	</div> </div>
 </body>
 </html>

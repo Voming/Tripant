@@ -6,16 +6,15 @@
 	display: flex;
     flex-direction: row;
 }
+.main-wrapper .hide{ display: none; }
+.main-wrapper .flex{display:flex;}
 .main-wrapper .btn,
-.main-wrapper a{
-	cursor: pointer;
-}
+.main-wrapper a{ cursor: pointer; }
 .main-wrapper .wfull{
 	width:100%;
 }
 /* 버튼 nav */
 .main-wrapper .nav-wrapper{
-	display : flex;
  	flex-direction : column;
 	justify-content: space-between; 
 	width: 100px;
@@ -29,11 +28,10 @@
 }
 .main-wrapper .plan_update,
 .main-wrapper .nav{
-	display: flex;
 	align-items: center;
     flex-direction: column;
 }
-.main-wrapper .nav-wrapper .nav .dayn{
+.main-wrapper .nav-wrapper .nav .btn{
       box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
       height : 40px;
 }
@@ -50,13 +48,16 @@
     background-color: #fafafa;
     border-radius: 10px;
 }
+.main-wrapper .nav-wrapper .cancel,
+.main-wrapper .nav-wrapper .edit{
+	height:30px;
+}
 .main-wrapper .nav-wrapper .plan_update .btn{
 	border : solid black 1px;
 }
 
 /* 일정 */
 .main-wrapper .schedule-wrapper{
-	display:flex;
 	flex-direction:column;
 	height:100%;
 	width: 30%;
@@ -74,21 +75,13 @@
 	height: 100%;
 	padding:10px;
 }
-/* common (tourlist,edittourlist)*/
-.main-wrapper .schedule-wrapper .list-box .tourlist,
-.main-wrapper .schedule-wrapper .list-box .edit-tourlist{
-	display: flex;
-	/* height: 100%; */
-}
 
 .main-wrapper .schedule-wrapper .list-box .column{
-	display: flex;
 	flex-direction: column;
 	width: 275px;
 	padding: 0 8px;
 }
 .main-wrapper .column .sub-title{
-	display: flex;
 	justify-content: space-between;
 	margin:10px 0;
 }
@@ -101,7 +94,6 @@
 }
 /* edit part */
 .main-wrapper .edit-tourlist .column .container{
-	display: flex;
 	flex-direction: column;	
 	background-color: #F7F8F9;
 	border-radius: 8px;
