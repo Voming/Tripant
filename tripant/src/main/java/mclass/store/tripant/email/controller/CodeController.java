@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import mclass.store.tripant.member.model.service.MemberService;
 
 @Controller
 @RequestMapping("/code")
@@ -35,11 +38,18 @@ public class CodeController {
 	
 	@Autowired
 	private Gmail gmail;
+
+	@Autowired
+	private MemberService memberService;
 	
 	//인증번호 발송
 	@PostMapping("/send")
 	@ResponseBody
-	public void sendCode(HttpServletResponse response,@RequestParam String memEmail) {
+	public String sendCode(HttpServletResponse response,@RequestParam String memEmail
+			, HttpSession session) {
+		if(memberService.existEmail(memEmail) == 1) {
+			return "-1";
+		}
 		// 랜덤 문자열
 		int leftLimit = 97; // 'a'
 		int rightLimit = 122; // 'z'
@@ -71,7 +81,6 @@ public class CodeController {
 		p.put("mail.smtp.socketFactory.fallback", "false");
 		p.put("mail.smtp.ssl.protocols", "TLSv1.2"); // 추가된 코드
 		p.put("mail.smtp.ssl.enable", "true");  // 추가된 코드
-		
 		try{
 			Authenticator auth = gmail;
 			Session ses = Session.getInstance(p, auth);
@@ -84,20 +93,24 @@ public class CodeController {
 			msg.addRecipient(Message.RecipientType.TO, toAddr);
 			msg.setContent(content, "text/html;charset=UTF-8");
 			Transport.send(msg); // 메세지 전송
-			response.getWriter().append(code);
+			session.setAttribute("code", code);
+			return "1";
 		}catch(Exception e){
+			session.removeAttribute("code");
 			e.printStackTrace();
+			return "0";
 		}
 	}
 	
 	//인증번호 확인
 	@PostMapping("/check")
 	@ResponseBody
-	public void checkCode(HttpServletResponse response, @RequestParam String inputCode, @RequestParam String sendCode) throws IOException {
-		if(inputCode.equals(sendCode)) {
-			response.getWriter().append(String.valueOf(1));
+	public String checkCode(HttpSession session, @RequestParam String inputCode) throws IOException {
+		if(inputCode.equals(session.getAttribute("code"))) {
+			session.removeAttribute("code");
+			return "1";
 		}else {
-			response.getWriter().append(String.valueOf(0));
+			return "0";
 		}
 	}
 }
