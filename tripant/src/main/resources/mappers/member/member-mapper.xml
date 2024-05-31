@@ -8,7 +8,10 @@
 		insert into member (mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_quit_date, mem_birth) values 
 		(#{memEmail}, #{memNick}, #{memPassword}, #{memRole}, #{memEnabled}, #{memType}, default, #{memQuitDate}, #{memBirth})  
 	</insert>
-	<select id="existNick" parameterType="string" resultType="int">
+	<select id="existNick" parameterType="string" resultType="_int">
 		select count(*) from member where mem_nick = #{memNick}
+	</select>
+	<select id="existEmail" parameterType="string" resultType="_int">
+		select count(*) from member where mem_email = #{memEmail}
 	</select>
 </mapper>
