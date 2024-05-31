@@ -86,3 +86,8 @@
 	width:50px;
 	background-color:white;
 }
+
+.col.list .btn:hover{
+	background-color:black;
+	color:white;
+}
