@@ -2,7 +2,9 @@
 /* 폰트 적용 */
 /* 레이아웃 규격 정하기 */
 .diary-wrap-main {
+	position :relative;
 	width: 960px;
+	height:3000px;
 	margin: auto;
 	padding-top: 3%;
 	padding-bottom: 5%;
@@ -157,3 +159,4 @@ select {
 	width: 32px; /* 아이콘 크기 조절 */
 	height: 32px;
 }
+
