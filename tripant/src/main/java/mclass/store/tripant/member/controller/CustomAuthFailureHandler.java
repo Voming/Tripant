@@ -1,4 +1,4 @@
-package mclass.store.tripant.login.controller;
+package mclass.store.tripant.member.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;

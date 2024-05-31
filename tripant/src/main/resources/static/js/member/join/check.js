@@ -53,3 +53,11 @@ function pwdCheckHandler(){
 		joinActive();
 	}
 }
+//비밀번호 보기
+function seePwdHandler(){
+	if($(this).is(":checked")){
+		$("#memPassword").prop("type", "text");
+	}else{
+		$("#memPassword").prop("type", "password");
+	}
+}

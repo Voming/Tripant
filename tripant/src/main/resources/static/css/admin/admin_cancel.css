@@ -81,7 +81,7 @@
 }
 /*  */
 
-.btn-cancel{
+.btn.done{
 	border-radius:8px;
 	border:none;
 	background-color:black;
@@ -91,7 +91,7 @@
 }
 
 
-.col.list .btn{
+.btn{
 	border-radius:8px;
 	border:solid black 1px;
 	background-color:white;
