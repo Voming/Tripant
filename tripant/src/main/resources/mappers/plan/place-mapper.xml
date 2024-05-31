@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper
-	namespace="mclass.store.tripant.plan.model.repostiory.PlaceRepository">
-	<insert id="insertPlace" parameterType="java.util.List">
-			INSERT INTO PLACE(TYPE,
-			CONTENTID, CONTENTTYPEID, ADD1, AREACODE, CAT1, CAT2, CAT3,
-			MAPX, MAPY, CREATETIME, SIGUNGUCODE, TITLE, MODIFIEDTIME, GETTIME) 
-			VALUES 
-			<foreach collection="list" item="item"  open="(" separator="," close=")" index="index">
-			(#{item.type},#{item.contentid},
-			#{item.contenttypeid}, #{item.add1}, #{item.areacode}, #{item.cat1}, #{item.cat2},
-			#{item.cat3}, #{item.mapx}, #{item.mapy}, #{item.createtime}, #{item.sigungucode},
-			#{item.title}, #{item.modifiedtime}, #{item.gettime})
+<mapper namespace="mclass.store.tripant.plan.model.repostiory.PlaceRepository">
+	<update id="insertPlace" parameterType="java.util.List">
+		merge into place t using 
+			<foreach collection="list" item="item"  open="(" close=") s" separator="UNION" >
+			select 
+				#{item.type} as type,				#{item.contentid} as contentid,
+				#{item.type} as contenttypeid,
+				#{item.title} as title, 
+				#{item.add1} as add1, 				#{item.areacode} as areacode,			    #{item.sigungucode} as sigungucode, 
+			    #{item.cat1} as cat1, #{item.cat2} as cat2, #{item.cat3} as cat3, 
+			    #{item.mapx} as mapx, #{item.mapy} as mapy,
+				#{item.gettime} as createtime, #{item.modifiedtime} as modifiedtime, #{item.gettime} as gettime
+		    from dual
 			</foreach>
-			ON DUPLICATE KEY UPDATE #{item.contenttypeid}, #{item.add1}, #{item.areacode},
-			#{item.cat1}, #{item.cat2}, #{item.cat3}, #{item.mapx}, #{item.mapy}, #{item.createtime},
-			#{item.sigungucode}, #{item.title}, #{item.modifiedtime}, #{item.gettime}
-	</insert>
+		on (t.type = s.type and t.contentid = s.contentid)
+		when matched then
+		  update set 
+					  	t.contenttypeid = s.contentid, 
+					  	t.title = s.title,  
+					  	t.add1 = s.add1, t.areacode = s.areacode, t.sigungucode = s.sigungucode,
+					  	t.cat1 = s.cat1, t.cat2 = s.cat2, t.cat3 = s.cat3, 
+						t.createtime = s.createtime, t.modifiedtime = s.modifiedtime, t.gettime = s.gettime
+		when not matched then
+		  insert (  	type, contentid, 
+					  	contenttypeid, 
+					  	title, 
+					  	add1, areacode, sigungucode, 
+					  	cat1, cat2, cat3, 
+					  	mapx, mapy, 
+					  	createtime, modifiedtime, gettime)  
+		  values (  	s.type, s.contentid, 
+					  	s.contenttypeid, 
+					  	s.title, 
+					  	s.add1, s.areacode, s.sigungucode,
+					  	s.cat1,s.cat2,s.cat3, 
+					  	s.mapx,s.mapy,
+						s.createtime,s.modifiedtime,s.gettime)
+	</update>
 </mapper>

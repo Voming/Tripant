@@ -16,6 +16,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.nimbusds.jose.shaded.gson.GsonBuilder;
+
 import mclass.store.tripant.place.domain.PlaceEntity;
 import mclass.store.tripant.plan.model.repostiory.PlaceRepository;
 
@@ -144,9 +146,9 @@ public class PlaceService {
 						sigungucode, tel, title, modifiedtime);
 				dtolist.add(dto);
 			}
-			
+
+			System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(dtolist));
 			result = placeRepository.insertPlace(dtolist);
-			System.out.println(dtolist);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
