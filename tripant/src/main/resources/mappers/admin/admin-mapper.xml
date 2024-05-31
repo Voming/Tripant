@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mclass.store.tripant.admin.model.repository.AdminDao">
+	<select id="selectMemList" resultType="AdminMemEntity" >
+	select mem_nick,mem_email,mem_join_date,mem_quit_date,mem_role from member
+	</select>
+</mapper>
