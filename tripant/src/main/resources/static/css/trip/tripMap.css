@@ -6,12 +6,31 @@
 	display: flex;
     flex-direction: row;
 }
-.main-wrapper .hide{ display: none; }
 .main-wrapper .flex{display:flex;}
+.main-wrapper .hide{ display: none; }
+
 .main-wrapper .btn,
 .main-wrapper a{ cursor: pointer; }
-.main-wrapper .wfull{
-	width:100%;
+
+.main-wrapper .wfull{ width:100%;}
+.main-wrapper .w250{width:250px;}
+.main-wrapper .w220{width:220px;}
+/* scroll
+.scrollbar{
+	overflow-x: overlay; 
+	overflow-y: overlay; 	
+}
+ */
+.scrollbar::-webkit-scrollbar{
+  	height: 10px;  /* 오른쪽 왼쪽 스크롤바 폭 너비 */
+  	width: 10px;  /* 위 아래 스크롤바 폭 너비 */
+}
+.scrollbar::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	border: 7px solid var(--color_light_gray);
+}
+.scrollbar::-webkit-scrollbar-corner {
+	background: transparent;
 }
 /* 버튼 nav */
 .main-wrapper .nav-wrapper{
@@ -19,7 +38,7 @@
 	justify-content: space-between; 
 	width: 100px;
 	padding : 15px 5px;
-	 border-right: 1px solid var(--color_light_gray);
+ 	border-right: 1px solid var(--color_light_gray);
 	
 }
 .main-wrapper .logo{
@@ -59,9 +78,11 @@
 /* 일정 */
 .main-wrapper .schedule-wrapper{
 	flex-direction:column;
-	height:100%;
 	width: 30%;
-	padding : 30px 30px;
+	padding : 0px 30px;
+}
+.main-wrapper .schedule-wrapper .plan-info{
+	flex-direction: column;
 }
 .main-wrapper .schedule-wrapper .plan-title{
 	font-size: var(--font2);
@@ -74,6 +95,7 @@
 .main-wrapper .schedule-wrapper .list-box{
 	height: 100%;
 	padding:10px;
+	overflow: hidden;
 }
 
 .main-wrapper .schedule-wrapper .list-box .column{
@@ -92,9 +114,18 @@
 	font-size: var(--font6);
 	color: var(--color_gray);
 }
-/* edit part */
+/*  scrollbar와 div무너짐 해결:flex의 상위 하위 너비지정*/
+.main-wrapper .edit-tourlist,
+.main-wrapper .tourlist{    flex-direction: row; overflow: scroll;}
+.main-wrapper .tourlist .column,
+.main-wrapper .edit-tourlist .column {flex-wrap: nowrap;}
+
+.main-wrapper .tourlist .column.flex > div,
+.main-wrapper .edit-tourlist .column.flex > div {width: 220px;}
+/*  */
+
+.main-wrapper  .column .container{	flex-direction: column;	}
 .main-wrapper .edit-tourlist .column .container{
-	flex-direction: column;	
 	background-color: #F7F8F9;
 	border-radius: 8px;
 	padding:0 5px;
