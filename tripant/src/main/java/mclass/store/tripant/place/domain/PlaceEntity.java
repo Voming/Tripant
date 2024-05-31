@@ -34,7 +34,7 @@ public class PlaceEntity {
     private String gettime;
 	
 	private Integer contentid;
-	private String contenttypeid;
+	private Integer contenttypeid;
 	private String add1;         
 	private String add2;       
 	private Integer areacode;     
@@ -60,7 +60,7 @@ public class PlaceEntity {
 		super();
 	} 
 
-	public PlaceEntity(Integer type, String gettime, Integer contentid, String contenttypeid, String add1, String add2,
+	public PlaceEntity(Integer type, String gettime, Integer contentid, Integer contenttypeid, String add1, String add2,
 			Integer areacode, String booktour, String cat1, String cat2, String cat3, String firstimage,
 			String firstimage2, String cpyrhtDivCd, String mapx, String mapy, String createtime, String mlevel,
 			String sigungucode, String tel, String title, String modifiedtime) {

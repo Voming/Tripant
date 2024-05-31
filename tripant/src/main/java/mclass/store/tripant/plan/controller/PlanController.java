@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import mclass.store.tripant.plan.domain.AreaNameEntity;
+import mclass.store.tripant.plan.model.service.PlaceService;
 import mclass.store.tripant.plan.model.service.PlanService;
 
 @Controller
 public class PlanController {
 	@Autowired
 	private PlanService planService;
+	@Autowired
+	private PlaceService placeService ;
 	
 	@GetMapping("/sample")
 	public String sample(Model model) {
 		//model.addAttribute();
+	
 		return "sample_layout";
 	}
 	
@@ -35,7 +39,7 @@ public class PlanController {
 		model.addAttribute("memCount", planService.selectMemCount());
 		
 		model.addAttribute("areaNameList", planService.selectAreaNameList());
-		
+//		System.out.println("insertPlace : " + placeService.insertPlace());
 		return "plan/main/home";
 	}
 	
