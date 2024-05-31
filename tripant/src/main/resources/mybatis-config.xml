@@ -11,6 +11,7 @@
 		<package name="mclass.store.tripant.plan.domain"/>
 		<package name="mclass.store.tripant.trip.domain"/> 
 		<package name="mclass.store.tripant.diary.domain"/>
-		<package name="mclass.store.tripant.schedule.domain"/>
+		<package name="mclass.store.tripant.place.domain"/>
+		<package name="mclass.store.tripant.admin.domain"/>
 	</typeAliases>
 </configuration>

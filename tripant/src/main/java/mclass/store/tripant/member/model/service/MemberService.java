@@ -16,11 +16,15 @@ public class MemberService {
 		return memberRepository.login(memEmail);
 	}
 	
-	public int joinEmail(MemberEntity newMem) {
+	public Integer joinEmail(MemberEntity newMem) {
 		return memberRepository.joinEmail(newMem);
 	}
 	
-	public int existNick(String memNick) {
+	public Integer existNick(String memNick) {
 		return memberRepository.existNick(memNick);
+	}
+	
+	public Integer existEmail(String memEmail) {
+		return memberRepository.existEmail(memEmail);
 	}
 }

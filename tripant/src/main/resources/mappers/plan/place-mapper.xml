@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="mclass.store.tripant.plan.model.repostiory.PlaceRepository">
+	<insert id="insertPlace" parameterType="java.util.List">
+			INSERT INTO PLACE(TYPE,
+			CONTENTID, CONTENTTYPEID, ADD1, AREACODE, CAT1, CAT2, CAT3,
+			MAPX, MAPY, CREATETIME, SIGUNGUCODE, TITLE, MODIFIEDTIME, GETTIME) 
+			VALUES 
+			<foreach collection="list" item="item"  open="(" separator="," close=")" index="index">
+			(#{item.type},#{item.contentid},
+			#{item.contenttypeid}, #{item.add1}, #{item.areacode}, #{item.cat1}, #{item.cat2},
+			#{item.cat3}, #{item.mapx}, #{item.mapy}, #{item.createtime}, #{item.sigungucode},
+			#{item.title}, #{item.modifiedtime}, #{item.gettime})
+			</foreach>
+			ON DUPLICATE KEY UPDATE #{item.contenttypeid}, #{item.add1}, #{item.areacode},
+			#{item.cat1}, #{item.cat2}, #{item.cat3}, #{item.mapx}, #{item.mapy}, #{item.createtime},
+			#{item.sigungucode}, #{item.title}, #{item.modifiedtime}, #{item.gettime}
+	</insert>
+</mapper>

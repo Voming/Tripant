@@ -58,7 +58,7 @@ a{
 }
 
 /* main 헤더 */
-.wrap-main .ad-header{
+.wrap-main .wrap-body .ad-header{
  background-color:rgb(128, 128, 128);
  height	:70px;
  color:white;
