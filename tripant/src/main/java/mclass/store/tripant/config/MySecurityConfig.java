@@ -14,7 +14,7 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.login.controller.CustomAuthFailureHandler;
+import mclass.store.tripant.member.controller.CustomAuthFailureHandler;
 
 @RequiredArgsConstructor
 @Configuration

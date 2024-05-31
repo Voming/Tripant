@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import mclass.store.tripant.diary.service.DiaryService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -25,6 +27,14 @@ public class DiaryController {
 		model.addAttribute("diaries",diaryService.selectDiaryList());
 		return "mydiary/diary_my_board";
 	}
+	
+//	일단 글쓰기 페이지 보이기만 
+//	TODO from으로 db 서버 보내기
+	@GetMapping("/write")
+	public String diarywrite() {
+		return "mydiary/diary_write";
+	}
+	
 	
 	
 }

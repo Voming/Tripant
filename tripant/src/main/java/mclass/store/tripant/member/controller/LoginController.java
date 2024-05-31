@@ -1,6 +1,7 @@
-package mclass.store.tripant.login.controller;
+package mclass.store.tripant.member.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashMap;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.apikeys.KeysJaewon;
-import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @RequiredArgsConstructor
@@ -21,9 +21,6 @@ public class LoginController {
 	private final KeysJaewon keysJaewon;
 	
 	private final MemberService memberService;
-	
-	@Autowired
-	private MemberEntity memberEntity;
 	
 	//로그인 페이지
 	@GetMapping("/login")
@@ -53,46 +50,7 @@ public class LoginController {
 		model.addAttribute("robotKey", keysJaewon.getRobotKey());
 		model.addAttribute("error", error);
 		model.addAttribute("exception", msg);
-		return "login/login";
-	}
-	
-	//회원가입 페이지
-	@GetMapping("/join")
-	public String join() {
-		return "login/join";
-	}
-	
-	// 닉네임 중복 검사
-	@PostMapping("/join/nick/check")
-	@ResponseBody
-	public Integer nickCheck(@RequestParam String memNick) {
-		int result = memberService.existNick(memNick);
-		return result;
-	}
-	
-	//회원가입
-	@PostMapping("/join")
-	@ResponseBody
-	public int joinMember(MemberEntity memberEntity, String recaptcha) {
-		
-		memberEntity.setMemPassword(new BCryptPasswordEncoder().encode(memberEntity.getMemPassword()));
-		memberEntity.setMemEnabled(1);
-		memberEntity.setMemRole("ROLE_MEM");
-		memberEntity.setMemType("T");
-		System.out.println("mem = "+memberEntity);
-		
-		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
-		try {
-			if(RecaptchaConfig.verify(recaptcha)) {
-				memberService.joinEmail(memberEntity);
-				return 1;
-			}else {
-				return 0;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
+		return "member/login";
 	}
 	
 	//카카오 로그인
@@ -107,5 +65,23 @@ public class LoginController {
 		return "redirect:"+keysJaewon.getNaverLoginUrl();
 	}
 	
+	//비밀번호 찾기 페이지
+	@GetMapping("/pwd")
+	public String findPwd() {
+		return "/member/pwd";
+	}
+	
+	//비밀번호 재설정
+	@PostMapping("/pwd")
+	@ResponseBody
+	public int setPwd(@RequestParam String memEmail, @RequestParam String memPassword) {
+		System.out.println("memEmail = "+memEmail);
+		System.out.println("memPwd = "+memPassword);
+		HashMap<String, Object> hashMap = new HashMap<>();
+		hashMap.put("memEmail", memEmail);
+		hashMap.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
+		int result = memberService.setPwd(hashMap);
+		return result;
+	}
 }
 

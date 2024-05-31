@@ -84,7 +84,7 @@
 }
 
 
-.btn-reset{
+.wrap-body .btn-reset{
 	border-radius:8px;
 	border:none;
 	height:30px;
@@ -93,4 +93,15 @@
 	background-color:black;
 	color:white;
 	margin-top:10px;
+}
+
+.wrap-body .btn-reset:hover{
+	background-color:white;
+	color:black;
+	border:solid black 1px;
+}
+
+/* checkbox 색상변경 */
+input[type=checkbox] {
+  accent-color:black;
 }

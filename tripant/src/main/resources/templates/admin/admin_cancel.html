@@ -9,6 +9,9 @@
 <link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_cancel.css}" rel="stylesheet">
+
+<!--제이쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 <div class="wrap-main">
@@ -54,14 +57,14 @@
 							<li>tripant@gmail.com</li>
 							<li>폰트 1개월</li>
 							<li>2024.05.20</li>
-							<li><button type="button" class="btn">결제취소</button></li>
+							<li><button type="button" class="btn" value="결제취소">결제취소</button></li>
 						</ul>
 						<ul class="col list">
 							<li>오예</li>
 							<li>tripant@gmail.com</li>
 							<li>테마-색상</li>
 							<li>2024.05.20</li>
-							<li><button type="button" class="btn-cancel">취소완료</button></li>
+							<li><button type="button" class="btn" value="결제취소">결제취소</button></li>
 						</ul>
 					</li>
 				</ul>	
@@ -69,5 +72,22 @@
 		</form>
 	</div>
 </div>
+
+<script>
+$(loadedHandler);
+function loadedHandler() {
+	$(".btn").on("click", ClickHandler);
+}
+
+function ClickHandler(){
+	$(this).addClass("done");  
+	$(this).text('취소완료');
+	$(this).prop('readonly', true); //취소완료 된 후 클릭해도 바뀌지않음.
+	/* if($(this).text() == '결제취소'){
+	}else{
+		$(this).text('결제취소');
+	} */
+}
+</script>
 </body>
 </html>

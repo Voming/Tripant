@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/member/join.css}" rel="stylesheet" type="text/css">
+<script type="text/javascript" th:src="@{/js/member/join/email_alert.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/code.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/check.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/agree.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/robot.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/active.js}"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<head th:replace="~{common/header :: head('회원가입')}"></head>
+<script th:inline="javascript">
+$(loadedHandler);
+function loadedHandler(){
+	//인증코드 입력창 숨김
+	$(".inputbtn.check").addClass('hide');
+	//이메일 공란 시 경고 문구
+	$("input#memEmail").on("keyup", writeEmailHandler);
+	//인증코드 발송
+	$(".btn.sendCode").on("click", codeSendHandler);
+	//인증코드 확인
+	$(".btn.checkCode").on("click", codeCheckHandler);
+	//닉네임 검사
+	$("input#memNick").on("keyup", nickCheckHandler);
+	//비밀번호 검사
+	$("input#memPassword").on("keyup", pwdCheckHandler);
+	//비밀번호 보기
+	$("#seePwd").on("click", seePwdHandler);
+	//생년월일 입력 검사
+	$("input#memBirth").on("change", joinActive);
+	//약관 동의 클릭 이벤트
+	$("#agree-all").on("click", agreeAllHandler);
+	$("input[name=agree]").on("click", agreeDivHandler);
+	//구글 리캡차v2
+	$("#frm-join").on("submit", robotHandler);
+}
+</script>
+<body>
+	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	<div class="wrap-main">
+		<form id="frm-join" action="/join" method="post">
+			<section class="flex join">
+				<div class="join title">회원가입</div>
+				<div class="join explain">회원가입을 위한 정보를 입력해주세요</div>
+				<div th:replace="~{member/fragment :: inputbtn('', 이메일, memEmail, email, '이메일 주소', 인증, sendCode, 4)}"></div>
+				<div style="color: red;">* 이메일을 입력해주세요.</div>
+				<div th:replace="~{member/fragment :: inputbtn(check, '이메일 인증번호', code, text, '', 확인, checkCode, 4)}"></div>
+				<div th:replace="~{member/fragment :: inputchk('', 닉네임, memNick, text, '한글 2~8자', 4)}"></div>
+				<div id="exist-nick" class="hide"><p style="color:red;">중복된 닉네임입니다.</p></div>
+				<div th:replace="~{member/fragment :: inputchk('', 비밀번호, memPassword, password, '영문 대문자, 소문자, 숫자 포함 8~20자', 4)}"></div>
+				<div><input type="checkbox" id="seePwd">비밀번호 보기</div>
+				<div th:replace="~{member/fragment :: inputlbl('생년월일 설정', memBirth, date, 4, '')}"></div>
+				<div>트립앤트 회원 약관 동의</div>
+				<div class="flex" style="align-items: center;">
+					<div><input type="checkbox" id="agree-all"></div>
+					<div>전체 동의</div>
+				</div>
+				<div th:replace="~{member/fragment :: agree(first, '동의')}"></div>
+				<div><textarea rows="10" disabled="disabled">약관입니다111111111</textarea></div>
+				<div th:replace="~{member/fragment :: agree(second, '동의')}"></div>
+				<div><textarea rows="10" disabled="disabled">약관입니다222222222</textarea></div>
+				<div class="g-recaptcha" data-sitekey="6LcOX-wpAAAAAH3Ov3DYEz5zhW7oIWjn5nEuaGET">
+				</div>
+				<div class="btn join"><button type="submit" class="btn join" disabled>회원가입</button></div>
+				<div class="back"><a th:href="@{/login}">로그인 화면가기</a></div>
+			</section>
+		</form>
+	</div>
+	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+</body>
+</html>

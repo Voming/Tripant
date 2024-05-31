@@ -1,4 +1,4 @@
-package mclass.store.tripant.login.controller;
+package mclass.store.tripant.member.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;

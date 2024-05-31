@@ -1,5 +1,6 @@
 package mclass.store.tripant.admin.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +19,10 @@ public class AdminController {
 	
 	@GetMapping("/member")
 	public String admin(Model model) {
+		
+		
 		model.addAttribute("memList",adminservie.selectMemList());
+		
 		return "admin/admin_member";
 	}
 	

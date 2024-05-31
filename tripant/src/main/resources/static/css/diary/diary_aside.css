@@ -1,12 +1,13 @@
 @charset "UTF-8";
 /* 레이아웃 규격 정하기 */
 aside {
-	position: fixed;
-	left : calc(100vw-960px-180px);
-	width: 160px;
-	top: 180px;
+	position: fixed; /* 글 스크롤시 따라다니게 하기 */
+	left: 90px; /* 사이드바 지역태그 부분이랑 사이간격 띄우기 */
+	width: 160px; /* 사이드바 간격 조절 */
+	top: 180px; /* 사이드바 지역태그랑 나란히 */
 	font-family: 'GangwonEdu_OTFBoldA';
 }
+
 .diary-aside {
 	list-style-type: none;
 	padding: 0px;
@@ -15,7 +16,6 @@ aside {
 	background: #f4f5f7;
 	/* height: 100%; */
 	overflow: auto;
-
 	height: 200px;
 	border-radius: 10px;
 	color: #0a0a0a;
@@ -24,9 +24,13 @@ aside {
 .diary-aside .borad, .myborad, .write {
 	text-decoration: none;
 	padding: 10px;
-	display: block;
 	color: #000;
 	font-weight: bold;
+	/* 사이드바 글씨 정렬 */
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
 
 .diary-aside a:hover {
@@ -35,11 +39,10 @@ aside {
 }
 
 .diary-aside .diary-aside-title span {
-	font-size: larger;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	padding-top: 10px;
+	padding-top: 27px; /* "여행기" 위에 띄우기  */
 	padding-bottom: 10px;
 }
 
@@ -51,4 +54,6 @@ aside {
 	margin-left: 180px; /* 사이드바와의 여백 */
 	padding: 20px;
 } /* 콘텐츠와의 여백 */
-
+.title-text {
+	font-size: var(--font2);
+}
