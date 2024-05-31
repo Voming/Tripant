@@ -5,11 +5,88 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
-        <div class="custom-marker" th:fragment="~{ping_num(i)}">
-            <img src="${imageSrc}" style="width: 34px; height: 39px;">
-            <span style="color : white;" th:text="${i + 1}"> </span>
-        </div>
+	<!-- tourlist -->
+	<div th:fragment="tourlist" class="tourlist">
+		<div>이거 보입니까??</div>
+	</div>
+	
+	<!-- edit trip list -->
+	<div th:fragment="edit-tourlist" class="edit-tourlist" style="display: none;">
+		<div class="column">
+			<div class="sub-title">
+				<div class="nday">1일차</div>
+				<div class="date">2024-06-01(토)</div>
+			</div>
+		 	<div class="container">
+			 	<div class="spot wfull">
+			        <div class="draggable spot-info" draggable="true">
+			            <span class="ico-drag">1번</span>
+			            <div class="el">
+			            	<div class="spot-title">제주국제공항</div>
+			            	<div class="spot-stay-time">10:00-11:00</div>
+			            </div>
+			        </div>
+			    </div>
+			 	<div class="spot wfull">
+			 		<div class="move-time">10분</div>
+			        <div class="draggable spot-info" draggable="true">
+			            <span class="ico-drag">2번</span>
+			            <div class="el">
+			            	<div class="spot-title">금돈가 제주본점</div>
+			            	<div class="spot-stay-time">12:00-13:00</div>
+			            </div>
+			        </div>
+			    </div>
+			 	<div class="spot wfull">
+			 		<div class="move-time">20분</div>
+			        <div class="draggable spot-info" draggable="true">
+			            <span class="ico-drag">3번</span>
+			            <div class="el">
+			            	<div class="spot-title">김희선제주몸국</div>
+			            	<div class="spot-stay-time">14:00-15:00</div>
+			            </div>
+			        </div>
+			    </div>
+		    </div> <!-- container  -->
+		</div>	<!-- column -->
+		
+		<div class="column">
+			<div class="sub-title">
+				<div class="nday">2일차</div>
+				<div class="date">2024-06-01(토)</div>
+			</div>
+		    <div class="container">
+			 	<div class="spot wfull">
+			        <div class="draggable spot-info" draggable="true">
+			            <span class="ico-drag">1번</span>
+			            <div class="el">
+			            	<div class="spot-title">제주국제공항2</div>
+			            	<div class="spot-stay-time">10:00-11:00</div>
+			            </div>
+			        </div>
+			    </div>
+			 	<div class="spot wfull">
+			 		<div class="move-time">10분</div>
+			        <div class="draggable spot-info" draggable="true">
+			            <span class="ico-drag">2번</span>
+			            <div class="el">
+			            	<div class="spot-title">금돈가 제주본점2</div>
+			            	<div class="spot-stay-time">12:00-13:00</div>
+			            </div>
+			        </div>
+			    </div>
+			 	<div class="spot wfull">
+			 		<div class="move-time">20분</div>
+			        <div class="draggable spot-info" draggable="true">
+			            <span class="ico-drag">3번</span>
+			            <div class="el">
+			            	<div class="spot-title">김희선제주몸국2</div>
+			            	<div class="spot-stay-time">14:00-15:00</div>
+			            </div>
+			        </div>
+			    </div>
+		    </div> <!-- container  -->
+		</div>	<!-- column -->
+	</div>
 </body>
 </html>
