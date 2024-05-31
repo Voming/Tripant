@@ -59,27 +59,28 @@
 						<ul class="col list">
 							<li>oyeee</li>
 							<li>tripant@gmail.com</li>
-							<li>2024.05.20</li>
-							<li>2024.05.20</li>
+							<li>2024-05-20</li>
+							<li>2024-05-20</li>
 							<li>관리자</li>
 							<li><button type="button" class="btn">편집</button></li>
 						</ul>
 						
 						<ul class="col list">
-	
-							<li>oyeee</li>
-							<li>tripant@gmail.com</li>
-							<li>2024.05.20</li>
-							<li>2024.05.20</li>
-							<li>관리자</li>
+							<th:block th:each="memList:${memList}">
+							<li th:text="${memList.memNick}"></li>
+							<li th:text="${memList.memEmail}"></li>
+							<li th:text="${memList.memJoinDate}"></li>
+							<li th:text="${memList.memQuitDate}"></li>
+							<li th:text="${memList.memRole}"></li>
 							<li><button type="button" class="btn">편집</button></li>
+							</th:block>
 						</ul>
 						
 						<ul class="col list">
 							<li>oyeee</li>
 							<li>tripant@gmail.com</li>
-							<li>2024.05.20</li>
-							<li>2024.05.20</li>
+							<li>2024-05-20</li>
+							<li>2024-05-20</li>
 							<li>관리자</li>
 							<li><button type="button" class="btn">편집</button></li>
 						</ul>
