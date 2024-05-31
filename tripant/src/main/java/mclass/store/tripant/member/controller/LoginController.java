@@ -50,7 +50,7 @@ public class LoginController {
 		model.addAttribute("robotKey", keysJaewon.getRobotKey());
 		model.addAttribute("error", error);
 		model.addAttribute("exception", msg);
-		return "login/login";
+		return "member/login";
 	}
 	
 	//카카오 로그인
@@ -68,7 +68,7 @@ public class LoginController {
 	//비밀번호 찾기 페이지
 	@GetMapping("/pwd")
 	public String findPwd() {
-		return "/login/pwd";
+		return "/member/pwd";
 	}
 	
 	//비밀번호 재설정

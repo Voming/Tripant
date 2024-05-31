@@ -28,7 +28,7 @@
 	margin: 0 auto;
 	flex-direction: column;
 	row-gap: 20px;
-	padding: 15px;
+	padding: 30px 20px;
 	background-color: #f6f6f6;
 	border-radius: 10px;
 }
@@ -53,6 +53,7 @@
 .wrap-main .flex.join{
 	justify-content: space-around;
 }
+.wrap-main button.btn.login {padding: 5px 0;}
 .wrap-main .flex.snslogin{
 	align-items: center;
 	justify-content: space-around;

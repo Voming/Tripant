@@ -23,7 +23,7 @@ public class JoinController {
 	//회원가입 페이지
 	@GetMapping("/join")
 	public String join() {
-		return "login/join";
+		return "member/join";
 	}
 	
 	// 닉네임 중복 검사
