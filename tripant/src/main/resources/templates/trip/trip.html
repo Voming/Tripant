@@ -20,8 +20,8 @@
 				<button type="button" class="dayn btn">2일차</button>
 			</nav>
 			<div class="plan_update">
-				<button type="button" class="btn">편집</button>
-				<button type="button" class="btn">저장</button>
+				<button type="button" class="edit btn">편집</button>
+				<button type="button" class="save btn">저장</button>
 			</div>
 		</aside>
 		<div class="schedule-wrapper">
@@ -31,51 +31,8 @@
 			</div>
 		<!-- 일자별 일정 리스트 -->
 		<div class="list-box">
-			<div class="tourlist">
-			
-				<div class="column">
-					<div class="sub-title">
-						<div class="nday">1일차</div>
-						<div class="date">2024-06-01(토)</div>
-					</div>
-				 	<div class="container">
-				        <div class="draggable spot" draggable="true">
-				            <span class="ico-drag"></span>
-				            <div class="el">HTML</div>
-				        </div>
-				        <div class="draggable spot" draggable="true">
-				            <span class="ico-drag"></span>    
-				            <div class="el">CSS</div>
-				        </div>
-				        <div class="draggable spot" draggable="true">
-				            <span class="ico-drag"></span>
-				            <div class="el">JavaScript</div>
-				        </div>
-				    </div>
-				</div>	<!-- column -->
-				
-				<div class="column">
-					<div class="sub-title">
-						<div class="nday">1일차</div>
-						<div class="date">2024-06-01(토)</div>
-					</div>
-				    <div class="container">
-				        <div class="draggable spot" draggable="true">
-				            <span class="ico-drag"></span>
-				            <div class="el">React</div>
-				        </div>
-				        <div class="draggable spot" draggable="true">
-				            <span class="ico-drag"></span>
-				            <div class="el">Vue</div>
-				        </div>
-				        <div class="draggable spot" draggable="true">
-				            <span class="ico-drag"></span>
-				            <div class="el">Next JS</div>
-				        </div>
-				    </div>
-				</div>	<!-- column -->
-				
-		 	 </div>	<!-- tourlist -->
+			<div th:replace="~{trip/trip_fragment :: tourlist}"></div><!-- tourlist -->
+			<div th:replace="~{trip/trip_fragment :: edit-tourlist}"> </div>	<!-- edit-tourlist -->
 		  </div>
 		    <!-- 더미 -->
 		</div><!-- schedule-wrapper -->
@@ -282,6 +239,7 @@ function panTo() {
     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
     map.panTo(moveLatLon);       
 }
+function
 </script>
 </body>
 </html>

@@ -10,6 +10,9 @@
 .main-wrapper a{
 	cursor: pointer;
 }
+.main-wrapper .wfull{
+	width:100%;
+}
 /* 버튼 nav */
 .main-wrapper .nav-wrapper{
 	display : flex;
@@ -17,6 +20,8 @@
 	justify-content: space-between; 
 	width: 100px;
 	padding : 15px 5px;
+	 border-right: 1px solid var(--color_light_gray);
+	
 }
 .main-wrapper .logo{
 	margin : 5px 5px 20px 5px;
@@ -55,7 +60,6 @@
 	flex-direction:column;
 	height:100%;
 	width: 30%;
-	background-color: var(--color_day6_yellow); 
 	padding : 30px 30px;
 }
 .main-wrapper .schedule-wrapper .plan-title{
@@ -70,41 +74,46 @@
 	height: 100%;
 	padding:10px;
 }
-.main-wrapper .schedule-wrapper .list-box .tourlist{
+/* common (tourlist,edittourlist)*/
+.main-wrapper .schedule-wrapper .list-box .tourlist,
+.main-wrapper .schedule-wrapper .list-box .edit-tourlist{
 	display: flex;
 	/* height: 100%; */
 }
-.main-wrapper .schedule-wrapper .list-box .tourlist .column{
+
+.main-wrapper .schedule-wrapper .list-box .column{
 	display: flex;
 	flex-direction: column;
 	width: 275px;
 	padding: 0 8px;
 }
-.main-wrapper .tourlist .column .sub-title{
+.main-wrapper .column .sub-title{
 	display: flex;
-	align-content: space-between;
-	margin-bottom:20px;
+	justify-content: space-between;
+	margin:10px 0;
 }
 .main-wrapper .sub-title .nday{
 	font-size: var(--font4);
 }
 .main-wrapper .sub-title .date{
-	font-size: var(--font7);
+	font-size: var(--font6);
 	color: var(--color_gray);
 }
-.main-wrapper .tourlist .column .container{
+/* edit part */
+.main-wrapper .edit-tourlist .column .container{
 	display: flex;
 	flex-direction: column;	
-	background-color: var(--color_gray);
+	background-color: #F7F8F9;
 	border-radius: 8px;
 	padding:0 5px;
 }
-.main-wrapper .tourlist .column .container .spot{
+.main-wrapper .edit-tourlist .column .container .spot-info{
 	background-color: #fff;
 	border-radius: 8px;
-	padding:5px;
+	width:80%;
 	height:50px;
 }
+/* edit part */
 /* 지도 */
 .main-wrapper .map-wrapper{
 	width: 70%;
