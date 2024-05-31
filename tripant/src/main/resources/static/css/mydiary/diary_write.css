@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/* 글작성 가운데 배열 */
+.diary-writes-main {
+	display: flex;
+	justify-content: center;
+}
+/* 옵션 길이 너비  */
+.diary-write-select-plan {
+	width: 960px;
+	height: 35px;
+}

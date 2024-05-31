@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/mydiary/diary_write.css}" rel="stylesheet">
+<head th:replace="~{common/header :: head('diaryboard')}">
+
+</head>
+<body>
+	<header>
+		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	</header>
+	<section class="diary-writes-main">
+			<div class="diary-write-wrap">
+		<form class="frm-diary">
+		
+		<table> 
+		<tr><td><h2>나의 여행일기 남기기</h2></td></tr>
+		<!-- 맨처음 일정 생성 했을때 일정 이름  -->
+		<tr><td>일정</td></tr>
+		<tr><td><select class="diary-writer-select-plan">
+					<option>처음 생성했던 일정 이름을 골라주세요!</option>
+					<option>일정1</option>
+					<option>일정2</option>
+					<option>일정3</option>
+				</select> </td></tr>
+		<!--여행일기 제목  -->
+		<tr><td>제목</td></tr>
+		<tr><td><input type="text" placeholder="제목을 입력하세요" name="title"></td></tr>
+		<!--여행일기 내용!  -->
+		<tr><td>내용</td></tr>
+		<tr><td><textarea placeholder="행복했던 여행을 기록해보세요" name="detail"></textarea> </td></tr>
+		<!--스토어에서 테마 구입시 색깔 적용 고르기  -->
+		<tr><td>테마</td></tr>
+		<tr><td><select>
+				<option>빨강</option>
+				<option>노랑</option>
+				<option>빨강</option>
+				<option>빨강</option>
+				<option>빨강</option>
+				</select></td></tr>
+		<tr><td>비공개</td></tr>
+		<tr><td><input type="radio"></td></tr>
+	
+		<tr><td>공개</td></tr>
+		<tr><td><input type="radio"></td></tr>
+		<tr><td><input type="submit" value="등록" onclick="alert(작성완료)"></td></tr>
+		
+		
+		
+		</table>
+		
+		</form>
+			</div>
+
+	</section>
+
+	<footer>
+		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+	</footer>
+</body>
+</html>
