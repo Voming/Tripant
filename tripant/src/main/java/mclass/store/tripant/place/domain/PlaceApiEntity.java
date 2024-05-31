@@ -1,4 +1,4 @@
-package mclass.store.tripant.schedule.domain;
+package mclass.store.tripant.place.domain;
 
 
 import org.springframework.stereotype.Component;
