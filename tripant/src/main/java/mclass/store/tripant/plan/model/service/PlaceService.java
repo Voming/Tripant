@@ -1,5 +1,6 @@
 package mclass.store.tripant.plan.model.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -14,15 +16,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import mclass.store.tripant.plan.domain.PlaceApiEntity;
-
+import mclass.store.tripant.place.domain.PlaceEntity;
+import mclass.store.tripant.plan.model.repostiory.PlaceRepository;
 
 @Service
 public class PlaceService {
-	// 스케줄쪽에서 해야할 일
-	// 1. API로 place 정보 받아오기
-	// 2.
-	
+	@Autowired
+	private PlaceRepository placeRepository; 
 	
 	public static String getTagValue(String tag, Element eElement) {
 		Node nValue = null;
@@ -44,12 +44,17 @@ public class PlaceService {
 	@Value("${tour.rest.api.servicekey}")
 	private String tourServiceKey;
 
-	// @Scheduled(cron = "*/10 * * * * *")
-	public void getPlace() {
-		System.out.println("####################scheduled############" + new Date());
+	// @Scheduled(cron = "*/20 * * * * *")
+	public int insertPlace() {
+		int result = 0;
 		
-		//관광타입ID(12:관광지, 14:문화시설, 15:축제공연행사, 25:여행코스, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
-		//type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장) 
+		//api 받아온 시간
+		Date date = new Date();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+	    String gettime = format.format(date);
+		System.out.println("####################scheduled############" + gettime);
+		
+		//반복문 돌리기(12:관광지, 14:문화시설, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
 		int contentTypeId = 12;
 
 		String url = String.format("https://apis.data.go.kr/B551011/KorService1/areaBasedList1?"
@@ -78,7 +83,7 @@ public class PlaceService {
 			
 			System.out.println(nList);
 			
-			List<PlaceApiEntity> dtolist = new ArrayList<PlaceApiEntity>();
+			List<PlaceEntity> dtolist = new ArrayList<PlaceEntity>();
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
 				Element eElement = (Element) nNode;
@@ -105,22 +110,47 @@ public class PlaceService {
 				String sigungucode = getTagValue("sigungucode", eElement);  
 				String tel = getTagValue("tel", eElement);          
 				String title = getTagValue("title", eElement);//20
-				String zipcodeS = getTagValue("zipcode", eElement);  //Integer   
+//				String zipcodeS = getTagValue("zipcode", eElement);  //Integer   
 				
 				int areacode = Integer.parseInt(areacodeS);
 				int contentid = Integer.parseInt(contentidS);
-				int zipcode = Integer.parseInt(zipcodeS);
+//				int zipcode = Integer.parseInt(zipcodeS);
+				
+				//관광타입ID(12:관광지, 14:문화시설, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
+				//type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장) 
+				int type = 10;
+				if(contentTypeId == 12) { //관광지 1
+					type = 1;
+				} else if(contentTypeId == 14) { //문화시설 2
+					type = 2;
+				} else if(contentTypeId == 28) { //레포츠 -> 캠핑장 6
+					if(title.contains("캠핑장")) {
+						type = 6;
+					}
+				} else if(contentTypeId == 32) { // 숙박 5
+					type = 5;
+				} else if(contentTypeId == 38) { // 쇼핑 3
+					type = 3;
+				} else if(contentTypeId == 39) { // 음식점 4
+					type = 4;
+				} else {
+					type = 10;
+				}
+				
 
-				PlaceApiEntity dto = new PlaceApiEntity(add1,add2, areacode,booktour,cat1,cat2,cat3,contentid,contenttypeid,createtime,
-						firstimage,firstimage2,cpyrhtDivCd,mapx,mapy,mlevel,modifiedtime,sigungucode,tel,title,zipcode);
+				PlaceEntity dto = new PlaceEntity(type, gettime, contentid, contenttypeid, add1, add2,
+						areacode, booktour, cat1, cat2, cat3, firstimage,
+						firstimage2, cpyrhtDivCd, mapx, mapy, createtime, mlevel,
+						sigungucode, tel, title, modifiedtime);
 				dtolist.add(dto);
 			}
 			
- 		// 장소에 값 넣기 따로 호출
+			result = placeRepository.insertPlace(dtolist);
 			System.out.println(dtolist);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return result;
 	}
 }
