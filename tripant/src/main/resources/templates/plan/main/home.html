@@ -3,12 +3,29 @@
 <link th:href="@{/css/plan/main/home_make.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/plan/main/home_example.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/plan/main/home_search.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/plan/main/home_modal.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('home')}">
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script th:src="@{/js/plan/plan_home.js}" ></script>
+
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	<div class="modal">
+		<div class="modal_popup">
+			<div>
+				<div class="model-left">
+					<h2>지역 이름</h2>
+					<select>
+						<option value="">-- 선택 --</option>
+						<option th:each="area : *{areaNameList}" th:value="${area?.areaName}"
+							th:utext="${area?.areaName}"></option>
+					</select> 
+				</div>
+				<div class="model-right"></div>
+			</div>
+		</div>
+	</div>
 	<div class="wrap-body">
 		<ul class="wrap-make">
 			<li class="make-left">
@@ -20,7 +37,7 @@
 				<ul class="make-plan"
 					style="font-size: var(--font3); font-weight: bolder;">
 					<li><p style="margin: 20px 20px 0 0;">일정을 생성해볼까요?</p></li>
-					<li><button type="button">일정 만들기</button></li>
+					<li><button type="button" class="btn make">일정 만들기</button></li>
 				</ul>
 			</li>
 			<li class="make-img"><img th:src="@{/images/area/SEOUL.jpg}"
