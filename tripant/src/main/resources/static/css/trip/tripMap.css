@@ -8,10 +8,12 @@
 }
 .main-wrapper .flex{display:flex;}
 .main-wrapper .hide{ display: none; }
-
+.main-wrapper .grid{display: grid;}
 .main-wrapper .btn,
 .main-wrapper a{ cursor: pointer; }
 
+
+.main-wrapper .hfull{ height:100%;}
 .main-wrapper .wfull{ width:100%;}
 .main-wrapper .w250{width:250px;}
 .main-wrapper .w220{width:220px;}
@@ -121,7 +123,7 @@
 .main-wrapper .edit-tourlist .column {flex-wrap: nowrap;}
 
 .main-wrapper .tourlist .column.flex > div,
-.main-wrapper .edit-tourlist .column.flex > div {width: 220px;}
+.main-wrapper .edit-tourlist .column.flex > div {width: 250px;}
 /*  */
 
 .main-wrapper  .column .container{	flex-direction: column;	}
@@ -130,13 +132,28 @@
 	border-radius: 8px;
 	padding:0 5px;
 }
+/* edit part */
 .main-wrapper .edit-tourlist .column .container .spot-info{
 	background-color: #fff;
 	border-radius: 8px;
 	width:80%;
 	height:50px;
 }
-/* edit part */
+/* show part - grid */
+.main-wrapper .tourlist .spot{
+	grid-template-columns :25px 150px 75px;
+	grid-template-rows :repeat(6,minmax(21px,auto));  
+	gap:5px;
+	}
+/* grid-items 규격설정 */	
+.main-wrapper .tourlist .spot-number{grid-column:1/2; grid-row: 1 / 2;}
+.main-wrapper .tourlist .spot-staytime{grid-column:2/3; grid-row: 1 / 2;}
+.main-wrapper .tourlist .spot-type{grid-column:2/3; grid-row: 2 / 3;}
+.main-wrapper .tourlist .spot-title{grid-column:2/3; grid-row: 3 / 4;}
+.main-wrapper .tourlist .spot-img{grid-column:3/4; grid-row: 2 / 5; border-radius: 8px;}
+.main-wrapper .tourlist .spot-caricon{grid-column:1/2; grid-row: 5 / 6;}
+.main-wrapper .tourlist .spot-move{grid-column:2/3; grid-row: 5 / 6;}
+
 /* 지도 */
 .main-wrapper .map-wrapper{
 	width: 70%;
