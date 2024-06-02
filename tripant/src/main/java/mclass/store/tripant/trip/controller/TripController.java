@@ -34,10 +34,10 @@ public class TripController {
 	@PostMapping("duration")
 	@ResponseBody //ajax 사용
 	public String getduration(
-			@RequestParam double startLng,
-			@RequestParam double startLat,
-			@RequestParam double endLng,
-			@RequestParam double endLat,
+			@RequestParam double startLng,  //시작 경도
+			@RequestParam double startLat,  //시작 위도
+			@RequestParam double endLng,    //도착 경도
+			@RequestParam double endLat,    //도착 위도
 			Model model) {
 		String aurlStr= String.format("https://apis-navi.kakaomobility.com/v1/directions?origin=%f,%f&destination=%f,%f&priority=TIME", startLng,startLat,endLng,endLat);
 		String duration ="";
