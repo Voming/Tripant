@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript" th:src="@{/js/member/join/email_alert.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/code.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/check.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/agree.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/robot.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/active.js}"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<head th:replace="~{common/header :: head('회원가입')}"></head>
+<style>
+.wrap-main {
+	width: 960px;
+	margin: 120px auto;
+}
+
+.wrap-main * {
+	font-family: 'GangwonEdu_OTFBoldA';
+}
+
+.wrap-main .hide {
+	display: none;
+}
+
+.wrap-main .btn {
+	cursor: pointer;
+	font-size: var(--font5);
+	border-radius: 8px;
+	border: 0;
+	padding: 5px 10px;
+	background-color: lightgrey;
+}
+
+.wrap-main .flex {
+	display: flex;
+}
+
+.wrap-main .flex.center {
+	justify-content: center;
+}
+
+.wrap-main .flex.chNick {
+	width: 340px;
+	margin: 0 auto;
+	flex-direction: column;
+	row-gap: 20px;
+	padding: 30px 20px;
+	background-color: #f6f6f6;
+	border-radius: 10px;
+}
+
+.wrap-main .chNick.title {
+	font-size: var(--font1);
+	margin-bottom: 20px;
+}
+
+.wrap-main .inputlbl input, .wrap-main .inputbtn input, .wrap-main .flex.login button
+	{
+	box-sizing: border-box;
+}
+
+.wrap-main .inputbtn {
+	width: 100%;
+}
+
+.wrap-main .flex.inputbtn {
+	justify-content: space-between;
+}
+
+.wrap-main .inputbtn1, .wrap-main .inputchk1 {
+	width: 70%;
+}
+
+.wrap-main .inputbtn1 input, .wrap-main .inputchk1 input, .wrap-main .btn.join
+	{
+	width: 100%;
+}
+
+.wrap-main .btn.chNick {
+	padding: 5px 0;
+}
+
+.wrap-main .inputbtn2, .wrap-main .inputchk2 {
+	width: 30%;
+	display: flex;
+	justify-content: center;
+}
+
+.wrap-main textarea {
+	resize: none;
+	width: 100%;
+	box-sizing: border-box;
+	overflow: scroll;
+	color: black;
+	background-color: white;
+}
+
+.wrap-main .g-recaptcha {
+	display: flex;
+	justify-content: center;
+}
+
+.wrap-main .save {
+	margin-top: 10px;
+	text-align: center;
+}
+</style>
+<script th:inline="javascript">
+$(loadedHandler);
+function loadedHandler(){
+	//버튼 호버 css
+	$('.btn').hover(function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
+	}, function(){
+		$(this).css('background-color', 'lightgrey');
+		$(this).css('color', 'black');
+	});
+	//인증코드 입력창 숨김
+	$(".inputbtn.check").addClass('hide');
+	//이메일 공란 시 경고 문구
+	$("input#memEmail").on("keyup", writeEmailHandler);
+	//인증코드 발송
+	$(".btn.sendCode").on("click", codeSendHandler);
+	//인증코드 확인
+	$(".btn.checkCode").on("click", codeCheckHandler);
+	//닉네임 검사
+	$("input#memNick").on("keyup", nickCheckHandler);
+	//비밀번호 검사
+	$("input#memPassword").on("keyup", pwdCheckHandler);
+	//비밀번호 보기
+	$("#seePwd").on("click", seePwdHandler);
+	//생년월일 입력 검사
+	$("input#memBirth").on("change", joinActive);
+	//약관 동의 클릭 이벤트
+	$("#agree-all").on("click", agreeAllHandler);
+	$("input[name=agree]").on("click", agreeDivHandler);
+	//구글 리캡차v2
+	$("#frm-join").on("submit", robotHandler);
+}
+</script>
+<body>
+	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	<div class="wrap-main">
+		<form id="frm-chNick" action="/chNick" method="post">
+			<section class="flex chNick">
+				<div class="chNick title">닉네임 변경</div>
+				<div th:replace="~{member/fragment :: inputchk('', 닉네임, memNick, text, '한글 2~8자', 4)}"></div>
+				<div id="exist-nick" class="hide"><p style="color:red;">중복된 닉네임입니다.</p></div>
+				<div class="choose">
+					<button type="button" class="btn back" disabled>돌아가기</button>
+					<button type="button" class="btn save" disabled>저장</button>
+				</div>
+			</section>
+		</form>
+	</div>
+	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+</body>
+</html>

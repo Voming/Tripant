@@ -11,4 +11,23 @@ public class MypageController {
 	public String mypage() {
 		return "mypage/home";
 	}
+	
+	//닉네임 변경 페이지
+	@GetMapping("/my/nick")
+	public String chNick() {
+		return "mypage/chNick";
+	}
+	
+	//비밀번호 변경 페이지
+	@GetMapping("/my/pwd")
+	public String chPwd() {
+		return "mypage/chPwd";
+	}
+	
+	//회원 탈퇴 페이지
+	@GetMapping("/my/quit")
+	public String quit() {
+		return "mypage/quit";
+	}
+	
 }

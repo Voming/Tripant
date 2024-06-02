@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('마이페이지')}"></head>
+<script>
+$(loadedHandler);
+function loadedHandler(){
+	//버튼 호버 css
+	$('.btn').hover(function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
+	}, function(){
+		$(this).css('background-color', 'lightgrey');
+		$(this).css('color', 'black');
+	});
+	//닉네임 변경 페이지로 이동
+	$('.btn.chNick').on('click', function(){
+		location.href = '/my/nick';
+	});
+	//비밀번호 변경 페이지로 이동
+	$('.btn.chPwd').on('click', function(){
+		location.href = '/my/pwd';
+	});
+}
+</script>
+<body>
+	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
+	<div class="wrap-main">
+		<div class="flex mypage">
+			<div class="title">마이페이지</div>
+			<div class="ch Nick"><button type="button" class="btn chNick">닉네임 변경</button></div>
+			<div class="ch Pwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
+			<div class="quit"><a th:href="@{/my/quit}">회원 탈퇴</a></div>
+		</div>
+	</div>
+	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
+</body>
+</html>
