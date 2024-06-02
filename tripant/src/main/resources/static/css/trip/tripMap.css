@@ -8,7 +8,7 @@
 }
 .main-wrapper .flex{display:flex;}
 .main-wrapper .hide{ display: none; }
-.main-wrapper .grid{display: grid;}
+.main-wrapper .grid{display: grid;    align-content: center;}
 .main-wrapper .btn,
 .main-wrapper a{ cursor: pointer; }
 
@@ -17,6 +17,8 @@
 .main-wrapper .wfull{ width:100%;}
 .main-wrapper .w250{width:250px;}
 .main-wrapper .w220{width:220px;}
+/* 모든 이미지에 radius적용 */
+.main-wrapper img{border-radius: 8px;}
 /* scroll
 .scrollbar{
 	overflow-x: overlay; 
@@ -146,7 +148,7 @@
 	gap:5px;
 	}
 /* grid-items 규격설정 */	
-.main-wrapper .tourlist .spot-number{grid-column:1/2; grid-row: 1 / 2;}
+.main-wrapper .tourlist .spot-number{grid-column:1/2; grid-row: 1 / 2; }
 .main-wrapper .tourlist .spot-staytime{grid-column:2/3; grid-row: 1 / 2;}
 .main-wrapper .tourlist .spot-type{grid-column:2/3; grid-row: 2 / 3;}
 .main-wrapper .tourlist .spot-title{grid-column:2/3; grid-row: 3 / 4;}
@@ -154,6 +156,19 @@
 .main-wrapper .tourlist .spot-caricon{grid-column:1/2; grid-row: 5 / 6;}
 .main-wrapper .tourlist .spot-move{grid-column:2/3; grid-row: 5 / 6;}
 
+/* background 이미지 규격 설정 */
+.main-wrapper .tourlist .spot-number.backimg{
+	background-image: url('/images/loacation/circle1_red.png');
+	background-size : contain ;
+	background-repeat : no-repeat;
+	color:white;
+	position: relative;
+	}	
+.main-wrapper .tourlist .spot-number >p{
+	position: absolute;
+	left: 40%;
+	transform:translate(-50%,-60%);
+}	
 /* 지도 */
 .main-wrapper .map-wrapper{
 	width: 70%;
