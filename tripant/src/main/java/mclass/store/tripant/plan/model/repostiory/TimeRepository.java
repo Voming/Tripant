@@ -10,5 +10,6 @@ import mclass.store.tripant.place.domain.PlaceAreaEntity;
 public interface TimeRepository {
 	public int deleteAllPlaceMoveTime();
 	public List<PlaceAreaEntity> selectAreaCodeList(int areacode);
+	public int selectAreaCodeCount(int areacode);
 	
 }

@@ -11,4 +11,8 @@
 		SELECT TYPE, CONTENTID, MAPX, MAPY,AREACODE FROM PLACE WHERE
 		AREACODE=#{AREACODE} ORDER BY CONTENTID
 	</select>
+	
+	<select id="selectAreaCodeCount" parameterType="_int">
+		SELECT COUNT(*) FROM PLACE WHERE AREACODE=#{areacode}
+	</select>
 </mapper>

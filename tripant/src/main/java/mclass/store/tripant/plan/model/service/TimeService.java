@@ -1,9 +1,13 @@
 package mclass.store.tripant.plan.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import mclass.store.tripant.place.domain.PlaceAreaEntity;
 import mclass.store.tripant.plan.model.repostiory.TimeRepository;
@@ -11,30 +15,36 @@ import mclass.store.tripant.plan.model.repostiory.TimeRepository;
 @Service
 public class TimeService {
 	@Autowired
-	private TimeRepository timeRepository; 
-	
-	public int deleteAllPlaceMoveTime(){
+	private static TimeRepository timeRepository;
+
+	public int deleteAllPlaceMoveTime() {
 		return timeRepository.deleteAllPlaceMoveTime();
 	}
-	
-	public List<PlaceAreaEntity> selectAreaCodeList(int areacode){
+
+	public List<PlaceAreaEntity> selectAreaCodeList(int areacode) {
 		return timeRepository.selectAreaCodeList(areacode);
 	}
-	
-//
-//	//sts꺼
+
+	public int selectAreaCodeCount(int areacode) {
+		return timeRepository.selectAreaCodeCount(areacode);
+	}
+
+	// api 보내기 전에 보낼 리스트 만들어두기
+	// 순열(순서있게 배열)
+
+
+	// map Api 다녀와서 시간 계산하기
+	// sts꺼
 //	@Value("${kakao.map.rest.api}")
 //	private String apikey;
 //	
 //	//지점 간 이동시간 구하기 ajax
-//	@PostMapping("duration")
-//	@ResponseBody //ajax 사용
 //	public String getduration(
-//			@RequestParam double startLng,  //시작 경도
-//			@RequestParam double startLat,  //시작 위도
-//			@RequestParam double endLng,    //도착 경도
-//			@RequestParam double endLat,    //도착 위도
-//			Model model) {
+//			 double startLng,  //시작 경도
+//			 double startLat,  //시작 위도
+//			 double endLng,    //도착 경도
+//			 double endLat,    //도착 위도
+//			) {
 //		String aurlStr= String.format("https://apis-navi.kakaomobility.com/v1/directions?origin=%f,%f&destination=%f,%f&priority=TIME", startLng,startLat,endLng,endLat);
 //		String duration ="";
 //		try {

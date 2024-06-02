@@ -45,7 +45,9 @@ public class PlanController {
 		
 		//System.out.println("insertPlace : " + placeService.insertPlace());
 		//System.out.println("timeService : " + timeService.deleteAllPlaceMoveTime());
-		System.out.println("selectAreaCodeList : " + timeService.selectAreaCodeList(1));
+		//System.out.println("selectAreaCodeList : " + timeService.selectAreaCodeList(1));
+		//System.out.println("selectAreaCodeCount : " + timeService.selectAreaCodeCount(1));
+		
 		return "plan/main/home";
 	}
 	
