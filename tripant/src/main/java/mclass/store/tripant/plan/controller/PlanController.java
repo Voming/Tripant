@@ -15,13 +15,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import mclass.store.tripant.plan.domain.AreaNameEntity;
 import mclass.store.tripant.plan.model.service.PlaceService;
 import mclass.store.tripant.plan.model.service.PlanService;
+import mclass.store.tripant.plan.model.service.TimeService;
 
 @Controller
 public class PlanController {
 	@Autowired
 	private PlanService planService;
 	@Autowired
-	private PlaceService placeService ;
+	private PlaceService placeService;
+	@Autowired
+	private TimeService timeService;
 	
 	@GetMapping("/sample")
 	public String sample(Model model) {
@@ -39,7 +42,10 @@ public class PlanController {
 		model.addAttribute("memCount", planService.selectMemCount());
 		
 		model.addAttribute("areaNameList", planService.selectAreaNameList());
-//		System.out.println("insertPlace : " + placeService.insertPlace());
+		
+		//System.out.println("insertPlace : " + placeService.insertPlace());
+		//System.out.println("timeService : " + timeService.deleteAllPlaceMoveTime());
+		System.out.println("selectAreaCodeList : " + timeService.selectAreaCodeList(1));
 		return "plan/main/home";
 	}
 	
