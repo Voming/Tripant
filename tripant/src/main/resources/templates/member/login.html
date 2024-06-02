@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/member/login.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('로그인')}"></head>
-<script type="text/javascript" th:src="@{/js/member/login/button_hover.js}"></script>
+<!-- 
 <style>
-/* body { 
+body { 
   width: 250px;
   height: 250px;
   overflow-y: scroll;
-} */
+}
 
-/* 스크롤바의 폭 너비 */
+/*스크롤바의 폭 너비*/
 body::-webkit-scrollbar {
     width: 10px;  
 }
@@ -24,6 +24,20 @@ body::-webkit-scrollbar-track {
     background: transparent;  /*스크롤바 뒷 배경 색상*/
 }
 </style>
+ -->
+<script>
+$(loadedHandler);
+function loadedHandler(){
+	//버튼 호버 css
+	$('.btn').hover(function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
+	}, function(){
+		$(this).css('background-color', 'lightgrey');
+		$(this).css('color', 'black');
+	});
+}
+</script>
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">

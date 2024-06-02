@@ -12,39 +12,59 @@
 .wrap-main a{
 	padding-top: 5px;
 }
+.wrap-main .ch{
+	width: 100%;
+	margin-bottom: 35px;
+}
 .wrap-main .btn{
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0;
+	width: 100%;
+	padding: 5px 10px;
+	background-color: lightgrey;
+	font-size: var(--font4);
 }
 .wrap-main .flex{
 	display: flex;
 }
 .wrap-main .flex.mypage{
-	width: 340px;
+	width: 150px;
 	margin: 0 auto;
 	flex-direction: column;
 	align-items: center;
-	row-gap: 20px;
 	padding: 30px 20px;
-	background-color: #f6f6f6;
 	border-radius: 10px;
 }
-.wrap-main .btn {
-	padding: 5px 10px;
+.wrap-main .title{
+	font-size: var(--font1);
+	margin-bottom: 70px;
 }
 .wrap-main .quit > a{
-	color: rgb(255, 255, 255);
+	color: #7e7e7e;
 	font-size: var(--font6);
 }
 </style>
+<script>
+$(loadedHandler);
+function loadedHandler(){
+	//버튼 호버 css
+	$('.btn').hover(function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
+	}, function(){
+		$(this).css('background-color', 'lightgrey');
+		$(this).css('color', 'black');
+	});
+}
+</script>
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
 		<div class="flex mypage">
 			<div class="title">마이페이지</div>
-			<div class="chNick"><button type="button" class="btn chNick">닉네임 변경</button></div>
-			<div class="chPwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
+			<div class="ch Nick"><button type="button" class="btn chNick">닉네임 변경</button></div>
+			<div class="ch Pwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
 			<div class="quit"><a th:href="@{/my/quit}">회원 탈퇴</a></div>
 		</div>
 	</div>
