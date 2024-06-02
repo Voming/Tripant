@@ -51,6 +51,7 @@ public class RecaptchaConfig {
             wr.close();
 
             int responseCode = con.getResponseCode();
+            System.out.println("[RecaptchaConfig responseCode] = "+responseCode);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));

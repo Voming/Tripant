@@ -9,13 +9,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.apikeys.KeysJaewon;
 
@@ -28,7 +25,7 @@ public class KakaoApi {
 	//토큰 받기
 	public String getAccessToken(String code) {
 		String accessToken = "";
-		String refreshToken = "";
+//		String refreshToken = "";
 		String reqUrl = "https://kauth.kakao.com/oauth/token";
 		
 		try {
@@ -69,9 +66,9 @@ public class KakaoApi {
 			String result = responseSb.toString();
 			System.out.println("responseBody = "+result);
 			
-			Map<String, String> resultMap = new Gson().fromJson(result, Map.class);
-			accessToken = resultMap.get("access_token");
-			refreshToken = resultMap.get("refresh_token");
+			Map<?, ?> resultMap = new Gson().fromJson(result, Map.class);
+			accessToken = (String) resultMap.get("access_token");
+//			refreshToken = resultMap.get("refresh_token");
 			
 			br.close();
 			bw.close();
@@ -114,15 +111,15 @@ public class KakaoApi {
 			
 			Gson gson = new Gson();
 			
-			HashMap<String, Object> resultMap = gson.fromJson(result, HashMap.class);
+			HashMap<?, ?> resultMap = gson.fromJson(result, HashMap.class);
 			
 			Object userId = resultMap.get("id");
 			String propertiesStr = gson.toJson(resultMap.get("properties"));
 			System.out.println(propertiesStr);
 			String kakaoAccountStr = gson.toJson(resultMap.get("kakao_account"));
 			
-			HashMap<String, Object> properties = gson.fromJson(propertiesStr, HashMap.class);
-			HashMap<String, Object> kakaoAccount = gson.fromJson(kakaoAccountStr, HashMap.class);
+			HashMap<?, ?> properties = gson.fromJson(propertiesStr, HashMap.class);
+			HashMap<?, ?> kakaoAccount = gson.fromJson(kakaoAccountStr, HashMap.class);
 			
 			String nickname = (String)properties.get("nickname");
 			String email = (String)kakaoAccount.get("email");

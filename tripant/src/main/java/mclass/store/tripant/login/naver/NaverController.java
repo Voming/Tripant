@@ -5,9 +5,6 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.apikeys.KeysJaewon;
-
-import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -16,8 +13,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class NaverController {
 
-	private final KeysJaewon keysJaewon;
-	
 	private final NaverApi naverApi;
 	
 	//네이버 로그인

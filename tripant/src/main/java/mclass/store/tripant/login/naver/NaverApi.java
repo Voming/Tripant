@@ -25,7 +25,7 @@ public class NaverApi {
 	//토큰 받기
 	public String getAccessToken(String code) {
 		String accessToken = "";
-		String refreshToken = "";
+//		String refreshToken = "";
 		String reqUrl = "https://nid.naver.com/oauth2.0/token";
 		
 		try {
@@ -48,13 +48,6 @@ public class NaverApi {
 			bw.write(sb.toString());
 			bw.flush();
 			
-//			conn.setRequestMethod("POST");
-//			conn.setRequestProperty("client_id", keysJaewon.getNaverLoginClientId());
-//			conn.setRequestProperty("client_secret", keysJaewon.getNaverLoginClientSecret());
-//			conn.setRequestProperty("code", code);
-//			conn.setRequestProperty("grant_type", "authorization_code");
-//			conn.setRequestProperty("state", state);
-			
 			int responseCode = conn.getResponseCode();
 			System.out.println("[NaverApi.getAccessToken] responseCode = "+responseCode);
 			
@@ -73,9 +66,9 @@ public class NaverApi {
 			String result = responseSb.toString();
 			System.out.println("responseBody = "+result);
 			
-			Map<String, String> resultMap = new Gson().fromJson(result, Map.class);
-			accessToken = resultMap.get("access_token");
-			refreshToken = resultMap.get("refresh_token");
+			Map<?, ?> resultMap = new Gson().fromJson(result, Map.class);
+			accessToken = (String) resultMap.get("access_token");
+//			refreshToken = resultMap.get("refresh_token");
 			
 			br.close();
 			bw.close();
@@ -118,13 +111,13 @@ public class NaverApi {
 			
 			Gson gson = new Gson();
 			
-			HashMap<String, Object> resultMap = gson.fromJson(result, HashMap.class);
+			HashMap<?, ?> resultMap = gson.fromJson(result, HashMap.class);
 			
 			
 			String responseStr = gson.toJson(resultMap.get("response"));
 			System.out.println(responseStr);
 			
-			HashMap<String, Object> response = gson.fromJson(responseStr, HashMap.class);
+			HashMap<?, ?> response = gson.fromJson(responseStr, HashMap.class);
 			
 			String email = (String)response.get("email");
 			String nickname = (String)response.get("nickname");
@@ -146,7 +139,7 @@ public class NaverApi {
 	
 	//로그아웃 처리
 	public void logout(String accessToken) {
-		String reqUrl = "";
+//		String reqUrl = "";
 	}
 	
 	//네이버 연동 해제

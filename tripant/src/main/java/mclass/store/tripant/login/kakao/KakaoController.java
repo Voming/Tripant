@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.apikeys.KeysJaewon;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @RequiredArgsConstructor
 @Controller
 public class KakaoController {
-	
-	private final KeysJaewon keysJaewon;
 	
 	private final KakaoApi kakaoApi;
 
