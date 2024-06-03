@@ -24,17 +24,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import mclass.store.tripant.apikeys.KeysJaewon;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @Controller
 @RequestMapping("/code")
-@PropertySource("classpath:/keyproperties/apikeys.properties")
 public class CodeController {
 	
-	@Value("${email.username}")
-	private String email;
-	@Value("${email.password}")
-	private String password;
+	@Autowired
+	private KeysJaewon keysJaewon;
 	
 	@Autowired
 	private Gmail gmail;
@@ -63,7 +61,7 @@ public class CodeController {
 		String code = sb.toString();
 		
 		// 사용자 인증 이메일 발송 내용
-		String from = email;
+		String from = keysJaewon.getGmail();
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
 		String content = "인증번호: "+code; 
@@ -135,7 +133,7 @@ public class CodeController {
 		String code = sb.toString();
 		
 		// 사용자 인증 이메일 발송 내용
-		String from = email;
+		String from = keysJaewon.getGmail();
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
 		String content = "인증번호: "+code; 
