@@ -11,18 +11,18 @@ function nickCheckHandler(){
 				if(result == 0){
 					$("#memNick-yes").removeClass('hide');
 					$("#memNick-no").addClass('hide');
-					$("#exist-memNick").addClass('hide');
+					$("#exist-nick").addClass('hide');
 					joinActive();
 				}else{
 					$("#memNick-yes").addClass('hide');
 					$("#memNick-no").removeClass('hide');
-					$("#exist-memNick").removeClass('hide');
+					$("#exist-nick").removeClass('hide');
 					joinActive();
 				}
 			}else{
 				$("#memNick-yes").addClass('hide');
 				$("#memNick-no").removeClass('hide');
-				$("#exist-memNick").addClass('hide');
+				$("#exist-nick").addClass('hide');
 				joinActive();
 			}
 		}, 
