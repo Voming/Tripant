@@ -12,18 +12,18 @@ function nickCheckHandler(){
 					$("#memNick-yes").removeClass('hide');
 					$("#memNick-no").addClass('hide');
 					$("#exist-nick").addClass('hide');
-					joinActive();
+					chNickActive();
 				}else{
 					$("#memNick-yes").addClass('hide');
 					$("#memNick-no").removeClass('hide');
 					$("#exist-nick").removeClass('hide');
-					joinActive();
+					chNickActive();
 				}
 			}else{
 				$("#memNick-yes").addClass('hide');
 				$("#memNick-no").removeClass('hide');
 				$("#exist-nick").addClass('hide');
-				joinActive();
+				chNickActive();
 			}
 		}, 
 		error: function (request, status, error){
@@ -32,32 +32,4 @@ function nickCheckHandler(){
 					+ "error: "+error);
 		}
 	});
-}
-//비밀번호 검사
-function pwdCheckHandler(){
-	const pwdExp1 = /^[0-9A-Za-z]{8,20}$/;
-	const pwdExp2 = /^.*[0-9].*$/;
-	const pwdExp3 = /^.*[A-Z].*$/;
-	const pwdExp4 = /^.*[a-z].*$/;
-	const pwdInput = $("input#memPassword").val();
-	if(pwdExp1.test(pwdInput) == true && 
-	   pwdExp2.test(pwdInput) == true && 
-	   pwdExp3.test(pwdInput) == true && 
-	   pwdExp4.test(pwdInput) == true){
-		$("#memPassword-yes").removeClass('hide');
-		$("#memPassword-no").addClass('hide');
-		joinActive();
-	}else{
-		$("#memPassword-yes").addClass('hide');
-		$("#memPassword-no").removeClass('hide');
-		joinActive();
-	}
-}
-//비밀번호 보기
-function seePwdHandler(){
-	if($(this).is(":checked")){
-		$("#memPassword").prop("type", "text");
-	}else{
-		$("#memPassword").prop("type", "password");
-	}
 }

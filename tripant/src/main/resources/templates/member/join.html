@@ -27,15 +27,15 @@ function loadedHandler(){
 	//인증번호 입력창 숨김
 	$(".inputbtn.check").addClass('hide');
 	//이메일 공란 시 경고 문구
-	$("input#memEmail").on("keyup", writeEmailHandler);
+	$("input#memEmail").on("input", writeEmailHandler);
 	//인증코드 발송
 	$(".btn.sendCode").on("click", codeSendHandler);
 	//인증코드 확인
 	$(".btn.checkCode").on("click", codeCheckHandler);
 	//닉네임 검사
-	$("input#memNick").on("keyup", nickCheckHandler);
+	$("input#memNick").on("input", nickCheckHandler);
 	//비밀번호 검사
-	$("input#memPassword").on("keyup", pwdCheckHandler);
+	$("input#memPassword").on("input", pwdCheckHandler);
 	//비밀번호 보기
 	$("#seePwd").on("click", seePwdHandler);
 	//생년월일 입력 검사

@@ -105,7 +105,7 @@
 .main-wrapper .schedule-wrapper .list-box .column{
 	flex-direction: column;
 	width: 275px;
-	padding: 0 8px;
+	padding-right: 20px;
 }
 .main-wrapper .column .sub-title{
 	justify-content: space-between;
@@ -125,7 +125,7 @@
 .main-wrapper .edit-tourlist .column {flex-wrap: nowrap;}
 
 .main-wrapper .tourlist .column.flex > div,
-.main-wrapper .edit-tourlist .column.flex > div {width: 250px;}
+.main-wrapper .edit-tourlist .column.flex > div {width: 250px; padding-right:10px;}
 /*  */
 
 .main-wrapper  .column .container{	flex-direction: column;	}
@@ -147,6 +147,9 @@
 	grid-template-rows :repeat(6,minmax(21px,auto));  
 	gap:5px;
 	}
+.main-wrapper .tourlist .spot>:not(:first-child){
+	/* align-self: center; */
+}	
 /* grid-items 규격설정 */	
 .main-wrapper .tourlist .spot-number{grid-column:1/2; grid-row: 1 / 2; }
 .main-wrapper .tourlist .spot-staytime{grid-column:2/3; grid-row: 1 / 2;}
@@ -169,6 +172,11 @@
 	left: 40%;
 	transform:translate(-50%,-60%);
 }	
+.main-wrapper .spot-staytime{
+	font-size:var(--font5);
+	color: var(--color_gray);
+}
+
 /* 지도 */
 .main-wrapper .map-wrapper{
 	width: 70%;

@@ -130,7 +130,7 @@ function durationHandler(){
 	
 	$.ajax({
 		type : "post",
-		url : "/plan/edit/duration",
+		url : "/trip/edit/duration",
 		data : {startLat : startLat, startLng : sartLng, endLat : endLat, endLng : endLng },
 		error : function (request, status, error){
 			alert("code: "+request.status + "\n" + "message: " 
