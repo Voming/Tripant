@@ -23,7 +23,7 @@
 	        <AppenderRef ref="ConsoleLog" />
 	        <AppenderRef ref="FileLog" />
 	    </Root>
-	   <Logger name="mclass.store.tripant.member" level="debug">
+	   <Logger name="mclass.store.tripant.member" level="debug" additivity="false">
 	       <AppenderRef ref="ConsoleLog" />
 	   </Logger>
 	</Loggers>
