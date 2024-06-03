@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
     <title>Map Test</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
+       <link rel="stylesheet" th:href="@{/css/common/reset.css}">
     <link rel="stylesheet" th:href="@{/css/common/core.css}">
     <link rel="stylesheet" th:href="@{/css/common/layout.css}">
-    <link rel="stylesheet" th:href="@{/css/trip/tripMap.css}">
-    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script> -->
+    <link rel="stylesheet" th:href="@{/css/plan/make/make_layout.css}">
+     <link rel="stylesheet" th:href="@{/css/plan/make/make_day_modal.css}">
 </head>
 <body>
+	<div class="modal show">
+		<div class="modal_popup">
+			<div>
+				<h2>여행 기간이 어떻게 되시나요?</h2>
+				<h4>여행 일자는 최대 10일 까지 설정 가능합니다</h4>
+				<div class="wrap-calendar">
+					<div class="modal-left"></div>
+
+					<div class="modal-right"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="main-wrapper">
 		<aside class="nav-wrapper flex">
 			<nav class="nav flex">
-				<a th:href="@{/}"><img class="logo" src="/images/tripant_logo_text.png"></a>
-				<button type="button" class="whole-day btn">전체일정</button>
-				<!-- frag for문으로 가져오기 -->
-				<div id="nday">
-					<button type="button" class="dayn btn">1일차</button>
-					<button type="button" class="dayn btn">2일차</button>
-				</div>
+				<a th:href="@{/}"><img class="logo"
+					src="/images/tripant_logo_text.png"></a>
+				<button type="button" class="whole-day btn">step 01<br>날짜확인</button>
+				<button type="button" class="dayn btn">step 02<br>장소선택</button>
+				<button type="button" class="dayn btn">step 03<br>숙소설정</button>
 			</nav>
 			<div class="plan_update flex">
 				<button type="button" class="edit btn">편집</button>
 				<button type="button" class="cancel btn" style="display: none;">취소</button>
-				<button type="button" class="save btn" disabled = 'disabled' >저장</button>
+				<button type="button" class="save btn" disabled='disabled'>저장</button>
 			</div>
 		</aside>
 		<div class="schedule-wrapper flex">
@@ -35,38 +48,54 @@
 			</div>
 			<!-- 일자별 일정 리스트 -->
 			<div class="list-box flex">
-				<div th:replace="~{trip/trip_fragment :: tourlist}"></div><!-- tourlist -->
-				<div th:replace="~{trip/trip_fragment :: edit-tourlist}" > </div>	<!-- edit-tourlist -->
+				<div th:replace="~{trip/trip_fragment :: tourlist}"></div>
+				<!-- tourlist -->
+				<div th:replace="~{trip/trip_fragment :: edit-tourlist}"> </div>	<!-- edit-tourlist -->
 			</div>
 		    <!-- 더미 -->
-		</div><!-- schedule-wrapper -->
+		</div>
+		<!-- schedule-wrapper -->
 		
-		<div class="map-wrapper" >
+		<div class="map-wrapper">
 		    <div id="map"></div>
 		    <!-- 더미값 -->
-		    <p><em>지도를 움직여 주세요!</em></p> 
+		    <p>
+				<em>지도를 움직여 주세요!</em>
+			</p> 
 		    <!-- 중심좌표  -->
 			<p id="result"></p>
-			<p><button onclick="setBounds()">지도 범위 재설정 하기</button></p>
+			<p>
+				<button onclick="setBounds()">지도 범위 재설정 하기</button>
+			</p>
 			<form></form> 
-			<div>x <input type="text" class="mapx"/></div>
-			<div>y <input type="text" class="mapy"/></div>
-			<div><button class="mapbtn">center</button></div>
+			<div>x <input type="text" class="mapx" />
+			</div>
+			<div>y <input type="text" class="mapy" />
+			</div>
+			<div>
+				<button class="mapbtn">center</button>
+			</div>
 			
 			
 		    <h1>카카오모빌리티 길찾기</h1>
-		    <div id="duration" th:text="${duration}"><!-- th:text="${duration}/60" -->소요 시간: </div>
+		    <div id="duration" th:text="${duration}">
+				<!-- th:text="${duration}/60" -->소요 시간: </div>
 		    <form>
-		        <label for="startLat" >출발지 위도:</label>
-		        <input type="text" id="startLat" name="startLat" value="33.4871087881" required>
+		        <label for="startLat">출발지 위도:</label>
+		        <input type="text" id="startLat" name="startLat"
+					value="33.4871087881" required>
 		        <label for="startLng">출발지 경도:</label>
-		        <input type="text" id="startLng" name="startLng" value="126.4770524688" required>
+		        <input type="text" id="startLng" name="startLng"
+					value="126.4770524688" required>
 		        <label for="endLat">도착지 위도:</label>
-		        <input type="text" id="endLat" name="endLat" value="33.5020048041" required>
+		        <input type="text" id="endLat" name="endLat"
+					value="33.5020048041" required>
 		        <label for="endLng">도착지 경도:</label>
-		        <input type="text" id="endLng" name="endLng" value="126.5049024879" required>
+		        <input type="text" id="endLng" name="endLng"
+					value="126.5049024879" required>
 		        <button type="button" class="test-btn">길찾기</button>
-		    </form><!-- 더미값 -->
+		    </form>
+			<!-- 더미값 -->
 		</div>
 	</div>
 <script th:inline="javascript">
