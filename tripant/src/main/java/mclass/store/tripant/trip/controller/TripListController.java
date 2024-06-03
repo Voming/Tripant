@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/trip/list")
+@RequestMapping(value = "/trip")
 public class TripListController {
 	
-	@GetMapping("")
+	@GetMapping("/list")
 	public String mainList(Model model) {
 		
 		return "trip/tripList";
 	}
-	@PostMapping("/delete")//ajax
+	@PostMapping("/list/delete")//ajax
 	@ResponseBody
 	public String planDelete(Model model) {
 		

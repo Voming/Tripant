@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/trip/edit")
+@RequestMapping(value = "/trip")
 public class TripController {
 	
-	@GetMapping("")
+	@GetMapping("/detail")
 	public String mapMain(Model model) {
 		//model.addAttribute();
 		return "trip/trip";
@@ -31,7 +31,7 @@ public class TripController {
 	private String apikey;
 	
 	//지점 간 이동시간 구하기 ajax
-	@PostMapping("duration")
+	@PostMapping("/edit/duration")
 	@ResponseBody //ajax 사용
 	public String getduration(
 			@RequestParam double startLng,  //시작 경도
