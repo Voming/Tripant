@@ -7,7 +7,32 @@ function loadedHandler() {
 	$("#selectbox").on("click", changeSelectAreaHandler);
 }
 
-// 지역 선택시 값 변경
+//모달 열기 ========================
+function btnMakeClickHandler() {
+	$(".modal").addClass("show");
+
+	$(".keep_btn").attr("disabled", true);
+	//일정 계속 만들기 활성화
+	$("#planForm input").on('input', function() {
+		if ($("#planForm input").val() == '' ||  $("#selectbox option:selected").text()=='--일정을 생성할 지역을 선택하세요--')
+			$(".keep_btn").attr("disabled", true);
+		else
+			$(".keep_btn").attr("disabled", false);
+	});
+	//일정 계속 만들기 
+	$(".keep_btn").on("click", btnKeepClickHandler);
+}
+
+
+// 외부영역 클릭 시 모달 닫기
+$(document).mouseup(function(e) {
+	var LayerModal = $(".modal");
+	if (LayerModal.has(e.target).length === 0) {
+		LayerModal.removeClass("show");
+	}
+});
+
+// 지역 선택시 값 변경-------------------------
 function changeSelectAreaHandler() {
 	var area = $("#selectbox option:selected").text();
 	console.log(area);
@@ -21,7 +46,7 @@ function changeSelectAreaHandler() {
 		, dataType: 'json'
 		, success: function(result) {
 			if (result != null) {
-				console.log(result);
+				/*console.log(result);*/
 				displayAreaInfo(result);
 			}
 		}
@@ -41,32 +66,32 @@ function displayAreaInfo(datalist) {
 	}
 }
 
-//모달 열기
-function btnMakeClickHandler() {
-	$(".modal").addClass("show");
-
-	$(".keep_btn").attr("disabled", true);
-	//일정 계속 만들기 활성화
-	$("#planForm input").on('input', function() {
-		if ($("#planForm input").val() == '')
-			$(".keep_btn").attr("disabled", true);
-		else
-			$(".keep_btn").attr("disabled", false);
+//일정 게속 만들기
+function btnKeepClickHandler(){
+	var area = $("#selectbox option:selected").text();
+	console.log(area);
+	var title =  $(this).parent().find("input[name=plane_title]").val();
+	console.log(title);
+	
+	$.ajax({
+		url: "make/keep"
+		, method: "post"
+		, data: {
+			areaName: area,
+			planTitle : title
+		}
+		, success: function(result) {
+			if(result != null){
+				console.log("이동");
+			}
+		}
+		, error: ajaxErrorHandler
 	});
-	//일정 계속 만들기 
-	$(".keep_btn").on("click", btnKeepClickHandler);
 }
 
 
-// 외부영역 클릭 시 모달 닫기
-$(document).mouseup(function(e) {
-	var LayerModal = $(".modal");
-	if (LayerModal.has(e.target).length === 0) {
-		LayerModal.removeClass("show");
-	}
-});
 
-//지역 검색
+//지역 검색 ================================
 function btnFindClickHandler() {
 	var findArea = $("[name=find]").val().trim();
 
@@ -88,6 +113,7 @@ function btnFindClickHandler() {
 	});
 }
 
+//지역 검색 결과 리스트 출력
 function displayFindArea(datalist) {
 	var htmlVal = '';
 	for (var idx in datalist) {
@@ -105,7 +131,7 @@ function displayFindArea(datalist) {
 
 	}
 	$(".area-box").html(htmlVal);
-	
+	//이미지 재배치
 	for (var idx in datalist) {
 		$("#findArea-" + idx)[0].src = "/images/area/" + datalist[idx].areaFileName;
 	}
