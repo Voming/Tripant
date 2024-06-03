@@ -33,7 +33,7 @@
 		<update id="savePwd" parameterType="map">
 			update member set mem_password = #{memPassword} where mem_email = #{memEmail}
 		</update>
-		<!-- 회원 탈퇴 시 현재 비밀번호 확인 -->
+		<!-- 현재 비밀번호 -->
 		<select id="currPwd" parameterType="string" resultType="string">
 			select mem_password from member where mem_email = #{memEmail}
 		</select>

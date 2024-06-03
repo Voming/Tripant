@@ -31,7 +31,7 @@ public interface MemberRepository {
 	// 비밀번호 변경
 	public int savePwd(Map<String, Object> map);
 	
-	// 회원 탈퇴 시 현재 비밀번호 확인
+	// 현재 비밀번호
 	public String currPwd(String memEmail);
 	
 	// 회원 탈퇴

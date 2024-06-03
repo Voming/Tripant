@@ -54,7 +54,7 @@ public class MemberService {
 		return memberRepository.savePwd(map);
 	}
 	
-	// 회원 탈퇴 시 현재 비밀번호 확인
+	// 현재 비밀번호
 	public String currPwd(String memEmail) {
 		return memberRepository.currPwd(memEmail);
 	};

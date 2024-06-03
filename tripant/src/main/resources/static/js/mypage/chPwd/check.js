@@ -5,18 +5,34 @@ function pwdCheckHandler(){
 	const pwdExp3 = /^.*[A-Z].*$/;
 	const pwdExp4 = /^.*[a-z].*$/;
 	const pwdInput = $("input#memPassword").val();
-	if(pwdExp1.test(pwdInput) == true && 
-	   pwdExp2.test(pwdInput) == true && 
-	   pwdExp3.test(pwdInput) == true && 
-	   pwdExp4.test(pwdInput) == true){
-		$("#memPassword-yes").removeClass('hide');
-		$("#memPassword-no").addClass('hide');
-		chPwdActive();
-	}else{
-		$("#memPassword-yes").addClass('hide');
-		$("#memPassword-no").removeClass('hide');
-		chPwdActive();
-	}
+	$.ajax({
+		url: '/pwd/use', 
+		type: 'post', 
+		data: {memPassword: pwdInput}, 
+		success: function(result){
+			if(pwdExp1.test(pwdInput) == true && 
+			   pwdExp2.test(pwdInput) == true && 
+			   pwdExp3.test(pwdInput) == true && 
+			   pwdExp4.test(pwdInput) == true){
+				if(result == 1){
+					$('#currPwd').removeClass('hide');
+					$("#memPassword-yes").addClass('hide');
+					$("#memPassword-no").removeClass('hide');
+					chPwdActive();
+				}else{
+					$('#currPwd').addClass('hide');
+					$("#memPassword-yes").removeClass('hide');
+					$("#memPassword-no").addClass('hide');
+					chPwdActive();
+				}
+			}else{
+				$('#currPwd').addClass('hide');
+				$("#memPassword-yes").addClass('hide');
+				$("#memPassword-no").removeClass('hide');
+				chPwdActive();
+			}
+		}
+	});
 }
 //비밀번호 보기
 function seePwdHandler(){

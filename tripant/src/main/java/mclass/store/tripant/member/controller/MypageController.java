@@ -48,7 +48,7 @@ public class MypageController {
 	public String chPwd() {
 		return "mypage/chPwd";
 	}
-
+	
 	// 비밀번호 변경
 	@PostMapping("/save/pwd")
 	@ResponseBody
@@ -67,10 +67,10 @@ public class MypageController {
 		return "mypage/quit";
 	}
 	
-	// 회원 탈퇴 시 현재 비밀번호 확인
-	@PostMapping("/quit/pwd")
+	// 현재 비밀번호
+	@PostMapping("/pwd/use")
 	@ResponseBody
-	public int quitPwd(String memPassword, Principal principal) {
+	public int currPwd(String memPassword, Principal principal) {
 		String memEmail = principal.getName();
 		String currPwd = memberService.currPwd(memEmail);
 		if(new BCryptPasswordEncoder().matches(memPassword, currPwd)) {
