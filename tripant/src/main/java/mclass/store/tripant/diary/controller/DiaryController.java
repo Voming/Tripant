@@ -21,20 +21,7 @@ public class DiaryController {
 		System.out.println("======dddd" + diaryService.selectDiaryList());
 		return "diary/diary_board";
 	}
-	//나의 글보기
-	@GetMapping("/my/diary")
-	public String mydiary(Model model) {
-		diaryService.selectDiaryList();
-		model.addAttribute("diaries",diaryService.selectDiaryList());
-		return "mydiary/diary_my_board";
-	}
 	
-//	일단 글쓰기 페이지 보이기만 
-//	TODO from으로 db 서버 보내기
-	@GetMapping("/write")
-	public String diarywrite() {
-		return "mydiary/diary_write";
-	}
 	
 	
 	

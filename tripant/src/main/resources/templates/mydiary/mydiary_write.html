@@ -96,12 +96,28 @@
 	</footer>
 	<script type="text/javascript">
 	//ckeditor 적용
-   ClassicEditor
+  ClassicEditor
             .create(document.querySelector('#editor'))
             .catch(error => {
                 console.error(error);
             });
-    
+   /* document.getElementById('diaryForm').addEventListener('submit', function(event) {
+       event.preventDefault(); // 폼 기본 제출 방지
+
+       const formData = new FormData(this);
+
+       fetch('/api/diaries', {
+           method: 'POST',
+           body: formData
+       })
+       .then(response => response.json())
+       .then(data => {
+           alert('작성완료');
+           console.log(data);
+       })
+       .catch(error => {
+           console.error('Error:', error);
+       });  */
 
 	</script>
 </body>
