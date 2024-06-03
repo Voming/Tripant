@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,26 +14,26 @@ import mclass.store.tripant.member.model.service.MemberService;
 
 @Controller
 public class MypageController {
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private Map<String, Object> map;
 
-	//마이페이지
+	// 마이페이지
 	@GetMapping("/my/home")
 	public String mypage() {
 		return "mypage/home";
 	}
-	
-	//닉네임 변경 페이지
+
+	// 닉네임 변경 페이지
 	@GetMapping("/my/nick")
 	public String chNick() {
 		return "mypage/chNick";
 	}
-	
-	//닉네임 변경
+
+	// 닉네임 변경
 	@PostMapping("/save/nick")
 	@ResponseBody
 	public int saveNick(String memNick, Principal principal) {
@@ -42,28 +43,28 @@ public class MypageController {
 		int result = memberService.saveNick(map);
 		return result;
 	}
-	
-	//비밀번호 변경 페이지
+
+	// 비밀번호 변경 페이지
 	@GetMapping("/my/pwd")
 	public String chPwd() {
 		return "mypage/chPwd";
 	}
-	
-	//닉네임 변경
+
+	// 비밀번호 변경
 	@PostMapping("/save/pwd")
 	@ResponseBody
 	public int savePwd(String memPassword, Principal principal) {
 		String memEmail = principal.getName();
-		map.put("memPassword", memPassword);
+		map.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
 		map.put("memEmail", memEmail);
 		int result = memberService.savePwd(map);
 		return result;
 	}
-	
-	//회원 탈퇴 페이지
+
+	// 회원 탈퇴 페이지
 	@GetMapping("/my/quit")
 	public String quit() {
 		return "mypage/quit";
 	}
-	
+
 }

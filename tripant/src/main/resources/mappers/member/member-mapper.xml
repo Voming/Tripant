@@ -12,11 +12,11 @@
 			(#{memEmail}, #{memNick}, #{memPassword}, #{memRole}, #{memEnabled}, #{memType}, default, #{memQuitDate}, #{memBirth})  
 		</insert>
 		<!-- 닉네임 중복 검사 -->
-		<select id="existNick" parameterType="string" resultType="_int">
+		<select id="existNick" parameterType="string" resultType="int">
 			select count(*) from member where mem_nick = #{memNick}
 		</select>
 		<!-- 이메일 가입 여부 -->
-		<select id="existEmail" parameterType="string" resultType="_int">
+		<select id="existEmail" parameterType="string" resultType="int">
 			select count(*) from member where mem_email = #{memEmail}
 		</select>
 		<!-- 비밀번호 재설정 -->
@@ -29,7 +29,7 @@
 		<update id="saveNick" parameterType="map">
 			update member set mem_nick = #{memNick} where mem_email = #{memEmail}
 		</update>
-		<!-- 비밀번호 -->
+		<!-- 비밀번호 변경 -->
 		<update id="savePwd" parameterType="map">
 			update member set mem_password = #{memPassword} where mem_email = #{memEmail}
 		</update>
