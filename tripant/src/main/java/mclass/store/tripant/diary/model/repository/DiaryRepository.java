@@ -9,4 +9,5 @@ import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 @Mapper
 public interface DiaryRepository {
 	public List<DiaryBoardEntity> selectDiaryList();
+	
 }
