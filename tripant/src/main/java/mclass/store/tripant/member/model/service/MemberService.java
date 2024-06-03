@@ -37,8 +37,8 @@ public class MemberService {
 	}
 
 	// 비밀번호 재설정
-	public int setPwd(HashMap<String, Object> hashMap) {
-		return memberRepository.setPwd(hashMap);
+	public int setPwd(Map<String, Object> map) {
+		return memberRepository.setPwd(map);
 	}
 
 // 마이페이지
@@ -51,4 +51,9 @@ public class MemberService {
 	public int savePwd(Map<String, Object> map){
 		return memberRepository.savePwd(map);
 	}
+	
+	// 회원 탈퇴 시 현재 비밀번호 확인
+	public int quitPwd(Map<String, Object> map) {
+		return memberRepository.quitPwd(map);
+	};
 }

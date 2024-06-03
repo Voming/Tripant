@@ -1,6 +1,7 @@
 package mclass.store.tripant.member.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,6 @@ public class MypageController {
 
 	@Autowired
 	private MemberService memberService;
-
-	@Autowired
-	private Map<String, Object> map;
 
 	// 마이페이지
 	@GetMapping("/my/home")
@@ -38,6 +36,7 @@ public class MypageController {
 	@ResponseBody
 	public int saveNick(String memNick, Principal principal) {
 		String memEmail = principal.getName();
+		Map<String, Object> map = new HashMap<>();
 		map.put("memNick", memNick);
 		map.put("memEmail", memEmail);
 		int result = memberService.saveNick(map);
@@ -55,6 +54,7 @@ public class MypageController {
 	@ResponseBody
 	public int savePwd(String memPassword, Principal principal) {
 		String memEmail = principal.getName();
+		Map<String, Object> map = new HashMap<>();
 		map.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
 		map.put("memEmail", memEmail);
 		int result = memberService.savePwd(map);
@@ -65,6 +65,18 @@ public class MypageController {
 	@GetMapping("/my/quit")
 	public String quit() {
 		return "mypage/quit";
+	}
+	
+	// 회원 탈퇴 시 현재 비밀번호 확인
+	@PostMapping("/quit/pwd")
+	@ResponseBody
+	public int quitPwd(String memPassword, Principal principal) {
+		String memEmail = principal.getName();
+		Map<String, Object> map = new HashMap<>();
+		map.put("memEmail", memEmail);
+		map.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
+		int result = memberService.quitPwd(map);
+		return result;
 	}
 
 }

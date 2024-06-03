@@ -25,7 +25,7 @@
 <!-- 입력창+체크 -->
 <div th:class="'inputchk '+${class}" th:fragment="inputchk(class, label, name, type, placeholder, size)">
 	<div><label th:style="'font-size: var(--font'+${size}+')'" th:for="${name}" th:id="${name}+'-lbl'" th:text="${label}"></label></div>
-	<div class="flex inputbtn" style="margin-top: 10px;">
+	<div class="flex inputchk" style="margin-top: 10px;">
 		<div class="inputchk1">
 			<input style="line-height: 1.5em;" th:type="${type}" th:name="${name}" th:id="${name}" th:placeholder="${placeholder}">
 		</div>

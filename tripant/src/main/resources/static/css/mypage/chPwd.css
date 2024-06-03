@@ -46,6 +46,10 @@
 	margin-bottom: 20px;
 }
 
+.wrap-main .inputchk input{
+	box-sizing: border-box;
+}
+
 .wrap-main .inputchk1 {
 	width: 70%;
 }
