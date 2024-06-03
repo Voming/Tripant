@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/mydiary/diary_write.css}" rel="stylesheet">
+<head th:replace="~{common/header :: head('diaryboard')}">
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<style>
+.inline-element, .inline-element2 {
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.inline-wrapper {
+	display: flex;
+	align-items: center;
+}
+</style>
+</head>
+
+<body>
+	<header>
+		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	</header>
+	<section class="diary-writes-main">
+		<div class="diary-write-wrap">
+			<form class="frm-diary">
+
+				<table class="diary-write-table">
+					<tr>
+						<td colspan="2"><h2>나의 여행일기 남기기</h2></td>
+					</tr>
+					<!-- 맨처음 일정 생성 했을때 일정 이름  -->
+					<tr>
+						<td>일정</td>
+					</tr>
+					<tr>
+						<td><select class="diary-writer-select-plan">
+								<option>처음 생성했던 일정 이름을 골라주세요!</option>
+								<option>일정1</option>
+								<option>일정2</option>
+								<option>일정3</option>
+						</select></td>
+					</tr>
+					<!--여행일기 제목  -->
+					<tr>
+						<td>제목</td>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="제목을 입력하세요" name="title"></td>
+					</tr>
+					<!--여행일기 내용!  -->
+					<tr>
+						<td>내용</td>
+					</tr>
+					<tr>
+						<td><textarea placeholder="행복했던 여행을 기록해보세요" name="detail"
+								id="editor"></textarea></td>
+					</tr>
+					<!-- 테마 선택 및 공개 여부 -->
+					<tr>
+						<td>테마 및 공개 여부</td>
+						<td class="inline-wrapper">
+							<div class="inline-element">
+								<select class="diary-writer-select-theme">
+									<option>테마를 적용하고 싶다면?</option>
+									<option>노랑</option>
+									<option>빨강</option>
+									<option>파랑</option>
+									<option>초록</option>
+								</select>
+							</div>
+							<div class="inline-element2">
+								<label><input type="radio" name="visibility"
+									value="private"> 비공개</label> <label><input type="radio"
+									name="visibility" value="public"> 공개</label>
+							</div>
+						</td>
+					</tr>
+
+					<!-- 제출 버튼 -->
+					<tr>
+						<td colspan="2"><input type="submit" value="등록"
+							onclick="alert('작성완료')"></td>
+					</tr>
+
+
+				</table>
+
+			</form>
+		</div>
+
+	</section>
+
+	<footer>
+		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+	</footer>
+	<script type="text/javascript">
+	//ckeditor 적용
+  ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+   /* document.getElementById('diaryForm').addEventListener('submit', function(event) {
+       event.preventDefault(); // 폼 기본 제출 방지
+
+       const formData = new FormData(this);
+
+       fetch('/api/diaries', {
+           method: 'POST',
+           body: formData
+       })
+       .then(response => response.json())
+       .then(data => {
+           alert('작성완료');
+           console.log(data);
+       })
+       .catch(error => {
+           console.error('Error:', error);
+       });  */
+
+	</script>
+</body>
+</html>

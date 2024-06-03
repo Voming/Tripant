@@ -14,26 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DiaryController {
 	@Autowired
 	private DiaryService diaryService;
-	
+	// 전체 글보기
 	@GetMapping("/diary")
 	public String diary(Model model){
 		model.addAttribute("diaries",diaryService.selectDiaryList());
 		System.out.println("======dddd" + diaryService.selectDiaryList());
 		return "diary/diary_board";
 	}
-	@GetMapping("/mydiary")
-	public String mydiary(Model model) {
-		diaryService.selectDiaryList();
-		model.addAttribute("diaries",diaryService.selectDiaryList());
-		return "mydiary/diary_my_board";
-	}
 	
-//	일단 글쓰기 페이지 보이기만 
-//	TODO from으로 db 서버 보내기
-	@GetMapping("/write")
-	public String diarywrite() {
-		return "mydiary/diary_write";
-	}
 	
 	
 	
