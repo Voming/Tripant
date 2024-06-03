@@ -3,6 +3,7 @@
 <link th:href="@{/css/mypage/chNick.css}" rel="stylesheet" type="text/css">
 <script type="text/javascript" th:src="@{/js/mypage/chNick/check.js}"></script>
 <script type="text/javascript" th:src="@{/js/mypage/chNick/active.js}"></script>
+<script type="text/javascript" th:src="@{/js/mypage/chNick/move.js}"></script>
 <head th:replace="~{common/header :: head('닉네임 변경')}"></head>
 <script th:inline="javascript">
 $(loadedHandler);
@@ -20,32 +21,11 @@ function loadedHandler(){
 		}
 	});
 	//닉네임 검사
-	$("input#memNick").on("keyup", nickCheckHandler);
+	$("input#memNick").on("input", nickCheckHandler);
 	//돌아가기 버튼
 	$('.btn.back').on('click', backClickHandler);
 	//저장 버튼
 	$('.btn.save').on('click', saveClickHandler);
-}
-//마이페이지 돌아가기
-function backClickHandler(){
-	location.href = '/my/home';
-}
-//닉네임 저장
-function saveClickHandler(){
-	$.ajax({
-		url: '/save/nick', 
-		type: 'post', 
-		data: $('#memNick'), 
-		success: function(result){
-			if(result == 1){
-				alert('닉네임이 변경되었습니다.');
-				location.href = '/my/home';
-			}else{
-				alert('닉네임 변경 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.');
-			}
-		}, 
-		error: ajaxErrorHandler
-	});
 }
 </script>
 <body>
