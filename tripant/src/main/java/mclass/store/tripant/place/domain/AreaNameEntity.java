@@ -1,4 +1,4 @@
-package mclass.store.tripant.plan.domain;
+package mclass.store.tripant.place.domain;
 
 import org.springframework.stereotype.Component;
 import lombok.Data;

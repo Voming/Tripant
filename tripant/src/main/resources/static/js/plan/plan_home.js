@@ -1,29 +1,69 @@
 $(loadedHandler);
 
 function loadedHandler() {
-	console.log("열림");
 	$(".btn.find").on("click", btnFindClickHandler);
 
 	$(".btn.make").on("click", btnMakeClickHandler);
+	$("#selectbox").on("click", changeSelectAreaHandler);
 }
 
+// 지역 선택시 값 변경
+function changeSelectAreaHandler() {
+	var area = $("#selectbox option:selected").text();
+	console.log(area);
+
+	$.ajax({
+		url: "make/area"
+		, method: "post"
+		, data: {
+			areaName: area
+		}
+		, dataType: 'json'
+		, success: function(result) {
+			if (result != null) {
+				console.log(result);
+				displayAreaInfo(result);
+			}
+		}
+		, error: ajaxErrorHandler
+	});
+}
+
+// 지역 선택시 값 넣기
+function displayAreaInfo(datalist) {
+	if (datalist[0] != null) {
+		var areaDto = datalist[0];
+		var aName = areaDto.areaEngName;
+		$("#planForm h2").text(aName);
+		var aExplain = areaDto.areaExplain;
+		$("#planForm h4").text(aExplain);
+		$("#infoImg")[0].src = "/images/area/" + areaDto.areaFileName;
+	}
+}
+
+//모달 열기
 function btnMakeClickHandler() {
-	$(".modal").show();
+	$(".modal").addClass("show");
+
+	//일정 계속 만들기 활성화
+	$("#planForm input").on('input', function() {
+		if ($("#planForm input").val() == '')
+			$(".keep_btn").attr("disabled", true);
+		else
+			$(".keep_btn").attr("disabled", false);
+	});
+	//일정 계속 만들기 
 	$(".keep_btn").on("click", btnKeepClickHandler);
-	$(".close_btn").on("click", btnCloseClickHandler);
 }
 
-//모달 닫기
-function btnKeepClickHandler() {
-	//값 전달 및 화면이동
-}
 
-//모달 닫기
-function btnCloseClickHandler() {
-	/* console.log('close clicked!'); */
-	$(".modal").none();
-}
-
+// 외부영역 클릭 시 모달 닫기
+$(document).mouseup(function(e) {
+	var LayerModal = $(".modal");
+	if (LayerModal.has(e.target).length === 0) {
+		LayerModal.removeClass("show");
+	}
+});
 
 //지역 검색
 function btnFindClickHandler() {
@@ -35,7 +75,7 @@ function btnFindClickHandler() {
 	}
 
 	$.ajax({
-		url: "find"
+		url: "find/area"
 		, method: "post"
 		, data: { findArea: findArea }
 		, dataType: 'json'

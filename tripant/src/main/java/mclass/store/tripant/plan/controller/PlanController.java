@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import mclass.store.tripant.plan.domain.AreaNameEntity;
+import mclass.store.tripant.place.domain.AreaEntity;
+import mclass.store.tripant.place.domain.AreaNameEntity;
 import mclass.store.tripant.plan.model.service.PlaceService;
 import mclass.store.tripant.plan.model.service.PlanService;
 import mclass.store.tripant.plan.model.service.TimeService;
@@ -51,11 +52,20 @@ public class PlanController {
 		return "plan/main/home";
 	}
 	
-	@PostMapping("/find")
+	@PostMapping("/find/area")
 	@ResponseBody
 	public List<AreaNameEntity> find(@RequestParam("findArea") String findArea) {
 		System.out.println("findArea :" + findArea);
 		List<AreaNameEntity> areaList = planService.selectAreaFindList(findArea);
+		System.out.println(areaList);
+		return areaList;
+	}
+	
+	@PostMapping("/make/area")
+	@ResponseBody
+	public List<AreaEntity> makeAreaInfo(@RequestParam("areaName") String areaName) {
+		System.out.println("areaName :" + areaName);
+		List<AreaEntity> areaList = planService.selectAreaInfoList(areaName);
 		System.out.println(areaList);
 		return areaList;
 	}
