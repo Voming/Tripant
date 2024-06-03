@@ -34,11 +34,11 @@
 			update member set mem_password = #{memPassword} where mem_email = #{memEmail}
 		</update>
 		<!-- 회원 탈퇴 시 현재 비밀번호 확인 -->
-		<select id="quitPwd" parameterType="map" resultType="int">
-			select count(*) from member where mem_email = #{memEmail} and mem_password = #{memPassword}
+		<select id="currPwd" parameterType="string" resultType="string">
+			select mem_password from member where mem_email = #{memEmail}
 		</select>
-		
-		<delete id="delete" parameterType="String">
+		<!-- 회원 탈퇴 -->
+		<delete id="memQuit" parameterType="string">
 			delete from Member where mem_email=#{memEmail}
 		</delete>
 		

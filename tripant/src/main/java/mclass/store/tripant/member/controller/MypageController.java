@@ -72,10 +72,20 @@ public class MypageController {
 	@ResponseBody
 	public int quitPwd(String memPassword, Principal principal) {
 		String memEmail = principal.getName();
-		Map<String, Object> map = new HashMap<>();
-		map.put("memEmail", memEmail);
-		map.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
-		int result = memberService.quitPwd(map);
+		String currPwd = memberService.currPwd(memEmail);
+		if(new BCryptPasswordEncoder().matches(memPassword, currPwd)) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
+	// 회원 탈퇴
+	@PostMapping("/my/quit")
+	@ResponseBody
+	public int memQuit(Principal principal) {
+		String memEmail = principal.getName();
+		int result = memberService.memQuit(memEmail);
 		return result;
 	}
 

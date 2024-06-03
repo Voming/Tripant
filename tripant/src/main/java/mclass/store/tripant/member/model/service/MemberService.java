@@ -1,20 +1,22 @@
 package mclass.store.tripant.member.model.service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.model.repository.MemberRepository;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-
+	
 // 로그인/로그아웃
 	// 로그인
 	public MemberEntity login(String memEmail) {
@@ -53,7 +55,14 @@ public class MemberService {
 	}
 	
 	// 회원 탈퇴 시 현재 비밀번호 확인
-	public int quitPwd(Map<String, Object> map) {
-		return memberRepository.quitPwd(map);
+	public String currPwd(String memEmail) {
+		return memberRepository.currPwd(memEmail);
 	};
+	
+	// 회원 탈퇴
+	@Transactional
+	public int memQuit(String memEmail) {
+		int result = memberRepository.memQuit(memEmail);
+		return result;
+	}
 }

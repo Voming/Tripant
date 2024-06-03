@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{common/header :: head('마이페이지')}"></head>
-<script>
+<script type="text/javascript" th:src="@{/js/mypage/quit/check.js}"></script>
+<script type="text/javascript" th:src="@{/js/mypage/quit/active.js}"></script>
+<script type="text/javascript" th:src="@{/js/mypage/quit/move.js}"></script>
+<head th:replace="~{common/header :: head('회원 탈퇴')}"></head>
+<script th:inline="javascript">
 $(loadedHandler);
 function loadedHandler(){
-	//버튼 호버 css
+	//버튼:hover css
 	$('.btn').hover(function(){
-		$(this).css('background-color', 'black');
-		$(this).css('color', 'white');
+		if(!$(this).prop('disabled')){
+			$(this).css('background-color', 'black');
+			$(this).css('color', 'white');
+		}
 	}, function(){
-		$(this).css('background-color', 'lightgrey');
-		$(this).css('color', 'black');
+		if(!$(this).prop('disabled')){
+			$(this).css('background-color', 'lightgrey');
+			$(this).css('color', 'black');
+		}
 	});
-	//닉네임 변경 페이지로 이동
-	$('.btn.chNick').on('click', function(){
-		location.href = '/my/nick';
-	});
-	//비밀번호 변경 페이지로 이동
-	$('.btn.chPwd').on('click', function(){
-		location.href = '/my/pwd';
-	});
+	//비밀번호 검사
+	$('input#memPassword').on('input', pwdCheckHandler);
+	//비밀번호 보기
+	$('#seePwd').on('click', seePwdHandler);
+	//돌아가기 버튼
+	$('.btn.back').on('click', backClickHandler);
+	//탈퇴하기 버튼
+	$('.btn.quit').on('click', quitClickHandler);
 }
 </script>
 <body>
-	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
+	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
-		<div class="flex mypage">
-			<div class="title">마이페이지</div>
-			<div class="ch Nick"><button type="button" class="btn chNick">닉네임 변경</button></div>
-			<div class="ch Pwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
-			<div class="quit"><a th:href="@{/my/quit}">회원 탈퇴</a></div>
-		</div>
+		<form id="frm-quit">
+			<section class="flex quit">
+				<div class="quit title">회원 탈퇴</div>
+				<div class="quit explain">회원 탈퇴 안내 사항</div>
+				<div><textarea rows="5" disabled="disabled">1. 복구되지 않습니다.</textarea></div>
+				<div th:replace="~{member/fragment :: inputchk('', '현재 비밀번호', memPassword, password, '영문 대문자, 소문자, 숫자 포함 8~20자', 4)}"></div>
+				<div><input type="checkbox" id="seePwd">비밀번호 보기</div>
+				<div class="flex choose">
+					<button type="button" class="btn back">돌아가기</button>
+					<button type="button" class="btn quit" disabled>탈퇴하기</button>
+				</div>
+			</section>
+		</form>
 	</div>
-	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
+	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
 </html>
