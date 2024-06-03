@@ -8,6 +8,7 @@ DROP SEQUENCE "SEQ_PLAN_ID";
 CREATE SEQUENCE "SEQ_PLAN_ID";
 
 
+
 --DROP TABLE "MEMBER" CASCADE CONSTRAINTS;
 --DROP TABLE "ITEM" CASCADE CONSTRAINTS;
 --DROP TABLE "PLACE" CASCADE CONSTRAINTS;
@@ -636,3 +637,23 @@ REFERENCES "MEMBER" (
 	"MEM_EMAIL"
 );
 
+
+-- 회원 탈퇴 시 insert into quit_member-> delete from member
+create or replace NONEDITIONABLE TRIGGER trg_member_quit
+    BEFORE delete ON member
+    REFERENCING OLD AS OLD
+    FOR EACH ROW
+DECLARE
+BEGIN
+   insert into quit_member values (
+   :OLD.MEM_EMAIL, 
+   :OLD.MEM_NICK, 
+   :OLD.MEM_ROLE, 
+   :OLD.MEM_ENABLED, 
+   :OLD.MEM_TYPE, 
+   :OLD.MEM_JOIN_DATE, 
+   default, 
+   :OLD.MEM_BIRTH
+   );
+END;
+/
