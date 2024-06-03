@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/mydiary/diary_my_board.css}" rel="stylesheet">
+<link th:href="@{/css/mydiary/mydiary_board.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}">
 
 </head>
@@ -10,7 +10,7 @@
 	</header>
 	<section>
 		<div class="mydiary-wrap">
-		<aside th:insert="~{common/diary_aside :: wrap-diary-aside}"></aside>
+		<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
 			<div class="board-list">
 				<div class="wrap-diary">
 					<div class="diary-img">

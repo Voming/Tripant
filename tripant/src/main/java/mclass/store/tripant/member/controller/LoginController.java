@@ -1,7 +1,9 @@
 package mclass.store.tripant.member.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,10 +79,10 @@ public class LoginController {
 	public int setPwd(@RequestParam String memEmail, @RequestParam String memPassword) {
 		System.out.println("memEmail = "+memEmail);
 		System.out.println("memPwd = "+memPassword);
-		HashMap<String, Object> hashMap = new HashMap<>();
-		hashMap.put("memEmail", memEmail);
-		hashMap.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
-		int result = memberService.setPwd(hashMap);
+		Map<String , Object> map = new HashMap<>();
+		map.put("memEmail", memEmail);
+		map.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
+		int result = memberService.setPwd(map);
 		return result;
 	}
 }

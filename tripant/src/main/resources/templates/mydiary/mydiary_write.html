@@ -1,20 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/mydiary/diary_write.css}" rel="stylesheet">
+<link th:href="@{/css/mydiary/mydiary_write.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}">
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-<style>
-.inline-element, .inline-element2 {
-	display: inline-block;
-	margin-right: 20px;
-}
+<!-- ckeditors -->
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> -->
+<!--제이쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-.inline-wrapper {
-	display: flex;
-	align-items: center;
-}
-</style>
 </head>
 
 <body>
@@ -82,7 +74,7 @@
 						<td colspan="2"><input type="submit" value="등록"
 							onclick="alert('작성완료')"></td>
 					</tr>
-
+				
 
 				</table>
 
@@ -94,31 +86,29 @@
 	<footer>
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
-	<script type="text/javascript">
-	//ckeditor 적용
-  ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
-   /* document.getElementById('diaryForm').addEventListener('submit', function(event) {
-       event.preventDefault(); // 폼 기본 제출 방지
-
-       const formData = new FormData(this);
-
-       fetch('/api/diaries', {
-           method: 'POST',
-           body: formData
-       })
-       .then(response => response.json())
-       .then(data => {
-           alert('작성완료');
-           console.log(data);
-       })
-       .catch(error => {
-           console.error('Error:', error);
-       });  */
-
+	<script>
+		//form 그냥 전송 방지
+		$(document).ready(function() {
+			$('#diaryForm').on('submit', function(event) {
+				event.preventDefalt(); //폼 기본 제출 방지
+				const formData = new FormData(this);
+				$.ajax({
+					url : '/api/diaries',
+					type : 'post',
+					data : formData,
+					processData : false,
+					contentType : false,
+					success : function(data) {
+						alert('작성완료');
+						console.log(data);
+						window.location.herf = '/my/diary';
+					},
+					error : function(error) {
+						console.error('Error:', error);
+					}
+				});
+			});
+		});
 	</script>
 </body>
 </html>

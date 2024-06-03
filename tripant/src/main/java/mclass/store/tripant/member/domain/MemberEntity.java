@@ -14,6 +14,5 @@ public class MemberEntity {
 	private Integer memEnabled;
 	private String memType;
 	private String memJoinDate;
-	private String memQuitDate;
 	private String memBirth;
 }

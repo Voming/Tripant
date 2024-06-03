@@ -46,8 +46,7 @@
 	margin-bottom: 20px;
 }
 
-.wrap-main .inputlbl input, .wrap-main .inputbtn input, .wrap-main .flex.login button
-	{
+.wrap-main .inputchk input {
 	box-sizing: border-box;
 }
 
