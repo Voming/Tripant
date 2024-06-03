@@ -45,6 +45,7 @@ function displayAreaInfo(datalist) {
 function btnMakeClickHandler() {
 	$(".modal").addClass("show");
 
+	$(".keep_btn").attr("disabled", true);
 	//일정 계속 만들기 활성화
 	$("#planForm input").on('input', function() {
 		if ($("#planForm input").val() == '')
@@ -81,7 +82,31 @@ function btnFindClickHandler() {
 		, dataType: 'json'
 		, success: function(result) {
 			console.log(result);
+			displayFindArea(result)
 		}
 		, error: ajaxErrorHandler
 	});
-} 
+}
+
+function displayFindArea(datalist) {
+	var htmlVal = '';
+	for (var idx in datalist) {
+		var findDto = datalist[idx];
+		htmlVal += `
+				<li>
+					<div class="area_btn">
+						<img id="findArea-${idx}"  alt="지역">
+						<div class="description">
+							<p style="font-size: var(--font3);">${findDto.areaName}</p>
+							<p style="font-size: var(--font5);">${findDto.areaEngName}</p>
+						</div>
+					</div>
+				</li>`;
+
+	}
+	$(".area-box").html(htmlVal);
+	
+	for (var idx in datalist) {
+		$("#findArea-" + idx)[0].src = "/images/area/" + datalist[idx].areaFileName;
+	}
+}

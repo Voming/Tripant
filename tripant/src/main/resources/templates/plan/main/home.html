@@ -26,7 +26,7 @@
 						<h3>개미의 여행에 제목을 넣어주세요</h3>
 						<input type="text" name="plane_title"><br>
 					</form>
-					<button type="submit" form="planForm" disabled="true" class="keep_btn">일정 계속 만들기</button>
+					<button type="submit" form="planForm" disabled class="keep_btn">일정 계속 만들기</button>
 				</div>
 				<div class="modal-right">
 					<img src="/images/area/SEOUL.jpg" alt="서울" id="infoImg">
@@ -92,7 +92,7 @@
 								<div class="area_btn">
 									<img th:src="@{|/images/area/${area.areaFileName}|}"alt="지역">
 									<div class="description">
-										<p style="font-size: var(--font3); " th:text="${area.areaName}"></p>
+										<p style="font-size: var(--font3);" th:text="${area.areaName}"></p>
 										<p style="font-size: var(--font5);" th:text="${area.areaEngName}"></p>
 									</div>
 								</div>
