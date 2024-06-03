@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('스토어')}"></head>
+<script>
+$(loadedHandler);
+function loadedHandler(){
+	//버튼 호버 css
+	$('.btn').hover(function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
+	}, function(){
+		$(this).css('background-color', 'lightgrey');
+		$(this).css('color', 'black');
+	});
+}
+</script>
+<body>
+	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
+	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
+</body>
+</html>
