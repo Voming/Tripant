@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mclass.store.tripant.member.model.repository.MemberRepository">
-	<!-- 로그인 -->
-	<select id="login" parameterType="string" resultType="MemberEntity">
-		select mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_quit_date, mem_birth from member where mem_email = #{memEmail}
-	</select>
-	<!-- 회원가입 -->
-	<insert id="join" parameterType="MemberEntity">
-		insert into member (mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_quit_date, mem_birth) values 
-		(#{memEmail}, #{memNick}, #{memPassword}, #{memRole}, #{memEnabled}, #{memType}, default, #{memQuitDate}, #{memBirth})  
-	</insert>
-	<!-- 닉네임 중복 검사 -->
-	<select id="existNick" parameterType="string" resultType="_int">
-		select count(*) from member where mem_nick = #{memNick}
-	</select>
-	<!-- 이메일 가입 여부 -->
-	<select id="existEmail" parameterType="string" resultType="_int">
-		select count(*) from member where mem_email = #{memEmail}
-	</select>
-	<!-- 비밀번호 재설정 -->
-	<update id="setPwd" parameterType="hashmap">
-		update member set mem_password = #{memPassword} where mem_email = #{memEmail}
-	</update>
+	<!-- 로그인/로그아웃 -->
+		<!-- 로그인 -->
+		<select id="login" parameterType="string" resultType="MemberEntity">
+			select mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_quit_date, mem_birth from member where mem_email = #{memEmail}
+		</select>
+		<!-- 회원가입 -->
+		<insert id="join" parameterType="MemberEntity">
+			insert into member (mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_quit_date, mem_birth) values 
+			(#{memEmail}, #{memNick}, #{memPassword}, #{memRole}, #{memEnabled}, #{memType}, default, #{memQuitDate}, #{memBirth})  
+		</insert>
+		<!-- 닉네임 중복 검사 -->
+		<select id="existNick" parameterType="string" resultType="_int">
+			select count(*) from member where mem_nick = #{memNick}
+		</select>
+		<!-- 이메일 가입 여부 -->
+		<select id="existEmail" parameterType="string" resultType="_int">
+			select count(*) from member where mem_email = #{memEmail}
+		</select>
+		<!-- 비밀번호 재설정 -->
+		<update id="setPwd" parameterType="hashmap">
+			update member set mem_password = #{memPassword} where mem_email = #{memEmail}
+		</update>
+		
+	<!-- 마이페이지 -->
+		<!-- 닉네임 변경 -->
+		<update id="saveNick" parameterType="map">
+			update member set mem_nick = #{memNick} where mem_email = #{memEmail}
+		</update>
+		<!-- 비밀번호 -->
+		<update id="savePwd" parameterType="map">
+			update member set mem_password = #{memPassword} where mem_email = #{memEmail}
+		</update>
 </mapper>
