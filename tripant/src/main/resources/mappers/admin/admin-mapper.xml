@@ -4,4 +4,10 @@
 	<select id="selectMemList" resultType="AdminMemEntity" >
 	select mem_nick,mem_email,mem_join_date,mem_quit_date,mem_role from member
 	</select>
+	<update id="adminMemRole" parameterType="_int">
+	<!-- parametertype string으로-->
+	<!-- update 구문 넣기 -->
+	<!-- update member set mem_role= #{memRole} where=${memEmail} -->
+	update member set mem_role= #{memRole} 
+	</update>
 </mapper>
