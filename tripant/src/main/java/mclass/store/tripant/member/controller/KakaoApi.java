@@ -1,4 +1,4 @@
-package mclass.store.tripant.login.kakao;
+package mclass.store.tripant.member.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

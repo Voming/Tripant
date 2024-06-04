@@ -6,7 +6,6 @@
 <link th:href="@{/css/plan/main/home_modal.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('home')}">
 </head>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script th:src="@{/js/plan/plan_home.js}" ></script>
 
 <body>
@@ -14,15 +13,23 @@
 	<div class="modal">
 		<div class="modal_popup">
 			<div>
-				<div class="model-left">
-					<h2>지역 이름</h2>
-					<select>
-						<option value="">-- 선택 --</option>
-						<option th:each="area : *{areaNameList}" th:value="${area?.areaName}"
-							th:utext="${area?.areaName}"></option>
-					</select> 
+				<div class="modal-left">
+					<form id="planForm">
+						<h2>지역을 선택하세요</h2>
+						<select id="selectbox" form="planForm">
+							<option value="">--일정을 생성할 지역을 선택하세요--</option>
+							<option th:each="area : *{areaNameList}"
+								th:value="${area?.areaName}" th:utext="${area?.areaName}"></option>
+						</select>
+						<h4></h4>
+						<h3>개미의 여행에 제목을 넣어주세요</h3>
+						<input type="text" name="plane_title"><br>
+					</form>
+					<button type="button" form="planForm" disabled class="keep_btn">일정 계속 만들기</button>
 				</div>
-				<div class="model-right"></div>
+				<div class="modal-right">
+					<img src="/images/area/SEOUL.jpg" alt="서울" id="infoImg">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -36,8 +43,9 @@
 				</div>
 				<ul class="make-plan"
 					style="font-size: var(--font3); font-weight: bolder;">
-					<li><p style="margin: 20px 20px 0 0;">일정을 생성해볼까요?</p></li>
-					<li><button type="button" class="btn make">일정 만들기</button></li>
+					<li><p style="margin: 20px 20px 0 0;" sec:authorize="isAnonymous()">일정 생성을 위해 로그인을 해주세요</p></li>
+					<li><p style="margin: 20px 20px 0 0;" sec:authorize="isAuthenticated()">일정을 생성해볼까요?</p></li>
+					<li><button type="button" class="btn make" sec:authorize="isAuthenticated()">일정 만들기</button></li>
 				</ul>
 			</li>
 			<li class="make-img"><img th:src="@{/images/area/SEOUL.jpg}"
@@ -84,7 +92,7 @@
 								<div class="area_btn">
 									<img th:src="@{|/images/area/${area.areaFileName}|}"alt="지역">
 									<div class="description">
-										<p style="font-size: var(--font3); " th:text="${area.areaName}"></p>
+										<p style="font-size: var(--font3);" th:text="${area.areaName}"></p>
 										<p style="font-size: var(--font5);" th:text="${area.areaEngName}"></p>
 									</div>
 								</div>

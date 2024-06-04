@@ -40,11 +40,11 @@
 
 									</li>
 									<li>
-										<a th:href="@{/mydiary}" sec:authorize="isAuthenticated()">나의 여행기</a>
+										<a th:href="@{/my/diary}" sec:authorize="isAuthenticated()">나의 여행기</a>
 										<a th:href="@{/diary}" sec:authorize="isAnonymous()">여행기</a>
 									</li>
 									<li>
-										<a href="#">스토어</a>
+										<a th:href="@{/store}">스토어</a>
 									</li>
 									<li>
 										<a th:href="@{/login}" sec:authorize="isAnonymous()">로그인</a>

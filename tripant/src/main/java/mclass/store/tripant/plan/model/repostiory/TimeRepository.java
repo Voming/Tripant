@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import mclass.store.tripant.place.domain.PlaceAreaEntity;
+import mclass.store.tripant.place.domain.PlaceMapEntity;
+import mclass.store.tripant.place.domain.PlaceMoveTimeEntity;
+
 
 @Mapper
 public interface TimeRepository {
 	public int deleteAllPlaceMoveTime();
-	public List<PlaceAreaEntity> selectAreaCodeList(int areacode);
-	public int selectAreaCodeCount(int areacode);
-	
+	public List<PlaceMapEntity> selectPlaceMapList(int areacode);
+	public int insertPlaceMoveTime(PlaceMoveTimeEntity moveTimeEntity);
 }

@@ -6,27 +6,32 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mclass.store.tripant.plan.domain.AreaNameEntity;
+import mclass.store.tripant.place.domain.AreaEntity;
+import mclass.store.tripant.place.domain.AreaNameEntity;
 import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 
 @Service
 public class PlanService {
 	@Autowired
-	private PlanRepository boardRepository;
+	private PlanRepository planRepository;
 	
 	public int selectPlanCount(){
-		return boardRepository.selectPlanCount();
+		return planRepository.selectPlanCount();
 	}
 	
 	public int selectMemCount(){
-		return boardRepository.selectMemCount();
+		return planRepository.selectMemCount();
 	}
 	
 	public List<AreaNameEntity> selectAreaNameList(){
-		return boardRepository.selectAreaNameList();
+		return planRepository.selectAreaNameList();
 	}
 	
 	public List<AreaNameEntity> selectAreaFindList(String findArea){
-		return boardRepository.selectAreaFindList(findArea);
+		return planRepository.selectAreaFindList(findArea);
+	}
+	
+	public List<AreaEntity> selectAreaInfoList(String areaName){
+		return planRepository.selectAreaInfoList(areaName);
 	}
 }

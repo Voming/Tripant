@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DiaryController {
 	@Autowired
 	private DiaryService diaryService;
-	// 전체 글보기
+	// 전체 글보기(공개 글)
 	@GetMapping("/diary")
 	public String diary(Model model){
 		model.addAttribute("diaries",diaryService.selectDiaryList());

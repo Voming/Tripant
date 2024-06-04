@@ -17,4 +17,11 @@ public class AdminMemSerivce {
 	public List<AdminMemEntity> selectMemList(){
 		return admindao.selectMemList();
 	}
+	
+	public Integer adminMemRole(int memRole) {
+		
+		return admindao.adminMemRole(memRole);
+	}
+	
+	
 }

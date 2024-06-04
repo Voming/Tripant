@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper
-	namespace="mclass.store.tripant.plan.model.repostiory.TimeRepository">
+<mapper namespace="mclass.store.tripant.plan.model.repostiory.TimeRepository">
 	<delete id="deleteAllPlaceMoveTime">
 		TRUNCATE TABLE PLACE_MOVE_TIME
 	</delete>
 
-	<select id="selectAreaCodeList" parameterType="_int"
-		resultType="PlaceAreaEntity">
-		SELECT TYPE, CONTENTID, MAPX, MAPY,AREACODE FROM PLACE WHERE
-		AREACODE=#{AREACODE} ORDER BY CONTENTID
+	<select id="selectPlaceMapList" parameterType="_int" resultType="PlaceMapEntity">
+		SELECT TYPE, CONTENTID, MAPX, MAPY FROM PLACE WHERE AREACODE=#{areacode} AND TYPE != 10 ORDER BY CONTENTID 
 	</select>
 	
-	<select id="selectAreaCodeCount" parameterType="_int">
-		SELECT COUNT(*) FROM PLACE WHERE AREACODE=#{areacode}
-	</select>
+	<insert id="insertPlaceMoveTime" parameterType="PlaceMoveTimeEntity">
+		INSERT INTO PLACE_MOVE_TIME(TYPE_START, CONTENTID_START, TYPE_END, CONTENTID_END, MOVE_TIME) VALUES (#{typeStart}, #{contentidStart}, #{typeEnd}, #{contentidEnd}, #{moveTime})
+	</insert>
+	
 </mapper>

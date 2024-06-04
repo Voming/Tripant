@@ -1,11 +1,13 @@
 package mclass.store.tripant.admin.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import mclass.store.tripant.admin.service.AdminMemSerivce;
 
@@ -20,10 +22,19 @@ public class AdminController {
 	@GetMapping("/member")
 	public String admin(Model model) {
 		
-		
 		model.addAttribute("memList",adminservie.selectMemList());
 		
 		return "admin/admin_member";
+	}
+	
+	@PostMapping("/member/role")
+	@ResponseBody
+	public Integer adminMemRole(@RequestParam int selectRole) {
+		
+	
+		int result=adminservie.adminMemRole(selectRole);
+
+		return result;
 	}
 	
 	@GetMapping("/board")

@@ -7,27 +7,31 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.member.controller.CustomAuthFailureHandler;
+import mclass.store.tripant.member.controller.CustomAuthSuccessHandler;
 
 @RequiredArgsConstructor
-@Configuration
 @EnableWebSecurity /* (debug = true) */
+@Configuration
 public class MySecurityConfig {
 	
 	private final CustomAuthFailureHandler customAuthFailureHandler;
+	private final CustomAuthSuccessHandler customAuthSuccessHandler;
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+					.requestMatchers(new AntPathRequestMatcher("/login")).anonymous()
+					.requestMatchers(new AntPathRequestMatcher("/my/**")).hasAnyAuthority("MEM", "VIP", "ADMIN", "OWNER")
+					.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyAuthority("ADMIN")
+					)
 			.csrf((csrf) -> csrf
 					.disable())
 //					.ignoringRequestMatchers(new AntPathRequestMatcher("/join")))
@@ -37,8 +41,8 @@ public class MySecurityConfig {
 			.formLogin((formLogin) -> formLogin
 					.loginPage("/login")
 					.defaultSuccessUrl("/")
+					.successHandler(customAuthSuccessHandler)
 					.failureHandler(customAuthFailureHandler)
-//					.failureUrl("/login?error=true")
 					.usernameParameter("memEmail")
 					.passwordParameter("memPassword"))
 			.logout((logout) -> logout
@@ -50,12 +54,12 @@ public class MySecurityConfig {
 	}
 	
 	@Bean
-	PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 }

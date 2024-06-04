@@ -1,24 +1,29 @@
 package mclass.store.tripant.member.model.service;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.model.repository.MemberRepository;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 
-	@Autowired
-	private MemberRepository memberRepository;
-
+	private final MemberRepository memberRepository;
+	
 // 로그인/로그아웃
 	// 로그인
 	public MemberEntity login(String memEmail) {
 		return memberRepository.login(memEmail);
+	}
+	
+	// 로그인 기록
+	public int log(Map<String, Object> map) {
+		return memberRepository.log(map);
 	}
 
 	// 회원가입
@@ -37,8 +42,8 @@ public class MemberService {
 	}
 
 	// 비밀번호 재설정
-	public int setPwd(HashMap<String, Object> hashMap) {
-		return memberRepository.setPwd(hashMap);
+	public int setPwd(Map<String, Object> map) {
+		return memberRepository.setPwd(map);
 	}
 
 // 마이페이지
@@ -50,5 +55,17 @@ public class MemberService {
 	// 비밀번호 변경
 	public int savePwd(Map<String, Object> map){
 		return memberRepository.savePwd(map);
+	}
+	
+	// 현재 비밀번호
+	public String currPwd(String memEmail) {
+		return memberRepository.currPwd(memEmail);
+	};
+	
+	// 회원 탈퇴
+	@Transactional
+	public int memQuit(String memEmail) {
+		int result = memberRepository.memQuit(memEmail);
+		return result;
 	}
 }

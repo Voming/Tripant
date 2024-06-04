@@ -1,6 +1,5 @@
 package mclass.store.tripant.member.model.repository;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -12,6 +11,9 @@ public interface MemberRepository {
 // 로그인/로그아웃
 	// 로그인
 	public MemberEntity login(String memEmail);
+	
+	// 로그인 기록
+	public int log(Map<String, Object> map);
 
 	// 회원가입
 	public Integer join(MemberEntity memberEntity);
@@ -23,11 +25,18 @@ public interface MemberRepository {
 	public Integer existEmail(String memEmail);
 
 	// 비밀번호 재설정
-	public int setPwd(HashMap<String, Object> hashMap);
+	public int setPwd(Map<String, Object> map);
 
 // 마이페이지
 	// 닉네임 변경
 	public int saveNick(Map<String, Object> map);
+
 	// 비밀번호 변경
 	public int savePwd(Map<String, Object> map);
+	
+	// 현재 비밀번호
+	public String currPwd(String memEmail);
+	
+	// 회원 탈퇴
+	public int memQuit(String memEmail);
 }

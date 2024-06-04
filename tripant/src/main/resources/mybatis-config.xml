@@ -8,6 +8,7 @@
 	</settings>
 	<typeAliases>
 		<package name="mclass.store.tripant.member.domain"/>
+		<package name="mclass.store.tripant.store.domain"/>
 		<package name="mclass.store.tripant.plan.domain"/>
 		<package name="mclass.store.tripant.trip.domain"/> 
 		<package name="mclass.store.tripant.diary.domain"/>

@@ -2,10 +2,14 @@ package mclass.store.tripant.place.domain;
 
 import org.springframework.stereotype.Component;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Component
+@NoArgsConstructor
+@AllArgsConstructor
 public class PlaceEntity {
 //	TYPE          NOT NULL NUMBER         
 //	CONTENTID     NOT NULL NUMBER         
@@ -55,37 +59,4 @@ public class PlaceEntity {
     private String title; 
     
     private String modifiedtime;
-    
-	public PlaceEntity() {
-		super();
-	} 
-
-	public PlaceEntity(Integer type, String gettime, Integer contentid, Integer contenttypeid, String add1, String add2,
-			Integer areacode, String booktour, String cat1, String cat2, String cat3, String firstimage,
-			String firstimage2, String cpyrhtDivCd, String mapx, String mapy, String createtime, String mlevel,
-			String sigungucode, String tel, String title, String modifiedtime) {
-		super();
-		this.type = type;
-		this.gettime = gettime;
-		this.contentid = contentid;
-		this.contenttypeid = contenttypeid;
-		this.add1 = add1;
-		this.add2 = add2;
-		this.areacode = areacode;
-		this.booktour = booktour;
-		this.cat1 = cat1;
-		this.cat2 = cat2;
-		this.cat3 = cat3;
-		this.firstimage = firstimage;
-		this.firstimage2 = firstimage2;
-		this.cpyrhtDivCd = cpyrhtDivCd;
-		this.mapx = mapx;
-		this.mapy = mapy;
-		this.createtime = createtime;
-		this.mlevel = mlevel;
-		this.sigungucode = sigungucode;
-		this.tel = tel;
-		this.title = title;
-		this.modifiedtime = modifiedtime;
-	}
 }

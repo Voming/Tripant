@@ -35,10 +35,10 @@ public class MemberSecurityService implements UserDetailsService {
 		System.out.println(loginEntity);
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		switch(loginEntity.getMemRole()) {
-			case "owner": authorities.add(new SimpleGrantedAuthority(MemberRole.OWNER.getValue()));
-			case "admin": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
-			case "vip": authorities.add(new SimpleGrantedAuthority(MemberRole.FONTUSER.getValue()));
-			case "mem": authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
+			case "ROLE_OWNER": authorities.add(new SimpleGrantedAuthority(MemberRole.OWNER.getRole()));
+			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole()));
+			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole()));
+			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));
 		}
 		return new User(loginEntity.getMemEmail(), loginEntity.getMemPassword(), authorities);
 	}

@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/mydiary/diary_write.css}" rel="stylesheet">
+<link th:href="@{/css/mydiary/mydiary_write.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}">
+<!-- ckeditors -->
+<!-- ckeditor CDN  -->
 <script
-	src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-<style>
-.inline-element, .inline-element2 {
-	display: inline-block;
-	margin-right: 20px;
-}
-
-.inline-wrapper {
-	display: flex;
-	align-items: center;
-}
-</style>
+	src="https://cdn.ckeditor.com/ckeditor5/41.2.0/super-build/ckeditor.js"></script>
+<!-- ckeditor CKBox  -->
+<script src="https://cdn.ckbox.io/CKBox/2.4.0/ckbox.js"></script>
+<!-- ckeditor jsp 파일 -->
+<script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
+<!--제이쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 
 <body>
@@ -23,11 +20,11 @@
 	</header>
 	<section class="diary-writes-main">
 		<div class="diary-write-wrap">
-			<form class="frm-diary">
+			<form class="frm-diary" id="diaryForm">
 
 				<table class="diary-write-table">
 					<tr>
-						<td colspan="2"><h2>나의 여행일기 남기기</h2></td>
+						<td colspan="2"><h1>나의 여행일기 남기기</h1></td>
 					</tr>
 					<!-- 맨처음 일정 생성 했을때 일정 이름  -->
 					<tr>
@@ -59,6 +56,9 @@
 					<!-- 테마 선택 및 공개 여부 -->
 					<tr>
 						<td>테마 및 공개 여부</td>
+					</tr>
+					<tr>
+
 						<td class="inline-wrapper">
 							<div class="inline-element">
 								<select class="diary-writer-select-theme">
@@ -72,16 +72,18 @@
 							<div class="inline-element2">
 								<label><input type="radio" name="visibility"
 									value="private"> 비공개</label> <label><input type="radio"
-									name="visibility" value="public"> 공개</label>
+									name="visibility" value="public" checked="checked"> 공개</label>
 							</div>
 						</td>
 					</tr>
 
 					<!-- 제출 버튼 -->
-					<tr>
-						<td colspan="2"><input type="submit" value="등록"
-							onclick="alert('작성완료')"></td>
+					<tr class="diary_btn_submit">
+						<td><input type="submit" value="등록" onclick="alert('작성완료')"
+							class="btn_submit"></td>
+						
 					</tr>
+
 
 
 				</table>
@@ -94,31 +96,34 @@
 	<footer>
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
-	<script type="text/javascript">
-	//ckeditor 적용
-  ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
-   /* document.getElementById('diaryForm').addEventListener('submit', function(event) {
-       event.preventDefault(); // 폼 기본 제출 방지
+	<script>
+		$(loadedHandler);
+		function loadedHandler() {
+			$(".btn.submit").on("click", submitInsertHandler);
 
-       const formData = new FormData(this);
-
-       fetch('/api/diaries', {
-           method: 'POST',
-           body: formData
-       })
-       .then(response => response.json())
-       .then(data => {
-           alert('작성완료');
-           console.log(data);
-       })
-       .catch(error => {
-           console.error('Error:', error);
-       });  */
-
+		}
+		//form 그냥 전송 방지
+		$(document).ready(function() {
+			$('#diaryForm').on('submit', function(event) {
+				event.preventDefault(); //폼 기본 제출 방지
+				const formData = new FormData(this);
+				$.ajax({
+					url : '/api/diaries',
+					type : 'post',
+					data : formData,
+					processData : false,
+					contentType : false,
+					success : function(data) {
+						alert('작성완료');
+						console.log(data);
+						window.location.href = '/my/diary';
+					},
+					error : function(error) {
+						console.error('Error:', error);
+					}
+				});
+			});
+		});
 	</script>
 </body>
 </html>

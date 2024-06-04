@@ -69,6 +69,15 @@
 						</th:block>
 						
 						
+						<ul class="col list">
+							<li >ㅇㅇ</li>
+							<li>tripant@gmail.com</li>
+							<li>2024-05-30</li>
+							<li></li>
+							<li></li>
+							<li><button type="button" class="btn">편집</button></li>
+						</ul>
+						
 					</li>
 				</ul>	
 			</div> 
@@ -94,21 +103,40 @@ function ClickHandler() {
          confirmButtonTextFont:"GangwonEdu_OTFBoldA",
          html: `
              <select name="selectRole" id="selectRole" style='font-family:GangwonEdu_OTFBoldA; font-size:13px; height:25px'>
-                 <option value="1">일반회원</option>
-                 <option value="2">관리자</option>
-                 <option value="3">소유자</option>
+                 <option value="1">휴먼회원</option>
+                 <option value="2">일반회원</option>
+                 <option value="3">폰튼적용회원</option>
+                 <option value="4">관리자</option>
+                 <option value="5">소유자</option>
              </select>
          `,
          focusConfirm: false,
          preConfirm: () => {  //확인 버튼 누르면 실행되는 콜백함수
-             const selectedRole = document.getElementById('selectRole').value;
-             return { selectedRole: selectedRole };
-             
-             
+             const selectRole = document.getElementById('selectRole').value;
+             $.ajax({
+            	 url:"/admin/member/role",
+            	 method:"post",
+            	 data: {selectRole:selectRole},
+				 //success: 1이면 업데이트 완료 0이면 실패
+				 success : function(result) {
+							console.log(result);
+							if (result == 1 ) {
+								alert("성공");
+							} else {
+								alert("실패");
+							}
+				 },
+				 error : function(request, status, error) {
+							alert("code: " + request.status + "\n"
+									+ "message: " + request.responseText + "\n"
+									+ "error: " + error);
+						}
+             });
+             return { selectRole: selectRole };
          }
      }).then((result) => {  
          if (result.isConfirmed) { //모달창에서 confirm 버튼을 눌렀다면
-             console.log('Selected Role:', result.value.selectedRole);
+             console.log('Selected Role:', result.value.selectRole);
          }
      });
 	 

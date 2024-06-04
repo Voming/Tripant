@@ -1,9 +1,9 @@
-package mclass.store.tripant.plan.domain;
+package mclass.store.tripant.place.domain;
 
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
-@Data
+@Data //getter,setter기능만 함
 @Component
 public class AreaEntity {
 //	AREA_CODE       NOT NULL NUMBER         

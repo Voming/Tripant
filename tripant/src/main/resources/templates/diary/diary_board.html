@@ -11,7 +11,7 @@
 		<!-- 버튼 클릭 이벤트로 지역 태그 클릭 시 이동 시키기 -->
 		<div class="diary-wrap-main">
 		<!-- 사이드바 연결 -->
-    		<aside th:insert="~{common/diary_aside :: wrap-diary-aside}"></aside>
+    		<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
 			<div class="board-search-inner">
 				<!-- 소개 문구 -->
 				<div class="diary-introduction">
@@ -47,6 +47,7 @@
 					<div id="tab01">
 						<div class="wrap-diary">
 							<div class="wrap-d-content">
+								<!-- 공개글 데이터 가져오기  -->
 								<th:block th:if="${diaries} != null">
 									<th:block th:each="diary :  ${diaries}">
 									<div class="wrap-d-content">
