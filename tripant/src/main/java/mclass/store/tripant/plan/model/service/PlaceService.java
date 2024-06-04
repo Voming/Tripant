@@ -184,7 +184,8 @@ public class PlaceService {
 		return result;
 	}
 
-	// @Scheduled(cron = "*/20 * * * * *")
+	// @Scheduled(cron = "* * 20 * * *") // 매일 20시에 실행
+	// 첫 번째 * 부터 초(0-59) 분(0-59) 시간(0-23) 일(1-31) 월(1-12) 요일(0-6) (0: 일, 1: 월, 2:화, 3:수, 4:목, 5:금, 6:토)
 	public int insertPlace() {
 		// 반복문 돌리기(12:관광지, 14:문화시설, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
 		int result = 0;

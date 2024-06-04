@@ -18,8 +18,9 @@ public class PlaceMoveTimeEntity {
 //	MOVE_TIME       NOT NULL VARCHAR2(50) 
 //	AREACODE        NOT NULL NUMBER 
 	
-	private Integer type;
+	private Integer typeStart;
 	private Integer contentidStart;
+	private Integer typeEnd;
 	private Integer contentidEnd;
 	private String moveTime;
 }

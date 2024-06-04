@@ -28,7 +28,12 @@ public class TimeService {
 	public List<PlaceMapEntity> selectPlaceMapList(int areacode) {
 		return timeRepository.selectPlaceMapList(areacode);
 	}
-
+	
+	public int insertPlaceMoveTime(PlaceMoveTimeEntity moveTimeEntity) {
+		return timeRepository.insertPlaceMoveTime(moveTimeEntity);
+	}
+	
+	// @Scheduled(cron = "* * 6 * * 1") //매주 일요일 6시에 실행
 	public void makeTimeList() {
 		int[] areaCode = { 1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
 
@@ -51,13 +56,16 @@ public class TimeService {
 		 * resultList) { System.out.print("["); System.out.print(i[0].getContentid() +
 		 * " : " +i[1].getContentid()); System.out.println("]"); }
 		 */
-
-//		map에 출발, 도착 보내서 이동시간 받아오기
-		calMoveTime(startendList);
+//		DB에 insert하기 전에 기존내용 지우기
+		timeRepository.deleteAllPlaceMoveTime();
+		
+		List<PlaceMoveTimeEntity> timeResultList = null;
+//		map에 출발, 도착 보내서 이동시간 DB에 넣기
+		timeResultList = calMoveTime(startendList);
 	}
 
-	// =====================================================map에 출발, 도착 보내서 이동시간
-	// 받아오기======================================================================
+	// =====================================================map에 출발, 도착 보내서 이동시간 받아오기======================================================================
+	// @Async
 	private List<PlaceMoveTimeEntity> calMoveTime(List<PlaceMapEntity[]> startendList) {
 		List<PlaceMoveTimeEntity> timeResultList = new ArrayList<>();
 		for (PlaceMapEntity[] i : startendList) {
@@ -68,13 +76,16 @@ public class TimeService {
 
 			String duration = getduration(startLng, startLat, endLng, endLat);
 
-			System.out.println(
-					"startLng : " + startLng + " startLat : " + startLat + " endLng : " + endLng + " endLat : " + endLat);
-			PlaceMoveTimeEntity calTime = new PlaceMoveTimeEntity(i[0].getType(), i[0].getContentid(),
-					i[1].getContentid(), String.valueOf(duration));
+//			System.out.println("startLng : " + startLng + " startLat : " + startLat + " endLng : " + endLng + " endLat : " + endLat);
+			
+			if(duration != null && !duration.equals("")) { //길찾기 결과를 찾을 수 없을때 null이 반환됨
+				PlaceMoveTimeEntity calTime = new PlaceMoveTimeEntity(i[0].getType(), i[0].getContentid(),
+						i[1].getType(), i[1].getContentid(), String.valueOf(duration));
 
-			System.out.println(calTime);
-			timeResultList.add(calTime);
+				System.out.println(calTime); //insert 할 정보
+				timeRepository.insertPlaceMoveTime(calTime);
+				timeResultList.add(calTime);
+			}
 		}
 
 		return timeResultList;
@@ -121,14 +132,15 @@ public class TimeService {
 				return ">>>> 에러났어요 : " + responseCode;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			System.out.println("\n\n >>>>>>>>>>>>>>>>ERROR 확인해주세요<<<<<<<<<<<<<<<<");
+			System.out.println("길찾기 결과를 찾을 수 없음");
 		}
 		return duration;
 	}
 
-	// =====================================================경우의 수 구하기
-	// =====================================================
+	// =====================================================경우의 수 구하기=====================================================
+	// @Async
 	private void perm(List<PlaceMapEntity> placeList, PlaceMapEntity[] output, boolean[] visited, int depth, int n,
 			int r, List<PlaceMapEntity[]> startendList) {
 		// 순서를 지키면서 n 개중에서 r 개를 뽑는 경우

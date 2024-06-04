@@ -50,7 +50,8 @@ public class PlanController {
 		//System.out.println("timeService : " + timeService.deleteAllPlaceMoveTime());
 		//System.out.println("selectPlaceMapList : " + timeService.selectPlaceMapList(1));
 		//timeService.selectPlaceMapList(1);
-		//timeService.makeTimeList(); //TODO
+		timeService.makeTimeList(); //TODO
+		
 		return "plan/main/home";
 	}
 	
