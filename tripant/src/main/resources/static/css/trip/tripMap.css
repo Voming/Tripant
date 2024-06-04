@@ -144,20 +144,21 @@
 /* show part - grid */
 .main-wrapper .tourlist .spot{
 	grid-template-columns :25px 150px 75px;
-	grid-template-rows :repeat(6,minmax(21px,auto));  
+	grid-template-rows :repeat(6,21px);  
 	gap:5px;
 	}
 .main-wrapper .tourlist .spot>:not(:first-child){
-	/* align-self: center; */
+	align-self: center;
 }	
 /* grid-items 규격설정 */	
-.main-wrapper .tourlist .spot-number{grid-column:1/2; grid-row: 1 / 2; }
-.main-wrapper .tourlist .spot-staytime{grid-column:2/3; grid-row: 1 / 2;}
-.main-wrapper .tourlist .spot-type{grid-column:2/3; grid-row: 2 / 3;}
-.main-wrapper .tourlist .spot-title{grid-column:2/3; grid-row: 3 / 4;}
-.main-wrapper .tourlist .spot-img{grid-column:3/4; grid-row: 2 / 5; border-radius: 8px;}
-.main-wrapper .tourlist .spot-caricon{grid-column:1/2; grid-row: 5 / 6;}
-.main-wrapper .tourlist .spot-move{grid-column:2/3; grid-row: 5 / 6;}
+.main-wrapper .tourlist .spot-number{grid-column:1; grid-row: 1 ; }
+.main-wrapper .tourlist .spot-staytime{grid-column:2; grid-row: 1 ;}
+.main-wrapper .tourlist .spot-type{grid-column:2; grid-row: 2 ;}
+.main-wrapper .tourlist .spot-title{grid-column:2; grid-row: 3 ;}
+.main-wrapper .tourlist .spot-memo{grid-column:2; grid-row: 4 ;}
+.main-wrapper .tourlist .spot-img{grid-column:3; grid-row: 2 / 5; border-radius: 8px;}
+.main-wrapper .tourlist .spot-caricon{grid-column:1; grid-row: 5 ;}
+.main-wrapper .tourlist .spot-move{grid-column:2; grid-row: 5 ;}
 
 /* background 이미지 규격 설정 */
 .main-wrapper .tourlist .spot-number.backimg{
@@ -176,6 +177,28 @@
 	font-size:var(--font5);
 	color: var(--color_gray);
 }
+.main-wrapper .spot .spot-memo{
+	line-height:21px;/* 안의 내묭의 높이가 얼마를 차지할 것인가 */
+ 	text-overflow: ellipsis; /* ...표시 */
+ 	word-wrap:break-word;
+	display: -webkit-box;
+	-webkit-line-clamp:1; /* ...을 붙이는 row */
+	-webkit-box-orient:vertical;
+	overflow:hidden;
+}
+.main-wrapper .spot .spot-memo .img-memo+.memo{
+	display: block;
+	position: absolute;
+	opacity:0; /* 불투명도 설정 0 : 투명 */
+ 	transition: all ease 0.5s;
+ 	padding : 10px;
+ 	width: 200px;
+ 	height: auto;
+ 	border-radius: 8px;
+ 	background-color:  #fafafa;
+ 	border:2px solid var(--color_gray);
+}
+
 
 /* 지도 */
 .main-wrapper .map-wrapper{
