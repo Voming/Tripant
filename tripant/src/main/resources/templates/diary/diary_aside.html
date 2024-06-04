@@ -8,9 +8,9 @@
 		<div class="aside-inner">
 			<ul class="diary-aside">
 				<li class="diary-aside-title"><span class="title-text"> 여행기 </span></li>
-				<li class="diary-aside-board"><a th:href="@{/diary}" sec:authorize="isAnonymous()" class="borad">여행기
+				<li class="diary-aside-board"><a th:href="@{/diary}"  class="borad">여행기
 						게시판</a></li>
-				<li class="diary-aside-myboard"><a th:href="@{/my/diary}"  class="myborad">나의
+				<li class="diary-aside-myboard"><a th:href="@{/my/diary}" sec:authorize="isAuthenticated()"  class="myborad">나의
 						여행기</a></li>
 				<li class="diary-aside-write"><a th:href="@{/my/write}" class="write">여행기
 						작성하기</a></li>
