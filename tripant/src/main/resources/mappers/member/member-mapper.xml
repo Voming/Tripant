@@ -6,6 +6,10 @@
 		<select id="login" parameterType="string" resultType="MemberEntity">
 			select mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_birth from member where mem_email = #{memEmail}
 		</select>
+		<!-- 로그인 기록 -->
+		<insert id="log" parameterType="map">
+			insert into log values(default, #{logIp}, #{memEmail}, #{logTf})
+		</insert>
 		<!-- 회원가입 -->
 		<insert id="join" parameterType="MemberEntity">
 			insert into member (mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_birth) values 

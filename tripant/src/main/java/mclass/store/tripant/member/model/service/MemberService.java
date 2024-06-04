@@ -22,6 +22,11 @@ public class MemberService {
 	public MemberEntity login(String memEmail) {
 		return memberRepository.login(memEmail);
 	}
+	
+	// 로그인 기록
+	public int log(Map<String, Object> map) {
+		return memberRepository.log(map);
+	}
 
 	// 회원가입
 	public Integer join(MemberEntity memberEntity) {

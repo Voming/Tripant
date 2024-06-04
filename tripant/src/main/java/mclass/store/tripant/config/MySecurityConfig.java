@@ -15,6 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.member.controller.CustomAuthFailureHandler;
+import mclass.store.tripant.member.controller.CustomAuthSuccessHandler;
 
 @RequiredArgsConstructor
 @Configuration
@@ -22,6 +23,7 @@ import mclass.store.tripant.member.controller.CustomAuthFailureHandler;
 public class MySecurityConfig {
 	
 	private final CustomAuthFailureHandler customAuthFailureHandler;
+	private final CustomAuthSuccessHandler customAuthSuccessHandler;
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -37,8 +39,8 @@ public class MySecurityConfig {
 			.formLogin((formLogin) -> formLogin
 					.loginPage("/login")
 					.defaultSuccessUrl("/")
+					.successHandler(customAuthSuccessHandler)
 					.failureHandler(customAuthFailureHandler)
-//					.failureUrl("/login?error=true")
 					.usernameParameter("memEmail")
 					.passwordParameter("memPassword"))
 			.logout((logout) -> logout
