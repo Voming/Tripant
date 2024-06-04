@@ -1,6 +1,86 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{common/header :: head('스토어')}"></head>
+<style>
+.wrap-main {
+	width: 960px;
+	margin: 100px auto;
+}
+
+.wrap-main * {
+	font-family: 'GangwonEdu_OTFBoldA';
+}
+
+.wrap-main .btn {
+	cursor: pointer;
+	border-radius: 8px;
+	border: 0;
+	background-color: lightgrey;
+	padding: 5px 5px 2px 5px;
+}
+
+.wrap-main .flex {
+	display: flex;
+	row-gap: 10px;
+}
+.wrap-main .flex.store{
+	flex-direction: column;
+	width: 100%;
+}
+.wrap-main .checked{
+	background: lightgrey;
+	font-size: var(--font3);
+	line-height: 2em;
+	padding: 0 10px;
+	border-radius: 10px;
+}
+.wrap-main .title{
+	font-size: var(--font1);
+	margin-top: 15px;
+}
+.wrap-main .explain{
+	font-size: var(--font4);
+}
+.wrap-main .list.flex{
+	flex-direction: row;
+	column-gap: 20px;
+	overflow-x: scroll;
+}
+.wrap-main .item.flex{
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+.wrap-main .item.pre{
+	border-radius: 10px;
+}
+.wrap-main input{
+	margin-bottom: 7px;
+}
+.wrap-main .item.explain.flex{
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.wrap-main .item.price{
+	text-align: right;
+}
+.wrap-main .explain.font.flex{
+	align-items: center;
+	line-height: 2em;
+	column-gap: 10px;
+}
+.wrap-main .btn.font{
+	margin-bottom: 10px;
+}
+.wrap-main .pay{
+	text-align: center;
+	margin: 0 0 10px 0;
+}
+.wrap-main .warn{
+	font-size: var(--font6);
+	color: lightgrey;
+}
+</style>
 <script>
 $(loadedHandler);
 function loadedHandler(){
@@ -16,6 +96,120 @@ function loadedHandler(){
 </script>
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
+	<div class="wrap-main">
+		<div class="flex store">
+			<div class="checked">n개의 상품이 선택되었습니다.</div>
+			<div class="title">테마</div>
+			<div class="explain">공개 여행기를 나만의 색으로 개성을 나타낼 수 있어요!</div>
+			<div class="list flex">
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+			</div>
+			<div class="title">글꼴</div>
+			<div class="explain font flex">
+				<div>글꼴은 총 8개가 제공됩니다.</div>
+				<div><button type="button" class="btn font">미리보기</button></div>
+			</div>
+			<div class="list flex">
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="radio" name="font"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+				<div class="item flex">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div>상품명</div>
+						<div><input type="radio" name="font"></div>
+					</div>
+					<div class="item price">${price}원</div>
+				</div>
+			</div>
+			<div class="pay"><button type="button" class="btn pay">선택한 상품 결제</button></div>
+			<div class="warn">※ 환불/취소는 구매 일자 기준 7일 이내에만 가능합니다.</div>
+		</div>
+	</div>
 	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
 </body>
 </html>

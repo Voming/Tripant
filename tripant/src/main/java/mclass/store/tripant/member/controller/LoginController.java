@@ -3,7 +3,6 @@ package mclass.store.tripant.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +20,8 @@ import mclass.store.tripant.member.model.service.MemberService;
 public class LoginController {
 	
 	private final KeysJaewon keysJaewon;
-	
 	private final MemberService memberService;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	//로그인 페이지
 	@GetMapping("/login")
@@ -81,7 +80,7 @@ public class LoginController {
 		System.out.println("memPwd = "+memPassword);
 		Map<String , Object> map = new HashMap<>();
 		map.put("memEmail", memEmail);
-		map.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
+		map.put("memPassword", bCryptPasswordEncoder.encode(memPassword));
 		int result = memberService.setPwd(map);
 		return result;
 	}
