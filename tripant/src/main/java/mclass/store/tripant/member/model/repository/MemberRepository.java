@@ -11,6 +11,9 @@ public interface MemberRepository {
 // 로그인/로그아웃
 	// 로그인
 	public MemberEntity login(String memEmail);
+	
+	// 로그인 기록
+	public int log(Map<String, Object> map);
 
 	// 회원가입
 	public Integer join(MemberEntity memberEntity);

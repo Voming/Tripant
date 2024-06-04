@@ -12,33 +12,26 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.apikeys.KeysJaewon;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @Controller
 @RequestMapping("/code")
+@RequiredArgsConstructor
 public class CodeController {
 	
-	@Autowired
-	private KeysJaewon keysJaewon;
-	
-	@Autowired
-	private Gmail gmail;
-
-	@Autowired
-	private MemberService memberService;
+	private final KeysJaewon keysJaewon;
+	private final Gmail gmail;
+	private final MemberService memberService;
 	
 	//인증번호 발송
 	@PostMapping("/send")

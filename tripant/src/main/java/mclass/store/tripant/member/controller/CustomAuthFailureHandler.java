@@ -2,6 +2,8 @@ package mclass.store.tripant.member.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -13,10 +15,15 @@ import org.springframework.stereotype.Component;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import mclass.store.tripant.member.model.service.MemberService;
 
 @Component
+@RequiredArgsConstructor
 public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
+	private final MemberService memberService;
+	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
@@ -34,7 +41,19 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 		}
 		error = URLEncoder.encode(error, "UTF-8");
 		setDefaultFailureUrl("/login?error=true&exception="+error);
-	
+		
+		String memEmail = request.getParameter("memEmail");
+		String ipAddr = request.getRemoteAddr();
+		
+		if(memberService.existEmail(memEmail) > 0) {
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("memEmail", memEmail);
+			map.put("logIp", ipAddr);
+			map.put("logTf", "F");
+			
+			memberService.log(map);
+		}
 		super.onAuthenticationFailure(request, response, exception);
 	}
 }
