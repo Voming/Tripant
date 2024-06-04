@@ -12,7 +12,7 @@ import mclass.store.tripant.diary.model.repository.DiaryRepository;
 public class DiaryService {
 	@Autowired
 	private DiaryRepository diaryRepository;
-	
+// 여행기, 나만의 여행기 글 리스트 가져오기	
 	public List<DiaryBoardEntity> selectDiaryList(){
 		return diaryRepository.selectDiaryList();
 	}

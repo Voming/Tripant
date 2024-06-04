@@ -82,6 +82,7 @@ function btnKeepClickHandler(){
 		}
 		, success: function(result) {
 			if(result != null){
+				location.href = result;
 				console.log("이동");
 			}
 		}

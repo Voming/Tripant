@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class PlaceMoveTimeEntity {
 //	TYPE            NOT NULL NUMBER       
 //	CONTENTID_START NOT NULL NUMBER       
@@ -21,5 +22,4 @@ public class PlaceMoveTimeEntity {
 	private Integer contentidStart;
 	private Integer contentidEnd;
 	private String moveTime;
-	private Integer areacode;
 }

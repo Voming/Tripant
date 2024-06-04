@@ -48,9 +48,9 @@ public class PlanController {
 		
 		//System.out.println("insertPlace : " + placeService.insertPlace());
 		//System.out.println("timeService : " + timeService.deleteAllPlaceMoveTime());
-		//System.out.println("selectAreaCodeList : " + timeService.selectAreaCodeList(1));
-		//System.out.println("selectAreaCodeCount : " + timeService.selectAreaCodeCount(1));
-		
+		//System.out.println("selectPlaceMapList : " + timeService.selectPlaceMapList(1));
+		//timeService.selectPlaceMapList(1);
+		//timeService.makeTimeList(); //TODO
 		return "plan/main/home";
 	}
 	
@@ -64,7 +64,7 @@ public class PlanController {
 		return areaList;
 	}
 	
-	//일정 지역 + 제목 설정
+	//지역&제목 모달에서 선택한 지역 정보 가져오기
 	@PostMapping("/make/area")
 	@ResponseBody
 	public List<AreaEntity> makeAreaInfo(@RequestParam("areaName") String areaName) {
@@ -76,18 +76,21 @@ public class PlanController {
 	
 	@PostMapping("/make/keep")
 	@ResponseBody
-	public void makeAreaKeep(HttpServletResponse response, 
+	public String makeAreaKeep(HttpServletResponse response, 
 			@RequestParam("areaName") String areaName, 
-			@RequestParam("planTitle") String planTitle) throws IOException {
-		System.out.println("areaName :" + areaName);
-		System.out.println("planTitle :" + planTitle);
+			@RequestParam("planTitle") String planTitle
+			, Model model) throws IOException {
+//		System.out.println("areaName :" + areaName);
+//		System.out.println("planTitle :" + planTitle);
+		model.addAttribute("areaName", areaName);
+		model.addAttribute("planTitle", planTitle);
 		
-		response.sendRedirect("/make");
+		return "/make";
 	}
 	
 	@GetMapping("/make")
 	public String make(Principal principal, Authentication authentication, Model model) {
-		
+		System.out.println(model.getAttribute("areaName"));
 		
 		return "plan/make/basic";
 	}
