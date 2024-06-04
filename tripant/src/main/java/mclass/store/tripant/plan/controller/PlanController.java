@@ -76,13 +76,13 @@ public class PlanController {
 	
 	@PostMapping("/make/keep")
 	@ResponseBody
-	public void makeAreaKeep(HttpServletResponse response, 
+	public String makeAreaKeep(HttpServletResponse response, 
 			@RequestParam("areaName") String areaName, 
 			@RequestParam("planTitle") String planTitle) throws IOException {
 		System.out.println("areaName :" + areaName);
 		System.out.println("planTitle :" + planTitle);
 		
-		response.sendRedirect("/make");
+		return "/make";
 	}
 	
 	@GetMapping("/make")
