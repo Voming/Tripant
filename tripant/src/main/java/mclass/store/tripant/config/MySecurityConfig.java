@@ -7,9 +7,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -18,8 +16,8 @@ import mclass.store.tripant.member.controller.CustomAuthFailureHandler;
 import mclass.store.tripant.member.controller.CustomAuthSuccessHandler;
 
 @RequiredArgsConstructor
-@Configuration
 @EnableWebSecurity /* (debug = true) */
+@Configuration
 public class MySecurityConfig {
 	
 	private final CustomAuthFailureHandler customAuthFailureHandler;
@@ -52,12 +50,12 @@ public class MySecurityConfig {
 	}
 	
 	@Bean
-	PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 }

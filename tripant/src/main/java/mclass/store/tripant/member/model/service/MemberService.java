@@ -2,7 +2,6 @@ package mclass.store.tripant.member.model.service;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +13,7 @@ import mclass.store.tripant.member.model.repository.MemberRepository;
 @RequiredArgsConstructor
 public class MemberService {
 
-	@Autowired
-	private MemberRepository memberRepository;
+	private final MemberRepository memberRepository;
 	
 // 로그인/로그아웃
 	// 로그인

@@ -17,8 +17,8 @@ import mclass.store.tripant.member.model.service.MemberService;
 public class JoinController {
 	
 	private final KeysJaewon keysJaewon;
-	
 	private final MemberService memberService;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	//회원가입 페이지
 	@GetMapping("/join")
@@ -39,7 +39,7 @@ public class JoinController {
 	@ResponseBody
 	public int joinMember(MemberEntity memberEntity, String recaptcha) {
 		
-		memberEntity.setMemPassword(new BCryptPasswordEncoder().encode(memberEntity.getMemPassword()));
+		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
 		memberEntity.setMemType("T");

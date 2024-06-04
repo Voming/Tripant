@@ -4,20 +4,21 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @Controller
+@RequiredArgsConstructor
 public class MypageController {
 
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	// 마이페이지
 	@GetMapping("/my/home")
@@ -55,7 +56,7 @@ public class MypageController {
 	public int savePwd(String memPassword, Principal principal) {
 		String memEmail = principal.getName();
 		Map<String, Object> map = new HashMap<>();
-		map.put("memPassword", new BCryptPasswordEncoder().encode(memPassword));
+		map.put("memPassword", bCryptPasswordEncoder.encode(memPassword));
 		map.put("memEmail", memEmail);
 		int result = memberService.savePwd(map);
 		return result;
@@ -73,7 +74,7 @@ public class MypageController {
 	public int currPwd(String memPassword, Principal principal) {
 		String memEmail = principal.getName();
 		String currPwd = memberService.currPwd(memEmail);
-		if(new BCryptPasswordEncoder().matches(memPassword, currPwd)) {
+		if(bCryptPasswordEncoder.matches(memPassword, currPwd)) {
 			return 1;
 		}else {
 			return 0;
