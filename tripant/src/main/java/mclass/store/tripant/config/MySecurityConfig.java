@@ -27,7 +27,11 @@ public class MySecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+					.requestMatchers(new AntPathRequestMatcher("/login")).anonymous()
+					.requestMatchers(new AntPathRequestMatcher("/my/**")).hasAnyAuthority("MEM", "VIP", "ADMIN", "OWNER")
+					.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyAuthority("ADMIN")
+					)
 			.csrf((csrf) -> csrf
 					.disable())
 //					.ignoringRequestMatchers(new AntPathRequestMatcher("/join")))
