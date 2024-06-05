@@ -176,7 +176,7 @@ function durationHandler(){
 	
 	$.ajax({
 		type : "post",
-		url : "/trip/edit/duration",
+		url : contextPath+"trip/edit/duration",
 		data : {startLat : startLat, startLng : sartLng, endLat : endLat, endLng : endLng },
 		error : function (request, status, error){
 			alert("code: "+request.status + "\n" + "message: " 
