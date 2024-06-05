@@ -6,7 +6,6 @@
 
 /* 게시글 리스트 */
 
-
 .wrap-body .ad-content{
 	display:flex;
 	width:100%;
@@ -23,12 +22,17 @@
 	width:100%;
 }
 
+ .wrap-body .ad-search .search-option{
+ 	height:30px;
+ 	margin-left:20px;
+ }
+
  .wrap-body .ad-search .search{
-	width:95%;
+	width:90%;
 	border-radius:20px;
 	border: solid black 1px;
 	height:30px;
-	margin:40px 0 20px 30px; 
+	margin:40px 0 20px 20px; 
 } 
 
 .wrap-body .ad-content .boardlist{
@@ -43,7 +47,6 @@
   	border-bottom:1px solid black;
   	align-items:center;
 } 
-
 
 .wrap-body .ad-content .list>li{
 	 margin:15px 0 15px 0; 
@@ -65,10 +68,10 @@
 	 vertical-align:baseline;
 	 text-align: center;
 }
+/* li 크기 지정 */
 .boardlist > li> .col >li:first-child{
 	width:13%;
 }
-
 .boardlist > li> .col >li:first-child+li{
 	width:30%;
 }
@@ -83,4 +86,14 @@
 }
 .boardlist > li> .col >li:first-child+li+li+li+li+li{
 	width:15%;
+}
+
+/* 게시글 목록 번호 붙이기 */
+.boardlist > li> .col.list >li:first-child{
+	counter-reset: number 0;
+}
+
+.boardlist > li> .col.list >li:first-child:before{
+	counter-increment:number 1;
+	content:counter(number)
 }

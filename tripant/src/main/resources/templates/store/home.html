@@ -80,7 +80,7 @@
 .wrap-main .btn.font{
 	margin-bottom: 10px;
 }
-.wrap-main .pay{
+.wrap-main .cart{
 	text-align: center;
 	margin: 0 0 10px 0;
 }
@@ -144,10 +144,10 @@ function itemNumHandler(){
 						<div><input type="radio" name="font"></div>
 					</div>
 					<div class="item price" th:text="${font.itemPrice}+'원'" th:if="${font.itemPrice} % 1000 == 0"></div>
-					<div class="item price sale" th:text="${font.itemPrice}+'원 할인!'" th:unless="${font.itemPrice} % 1000 == 0"></div>
+					<div class="item price sale flex" th:text="${font.itemPrice}+'원'" th:unless="${font.itemPrice} % 1000 == 0"></div>
 				</div>
 			</div>
-			<div class="pay"><button type="button" class="btn pay">선택한 상품 결제</button></div>
+			<div class="cart"><button type="button" class="btn cart">장바구니에 담기</button></div>
 			<div class="warn">※ 환불/취소는 구매 일자 기준 7일 이내에만 가능합니다.</div>
 		</div>
 	</div>

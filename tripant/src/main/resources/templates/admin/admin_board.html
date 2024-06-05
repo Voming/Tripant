@@ -9,6 +9,8 @@
 <link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_board.css}" rel="stylesheet">
+<!--제이쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 <div class="wrap-main">
@@ -34,6 +36,10 @@
 				<div class="ad-text">전체 게시글</div>
 			</div>
 			<div class="ad-search">
+				<select class="search-option" name="option">
+					<option value="nick" selected>닉네임</option>
+					<option value="title">제목</option>
+				</select>
 				<input class="search" type="text" placeholder="게시글검색">
 			</div>
 			<div class="ad-content">
@@ -44,19 +50,22 @@
 							<li>제목</li>
 							<li>닉네임</li>
 							<li>날짜</li>
-							<li>조회수▼</li>
-							<li>좋아요▼</li>
+							<li>조회수<span>▼</span></li>
+							<li>좋아요<span>▼</span></li>
 						</ul>
 					</li>
 					<li>
+						<th:block th:each="memBoard:${memBoard}">
 						<ul class="col list">
-								<li>1</li>
-								<li>안녕하세요</li>
-								<li>oyeee</li>
-								<li>2024.05.20</li>
-								<li>4</li>
-								<li>77</li>
-							</ul>
+							<li></li>
+							<li th:text="${memBoard.diaryTitle}"></li>
+							<li th:text="${memBoard.diaryMemEmail}"></li>
+							<li th:text="${memBoard.diaryDate}"></li>
+							<li th:text="${memBoard.diaryViews}"></li>
+							<li></li>
+						</ul>
+						</th:block>
+						
 					</li>
 				</ul>
 			</div>

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 
 
@@ -16,6 +17,9 @@ public interface AdminDao {
 	public List<AdminMemEntity> selectMemList();
 	
 	public Integer adminMemRole(int memRole);
+	
+	//전체게시글
+	public List<AdminBoardEntity> boardList();
 	
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 
