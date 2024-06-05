@@ -26,6 +26,15 @@
 	   <Logger name="mclass.store.tripant.member" level="debug" additivity="false">
 	       <AppenderRef ref="ConsoleLog" />
 	   </Logger>
+	   <Logger name="mclass.store.tripant.plan" level="debug" additivity="false">
+	       <AppenderRef ref="ConsoleLog" />
+	   </Logger>
+	   <Logger name="mclass.store.tripant.trip" level="debug" additivity="false">
+	       <AppenderRef ref="ConsoleLog" />
+	   </Logger>
+	   <Logger name="mclass.store.tripant.admin" level="debug" additivity="false">
+	       <AppenderRef ref="ConsoleLog" />
+	   </Logger>
 	   <Logger name="mclass.store.tripant.diary" level="debug" additivity="false">
 	       <AppenderRef ref="ConsoleLog" />
 	   </Logger>
