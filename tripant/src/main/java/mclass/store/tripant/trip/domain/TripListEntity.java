@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class TripListEntity {
+	private String areaShortName;
+	private String areaFileName;
 	private Integer planId ;
 	private Integer planAreaCode ;
 	private String planTitle ;

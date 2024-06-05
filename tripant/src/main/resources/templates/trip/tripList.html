@@ -11,9 +11,9 @@
 		<h1 class="title"> 나의 여행 </h1>
 		<!-- 일정있습 -->
 		<div class="full">
-			<div th:each="plan : ${plan}" class="trip-list wfull" >
+			<div th:each="plan : ${planlist}" class="trip-list wfull" >
 				<a class="ntip wfull" th:href="@{#}"><!-- 해당 정보에 대한 trip 페이지로 이동 -->
-					<img th:src="/images/area/${plan.areaFileName}" alt="img"  class="location-img"/>
+					<img th:src="@{|/images/area/${plan.areaFileName}|}" alt="img"  class="location-img"/>
 					<div class="trip-info">
 						<div th:text="${plan.areaShortName}" class="trip-location">제주</div>
 						<div th:text="${plan.planTitle}" class="trip-title">개미와 함꼐 떠나는 신나는 제주여행</div>

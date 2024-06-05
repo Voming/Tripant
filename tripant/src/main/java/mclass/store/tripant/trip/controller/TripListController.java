@@ -23,7 +23,8 @@ public class TripListController {
 	public String mainList(Model model , Principal principal /* ,@RequestParam String memEmail */) {
 		System.out.println("principal = "+principal);
 		System.out.println("login memEmail = "+principal.getName());
-//		model.addAttribute("plan", tripListService.selectTripList(principal.getName()));
+		System.out.println(tripListService.selectTripList(principal.getName()));
+		model.addAttribute("planlist", tripListService.selectTripList(principal.getName()));
 		return "trip/tripList";
 	}
 	@PostMapping("/list/delete")//ajax
