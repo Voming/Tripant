@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 *{ font-family: 'GangwonEdu_OTFBoldA'; }
+div, span {font-family: 'GangwonEdu_OTFBoldA'; }
+
 .main-wrapper .btn, .main-wrapper a { cursor: pointer;}
 
 .main-wrapper {
