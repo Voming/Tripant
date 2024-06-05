@@ -38,7 +38,9 @@ public class AdminController {
 	}
 	
 	@GetMapping("/board")
-	public String adminlist() {
+	public String adminlist(Model model) {
+		model.addAttribute("memBoard",adminservie.boardList());
+		
 		return "admin/admin_board";
 	}
 	

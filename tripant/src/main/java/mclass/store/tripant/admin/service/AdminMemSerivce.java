@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.model.repository.AdminDao;
 
@@ -23,5 +24,8 @@ public class AdminMemSerivce {
 		return admindao.adminMemRole(memRole);
 	}
 	
+	public List<AdminBoardEntity> boardList(){
+		return admindao.boardList();
+	}
 	
 }
