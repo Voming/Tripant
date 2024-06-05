@@ -36,6 +36,10 @@
 				<div class="ad-text">전체 게시글</div>
 			</div>
 			<div class="ad-search">
+				<select class="search-option" name="option">
+					<option value="nick" selected>닉네임</option>
+					<option value="title">제목</option>
+				</select>
 				<input class="search" type="text" placeholder="게시글검색">
 			</div>
 			<div class="ad-content">
@@ -53,12 +57,12 @@
 					<li>
 						<th:block th:each="memBoard:${memBoard}">
 						<ul class="col list">
-								<li></li>
-								<li th:text="${memBoard.diaryTitle}"></li>
-								<li th:text="${memBoard.diaryMemEmail}"></li>
-								<li th:text="${memBoard.diaryDate}"></li>
-								<li th:text="${memBoard.diaryViews}"></li>
-								<li></li>
+							<li></li>
+							<li th:text="${memBoard.diaryTitle}"></li>
+							<li th:text="${memBoard.diaryMemEmail}"></li>
+							<li th:text="${memBoard.diaryDate}"></li>
+							<li th:text="${memBoard.diaryViews}"></li>
+							<li></li>
 						</ul>
 						</th:block>
 						

@@ -22,12 +22,17 @@
 	width:100%;
 }
 
+ .wrap-body .ad-search .search-option{
+ 	height:30px;
+ 	margin-left:20px;
+ }
+
  .wrap-body .ad-search .search{
-	width:95%;
+	width:90%;
 	border-radius:20px;
 	border: solid black 1px;
 	height:30px;
-	margin:40px 0 20px 30px; 
+	margin:40px 0 20px 20px; 
 } 
 
 .wrap-body .ad-content .boardlist{
