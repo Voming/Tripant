@@ -172,7 +172,7 @@
 .main-wrapper .tourlist .spot-number >p{
 	position: absolute;
 	left: 40%;
-	transform:translate(-50%,-60%);
+	transform:translate(-50%,30%);
 }	
 .main-wrapper .spot-staytime{
 	font-size:var(--font5);
