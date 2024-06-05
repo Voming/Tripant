@@ -9,10 +9,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
@@ -76,23 +79,25 @@ public class PlanController {
 	}
 	
 	@PostMapping("/make/keep")
-	@ResponseBody
-	public String makeAreaKeep(HttpServletResponse response, 
-			@RequestParam("areaName") String areaName, 
+	public String makeAreaKeep(@RequestParam("areaName") String areaName, 
 			@RequestParam("planTitle") String planTitle
-			, Model model) throws IOException {
+			, RedirectAttributes rttb
+			) throws IOException {
 //		System.out.println("areaName :" + areaName);
 //		System.out.println("planTitle :" + planTitle);
-		model.addAttribute("areaName", areaName);
-		model.addAttribute("planTitle", planTitle);
 		
-		return "/make";
+		rttb.addFlashAttribute("areaName", areaName);
+		rttb.addFlashAttribute("planTitle", planTitle);
+		return "redirect:/make";
 	}
 	
 	@GetMapping("/make")
-	public String make(Principal principal, Authentication authentication, Model model) {
-		System.out.println(model.getAttribute("areaName"));
-		
+	public String make(
+			//@ModelAttribute("areaName") String areaName, @ModelAttribute("planTitle") String planTitle
+			) {
+//		System.out.println("areaName :" + areaName);
+//		System.out.println("planTitle :" + planTitle);
+//		
 		return "plan/make";
 	}
 }

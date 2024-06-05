@@ -1,5 +1,8 @@
 $(loadedHandler);
 
+// 여기선 동작하지 않음. 
+//const contextPath2 = "[[@{/}]]"; console.log(contextPath2);
+
 function loadedHandler() {
 	$(".btn.find").on("click", btnFindClickHandler);
 
@@ -38,7 +41,7 @@ function changeSelectAreaHandler() {
 	console.log(area);
 
 	$.ajax({
-		url: "make/area"
+		url: contextPath +"make/area"
 		, method: "post"
 		, data: {
 			areaName: area
@@ -62,7 +65,7 @@ function displayAreaInfo(datalist) {
 		$("#planForm h2").text(aName);
 		var aExplain = areaDto.areaExplain;
 		$("#planForm h4").text(aExplain);
-		$("#infoImg")[0].src = "/images/area/" + areaDto.areaFileName;
+		$("#infoImg")[0].src = contextPath + "images/area/" + areaDto.areaFileName;
 	}
 }
 
@@ -70,24 +73,24 @@ function displayAreaInfo(datalist) {
 function btnKeepClickHandler(){
 	var area = $("#selectbox option:selected").text();
 	console.log(area);
-	var title =  $(this).parent().find("input[name=plane_title]").val();
+	var title =  $(this).parent().find("input[name=planTitle]").val();
 	console.log(title);
+	planForm.action= contextPath +"make/keep";
+	planForm.method="post";
+	planForm.submit();
 	
+	//location.href="[@/make?areaName="+area+"&planTitle="+title+"]";
+	/*
 	$.ajax({
-		url: "make/keep"
+		url: contextPath+"make/keep"
 		, method: "post"
 		, data: {
 			areaName: area,
 			planTitle : title
 		}
-		, success: function(result) {
-			if(result != null){
-				location.href = result;
-				console.log("이동");
-			}
-		}
 		, error: ajaxErrorHandler
 	});
+	*/
 }
 
 
@@ -134,6 +137,6 @@ function displayFindArea(datalist) {
 	$(".area-box").html(htmlVal);
 	//이미지 재배치
 	for (var idx in datalist) {
-		$("#findArea-" + idx)[0].src = "/images/area/" + datalist[idx].areaFileName;
+		$("#findArea-" + idx)[0].src = contextPath + "images/area/" + datalist[idx].areaFileName;
 	}
 }
