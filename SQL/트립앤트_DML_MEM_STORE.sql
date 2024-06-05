@@ -31,6 +31,16 @@ insert into member values(
     to_date('24/06/03', 'RR/MM/DD'), 
     to_date('99/08/05', 'RR/MM/DD')
 );
+insert into member values(
+    'gyrua34@gmail.com', 
+    '효겸', 
+    '$2a$10$OkiTJp9MeIZTKSSHV6ClaOgLhYX6QveeWY62OxeycL9PoBkpBGxO.', 
+    'ROLE_MEM', 
+    1, 
+    'T', 
+    to_date('24/06/05', 'RR/MM/DD'), 
+    to_date('95/06/29', 'RR/MM/DD')
+);
 commit;
 
 -- 회원 탈퇴 트리거
