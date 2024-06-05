@@ -6,7 +6,6 @@
 
 /* 게시글 리스트 */
 
-
 .wrap-body .ad-content{
 	display:flex;
 	width:100%;
@@ -44,7 +43,6 @@
   	align-items:center;
 } 
 
-
 .wrap-body .ad-content .list>li{
 	 margin:15px 0 15px 0; 
 }
@@ -65,11 +63,10 @@
 	 vertical-align:baseline;
 	 text-align: center;
 }
+/* li 크기 지정 */
 .boardlist > li> .col >li:first-child{
 	width:13%;
-	
 }
-
 .boardlist > li> .col >li:first-child+li{
 	width:30%;
 }
@@ -86,11 +83,12 @@
 	width:15%;
 }
 
+/* 게시글 목록 번호 붙이기 */
 .boardlist > li> .col.list >li:first-child{
 	counter-reset: number 0;
 }
 
 .boardlist > li> .col.list >li:first-child:before{
 	counter-increment:number 1;
-	content:counter(number) "번 "
+	content:counter(number)
 }
