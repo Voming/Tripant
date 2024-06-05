@@ -27,10 +27,11 @@ public class MySecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 					.requestMatchers(new AntPathRequestMatcher("/login")).anonymous()
+					.requestMatchers(new AntPathRequestMatcher("/trip/**")).hasAnyAuthority("MEM", "VIP", "ADMIN", "OWNER")
 					.requestMatchers(new AntPathRequestMatcher("/my/**")).hasAnyAuthority("MEM", "VIP", "ADMIN", "OWNER")
 					.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyAuthority("ADMIN")
+					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 					)
 			.csrf((csrf) -> csrf
 					.disable())
