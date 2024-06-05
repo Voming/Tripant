@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-    <title>Map Test</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
-    <link rel="stylesheet" th:href="@{/css/common/core.css}">
-    <link rel="stylesheet" th:href="@{/css/common/layout.css}">
     <link rel="stylesheet" th:href="@{/css/trip/tripMap.css}">
-    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script> -->
+<head th:replace="~{common/header :: head('trip')}">
 </head>
 <body>
 	<div class="main-wrapper">
@@ -76,8 +71,58 @@ $(document).ready(function(){
 	$(".save").click(saveHandler);
 	$(".mapbtn").click(panTo);
 	$(".test-btn").click(durationHandler);
+	$(".img-memo").hover(memoHandler,memoNoHandler);
 	dragAndDrop();
+	circleColorHandler();
 });
+//동그라미 이미지 색 변경
+function circleColorHandler(){
+
+	var circleCss;
+	$('.column.flex').each(function(e){ //e : element
+		//현재 고른 	$('.column.flex') 각각에 아래 함수를 적용
+		//현재 고른 $('.column.flex')것에 적용해야하니 this사용! $('.column.flex')를 사용하면 무조건 첫번째 태그만 가져옴 this의 중요성!!!
+		circleCss = $(this).data('columns'); //type이 number이므로 case에 값 넣을 때 작은따옴표 X
+		switch(circleCss){
+		case 1:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
+			break;
+		case 2:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle2_purple.png')");
+			break;
+		case 3:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle3_pink.png')");
+			break;
+		case 4:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle4_orange.png')");
+			break;
+		case 5:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle5_skyblue.png')");
+			break;
+		case 6:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle6_yellow.png')");
+			break;
+		case 7:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
+			break;
+		case 8:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
+			break;
+		case 9:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
+			break;
+		case 10:
+			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle10_navy.png')");
+			break;
+		default:
+			console.log("!!!!!!!!!!!!!");
+			console.log($(this).children().find('.backimg'));
+			console.log('>>>>>backimg 실패 확인해보세요');
+		}
+	});
+}
+
+
 //드래그 앤 드랍
 function dragAndDrop(){
     const draggables = $('.draggable');
@@ -109,6 +154,7 @@ function dragAndDrop(){
 
     containers.each(function() {
         $(this).on('dragover', function(e) {
+    	//드래그 앤 드랍 시 동그라미 색깔, 순서, 
             e.preventDefault();
             const afterElement = getDragAfterElement(this, e.originalEvent.clientY);
             const draggable = $('.dragging')[0];
@@ -247,37 +293,18 @@ function panTo() {
     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
     map.panTo(moveLatLon);       
 }
-/* map */
-function editHandler(){
-	$(this).next().show(); //취소 버튼 활성화
-	$(this).parent().prevAll().find('#nday').hide(); //n일차 btn 숨김
-	$(this).hide(); //편집 숨김
-	//저장btn 활성화 css변경
-	$(this).siblings('.save').attr('disabled',false);
-	
-	$(this).parents().find('.tourlist').addClass('hide');
-	$(this).parents().find('.edit-tourlist').removeClass('hide');
-	setBounds(); //지도 리로드
+/* map ^ */
+ 
+/* memo장 표시 */ 
+function memoHandler(){
+	$(this).siblings('.memo').css('opacity','1');
 }
-function cancelHandler(){
-	$(this).hide(); //취소 숨김
-	$(this).prev().show(); //편집 보여줌
-	$(this).parent().prevAll().find('#nday').show(); //n일차 btn 보여줌
-	
-	$(this).parents().find('.tourlist').removeClass('hide');
-	$(this).parents().find('.edit-tourlist').addClass('hide');
-	setBounds(); //지도 리로드
+function memoNoHandler(){
+	$(this).siblings('.memo').css('opacity','0');
 }
-function saveHandler(){
-	$(this).siblings('.cancel').hide(); //취소 숨김
-	$(this).siblings('.edit').show(); //편집 보여줌
-	$(this).parent().prevAll().find('#nday').show(); //n일차 btn 보여줌
-	//일정 목록보여주기
-	$(this).parents().find('.tourlist').removeClass('hide');
-	$(this).parents().find('.edit-tourlist').addClass('hide');
-	setBounds(); //지도 리로드
-	//DB이동 ajax
-}
+
+
 </script>
+<script type="text/javascript" th:src="@{/js/trip/nav_btn.js}"></script>
 </body>
 </html>

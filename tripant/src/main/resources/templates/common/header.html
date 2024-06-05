@@ -15,9 +15,11 @@
 <link th:href="@{/css/common/header.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/common/footer.css}" rel="stylesheet" type="text/css">
 
-<link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet" type="text/css">
-
 <script th:src="@{/js/error_handler.js}" ></script>
+<script th:line="javascript">
+// 여기서 먼저 선언하고 그아래 script파일 추가하기.
+const contextPath = "[[@{/}]]"; console.log(contextPath);
+</script>
 </head>
 <body>
 	<div th:fragment="wrap-header">
