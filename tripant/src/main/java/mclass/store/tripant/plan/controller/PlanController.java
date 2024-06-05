@@ -52,7 +52,7 @@ public class PlanController {
 		//timeService.selectPlaceMapList(1);
 		//timeService.makeTimeList(); //TODO
 		
-		return "plan/main/home";
+		return "plan/home";
 	}
 	
 	//지역 리스트 검색
@@ -93,6 +93,6 @@ public class PlanController {
 	public String make(Principal principal, Authentication authentication, Model model) {
 		System.out.println(model.getAttribute("areaName"));
 		
-		return "plan/make/basic";
+		return "plan/make";
 	}
 }

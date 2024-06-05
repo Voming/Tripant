@@ -75,8 +75,9 @@
 .main-wrapper .nav-wrapper .edit{
 	height:30px;
 }
-.main-wrapper .nav-wrapper .plan_update .btn{
-	border : solid black 1px;
+.main-wrapper .nav-wrapper .plan_next .btn{
+	background-color: black;
+	color: white;
 }
 
 /* 일정 */
