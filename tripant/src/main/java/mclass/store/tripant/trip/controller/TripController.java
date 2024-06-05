@@ -56,7 +56,6 @@ public class TripController {
 				while((inputLine = br.readLine()) != null) {
 					response.append(inputLine);
 				}
-				System.out.println("\n response \n "+response.toString());
 				br.close();
 				
 				 // JSON 파싱하여 duration 값만 추출
