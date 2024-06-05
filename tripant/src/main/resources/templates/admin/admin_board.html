@@ -53,13 +53,15 @@
 					<li>
 						<th:block th:each="memBoard:${memBoard}">
 						<ul class="col list">
-								<li>1</li>
+								<li></li>
 								<li th:text="${memBoard.diaryTitle}"></li>
 								<li th:text="${memBoard.diaryMemEmail}"></li>
 								<li th:text="${memBoard.diaryDate}"></li>
 								<li th:text="${memBoard.diaryViews}"></li>
 								<li></li>
-							</ul>
+						</ul>
+						</th:block>
+						
 					</li>
 				</ul>
 			</div>

@@ -67,6 +67,7 @@
 }
 .boardlist > li> .col >li:first-child{
 	width:13%;
+	
 }
 
 .boardlist > li> .col >li:first-child+li{
@@ -83,4 +84,13 @@
 }
 .boardlist > li> .col >li:first-child+li+li+li+li+li{
 	width:15%;
+}
+
+.boardlist > li> .col.list >li:first-child{
+	counter-reset: number 0;
+}
+
+.boardlist > li> .col.list >li:first-child:before{
+	counter-increment:number 1;
+	content:counter(number) "번 "
 }
