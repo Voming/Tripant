@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.member.model.service.MemberUserService;
 import mclass.store.tripant.member.model.service.UserOAuth2UserService;
+import mclass.store.tripant.member.model.service.MemberSecurityService;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class KakaoController {
 	
 	private final KakaoApi kakaoApi;
 	private final MemberService memberService;
-	private final MemberUserService memberSecurityService;
+	private final MemberSecurityService memberSecurityService;
 	private final UserOAuth2UserService userOAuth2UserService;
 
 	// 카카오 로그인
