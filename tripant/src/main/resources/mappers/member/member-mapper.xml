@@ -19,7 +19,7 @@
 		<select id="existNick" parameterType="string" resultType="int">
 			select count(*) from member where mem_nick = #{memNick}
 		</select>
-		<!-- 이메일 가입 여부 -->
+		<!-- 이메일 여부 -->
 		<select id="existEmail" parameterType="string" resultType="int">
 			select count(*) from member where mem_email = #{memEmail}
 		</select>

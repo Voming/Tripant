@@ -26,6 +26,12 @@ public class JoinController {
 		return "member/join";
 	}
 	
+	//SNS 회원가입 페이지
+	@GetMapping("/join/sns")
+	public String joinsns() {
+		return "member/joinsns";
+	}
+	
 	// 닉네임 중복 검사
 	@PostMapping("/join/nick/check")
 	@ResponseBody

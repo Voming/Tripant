@@ -7,41 +7,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-
+import mclass.store.tripant.member.model.service.MemberUserService;
+import mclass.store.tripant.member.model.service.UserOAuth2UserService;
+import mclass.store.tripant.member.model.service.MemberService;
 
 @RequiredArgsConstructor
 @Controller
 public class KakaoController {
 	
 	private final KakaoApi kakaoApi;
+	private final MemberService memberService;
+	private final MemberUserService memberSecurityService;
+	private final UserOAuth2UserService userOAuth2UserService;
 
-	//카카오 로그인
+	// 카카오 로그인
 	@GetMapping("/login/oauth2/code/kakao")
-	public String login(String code, HttpSession session) {
-		//1. 인가 코드 받기
+	public void login(String code, HttpSession session) {
+		// 1. 인가 코드 받기
 		
-		//2. 토큰 받기
+		// 2. 토큰 받기
 		String accessToken = kakaoApi.getAccessToken(code);
 		session.setAttribute("kakaoToken", accessToken);
 		
-		//3. 사용자 정보 받기
+		// 3. 사용자 정보 받기
 		Map<String, Object> userInfo = kakaoApi.getUserInfo(accessToken);
 		
 		Object userId = userInfo.get("userId");
-		String email = (String) userInfo.get("email");
-		String nickname = (String) userInfo.get("nickname");
+		String memEmail = (String) userInfo.get("email");
+		System.out.println("memEmail = "+memEmail);
+		
+		// Spring Security 
+		// 1. 이메일 여부 
+		int yn = memberService.existEmail(memEmail);
 		
 		System.out.println("userId = "+userId.toString());
-		System.out.println("email = "+email);
-		System.out.println("nickname = "+nickname);
+		System.out.println("memEmail = "+memEmail);
 		System.out.println("accessToken = "+accessToken);
-		
-		return "redirect:/login";
 	}
+	
 	
 	//카카오 로그아웃
 	@GetMapping("/logout/kakao")
@@ -63,22 +66,9 @@ public class KakaoController {
 		if(kakaoToken != null) {
 			kakaoApi.unlink(kakaoToken);
 			session.invalidate();
-			return "redirect:/main";
+			return "redirect:/unlink/kakao";
 		}else {
 			return "redirect:/login";
 		}
 	}
-	
-	//카카오 나한테 링크 보내기
-	@GetMapping("/sendmsg/me")
-	public String getMethodName(HttpSession session) {
-		String kakaoToken = (String) session.getAttribute("kakaoToken");
-		sendLinkPost("http://tripant.store/login", "Bearer "+kakaoToken);
-		return kakaoToken;
-	}
-	@PostMapping("https://kapi.kakao.com/v2/api/talk/memo/scrap/send")
-	public String sendLinkPost(@RequestBody String request_url, @RequestHeader String Authorization) {
-		return "redirect:/login";
-	}
-	
 }
