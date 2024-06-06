@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/member/login.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('로그인')}"></head>
+<link th:href="@{/css/member/login.css}" rel="stylesheet" type="text/css">
+<script type="text/javascript" th:src="@{/js/member/login/loadedHandler.js}"></script>
 <!-- 
 <style>
 body { 
@@ -25,19 +26,6 @@ body::-webkit-scrollbar-track {
 }
 </style>
  -->
-<script>
-$(loadedHandler);
-function loadedHandler(){
-	//버튼 호버 css
-	$('.btn').hover(function(){
-		$(this).css('background-color', 'black');
-		$(this).css('color', 'white');
-	}, function(){
-		$(this).css('background-color', 'lightgrey');
-		$(this).css('color', 'black');
-	});
-}
-</script>
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
@@ -58,16 +46,16 @@ function loadedHandler(){
 				<div class="flex snslogin">
 					<div>SNS 간편 로그인</div>
 					<div class="flex snslogo">
-						<a th:href="@{/member/kakao}"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"></a>
-						<a th:href="@{/member/naver}"><img th:src="@{/images/member/login_naver.png}" style="width: 34px; height: 34px;"></a>
-						<a th:href="@{/member/google}"><img th:src="@{/images/member/login_google.png}" style="width: 34px; height: 34px; background-color: white;"></a>
+						<a th:href="@{/login/kakao}"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"></a>
+						<a th:href="@{/login/naver}"><img th:src="@{/images/member/login_naver.png}" style="width: 34px; height: 34px;"></a>
+						<a th:href="@{/login/google}"><img th:src="@{/images/member/login_google.png}" style="width: 34px; height: 34px; background-color: white;"></a>
 					</div>
 				</div>
 			</section>
 		</form>
 	</div>
 	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
-	<div class="trash" style="display: none;">
+	<div class="trash">
 		<div class="text-center">
 		    <a th:href="@{/login/kakao}">
 		        <img th:src="@{/images/member/login_kakao.png}" width="34px" height="34px">
