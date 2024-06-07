@@ -23,7 +23,9 @@ public class DiaryController {
 
 	// 글 상세보기
 	@GetMapping("/diary/read")
-	public String diaryread() {
+	public String diaryread(Model model) {
+		model.addAttribute("diaries", diaryService.selectDiaryList());
+		System.out.println("======dddd" + diaryService.selectDiaryList());
 		return "diary/diary_read";
 	}
 

@@ -7,6 +7,8 @@ import java.time.format.DateTimeParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nimbusds.oauth2.sdk.Response;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
+import mclass.store.tripant.diary.domain.DiaryPostEntity;
 import mclass.store.tripant.diary.service.DiaryService;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -42,34 +45,46 @@ public class MyDiaryController {
 	}
 
 	// 글쓰기 처리
-    @PostMapping("/my/write")
-    public ResponseEntity<?> createDiary(@RequestParam String diaryMemEmail,
-                                         @RequestParam Integer diaryPlanId,
-                                         @RequestParam String diaryTitle,
-                                         @RequestParam String diaryContent,
-                                         @RequestParam String diaryDate,
-                                         @RequestParam String diaryOpen,
-                                         @RequestParam(required = false) Integer diaryViews,
-                                         @RequestParam(required = false) String diaryTheme) {
-        DiaryBoardEntity diary = new DiaryBoardEntity();
-        diary.setDiaryMemEmail(diaryMemEmail);
-        diary.setDiaryPlanId(diaryPlanId);
-        diary.setDiaryTitle(diaryTitle);
-        diary.setDiaryContent(diaryContent);
-        diary.setDiaryOpen(diaryOpen);
-        diary.setDiaryViews(diaryViews == null ? 0 : diaryViews); // 기본값 설정
-        diary.setDiaryTheme(diaryTheme);
+	@PostMapping("/my/write")
+	public ResponseEntity<?> createDiary(@RequestParam Integer diaryPlanId,
+	                                     @RequestParam String diaryTitle,
+	                                     @RequestParam String diaryContent,
+	                                     @RequestParam String diaryDate,
+	                                     @RequestParam String diaryOpen, // 공개 여부를 파라미터로 받아옴
+	                                     @RequestParam(required = false) Integer diaryViews,
+	                                     @RequestParam(required = false) String diaryTheme) {
+	    String diaryMemEmail = getLoggedInUserEmail();
 
-        try {
-            
-            LocalDate localDate = LocalDate.parse(diaryDate, DateTimeFormatter.ISO_DATE);
-            diary.setDiaryDate(java.sql.Date.valueOf(localDate));
-        } catch (DateTimeParseException e) {
-            
-            return ResponseEntity.badRequest().body("Invalid date format. Please use 'yyyy-MM-dd'.");
-        }
+	    DiaryPostEntity diary = new DiaryPostEntity();
+	    diary.setDiaryMemEmail(diaryMemEmail);
+	    diary.setDiaryPlanId(diaryPlanId);
+	    diary.setDiaryTitle(diaryTitle);
+	    diary.setDiaryContent(diaryContent);
+	    diary.setDiaryViews(diaryViews == null ? 0 : diaryViews); // 기본값 설정
+	    diary.setDiaryTheme(diaryTheme);
 
-        diaryService.save(diary);
-        return ResponseEntity.ok().body(diary);
-    }
+	    try {
+	        LocalDate localDate = LocalDate.parse(diaryDate, DateTimeFormatter.ISO_DATE);
+	        diary.setDiaryDate(java.sql.Date.valueOf(localDate));
+	    } catch (DateTimeParseException e) {
+	        return ResponseEntity.badRequest().body("Invalid date format. Please use 'yyyy-MM-dd'.");
+	    }
+
+	    // 공개 여부 설정
+	    if ("0".equals(diaryOpen)) {
+	        // 공개
+	        diary.setDiaryOpen("0");
+	    } else {
+	        // 비공개
+	        diary.setDiaryOpen("1");
+	    }
+
+	    diaryService.save(diary);
+	    return ResponseEntity.ok().body(diary);
+	}
+
+	private String getLoggedInUserEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

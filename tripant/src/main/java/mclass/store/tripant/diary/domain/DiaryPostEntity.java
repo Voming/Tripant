@@ -1,10 +1,14 @@
 package mclass.store.tripant.diary.domain;
 
+import java.sql.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
 @Data @Component
+
+// 글 등록
 public class DiaryPostEntity {
 //	DIARY_ID        NOT NULL NUMBER         
 //	DIARY_MEM_EMAIL NOT NULL VARCHAR2(100)  
@@ -20,7 +24,7 @@ public class DiaryPostEntity {
 	private Integer diaryPlanId;
 	private String diaryTitle;
 	private String diaryContent;
-	private String diaryDate;
+	private Date diaryDate; // java.sql.Date 타입으로 변경
 	private String diaryOpen;
 	private Integer diaryViews;
 	private String diaryTheme;
