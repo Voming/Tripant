@@ -1,5 +1,7 @@
 package mclass.store.tripant.trip.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -9,8 +11,8 @@ public class TripListEntity {
 	private Integer planId ;
 	private Integer planAreaCode ;
 	private String planTitle ;
-	private String planStartDay ;
-	private String planEndDay ;
+	private Date planStartDay ;
+	private Date planEndDay ;
 	private String planMakeDay ;
 	private String planDeleteDay ;
 }
