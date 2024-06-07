@@ -61,11 +61,11 @@ public class MyDiaryController {
         diary.setDiaryTheme(diaryTheme);
 
         try {
-            // Convert the diaryDate from String to LocalDate
+            
             LocalDate localDate = LocalDate.parse(diaryDate, DateTimeFormatter.ISO_DATE);
             diary.setDiaryDate(java.sql.Date.valueOf(localDate));
         } catch (DateTimeParseException e) {
-            // Handle the exception if the date format is incorrect
+            
             return ResponseEntity.badRequest().body("Invalid date format. Please use 'yyyy-MM-dd'.");
         }
 
