@@ -10,6 +10,7 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +20,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/trip")
 public class TripController {
 	
+	//test용
 	@GetMapping("/detail")
 	public String mapMain(Model model) {
+		//model.addAttribute();
+		return "trip/trip";
+	}
+	
+	@GetMapping(value="/detail/{planId}")
+	public String main(Model model,@PathVariable("planId") Integer planId) {
+		System.out.println(planId);
 		//model.addAttribute();
 		return "trip/trip";
 	}
