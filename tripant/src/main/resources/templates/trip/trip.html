@@ -75,11 +75,19 @@ $(document).ready(function(){
 	dragAndDrop();
 	circleColorHandler();
 });
+//n일차 버튼 생성
+function ndayBtnHandler(){
+	$('.column.flex').each(function(e){
+		
+		
+	});
+}
+
 //동그라미 이미지 색 변경
 function circleColorHandler(){
 
 	var circleCss;
-	$('.column.flex').each(function(e){ //e : element
+	$('.column.flex').each(function(e){  //e : element
 		//현재 고른 	$('.column.flex') 각각에 아래 함수를 적용
 		//현재 고른 $('.column.flex')것에 적용해야하니 this사용! $('.column.flex')를 사용하면 무조건 첫번째 태그만 가져옴 this의 중요성!!!
 		circleCss = $(this).data('columns'); //type이 number이므로 case에 값 넣을 때 작은따옴표 X
@@ -115,7 +123,6 @@ function circleColorHandler(){
 			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle10_navy.png')");
 			break;
 		default:
-			console.log("!!!!!!!!!!!!!");
 			console.log($(this).children().find('.backimg'));
 			console.log('>>>>>backimg 실패 확인해보세요');
 		}

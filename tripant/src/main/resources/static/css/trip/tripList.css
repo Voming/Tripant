@@ -27,10 +27,10 @@
 	display: flex; 
 	align-items: center;
 }
-.main-wrapper .trip-list .ntip{
+.main-wrapper .trip-list .ntrip{
 	display: flex;
 }
-.main-wrapper .trip-list .ntip .trip-info{
+.main-wrapper .trip-list .ntrip .trip-info{
 	margin:10px;
 	display: flex;
 	flex-direction:column;
