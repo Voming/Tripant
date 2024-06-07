@@ -17,5 +17,8 @@ public class DiaryService {
 		return diaryRepository.selectDiaryList();
 	}
 	
-	
+	//게시글 등록하기
+	 public void save(DiaryBoardEntity diary) {
+		 diaryRepository.insertDiary(diary);
+	 }
 }

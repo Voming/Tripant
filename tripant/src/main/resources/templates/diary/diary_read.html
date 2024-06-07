@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('diaryboard')}">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
 </head>
 <body>
+	<!--헤더영역  -->
+	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 
+
+
+
+
+
+
+	<!-- 푸터영역 -->
+	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
 </html>

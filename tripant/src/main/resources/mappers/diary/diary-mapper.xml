@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
+<mapper
+	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
 	<select id="selectDiaryList" resultType="DiaryBoardEntity">
-        SELECT DIARY_ID, DIARY_MEM_EMAIL, DIARY_PLAN_ID, DIARY_TITLE, DIARY_CONTENT, DIARY_DATE, DIARY_OPEN, DIARY_VIEWS, DIARY_THEME
-        FROM DIARY
-    </select>
-	
+		SELECT DIARY_ID,
+		DIARY_MEM_EMAIL, DIARY_PLAN_ID, DIARY_TITLE, DIARY_CONTENT,
+		DIARY_DATE, DIARY_OPEN, DIARY_VIEWS, DIARY_THEME
+		FROM DIARY
+	</select>
+	<insert id="insertDiary" parameterType="DiaryBoardEntity">
+		INSERT INTO diary (
+		DIARY_ID, DIARY_MEM_EMAIL,
+		DIARY_PLAN_ID, DIARY_TITLE, DIARY_CONTENT, DIARY_DATE, DIARY_OPEN,
+		DIARY_VIEWS, DIARY_THEME)
+		VALUES (diary_seq.NEXTVAL, #{diaryMemEmail},
+		{#diaryPlanId},{#diaryTitle},{#diaryContent},
+		{#diaryDate},{#diaryOpen},{#diaryViews},{#diaryTheme})
+	</insert>
 </mapper>
