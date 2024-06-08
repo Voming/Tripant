@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
 <link rel="stylesheet" th:href="@{/css/plan/make/make_layout.css}">
 <link rel="stylesheet" th:href="@{/css/plan/make/make_day_modal.css}">
 <link rel="stylesheet" th:href="@{/css/plan/make/make_items.css}">
+
+
 <head th:replace="~{common/header :: head('일정만들기')}">
 </head>
 <script th:src="@{/js/plan/plan_make.js}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <body>
 
-	<div class="modal">
+	<div class="modal show">
 		<div class="modal_popup">
 			<div>
 				<h2>여행 기간이 어떻게 되시나요?</h2>
 				<h4>여행 일자는 최대 10일 까지 설정 가능합니다</h4>
 				<div class="wrap-calendar">
-					<div class="modal-left"></div>
-
-					<div class="modal-right"></div>
+					<input type="text" id="daterange" />
+					
 				</div>
 			</div>
 		</div>
@@ -61,5 +67,6 @@
 		</div>
 	</div>
 	<script th:src="@{/js/plan/plan_map.js}"></script>
+	<script th:src="@{/js/plan/plan_calendar.js}"></script>
 </body>
 </html>
