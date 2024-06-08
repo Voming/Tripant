@@ -2,17 +2,20 @@ package mclass.store.tripant.member.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 @Data
-public class MemberEntity implements UserDetails {
+public class MemberEntity implements UserDetails, OAuth2User {
 	/**
 	 * 
 	 */
@@ -25,7 +28,13 @@ public class MemberEntity implements UserDetails {
 	private String memType;
 	private String memJoinDate;
 	private String memBirth;
+	private Map<String, Object>attributes;
 
+	@Override
+	public String getName() {
+		return memEmail;
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
@@ -62,4 +71,5 @@ public class MemberEntity implements UserDetails {
 	public boolean isEnabled() {
 		return this.memEnabled == 1 ? true : false;
 	}
+
 }

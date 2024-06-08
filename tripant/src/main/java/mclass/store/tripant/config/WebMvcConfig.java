@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 //WebMvcConfigurer -> url 관련 설정
 @Configuration
 @EnableWebMvc
-public class MyConfiguration implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer {
 	
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {

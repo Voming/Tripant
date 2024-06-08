@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.member.model.service.UserOAuth2UserService;
+import mclass.store.tripant.member.model.service.OAuth2MemberService;
 import mclass.store.tripant.member.model.service.MemberSecurityService;
 import mclass.store.tripant.member.model.service.MemberService;
 
@@ -18,7 +18,7 @@ public class KakaoController {
 	private final KakaoApi kakaoApi;
 	private final MemberService memberService;
 	private final MemberSecurityService memberSecurityService;
-	private final UserOAuth2UserService userOAuth2UserService;
+	private final OAuth2MemberService userOAuth2UserService;
 
 	// 카카오 로그인
 	@GetMapping("/login/oauth2/code/kakao")
