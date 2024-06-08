@@ -7,10 +7,6 @@
 <head th:replace="~{common/header :: head('home')}">
 </head>
 
-<script th:line="javascript">
-// 여기서 먼저 선언하고 그아래 script파일 추가하기.
-const contextPath = "[[@{/}]]"; console.log(contextPath);
-</script>
 <script th:line="javascript" th:src="@{/js/plan/plan_home.js}" ></script>
 
 <body>
