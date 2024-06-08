@@ -2,6 +2,7 @@ package mclass.store.tripant.member.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -31,7 +32,13 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
 		public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 			System.out.println("loadUser===========");
 			OAuth2User oAuth2User = super.loadUser(userRequest);
-			String email = oAuth2User.getAttribute("email");
+			String email;
+			if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
+				Map<String, Object> kakaoAttributes = oAuth2User.getAttribute("kakao_account");
+				email = (String) kakaoAttributes.get("email"); 
+			}else {
+				email = oAuth2User.getAttribute("email");
+			}
 			Optional<MemberEntity> memberEntityOp = Optional.ofNullable(memberRepository.login(email));
 			if(memberEntityOp.isEmpty()) {
 				throw new UsernameNotFoundException("가입해");

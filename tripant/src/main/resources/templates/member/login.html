@@ -46,7 +46,7 @@ body::-webkit-scrollbar-track {
 				<div class="flex snslogin">
 					<div>SNS 간편 로그인</div>
 					<div class="flex snslogo">
-						<a th:href="@{/login/kakao}"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"></a>
+						<a th:href="@{/oauth2/authorization/kakao}"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"></a>
 						<a th:href="@{/login/naver}"><img th:src="@{/images/member/login_naver.png}" style="width: 34px; height: 34px;"></a>
 						<a th:href="@{/oauth2/authorization/google}"><img th:src="@{/images/member/login_google.png}" style="width: 34px; height: 34px; background-color: white;"></a>
 					</div>
@@ -55,42 +55,5 @@ body::-webkit-scrollbar-track {
 		</form>
 	</div>
 	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
-	<div class="trash">
-		<div class="text-center">
-		    <a th:href="@{/login/kakao}">
-		        <img th:src="@{/images/member/login_kakao.png}" width="34px" height="34px">
-		    </a>
-		</div>
-		<div class="text-center">
-		    <a th:href="@{/logout/kakao}">
-		        카카오 로그아웃
-		    </a>
-		</div>
-		<div class="text-center">
-		    <a th:href="@{/unlink/kakao}">
-		        카카오 회원 탈퇴
-		    </a>
-		</div>
-		<div class="text-center">
-		    <a th:href="@{/sendmsg/me}">
-		        카카오 나한테 링크 보내기
-		    </a>
-		</div>
-		<div class="text-center">
-		    <a th:href="@{/login/naver}">
-		        <img th:src="@{/images/member/login_naver.png}" width="34px" height="34px">
-		    </a>
-		</div>
-		<div class="text-center">
-		    <a th:href="@{/logout/naver}">
-		        네이버 로그아웃
-		    </a>
-		</div>
-		<div class="text-center">
-		    <a th:href="@{/unlink/naver}">
-		        네이버 회원 탈퇴
-		    </a>
-		</div>
-	</div>
 </body>
 </html>
