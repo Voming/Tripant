@@ -22,7 +22,16 @@ $(function() {
 });
 
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-	$(".modal").removeClass("show");
-	console.log(picker.startDate.format('YYYY-MM-DD'));
-	console.log(picker.endDate.format('YYYY-MM-DD'));
+	//console.log(picker.startDate.format('YYYY-MM-DD'));
+	//console.log(picker.endDate.format('YYYY-MM-DD'));
+
+	let diff = Math.abs(picker.endDate- picker.startDate);
+	diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+	//console.log(diff);
+
+	if (diff > 10) {
+		alert("기간이 너무 큽니다. 기간을 다시 입력해주세요.");
+	} else {
+		$(".modal").removeClass("show");
+	}
 });
