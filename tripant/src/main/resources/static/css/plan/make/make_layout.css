@@ -1,9 +1,16 @@
 @charset "UTF-8";
 
-*{ font-family: 'GangwonEdu_OTFBoldA'; }
-div, span {font-family: 'GangwonEdu_OTFBoldA'; }
+* {
+	font-family: 'GangwonEdu_OTFBoldA';
+}
 
-.main-wrapper .btn, .main-wrapper a { cursor: pointer;}
+div, span, a {
+	font-family: 'GangwonEdu_OTFBoldA';
+}
+
+.main-wrapper .btn, .main-wrapper a {
+	cursor: pointer;
+}
 
 .main-wrapper {
 	width: 100%;
@@ -30,58 +37,50 @@ div, span {font-family: 'GangwonEdu_OTFBoldA'; }
 	width: 80px;
 }
 
-.main-wrapper .nav-wrapper .btn {
-	box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
-	height: 40px;
-}
-
-.main-wrapper .nav-wrapper .btn {
+.main-wrapper .nav-wrapper ul {
 	width: 80%;
 	height: 50px;
-	margin: 5px;
+}
+
+.main-wrapper .nav-wrapper ul li {
+	display: flex;
+	box-shadow: 0 2px 8px 0 var(--color_gray) !important;
+	height: 50px;
 	font-size: 15px;
 	border: none;
 	background-color: #fafafa;
 	border-radius: 10px;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
 }
 
+.main-wrapper .nav-wrapper ul li a {
+	font-family: 'GangwonEdu_OTFBoldA';
+	font-size: var(--font4);
+	margin: 5px;
+	text-align: center;
+}
+
+/* 다음 버튼 */
 .main-wrapper .plan_next, .main-wrapper .nav {
 	align-items: center;
 	flex-direction: column;
 }
 
-.main-wrapper .nav-wrapper .nav .btn {
-	box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
-	height: 40px;
-}
-
-.main-wrapper .nav-wrapper .plan_next .btn{
+.main-wrapper .nav-wrapper .plan_next .btn {
+	width: 80%;
+	height: 50px;
+	border: none;
+	border-radius: 10px;
+	align-items: center;
+	justify-content: center;
 	background-color: black;
 	color: white;
+	font-size: var(--font4);
+	margin: 5px;
+	text-align: center;
 }
-
-
-/* 일정 */
-.main-wrapper .schedule-wrapper {
-	flex-direction: column;
-	width: 30%;
-	padding: 0px 30px;
-}
-
-.main-wrapper .schedule-wrapper .plan-info {
-	flex-direction: column;
-}
-
-.main-wrapper .schedule-wrapper .plan-title {
-	font-size: var(--font2);
-	margin: 30px 0 10px 0;
-}
-
-.main-wrapper .schedule-wrapper .plan-location {
-	margin-right: 15px;
-	font-size: var(--font3);
-}
-
 
 /* 지도 */
 .main-wrapper .map-wrapper {

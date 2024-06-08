@@ -4,16 +4,19 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
 <link rel="stylesheet" th:href="@{/css/plan/make/make_layout.css}">
 <link rel="stylesheet" th:href="@{/css/plan/make/make_day_modal.css}">
-<link rel="stylesheet" th:href="@{/css/plan/make/make_items.css}">
-
+<link rel="stylesheet" th:href="@{/css/plan/make/make_day_layout.css}">
 
 <head th:replace="~{common/header :: head('일정만들기')}">
 </head>
 <script th:src="@{/js/plan/plan_make.js}"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <body>
 
 	<div class="modal show">
@@ -21,51 +24,65 @@
 			<div>
 				<h2>여행 기간이 어떻게 되시나요?</h2>
 				<h4>여행 일자는 최대 10일 까지 설정 가능합니다</h4>
+				<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
 				<div class="wrap-calendar">
 					<input type="text" id="daterange" />
-					
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="main-wrapper">
-
 		<aside class="nav-wrapper flex">
 			<nav class="nav flex">
 				<a th:href="@{/}"><img class="logo"
 					src="/images/tripant_logo_text.png"></a>
-				<button type="button" class="day btn">
-					step 01<br>날짜확인
-				</button>
-				<button type="button" class="spot btn">
-					step 02<br>장소선택
-				</button>
-				<button type="button" class="stay btn">
-					step 03<br>숙소설정
-				</button>
+				<ul class="tab-nav">
+					<li><a href="#tab01"> step 01<br>날짜확인
+					</a></li>
+					<li><a href="#tab02"> step 02<br>장소선택
+					</a></li>
+					<li><a href="#tab03"> step 03<br>숙소설정
+					</a></li>
+				</ul>
 			</nav>
 			<div class="plan_next flex">
 				<button type="button" class="next btn" disabled='disabled'>다음</button>
 			</div>
 		</aside>
-		<div class="schedule-wrapper flex">
-			<div class="plan-info flex">
-				<div class="plan-title">개미와 함꼐 떠나는 신나는 제주여행</div>
-				<span class="plan-location">제주</span> <span class="plan-priod">2024.06.01~2024.06.02</span>
-				<div th:text="${areaName}">기본 메시지</div>
-				<div th:text="${planTitle}">기본 메시지</div>
+		<div class="tab-content">
+			<div id="tab01">
+				<div>
+					<div class="plan-title">개미와 함꼐 떠나는 신나는 제주여행</div>
+					<span class="plan-location">제주</span> <span class="plan-priod">2024.06.01~2024.06.02</span>
+					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
+					
+				</div>
 			</div>
-
-			<div class="list-box flex"></div>
+			<div id="tab02">
+				<div>
+					<div class="plan-title">개미와 함꼐 떠나는 신나는 제주여행</div>
+					<span class="plan-location">제주</span> <span class="plan-priod">2024.06.01~2024.06.02</span>
+					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
+					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
+				</div>
+			</div>
+			<div id="tab03">
+				<div>
+					<div class="plan-title">개미와 함꼐 떠나는 신나는 제주여행</div>
+					<span class="plan-location">제주</span> <span class="plan-priod">2024.06.01~2024.06.02</span>
+					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
+					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
+					
+				</div>
+			</div>
 		</div>
 
-		<div class="list-box-check flex"></div>
 
 		<div class="map-wrapper">
 			<div id="map"></div>
 		</div>
 	</div>
+	
 	<script th:src="@{/js/plan/plan_map.js}"></script>
 	<script th:src="@{/js/plan/plan_calendar.js}"></script>
 </body>

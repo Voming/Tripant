@@ -29,7 +29,7 @@
 	background: #ffffff;
 	border-radius: 20px;
 	width:600px;
-	height: 350px;
+	height: 400px;
 	justify-content: center;
 }
 
@@ -44,8 +44,12 @@
 }
 
 .modal .modal_popup h4 {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
+.modal .modal_popup h6 {
+	margin-bottom: 10px;
+}
+
 
 .modal .modal_popup .wrap-calendar {
 	/* 가로 정렬 */
