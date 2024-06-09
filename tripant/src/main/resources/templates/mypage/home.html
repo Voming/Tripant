@@ -28,8 +28,13 @@ function loadedHandler(){
 	<div class="wrap-main">
 		<div class="flex mypage">
 			<div class="title">마이페이지</div>
-			<div class="ch Nick"><button type="button" class="btn chNick">닉네임 변경</button></div>
-			<div class="ch Pwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
+			<div class="myInfo email flex">이메일<input type="text" name="memEmail" value="사용자 이메일" readonly></div>
+			<div class="myInfo nick flex">닉네임<input type="text" name="memNick" value="사용자 닉네임" readonly></div>
+			<div class="ch nick"><button type="button" class="btn chNick">닉네임 변경</button></div>
+			<div class="ch pwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
+			<div class="unlink kakao flex"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"><a th:href="@{/my/quit}">연동 해제</a></div>
+			<div class="unlink naver flex"><img th:src="@{/images/member/login_naver.png}" style="width: 34px; height: 34px;"><a th:href="@{/my/quit}">연동 해제</a></div>
+			<div class="unlink google flex"><img th:src="@{/images/member/login_google.png}" style="width: 34px; height: 34px;"><a th:href="@{/my/quit}">연동 해제</a></div>
 			<div class="quit"><a th:href="@{/my/quit}">회원 탈퇴</a></div>
 		</div>
 	</div>

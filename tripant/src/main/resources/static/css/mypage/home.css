@@ -30,10 +30,11 @@
 
 .wrap-main .flex {
 	display: flex;
+	align-items: center;
 }
 
 .wrap-main .flex.mypage {
-	width: 150px;
+	width: 200px;
 	margin: 0 auto;
 	flex-direction: column;
 	align-items: center;
@@ -43,10 +44,24 @@
 
 .wrap-main .title {
 	font-size: var(--font1);
-	margin-bottom: 70px;
+	margin-bottom: 20px;
 }
 
-.wrap-main .quit>a {
+.wrap-main .myInfo.flex {
+	column-gap: 10px;
+	margin-bottom: 20px;
+}
+
+.wrap-main .myInfo.nick.flex{
+	margin-bottom: 60px;
+}
+
+.wrap-main .unlink.flex {
+	column-gap: 10px;
+	margin-bottom: 20px;
+}
+
+.wrap-main a {
 	color: #7e7e7e;
-	font-size: var(--font6);
+	font-size: var(--font5);
 }
