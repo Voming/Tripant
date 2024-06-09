@@ -1,94 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/mydiary/mydiary_write.css}" rel="stylesheet">
+<!-- ckeditors -->
+<!-- ckeditor CDN  -->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/super-build/ckeditor.js"></script>
+<!-- ckeditor CKBox  -->
+<script src="https://cdn.ckbox.io/CKBox/2.4.0/ckbox.js"></script>
+<!-- ckeditor jsp 파일 -->
+<script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
+<!-- 제이쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <head th:replace="~{common/header :: head('diaryboard')}">
-    <link th:href="@{/css/mydiary/mydiary_write.css}" rel="stylesheet">
-    <!-- ckeditors -->
-    <!-- ckeditor CDN  -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/super-build/ckeditor.js"></script>
-    <!-- ckeditor CKBox  -->
-    <script src="https://cdn.ckbox.io/CKBox/2.4.0/ckbox.js"></script>
-    <!-- ckeditor jsp 파일 -->
-    <script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
-    <!-- 제이쿼리  -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 
 <body>
-    <header>
-        <div class="header" th:insert="~{common/header :: wrap-header}"></div>
-    </header>
-    <section class="diary-writes-main">
-        <div class="diary-write-wrap">
-            <form id="diaryForm" method="post">
+	<header>
+		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
+	</header>
+	<section class="diary-writes-main">
+		<div class="diary-write-wrap">
+			<form id="diaryForm" method="post">
 
-                <table class="diary-write-table">
-                    <tr>
-                        <td colspan="2"><h1>나의 여행일기 남기기</h1></td>
-                    </tr>
-                    <tr>
-                        <td>일정</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select name="diaryPlanId" class="diary-writer-select-plan">
-                                <option value="">처음 생성했던 일정 이름을 골라주세요!</option>
-                                <option value="1">일정1</option>
-                                <option value="2">일정2</option>
-                                <option value="3">일정3</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>제목</td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" placeholder="제목을 입력하세요" name="diaryTitle"></td>
-                    </tr>
-                    <tr>
-                        <td>내용</td>
-                    </tr>
-                    <tr>
-                        <td><textarea placeholder="행복했던 여행을 기록해보세요" name="diaryContent" id="editor"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>날짜</td>
-                    </tr>
-                    <tr>
-                        <td><input type="date" name="diaryDate"></td>
-                    </tr>
-                    <tr>
-                        <td>테마 및 공개 여부</td>
-                    </tr>
-                    <tr>
-                        <td class="inline-wrapper">
-                            <div class="inline-element">
-                                <select name="diaryTheme" class="diary-writer-select-theme">
-                                    <option value="">테마를 적용하고 싶다면?</option>
-                                    <option value="yellow">노랑</option>
-                                    <option value="red">빨강</option>
-                                    <option value="blue">파랑</option>
-                                    <option value="green">초록</option>
-                                </select>
-                            </div>
-                            <div class="inline-element2">
-                                <label><input type="radio" name="diaryOpen" value="private"> 비공개</label>
-                                <label><input type="radio" name="diaryOpen" value="public" checked="checked"> 공개</label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="diary_btn_submit">
-                        <td><input type="submit" value="등록" class="btn_submit"></td>
-                    </tr>
-                </table>
+				<table class="diary-write-table">
+					<tr>
+						<td colspan="2"><h1>나의 여행일기 남기기</h1></td>
+					</tr>
+					<tr>
+						<td>일정</td>
+					</tr>
+					<tr>
+						<td><select name="diaryPlanId"
+							class="diary-writer-select-plan">
+								<option value="">처음 생성했던 일정 이름을 골라주세요!</option>
+								<option value="1">일정1</option>
+								<option value="2">일정2</option>
+								<option value="3">일정3</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td>제목</td>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="제목을 입력하세요"
+							name="diaryTitle"></td>
+					</tr>
+					<tr>
+						<td>내용</td>
+					</tr>
+					<tr>
+						<td><textarea placeholder="행복했던 여행을 기록해보세요"
+								name="diaryContent" id="editor"></textarea></td>
+					</tr>
+					<tr>
+						<td>날짜</td>
+					</tr>
+					<tr>
+						<td><input type="date" name="diaryDate"></td>
+					</tr>
+					<tr>
+						<td>테마 및 공개 여부</td>
+					</tr>
+					<tr>
+						<td class="inline-wrapper">
+							<div class="inline-element">
+								<select name="diaryTheme" class="diary-writer-select-theme">
+									<option value="">테마를 적용하고 싶다면?</option>
+									<option value="yellow">노랑</option>
+									<option value="red">빨강</option>
+									<option value="blue">파랑</option>
+									<option value="green">초록</option>
+								</select>
+							</div>
+							<div class="inline-element2">
+								<label><input type="radio" name="diaryOpen"
+									value="private"> 비공개</label> <label><input type="radio"
+									name="diaryOpen" value="public" checked="checked"> 공개</label>
+							</div>
+						</td>
+					</tr>
+					<tr class="diary_btn_submit">
+						<td><input type="submit" value="등록" class="btn_submit"></td>
+					</tr>
+				</table>
 
-            </form>
-        </div>
-    </section>
+			</form>
+		</div>
+	</section>
 
-    <footer>
-        <div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
-    </footer>
-    <script>
+	<footer>
+		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+	</footer>
+	<script>
         $(document).ready(function() {
             $('#diaryForm').on('submit', function(event) {
                 event.preventDefault(); // 폼 기본 제출 방지

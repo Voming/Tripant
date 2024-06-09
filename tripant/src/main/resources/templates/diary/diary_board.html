@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/diary/diary_board.css}" rel="stylesheet">
+<link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}"></head>
 <body>
 	<header>
-		<div class="header" th:insert="~{common/header :: wrap-header}"/>
+		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	</header>
-    <!-- <aside th:insert="~{common/diary_aside :: wrap-diary-aside}"></aside> -->
+	<!-- <aside th:insert="~{common/diary_aside :: wrap-diary-aside}"></aside> -->
 	<section>
 		<!-- 버튼 클릭 이벤트로 지역 태그 클릭 시 이동 시키기 -->
 		<div class="diary-wrap-main">
-		<!-- 사이드바 연결 -->
-    		<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
+			<!-- 사이드바 연결 -->
+			<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
 			<div class="board-search-inner">
 				<!-- 소개 문구 -->
 				<div class="diary-introduction">
@@ -50,25 +51,25 @@
 								<!-- 공개글 데이터 가져오기  -->
 								<th:block th:if="${diaries} != null">
 									<th:block th:each="diary :  ${diaries}">
-									<div class="wrap-d-content">
-										<div class="diary-img">
-											<img src="https://dummyimage.com/350x200/000/fff"
-												alt="대표 이미지">
-										</div>
-										<div class="wrap-content">
-											<div class="diary-content">
-												<p class="diary-title" style="font-size: var(--font3);"
-													th:text="${diary.diaryTitle}"></p>
-												<p class="diary-date" style="font-size: var(--font4);"
-													th:text="${diary.diaryDate}"></p>
-												<p class="diary-preview" style="font-size: var(--font5);"
-													th:text="${diary.diaryContent}"></p>
+										<div class="wrap-d-content">
+											<div class="diary-img">
+												<img src="https://dummyimage.com/350x200/000/fff"
+													alt="대표 이미지">
 											</div>
-											<div class="diary-like">
-												<img th:src="@{/images/diary/diary_like_none.png}"
-													alt="하트아이콘" class="like-icon">
+											<div class="wrap-content">
+												<div class="diary-content">
+													<p class="diary-title" style="font-size: var(--font3);"
+														th:text="${diary.diaryTitle}"></p>
+													<p class="diary-date" style="font-size: var(--font4);"
+														th:text="${diary.diaryDate}"></p>
+													<p class="diary-preview" style="font-size: var(--font5);"
+														th:text="${diary.diaryContent}"></p>
+												</div>
+												<div class="diary-like">
+													<img th:src="@{/images/diary/diary_like_none.png}"
+														alt="하트아이콘" class="like-icon">
+												</div>
 											</div>
-										</div>
 										</div>
 									</th:block>
 								</th:block>
@@ -208,33 +209,38 @@
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
 	<script>
-	
-	/*탭 전환 시키기  */
+		/*탭 전환 시키기  */
 		$('.area-tab-nav a').click(function() {
 			$('.diary-tab-content > div').hide().filter(this.hash).fadeIn();
 			$('.area-tab-nav a').removeClass('active');
 			$(this).addClass('active');
 			return false;
 		}).filter(':eq(0)').click();
-	
-	
-	/*좋아요 누르기  */
-	
-		$(document).ready(function() {
-			var itemsPerPage = 8; // 페이지에 8개씩 뿌리기
-			var currentPage = 0;
-			var currentTap = '#tab01'; // 초기 탭은 전체
-			
-		    $('.diary-like .like-icon').on('click', function() {
-		    	if ($(this).attr('src') === '/images/diary/diary_like_none.png') {
-                    $(this).attr('src', '/images/diary/diary_like_icon.png');
-                } else {
-                    $(this).attr('src', '/images/diary/diary_like_none.png');
-                }
-		    });
-		});
-	
-	
+
+		/*좋아요 누르기  */
+
+		$(document)
+				.ready(
+						function() {
+							var itemsPerPage = 8; // 페이지에 8개씩 뿌리기
+							var currentPage = 0;
+							var currentTap = '#tab01'; // 초기 탭은 전체
+
+							$('.diary-like .like-icon')
+									.on(
+											'click',
+											function() {
+												if ($(this).attr('src') === '/images/diary/diary_like_none.png') {
+													$(this)
+															.attr('src',
+																	'/images/diary/diary_like_icon.png');
+												} else {
+													$(this)
+															.attr('src',
+																	'/images/diary/diary_like_none.png');
+												}
+											});
+						});
 	</script>
 </body>
 
