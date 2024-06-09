@@ -88,6 +88,9 @@ public class PlanController {
 		
 		rttb.addFlashAttribute("areaName", areaName);
 		rttb.addFlashAttribute("planTitle", planTitle);
+		//짧은 이름으로 넘기기 
+		String areaShortName = planService.selectAreaShortName(areaName);
+		rttb.addFlashAttribute("areaShortName", areaShortName);
 		return "redirect:/make";
 	}
 	

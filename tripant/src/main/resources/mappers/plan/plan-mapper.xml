@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mclass.store.tripant.plan.model.repostiory.PlanRepository">
+	<!-- 그 외에 일정에 필요한 mapper -->
 	<select id="selectPlanCount" resultType="_int">
 		SELECT COUNT(*) FROM
 		PLAN
@@ -23,6 +24,10 @@
 	</select>
 	
 	<select id="selectAreaInfoList" parameterType="string" resultType="AreaEntity">
-		select * from area where area_name = #{areaName}
+		SELECT * FROM AREA WHERE AREA_NAME = #{areaName}
+	</select>
+
+	<select id="selectAreaShortName"  parameterType="string" resultType="string">
+		SELECT AREA_SHORT_NAME FROM AREA WHERE AREA_NAME = #{areaName}
 	</select>
 </mapper>

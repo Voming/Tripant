@@ -34,4 +34,8 @@ public class PlanService {
 	public List<AreaEntity> selectAreaInfoList(String areaName){
 		return planRepository.selectAreaInfoList(areaName);
 	}
+	
+	public String selectAreaShortName(String areaName) {
+		return planRepository.selectAreaShortName(areaName);
+	}
 }
