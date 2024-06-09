@@ -1,7 +1,7 @@
 //비밀번호 재설정
 function setPwdHandler(){
 	$.ajax({
-		url: '/pwd', 
+		url: contextPath+'pwd', 
 		method: 'post', 
 		data: $('#frm-pwd').serialize(), 
 		success: function(result){

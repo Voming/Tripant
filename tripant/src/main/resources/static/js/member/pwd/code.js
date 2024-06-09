@@ -2,7 +2,7 @@
 function codeSendHandler(){
 	var memEmail = $("#memEmail").val();
 	$.ajax({
-		url: "/code/send/pwd", 
+		url: contextPath+'code/send/pwd', 
 		type: "post", 
 		async: false, 
 		data: {memEmail: memEmail}, 
@@ -27,7 +27,7 @@ function codeSendHandler(){
 function codeCheckHandler(){
 	var inputCode = $("#code").val();
 	$.ajax({
-		url: "/code/check", 
+		url: contextPath+'code/check', 
 		type: "post", 
 		async: false, 
 		data: {inputCode: inputCode}, 

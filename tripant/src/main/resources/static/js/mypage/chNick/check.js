@@ -3,7 +3,7 @@ function nickCheckHandler(){
 	const nickExp = /^[가-힣]{2,8}$/;
 	const nickInput = $("input#memNick").val();
 	$.ajax({
-		url: '/join/nick/check', 
+		url: contextPath+'join/nick/check', 
 		type: 'post', 
 		data: {memNick: nickInput}, 
 		success: function(result){

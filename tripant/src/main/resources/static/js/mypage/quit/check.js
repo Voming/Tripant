@@ -2,7 +2,7 @@
 function pwdCheckHandler(){
 	const pwdInput = $("input#memPassword").val();
 	$.ajax({
-		url: '/pwd/use', 
+		url: contextPath+'pwd/use', 
 		type: 'post', 
 		data: {memPassword: pwdInput}, 
 		success: function(result){

@@ -1,12 +1,12 @@
 //마이페이지 돌아가기
 function backClickHandler(){
-	location.href = '/my/home';
+	location.href = contextPath+'my/home';
 }
 //회원 탈퇴
 function quitClickHandler(){
 	const memPassword = $('#memPassword').val();
 	$.ajax({
-		url: '/my/quit', 
+		url: contextPath+'my/quit', 
 		type: 'post', 
 		data: {memPassword: memPassword}, 
 		success: function(result){
@@ -14,7 +14,7 @@ function quitClickHandler(){
 				if(confirm('정말 탈퇴하시겠습니까?')){
 					alert('탈퇴 완료되었습니다.\n메인 페이지로 이동합니다.');
 					let form = document.getElementById('frm-quit');
-					form.action = '/logout';
+					form.action = contextPath+'logout';
 					form.method = 'POST';
 					form.submit();
 				}

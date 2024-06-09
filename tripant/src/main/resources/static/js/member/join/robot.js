@@ -15,7 +15,7 @@ function robotHandler() {
 	}
 	var captcha = 0;
 	$.ajax({
-		url: '/join',
+		url: contextPath+'join',
 		type: 'post',
 		data: memberEntity,
 		success: function(data) {
