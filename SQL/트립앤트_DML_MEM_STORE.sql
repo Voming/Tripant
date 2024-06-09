@@ -1,14 +1,28 @@
 desc member;
 select * from member;
+select * from plan_member;
+delete from plan_member where mem_email = 'seojw0730@gmail.com';
+delete from member where mem_nick = '서재원';
+commit;
 -- 트립앤트 회원
 insert into member values(
     'seojw0730@naver.com', 
-    '한글', 
+    '재원', 
     '$2a$12$6jbDn8AQYh/5V1OI7ok4UuW.Wurj0vOGZqpmqYzfOLEsVez6BNn5O', 
     'ROLE_MEM', 
     1, 
     'T', 
     to_date('24/06/03', 'RR/MM/DD'), 
+    to_date('97/07/30', 'RR/MM/DD')
+);
+insert into member values(
+    'seojw0730@gmail.com', 
+    '서재원', 
+    '$2a$12$6jbDn8AQYh/5V1OI7ok4UuW.Wurj0vOGZqpmqYzfOLEsVez6BNn5O', 
+    'ROLE_MEM', 
+    1, 
+    'T', 
+    to_date('24/06/08', 'RR/MM/DD'), 
     to_date('97/07/30', 'RR/MM/DD')
 );
 insert into member values(
@@ -42,7 +56,6 @@ insert into member values(
     to_date('95/06/29', 'RR/MM/DD')
 );
 commit;
-
 -- 회원 탈퇴 트리거
 create or replace NONEDITIONABLE TRIGGER trg_member_quit
     BEFORE delete ON member
