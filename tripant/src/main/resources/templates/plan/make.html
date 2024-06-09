@@ -19,12 +19,12 @@
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <body>
 
-	<div class="modal show">
+	<div class="modal">
 		<div class="modal_popup">
 			<div>
 				<h2>여행 기간이 어떻게 되시나요?</h2>
-				<h4>여행 일자는 최대 10일 까지 설정 가능합니다</h4>
-				<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
+				<h4>여행 일자는 최대 10일 까지 설정 가능합니다.</h4>
+				<h5>입력 칸을 클릭하면 달력이 나타납니다.</h5>
 				<div class="wrap-calendar">
 					<input type="text" id="daterange" />
 				</div>
@@ -34,7 +34,7 @@
 	<div class="main-wrapper">
 		<aside class="nav-wrapper flex">
 			<nav class="nav flex">
-				<a th:href="@{/}"><img class="logo"
+				<a><img class="logo"
 					src="/images/tripant_logo_text.png"></a>
 				<ul class="tab-nav">
 					<li><a href="#tab01"> step 01<br>날짜확인
@@ -51,9 +51,10 @@
 		</aside>
 		<div class="tab-content">
 			<div id="tab01">
-				<div>
+				<div class="flex">
 					<div class="plan-title">개미와 함꼐 떠나는 신나는 제주여행</div>
-					<span class="plan-location">제주</span> <span class="plan-priod">2024.06.01~2024.06.02</span>
+					<span class="plan-location">제주</span> 
+					<span class="plan-priod">2024.06.01~2024.06.02</span>
 					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
 					
 				</div>

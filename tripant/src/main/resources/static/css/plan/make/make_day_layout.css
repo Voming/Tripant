@@ -1,23 +1,30 @@
 @charset "UTF-8";
 
+/* 지도 크기 세팅 */
+.main-wrapper .map-wrapper {
+	width: 75%;
+}
 
-/* 일정 */
-.main-wrapper .schedule-wrapper {
+/* 내용 부분 크기 세팅 */
+.main-wrapper .tab-content {
 	flex-direction: column;
-	width: 30%;
+	width: 25%;
 	padding: 0px 30px;
 }
 
-.main-wrapper .schedule-wrapper .plan-info {
+
+.main-wrapper .tab-content #tab01 div {
 	flex-direction: column;
+	font-family: 'GangwonEdu_OTFBoldA';
 }
 
-.main-wrapper .schedule-wrapper .plan-title {
+.main-wrapper .tab-content .plan-title {
 	font-size: var(--font2);
 	margin: 30px 0 10px 0;
 }
 
-.main-wrapper .schedule-wrapper .plan-location {
-	margin-right: 15px;
+.main-wrapper .tab-content span {
+	margin-bottom: 10px;
 	font-size: var(--font3);
 }
+

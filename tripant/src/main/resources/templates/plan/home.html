@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <link th:href="@{/css/plan/main/home_make.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/plan/main/home_example.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/plan/main/home_search.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/plan/main/home_modal.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('home')}">
 </head>
-
 <script th:line="javascript" th:src="@{/js/plan/plan_home.js}" ></script>
-
 <body>
 
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>

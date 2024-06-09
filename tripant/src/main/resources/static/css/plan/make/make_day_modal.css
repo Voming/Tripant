@@ -46,31 +46,28 @@
 .modal .modal_popup h4 {
 	margin-bottom: 30px;
 }
-.modal .modal_popup h6 {
+.modal .modal_popup h5 {
 	margin-bottom: 10px;
 }
 
+.modal .modal_popup #daterange{
+	width: 200px;
+	height: 30px;
+	text-align: center;
+	font-size: var(--font5);
+}
 
 .modal .modal_popup .wrap-calendar {
-	/* 가로 정렬 */
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 }
 
-.modal-left {
-	width: 380px;
-	height: 380px;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-
-.modal-right {
-	width: 380px;
-	height: 380px;
-	/* 상하좌우 정중앙 정렬하기 */
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.daterangepicker.ltr.show-calendar.openscenter .drp-buttons .btn-sm{
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	width: 80px;
+	height: 30px;
 }

@@ -1,4 +1,5 @@
 $(function() {
+	// TODO 바로 열리게 하는 방법 있는지 찾아보기
 	$('#daterange').daterangepicker({
 		opens: "center",
 		"locale": {
