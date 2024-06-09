@@ -54,18 +54,6 @@ public class LoginController {
 		return "member/login";
 	}
 	
-	//카카오 로그인
-	@GetMapping("/login/kakao")
-	public String kakaoLogin() {
-		return "redirect:"+keysJaewon.getKakaoLoginUrl();
-	}
-	
-	//네이버 로그인
-	@GetMapping("/login/naver")
-	public String naverLogin() {
-		return "redirect:"+keysJaewon.getNaverLoginUrl();
-	}
-	
 	//비밀번호 찾기 페이지
 	@GetMapping("/pwd")
 	public String findPwd() {
