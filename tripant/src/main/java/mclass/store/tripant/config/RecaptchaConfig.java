@@ -1,4 +1,4 @@
-package mclass.store.tripant.member.controller;
+package mclass.store.tripant.config;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

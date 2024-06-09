@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.apikeys.KeysJaewon;
+import mclass.store.tripant.config.RecaptchaConfig;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.model.service.MemberService;
 

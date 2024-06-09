@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.apikeys.KeysJaewon;
+import mclass.store.tripant.config.RecaptchaConfig;
 
 @RestController
 @RequiredArgsConstructor

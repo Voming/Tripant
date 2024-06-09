@@ -12,10 +12,7 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.member.controller.CustomAuthFailureHandler;
-import mclass.store.tripant.member.controller.CustomAuthSuccessHandler;
-import mclass.store.tripant.member.controller.OAuth2FailureHandler;
-import mclass.store.tripant.member.model.service.OAuth2MemberService;
+import mclass.store.tripant.member.model.service.OAuth2SecurityService;
 
 @RequiredArgsConstructor
 @EnableWebSecurity /* (debug = true) */
@@ -25,7 +22,7 @@ public class SecurityConfig {
 	private final CustomAuthSuccessHandler customAuthSuccessHandler;
 	private final CustomAuthFailureHandler customAuthFailureHandler;
 	private final OAuth2FailureHandler oAuth2FailureHandler;
-	private final OAuth2MemberService oAuth2MemberService;
+	private final OAuth2SecurityService oAuth2MemberService;
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

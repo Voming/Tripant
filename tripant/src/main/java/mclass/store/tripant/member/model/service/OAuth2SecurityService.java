@@ -22,7 +22,7 @@ import mclass.store.tripant.member.model.repository.MemberRepository;
 
 @Service
 @RequiredArgsConstructor
-public class OAuth2MemberService extends DefaultOAuth2UserService {
+public class OAuth2SecurityService extends DefaultOAuth2UserService {
 	
 	private final MemberRepository memberRepository;
 	

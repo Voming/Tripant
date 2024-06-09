@@ -12,6 +12,11 @@ import lombok.Getter;
 @Getter
 public class CustomOAuth2User extends User implements OAuth2User {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public CustomOAuth2User(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 	}
