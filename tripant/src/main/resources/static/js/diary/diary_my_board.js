@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet" type="text/css">
-<link th:href="@{/css/mydiary/mydiary_board.css}" rel="stylesheet">
-<head th:replace="~{common/header :: head('diaryboard')}"></head>
-<script type="text/javascript">
-//JavaScript 코드 추가
 document.addEventListener("DOMContentLoaded", function() {
 	var diaries =8; /* 일기 데이터 배열 */
 	
@@ -46,47 +39,3 @@ document.addEventListener("DOMContentLoaded", function() {
     renderDiaries(currentIndex, batchSize);
     currentIndex += batchSize; // 초기 인덱스 설정
 });
-
-
-</script>
-</head>
-<body>
-	<header>
-		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
-	</header>
-	<section>
-		<div class="mydiary-wrap">
-			<!-- 사이드바 연결 -->
-			<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
-			<!-- 나만의 글 가져오기   -->
-			<div class="board-list">
-				<th:block th:if="${diaries} != null">
-					<th:block th:each="diary :  ${diaries}">
-						<div class="wrap-diary">
-							<div class="diary-img">
-								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-							</div>
-							<div class="wrap-content">
-								<div class="diary-content">
-									<p class="diary-title" th:text="${diary.diaryTitle}"></p>
-									<p class="diary-date" th:text="${diary.diaryDate}"></p>
-									<p class="diary-open" th:text="${diary.diaryOpen}"></p>
-								</div>
-							</div>
-						</div>
-					</th:block>
-				</th:block>
-				<!-- 4x4 로 뿌리기 -->
-			</div>
-
-			<div class="btn-more">
-				<button type="button" class="learn-more">더보기</button>
-			</div>
-		</div>
-	</section>
-	<!-- <aside> <div class="aside" th:insert="~{common/diary_aside :: wrap-aside}"></div></aside> -->
-	<footer>
-		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
-	</footer>
-</body>
-</html>

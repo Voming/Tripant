@@ -1,13 +1,13 @@
 @charset "UTF-8";
 .wrap-main *{
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
-
 .wrap-main{
 	display:flex;
 	flex-direction:row;
     margin: 0 auto;
 }
+
 
 body{
 	margin:0;

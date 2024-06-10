@@ -1,11 +1,14 @@
 package mclass.store.tripant.config;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+
+import com.nimbusds.jose.shaded.gson.Gson;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +21,10 @@ public class OAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler 
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		if(exception instanceof UsernameNotFoundException) {
+			String msg = exception.getMessage();
+			Map<String, Object> map = new Gson().fromJson(msg, Map.class);
+			request.getSession().setAttribute("memEmail", map.get("memEmail"));
+			request.getSession().setAttribute("memType", map.get("memType"));
 			response.setContentType("text/html; charset=utf-8");
 			response.getWriter()
 			.append("<script type=\"text/javascript\">")

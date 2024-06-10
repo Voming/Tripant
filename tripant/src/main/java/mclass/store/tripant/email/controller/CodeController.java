@@ -36,7 +36,7 @@ public class CodeController {
 	//인증번호 발송
 	@PostMapping("/send")
 	@ResponseBody
-	public String sendCode(HttpServletResponse response,@RequestParam String memEmail
+	public String codeSend(HttpServletResponse response,@RequestParam String memEmail
 			, HttpSession session) {
 		if(memberService.existEmail(memEmail) == 1) {
 			return "-1";
@@ -96,7 +96,7 @@ public class CodeController {
 	//인증번호 확인
 	@PostMapping("/check")
 	@ResponseBody
-	public String checkCode(HttpSession session, @RequestParam String inputCode) throws IOException {
+	public String codeCheck(HttpSession session, @RequestParam String inputCode) throws IOException {
 		if(inputCode.equals(session.getAttribute("code"))) {
 			session.removeAttribute("code");
 			return "1";
@@ -108,7 +108,7 @@ public class CodeController {
 	//비밀번호 찾기 - 인증번호 발송
 	@PostMapping("/send/pwd")
 	@ResponseBody
-	public String pwdSendCode(HttpServletResponse response,@RequestParam String memEmail
+	public String codeSendPwd(HttpServletResponse response,@RequestParam String memEmail
 			, HttpSession session) {
 		if(memberService.existEmail(memEmail) == 0) {
 			return "-1";

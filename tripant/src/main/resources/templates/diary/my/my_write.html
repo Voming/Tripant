@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet" type="text/css">
-<link th:href="@{/css/mydiary/mydiary_write.css}" rel="stylesheet">
-<!-- ckeditors -->
-<!-- ckeditor CDN  -->
-<script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/super-build/ckeditor.js"></script>
-<!-- ckeditor CKBox  -->
-<script src="https://cdn.ckbox.io/CKBox/2.4.0/ckbox.js"></script>
-<!-- ckeditor jsp 파일 -->
-<script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
-<!-- 제이쿼리  -->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link th:href="@{/css/diary/my/my_write.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}">
 </head>
-
 <body>
+
 	<header>
 		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	</header>
@@ -49,8 +40,13 @@
 						<td>내용</td>
 					</tr>
 					<tr>
-						<td><textarea placeholder="행복했던 여행을 기록해보세요"
-								name="diaryContent" id="editor"></textarea></td>
+						<td>
+							<!--  <textarea placeholder="행복했던 여행을 기록해보세요"
+								name="diaryContent" id="editor"></textarea>-->
+							<div id="container">
+								<div id="editor"></div>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td>날짜</td>
@@ -92,26 +88,33 @@
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
 	<script>
-        $(document).ready(function() {
-            $('#diaryForm').on('submit', function(event) {
-                event.preventDefault(); // 폼 기본 제출 방지
-                const formData = $(this).serialize(); // 폼 데이터를 직렬화
+		$(document).ready(function() {
+			$('#diaryForm').on('submit', function(event) {
+				event.preventDefault(); // 폼 기본 제출 방지
+				const formData = $(this).serialize(); // 폼 데이터를 직렬화
 
-                $.ajax({
-                    url: '/my/write', // 서버의 엔드포인트 URL
-                    type: 'post',
-                    data: formData,
-                    success: function(data) {
-                        alert('작성완료');
-                        window.location.href = '/my/diary'; // 성공 시 리디렉션
-                    },
-                    error: function(error) {
-                        console.error('Error:', error);
-                        alert('오류가 발생했습니다.');
-                    }
-                });
-            });
-        });
-    </script>
+				$.ajax({
+					url : '/my/write', // 서버의 엔드포인트 URL
+					type : 'post',
+					data : formData,
+					success : function(data) {
+						alert('작성완료');
+						window.location.href = '/my/diary'; // 성공 시 리디렉션
+					},
+					error : function(error) {
+						console.error('Error:', error);
+						alert('오류가 발생했습니다.');
+					}
+				});
+			});
+		});
+	</script>
+	<!-- ckeditors -->
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
+	
+
+	<!-- ckeditor jsp 파일 -->
+	<script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
 </body>
 </html>

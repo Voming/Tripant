@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.apikeys.KeysJaewon;
@@ -39,7 +41,7 @@ public class JoinController {
 	
 	//SNS 회원가입 페이지
 	@GetMapping("/join/sns")
-	public String joinsns(Model model) {
+	public String joinSns(Model model) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
 		String today = sdf.format(calendar.getTime());
@@ -50,15 +52,15 @@ public class JoinController {
 	// 닉네임 중복 검사
 	@PostMapping("/join/nick/check")
 	@ResponseBody
-	public Integer nickCheck(@RequestParam String memNick) {
+	public Integer joinNickCheck(@RequestParam String memNick) {
 		int result = memberService.existNick(memNick);
 		return result;
 	}
 	
-	//회원가입
+	// 회원가입
 	@PostMapping("/join")
 	@ResponseBody
-	public int joinMember(MemberEntity memberEntity, String recaptcha) {
+	public int joinP(MemberEntity memberEntity, String recaptcha) {
 		
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
@@ -70,6 +72,40 @@ public class JoinController {
 		try {
 			if(RecaptchaConfig.verify(recaptcha)) {
 				memberService.join(memberEntity);
+				return 1;
+			}else {
+				return 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	// SNS 회원가입
+	@PostMapping("/join/sns")
+	@ResponseBody
+	public int joinSnsP(MemberEntity memberEntity, String recaptcha, HttpSession session) {
+		
+		String memEmail = (String) session.getAttribute("memEmail");
+		String memType = (String) session.getAttribute("memType");
+		if(memEmail != null && memType != null) {
+			memberEntity.setMemEmail(memEmail);
+		}else {
+			memType = "T";
+		}
+		log.debug("[sjw] memEmail = "+memEmail);
+		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
+		memberEntity.setMemEnabled(1);
+		memberEntity.setMemRole("ROLE_MEM");
+		memberEntity.setMemType(memType);
+		log.debug("[sjw] mem = "+memberEntity);
+		
+		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
+		try {
+			if(RecaptchaConfig.verify(recaptcha)) {
+				memberService.join(memberEntity);
+				session.removeAttribute("memEmail");
 				return 1;
 			}else {
 				return 0;

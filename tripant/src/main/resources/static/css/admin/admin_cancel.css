@@ -79,8 +79,8 @@
 .memberlist > li> .col >li:first-child+li+li+li{
 	width:23%;
 }
-/*  */
 
+/* 취소완료 */
 .btn.done{
 	border-radius:8px;
 	border:none;
@@ -89,12 +89,12 @@
 	height:30px;
 	width:70px;
 }
-
-
+/*취소버튼 */
 .btn{
 	border-radius:8px;
 	border:solid black 1px;
 	background-color:white;
 	height:30px;
 	width:70px;
+	cursor:pointer;
 }

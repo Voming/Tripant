@@ -23,26 +23,23 @@
 	display: inline-block;
 }
 
-.make-plan button{
+.make-plan button {
 	width: 130px;
 	height: 30px;
-	font-family: "GangwonEdu_OTFBoldA";
+	font-family: "Binggrae";
 	font-size: var(--font4);
 	background: black;
 	color: white;
 	border: 0;
 	border-radius: 8px;
 	text-align: center;
-	padding-top: 7px;
 }
 
-
-.make-plan button:hover{
+.make-plan button:hover {
 	background: var(--color_light_gray);
 	color: black;
 	cursor: pointer;
 }
-
 
 .wrap-body .make-img img {
 	margin-top: 60px;
@@ -52,13 +49,13 @@
 	border-radius: 8px;
 }
 
-.wrap-body .make-info{
+.wrap-body .make-info {
 	/* 가로 정렬 */
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 40px;
 }
 
-.wrap-body .make-info p{
+.wrap-body .make-info p {
 	margin: 0 15px;
 }

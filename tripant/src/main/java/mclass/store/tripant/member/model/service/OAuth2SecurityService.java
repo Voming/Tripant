@@ -1,6 +1,7 @@
 package mclass.store.tripant.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,19 +34,25 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 		log.debug("[sjw] loadUser===========");
 		OAuth2User oAuth2User = super.loadUser(userRequest);
 		String email = "";
+		Map<String, Object> map = new HashMap<>();
 		if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
+			map.put("memType", "K");
 			Map<String, Object> kakaoAttributes = oAuth2User.getAttribute("kakao_account");
 			email = (String) kakaoAttributes.get("email"); 
 		}else if(userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
+			map.put("memType", "N");
 			Map<String, Object> naverAttributes = oAuth2User.getAttribute("response");
 			email = (String) naverAttributes.get("email"); 
 		}else if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
+			map.put("memType", "G");
 			email = (String) oAuth2User.getAttributes().get("email");
 		}
+		map.put("memEmail", email);
+		
 		log.debug("[sjw] email = "+email);
 		Optional<MemberEntity> memberEntityOp = Optional.ofNullable(memberRepository.login(email));
 		if(memberEntityOp.isEmpty()) {
-			throw new UsernameNotFoundException("가입해");
+			throw new UsernameNotFoundException(map.toString());
 		}
 		MemberEntity memberEntity = memberEntityOp.get();
 		List<GrantedAuthority> authorities = new ArrayList<>();
@@ -55,7 +62,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole()));
 			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));
 		}
-		System.out.println("[sjw] oAuth2User = "+oAuth2User);
+		log.debug("[sjw] oAuth2User = "+oAuth2User.toString());
 		return new CustomOAuth2User(email, memberEntity.getMemPassword(), authorities);
 	}
 }

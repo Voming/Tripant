@@ -28,8 +28,14 @@ function loadedHandler(){
 	<div class="wrap-main">
 		<div class="flex mypage">
 			<div class="title">마이페이지</div>
-			<div class="myInfo email flex">이메일&nbsp;&nbsp;:<input type="text" name="memEmail" th:value="${memEmail}" readonly></div>
-			<div class="myInfo nick flex">닉네임&nbsp;&nbsp;:<input type="text" name="memNick" th:value="${memNick}" readonly></div>
+			<div class="myInfo email flex">
+				<div class="myInfo email">이메일 : </div>
+				<div><input type="text" name="memEmail" th:value="${memEmail}" readonly></div>
+			</div>
+			<div class="myInfo nick flex">
+				<div class="myInfo nick">닉네임 : </div>
+				<div><input type="text" name="memNick" th:value="${memNick}" readonly></div>
+			</div>
 			<div class="ch nick"><button type="button" class="btn chNick">닉네임 변경</button></div>
 			<div class="ch pwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
 			<div class="unlink kakao flex"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"><a th:href="@{/my/quit}">연동 해제</a></div>

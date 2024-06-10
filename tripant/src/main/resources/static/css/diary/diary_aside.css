@@ -5,7 +5,7 @@ aside {
 	left: 90px; /* 사이드바 지역태그 부분이랑 사이간격 띄우기 */
 	width: 160px; /* 사이드바 간격 조절 */
 	top: 180px; /* 사이드바 지역태그랑 나란히 */
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 
 .diary-aside {
@@ -47,7 +47,7 @@ aside {
 }
 
 .diary-aside .aside-inner {
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 
 .diary-aside .section-content {

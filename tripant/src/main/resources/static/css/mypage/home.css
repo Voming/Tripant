@@ -6,7 +6,7 @@
 }
 
 .wrap-main * {
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 
 .wrap-main a {
@@ -50,10 +50,15 @@
 .wrap-main .myInfo.flex {
 	column-gap: 10px;
 	margin-bottom: 20px;
+	font-size: var(--font5);
+}
+
+.wrap-main .myInfo.flex .myInfo{
+	width: 50px;
 }
 
 .wrap-main .myInfo.nick.flex{
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 }
 
 .wrap-main input{

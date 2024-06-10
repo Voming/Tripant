@@ -5,7 +5,7 @@
 	margin: auto;
 	padding-top: 110px; /*사이드바랑 나란히  */
 	padding-bottom: 5%;
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 /* 나의 글 리스트 배열 글 밑으로 가게 */
 .board-list {
@@ -25,7 +25,7 @@
 .btn-more button {
 	width: 130px;
 	height: 30px;
-	font-family: "GangwonEdu_OTFBoldA";
+	font-family: "Binggrae";
 	font-size: var(--font4);
 	background: black;
 	color: white;

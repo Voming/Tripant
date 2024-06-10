@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 * {
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 
 .main-wrapper .btn, .main-wrapper a {
@@ -52,7 +52,7 @@
 }
 
 .main-wrapper .nav-wrapper ul li a {
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 	font-size: var(--font4);
 	margin: 5px;
 	text-align: center;

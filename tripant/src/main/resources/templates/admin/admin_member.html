@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>회원관리</title>
@@ -15,6 +16,7 @@
 <!--제이쿼리  -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
+<script th:line="javascript" th:src="@{/js/admin/member_role.js}" ></script>
 <body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
@@ -78,7 +80,7 @@
 
 
 <script>
-$(loadedHandler);
+/*  $(loadedHandler);
 function loadedHandler() {
 	$(".btn").on("click", ClickHandler);
 }
@@ -90,9 +92,9 @@ function ClickHandler() {
          confirmButtonText:"수정완료",
          confirmButtonColor:"black",
          width:"280px",
-         confirmButtonTextFont:"GangwonEdu_OTFBoldA",
+         confirmButtonTextFont:"Binggrae",
          html: `
-             <select name="selectRole" id="selectRole" style='font-family:GangwonEdu_OTFBoldA; font-size:13px; height:25px'>
+             <select name="selectRole" id="selectRole" style='font-family:Binggrae; font-size:13px; height:25px'>
                  <option value="1">휴먼회원</option>
                  <option value="2">일반회원</option>
                  <option value="3">폰튼적용회원</option>
@@ -130,7 +132,7 @@ function ClickHandler() {
          }
      });
 	 
-}
+}  */
 
 
 </script>

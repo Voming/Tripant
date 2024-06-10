@@ -29,7 +29,7 @@ header .log li {
 
 header .log a {
     /* 로그인 폰트 세팅 */
-    font-family: "GangwonEdu_OTFBoldA";
+    font-family: "Binggrae";
     font-size: var(--font4);
     font-weight: bold;
     padding-top: 5px;

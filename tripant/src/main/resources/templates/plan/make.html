@@ -9,22 +9,18 @@
 <head th:replace="~{common/header :: head('일정만들기')}">
 </head>
 <script th:src="@{/js/plan/plan_make.js}"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <body>
 
-	<div class="modal">
+	<div class="modal show">
 		<div class="modal_popup">
 			<div>
 				<h2>여행 기간이 어떻게 되시나요?</h2>
 				<h4>여행 일자는 최대 10일 까지 설정 가능합니다.</h4>
-				<h5>입력 칸을 클릭하면 달력이 나타납니다.</h5>
 				<div class="wrap-calendar">
 					<input type="text" id="daterange" />
 				</div>
@@ -54,8 +50,9 @@
 				<div class="flex">
 					<p class="plan-title" th:text="${planTitle}"></p>
 					<p class="plan-location" th:text="${areaShortName}"></p>
+					
 					<span class="plan-priod">먼저 기간을 입력해주세요</span>
-					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
+					<span class="plan-timeEx"></span> 
 				</div>
 			</div>
 			<div id="tab02">

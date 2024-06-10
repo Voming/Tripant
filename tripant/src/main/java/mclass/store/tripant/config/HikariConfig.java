@@ -17,7 +17,7 @@ public class HikariConfig{
 	private final KeysJaewon keysJaewon;
 	
 	@Bean
-	public DataSource dataSource() {
+	DataSource dataSource() {
 		com.zaxxer.hikari.HikariConfig hikariConfig = new com.zaxxer.hikari.HikariConfig();
 
 		hikariConfig.setJdbcUrl(keysJaewon.getHikariUrl());

@@ -23,35 +23,36 @@
 		#{diaryDate}, #{diaryOpen}, #{diaryViews},
 		#{diaryTheme})
 	</insert>
-	<!--글 상세보기 -->
-	<select id="selectplanById" parameterType="String"
-		resultType="DiaryBoardEntity">
-		SELECT * FROM diary WHERE diaryPlanId = #{diaryPlanId};
+	<!-- 특정 ID의 다이어리 조회 -->
+	<select id="findById" parameterType="Long" resultType="DiaryBoardEntity">
+		SELECT * FROM DIARY WHERE DIARY_ID = #{id}
 	</select>
 	<!-- 공개된 일기 선택 -->
 	<select id="selectPublicDiaries" resultType="DiaryBoardEntity">
 		SELECT * FROM diary
-		WHERE DIARY_OPEN = '0';
+		WHERE DIARY_OPEN = '0'
 	</select>
 
 	<!-- 비공개된 일기 선택 -->
 	<select id="selectPrivateDiaries" resultType="DiaryBoardEntity">
 		SELECT * FROM diary
-		WHERE DIARY_OPEN = '1';
+		WHERE DIARY_OPEN = '1'
 	</select>
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="string">
 		DELETE FROM diary
-		WHERE DIARY_ID = #{diaryId};
+		WHERE DIARY_ID = #{diaryId}
 	</delete>
 	<!-- 글 수정 -->
 	<update id="updateDiary" parameterType="DiaryPostEntity">
 		UPDATE diary
-		SET DIARY_TITLE = #{diaryTitle},
+		SET
+		DIARY_TITLE = #{diaryTitle},
 		DIARY_CONTENT = #{diaryContent},
 		DIARY_DATE = #{diaryDate},
 		DIARY_OPEN = #{diaryOpen},
-		DIARY_THEME = #{diaryTheme}
-		WHERE DIARY_ID = #{diaryId};
+		DIARY_THEME =
+		#{diaryTheme}
+		WHERE DIARY_ID = #{diaryId}
 	</update>
 </mapper>

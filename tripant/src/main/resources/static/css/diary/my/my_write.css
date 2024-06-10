@@ -75,3 +75,11 @@ input[type="submit"]:active {
 	display: flex;
 	justify-content: flex-end;
 }
+/* ckeditor */
+#container{
+
+}
+.ck-editor__editable[role="textbox"] {
+	/* Editing area */
+	min-height: 500px; /* text area 높이 지정 */
+}

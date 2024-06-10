@@ -10,7 +10,7 @@
 }
 
 .wrap-main * {
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 
 .wrap-main .btn {
@@ -18,7 +18,7 @@
 	border-radius: 8px;
 	border: 0;
 	background-color: lightgrey;
-	padding: 5px 5px 2px 5px;
+	padding: 5px;
 }
 
 .wrap-main .hide{
@@ -79,9 +79,6 @@
 	line-height: 2em;
 	column-gap: 10px;
 }
-.wrap-main .btn.font{
-	margin-bottom: 10px;
-}
 .wrap-main .cart{
 	text-align: center;
 	margin: 0 0 10px 0;
@@ -112,11 +109,44 @@
 .wrap-main .sidebar.item a{
 	margin-top: 5px;
 }
+
+/* 폰트 미리보기 */
+.font.modal.flex{
+	position: fixed;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	background-color: rgba(128, 128, 128, .8);
+	width: 100vw; height: 100vh;
+}
+.font.modal.preview{
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	border-radius: 10px;
+	padding: 30px;
+}
+.font.modal.flex .title{
+	font-size: var(--font1);
+	font-weight: bold;
+}
+.font.modal.flex .btn{
+	cursor: pointer;
+	border-radius: 8px;
+	border: 0;
+	background-color: lightgrey;
+	padding: 5px;
+	font-size: var(--font3);
+}
 </style>
 <script>
 $(loadedHandler);
 function loadedHandler(){
-	//버튼 호버 css
+	// 버튼 호버 css
 	$('.btn').hover(function(){
 		$(this).css('background-color', 'black');
 		$(this).css('color', 'white');
@@ -125,6 +155,12 @@ function loadedHandler(){
 		$(this).css('color', 'black');
 	});
 	$('input').on('click', itemNumHandler);
+	
+	// 폰트 모달 띄우기
+	$('.btn.font').on('click', modalOpenHandler);
+	
+	// 폰트 모달 닫기
+	$('.btn.modal-close').on('click', modalCloseHandler);
 }
 // 상품 선택 시 개수 표현
 function itemNumHandler(){
@@ -137,8 +173,23 @@ function itemNumHandler(){
 	}
 	console.log(itemNum);
 }
+// 폰트 모달 띄우기
+function modalOpenHandler(){
+	$('.font.modal.flex').css('display', 'flex');
+}
+// 폰트 모달 닫기
+function modalCloseHandler(){
+	$('.font.modal.flex').css('display', 'none');
+}
 </script>
 <body>
+	<div class="font modal flex">
+		<div class="font modal preview">
+			<div class="font modal title">제공되는 글꼴 종류</div>
+			<div class="font modal png"><img th:src="@{/images/store/font_preview.png}"></div>
+			<div><button type="button" class="btn modal-close">닫기</button></div>
+		</div>
+	</div>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
 		<aside class="sidebar flex">

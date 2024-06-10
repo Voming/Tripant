@@ -23,10 +23,9 @@ public class MypageController {
 
 	// 마이페이지
 	@GetMapping("/my/home")
-	public String mypage(Model model, Principal principal) {
+	public String myHome(Model model, Principal principal) {
 		String memEmail = principal.getName();
 		Map<String, Object> map = memberService.myInfo(memEmail);
-		System.out.println("map = "+map);
 		model.addAttribute("memEmail", map.get("MEM_EMAIL"));
 		model.addAttribute("memNick", map.get("MEM_NICK"));
 		return "mypage/home";
@@ -34,7 +33,7 @@ public class MypageController {
 
 	// 닉네임 변경 페이지
 	@GetMapping("/my/nick")
-	public String chNick() {
+	public String myNick() {
 		return "mypage/chNick";
 	}
 
@@ -52,7 +51,7 @@ public class MypageController {
 
 	// 비밀번호 변경 페이지
 	@GetMapping("/my/pwd")
-	public String chPwd() {
+	public String myPwd() {
 		return "mypage/chPwd";
 	}
 	
@@ -70,14 +69,14 @@ public class MypageController {
 
 	// 회원 탈퇴 페이지
 	@GetMapping("/my/quit")
-	public String quit() {
+	public String myQuit() {
 		return "mypage/quit";
 	}
 	
 	// 현재 비밀번호
 	@PostMapping("/pwd/use")
 	@ResponseBody
-	public int currPwd(String memPassword, Principal principal) {
+	public int pwdUse(String memPassword, Principal principal) {
 		String memEmail = principal.getName();
 		String currPwd = memberService.currPwd(memEmail);
 		if(bCryptPasswordEncoder.matches(memPassword, currPwd)) {
@@ -90,7 +89,7 @@ public class MypageController {
 	// 회원 탈퇴
 	@PostMapping("/my/quit")
 	@ResponseBody
-	public int memQuit(Principal principal) {
+	public int myQuit(Principal principal) {
 		String memEmail = principal.getName();
 		int result = memberService.memQuit(memEmail);
 		return result;
