@@ -57,7 +57,7 @@
 					<li>
 						<th:block th:each="memBoard:${memBoard}">
 						<ul class="col list">
-							<li></li>
+							<li th:text="${memBoard.diaryId}"></li>
 							<li th:text="${memBoard.diaryTitle}"></li>
 							<li th:text="${memBoard.diaryMemEmail}"></li>
 							<li th:text="${memBoard.diaryDate}"></li>

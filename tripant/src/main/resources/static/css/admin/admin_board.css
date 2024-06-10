@@ -88,11 +88,11 @@
 }
 
 /* 게시글 목록 번호 붙이기 */
-.boardlist > li> .col.list >li:first-child{
+/* .boardlist > li> .col.list >li:first-child{
 	counter-reset: number 0;
 }
 
 .boardlist > li> .col.list >li:first-child:before{
 	counter-increment:number 1;
 	content:counter(number)
-}
+} */
