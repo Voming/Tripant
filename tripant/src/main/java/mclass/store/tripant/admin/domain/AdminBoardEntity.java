@@ -9,6 +9,7 @@ import lombok.Data;
 public class AdminBoardEntity {
 
 	//TODO view 만들고 수정
+	private int diaryId;
 	private String diaryTitle;
 	private String diaryMemEmail;
 	private String diaryDate;
