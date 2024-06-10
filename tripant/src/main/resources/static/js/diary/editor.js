@@ -4,8 +4,7 @@ CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
 	// https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
 	toolbar: {
 		items: [
-			'exportPDF', 'exportWord', '|',
-			'findAndReplace', 'selectAll', '|',
+			
 			'heading', '|',
 			'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
 			'bulletedList', 'numberedList', 'todoList', '|',
@@ -16,8 +15,7 @@ CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
 			'alignment', '|',
 			'link', 'uploadImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
 			'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-			'textPartLanguage', '|',
-			'sourceEditing'
+			
 		],
 		shouldNotGroupWhenFull: true
 	},
@@ -43,7 +41,7 @@ CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
 		]
 	},
 	// https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-	placeholder: 'Welcome to CKEditor 5!',
+	placeholder: '행복했던 나의 여행을 기록으로 남겨보세요.',
 	// https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
 	fontFamily: {
 		options: [
