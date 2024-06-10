@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
 			<!-- 나만의 글 가져오기   -->
 			<div class="board-list">
-				<th:block th:if="${diaries} != null">
+				<!-- <th:block th:if="${diaries} != null">
 					<th:block th:each="diary :  ${diaries}">
 						<div class="wrap-diary">
 							<div class="diary-img">
@@ -75,8 +75,110 @@ document.addEventListener("DOMContentLoaded", function() {
 							</div>
 						</div>
 					</th:block>
-				</th:block>
+				</th:block> -->
 				<!-- 4x4 로 뿌리기 -->
+				
+				
+				<!-- db 연동 전 데모글  -->
+				<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제목</p>
+									<p class="diary-date" >yy-mm-dd</p>
+									<p class="diary-open" >비공개</p>
+								</div>
+							</div>
+						</div>
+				<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제목</p>
+									<p class="diary-date" >yy-mm-dd</p>
+									<p class="diary-open" >비공개</p>
+								</div>
+							</div>
+						</div>
+				<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제목</p>
+									<p class="diary-date" >yy-mm-dd</p>
+									<p class="diary-open" >비공개</p>
+								</div>
+							</div>
+						</div>
+				<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제목</p>
+									<p class="diary-date" >yy-mm-dd</p>
+									<p class="diary-open" >비공개</p>
+								</div>
+							</div>
+						</div>
+				<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제목</p>
+									<p class="diary-date" >yy-mm-dd</p>
+									<p class="diary-open" >비공개</p>
+								</div>
+							</div>
+						</div>
+				<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제목</p>
+									<p class="diary-date" >yy-mm-dd</p>
+									<p class="diary-open" >비공개</p>
+								</div>
+							</div>
+						</div>
+				<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제목</p>
+									<p class="diary-date" >yy-mm-dd</p>
+									<p class="diary-open" >비공개</p>
+								</div>
+							</div>
+						</div>
+				<div class="wrap-diary">
+							<div class="diary-img">
+								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
+							</div>
+							<div class="wrap-content">
+								<div class="diary-content">
+									<p class="diary-title">제목</p>
+									<p class="diary-date" >yy-mm-dd</p>
+									<p class="diary-open" >비공개</p>
+								</div>
+							</div>
+						</div>
+				<!-- 더미 글 끝 -->
+				
+				
 			</div>
 
 			<div class="btn-more">

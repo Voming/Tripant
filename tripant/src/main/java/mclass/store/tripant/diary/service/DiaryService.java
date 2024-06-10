@@ -2,6 +2,7 @@ package mclass.store.tripant.diary.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +18,20 @@ public class DiaryService {
 	public List<DiaryBoardEntity> selectDiaryList(){
 		return diaryRepository.selectDiaryList();
 	}
-	
-	//게시글 등록하기
-	 public void save(DiaryPostEntity diary) {
-		 diaryRepository.insertDiary(diary);
-	
-	        // 공개
-	        diary.setDiaryOpen("0");
-	        
-	        // 비공개
-	        // diary.setDiaryOpen("1");
-	        
-	        diaryRepository.insertDiary(diary);
-	 }
+	// 특정 ID의 다이어리 가져오기
+	public DiaryBoardEntity findById(Long id) {
+	    return diaryRepository.findById(id);
+	}
+ // 게시글 등록하기
+    public void save(DiaryPostEntity diary) {
+        diaryRepository.insertDiary(diary);
+
+        // 공개 설정
+        diary.setDiaryOpen("0");
+        
+        // 비공개 설정
+        // diary.setDiaryOpen("1");
+        
+        diaryRepository.insertDiary(diary);
+    }
 }
