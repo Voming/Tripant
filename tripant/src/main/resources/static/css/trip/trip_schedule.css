@@ -1,0 +1,121 @@
+@charset "UTF-8";
+/* 일정 */
+.main-wrapper .schedule-wrapper{
+	flex-direction:column;
+	width: 30%;
+	padding : 0px 30px;
+}
+.main-wrapper .schedule-wrapper .plan-info{
+	flex-direction: column;
+}
+.main-wrapper .schedule-wrapper .plan-title{
+	font-size: var(--font2);
+	margin: 30px 0 10px 0 ;
+}
+.main-wrapper .schedule-wrapper .plan-location{
+	margin-right : 15px;
+	font-size:var(--font3);
+} 
+.main-wrapper .schedule-wrapper .list-box{
+	height: 100%;
+	padding:10px;
+	overflow: hidden;
+}
+
+.main-wrapper .schedule-wrapper .list-box .column{
+	flex-direction: column;
+	width: 275px;
+	padding-right: 20px;
+}
+.main-wrapper .column .sub-title{
+	justify-content: space-between;
+	margin:10px 0;
+}
+.main-wrapper .sub-title .nday{
+	font-size: var(--font4);
+}
+.main-wrapper .sub-title .date{
+	font-size: var(--font6);
+	color: var(--color_gray);
+}
+/*  scrollbar와 div무너짐 해결:flex의 상위 하위 너비지정*/
+.main-wrapper .edit-tourlist,
+.main-wrapper .tourlist{    flex-direction: row; overflow: scroll;}
+.main-wrapper .tourlist .column,
+.main-wrapper .edit-tourlist .column {flex-wrap: nowrap;}
+
+.main-wrapper .tourlist .column.flex > div,
+.main-wrapper .edit-tourlist .column.flex > div {width: 250px; padding-right:10px;}
+/*  */
+
+.main-wrapper  .column .container{	flex-direction: column;	}
+.main-wrapper .edit-tourlist .column .container{
+	background-color: #F7F8F9;
+	border-radius: 8px;
+	padding:0 5px;
+}
+/* edit part */
+.main-wrapper .edit-tourlist .column .container .spot-info{
+	background-color: #fff;
+	border-radius: 8px;
+	width:80%;
+	height:50px;
+}
+/* show part - grid */
+.main-wrapper .tourlist .spot{
+	grid-template-columns :25px 150px 75px;
+	grid-template-rows :repeat(6,21px);  
+	gap:5px;
+	}
+.main-wrapper .tourlist .spot>:not(:first-child){
+	align-self: center;
+}	
+/* grid-items 규격설정 */	
+.main-wrapper .tourlist .spot-number{grid-column:1; grid-row: 1 ; }
+.main-wrapper .tourlist .spot-staytime{grid-column:2; grid-row: 1 ;}
+.main-wrapper .tourlist .spot-type{grid-column:2; grid-row: 2 ;}
+.main-wrapper .tourlist .spot-title{grid-column:2; grid-row: 3 ;}
+.main-wrapper .tourlist .spot-memo{grid-column:2; grid-row: 4 ;}
+.main-wrapper .tourlist .spot-img{grid-column:3; grid-row: 2 / 5; border-radius: 8px;}
+.main-wrapper .tourlist .spot-caricon{grid-column:1; grid-row: 5 ;}
+.main-wrapper .tourlist .spot-move{grid-column:2; grid-row: 5 ;}
+
+/* background 이미지 규격 설정 */
+.main-wrapper .tourlist .spot-number.backimg{
+	background-image: url('/images/loacation/circle1_red.png');
+	background-size : contain ;
+	background-repeat : no-repeat;
+	color:white;
+	position: relative;
+	}	
+.main-wrapper .tourlist .spot-number >p{
+	position: absolute;
+	left: 40%;
+	transform:translate(-50%,30%);
+}	
+.main-wrapper .spot-staytime{
+	font-size:var(--font5);
+	color: var(--color_gray);
+}
+.main-wrapper .spot .spot-memo{
+	line-height:21px;/* 안의 내묭의 높이가 얼마를 차지할 것인가 */
+ 	text-overflow: ellipsis; /* ...표시 */
+ 	word-wrap:break-word;
+	display: -webkit-box;
+	-webkit-line-clamp:1; /* ...을 붙이는 row */
+	-webkit-box-orient:vertical;
+	overflow:hidden;
+}
+.main-wrapper .spot .spot-memo .img-memo+.memo{
+	display: block;
+	position: absolute;
+	opacity:0; /* 불투명도 설정 0 : 투명 */
+ 	transition: all ease 0.5s;
+ 	padding : 10px;
+ 	width: 200px;
+ 	height: auto;
+ 	border-radius: 8px;
+ 	background-color:  #fafafa;
+ 	border:2px solid var(--color_gray);
+}
+

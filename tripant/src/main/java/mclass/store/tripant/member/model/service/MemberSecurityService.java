@@ -13,26 +13,28 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.domain.MemberRole;
 import mclass.store.tripant.member.model.repository.MemberRepository;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class MemberSecurityService implements UserDetailsService {
 	
 	private final MemberRepository memberRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String memEmail) throws UsernameNotFoundException {
-		System.out.println("membersecurityservice==============");
+		log.debug("[sjw] membersecurityservice==============");
 		Optional<MemberEntity> loginEntityOp = Optional.ofNullable(memberRepository.login(memEmail));
-		System.out.println(loginEntityOp);
+		System.out.println("[sjw] loginEntityOp = "+loginEntityOp);
 		if(loginEntityOp.isEmpty()) {
 			throw new UsernameNotFoundException("가입해");
 		}
 		MemberEntity loginEntity = loginEntityOp.get();
-		System.out.println(loginEntity);
+		System.out.println("[sjw] loginEntity = "+loginEntity);
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		switch(loginEntity.getMemRole()) {
 			case "ROLE_OWNER": authorities.add(new SimpleGrantedAuthority(MemberRole.OWNER.getRole()));

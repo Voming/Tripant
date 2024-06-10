@@ -54,8 +54,9 @@ public class SecurityConfig {
 				.defaultSuccessUrl("/")
 				.successHandler(customAuthSuccessHandler)
 				.failureHandler(oAuth2FailureHandler)
-				.userInfoEndpoint()
-				.userService(oAuth2MemberService)
+				.userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+						.userService(oAuth2MemberService)
+						)
 				)
 		.logout((logout) -> logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

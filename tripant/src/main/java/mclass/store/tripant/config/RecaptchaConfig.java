@@ -14,10 +14,15 @@ import javax.net.ssl.HttpsURLConnection;
 
 import org.springframework.context.annotation.Configuration;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Configuration
+@RequiredArgsConstructor
 public class RecaptchaConfig {
 
-	public static final String url = "https://www.google.com/recaptcha/api/siteverify";
+	public final static String url = "https://www.google.com/recaptcha/api/siteverify";
     private final static String USER_AGENT = "Mozilla/5.0";
 
     private static String secret;
@@ -51,7 +56,7 @@ public class RecaptchaConfig {
             wr.close();
 
             int responseCode = con.getResponseCode();
-            System.out.println("[RecaptchaConfig responseCode] = "+responseCode);
+            log.debug("[sjw] RecaptchaConfig responseCode = "+responseCode);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));

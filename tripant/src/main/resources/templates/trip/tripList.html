@@ -24,30 +24,11 @@
 					<img class="wfull img" src="/images/icons/kebabIcon.png"/>
 					<div id="mini-modal" class="mini-modal mini1" > 
 						<div><a th:href="@{#route}" class="show-detail" >일정보기</a></div>
-						<div><a th:href="@{#share}" class="share-plan" >공유</a></div>
+						<div class="share-plan modal">공유</div>
 						<div class="delete-plan">삭제</div>
 					</div>
 				</button>
 			</div>
-			<!-- 삭제할 더미값 -->
-			<!-- <div class="trip-list wfull" >
-				<a class="ntrip wfull" th:href="@{#}">해당 정보에 대한 trip 페이지로 이동
-					<img alt="img" src="https://placehold.co/180x180/000000/FFFFFF.png" class="location-img"/>
-					<div class="trip-info">
-						<div class="trip-location">제주</div>
-						<div class="trip-title">개미와 함꼐 떠나는 신나는 제주여행2</div>
-						<div class="trip-period">2024.06.01~2024.06.02</div>
-					</div>
-				</a>
-				<button class="info btn" > 
-					<img class="wfull img" src="/images/icons/kebabIcon.png"/>
-					<div id="mini-modal" class="mini-modal mini1" > 
-						<div class="show-detail"><a th:href="@{#route2}" >일정보기</a></div>
-						<div class="share-plan"><a th:href="@{#share2}" >공유</a></div>
-						<div class="delete-plan">삭제</div>
-					</div>
-				</button>
-			</div> -->
 			<div style="height: 100px;" ></div>
 		</div> <!-- full -->
 		<!-- 여행일정없음 -->
@@ -56,6 +37,9 @@
 <script th:inline="javascript">
 $(loaededHandler);
 function loaededHandler(){
+	//공유
+	$('.share-plan.modal').on("click",shareModalHandler);
+	
 	//삭제
 	$('.delete-plan').on("click",deleteHandler);
 	
@@ -68,6 +52,12 @@ function loaededHandler(){
         }
     });
 }
+//친구공유 모달
+function shareModalHandler(){
+	
+}
+
+//
 function modalBtnHandler(){
 	var mbtn = $(this).children('#mini-modal');
      // 클릭된 버튼의 자식 요소 중 '.mini-modal' 클래스를 가진 요소를 찾습니다.
@@ -77,7 +67,7 @@ function modalBtnHandler(){
 		mbtn.css('visibility','hidden');
 	}
     // event.stopPropagation();
-     // 이벤트 전파를 막아 document 클릭 이벤트가 실행되지 않도록 합니다.
+    // 이벤트 전파를 막아 document 클릭 이벤트가 실행되지 않도록 합니다.
 }
 //일정삭제
 function deleteHandler() {

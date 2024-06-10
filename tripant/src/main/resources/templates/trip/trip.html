@@ -2,6 +2,9 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 
  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
+    <link rel="stylesheet" th:href="@{/css/trip/trip_layout.css}">
+    <link rel="stylesheet" th:href="@{/css/trip/trip_nav.css}">
+    <link rel="stylesheet" th:href="@{/css/trip/trip_schedule.css}">
     <link rel="stylesheet" th:href="@{/css/trip/tripMap.css}">
 <head th:replace="~{common/header :: head('trip')}">
 </head>
@@ -10,12 +13,18 @@
 		<aside class="nav-wrapper flex">
 			<nav class="nav flex">
 				<a th:href="@{/}"><img class="logo" src="/images/tripant_logo_text.png"></a>
-				<button type="button" class="whole-day btn">전체일정</button>
-				<!-- frag for문으로 가져오기 -->
-				<div id="nday">
-					<button type="button" class="dayn btn">1일차</button>
-					<button type="button" class="dayn btn">2일차</button>
-				</div>
+				<div class="dayn"><a href="#tab00">전체일정</a></div>
+				<!-- 일정 수 만큼 each로 가져오기 -->
+				<div class="dayn"><a href="#tab01">1일차</a></div>
+				<div class="dayn"><a href="#tab02">2일차</a></div>
+				<div class="dayn"><a href="#tab03">3일차</a></div>
+				<div class="dayn"><a href="#tab04">4일차</a></div>
+				<div class="dayn"><a href="#tab05">5일차</a></div>
+				<div class="dayn"><a href="#tab06">6일차</a></div>
+				<div class="dayn"><a href="#tab07">7일차</a></div>
+				<div class="dayn"><a href="#tab08">8일차</a></div>
+				<div class="dayn"><a href="#tab09">9일차</a></div>
+				<div class="dayn"><a href="#tab10">10일차</a></div>
 			</nav>
 			<div class="plan_update flex">
 				<button type="button" class="edit btn">편집</button>
