@@ -2,7 +2,7 @@ package mclass.store.tripant.diary.domain;
 
 import java.sql.Date;
 
-import org.springframework.data.annotation.Id;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;

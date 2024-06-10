@@ -1,27 +1,26 @@
 package mclass.store.tripant.diary.controller;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nimbusds.oauth2.sdk.Response;
 
-import mclass.store.tripant.diary.domain.DiaryBoardEntity;
+
+
+
 import mclass.store.tripant.diary.domain.DiaryPostEntity;
 import mclass.store.tripant.diary.service.DiaryService;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class MyDiaryController {
