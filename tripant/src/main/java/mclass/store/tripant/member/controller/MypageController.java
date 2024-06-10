@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +23,12 @@ public class MypageController {
 
 	// 마이페이지
 	@GetMapping("/my/home")
-	public String mypage() {
+	public String mypage(Model model, Principal principal) {
+		String memEmail = principal.getName();
+		Map<String, Object> map = memberService.myInfo(memEmail);
+		System.out.println("map = "+map);
+		model.addAttribute("memEmail", map.get("MEM_EMAIL"));
+		model.addAttribute("memNick", map.get("MEM_NICK"));
 		return "mypage/home";
 	}
 

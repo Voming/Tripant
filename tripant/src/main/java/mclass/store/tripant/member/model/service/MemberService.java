@@ -47,6 +47,10 @@ public class MemberService {
 	}
 
 // 마이페이지
+	// 내 정보
+	public Map<String, Object> myInfo(String memEmail){
+		return memberRepository.myInfo(memEmail);
+	}
 	// 닉네임 변경
 	public int saveNick(Map<String, Object> map) {
 		return memberRepository.saveNick(map);
