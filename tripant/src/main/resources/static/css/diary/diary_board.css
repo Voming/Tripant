@@ -35,15 +35,16 @@
 
 .area-tab-nav li a {
 	display: block;
-	background: #f8f8f8;
-	color: #000;
+	/* background: #f8f8f8; */
+/* 	color: #000; */
 	text-decoration: none;
 	font-size: 16px;
 }
 
 .area-tab-nav li a:hover, .area-tab-nav li a.active {
-	background: #fff;
-	color: #4b76e5;
+	/* background: #fff; */
+	 color: #fff; /* 글씨 색 흰색  */
+	 
 }
 
 /*인기순, 최신순  */

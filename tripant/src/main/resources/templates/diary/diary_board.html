@@ -3,7 +3,8 @@
 <link th:href="@{/css/diary/diary_board.css}" rel="stylesheet">
 <link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet">
 <!--board.js파일  -->
-<script type="text/javascript" th:src="@{/js/diary/diary_board.js}"></script>
+<!--  <script type="text/javascript" th:src="@{/js/diary/diary_board.js}"></script> -->
+
 <head th:replace="~{common/header :: head('diaryboard')}"></head>
 <body>
 	<header>
@@ -26,26 +27,7 @@
 						<option value="popularity">인기순</option>
 					</select>
 				</div>
-				<ul class="area-tab-nav">
-					<li class="tags"><a href="#tab01">전체</a></li>
-					<li class="tags"><a href="#tab02">서울</a></li>
-					<li class="tags"><a href="#tab03">부산</a></li>
-					<li class="tags"><a href="#tab04">대구</a></li>
-					<li class="tags"><a href="#tab05">인천</a></li>
-					<li class="tags"><a href="#tab06">광주</a></li>
-					<li class="tags"><a href="#tab07">대전</a></li>
-					<li class="tags"><a href="#tab08">울산</a></li>
-					<li class="tags"><a href="#tab09">세종</a></li>
-					<li class="tags"><a href="#tab10">경기</a></li>
-					<li class="tags"><a href="#tab11">강원</a></li>
-					<li class="tags"><a href="#tab12">충북</a></li>
-					<li class="tags"><a href="#tab13">충남</a></li>
-					<li class="tags"><a href="#tab14">전북</a></li>
-					<li class="tags"><a href="#tab15">전남</a></li>
-					<li class="tags"><a href="#tab16">경북</a></li>
-					<li class="tags"><a href="#tab17">경남</a></li>
-					<li class="tags"><a href="#tab18">제주</a></li>
-				</ul>
+				<div th:replace="~{diary/diary_fragment :: arealist}"></div><!-- 지역 탭 -->
 				<div class="diary-tab-content">
 					<div id="tab01">
 						<div class="wrap-diary">
@@ -503,6 +485,6 @@
 	</footer>
 
 </body>
-
+ <script type="text/javascript" th:src="@{/js/diary/diary_board.js}"></script>
 
 </html>
