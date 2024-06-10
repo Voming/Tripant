@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mclass.store.tripant.store.model.repository.StoreRepository">
-	<!-- 테마 목록 -->
-	<select id="themeList" resultType="itemEntity">
-		select item_name, item_price, item_sale from item where substr(item_code, 1, 1) = 'T' order by item_code 
-	</select>
-	<!-- 폰트 목록 -->
-	<select id="fontList" resultType="itemEntity">
-		select item_name, item_price, item_sale from item where substr(item_code, 1, 1) = 'F' order by item_code 
+	<!-- 스토어 -->
+		<!-- 테마 목록 -->
+		<select id="themeList" resultType="itemEntity">
+			select item_name, to_char(item_price, '9,999') as item_price, item_sale from item where substr(item_code, 1, 1) = 'T' order by item_code 
+		</select>
+		<!-- 폰트 목록 -->
+		<select id="fontList" resultType="itemEntity">
+			select item_name, to_char(item_price, '9,999') as item_price, item_sale from item where substr(item_code, 1, 1) = 'F' order by item_code 
+		</select>
+	<!-- 장바구니 -->
+	<select id="cart" resultType="map" parameterType="string">
+		select item_code, item_name, item_price from cart join item using (item_code) where mem_email = #{memEmail}
 	</select>
 </mapper>

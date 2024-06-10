@@ -6,6 +6,6 @@ import lombok.Data;
 public class ItemEntity {
 	private String itemCode;
 	private String itemName;
-	private Integer itemPrice;
+	private String itemPrice;
 	private Integer itemDur;
 }
