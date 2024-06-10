@@ -29,6 +29,10 @@
 		</update>
 		
 	<!-- 마이페이지 -->
+		<!-- 내 정보 -->
+		<select id="myInfo" resultType="map">
+			select mem_email, mem_nick from member where mem_email = #{memEmail}
+		</select>
 		<!-- 닉네임 변경 -->
 		<update id="saveNick" parameterType="map">
 			update member set mem_nick = #{memNick} where mem_email = #{memEmail}

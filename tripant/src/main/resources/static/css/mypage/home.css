@@ -56,6 +56,15 @@
 	margin-bottom: 60px;
 }
 
+.wrap-main input{
+	border: 0;
+	font-size: var(--font5);
+}
+
+.wrap-main input:focus{
+	outline: none;
+}
+
 .wrap-main .unlink.flex {
 	column-gap: 10px;
 	margin-bottom: 20px;

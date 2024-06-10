@@ -28,6 +28,9 @@ public interface MemberRepository {
 	public int setPwd(Map<String, Object> map);
 
 // 마이페이지
+	// 내 정보
+	public Map<String, Object> myInfo(String memEmail);
+	
 	// 닉네임 변경
 	public int saveNick(Map<String, Object> map);
 
