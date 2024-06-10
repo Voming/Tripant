@@ -2,7 +2,8 @@ desc member;
 select * from member;
 select * from plan_member;
 delete from plan_member where mem_email = 'seojw0730@gmail.com';
-delete from member where mem_nick = '서재원';
+delete from member where mem_nick = '구글';
+truncate table log;
 commit;
 -- 트립앤트 회원
 insert into member values(
@@ -102,14 +103,14 @@ select * from log order by 1 desc;
     -- 테마
 begin
     for i in 0..9 loop
-        insert into item values ('T'||i, '테마'||(i+1), 500, null);
+        insert into item values ('T'||i, '테마'||(i+1), 500, null, null);
     end loop;
     commit;
 end;
 /
     -- 폰트
-insert into item values('F0', '폰트 30일', 1000, 30);
-insert into item values('F1', '폰트 90일', 2700, 90);
+insert into item values('F0', '폰트 30일', 1000, 30, null);
+insert into item values('F1', '폰트 90일', 3000, 90, 10);
 commit;
 
 select * from item;
