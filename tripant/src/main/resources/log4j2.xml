@@ -2,13 +2,8 @@
 <Configuration status="DEBUG">
 	<Properties>
 		<Property name="LOG_DATEFORMAT_PATTERN">{HH:mm:ss.SSS}</Property>
-		<Property name="LOG_LEVEL_PATTERN">{-%5p}{FATAL=red blink, ERROR=red, WARN=yellow
-			bold, INFO=green, DEBUG=green bold, TRACE=blue}
-			%style{%-35.35C{1.}}{cyan} :
-			%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</Property>
-		<Property name="LOG_LEVEL_PATTERN_ASPECT">{-%5p}{FATAL=red blink, ERROR=red, WARN=yellow
-			bold, INFO=green, DEBUG=green bold, TRACE=blue} :
-			%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</Property>
+		<Property name="LOG_LEVEL_PATTERN">{-%5p}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue}%style{%-35.35C{1.}}{cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</Property>
+		<Property name="LOG_LEVEL_PATTERN_ASPECT">{-%5p}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</Property>
 	</Properties>
     <Appenders>
     	 <Console name="ConsoleLog" target="SYSTEM_OUT">
