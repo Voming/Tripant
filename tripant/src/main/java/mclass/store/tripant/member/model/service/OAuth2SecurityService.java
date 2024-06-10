@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.member.domain.CustomOAuth2User;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.domain.MemberRole;
@@ -22,13 +23,14 @@ import mclass.store.tripant.member.model.repository.MemberRepository;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OAuth2SecurityService extends DefaultOAuth2UserService {
 	
 	private final MemberRepository memberRepository;
 	
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-		System.out.println("loadUser===========");
+		log.debug("[sjw] loadUser===========");
 		OAuth2User oAuth2User = super.loadUser(userRequest);
 		String email = "";
 		if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
@@ -40,7 +42,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 		}else if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
 			email = (String) oAuth2User.getAttributes().get("email");
 		}
-		System.out.println("email = "+email);
+		log.debug("[sjw] email = "+email);
 		Optional<MemberEntity> memberEntityOp = Optional.ofNullable(memberRepository.login(email));
 		if(memberEntityOp.isEmpty()) {
 			throw new UsernameNotFoundException("가입해");
@@ -53,7 +55,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole()));
 			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));
 		}
-		System.out.println("oAuth2User = "+oAuth2User);
+		System.out.println("[sjw] oAuth2User = "+oAuth2User);
 		return new CustomOAuth2User(email, memberEntity.getMemPassword(), authorities);
 	}
 }

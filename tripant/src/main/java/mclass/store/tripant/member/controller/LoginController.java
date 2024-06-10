@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.apikeys.KeysJaewon;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class LoginController {
 	
 	private final KeysJaewon keysJaewon;
@@ -64,8 +66,8 @@ public class LoginController {
 	@PostMapping("/pwd")
 	@ResponseBody
 	public int setPwd(@RequestParam String memEmail, @RequestParam String memPassword) {
-		System.out.println("memEmail = "+memEmail);
-		System.out.println("memPwd = "+memPassword);
+		log.debug("[sjw] memEmail = "+memEmail);
+		log.debug("[sjw] memPwd = "+memPassword);
 		Map<String , Object> map = new HashMap<>();
 		map.put("memEmail", memEmail);
 		map.put("memPassword", bCryptPasswordEncoder.encode(memPassword));
