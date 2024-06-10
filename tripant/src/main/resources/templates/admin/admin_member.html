@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>회원관리</title>
@@ -15,6 +16,7 @@
 <!--제이쿼리  -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
+<script th:line="javascript" th:src="@{/js/admin/member_role.js}" ></script>
 <body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
@@ -78,7 +80,7 @@
 
 
 <script>
-$(loadedHandler);
+/*  $(loadedHandler);
 function loadedHandler() {
 	$(".btn").on("click", ClickHandler);
 }
@@ -130,7 +132,7 @@ function ClickHandler() {
          }
      });
 	 
-}
+}  */
 
 
 </script>
