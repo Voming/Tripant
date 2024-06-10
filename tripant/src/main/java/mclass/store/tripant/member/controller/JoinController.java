@@ -94,7 +94,7 @@ public class JoinController {
 		}else {
 			memType = "T";
 		}
-		System.out.println("memEmail = "+memEmail);
+		log.debug("[sjw] memEmail = "+memEmail);
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
