@@ -26,8 +26,8 @@
 								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
 							</div>
 							<div class="wrap-content">
-								<div class="diary-content">
-									<p class="diary-title" th:text="${diary.diaryTitle}"></p>
+								<div class="diary-content"><a th:href="@{|/diary/read/${diary.diaryId}|}">
+									<p class="diary-title" th:text="${diary.diaryTitle}"></p></a>
 									<p class="diary-date" th:text="${diary.diaryDate}"></p>
 									<p class="diary-open" th:text="${diary.diaryOpen}"></p>
 								</div>
@@ -39,7 +39,7 @@
 
 
 				<!-- db 연동 전 데모글  -->
-				<div class="wrap-diary">
+				<!-- <div class="wrap-diary">
 					<div class="diary-img">
 						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
 					</div>
@@ -134,7 +134,7 @@
 							<p class="diary-open">비공개</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- 더미 글 끝 -->
 
 

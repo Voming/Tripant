@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/*  글 상세 내용 레이아웃 */
+.myread-wrap {
+	display: flex;
+	justify-content: space-around;;
+	width: 960px;
+	margin: auto;
+  	height: 500px;
+  	border: solid;/* 글 패딩을 위한글 보기 용  */
+	}
+.diary-list{
+	border: dashed;
+    width: 980px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: baseline;
+}

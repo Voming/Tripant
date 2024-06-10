@@ -41,9 +41,9 @@
 													alt="대표 이미지">
 											</div>
 											<div class="wrap-content">
-												<div class="diary-content">
+												<div class="diary-content"><a th:href="@{|/diary/read/${diary.diaryId}|}">
 													<p class="diary-title" style="font-size: var(--font3);"
-														th:text="${diary.diaryTitle}"></p>
+														th:text="${diary.diaryTitle}"></p></a>
 													<p class="diary-date" style="font-size: var(--font4);"
 														th:text="${diary.diaryDate}"></p>
 													<p class="diary-preview" style="font-size: var(--font5);"
