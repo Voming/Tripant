@@ -62,7 +62,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole()));
 			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));
 		}
-		System.out.println("[sjw] oAuth2User = "+oAuth2User);
+		log.debug("[sjw] oAuth2User = "+oAuth2User.toString());
 		return new CustomOAuth2User(email, memberEntity.getMemPassword(), authorities);
 	}
 }

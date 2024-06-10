@@ -50,6 +50,11 @@
 .wrap-main .myInfo.flex {
 	column-gap: 10px;
 	margin-bottom: 20px;
+	font-size: var(--font5);
+}
+
+.wrap-main .myInfo.flex .myInfo{
+	width: 50px;
 }
 
 .wrap-main .myInfo.nick.flex{
@@ -58,7 +63,7 @@
 
 .wrap-main input{
 	border: 0;
-	font-size: var(--font6);
+	font-size: var(--font5);
 }
 
 .wrap-main input:focus{
