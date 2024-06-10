@@ -18,9 +18,15 @@
 	font-size: var(--font5);
 	border-radius: 8px;
 	border: 0;
-	padding: 5px 10px;
-	background-color: lightgrey;
+	padding: 5px;
+	background-color: black;
+	color: white;
 	width: 150px;
+}
+
+.wrap-main .btn:disabled{
+	background-color: lightgrey;
+	color: white;
 }
 
 .wrap-main .flex {
@@ -56,6 +62,7 @@
 
 .wrap-main .inputchk1 input {
 	width: 100%;
+	font-size: var(--font6);
 }
 
 .wrap-main .inputchk2 {

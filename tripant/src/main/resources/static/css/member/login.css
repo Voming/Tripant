@@ -13,7 +13,9 @@
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0;
-	background-color: lightgrey;
+	background-color: black;
+	color: white;
+	padding: 5px 0;
 }
 
 .wrap-main .flex {
@@ -60,10 +62,6 @@
 
 .wrap-main .flex.join {
 	justify-content: space-around;
-}
-
-.wrap-main button.btn.login {
-	padding: 5px 0;
 }
 
 .wrap-main .flex.snslogin {

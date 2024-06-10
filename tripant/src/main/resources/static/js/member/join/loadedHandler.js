@@ -3,13 +3,13 @@ function loadedHandler(){
 	//버튼:hover css
 	$('.btn').hover(function(){
 		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'black');
-			$(this).css('color', 'white');
+			$(this).css('background-color', 'lightgrey');
+			$(this).css('color', 'black');
 		}
 	}, function(){
 		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'lightgrey');
-			$(this).css('color', 'black');
+			$(this).css('background-color', 'black');
+			$(this).css('color', 'white');
 		}
 	});
 	//인증번호 입력창 숨김

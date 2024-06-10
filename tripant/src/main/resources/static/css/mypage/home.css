@@ -2,15 +2,11 @@
 
 .wrap-main {
 	width: 960px;
-	margin: 120px auto;
+	margin: 30px auto 120px auto;
 }
 
 .wrap-main * {
 	font-family: 'Binggrae';
-}
-
-.wrap-main a {
-	padding-top: 5px;
 }
 
 .wrap-main .ch {
@@ -24,7 +20,8 @@
 	border: 0;
 	width: 100%;
 	padding: 5px 10px;
-	background-color: lightgrey;
+	background-color: black;
+	color: white;
 	font-size: var(--font4);
 }
 
@@ -44,7 +41,7 @@
 
 .wrap-main .title {
 	font-size: var(--font1);
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 }
 
 .wrap-main .myInfo.flex {
@@ -58,7 +55,7 @@
 }
 
 .wrap-main .myInfo.nick.flex{
-	margin-bottom: 40px;
+	margin-bottom: 80px;
 }
 
 .wrap-main input{
