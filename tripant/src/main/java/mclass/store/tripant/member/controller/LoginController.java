@@ -58,14 +58,14 @@ public class LoginController {
 	
 	//비밀번호 찾기 페이지
 	@GetMapping("/pwd")
-	public String findPwd() {
+	public String pwd() {
 		return "/member/pwd";
 	}
 	
 	//비밀번호 재설정
 	@PostMapping("/pwd")
 	@ResponseBody
-	public int setPwd(@RequestParam String memEmail, @RequestParam String memPassword) {
+	public int pwdP(@RequestParam String memEmail, @RequestParam String memPassword) {
 		log.debug("[sjw] memEmail = "+memEmail);
 		log.debug("[sjw] memPwd = "+memPassword);
 		Map<String , Object> map = new HashMap<>();

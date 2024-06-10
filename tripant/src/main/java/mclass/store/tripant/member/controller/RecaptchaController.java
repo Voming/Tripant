@@ -17,7 +17,7 @@ public class RecaptchaController {
 	
 	@PostMapping("/robot/join")
 	@ResponseBody
-	public int robot(HttpServletRequest request) {
+	public int robotJoin(HttpServletRequest request) {
 		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
 		String gRecaptchaResponse = request.getParameter("recaptcha");
 		try {

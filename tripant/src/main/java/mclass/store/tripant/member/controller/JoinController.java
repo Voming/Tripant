@@ -41,7 +41,7 @@ public class JoinController {
 	
 	//SNS 회원가입 페이지
 	@GetMapping("/join/sns")
-	public String joinsns(Model model) {
+	public String joinSns(Model model) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
 		String today = sdf.format(calendar.getTime());
@@ -52,7 +52,7 @@ public class JoinController {
 	// 닉네임 중복 검사
 	@PostMapping("/join/nick/check")
 	@ResponseBody
-	public Integer nickCheck(@RequestParam String memNick) {
+	public Integer joinNickCheck(@RequestParam String memNick) {
 		int result = memberService.existNick(memNick);
 		return result;
 	}
@@ -60,7 +60,7 @@ public class JoinController {
 	// 회원가입
 	@PostMapping("/join")
 	@ResponseBody
-	public int joinMember(MemberEntity memberEntity, String recaptcha) {
+	public int joinP(MemberEntity memberEntity, String recaptcha) {
 		
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
@@ -85,7 +85,7 @@ public class JoinController {
 	// SNS 회원가입
 	@PostMapping("/join/sns")
 	@ResponseBody
-	public int joinsnsMember(MemberEntity memberEntity, String recaptcha, HttpSession session) {
+	public int joinSnsP(MemberEntity memberEntity, String recaptcha, HttpSession session) {
 		
 		String memEmail = (String) session.getAttribute("memEmail");
 		String memType = (String) session.getAttribute("memType");
