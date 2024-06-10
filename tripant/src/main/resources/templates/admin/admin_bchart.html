@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>게시글통계</title>
@@ -10,8 +11,11 @@
 <link th:href="@{/css/admin/admin_bchart.css}" rel="stylesheet">
 <!--chart.js CDN  -->
 <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js}"  rel="stylesheet">
-<script th:src="@{https://fastly.jsdelivr.net/npm/chart.js}"></script>
+ <script th:src="@{https://fastly.jsdelivr.net/npm/chart.js}"></script>
+ <!--제이쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
 </head>
+
 <body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
@@ -36,72 +40,8 @@
 		</div>
 		<canvas id="myChart" style="height:90vh; width:80vw"></canvas>
 	</div>
-	
 </div>		
 		
-<script>
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-		  type: 'polarArea',
-		  data: {        
-				datasets: [{           
-					label: 'polarArea',            
-					 data:[100,25,50,80],            
-					backgroundColor: [                
-						'rgba(255, 99, 132, 0.2)',                
-						'rgba(54, 162, 235, 0.2)',                
-						'rgba(255, 206, 86, 0.2)',                
-						'rgba(75, 192, 192, 0.2)',                
-						'rgba(153, 102, 255, 0.2)',               
-						'rgba(255, 159, 64, 0.2)'            
-						],            
-							}]    
-						}
-		 ,
-		  backgroundColor: [                
-				'rgba(255, 99, 132, 0.2)',                
-				'rgba(54, 162, 235, 0.2)',                
-				'rgba(255, 206, 86, 0.2)',                
-				'rgba(75, 192, 192, 0.2)',                
-				'rgba(153, 102, 255, 0.2)',               
-				'rgba(255, 159, 64, 0.2)'            
-				],     
-		  options: {
-		    responsive: false,
-		    plugins: {
-		      legend: {
-		        position: 'top',
-		      },
-		      title: {
-		        display: true,
-		        text: '게시글 태그별 통계'
-		      }
-		    }
-		  },
-		});
-
- const DATA_COUNT = 5;
-const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
-
-const labels = ['Red', 'Orange', 'Yellow', 'Green', 'Blue'];
-const data = {
-  labels: labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: Utils.numbers(NUMBER_CFG),
-      backgroundColor: [
-        Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
-        Utils.transparentize(Utils.CHART_COLORS.orange, 0.5),
-        Utils.transparentize(Utils.CHART_COLORS.yellow, 0.5),
-        Utils.transparentize(Utils.CHART_COLORS.green, 0.5),
-        Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
-      ]
-    }
-  ]
-};
-</script>
-	
+<script th:line="javascript" th:src="@{/js/admin/board_chart.js}" ></script>
 </body>
 </html>
