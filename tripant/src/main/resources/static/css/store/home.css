@@ -15,8 +15,9 @@
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0;
-	background-color: var(--color_light_gray);
-	padding: 5px;
+	background-color: black;
+	color: white;
+	padding: 5px 10px;
 }
 
 .wrap-main .hide {
@@ -69,10 +70,6 @@
 	border-radius: 10px;
 }
 
-.wrap-main input {
-	margin-bottom: 7px;
-}
-
 .wrap-main .item.explain.flex {
 	flex-direction: row;
 	justify-content: space-between;
@@ -105,7 +102,7 @@
 	border: 1px solid black;
 	border-radius: 10px;
 	background-color: white;
-	left: 100px;
+	left: 50px;
 }
 
 .wrap-main div.sidebar {
@@ -156,7 +153,8 @@
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0;
-	background-color: var(--color_light_gray);
+	background-color: black;
+	color: white;
 	padding: 5px;
 	font-size: var(--font3);
 }
