@@ -113,5 +113,14 @@ insert into item values('F0', '폰트 30일', 1000, 30, null);
 insert into item values('F1', '폰트 90일', 3000, 90, 10);
 commit;
 
+-- 장바구니 추가
+begin
+    for i in 0..9 loop
+        insert into cart values('T'||i, 'seojw0730@naver.com');
+    end loop;
+    commit;
+end;
+/
+
 select * from item;
 truncate table item;
