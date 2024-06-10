@@ -5,6 +5,8 @@
 .wrap-main {
 	width: 960px;
 	margin: 100px auto;
+	/* padding: 0 240px; */
+	position: relative;
 }
 
 .wrap-main * {
@@ -88,6 +90,28 @@
 	font-size: var(--font6);
 	color: lightgrey;
 }
+
+/* 사이드바 */
+.wrap-main aside.sidebar{
+	position: fixed;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	left: 20px;
+}
+.wrap-main div.sidebar{
+	flex-direction: column;
+	align-items: center;
+	padding: 5px 10px;
+}
+.wrap-main .sidebar.item{
+	flex-direction: row;
+	align-items: center;
+	column-gap: 10px;
+}
+.wrap-main .sidebar.item a{
+	margin-top: 5px;
+}
 </style>
 <script>
 $(loadedHandler);
@@ -117,6 +141,13 @@ function itemNumHandler(){
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
+		<aside class="sidebar flex">
+			<div class="sidebar flex">
+				<div class="sidebar title">스토어</div>
+				<div class="sidebar item flex"><img th:src="@{/images/store/cart.png}" width="20px" height="20px"><a th:href="@{/store/cart}">장바구니</a></div>
+				<div class="sidebar item flex"><img th:src="@{/images/store/buy.png}" width="20px" height="20px"><a th:href="@{/store/buy}">구매내역</a></div>
+			</div>
+		</aside>
 		<div class="flex store">
 			<div class="checked hide"><strong id="itemNum"></strong>개의 상품이 선택되었습니다.</div>
 			<div class="title">테마</div>
