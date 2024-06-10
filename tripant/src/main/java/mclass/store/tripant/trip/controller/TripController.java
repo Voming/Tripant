@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping(value = "/trip")
 public class TripController {
@@ -29,7 +31,6 @@ public class TripController {
 	
 	@GetMapping(value="/detail/{planId}")
 	public String main(Model model,@PathVariable("planId") Integer planId) {
-		System.out.println(planId);
 		//model.addAttribute();
 		return "trip/trip";
 	}
