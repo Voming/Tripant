@@ -1,12 +1,9 @@
 package mclass.store.tripant.config;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -28,7 +25,7 @@ public class AspectConfig {
 	@Pointcut("execution(public * mclass..*Controller.*(..))")
 	public void controllerPointcut() {}
 
-	@Around("daoPointcut()")
+	@Around("RepositoryPointcut()")
 	public Object aroundDaoLog(ProceedingJoinPoint pjp) throws Throwable {
 		Object returnObj = null;
 		// pjp.getThis() : 클래스명
