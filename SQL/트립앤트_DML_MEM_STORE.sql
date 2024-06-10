@@ -9,7 +9,7 @@ insert into member values(
     'seojw0730@naver.com', 
     '재원', 
     '$2a$12$6jbDn8AQYh/5V1OI7ok4UuW.Wurj0vOGZqpmqYzfOLEsVez6BNn5O', 
-    'ROLE_MEM', 
+    'ROLE_ADMIN', 
     1, 
     'T', 
     to_date('24/06/03', 'RR/MM/DD'), 
@@ -19,7 +19,7 @@ insert into member values(
     'seojw0730@gmail.com', 
     '서재원', 
     '$2a$12$6jbDn8AQYh/5V1OI7ok4UuW.Wurj0vOGZqpmqYzfOLEsVez6BNn5O', 
-    'ROLE_MEM', 
+    'ROLE_ADMIN', 
     1, 
     'T', 
     to_date('24/06/08', 'RR/MM/DD'), 
@@ -54,6 +54,26 @@ insert into member values(
     'T', 
     to_date('24/06/05', 'RR/MM/DD'), 
     to_date('95/06/29', 'RR/MM/DD')
+);
+insert into member values(
+    'dpdls898@naver.com', 
+    '오예', 
+    '$2a$10$0a0QuNdikz2mttbPInhXyeesWiMDpTZtGgeilB2r49QhX6qp0yd.C', 
+    'ROLE_OWNER', 
+    1, 
+    'T', 
+    to_date('24/06/10', 'RR/MM/DD'), 
+    to_date('00/03/26', 'RR/MM/DD')
+);
+insert into member values(
+    'ej.kh.kim@gmail.com', 
+    '이제이', 
+    '$2a$10$/3ujw9k68wsumBdkyG3jN.3QUnFUDskHIMQwGQE3hV4ObQxGqtOL.', 
+    'ROLE_MEM', 
+    1, 
+    'T', 
+    to_date('24/06/10', 'RR/MM/DD'), 
+    to_date('24/06/09', 'RR/MM/DD')
 );
 commit;
 -- 회원 탈퇴 트리거
