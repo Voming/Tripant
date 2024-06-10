@@ -45,7 +45,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 		log.debug("[sjw] email = "+email);
 		Optional<MemberEntity> memberEntityOp = Optional.ofNullable(memberRepository.login(email));
 		if(memberEntityOp.isEmpty()) {
-			throw new UsernameNotFoundException("가입해");
+			throw new UsernameNotFoundException(email);
 		}
 		MemberEntity memberEntity = memberEntityOp.get();
 		List<GrantedAuthority> authorities = new ArrayList<>();

@@ -14,10 +14,7 @@
 .tags {
 	border-radius: 5px 5px 5px;
 	border: 1px solid;
-	padding-top: 13px;
-	padding-bottom: 5px;
-	padding-left: 7px;
-	padding-right: 7px;
+ 	padding: 6px;
 }
 
 .area-tab-nav {
