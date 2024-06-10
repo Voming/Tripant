@@ -1,11 +1,12 @@
 @charset "UTF-8";
+.main-wrapper .hide{ display: none; }
 .main-wrapper{
 	height:59vh;
     min-height: 450px;  /* 나머지들의 최소 높이 */
     min-height: 100%; 
     width: 960px;
     margin: 0 auto;
-    font-family: 'GangwonEdu_OTFBoldA';
+    font-family: 'Binggrae';
     display: flex;
     flex-direction: column;
     padding : 15px;
@@ -15,6 +16,10 @@
 }
 .main-wrapper .wfull{
 	width:100%;
+}
+.main-wrapper .nothing{
+	color: var(--color_gray);
+	font-size: var(--font1);
 }
 .main-wrapper .trip-list{
 	cursor:pointer;
@@ -37,6 +42,7 @@
 	justify-content: center;
 }
 .main-wrapper .trip-list .location-img{
+	object-fit: cover;
 	border-radius: 10px;
 	height:180px;
 	width:180px;
@@ -49,27 +55,18 @@
 	padding:0px;
 	position: relative;
 }
-.main-wrapper .trip-list .trip-info > div{
+.main-wrapper .trip-list .trip-info > * {
 	margin:10px 0;
 }
-.main-wrapper .trip-list .trip-info .trip-location{
-	font-size: var(--font4);
-}
-.main-wrapper .trip-list .trip-info .trip-title{
-	font-size: var(--font3);
-}
-.main-wrapper .trip-list .trip-info .trip-period{
-	font-size: var(--font5);
-}
+
 
 .main-wrapper .trip-list .mini-modal{
     box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
     background-color: #fafafa;
 	width:150px;
 	padding : 5px 10px;
-	display: flex;
+/* 	display: flex; */
 	flex-direction: column;
-	visibility: hidden;
 	position: absolute;
 	top: 0px;
 	right : 10px;
@@ -81,3 +78,4 @@
 .main-wrapper .trip-list .mini-modal>div>a{
 	padding : 2px ;
 }
+
