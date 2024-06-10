@@ -88,12 +88,17 @@ public class JoinController {
 	public int joinsnsMember(MemberEntity memberEntity, String recaptcha, HttpSession session) {
 		
 		String memEmail = (String) session.getAttribute("memEmail");
+		String memType = (String) session.getAttribute("memType");
+		if(memEmail != null && memType != null) {
+			memberEntity.setMemEmail(memEmail);
+		}else {
+			memType = "T";
+		}
 		System.out.println("memEmail = "+memEmail);
-		memberEntity.setMemEmail(memEmail);
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
-		memberEntity.setMemType("T");
+		memberEntity.setMemType(memType);
 		log.debug("[sjw] mem = "+memberEntity);
 		
 		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());

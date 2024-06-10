@@ -26,7 +26,6 @@ public class MypageController {
 	public String mypage(Model model, Principal principal) {
 		String memEmail = principal.getName();
 		Map<String, Object> map = memberService.myInfo(memEmail);
-		System.out.println("map = "+map);
 		model.addAttribute("memEmail", map.get("MEM_EMAIL"));
 		model.addAttribute("memNick", map.get("MEM_NICK"));
 		return "mypage/home";
