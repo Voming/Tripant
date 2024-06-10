@@ -41,5 +41,8 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 		const period = picker.startDate.format('YYYY-MM-DD') + " ~ " + picker.endDate.format('YYYY-MM-DD');
 		console.log(period);
 		$(".plan-priod").html(period);
+		
+		var htmlVal = "입력하신 여행 기간이 여행지 도착날짜와 여행지 출발 날짜가 맞는지 확인해주세요. 기본 설정 시간은 오전 10시~오후 10시 총 12시간 입니다.";
+		$(".plan-timeEx").html(htmlVal);
 	}
 });
