@@ -14,57 +14,60 @@ a {
 }
 
 h1 {
-	font-family: 'GangwonEdu_OTFBoldA';
-	font-size: 30px;
-	font-weight: bolder;
+	font-family: 'Binggrae';
+	font-size: 25px;
+	
 }
 
 h2 {
-	font-family: 'GangwonEdu_OTFBoldA';
-	font-size: 25px;
-	font-weight: bolder;
+	font-family: 'Binggrae';
+	font-size: 20px;
+	
 }
 
 h3 {
-	font-family: 'GangwonEdu_OTFBoldA';
-	font-size: 20px;
-	font-weight: bolder;
+	font-family: 'Binggrae';
+	font-size: 17px;
+	
 }
 
 h4 {
-	font-family: 'GangwonEdu_OTFBoldA';
-	font-size: 17px;
+	font-family: 'Binggrae';
+	font-size: 15px;
+	
 }
 
 h5 {
-	font-family: 'GangwonEdu_OTFBoldA';
-	font-size: 15px;
+	font-family: 'Binggrae';
+	font-size: 13px;
+	
 }
 
 h6 {
-	font-family: 'GangwonEdu_OTFBoldA';
-	font-size: 13px;
+	font-family: 'Binggrae';
+	font-size: 11px;
+	
 }
 
 
 p {
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 
 /* 공통폰트 */
 @font-face {
-    font-family: 'GangwonEdu_OTFBoldA';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-family: 'Binggrae';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
-@font-face {
+/* @font-face {
 	font-family: 'GangwonEdu_OTFLightA';
 	src: url('/fonts/GangwonEdu_OTFLightA.ttf') format('woff'); 
 	font-weight: normal;
 	font-style: normal;
-}
+} */
 
 :root {
 	--color_day1_red: #E54B4B;
@@ -81,13 +84,12 @@ p {
 	--color_light_gray: #F6F6F6;
 	--color_gray: #D4D4D4;
 	
-	--font1: 30px;
-	--font2: 25px;
-	--font3: 20px;
-	--font4: 17px;
-	--font5: 15px;
-	--font6: 13px;
-	--font7: 11px;
+	--font1: 25px;
+	--font2: 20px;
+	--font3: 17px;
+	--font4: 15px;
+	--font5: 13px;
+	--font6: 11px;
 }
 
 /* 구매폰트 */
