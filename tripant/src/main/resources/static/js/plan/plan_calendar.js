@@ -1,9 +1,8 @@
-$(function() {
-	//
-	
-	// TODO 바로 열리게 하는 방법 있는지 찾아보기
+$(document).ready(function() {
+// TODO 바로 열리게 하는 방법 있는지 찾아보기
 	$('#daterange').daterangepicker({
 		opens: "center",
+		alwaysOpen: true,
 		"locale": {
 			"format": "YYYY-MM-DD",
 			"separator": " ~ ",
@@ -23,7 +22,7 @@ $(function() {
 		console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
 	});
 
-
+   $("#daterange").focus(); 
 });
 
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
@@ -41,7 +40,7 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 		const period = picker.startDate.format('YYYY-MM-DD') + " ~ " + picker.endDate.format('YYYY-MM-DD');
 		console.log(period);
 		$(".plan-priod").html(period);
-		
+
 		var htmlVal = "입력하신 여행 기간이 여행지 도착날짜와 여행지 출발 날짜가 맞는지 확인해주세요. 기본 설정 시간은 오전 10시~오후 10시 총 12시간 입니다.";
 		$(".plan-timeEx").html(htmlVal);
 	}
