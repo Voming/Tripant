@@ -60,9 +60,7 @@ public class PlanController {
 		mv.setViewName("plan/home");
 		
 		//System.out.println("insertPlace : " + placeService.insertPlace());
-		//System.out.println("timeService : " + timeService.deleteAllPlaceMoveTime());
 		//System.out.println("selectPlaceMapList : " + timeService.selectPlaceMapList(1));
-		//timeService.selectPlaceMapList(1);
 		//timeService.makeTimeList(); //TODO
 		
 		return mv;

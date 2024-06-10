@@ -37,7 +37,7 @@ public class TimeService {
 	public void makeTimeList() {
 		int[] areaCode = { 1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
 
-		List<PlaceMapEntity> placeList = timeRepository.selectPlaceMapList(areaCode[1]); // 이동시간 계산할 지역에 포함된 장소 리스트
+		List<PlaceMapEntity> placeList = timeRepository.selectPlaceMapList(39); // 이동시간 계산할 지역에 포함된 장소 리스트(type =10은 제외하고)
 
 		int depth = 0; // 깊이 0번 부터 탐색 시작
 		int n = placeList.size(); // 장소 리스트 크기
@@ -47,7 +47,7 @@ public class TimeService {
 
 		List<PlaceMapEntity[]> startendList = new ArrayList<>();// List[출발 정보, 도착 정보]
 
-		System.out.println("======= " + ((n * n - 1) - n + 1)); // 만들어진 경우의 수 크기
+//		System.out.println("======= " + ((n * n - 1) - n + 1)); // 만들어진 경우의 수 크기
 //		경우의 수 구하기
 		perm(placeList, output, visited, depth, n, r, startendList);
 
@@ -68,6 +68,7 @@ public class TimeService {
 	// @Async
 	private List<PlaceMoveTimeEntity> calMoveTime(List<PlaceMapEntity[]> startendList) {
 		List<PlaceMoveTimeEntity> timeResultList = new ArrayList<>();
+		int count = 0;
 		for (PlaceMapEntity[] i : startendList) {
 			double startLng = Double.parseDouble(i[0].getMapx()); // 시작 경도
 			double startLat = Double.parseDouble(i[0].getMapy()); // 시작 위도
@@ -82,12 +83,16 @@ public class TimeService {
 				PlaceMoveTimeEntity calTime = new PlaceMoveTimeEntity(i[0].getType(), i[0].getContentid(),
 						i[1].getType(), i[1].getContentid(), String.valueOf(duration));
 
-				System.out.println(calTime); //insert 할 정보
+//				System.out.println(calTime); //insert 할 정보
 				timeRepository.insertPlaceMoveTime(calTime);
 				timeResultList.add(calTime);
 			}
+			count++;
+			if(count % 100 == 0) {
+				System.out.println(count);
+			}
 		}
-
+		System.out.println("=============시간 계산이 끝났습니다=================");
 		return timeResultList;
 	}
 
@@ -120,7 +125,7 @@ public class TimeService {
 				while ((inputLine = br.readLine()) != null) {
 					response.append(inputLine);
 				}
-				System.out.println("\n response \n " + response.toString());
+//				System.out.println("\n response \n " + response.toString());
 				br.close();
 
 				// JSON 파싱하여 duration 값만 추출
@@ -133,8 +138,8 @@ public class TimeService {
 			}
 		} catch (Exception e) {
 //			e.printStackTrace();
-			System.out.println("\n\n >>>>>>>>>>>>>>>>ERROR 확인해주세요<<<<<<<<<<<<<<<<");
-			System.out.println("길찾기 결과를 찾을 수 없음");
+//			System.out.println("\n\n >>>>>>>>>>>>>>>>ERROR 확인해주세요<<<<<<<<<<<<<<<<");
+//			System.out.println("길찾기 결과를 찾을 수 없음");
 		}
 		return duration;
 	}
