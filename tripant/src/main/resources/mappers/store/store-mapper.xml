@@ -3,10 +3,10 @@
 <mapper namespace="mclass.store.tripant.store.model.repository.StoreRepository">
 	<!-- 테마 목록 -->
 	<select id="themeList" resultType="itemEntity">
-		select item_name, item_price from item where substr(item_code, 1, 1) = 'T' order by item_code 
+		select item_name, item_price, item_sale from item where substr(item_code, 1, 1) = 'T' order by item_code 
 	</select>
 	<!-- 폰트 목록 -->
 	<select id="fontList" resultType="itemEntity">
-		select item_name, item_price from item where substr(item_code, 1, 1) = 'F' order by item_code 
+		select item_name, item_price, item_sale from item where substr(item_code, 1, 1) = 'F' order by item_code 
 	</select>
 </mapper>
