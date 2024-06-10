@@ -27,6 +27,11 @@ public class MyDiaryController {
 
 	@Autowired
 	private DiaryService diaryService;
+	
+	@GetMapping("/diary/test") // 나의 여행기(비공개글) 목록 가져오기
+	public String test(Model model) {
+		return "diary/ck_test";
+	}
 
 	// 나의 글보기
 	@GetMapping("/my/diary") // 나의 여행기(비공개글) 목록 가져오기
@@ -34,13 +39,13 @@ public class MyDiaryController {
 		diaryService.selectDiaryList();
 		model.addAttribute("diaries", diaryService.selectDiaryList());
 		System.out.println("======mydiary controller===" + diaryService.selectDiaryList());
-		return "mydiary/mydiary_board";
+		return "diary/my/my_board";
 	}
 
 //		글쓰기 페이지 보이기
 	@GetMapping("/my/write")
 	public String myWrite() {
-		return "mydiary/mydiary_write";
+		return "diary/my/my_write";
 	}
 
 	// 글쓰기 처리
