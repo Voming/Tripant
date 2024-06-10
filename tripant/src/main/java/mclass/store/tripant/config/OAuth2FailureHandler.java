@@ -18,6 +18,7 @@ public class OAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler 
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		if(exception instanceof UsernameNotFoundException) {
+			request.getSession().setAttribute("memEmail", exception.getMessage());
 			response.setContentType("text/html; charset=utf-8");
 			response.getWriter()
 			.append("<script type=\"text/javascript\">")

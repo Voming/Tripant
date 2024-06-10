@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.apikeys.KeysJaewon;
@@ -55,7 +57,7 @@ public class JoinController {
 		return result;
 	}
 	
-	//회원가입
+	// 회원가입
 	@PostMapping("/join")
 	@ResponseBody
 	public int joinMember(MemberEntity memberEntity, String recaptcha) {
@@ -70,6 +72,35 @@ public class JoinController {
 		try {
 			if(RecaptchaConfig.verify(recaptcha)) {
 				memberService.join(memberEntity);
+				return 1;
+			}else {
+				return 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	// SNS 회원가입
+	@PostMapping("/join/sns")
+	@ResponseBody
+	public int joinsnsMember(MemberEntity memberEntity, String recaptcha, HttpSession session) {
+		
+		String memEmail = (String) session.getAttribute("memEmail");
+		System.out.println("memEmail = "+memEmail);
+		memberEntity.setMemEmail(memEmail);
+		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
+		memberEntity.setMemEnabled(1);
+		memberEntity.setMemRole("ROLE_MEM");
+		memberEntity.setMemType("T");
+		log.debug("[sjw] mem = "+memberEntity);
+		
+		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
+		try {
+			if(RecaptchaConfig.verify(recaptcha)) {
+				memberService.join(memberEntity);
+				session.removeAttribute("memEmail");
 				return 1;
 			}else {
 				return 0;

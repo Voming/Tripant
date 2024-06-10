@@ -39,7 +39,7 @@ public class MyDiaryController {
 
 //		글쓰기 페이지 보이기
 	@GetMapping("/my/write")
-	public String diarywrite() {
+	public String myWrite() {
 		return "mydiary/mydiary_write";
 	}
 

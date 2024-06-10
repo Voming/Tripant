@@ -28,7 +28,7 @@ public class DiaryController {
 
 	// 글 상세보기
     @GetMapping("/diary/read/{id}")
-    public String readDiary(@PathVariable Long id, Model model) {
+    public String diartRead(@PathVariable Long id, Model model) {
         DiaryBoardEntity diary = diaryService.findById(id);
         model.addAttribute("diary", diary);
         return "diary/diary_read";
