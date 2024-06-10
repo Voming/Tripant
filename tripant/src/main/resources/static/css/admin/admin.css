@@ -1,8 +1,9 @@
 @charset "UTF-8";
 .wrap-main *{
-	font-family: 'Binggrae';
-}
 
+	font-family: 'Binggrae';
+
+}
 .wrap-main{
 	display:flex;
 	flex-direction:row;
