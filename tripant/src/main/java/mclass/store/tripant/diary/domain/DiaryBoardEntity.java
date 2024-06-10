@@ -1,7 +1,7 @@
 package mclass.store.tripant.diary.domain;
 
 import java.sql.Date;
-import java.time.LocalDate;
+
 
 import org.springframework.stereotype.Component;
 
@@ -28,5 +28,5 @@ public class DiaryBoardEntity {
 	private String diaryOpen;
 	private Integer diaryViews;
 	private String diaryTheme;
-
+	
 }
