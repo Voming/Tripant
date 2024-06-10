@@ -24,7 +24,7 @@
 }
 
 .wrap-main .btn:disabled{
-	background-color: lightgrey;
+	background-color: lightgray;
 	color: white;
 }
 

@@ -3,7 +3,7 @@ function loadedHandler(){
 	//버튼:hover css
 	$('.btn').hover(function(){
 		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'lightgrey');
+			$(this).css('background-color', 'lightgray');
 			$(this).css('color', 'black');
 		}
 	}, function(){

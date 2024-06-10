@@ -17,7 +17,7 @@
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0;
-	background-color: lightgrey;
+	background-color: var(--color_light_gray);
 	padding: 5px;
 }
 
@@ -38,7 +38,7 @@
 	width: 100%;
 }
 .wrap-main .checked{
-	background: lightgrey;
+	background: var(--color_light_gray);
 	font-size: var(--font3);
 	line-height: 2em;
 	padding: 0 10px;
@@ -85,7 +85,7 @@
 }
 .wrap-main .warn{
 	font-size: var(--font6);
-	color: lightgrey;
+	color: var(--color_light_gray);
 }
 
 /* 사이드바 */
@@ -138,7 +138,7 @@
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0;
-	background-color: lightgrey;
+	background-color: var(--color_light_gray);
 	padding: 5px;
 	font-size: var(--font3);
 }
@@ -151,7 +151,7 @@ function loadedHandler(){
 		$(this).css('background-color', 'black');
 		$(this).css('color', 'white');
 	}, function(){
-		$(this).css('background-color', 'lightgrey');
+		$(this).css('background-color', 'var(--color_light_gray)');
 		$(this).css('color', 'black');
 	});
 	$('input').on('click', itemNumHandler);
