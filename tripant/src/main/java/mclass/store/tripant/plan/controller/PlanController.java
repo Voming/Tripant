@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,10 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
 import mclass.store.tripant.plan.model.service.PlaceService;
@@ -24,7 +28,10 @@ import mclass.store.tripant.plan.model.service.PlanService;
 import mclass.store.tripant.plan.model.service.TimeService;
 
 @Controller
+@Slf4j  //private Logger log = LoggerFactory.getLogger(PlanController.class); 내용을 대신해줌
 public class PlanController {
+	//private Logger log = LoggerFactory.getLogger(PlanController.class);
+	
 	@Autowired
 	private PlanService planService;
 	@Autowired
@@ -40,14 +47,17 @@ public class PlanController {
 	 */
 	
 	@GetMapping("/")
-	public String home(Principal principal, Authentication authentication, Model model) {
-		System.out.println("principal = "+principal);
-		System.out.println("auth = "+authentication);
+	public ModelAndView home(Principal principal, Authentication authentication, ModelAndView mv) {
+		log.trace("principal = "+principal);
+		log.debug("auth = "+authentication);
 		
-		model.addAttribute("planCount", planService.selectPlanCount());
-		model.addAttribute("memCount", planService.selectMemCount());
+		//model 대신 ModelAndView를 사용함
+		mv.addObject("planCount", planService.selectPlanCount());
+		mv.addObject("memCount", planService.selectMemCount());
 		
-		model.addAttribute("areaNameList", planService.selectAreaNameList());
+		mv.addObject("areaNameList", planService.selectAreaNameList());
+		
+		mv.setViewName("plan/home");
 		
 		//System.out.println("insertPlace : " + placeService.insertPlace());
 		//System.out.println("timeService : " + timeService.deleteAllPlaceMoveTime());
@@ -55,13 +65,13 @@ public class PlanController {
 		//timeService.selectPlaceMapList(1);
 		//timeService.makeTimeList(); //TODO
 		
-		return "plan/home";
+		return mv;
 	}
 	
 	//지역 리스트 검색
 	@PostMapping("/find/area")
 	@ResponseBody
-	public List<AreaNameEntity> find(@RequestParam("findArea") String findArea) {
+	public List<AreaNameEntity> findArea(@RequestParam("findArea") String findArea) {
 		System.out.println("findArea :" + findArea);
 		List<AreaNameEntity> areaList = planService.selectAreaFindList(findArea);
 		System.out.println(areaList);
@@ -71,7 +81,7 @@ public class PlanController {
 	//지역&제목 모달에서 선택한 지역 정보 가져오기
 	@PostMapping("/make/area")
 	@ResponseBody
-	public List<AreaEntity> makeAreaInfo(@RequestParam("areaName") String areaName) {
+	public List<AreaEntity> makeArea(@RequestParam("areaName") String areaName) {
 		System.out.println("areaName :" + areaName);
 		List<AreaEntity> areaList = planService.selectAreaInfoList(areaName);
 		System.out.println(areaList);
@@ -79,7 +89,7 @@ public class PlanController {
 	}
 	
 	@PostMapping("/make/keep")
-	public String makeAreaKeep(@RequestParam("areaName") String areaName, 
+	public String makeKeep(@RequestParam("areaName") String areaName, 
 			@RequestParam("planTitle") String planTitle
 			, RedirectAttributes rttb
 			) throws IOException {
