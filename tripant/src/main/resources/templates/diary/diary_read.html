@@ -15,7 +15,7 @@
 
 	<!-- 일기 목록 영역 -->
 
-	<div class="myread-wrap">
+	<div class="myread-wrap" >
 
 		<div class="diary-list">
 			<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
@@ -25,8 +25,7 @@
 							src="/images/icons/kebabIcon.png" style="width: 30px;" /></a>
 						<ul class="submenu" style="width: 100px;">
 							<li><a href="#">공유하기</a></li>
-							<li><input type="hidden"></li>
-							<li><a href="#">신고하기</a></li>
+							<li class="report" th:data-report="${diary.diaryId}" ><a>신고하기</a></li>
 							<!-- 로그인시 활성화 -->
 							<li><a href="#" sec:authorize="isAuthenticated()">삭제하기</a></li>
 
