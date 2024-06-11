@@ -6,48 +6,48 @@
 	width: 960px;
 	margin: auto;
 	height: 500px;
-	border: solid;
 	padding-bottom: 100px;
 	padding-top: 100px;
 	flex-wrap: nowrap;
 	flex-direction: row-reverse; /* 아이콘 오른쪽 배열 두기  */
 }
+/* 글 상세 보기에서 위아래 선 스타일표시  */
+.diary-date .diary-content {
+border-bottom: solid 1px;
+    width: 860px;}
+/* 글 상세보기 */    
 
-/* 햄버거 토글 버튼  */
-.info.btn {
-	width: 50px;
-	height: 35px;
-}
-
-.diary-list {
-	margin: 10px;
+.menubar{
 	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
-	flex-wrap: wrap;
-	align-items: center;
-	border: dashed;
-	width: 900px;
-	align-content: flex-start;
+	position: fixed;	/*고정 시켜두기  */
+	right: 189px;	
+}
+.menu > li {
+ width: 70px; /*20*5=100%*/
+  float: left;
+  text-align: center;
+  line-height: 40px;
+ 
 }
 
-.diary-list .mini-modal {
-	box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
-	background-color: #fafafa;
-	width: 150px;
-	padding: 5px 10px;
-	/* 	display: flex; */
-	flex-direction: column;
-	position: absolute;
-	top: 0px;
-	right: 10px;
+.menu a {
+  color: #fff;
 }
 
-.diary-list .mini-modal>div {
-	padding: 5px 0px;
-	border: none;
+.submenu > li {
+  line-height: 50px;
+  background-color: #94a9ff;
 }
 
-.diary-list .mini-modal>div>a {
-	padding: 2px;
+.submenu {
+  height: 0; /*ul의 높이를 안보이게 처리*/
+  overflow: hidden;
 }
+.menu > li:hover {
+  background-color: #94a9ff;
+  transition-duration: 0.5s;
+}
+
+.menu > li:hover .submenu {
+  height: 250px; /*서브메뉴 li한개의 높이 50*5*/
+  transition-duration: 1s;}
