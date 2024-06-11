@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.store.domain.ItemEntity;
@@ -27,10 +28,13 @@ public class StoreService {
 	}
 	
 	// 장바구니에 담기
-	public int insertItems(List<Map<String, Object>> list) {
-		return storeRepository.insertItems(list);
+	@Transactional
+	public int insertItems(String memEmail, List<Map<String, Object>> list) {
+		storeRepository.fontDel(memEmail);
+		int result = storeRepository.insertItems(list);
+		return result;
 	}
-
+	
 	// 장바구니
 	public List<Map<String, Object>> cart(String memEmail){
 		return storeRepository.cart(memEmail);
