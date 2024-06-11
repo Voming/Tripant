@@ -2,6 +2,7 @@ $(loadedHandler);
 
 function loadedHandler() {
 	$(".logo").on("click", btnLogoClickHandler);
+	$(".plan-priod").on("click", btnPriodClickHandler);
 	
 	//좌측 탭
 	$('.tab-nav a').click(function() {
@@ -19,4 +20,8 @@ function btnLogoClickHandler(){
 	if( confirm("지금 나가면 작업한 내용이 없어집니다. 괜찮습니까?") ==true){
 		location.href = "/";
 	}
+}
+
+function btnPriodClickHandler(){
+	$(".modal").addClass("show");
 }
