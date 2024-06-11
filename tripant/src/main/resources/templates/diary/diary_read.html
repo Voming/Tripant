@@ -9,24 +9,60 @@
 <body>
 	<!--헤더영역  -->
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
-<!-- 사이드바 연결 -->
-			<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
+	<!-- 사이드바 연결 -->
+	<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
+
+		
 	<!-- 일기 목록 영역 -->
+
 	<div class="myread-wrap">
-    <div class="diary-list">
-        <h1>여행기 상세보기</h1>
-        <div th:if="${diary != null}">
-            <div th:text="${diary.diaryTitle}" class="diary-title">Diary Title</div>
-            <div th:text="${#dates.format(diary.diaryDate, 'yyyy-MM-dd')}" class="diary-date">Diary Date</div>
-            <div th:text="${diary.diaryContent}" class="diary-content">Diary Content</div>
-        </div>
-        <div th:if="${diary == null}">
-            <p>일기를 찾을 수 없습니다.</p>
-        </div>
-    </div>
-</div>
+	<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
+					<button class="info btn" > 
+					<img class="wfull img" src="/images/icons/kebabIcon.png" style="width: 30px;"/>
+					<div class="mini-modal hide" > 
+					
+						<div class="share-diary modal">공유</div>
+						<!-- modal -->
+						<div class="wrap-modal">
+							<div class ="modal-content ">
+								<div class="btn modal-close"> x </div>
+		                        <!-- <button type="button" class="btn modal-close">상단 x 버튼</button> -->
+		                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </div>
+		                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </div>
+							</div>
+						</div>
+						<!-- //modal -->
+						<div class="delete-diary">삭제</div>
+						<div class="report-diary">신고하기</div>
+					</div>
+				</button>
+		<div class="diary-list">
+
+			<div th:if="${diary != null}">
+				<p>제목</p>
+				<br>
+				<div th:text="${diary.diaryTitle}" class="diary-title">Diary
+					Title</div>
+				<p>날짜</p>
+				<br>
+				<div th:text="${#dates.format(diary.diaryDate, 'yyyy-MM-dd')}"
+					class="diary-date">Diary Date</div>
+				<p>내용</p>
+				<br>
+				<div th:text="${diary.diaryContent}" class="diary-content">Diary
+					Content</div>
+			</div>
+			<div th:if="${diary == null}">
+				<p>일기를 찾을 수 없습니다.</p>
+			</div>
+		</div>
+		
+	</div>
+	
 
 	<!-- 푸터영역 -->
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
+<!--자바 스크립트   -->
+<script type="text/javascript" th:src="@{/js/diary/diary_read.js}"></script>
 </html>

@@ -2,19 +2,52 @@
 /*  글 상세 내용 레이아웃 */
 .myread-wrap {
 	display: flex;
-	justify-content: space-around;;
+	justify-content: space-evenly; /* 아이콘 오른쪽 배열 두기  */
 	width: 960px;
 	margin: auto;
-  	height: 500px;
-  	border: solid;/* 글 패딩을 위한글 보기 용  */
-	}
-.diary-list{
+	height: 500px;
+	border: solid;
+	padding-bottom: 100px;
+	padding-top: 100px;
+	flex-wrap: nowrap;
+	flex-direction: row-reverse; /* 아이콘 오른쪽 배열 두기  */
+}
+
+/* 햄버거 토글 버튼  */
+.info.btn {
+	width: 50px;
+	height: 35px;
+}
+
+.diary-list {
+	margin: 10px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
 	border: dashed;
-    width: 980px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: space-around;
-    justify-content: space-around;
-    align-items: baseline;
+	width: 900px;
+	align-content: flex-start;
+}
+
+.diary-list .mini-modal {
+	box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
+	background-color: #fafafa;
+	width: 150px;
+	padding: 5px 10px;
+	/* 	display: flex; */
+	flex-direction: column;
+	position: absolute;
+	top: 0px;
+	right: 10px;
+}
+
+.diary-list .mini-modal>div {
+	padding: 5px 0px;
+	border: none;
+}
+
+.diary-list .mini-modal>div>a {
+	padding: 2px;
 }
