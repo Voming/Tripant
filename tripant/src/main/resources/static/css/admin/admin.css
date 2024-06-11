@@ -57,6 +57,10 @@ a{
 	font-size:13px;
 }
 
+.wrap-sidebar .ad-menustorea.a{
+	margin-bottom:10px;
+}
+
 /* main 헤더 */
 .wrap-main .wrap-body .ad-header{
  background-color:rgb(128, 128, 128);
