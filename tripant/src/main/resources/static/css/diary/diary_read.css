@@ -13,41 +13,80 @@
 }
 /* 글 상세 보기에서 위아래 선 스타일표시  */
 .diary-date .diary-content {
-border-bottom: solid 1px;
-    width: 860px;}
-/* 글 상세보기 */    
-
-.menubar{
-	display: flex;
-	position: fixed;	/*고정 시켜두기  */
-	right: 189px;	
+	border-bottom: solid 1px;
+	width: 860px;
 }
-.menu > li {
- width: 70px; /*20*5=100%*/
-  float: left;
-  text-align: center;
-  line-height: 40px;
- 
+/* 글 배경 */
+.myread-wrap {
+	margin: 80px auto 40px;
+	/* Adjust top margin to avoid overlap with fixed header */
+	max-width: 800px;
+	padding: 20px;
 }
 
-.menu a {
-  color: #fff;
+.diary-list {
+	background: #f9f9f9;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 860px;
 }
 
-.submenu > li {
-  line-height: 50px;
-  background-color: #94a9ff;
+.menubar {
+	text-align: right;
+}
+
+.menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu>li {
+	display: inline-block;
+	position: relative;
+}
+
+.menu>li>a {
+	display: block;
 }
 
 .submenu {
-  height: 0; /*ul의 높이를 안보이게 처리*/
-  overflow: hidden;
-}
-.menu > li:hover {
-  background-color: #94a9ff;
-  transition-duration: 0.5s;
+	display: none;
+	position: absolute;
+	top: 30px;
+	right: 0;
+	background: white;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	list-style: none;
+	padding: 10px;
+	margin: 0;
+	border-radius: 5px;
 }
 
-.menu > li:hover .submenu {
-  height: 250px; /*서브메뉴 li한개의 높이 50*5*/
-  transition-duration: 1s;}
+.menu>li:hover .submenu {
+	display: block;
+}
+
+.submenu>li {
+	margin: 0;
+	padding: 0;
+}
+
+.submenu>li>a {
+	display: block;
+	padding: 5px 10px;
+	color: #333;
+	text-decoration: none;
+}
+
+.diary-title {
+	font-size: 1.8em;
+	margin-bottom: 10px;
+	border-bottom: 2px solid #333;
+	padding-bottom: 10px;
+}
+
+.diary-date, .diary-content {
+	margin-bottom: 20px;
+}
