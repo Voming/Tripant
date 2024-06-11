@@ -1,10 +1,28 @@
 desc member;
+desc item;
 select * from member;
 select * from plan_member;
 delete from plan_member where mem_email = 'seojw0730@gmail.com';
 delete from member where mem_nick = '구글';
 truncate table log;
 commit;
+-- 트립앤트 소유자 및 관리자
+begin
+    for i in 1..10 loop
+        insert into member values(
+            'admin'||i||'@tripant.store', 
+            'admin'||i, 
+            '$2a$12$ezqkPXRgYVoKN01wpt5v8O9wMYiG3snSkWFtVZs7i7sHgCE9QiNo2', 
+            'ROLE_ADMIN', 
+            1, 
+            'T', 
+            to_date('01/01/01', 'YY/MM/DD'), 
+            to_date('01/01/01', 'YY/MM/DD')
+        );
+    end loop;
+    commit;
+end;
+/
 -- 트립앤트 회원
 insert into member values(
     'seojw0730@naver.com', 
@@ -60,7 +78,7 @@ insert into member values(
     'dpdls898@naver.com', 
     '오예', 
     '$2a$10$0a0QuNdikz2mttbPInhXyeesWiMDpTZtGgeilB2r49QhX6qp0yd.C', 
-    'ROLE_OWNER', 
+    'ROLE_MEM', 
     1, 
     'T', 
     to_date('24/06/10', 'RR/MM/DD'), 
