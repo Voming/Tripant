@@ -20,7 +20,7 @@ function reportHandler(){
 	var reportId = $(this).data('report');
 	console.log(reportId);
 		Swal.fire({
-		  title: "정말로 이 글을 신고하시겠습니까?",
+		  title: "이 글을 신고하시겠습니까?",
 		  text: "신고를 취소하고 싶으신 경우, 고객센터에 문의해주시길 바립니다.",
 		  showCancelButton: true,
 		  confirmButtonColor: "#3085d6",
