@@ -13,7 +13,6 @@ function loadedHandler() {
 //모달 열기 ========================
 function btnMakeClickHandler() {
 	var auth = $(".auth").attr("value");
-	console.log(auth);
 
 	if (!auth) {
 		alert("로그인을 한 후에 이용해주세요.");

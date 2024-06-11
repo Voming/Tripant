@@ -62,11 +62,8 @@
 					<li class="example-img"><img th:src="@{/images/area/JEJU.jpg}"
 						alt="제주"></li>
 					<li class="example-right">
-						<h2>여행을 준비하는 개미님은</h2>
-						<h2>트립앤트의 스케줄링을 통해</h2>
-						<h2>10시간 이상을 절약하셨어요</h2>
-						<h6>제주여행을 준비하는 개미님은 트립앤트 덕분에 위치, 동선, 영업일, 식사시간 등을</h6>
-						<h6>고려하며 평균 10시간에 걸쳐 며칠동안 짜야 할 일정 계획을 단 5분만에 만들었어요!</h6>
+						<h2>여행을 준비하는 개미님은<br>트립앤트의 스케줄링을 통해<br>10시간 이상을 절약하셨어요</h2>
+						<h6>제주여행을 준비하는 개미님은 트립앤트 덕분에 위치, 동선, 영업일, 식사시간 등을<br>고려하며 평균 10시간에 걸쳐 며칠동안 짜야 할 일정 계획을 단 5분만에 만들었어요!</h6>
 					</li>
 				</ul>
 			</div>
@@ -91,8 +88,8 @@
 								<div class="area_btn">
 									<img th:src="@{|/images/area/${area.areaFileName}|}"alt="지역">
 									<div class="description">
-										<p style="font-size: var(--font3);" th:text="${area.areaName}"></p>
-										<p style="font-size: var(--font5);" th:text="${area.areaEngName}"></p>
+										<h3 th:text="${area.areaName}"></h3>
+										<h5 th:text="${area.areaEngName}"></h5>
 									</div>
 								</div>
 							</li>
