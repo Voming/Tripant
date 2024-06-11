@@ -21,9 +21,15 @@ public class StoreController {
 	private final StoreService storeService; 
 	
 	@GetMapping("/store")
-	public ModelAndView store(ModelAndView mv) {
+	public ModelAndView store(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/home");
-		List<ItemEntity> themeList = storeService.themeList();
+		String memEmail;
+		if(principal != null) {
+			memEmail = principal.getName();
+		}else {
+			memEmail = "";
+		}
+		List<ItemEntity> themeList = storeService.themeList(memEmail);
 		List<ItemEntity> fontList = storeService.fontList();
 		mv.addObject("themeList", themeList);
 		mv.addObject("fontList", fontList);
@@ -33,9 +39,14 @@ public class StoreController {
 	@GetMapping("/store/cart")
 	public ModelAndView storeCart(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/cart");
-		String memEmail = principal.getName();
-		List<Map<String, Object>> map = storeService.cart(memEmail);
-		mv.addObject("cart", map);
+		if(principal != null) {
+			String memEmail = principal.getName();
+			List<Map<String, Object>> map = storeService.cart(memEmail);
+			System.out.println(map.size());
+			if(map.size() > 0) {
+				mv.addObject("cart", map);
+			}
+		}
 		return mv;
 	}
 	

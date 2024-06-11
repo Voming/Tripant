@@ -105,6 +105,7 @@ public class JoinController {
 		try {
 			if(RecaptchaConfig.verify(recaptcha)) {
 				memberService.join(memberEntity);
+				session.removeAttribute("memType");
 				session.removeAttribute("memEmail");
 				return 1;
 			}else {

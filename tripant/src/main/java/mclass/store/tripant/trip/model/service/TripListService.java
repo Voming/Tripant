@@ -18,8 +18,9 @@ public class TripListService {
 	public List<TripListEntity> selectTripList(String memEmail){
 		return repository.selectTripList(memEmail);
 	}
+	
 	//여행삭제(planId -> PK)
-//	public int deletePlan(int planId) {
-//		return repository.deletePlan(planId);
-//	}
+	public int delete(Integer planId) {
+		return repository.delete(planId);
+	}
 }

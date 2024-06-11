@@ -28,20 +28,19 @@ public class MemberSecurityService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String memEmail) throws UsernameNotFoundException {
 		log.debug("[sjw] membersecurityservice==============");
-		Optional<MemberEntity> loginEntityOp = Optional.ofNullable(memberRepository.login(memEmail));
-		System.out.println("[sjw] loginEntityOp = "+loginEntityOp);
-		if(loginEntityOp.isEmpty()) {
+		Optional<MemberEntity> memberEntityOp = Optional.ofNullable(memberRepository.login(memEmail));
+		System.out.println("[sjw] loginEntityOp = "+memberEntityOp);
+		if(memberEntityOp.isEmpty()) {
 			throw new UsernameNotFoundException("가입해");
 		}
-		MemberEntity loginEntity = loginEntityOp.get();
-		System.out.println("[sjw] loginEntity = "+loginEntity);
+		MemberEntity memberEntity = memberEntityOp.get();
+		System.out.println("[sjw] loginEntity = "+memberEntity);
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		switch(loginEntity.getMemRole()) {
-			case "ROLE_OWNER": authorities.add(new SimpleGrantedAuthority(MemberRole.OWNER.getRole()));
-			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole()));
-			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole()));
-			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));
+		switch(memberEntity.getMemRole()) {
+			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole())); break;
+			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole())); break;
+			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole())); break;
 		}
-		return new User(loginEntity.getMemEmail(), loginEntity.getMemPassword(), authorities);
+		return new User(memberEntity.getMemEmail(), memberEntity.getMemPassword(), authorities);
 	}
 }

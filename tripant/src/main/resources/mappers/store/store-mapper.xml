@@ -2,14 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mclass.store.tripant.store.model.repository.StoreRepository">
 	<!-- 스토어 -->
-		<!-- 테마 목록 -->
-		<select id="themeList" resultType="itemEntity">
-			select item_name, to_char(item_price, '9,999') as item_price, item_sale from item where substr(item_code, 1, 1) = 'T' order by item_code 
-		</select>
-		<!-- 폰트 목록 -->
-		<select id="fontList" resultType="itemEntity">
-			select item_name, to_char(item_price, '9,999') as item_price, item_sale from item where substr(item_code, 1, 1) = 'F' order by item_code 
-		</select>
+	<!-- 테마 목록 -->
+	<select id="themeList" resultType="itemEntity" parameterType="string">
+		select item_name, to_char(item_price, '9,999') as item_price, item_sale from item 
+		 where substr(item_code, 1, 1) = 'T' 
+		 <if test="#{memEmail} != null">
+		  and item_code not in (select item_code from cart where substr(item_code, 1, 1) = 'T' and mem_email = #{memEmail}) 
+		   and item_code not in (select item_code from buy where substr(item_code, 1, 1) = 'T' and mem_email = #{memEmail}) 
+		 </if>
+		    order by item_code 
+	</select>
+	<!-- 폰트 목록 -->
+	<select id="fontList" resultType="itemEntity">
+		select item_name, to_char(item_price, '9,999') as item_price, item_sale from item where substr(item_code, 1, 1) = 'F' order by item_code 
+	</select>
+	<!-- 장바구니에 담기 -->
+	<insert id="insertItems" parameterType="list">
+		<foreach collection="list" item="item">
+			insert into cart values (#{itemCode}, #{memEmail})
+		</foreach>
+	</insert>
 	<!-- 장바구니 -->
 	<select id="cart" resultType="map" parameterType="string">
 		select item_code, item_name, item_price from cart join item using (item_code) where mem_email = #{memEmail}
