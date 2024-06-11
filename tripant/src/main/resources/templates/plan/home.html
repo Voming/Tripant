@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/plan/main/home_make.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/plan/main/home_example.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/plan/main/home_search.css}" rel="stylesheet" type="text/css">
@@ -42,11 +41,10 @@
 					<p>기존에 경험하지 못한 새로운</p>
 					<p>개미의 여행</p>
 				</div>
-				<ul class="make-plan"
-					style="font-size: var(--font3); font-weight: bolder;">
-					<li><p style="margin: 20px 20px 0 0;" sec:authorize="isAnonymous()">일정 생성을 위해 로그인을 해주세요</p></li>
-					<li><p style="margin: 20px 20px 0 0;" sec:authorize="isAuthenticated()">일정을 생성해볼까요?</p></li>
-					<li><button type="button" class="btn make" sec:authorize="isAuthenticated()">일정 만들기</button></li>
+				<div class="auth hidden" th:value="${auth}" ></div>
+				<ul class="make-plan" style="font-size: var(--font3); font-weight: bolder;">
+					<li><p style="margin: 20px 20px 0 0;">일정을 생성해볼까요?</p></li>
+					<li><button type="button" class="btn make">일정 만들기</button></li>
 				</ul>
 			</li>
 			<li class="make-img"><img th:src="@{/images/area/SEOUL.jpg}"
