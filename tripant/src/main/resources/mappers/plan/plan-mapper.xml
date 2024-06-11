@@ -3,13 +3,11 @@
 <mapper namespace="mclass.store.tripant.plan.model.repostiory.PlanRepository">
 	<!-- 그 외에 일정에 필요한 mapper -->
 	<select id="selectPlanCount" resultType="_int">
-		SELECT COUNT(*) FROM
-		PLAN
+		SELECT COUNT(*) FROM PLAN
 	</select>
 
 	<select id="selectMemCount" resultType="_int">
-		SELECT COUNT(*) FROM
-		MEMBER
+		SELECT COUNT(*) FROM MEMBER WHERE MEM_ROLE='ROLE_MEM'
 	</select>
 
 	<select id="selectAreaNameList" resultType="AreaNameEntity">

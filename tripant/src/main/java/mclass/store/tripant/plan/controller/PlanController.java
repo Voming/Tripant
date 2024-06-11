@@ -50,7 +50,8 @@ public class PlanController {
 	public ModelAndView home(Principal principal, Authentication authentication, ModelAndView mv) {
 		log.trace("principal = "+principal);
 		log.debug("auth = "+authentication);
-		
+		mv.addObject("principal", principal);
+		mv.addObject("auth", authentication);
 		//model 대신 ModelAndView를 사용함
 		mv.addObject("planCount", planService.selectPlanCount());
 		mv.addObject("memCount", planService.selectMemCount());

@@ -12,18 +12,24 @@ function loadedHandler() {
 
 //모달 열기 ========================
 function btnMakeClickHandler() {
-	$(".modal").addClass("show");
+	var auth = $(".auth").attr("value");
 
-	$(".keep_btn").attr("disabled", true);
-	//일정 계속 만들기 활성화
-	$("#planForm input").on('input', function() {
-		if ($("#planForm input").val() == '' ||  $("#selectbox option:selected").text()=='--일정을 생성할 지역을 선택하세요--')
-			$(".keep_btn").attr("disabled", true);
-		else
-			$(".keep_btn").attr("disabled", false);
-	});
-	//일정 계속 만들기 
-	$(".keep_btn").on("click", btnKeepClickHandler);
+	if (!auth) {
+		alert("로그인을 한 후에 이용해주세요.");
+	} else  {
+		$(".modal").addClass("show");
+
+		$(".keep_btn").attr("disabled", true);
+		//일정 계속 만들기 활성화
+		$("#planForm input").on('input', function() {
+			if ($("#planForm input").val() == '' || $("#selectbox option:selected").text() == '--일정을 생성할 지역을 선택하세요--')
+				$(".keep_btn").attr("disabled", true);
+			else
+				$(".keep_btn").attr("disabled", false);
+		});
+		//일정 계속 만들기 
+		$(".keep_btn").on("click", btnKeepClickHandler);
+	}
 }
 
 
