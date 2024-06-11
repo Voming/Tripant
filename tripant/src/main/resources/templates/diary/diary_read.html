@@ -9,24 +9,55 @@
 <body>
 	<!--헤더영역  -->
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
-<!-- 사이드바 연결 -->
-			<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
+	<!-- 사이드바 연결 -->
+	<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
+
+
 	<!-- 일기 목록 영역 -->
+
 	<div class="myread-wrap">
-    <div class="diary-list">
-        <h1>여행기 상세보기</h1>
-        <div th:if="${diary != null}">
-            <div th:text="${diary.diaryTitle}" class="diary-title">Diary Title</div>
-            <div th:text="${#dates.format(diary.diaryDate, 'yyyy-MM-dd')}" class="diary-date">Diary Date</div>
-            <div th:text="${diary.diaryContent}" class="diary-content">Diary Content</div>
-        </div>
-        <div th:if="${diary == null}">
-            <p>일기를 찾을 수 없습니다.</p>
-        </div>
-    </div>
-</div>
+
+		<div class="diary-list">
+			<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
+			<div class="menubar">
+				<ul class="menu">
+					<li><a href="#"><img class="wfull img"
+							src="/images/icons/kebabIcon.png" style="width: 30px;" /></a>
+						<ul class="submenu">
+							<li><a href="#">공유하기</a></li>
+							<li><a href="#">신고하기</a></li>
+							<!-- 로그인시 활성화 -->
+							<li><a href="#">삭제하기</a></li>
+
+						</ul></li>
+				</ul>
+			</div>
+
+			<div th:if="${diary != null}">
+
+
+				<div th:text="${diary.diaryTitle}" class="diary-title">Diary
+					Title</div>
+				<p>날짜</p>
+				<br>
+				<div th:text="${#dates.format(diary.diaryDate, 'yyyy-MM-dd')}"
+					class="diary-date">Diary Date</div>
+				<p>내용</p>
+				<br>
+				<div th:text="${diary.diaryContent}" class="diary-content">Diary
+					Content</div>
+			</div>
+			<div th:if="${diary == null}">
+				<p>일기를 찾을 수 없습니다.</p>
+			</div>
+		</div>
+
+	</div>
+
 
 	<!-- 푸터영역 -->
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
+<!--자바 스크립트   -->
+<script type="text/javascript" th:src="@{/js/diary/diary_read.js}"></script>
 </html>

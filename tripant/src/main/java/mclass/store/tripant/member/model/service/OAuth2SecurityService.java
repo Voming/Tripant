@@ -57,7 +57,6 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 		MemberEntity memberEntity = memberEntityOp.get();
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		switch(memberEntity.getMemRole()) {
-			case "ROLE_OWNER": authorities.add(new SimpleGrantedAuthority(MemberRole.OWNER.getRole()));
 			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole()));
 			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole()));
 			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));

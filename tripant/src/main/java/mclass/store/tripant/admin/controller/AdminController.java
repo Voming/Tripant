@@ -1,13 +1,14 @@
 package mclass.store.tripant.admin.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import mclass.store.tripant.admin.service.AdminMemSerivce;
 
@@ -17,36 +18,45 @@ import mclass.store.tripant.admin.service.AdminMemSerivce;
 public class AdminController {
 
 	@Autowired
-	private AdminMemSerivce adminservie;
+	private AdminMemSerivce adminservice;
 	
 	@GetMapping("/member")
-	public String admin(Model model) {
+	public ModelAndView Member(ModelAndView mv) {
 		
-		model.addAttribute("memList",adminservie.selectMemList());
+		//model.addAttribute("memList",adminservice.selectMemList());
+		mv.addObject("memList",adminservice.selectMemList());
+		mv.setViewName("admin/admin_member");
 		
-		return "admin/admin_member";
+		return mv;
+		//return "admin/admin_member";
 	}
 	
 	@PostMapping("/member/role")
 	@ResponseBody
-	public Integer adminMemRole(@RequestParam int selectRole) {
+	public Integer MemberRole() {
 		
-	
-		int result=adminservie.adminMemRole(selectRole);
+		
+		//int result=adminservie.adminMemRole();
 
-		return result;
+		return 0;
 	}
 	
 	@GetMapping("/board")
-	public String adminlist(Model model) {
-		model.addAttribute("memBoard",adminservie.boardList());
+	public String board(Model model) {
+		model.addAttribute("memBoard",adminservice.boardList());
 		
 		return "admin/admin_board";
 	}
 	
+
 	@GetMapping("/complain")
 	public String complain() {
 		return "admin/admin_complain";
+	}
+	
+	@GetMapping("/goods")
+	public String goods() {
+		return "admin/admin_goods";
 	}
 	
 	@GetMapping("/cancel")
@@ -55,12 +65,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("/mchart")
-	public String adminmchart() {
+	public String mchart() {
 		return "admin/admin_mchart";
 	}
 	
 	@GetMapping("/bchart")
-	public String adminbchart() {
+	public String bchart() {
 		return "admin/admin_bchart";
 	}
 }

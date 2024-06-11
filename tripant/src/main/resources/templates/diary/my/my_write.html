@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet"
+	type="text/css">
 <link th:href="@{/css/diary/my/my_write.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}">
 </head>
@@ -24,7 +25,7 @@
 						<td><select name="diaryPlanId"
 							class="diary-writer-select-plan">
 								<option value="">처음 생성했던 일정 이름을 골라주세요!</option>
-								<option value="1">일정1</option>
+								<option value="1">planTitle</option> <!--planTitle (planId 하나당 글 작성 1개)  -->
 								<option value="2">일정2</option>
 								<option value="3">일정3</option>
 						</select></td>
@@ -87,34 +88,14 @@
 	<footer>
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
-	<script>
-		$(document).ready(function() {
-			$('#diaryForm').on('submit', function(event) {
-				event.preventDefault(); // 폼 기본 제출 방지
-				const formData = $(this).serialize(); // 폼 데이터를 직렬화
 
-				$.ajax({
-					url : '/my/write', // 서버의 엔드포인트 URL
-					type : 'post',
-					data : formData,
-					success : function(data) {
-						alert('작성완료');
-						window.location.href = '/my/diary'; // 성공 시 리디렉션
-					},
-					error : function(error) {
-						console.error('Error:', error);
-						alert('오류가 발생했습니다.');
-					}
-				});
-			});
-		});
-	</script>
 	<!-- ckeditors -->
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
-	
 
 	<!-- ckeditor jsp 파일 -->
 	<script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
+	<!--글 등록  -->
+	<script type="text/javascript" th:src="@{/js/diary/diary_write.js}"></script>
 </body>
 </html>

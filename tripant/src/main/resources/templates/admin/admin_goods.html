@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
-<title>게시글관리</title>
+<title>상품관리</title>
 <!-- reset.css -->
 <link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
 <!-- 레이아웃 설정 -->
 <link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
-<link th:href="@{/css/admin/admin_board.css}" rel="stylesheet">
+<link th:href="@{/css/admin/admin_goods.css}" rel="stylesheet">
 <!--제이쿼리  -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
+
 <div class="wrap-main">
 	<div class="wrap-sidebar">
 		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
@@ -30,48 +32,39 @@
 		<div class="ad-menustorea a"><a href="/admin/cancel">결제취소</a></div>
 		<div class="ad-menustorea b"><a href="/admin/goods">상품관리</a></div>
 	</div>
-	
 	<div class="wrap-body">
-		<form>
-			<div class="ad-header">
-				<div class="ad-text">전체 게시글</div>
+		<div class="ad-header">
+				<div class="ad-text">상품관리</div>
 			</div>
 			<div class="ad-search">
-				<select class="search-option" name="option">
-					<option value="nick" selected>닉네임</option>
-					<option value="title">제목</option>
-				</select>
-				<input class="search" type="text" placeholder="게시글검색">
+				<input class="search" type="text" placeholder="상품명 검색">
 			</div>
 			<div class="ad-content">
-				<ul class="boardlist">
+				<ul class="memberlist">
 					<li>	
 						<ul class="col">
-							<li>번호</li>
-							<li>제목</li>
-							<li>닉네임</li>
-							<li>날짜</li>
-							<li>조회수<span>▼</span></li>
-							<li>좋아요<span>▼</span></li>
+							<li>코드</li>
+							<li>이름</li>
+							<li>가격</li>
+							<li>기간</li>
+							<li><button type="button" class="btn-add">상품추가</button></li>
 						</ul>
 					</li>
+					
 					<li>
-						<th:block th:each="memBoard:${memBoard}">
 						<ul class="col list">
-							<li th:text="${memBoard.diaryId}"></li>
-							<li th:text="${memBoard.diaryTitle}"></li>
-							<li th:text="${memBoard.diaryMemEmail}"></li>
-							<li th:text="${memBoard.diaryDate}"></li>
-							<li th:text="${memBoard.diaryViews}"></li>
-							<li></li>
+							<li>T-1</li>
+							<li>테마</li>
+							<li>500원</li>
+							<li>무제한</li>
+							<li><button type="button" class="btn">수정</button> <button type="button" class="btn cancel">삭제</button> </li>
 						</ul>
-						</th:block>
-						
 					</li>
-				</ul>
-			</div>
-		</form>
+				</ul>	
+			</div> 
 	</div>
-</div>	
+</div>
+
+
 </body>
 </html>
