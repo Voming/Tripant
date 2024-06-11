@@ -11,10 +11,13 @@ import mclass.store.tripant.store.domain.ItemEntity;
 public interface StoreRepository {
 	// 스토어
 	// 테마 목록
-	public List<ItemEntity> themeList();
+	public List<ItemEntity> themeList(String memEmail);
 
 	// 폰트 목록
 	public List<ItemEntity> fontList();
+	
+	// 장바구니에 담기
+	public int insertItems(List<Map<String, Object>> list);
 
 	// 장바구니
 	public List<Map<String, Object>> cart(String memEmail);

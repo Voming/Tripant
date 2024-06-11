@@ -21,9 +21,15 @@ public class StoreController {
 	private final StoreService storeService; 
 	
 	@GetMapping("/store")
-	public ModelAndView store(ModelAndView mv) {
+	public ModelAndView store(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/home");
-		List<ItemEntity> themeList = storeService.themeList();
+		String memEmail;
+		if(principal != null) {
+			memEmail = principal.getName();
+		}else {
+			memEmail = "";
+		}
+		List<ItemEntity> themeList = storeService.themeList(memEmail);
 		List<ItemEntity> fontList = storeService.fontList();
 		mv.addObject("themeList", themeList);
 		mv.addObject("fontList", fontList);

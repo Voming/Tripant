@@ -21,7 +21,7 @@
 }
 
 .wrap-main .hide {
-	display: none;
+	visibility: hidden;
 }
 
 .wrap-main .sale {
@@ -50,6 +50,9 @@
 .wrap-main .title {
 	font-size: var(--font1);
 	margin-top: 15px;
+}
+.wrap-main .title span{
+	font-size: var(--font6);
 }
 
 .wrap-main .explain {
