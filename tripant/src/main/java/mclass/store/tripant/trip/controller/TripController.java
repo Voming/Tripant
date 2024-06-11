@@ -30,7 +30,7 @@ public class TripController {
 	}
 	
 	@GetMapping(value="/detail/{planId}")
-	public String main(Model model,@PathVariable("planId") Integer planId) {
+	public String detail(Model model,@PathVariable("planId") Integer planId) {
 		//model.addAttribute();
 		return "trip/trip";
 	}
