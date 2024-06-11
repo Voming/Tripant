@@ -36,7 +36,13 @@ public class StoreService {
 	}
 	
 	// 장바구니
+	// 장바구니 목록
 	public List<Map<String, Object>> cart(String memEmail){
 		return storeRepository.cart(memEmail);
+	}
+	
+	// 장바구니 삭제
+	public int cartDel(Map<String, Object> map) {
+		return storeRepository.cartDel(map);
 	}
 }

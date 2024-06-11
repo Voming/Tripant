@@ -21,5 +21,9 @@ public interface StoreRepository {
 	public int insertItems(List<Map<String, Object>> list);
 	
 	// 장바구니
+	// 장바구니 목록
 	public List<Map<String, Object>> cart(String memEmail);
+	
+	// 장바구니 삭제
+	public int cartDel(Map<String, Object> map);
 }

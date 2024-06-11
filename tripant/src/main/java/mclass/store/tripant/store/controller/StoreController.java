@@ -79,6 +79,25 @@ public class StoreController {
 		return mv;
 	}
 	
+	// 장바구니 삭제
+	@PostMapping("/store/cart/del")
+	@ResponseBody
+	public int storeCartDel(@RequestParam List<String> items, Principal principal) {
+		int size = items.size();
+		Map<String, Object> map = new HashMap<>();
+		String memEmail = principal.getName();
+		map.put("memEmail", memEmail);
+		map.put("itemCode", items);
+		int delNum = storeService.cartDel(map);
+		int result;
+		if(size == delNum) {
+			result = 1;
+		}else {
+			result = 0;
+		}
+		return result;
+	}
+	
 	@GetMapping("/store/buy")
 	public String storeBuy() {
 		return "store/buy";

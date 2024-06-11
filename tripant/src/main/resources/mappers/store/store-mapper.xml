@@ -33,4 +33,10 @@
 		select item_code, item_name, item_price from cart join item using (item_code) where mem_email = #{memEmail}
 	</select>
 	<!-- 장바구니 삭제 -->
+	<delete id="cartDel" parameterType="map">
+		delete from cart where mem_email = #{memEmail} and item_code in 
+			<foreach collection="itemCode" item="code" open="(" separator="," close=")">
+				#{code}
+			</foreach>
+	</delete>
 </mapper>
