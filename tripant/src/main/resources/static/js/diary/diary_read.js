@@ -3,8 +3,8 @@ function loaededHandler(){
 	//공유-모달창
 	//$('.share-plan.modal').on("click",shareModalHandler);
 	
-	//삭제
-	//$('.delete-diary').on("click",deleteHandler);
+	//신고하기
+	$('.report').on("click",reportHandler);
 	
 	//케밥 아이콘 이벤트
 	$('.info').on("click",miniModalBtnHandler);
@@ -16,25 +16,38 @@ function loaededHandler(){
     });	
 }
 
-//친구공유 모달
-/*function shareModalHandler(){
-	$(".wrap-modal").css("display","block");
-
-}*/
-//친구공유 모달 닫기
-/*$(document).mouseup(function(e) {
-	var LayerModal = $(".wrap-modal");
-	if (LayerModal.has(e.target).length === 0) {
-		LayerModal.css("display","none");
-	}
-	$('.mini-modal').removeClass('active');
-	$(this).parent().addClass('active');
-});*/
-
-//미니 모달창
-/*function miniModalBtnHandler(){
-	var mbtn = $(this).children('.mini-modal');
-	$('.mini-modal').addClass('hide');
-	$(this).children('.mini-modal').removeClass("hide");
-	
-}*/
+function reportHandler(){
+	var reportId = $(this).data('report');
+	console.log(reportId);
+		Swal.fire({
+		  title: "정말로 이 글을 신고하시겠습니까?",
+		  text: "신고를 취소하고 싶으신 경우, 고객센터에 문의해주시길 바립니다.",
+		  showCancelButton: true,
+		  confirmButtonColor: "#3085d6",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "확인",
+		  cancelButtonText: "취소",
+	   	  confirmButtonTextFont:"Binggrae",
+		}).then((result) => {
+		  if (result.isConfirmed) {
+	         $.ajax({
+        	 url:"/diary/report",
+        	 method:"post",
+        	 data: {reportId:reportId},
+			 //success: 1이면 업데이트 완료 0이면 실패
+			 success : function(result) {
+				if(result == 1){
+						Swal.fire({
+				     	title: "성공",
+				      	text: "신고되었습니다",
+		                confirmButtonText: 'Ok'		      	
+				    }).then(() => {
+						location.reload();
+					});
+				}
+			 },
+			 error : ajaxErrorHandler
+         	});//ajax
+		  }//if
+		});
+}
