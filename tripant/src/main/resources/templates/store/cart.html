@@ -17,7 +17,8 @@
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0;
-	background-color: var(--color_light_gray);
+	background-color: black;
+	color: white;
 	padding: 5px;
 }
 
@@ -47,10 +48,16 @@
 
 .wrap-main .item-info.flex{
 	margin-top: 10px;
+	align-items: center;
+}
+
+.wrap-main .cart-list.empty{
+	font-size: var(--font1);
 }
 .wrap-main .cart-info.flex{
 	border-top: 1px solid lightgray;
 	padding: 10px 0;
+	align-items: center;
 }
 .wrap-main .item-info.flex > div, 
 .wrap-main .cart-info.flex > div{
@@ -90,18 +97,45 @@
 	margin-top: 5px;
 }
 
+/* 가격 + 구매버튼 */
+.wrap-main .cart-bottom.flex{
+	flex-direction: row;
+	border-top: 1px solid lightgray;
+	padding-top: 10px;
+	line-height: 2em;
+	align-items: center;
+	justify-content: space-between
+}
+.wrap-main .cart-check.flex{
+	align-items: center;
+	justify-content: center;
+}
 </style>
 <script>
 $(loadedHandler);
 function loadedHandler(){
 	// 버튼 호버 css
 	$('.btn').hover(function(){
-		$(this).css('background-color', 'black');
-		$(this).css('color', 'white');
-	}, function(){
 		$(this).css('background-color', 'var(--color_light_gray)');
 		$(this).css('color', 'black');
+	}, function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
 	});
+	
+	// 총 가격 계산
+	$('input[name=cart-pick]').on('click', sumCalcHandler);
+}
+
+// 총 가격 계산
+function sumCalcHandler(){
+	let sum = 0;
+	$('input[name=cart-pick]:checked').each(function(index, item){
+		sum += item.nextElementSibling.value * 1;
+	});
+	let sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	let text = '총 가격 : '+sum2+' 원';
+	$('.sum').text(text);
 }
 </script>
 <body>
@@ -125,9 +159,17 @@ function loadedHandler(){
 				<div class="cart-info flex" th:each="item : ${cart}">
 					<div class="cart-name" th:text="${item.ITEM_NAME}"></div>
 					<div class="cart-price" th:text="${item.ITEM_PRICE}+'원'"></div>
-					<div class="cart-check"><input type="checkbox" name="cart-pick" th:value="${item.ITEM_CODE}"></div>
+					<div class="cart-check flex">
+						<input type="checkbox" name="cart-pick" th:value="${item.ITEM_CODE}" style="width: 20px; height: 20px;">
+						<input type="hidden" th:value="${item.ITEM_PRICE}">
+					</div>
 				</div>
 			</div>
+			<div class="cart-list empty" th:unless="${cart} != null">장바구니가 비었습니다.</div>
+		</div>
+		<div class="cart-bottom flex">
+			<div class="sum">총 가격 : 0 원</div>
+			<div><button type="button" class="btn pay">선택 상품 구매하기</button></div>
 		</div>
 	</div>
 	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>

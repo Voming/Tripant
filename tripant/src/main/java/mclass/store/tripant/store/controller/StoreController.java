@@ -33,9 +33,14 @@ public class StoreController {
 	@GetMapping("/store/cart")
 	public ModelAndView storeCart(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/cart");
-		String memEmail = principal.getName();
-		List<Map<String, Object>> map = storeService.cart(memEmail);
-		mv.addObject("cart", map);
+		if(principal != null) {
+			String memEmail = principal.getName();
+			List<Map<String, Object>> map = storeService.cart(memEmail);
+			System.out.println(map.size());
+			if(map.size() > 0) {
+				mv.addObject("cart", map);
+			}
+		}
 		return mv;
 	}
 	
