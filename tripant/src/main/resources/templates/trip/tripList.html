@@ -13,7 +13,7 @@
 		<!-- 일정있습 -->
 		<div class="full">
 			<div th:each="plan : ${planlist}" class="trip-list wfull" >
-				<a class="ntrip wfull" th:href="@{|trip/detail/${plan.planId}|}"><!-- 해당 정보에 대한 trip 페이지로 이동 -->
+				<a class="ntrip wfull" th:href="@{|trip/detail/${plan.planId}|}" ><!-- 해당 정보에 대한 trip 페이지로 이동 -->
 					<img th:src="@{|/images/area/${plan.areaFileName}|}" alt="img"  class="location-img"/>
 					<div class="trip-info">
 						<h4 th:text="${plan.areaShortName}" class="trip-location"></h4>
@@ -26,6 +26,7 @@
 					<div class="mini-modal hide" > 
 						<div><a th:href="@{#route}" class="show-detail" >일정보기</a></div>
 						<div class="share-plan modal">공유</div>
+						<div class="delete-plan" th:data-plan-id="${plan.planId}" th:data-title="${plan.planTitle}" >삭제</div>
 						<!-- modal -->
 						<div class="wrap-modal">
 							<div class ="modal-content ">
@@ -36,7 +37,6 @@
 							</div>
 						</div>
 						<!-- //modal -->
-						<div class="delete-plan">삭제</div>
 					</div>
 				</button>
 			</div>

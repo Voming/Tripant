@@ -21,15 +21,15 @@ public class TripListController {
 	private TripListService tripListService;
 	
 	@GetMapping("/list")
-	public String mainList(Model model , Principal principal /* ,@RequestParam String memEmail */) {
-		System.out.println(tripListService.selectTripList(principal.getName()));
+	public String tripList(Model model , Principal principal /* ,@RequestParam String memEmail */) {
 		model.addAttribute("planlist", tripListService.selectTripList(principal.getName()));
 		return "trip/tripList";
 	}
+	
 	@PostMapping("/list/delete")//ajax
 	@ResponseBody
-	public String planDelete(Model model) {
-		
-		return "trip/tripList";
+	public int listDelete(Integer planId) {
+		int result =  tripListService.delete(planId);
+		return result;
 	}
 }

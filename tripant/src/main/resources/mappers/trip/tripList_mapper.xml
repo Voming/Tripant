@@ -3,9 +3,12 @@
 <mapper namespace="mclass.store.tripant.trip.model.repository.TripListRepository">
 	<!-- 여행목록 -->
 		<select id="selectTripList" parameterType="string" resultType="TripListEntity">
-			select a.area_short_name area_short_name, a.area_file_name area_file_name ,t1.*
-from area a join (select p.* from plan_member pm join plan p on(pm.plan_id = p.plan_id) where pm.mem_email=#{memEmail}) t1
-on a.area_code = t1.plan_area_code
+		select a.area_short_name area_short_name, a.area_file_name area_file_name ,t1.*
+		from area a join (select p.* from plan_member pm join plan p on(pm.plan_id = p.plan_id) where pm.mem_email=#{memEmail} and plan_delete_day is null) t1
+		on a.area_code = t1.plan_area_code order by plan_id desc
 		</select>
+		<update id="delete" parameterType="int" >
+			UPDATE PLAN SET plan_delete_day = SYSDATE WHERE plan_id = #{planId}
+		</update>
 	
 </mapper>

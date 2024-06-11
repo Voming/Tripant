@@ -39,25 +39,48 @@ function miniModalBtnHandler(){
 	
 }
 
+
 //일정삭제
 function deleteHandler() {
+	//data로 id와 title받아오기
+	var planId = $(this).data('plan-id');
+	var planTitle = $(this).data('title');
 	//TODO data ajax로 넘기기
 	Swal.fire({
-		  title: "[제목]",
+		  title: "<h2>"+planTitle+"</h2>",
 		  text: "삭제하시겠습니까?",
-		  //icon: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#3085d6",
 		  cancelButtonColor: "#d33",
 		  confirmButtonText: "삭제",
-		  cancelButtonText: "취소"
+		  cancelButtonText: "취소",
+	   	  confirmButtonTextFont:"Binggrae",
 		}).then((result) => {
 		  if (result.isConfirmed) {
-		    Swal.fire({
-		      title: "삭제완료",
-		      text: "[제목]삭제가 완료되었습니다",
-		      //icon: "success"
-		    });
-		  }
+	         $.ajax({
+        	 url:"/trip/list/delete",
+        	 method:"post",
+        	 data: {planId:planId},
+			 //success: 1이면 업데이트 완료 0이면 실패
+			 success : function(result) {
+				if(result == 1){
+						Swal.fire({
+				     	title: "성공",
+				      	text: "삭제되었습니다",
+		                confirmButtonText: 'Ok'		      	
+				    }).then(() => {
+						location.reload();
+					});
+				}else if(result == 0){
+						Swal.fire({
+				     	title: "실패",
+				      	text: "삭제에 실패했습니다. 다시 한 번 확인해주세요",
+		                confirmButtonText: 'Ok'		      	
+				    })
+				}
+			 },
+			 error : ajaxErrorHandler
+         	});//ajax
+		  }//if
 		});
 }
