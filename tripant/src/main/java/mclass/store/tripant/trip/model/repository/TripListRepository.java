@@ -11,7 +11,6 @@ public interface TripListRepository {
 	
 	// 여행목록 
 	public List<TripListEntity>  selectTripList(String memEmail);
+	public Integer delete(Integer planId);
 	
-	//여행삭제(planId -> PK)
-//	public int deletePlan(int planId);
 }

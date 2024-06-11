@@ -17,13 +17,18 @@ public class StoreService {
 
 	// 스토어
 	// 테마 목록
-	public List<ItemEntity> themeList() {
-		return storeRepository.themeList();
+	public List<ItemEntity> themeList(String memEmail) {
+		return storeRepository.themeList(memEmail);
 	}
 
 	// 폰트 목록
 	public List<ItemEntity> fontList() {
 		return storeRepository.fontList();
+	}
+	
+	// 장바구니에 담기
+	public int insertItems(List<Map<String, Object>> list) {
+		return storeRepository.insertItems(list);
 	}
 
 	// 장바구니

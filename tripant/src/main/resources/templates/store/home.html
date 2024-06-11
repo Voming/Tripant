@@ -5,6 +5,8 @@
 <script th:src="@{/js/store/home/loadedHandler.js}" type="text/javascript"></script>
 <script th:src="@{/js/store/home/itemNum.js}" type="text/javascript"></script>
 <script th:src="@{/js/store/home/fontModal.js}" type="text/javascript"></script>
+<script>
+</script>
 <body>
 	<div class="font modal flex">
 		<div class="font modal preview">
@@ -24,14 +26,14 @@
 		</aside>
 		<div class="flex store">
 			<div class="checked hide"><strong id="itemNum"></strong>개의 상품이 선택되었습니다.</div>
-			<div class="title">테마</div>
+			<div class="title">테마 <span>(구매하거나 장바구니에 담은 테마는 나오지 않습니다.)</span></div>
 			<div class="explain">공개 여행기를 나만의 색으로 개성을 나타낼 수 있어요!</div>
 			<div class="list flex" th:if="${themeList} != null">
 				<div class="item flex" th:each="theme : ${themeList}">
 					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
 					<div class="item explain flex">
 						<div th:text="${theme.itemName}"></div>
-						<div><input type="checkbox" name="theme"></div>
+						<div><input type="checkbox" name="theme" th:value="${theme.itemCode}"></div>
 					</div>
 					<div class="item price" th:text="${theme.itemPrice}+'원'"></div>
 				</div>
@@ -47,7 +49,7 @@
 					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
 					<div class="item explain flex">
 						<div th:text="${font.itemName}"></div>
-						<div><input type="radio" name="font"></div>
+						<div><input type="radio" name="font" ></div>
 					</div>
 					<div class="item price" th:text="${font.itemPrice}+'원'"></div>
 				</div>
