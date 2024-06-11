@@ -19,7 +19,7 @@
 	border-radius: 8px;
 	border: 0;
 	padding: 5px 10px;
-	background-color: lightgrey;
+	background-color: var(--color_light_gray);
 	width: 150px;
 }
 

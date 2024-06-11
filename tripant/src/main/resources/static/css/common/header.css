@@ -9,14 +9,14 @@ header .tn {
 }
 
 header .logo-side {
-    margin-top: 15px;
+    padding-top: 15px;
 }
 
 header .tn .log {
     /* 로그인 오른쪽 고정 */
     font-size: 15px;
     position: absolute;
-    top: 8px;
+    top: 23px;
     right: 0;
 }
 

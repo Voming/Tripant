@@ -19,7 +19,13 @@
 	border-radius: 8px;
 	border: 0;
 	padding: 5px 10px;
-	background-color: lightgrey;
+	background-color: black;
+	color: white;
+}
+
+.wrap-main .btn:disabled{
+	background-color: lightgray;
+	color: white;
 }
 
 .wrap-main .flex {
@@ -64,10 +70,6 @@
 .wrap-main .inputbtn1 input, .wrap-main .inputchk1 input, .wrap-main .btn.join
 	{
 	width: 100%;
-}
-
-.wrap-main button.btn.join {
-	padding: 5px 0;
 }
 
 .wrap-main .inputbtn2, .wrap-main .inputchk2 {

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('스토어')}"></head>
+<style>
+.wrap-main {
+	width: 960px;
+	margin: 100px auto;
+	/* padding: 0 240px; */
+	position: relative;
+}
+
+.wrap-main * {
+	font-family: 'Binggrae';
+}
+
+.wrap-main .btn {
+	cursor: pointer;
+	border-radius: 8px;
+	border: 0;
+	background-color: var(--color_light_gray);
+	padding: 5px;
+}
+
+.wrap-main .hide{
+	display: none;
+}
+
+.wrap-main .sale{
+	color: red;
+}
+
+.wrap-main .flex {
+	display: flex;
+	row-gap: 10px;
+}
+.wrap-main .flex.store{
+	flex-direction: column;
+	width: 100%;
+}
+.wrap-main .checked{
+	background: var(--color_light_gray);
+	font-size: var(--font3);
+	line-height: 2em;
+	padding: 0 10px;
+	border-radius: 10px;
+}
+.wrap-main .title{
+	font-size: var(--font1);
+	margin-top: 15px;
+}
+.wrap-main .explain{
+	font-size: var(--font4);
+}
+.wrap-main .list.flex{
+	flex-direction: row;
+	column-gap: 20px;
+	overflow-x: scroll;
+}
+.wrap-main .item.flex{
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+.wrap-main .item.pre{
+	border-radius: 10px;
+}
+.wrap-main input{
+	margin-bottom: 7px;
+}
+.wrap-main .item.explain.flex{
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.wrap-main .item.price{
+	text-align: right;
+}
+.wrap-main .explain.font.flex{
+	align-items: center;
+	line-height: 2em;
+	column-gap: 10px;
+}
+.wrap-main .cart{
+	text-align: center;
+	margin: 0 0 10px 0;
+}
+.wrap-main .warn{
+	font-size: var(--font6);
+	color: var(--color_light_gray);
+}
+
+/* 사이드바 */
+.wrap-main aside.sidebar{
+	position: fixed;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	left: 100px;
+}
+.wrap-main div.sidebar{
+	flex-direction: column;
+	align-items: center;
+	padding: 5px 10px;
+}
+.wrap-main .sidebar.item{
+	flex-direction: row;
+	align-items: center;
+	column-gap: 10px;
+}
+.wrap-main .sidebar.item a{
+	margin-top: 5px;
+}
+
+/* 폰트 미리보기 */
+.font.modal.flex{
+	position: fixed;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	background-color: rgba(128, 128, 128, .8);
+	width: 100vw; height: 100vh;
+}
+.font.modal.preview{
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+	border-radius: 10px;
+	padding: 30px;
+}
+.font.modal.flex .title{
+	font-size: var(--font1);
+	font-weight: bold;
+}
+.font.modal.flex .btn{
+	cursor: pointer;
+	border-radius: 8px;
+	border: 0;
+	background-color: var(--color_light_gray);
+	padding: 5px;
+	font-size: var(--font3);
+}
+</style>
+<script>
+$(loadedHandler);
+function loadedHandler(){
+	// 버튼 호버 css
+	$('.btn').hover(function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
+	}, function(){
+		$(this).css('background-color', 'var(--color_light_gray)');
+		$(this).css('color', 'black');
+	});
+	$('input').on('click', itemNumHandler);
+	
+	// 폰트 모달 띄우기
+	$('.btn.font').on('click', modalOpenHandler);
+	
+	// 폰트 모달 닫기
+	$('.btn.modal-close').on('click', modalCloseHandler);
+}
+// 상품 선택 시 개수 표현
+function itemNumHandler(){
+	let itemNum = $('input:checked').length;
+	if(itemNum > 0){
+		$('.checked').removeClass('hide');
+		$('#itemNum').text(itemNum);
+	}else{
+		$('.checked').addClass('hide');
+	}
+	console.log(itemNum);
+}
+// 폰트 모달 띄우기
+function modalOpenHandler(){
+	$('.font.modal.flex').css('display', 'flex');
+}
+// 폰트 모달 닫기
+function modalCloseHandler(){
+	$('.font.modal.flex').css('display', 'none');
+}
+</script>
+<body>
+	<div class="font modal flex">
+		<div class="font modal preview">
+			<div class="font modal title">제공되는 글꼴 종류</div>
+			<div class="font modal png"><img th:src="@{/images/store/font_preview.png}"></div>
+			<div><button type="button" class="btn modal-close">닫기</button></div>
+		</div>
+	</div>
+	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
+	<div class="wrap-main">
+		<aside class="sidebar flex">
+			<div class="sidebar flex">
+				<div class="sidebar title">스토어</div>
+				<div class="sidebar item flex"><img th:src="@{/images/store/cart.png}" width="20px" height="20px"><a th:href="@{/store/cart}">장바구니</a></div>
+				<div class="sidebar item flex"><img th:src="@{/images/store/buy.png}" width="20px" height="20px"><a th:href="@{/store/buy}">구매내역</a></div>
+			</div>
+		</aside>
+		<div class="flex store">
+			<div class="checked hide"><strong id="itemNum"></strong>개의 상품이 선택되었습니다.</div>
+			<div class="title">테마</div>
+			<div class="explain">공개 여행기를 나만의 색으로 개성을 나타낼 수 있어요!</div>
+			<div class="list flex" th:if="${themeList} != null">
+				<div class="item flex" th:each="theme : ${themeList}">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div th:text="${theme.itemName}"></div>
+						<div><input type="checkbox" name="theme"></div>
+					</div>
+					<div class="item price" th:text="${theme.itemPrice}+'원'"></div>
+				</div>
+			</div>
+			<div class="title">글꼴</div>
+			<div class="explain font flex">
+				<div>글꼴은 총 8개가 제공됩니다.</div>
+				<div><button type="button" class="btn font">미리보기</button></div>
+			</div>
+			<div class="list flex" th:if="${fontList} != null">
+				<div class="item flex" th:each="font : ${fontList}">
+					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
+					<div class="item explain flex">
+						<div th:text="${font.itemName}"></div>
+						<div><input type="radio" name="font"></div>
+					</div>
+					<div class="item price" th:text="${font.itemPrice}+'원'" th:if="${font.itemPrice} % 1000 == 0"></div>
+					<div class="item price sale flex" th:text="${font.itemPrice}+'원'" th:unless="${font.itemPrice} % 1000 == 0"></div>
+				</div>
+			</div>
+			<div class="cart"><button type="button" class="btn cart">장바구니에 담기</button></div>
+			<div class="warn">※ 환불/취소는 구매 일자 기준 7일 이내에만 가능합니다.</div>
+		</div>
+	</div>
+	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
+</body>
+</html>

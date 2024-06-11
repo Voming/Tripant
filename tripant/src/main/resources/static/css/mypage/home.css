@@ -2,20 +2,20 @@
 
 .wrap-main {
 	width: 960px;
-	margin: 120px auto;
+	margin: 30px auto 30px auto;
 }
 
 .wrap-main * {
 	font-family: 'Binggrae';
 }
 
-.wrap-main a {
-	padding-top: 5px;
-}
-
 .wrap-main .ch {
 	width: 100%;
 	margin-bottom: 35px;
+}
+
+.wrap-main .ch.pwd{
+	margin-bottom: 80px;
 }
 
 .wrap-main .btn {
@@ -24,7 +24,8 @@
 	border: 0;
 	width: 100%;
 	padding: 5px 10px;
-	background-color: lightgrey;
+	background-color: black;
+	color: white;
 	font-size: var(--font4);
 }
 
@@ -34,36 +35,40 @@
 }
 
 .wrap-main .flex.mypage {
-	width: 200px;
+	width: 280px;
 	margin: 0 auto;
 	flex-direction: column;
 	align-items: center;
 	padding: 30px 20px;
 	border-radius: 10px;
+	background-color: var(--color_light_gray);
 }
 
 .wrap-main .title {
 	font-size: var(--font1);
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 }
 
 .wrap-main .myInfo.flex {
-	column-gap: 10px;
 	margin-bottom: 20px;
-	font-size: var(--font5);
+	text-align: center;
+}
+
+.wrap-main .myInfo.flex *{
+	font-size: var(--font4);
 }
 
 .wrap-main .myInfo.flex .myInfo{
-	width: 50px;
+	width: 80px;
 }
 
 .wrap-main .myInfo.nick.flex{
-	margin-bottom: 40px;
+	margin-bottom: 80px;
 }
 
 .wrap-main input{
 	border: 0;
-	font-size: var(--font5);
+	background-color: var(--color_light_gray);
 }
 
 .wrap-main input:focus{

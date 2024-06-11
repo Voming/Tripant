@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('장바구니')}"></head>
+<style>
+.wrap-main {
+	width: 960px;
+	margin: 100px auto;
+	/* padding: 0 240px; */
+	position: relative;
+}
+
+.wrap-main * {
+	font-family: 'Binggrae';
+}
+
+.wrap-main .btn {
+	cursor: pointer;
+	border-radius: 8px;
+	border: 0;
+	background-color: var(--color_light_gray);
+	padding: 5px;
+}
+
+.wrap-main .hide{
+	display: none;
+}
+
+.wrap-main .flex {
+	display: flex;
+	row-gap: 10px;
+}
+.wrap-main .flex.cart{
+	flex-direction: column;
+	width: 100%;
+}
+.wrap-main .checked{
+	background-color: var(--color_light_gray);
+	font-size: var(--font3);
+	line-height: 2em;
+	padding: 0 10px;
+	border-radius: 10px;
+}
+.wrap-main .title{
+	font-size: var(--font1);
+	margin-top: 15px;
+}
+
+.wrap-main .item-info.flex{
+	margin-top: 10px;
+}
+.wrap-main .cart-info.flex{
+	border-top: 1px solid lightgray;
+	padding: 10px 0;
+}
+.wrap-main .item-info.flex > div, 
+.wrap-main .cart-info.flex > div{
+	padding: 5px 10px;
+	flex-grow: 1;
+	line-height: 2em;
+	font-size: var(--font3);
+}
+.wrap-main .item-info.flex .item-name, 
+.wrap-main .cart-info.flex .cart-name{
+	flex-grow: 3;
+}
+.wrap-main .item-info.flex div:nth-child(n+2), 
+.wrap-main .cart-info.flex div:nth-child(n+2){
+	text-align: center;
+}
+
+/* 사이드바 */
+.wrap-main aside.sidebar{
+	position: fixed;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	left: 50px;
+}
+.wrap-main div.sidebar{
+	flex-direction: column;
+	align-items: center;
+	padding: 5px 10px;
+}
+.wrap-main .sidebar.item{
+	flex-direction: row;
+	column-gap: 10px;
+	margin-bottom: 10px;
+}
+.wrap-main .sidebar.item a{
+	margin-top: 5px;
+}
+
+</style>
+<script>
+$(loadedHandler);
+function loadedHandler(){
+	// 버튼 호버 css
+	$('.btn').hover(function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
+	}, function(){
+		$(this).css('background-color', 'var(--color_light_gray)');
+		$(this).css('color', 'black');
+	});
+}
+</script>
+<body>
+	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
+	<div class="wrap-main">
+		<aside class="sidebar flex" style="display: none;">
+			<div class="sidebar flex">
+				<div class="sidebar title"><a th:href="@{/store}">스토어</a></div>
+				<div class="sidebar item flex"><img th:src="@{/images/store/cart.png}" width="20px" height="20px"><a th:href="@{/store/cart}">장바구니</a></div>
+				<div class="sidebar item flex"><img th:src="@{/images/store/buy.png}" width="20px" height="20px"><a th:href="@{/store/buy}">구매내역</a></div>
+			</div>
+		</aside>
+		<div class="cart flex">
+			<div class="title">장바구니</div>
+			<div class="item-info flex">
+				<div class="item-name">상품명</div>
+				<div class="item-price">가격</div>
+				<div class="item-check">선택</div>
+			</div>
+			<div class="cart-list" th:if="${cart} != null">
+				<div class="cart-info flex" th:each="item : ${cart}">
+					<div class="cart-name" th:text="${item.ITEM_NAME}"></div>
+					<div class="cart-price" th:text="${item.ITEM_PRICE}+'원'"></div>
+					<div class="cart-check"><input type="checkbox" name="cart-pick" th:value="${item.ITEM_CODE}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
+</body>
+</html>

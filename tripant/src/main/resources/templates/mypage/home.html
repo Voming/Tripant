@@ -1,39 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{/css/mypage/home.css}" rel="stylesheet" type="text/css">
 <head th:replace="~{common/header :: head('마이페이지')}"></head>
-<script>
-$(loadedHandler);
-function loadedHandler(){
-	//버튼 호버 css
-	$('.btn').hover(function(){
-		$(this).css('background-color', 'black');
-		$(this).css('color', 'white');
-	}, function(){
-		$(this).css('background-color', 'lightgrey');
-		$(this).css('color', 'black');
-	});
-	//닉네임 변경 페이지로 이동
-	$('.btn.chNick').on('click', function(){
-		location.href = '/my/nick';
-	});
-	//비밀번호 변경 페이지로 이동
-	$('.btn.chPwd').on('click', function(){
-		location.href = '/my/pwd';
-	});
-}
-</script>
+<link th:href="@{/css/mypage/home.css}" rel="stylesheet" type="text/css">
+<script th:src="@{/js/mypage/home/loadedHandler.js}" type="text/javascript"></script>
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
 		<div class="flex mypage">
 			<div class="title">마이페이지</div>
 			<div class="myInfo email flex">
-				<div class="myInfo email">이메일 : </div>
+				<div class="myInfo email">이메일 :</div>
 				<div><input type="text" name="memEmail" th:value="${memEmail}" readonly></div>
 			</div>
 			<div class="myInfo nick flex">
-				<div class="myInfo nick">닉네임 : </div>
+				<div class="myInfo nick">닉네임 :</div>
 				<div><input type="text" name="memNick" th:value="${memNick}" readonly></div>
 			</div>
 			<div class="ch nick"><button type="button" class="btn chNick">닉네임 변경</button></div>

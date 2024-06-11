@@ -13,7 +13,9 @@
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0;
-	background-color: lightgrey;
+	background-color: black;
+	color: white;
+	padding: 5px 0;
 }
 
 .wrap-main .flex {
@@ -35,7 +37,7 @@
 	flex-direction: column;
 	row-gap: 20px;
 	padding: 30px 20px;
-	background-color: #f6f6f6;
+	background-color: var(--color_light_gray);
 	border-radius: 10px;
 }
 
@@ -60,10 +62,6 @@
 
 .wrap-main .flex.join {
 	justify-content: space-around;
-}
-
-.wrap-main button.btn.login {
-	padding: 5px 0;
 }
 
 .wrap-main .flex.snslogin {

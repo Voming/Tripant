@@ -6,7 +6,7 @@
 <script type="text/javascript" th:src="@{/js/member/joinsns/robot.js}"></script>
 <script type="text/javascript" th:src="@{/js/member/joinsns/active.js}"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
-<head th:replace="~{common/header :: head('회원가입')}"></head>
+<head th:replace="~{common/header :: head('SNS 회원가입')}"></head>
 <script th:inline="javascript">
 $(loadedHandler);
 function loadedHandler(){
@@ -18,7 +18,7 @@ function loadedHandler(){
 		}
 	}, function(){
 		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'lightgrey');
+			$(this).css('background-color', 'var(--color_light_gray)');
 			$(this).css('color', 'black');
 		}
 	});
