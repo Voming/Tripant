@@ -60,7 +60,7 @@
 	margin:10px 0;
 }
 
-
+/* 미니 모달 일정보기, 공유, 삭제 */
 .main-wrapper .trip-list .mini-modal{
     box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
     background-color: #fafafa;
@@ -81,4 +81,3 @@
 .main-wrapper .trip-list .mini-modal>div>a{
 	padding : 2px ;
 }
-

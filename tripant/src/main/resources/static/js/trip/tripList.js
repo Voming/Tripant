@@ -45,7 +45,7 @@ function deleteHandler() {
 	//data로 id와 title받아오기
 	var planId = $(this).data('plan-id');
 	var planTitle = $(this).data('title');
-	//TODO data ajax로 넘기기
+	//data ajax로 넘기기
 	Swal.fire({
 		  title: "<h2>"+planTitle+"</h2>",
 		  text: "삭제하시겠습니까?",
