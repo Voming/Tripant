@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품관리</title>
+<!-- reset.css -->
+<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
+<!-- 레이아웃 설정 -->
+<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/admin/admin.css}" rel="stylesheet">
+<link th:href="@{/css/admin/admin_goods.css}" rel="stylesheet">
+<!--제이쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
+
+<div class="wrap-main">
+	<div class="wrap-sidebar">
+		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
+		<div class="ad-menu"> 관리자메뉴</div>
+		<div class="ad-member">회원관리</div>
+		<div class="ad-menumember a"><a href="/admin/member">회원관리</a></div>
+		<div class="ad-menumember b"><a href="/admin/mchart">회원통계</a></div>
+		
+		<div class="ad-board">게시글 관리</div>
+		<div class="ad-menuboard a"><a href="/admin/board">전체게시글</a></div>
+		<div class="ad-menuboard b"><a href="/admin/complain">신고 게시글 관리</a></div>
+		<div class="ad-menuboard c"><a href="/admin/bchart">게시글 통계</a></div>
+		
+		<div class="ad-store">스토어 관리</div>
+		<div class="ad-menustorea a"><a href="/admin/cancel">결제취소</a></div>
+		<div class="ad-menustorea b"><a href="/admin/goods">상품관리</a></div>
+	</div>
+	<div class="wrap-body">
+		<div class="ad-header">
+				<div class="ad-text">상품관리</div>
+			</div>
+			<div class="ad-search">
+				<input class="search" type="text" placeholder="상품명 검색">
+			</div>
+			<div class="ad-content">
+				<ul class="memberlist">
+					<li>	
+						<ul class="col">
+							<li>코드</li>
+							<li>이름</li>
+							<li>가격</li>
+							<li>기간</li>
+							<li><button type="button" class="btn-add">상품추가</button></li>
+						</ul>
+					</li>
+					
+					<li>
+						<ul class="col list">
+							<li>T-1</li>
+							<li>테마</li>
+							<li>500원</li>
+							<li>무제한</li>
+							<li><button type="button" class="btn">수정</button> <button type="button" class="btn cancel">삭제</button> </li>
+						</ul>
+					</li>
+				</ul>	
+			</div> 
+	</div>
+</div>
+
 
 </body>
 </html>
