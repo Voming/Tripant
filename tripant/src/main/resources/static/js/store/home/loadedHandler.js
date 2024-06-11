@@ -17,4 +17,7 @@ function loadedHandler(){
 	
 	// 폰트 모달 닫기
 	$('.btn.modal-close').on('click', modalCloseHandler);
+	
+	// 장바구니에 담기
+	$('.btn.cart').on('click', insertItemsHandler);
 }

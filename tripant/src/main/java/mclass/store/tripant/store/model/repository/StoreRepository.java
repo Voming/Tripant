@@ -17,8 +17,13 @@ public interface StoreRepository {
 	public List<ItemEntity> fontList();
 	
 	// 장바구니에 담기
+	public int fontDel(String memEmail);
 	public int insertItems(List<Map<String, Object>> list);
-
+	
 	// 장바구니
+	// 장바구니 목록
 	public List<Map<String, Object>> cart(String memEmail);
+	
+	// 장바구니 삭제
+	public int cartDel(Map<String, Object> map);
 }

@@ -21,6 +21,7 @@
 			<div>
 				<h2>여행 기간이 어떻게 되시나요?</h2>
 				<h4>여행 일자는 최대 10일 까지 설정 가능합니다.</h4>
+				<h5>아래를 클릭하여 여행 기간을 설정해주세요.</h5>
 				<div class="wrap-calendar">
 					<input type="text" id="daterange" />
 				</div>
@@ -48,11 +49,13 @@
 		<div class="tab-content">
 			<div id="tab01">
 				<div class="flex">
-					<p class="plan-title" th:text="${planTitle}"></p>
-					<p class="plan-location" th:text="${areaShortName}"></p>
-					
-					<span class="plan-priod">먼저 기간을 입력해주세요</span>
-					<span class="plan-timeEx"></span> 
+					<div class="plan-title" th:text="${planTitle}"></div>
+					<div class="plan-location" th:text="${areaShortName}"></div>
+					<div class="wrap-priod">
+						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
+						<img class="plan-priod" th:src="@{/images/icons/calendar.png}" alt="달력">
+					</div>
+					<h5 class="plan-timeEx" style="font-size:var(--font5);"></h5> 
 				</div>
 			</div>
 			<div id="tab02">

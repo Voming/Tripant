@@ -5,8 +5,7 @@
 <script th:src="@{/js/store/home/loadedHandler.js}" type="text/javascript"></script>
 <script th:src="@{/js/store/home/itemNum.js}" type="text/javascript"></script>
 <script th:src="@{/js/store/home/fontModal.js}" type="text/javascript"></script>
-<script>
-</script>
+<script th:src="@{/js/store/home/insertItems.js}" type="text/javascript"></script>
 <body>
 	<div class="font modal flex">
 		<div class="font modal preview">
@@ -39,7 +38,7 @@
 				</div>
 			</div>
 			<div class="list flex" th:unless="${themeList} != null">상품이 없습니다.</div>
-			<div class="title">글꼴</div>
+			<div class="title">글꼴 <span>(글꼴 상품은 한 개만 담을 수 있습니다.)</span></div>
 			<div class="explain font flex">
 				<div>글꼴은 총 8개가 제공됩니다.</div>
 				<div><button type="button" class="btn font">미리보기</button></div>
@@ -49,7 +48,7 @@
 					<div class="item pre" style="width: 150px; height: 150px; background: red;"></div>
 					<div class="item explain flex">
 						<div th:text="${font.itemName}"></div>
-						<div><input type="radio" name="font" ></div>
+						<div><input type="radio" name="font" th:value="${font.itemCode}"></div>
 					</div>
 					<div class="item price" th:text="${font.itemPrice}+'원'"></div>
 				</div>

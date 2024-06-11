@@ -7,5 +7,4 @@ function itemNumHandler(){
 	}else{
 		$('.checked').addClass('hide');
 	}
-	console.log(itemNum);
 }
