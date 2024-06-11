@@ -1,11 +1,3 @@
-desc member;
-desc item;
-select * from member;
-select * from plan_member;
-delete from plan_member where mem_email = 'seojw0730@gmail.com';
-delete from member where mem_nick = '구글';
-truncate table log;
-commit;
 -- 트립앤트 소유자 및 관리자
 begin
     for i in 1..10 loop
@@ -96,27 +88,24 @@ insert into member values(
 );
 commit;
 -- 회원 탈퇴 트리거
-create or replace NONEDITIONABLE TRIGGER trg_member_quit
-    BEFORE delete ON member
-    REFERENCING OLD AS OLD
-    FOR EACH ROW
-DECLARE
-BEGIN
-   insert into quit_member values (
-   :OLD.MEM_EMAIL, 
-   :OLD.MEM_NICK, 
-   :OLD.MEM_ROLE, 
-   :OLD.MEM_ENABLED, 
-   :OLD.MEM_TYPE, 
-   :OLD.MEM_JOIN_DATE, 
-   default, 
-   :OLD.MEM_BIRTH
-   );
-END;
-/
-
-select * from log order by 1 desc;
-
+--create or replace NONEDITIONABLE TRIGGER trg_member_quit
+--    BEFORE delete ON member
+--    REFERENCING OLD AS OLD
+--    FOR EACH ROW
+--DECLARE
+--BEGIN
+--   insert into quit_member values (
+--   :OLD.MEM_EMAIL, 
+--   :OLD.MEM_NICK, 
+--   :OLD.MEM_ROLE, 
+--   :OLD.MEM_ENABLED, 
+--   :OLD.MEM_TYPE, 
+--   :OLD.MEM_JOIN_DATE, 
+--   default, 
+--   :OLD.MEM_BIRTH
+--   );
+--END;
+--/
 -- 상품 목록 추가
     -- 테마
 begin
@@ -140,5 +129,3 @@ begin
 end;
 /
 
-select * from item;
-truncate table item;
