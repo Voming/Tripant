@@ -1,4 +1,6 @@
 @charset "UTF-8";
+.wrap-modal.show { display: block; }
+
 
 /*모달 팝업 영역 스타일링*/
 .main-wrapper .wrap-modal {
@@ -10,13 +12,9 @@
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.1);
 	z-index: 100;
 	position: fixed;
-}
-
-.wrap-modal.show {
-	display: block;
 }
 
 /*팝업*/
@@ -32,10 +30,52 @@
 	height: 450px;
 	justify-content: center;
 }
+
 /* grid 설정 */
 .wrap-modal .modal-content {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 1fr 1fr 6fr 1fr;
-	gap: 5px;
+	gap: 10px;
+	place-content: space-around stretch; /* 아이템 그룹 세로정렬, 가로정렬 */
 }
+
+/* grid item 위치 설정 */
+.wrap-modal .modal-content .area{
+	grid-column:1;
+	grid-row:1;
+}
+.wrap-modal .modal-content .plan-title{
+	grid-column:1;
+	grid-row:2;
+}
+.wrap-modal .modal-content .frm-find{
+	grid-column:1;
+	grid-row:3;
+	display: flex;
+	flex-wrap: nowrap;
+}
+.wrap-modal .modal-content .confimed{
+	grid-column:1;
+	grid-row:5;
+
+}
+.wrap-modal .modal-content .frm-find .wirte-nick{
+    border-radius: 20px 0px 0px 20px;
+    border: none;
+    background-color: var(--color_light_gray);
+}
+.wrap-modal .modal-content .frm-find .find{
+    border-radius: 0px 20px 20px 0px;
+    border: none;
+    background-color: var(--color_light_gray);
+}
+/* item 스타일 설정  */
+.wrap-modal .modal-content .confimed{
+	border-radius: 8px;
+	border:none;
+	background-color: black;
+	color:white;
+	font-size: var(--font3)
+}
+

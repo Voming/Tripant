@@ -8,25 +8,22 @@ function loaededHandler(){
 	
 	//케밥 아이콘 이벤트
 	$('.info').on("click",miniModalBtnHandler);
-    $(document).on('click', function(event) {
-        // 클릭한 요소가 '.info' 클래스의 버튼 내부 요소나 '.mini-modal' 클래스가 아닌 경우에만 실행
-        if (!$(event.target).closest('.info').length && !$(event.target).closest('.mini-modal').length) {
-            $('.mini-modal').addClass('hide');
-        }
-    });	
 }
 
 //친구공유 모달
 function shareModalHandler(){
-	$(".wrap-modal").css("display","block");
-
+	$(this).parent().parent().siblings(".wrap-modal").css("display","block");
 }
-//친구공유 모달 닫기
+//모든 모달 닫기
 $(document).mouseup(function(e) {
 	var LayerModal = $(".wrap-modal");
-	if (LayerModal.has(e.target).length === 0) {
+	
+	// 클릭된 대상이 LayerModal의 자식 요소가 아니거나, confimed 클래스를 가진 버튼인지 확인
+	if (LayerModal.has(e.target).length === 0 || $(e.target).closest('.confimed').length > 0) {
 		LayerModal.css("display","none");
+		$('.mini-modal').addClass('hide');
 	}
+
 	$('.mini-modal').removeClass('active');
 	$(this).parent().addClass('active');
 });
@@ -50,11 +47,12 @@ function deleteHandler() {
 		  title: "<h2>"+planTitle+"</h2>",
 		  text: "삭제하시겠습니까?",
 		  showCancelButton: true,
-		  confirmButtonColor: "#3085d6",
+		  confirmButtonColor: "#000000",
 		  cancelButtonColor: "#d33",
 		  confirmButtonText: "삭제",
 		  cancelButtonText: "취소",
 	   	  confirmButtonTextFont:"Binggrae",
+	   	  animation:false
 		}).then((result) => {
 		  if (result.isConfirmed) {
 	         $.ajax({

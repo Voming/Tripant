@@ -31,26 +31,12 @@
 						<div class="show-detail">일정보기</div>
 						<div class="share-plan modal">공유</div>
 						<div class="delete-plan" th:data-plan-id="${plan.planId}" th:data-title="${plan.planTitle}" >삭제</div>
-						
-						<!-- 공유 modal -->
-						<div class="wrap-modal">
-							<div class ="modal-content ">
-		                        <!-- <button type="button" class="btn modal-close">상단 x 버튼</button> -->
-		                        <h4 th:text="${plan.areaShortName}">지역명</h4>
-		                        <h2 th:text="${plan.planTitle}">제목</h2>
-								<form class="frm-find" action="tripList.html" method="get">
-								
-									<input type="text" name="find" placeholder="일정을 공유할 유저의 닉네임을 입력하세요"/>
-									<input type="button" class="btn find" />
-									<img class="search-btn" src="/images/icons/search.png" alt="검색"/>
-								
-								</form>
-							</div>
-						</div>
-						<!-- //modal -->
 					</div>
 				</button>
-			</div>
+				<!-- 공유 modal fragment-->
+				<div th:replace="~{trip/triplist_fragment :: share}"></div> 
+				
+			</div> <!-- each -->
 			<div style="height: 100px;" ></div>
 		</div> <!-- full -->
 		<!-- 여행일정없음 -->
