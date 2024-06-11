@@ -1,7 +1,7 @@
 $(loaededHandler);
 function loaededHandler(){
 	//공유-모달창
-	//$('.share-plan.modal').on("click",shareModalHandler);
+	$('.share').on("click",shareHandler);
 	
 	//신고하기
 	$('.report').on("click",reportHandler);
@@ -23,11 +23,12 @@ function reportHandler(){
 		  title: "이 글을 신고하시겠습니까?",
 		  text: "신고를 취소하고 싶으신 경우, 고객센터에 문의해주시길 바립니다.",
 		  showCancelButton: true,
-		  confirmButtonColor: "#3085d6",
+		  confirmButtonColor: "#000000",
 		  cancelButtonColor: "#d33",
 		  confirmButtonText: "확인",
 		  cancelButtonText: "취소",
 	   	  confirmButtonTextFont:"Binggrae",
+	   	   animation:false
 		}).then((result) => {
 		  if (result.isConfirmed) {
 	         $.ajax({
@@ -50,4 +51,39 @@ function reportHandler(){
          	});//ajax
 		  }//if
 		});
+}
+// 공유하기
+function shareHandler() {
+    var shareId = $(this).data('share');
+    console.log(shareId);
+    // 공유하기 모달 표시
+    Swal.fire({
+        title: "나의 여행기 공유하기",
+        html: "<p>여행기를 공유하시겠습니까?</p><div class='share-links'><a href='#' class='facebook-link'>페이스북</a><a href='#' class='twitter-link'>트위터</a></div>",
+        showCancelButton: true,
+        confirmButtonColor: "#000000",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "확인",
+        cancelButtonText: "취소",
+        confirmButtonTextFont: "Binggrae",
+        animation:false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // 여행기 공유 처리를 수행하는 코드 추가
+        }
+    });
+
+    // 페이스북으로 공유 링크 클릭 시
+    $('.facebook-link').click(function() {
+        // 여행기를 페이스북으로 공유하는 기능 추가
+        var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href);
+        window.open(shareUrl, '_blank');
+    });
+
+    // 트위터로 공유 링크 클릭 시
+    $('.twitter-link').click(function() {
+        // 여행기를 트위터로 공유하는 기능 추가
+        var shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href);
+        window.open(shareUrl, '_blank');
+    });
 }

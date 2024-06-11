@@ -19,7 +19,12 @@
 	border: 0;
 	background-color: black;
 	color: white;
-	padding: 5px;
+	padding: 5px 10px;
+}
+
+.wrap-main .btn:disabled{
+	background-color: lightgray;
+	color: white;
 }
 
 .wrap-main .hide{
@@ -110,21 +115,34 @@
 	align-items: center;
 	justify-content: center;
 }
+.wrap-main .cart-button.flex{
+	column-gap: 15px;
+}
 </style>
 <script>
 $(loadedHandler);
 function loadedHandler(){
-	// 버튼 호버 css
+	//버튼:hover css
 	$('.btn').hover(function(){
-		$(this).css('background-color', 'var(--color_light_gray)');
-		$(this).css('color', 'black');
+		if(!$(this).prop('disabled')){
+			$(this).css('background-color', 'lightgray');
+			$(this).css('color', 'black');
+		}
 	}, function(){
-		$(this).css('background-color', 'black');
-		$(this).css('color', 'white');
+		if(!$(this).prop('disabled')){
+			$(this).css('background-color', 'black');
+			$(this).css('color', 'white');
+		}
 	});
 	
 	// 총 가격 계산
 	$('input[name=cart-pick]').on('click', sumCalcHandler);
+	
+	// 버튼 활성화
+	$('input[name=cart-pick]').on('click', btnActiveHandler);
+	
+	// 장바구니 삭제
+	$('.btn.del').on('click', cartDelHandler);
 }
 
 // 총 가격 계산
@@ -137,11 +155,44 @@ function sumCalcHandler(){
 	let text = '총 가격 : '+sum2+' 원';
 	$('.sum').text(text);
 }
+
+// 버튼 활성화
+function btnActiveHandler(){
+	let checkNum = $('input[name=cart-pick]:checked').length;
+	if(checkNum == 0){
+		$('.btn').prop('disabled', true);
+	}else{
+		$('.btn').prop('disabled', false);
+	}
+}
+
+// 장바구니 삭제
+function cartDelHandler(){
+	let items = [];
+	$('input:checked').each(function(index, element){
+		items.push(element.value);
+	});
+	console.log(items);
+	$.ajax({
+		url: contextPath+'store/cart/del', 
+		type: 'post', 
+		data: {items : items}, 
+		success: function(result){
+			if(result == 1){
+				alert('선택하신 상품이 삭제되었습니다.');
+				location.reload();
+			}else{
+				alert('상품 삭제 중 오류가 발생했습니다.');
+			}
+		}, 
+		error: ajaxErrorHandler 
+	});
+}
 </script>
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
-		<aside class="sidebar flex" style="display: none;">
+		<aside class="sidebar flex">
 			<div class="sidebar flex">
 				<div class="sidebar title"><a th:href="@{/store}">스토어</a></div>
 				<div class="sidebar item flex"><img th:src="@{/images/store/cart.png}" width="20px" height="20px"><a th:href="@{/store/cart}">장바구니</a></div>
@@ -169,7 +220,10 @@ function sumCalcHandler(){
 		</div>
 		<div class="cart-bottom flex">
 			<div class="sum">총 가격 : 0 원</div>
-			<div><button type="button" class="btn pay">선택 상품 구매하기</button></div>
+			<div class="cart-button flex">
+				<button type="button" class="btn pay" disabled>구매</button>
+				<button type="button" class="btn del" disabled>삭제</button>
+			</div>
 		</div>
 	</div>
 	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>

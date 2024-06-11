@@ -10,30 +10,41 @@
 	<header class="header" th:insert="~{common/header :: wrap-header}"></header>
 	<div class="main-wrapper">
 		<h1 class="title"> 나의 여행 </h1>
-		<!-- 일정있습 -->
+		<!-- 일정 있을 경우 -->
 		<div class="full">
 			<div th:each="plan : ${planlist}" class="trip-list wfull" >
-				<a class="ntrip wfull" th:href="@{|trip/detail/${plan.planId}|}" ><!-- 해당 정보에 대한 trip 페이지로 이동 -->
+			    
+			    <!-- 일정 정보 -->
+				<div class="ntrip wfull" th:href="@{|trip/detail/${plan.planId}|}" ><!-- 해당 정보에 대한 trip 페이지로 이동 -->
 					<img th:src="@{|/images/area/${plan.areaFileName}|}" alt="img"  class="location-img"/>
 					<div class="trip-info">
 						<h4 th:text="${plan.areaShortName}" class="trip-location"></h4>
 						<h3 th:text="${plan.planTitle}" class="trip-title"></h3>
 						<h5 class="trip-period"><span th:text="${#dates.format(plan.planStartDay,'yyyy.MM.dd')}"></span> ~ <span th:text="${#dates.format(plan.planEndDay,'yyyy.MM.dd')}"></span></h5><!-- 어떻게 표현하지 -->
 					</div>
-				</a>
+				</div>
+				
+				<!-- 케밥 버튼 -->
 				<button class="info btn" > 
 					<img class="wfull img" src="/images/icons/kebabIcon.png"/>
 					<div class="mini-modal hide" > 
-						<div><a th:href="@{#route}" class="show-detail" >일정보기</a></div>
+						<div class="show-detail">일정보기</div>
 						<div class="share-plan modal">공유</div>
 						<div class="delete-plan" th:data-plan-id="${plan.planId}" th:data-title="${plan.planTitle}" >삭제</div>
-						<!-- modal -->
+						
+						<!-- 공유 modal -->
 						<div class="wrap-modal">
 							<div class ="modal-content ">
-								<div class="btn modal-close"> x </div>
 		                        <!-- <button type="button" class="btn modal-close">상단 x 버튼</button> -->
-		                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </div>
-		                        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </div>
+		                        <h4 th:text="${plan.areaShortName}">지역명</h4>
+		                        <h2 th:text="${plan.planTitle}">제목</h2>
+								<form class="frm-find" action="tripList.html" method="get">
+								
+									<input type="text" name="find" placeholder="일정을 공유할 유저의 닉네임을 입력하세요"/>
+									<input type="button" class="btn find" />
+									<img class="search-btn" src="/images/icons/search.png" alt="검색"/>
+								
+								</form>
 							</div>
 						</div>
 						<!-- //modal -->
