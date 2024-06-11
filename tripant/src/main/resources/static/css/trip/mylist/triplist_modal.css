@@ -19,22 +19,23 @@
 	display: block;
 }
 
+/*팝업*/
 .wrap-modal .modal-content {
-	/*팝업*/
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 40px;
+	padding: 30px;
 	background: #ffffff;
 	border-radius: 20px;
-	width:600px;
-	height: 400px;
+	width:500px;
+	height: 450px;
 	justify-content: center;
 }
-
+/* grid 설정 */
 .wrap-modal .modal-content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr 1fr 6fr 1fr;
+	gap: 5px;
 }
