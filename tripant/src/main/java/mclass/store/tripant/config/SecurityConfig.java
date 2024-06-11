@@ -29,8 +29,8 @@ public class SecurityConfig {
 		http
 		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
 				.requestMatchers(new AntPathRequestMatcher("/login")).anonymous()
-				.requestMatchers(new AntPathRequestMatcher("/trip/**")).hasAnyAuthority("MEM", "VIP", "ADMIN", "OWNER")
-				.requestMatchers(new AntPathRequestMatcher("/my/**")).hasAnyAuthority("MEM", "VIP", "ADMIN", "OWNER")
+				.requestMatchers(new AntPathRequestMatcher("/trip/**")).hasAnyAuthority("MEM", "VIP", "ADMIN")
+				.requestMatchers(new AntPathRequestMatcher("/my/**")).hasAnyAuthority("MEM", "VIP", "ADMIN")
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyAuthority("ADMIN")
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 					)
