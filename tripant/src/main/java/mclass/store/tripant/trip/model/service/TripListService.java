@@ -30,4 +30,9 @@ public class TripListService {
 	public List<TripShareEntity> find(Map<String, Object> map){
 		return repository.find(map);
 	}
+	
+	//일정 공유 중인 맴버
+	public List<TripShareEntity> share(Map<String, Object> map){
+		return repository.share(map);
+	}
 }

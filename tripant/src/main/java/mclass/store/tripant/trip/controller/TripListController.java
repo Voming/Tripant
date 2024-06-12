@@ -41,10 +41,11 @@ public class TripListController {
 	//유저검색
 	@PostMapping("/search/nick")//ajax
 	@ResponseBody
-	public List<TripShareEntity> seachNick(Integer planId, String findNick) {
+	public List<TripShareEntity> seachNick(Integer planId, String findNick,Principal principal) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("planId", planId);
 		map.put("findNick", findNick);
+		map.put("memEmail",principal.getName());
 		List<TripShareEntity> nickList = tripListService.find(map);
 		return nickList;
 	}

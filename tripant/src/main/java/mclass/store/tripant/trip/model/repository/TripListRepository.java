@@ -19,4 +19,7 @@ public interface TripListRepository {
 	
 	//유저검색
 	public List<TripShareEntity> find(Map<String, Object> map);
+	
+	//일정 공유 중인 맴버
+	public List<TripShareEntity> share(Map<String, Object> map);
 }

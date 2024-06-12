@@ -16,11 +16,16 @@
 		
 	<!-- 유저검색 -->
 		<select id="find" parameterType="map" resultType="TripShareEntity">
-			select mem_nick, plan_id, plan_mem_role from plan_member join member using (mem_email) where plan_id = #{planId} and plan_mem_role = 0
+			select mem_nick, plan_id, plan_mem_role from plan_member join member using (mem_email) where plan_id = #{planId} and plan_mem_role = 0 and mem_nick like '%${findNick}%' and not mem_email = #{memEmail}
 			union
 			select mem_nick, null, null from member where mem_role in ('ROLE_MEM', 'ROLE_VIP') and mem_nick like '%${findNick}%'
 			minus
 			select mem_nick, null, null from member join plan_member using (mem_email) where plan_id = #{planId}
 		</select>	
+		
+	<!-- 공유 중인 유저 -->	
+		<select id="share" parameterType="map" resultType="TripShareEntity">
+			select mem_nick, plan_id, plan_mem_role from plan_member join member using (mem_email) where plan_id = #{planId} and plan_mem_role = 0 and not mem_email = #{memEmail}
+		</select>
 	
 </mapper>
