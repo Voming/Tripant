@@ -1,7 +1,9 @@
 @charset "UTF-8";
 .wrap-modal.show { display: block; }
-
-
+.wrap-modal .btn{	border:black solid 1px;
+	border-radius: 8px;
+	background-color: black;
+	color: white;}
 /*모달 팝업 영역 스타일링*/
 .main-wrapper .wrap-modal {
 	/*팝업 배경*/
@@ -58,12 +60,12 @@
 .wrap-modal .modal-content .confimed{
 	grid-column:1;
 	grid-row:5;
-
 }
 .wrap-modal .modal-content .frm-find .wirte-nick{
     border-radius: 20px 0px 0px 20px;
     border: none;
     background-color: var(--color_light_gray);
+    padding-left:20px;
 }
 .wrap-modal .modal-content .frm-find .find{
     border-radius: 0px 20px 20px 0px;
@@ -72,10 +74,18 @@
 }
 /* item 스타일 설정  */
 .wrap-modal .modal-content .confimed{
-	border-radius: 8px;
-	border:none;
-	background-color: black;
-	color:white;
 	font-size: var(--font3)
 }
+.wrap-modal .modal-content .memlist{
+	flex-direction: column;
+}
+.wrap-modal .modal-content .memlist .memNick{
+	justify-content: space-between;
+	padding: 2px 60px;
+}
 
+.wrap-modal .memlist .add{
+	border:solid black 1px;;
+	background-color: white;
+	color:black;
+}
