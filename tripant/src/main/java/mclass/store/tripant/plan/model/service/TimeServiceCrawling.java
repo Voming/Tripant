@@ -35,7 +35,7 @@ public class TimeServiceCrawling {
 	
 	// @Scheduled(cron = "* * 6 * * 1") //매주 일요일 6시에 실행
 	public void makeTimeList() {
-		int[] areaCode = { 1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
+//		int[] areaCode = { 1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
 //TODO 8
 		List<PlaceMapEntity> placeList = timeRepository.selectPlaceMapList(38); // 이동시간 계산할 지역에 포함된 장소 리스트(type =10은 제외하고)
 
@@ -59,9 +59,10 @@ public class TimeServiceCrawling {
 //		DB에 insert하기 전에 기존내용 지우기
 //		timeRepository.deleteAllPlaceMoveTime();
 		
-		List<PlaceMoveTimeEntity> timeResultList = null;
+//		List<PlaceMoveTimeEntity> timeResultList = null;
 //		map에 출발, 도착 보내서 이동시간 DB에 넣기
-		timeResultList = calMoveTime(startendList);
+//		timeResultList = calMoveTime(startendList);
+		calMoveTime(startendList);
 	}
 
 	// =====================================================map에 출발, 도착 보내서 이동시간 받아오기======================================================================

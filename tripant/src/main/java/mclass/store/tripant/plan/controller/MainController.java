@@ -14,19 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.place.domain.AreaNameEntity;
-import mclass.store.tripant.plan.model.service.PlaceServiceCrawling;
 import mclass.store.tripant.plan.model.service.PlanService;
-import mclass.store.tripant.plan.model.service.TimeServiceCrawling;
 
 @Controller
 @Slf4j
 public class MainController {
 	@Autowired
 	private PlanService planService;
-	@Autowired
-	private PlaceServiceCrawling placeService;
-	@Autowired
-	private TimeServiceCrawling timeService;
+//	@Autowired
+//	private PlaceServiceCrawling placeService;
+//	@Autowired
+//	private TimeServiceCrawling timeService;
 
 	@GetMapping("/")
 	public ModelAndView home(Principal principal, Authentication authentication, ModelAndView mv) {

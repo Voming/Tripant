@@ -9,13 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.service.DiaryService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
-
 
 @Controller
 @RequestMapping(value = "/diary")
@@ -45,6 +39,5 @@ public class DiaryController {
 //        int result = diaryService.
 //        return result;
 //    }
-    
 }
 

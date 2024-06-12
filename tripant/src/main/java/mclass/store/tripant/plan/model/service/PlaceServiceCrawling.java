@@ -10,14 +10,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.nimbusds.jose.shaded.gson.GsonBuilder;
 
 import mclass.store.tripant.place.domain.PlaceEntity;
 import mclass.store.tripant.plan.model.repostiory.PlaceRepositoryCrawling;
