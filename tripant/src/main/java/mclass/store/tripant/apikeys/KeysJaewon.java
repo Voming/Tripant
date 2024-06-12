@@ -10,7 +10,9 @@ import lombok.Getter;
 public class KeysJaewon {
 	
 	//DB 연결
-	@Value("${spring.datasource.hikari.jdbc-url}")
+	@Value("${spring.datasource.hikari.jdbc-log4j2-driverClassName}")
+	private String hikariDriverClassName;
+	@Value("${spring.datasource.hikari.jdbc-log4j2-url}")
 	private String hikariUrl;
 	@Value("${spring.datasource.hikari.username}")
 	private String hikariUsername;

@@ -20,6 +20,7 @@ public class HikariConfig{
 	DataSource dataSource() {
 		com.zaxxer.hikari.HikariConfig hikariConfig = new com.zaxxer.hikari.HikariConfig();
 
+		hikariConfig.setJdbcUrl(keysJaewon.getHikariDriverClassName());
 		hikariConfig.setJdbcUrl(keysJaewon.getHikariUrl());
 		hikariConfig.setUsername(keysJaewon.getHikariUsername());
 		hikariConfig.setPassword(keysJaewon.getHikariPassword());
