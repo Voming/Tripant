@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.place.domain.PlaceMapEntity;
 import mclass.store.tripant.place.domain.PlaceMoveTimeEntity;
-import mclass.store.tripant.plan.model.repostiory.TimeRepository;
+import mclass.store.tripant.plan.model.repostiory.TimeRepositoryCrawling;
 
 @Service
-public class TimeService {
+public class TimeServiceCrawling {
 	@Autowired
-	private TimeRepository timeRepository;
+	private TimeRepositoryCrawling timeRepository;
 
 	public int deleteAllPlaceMoveTime() {
 		return timeRepository.deleteAllPlaceMoveTime();
@@ -36,8 +36,8 @@ public class TimeService {
 	// @Scheduled(cron = "* * 6 * * 1") //매주 일요일 6시에 실행
 	public void makeTimeList() {
 		int[] areaCode = { 1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
-
-		List<PlaceMapEntity> placeList = timeRepository.selectPlaceMapList(39); // 이동시간 계산할 지역에 포함된 장소 리스트(type =10은 제외하고)
+//TODO 8
+		List<PlaceMapEntity> placeList = timeRepository.selectPlaceMapList(38); // 이동시간 계산할 지역에 포함된 장소 리스트(type =10은 제외하고)
 
 		int depth = 0; // 깊이 0번 부터 탐색 시작
 		int n = placeList.size(); // 장소 리스트 크기
@@ -57,7 +57,7 @@ public class TimeService {
 		 * " : " +i[1].getContentid()); System.out.println("]"); }
 		 */
 //		DB에 insert하기 전에 기존내용 지우기
-		timeRepository.deleteAllPlaceMoveTime();
+//		timeRepository.deleteAllPlaceMoveTime();
 		
 		List<PlaceMoveTimeEntity> timeResultList = null;
 //		map에 출발, 도착 보내서 이동시간 DB에 넣기
