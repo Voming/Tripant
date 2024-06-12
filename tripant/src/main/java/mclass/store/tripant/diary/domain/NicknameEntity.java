@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Data@Component
-public class DiaryBoardEntity {
+public class NicknameEntity {
 
 //	DIARY_ID        NOT NULL NUMBER         
 //	DIARY_MEM_EMAIL NOT NULL VARCHAR2(100)  
@@ -27,7 +27,6 @@ public class DiaryBoardEntity {
 	private Date diaryDate; // java.sql.Date 타입으로 변경
 	private String diaryOpen;
 	private Integer diaryViews;
-	private String diaryTheme;
-	private String memNick;
+	private String memNick;	//회원의 닉네임
 	
 }

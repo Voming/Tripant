@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.DiaryPostEntity;
+import mclass.store.tripant.diary.domain.NicknameEntity;
 
 @Mapper
 public interface DiaryRepository {
@@ -19,4 +20,6 @@ public interface DiaryRepository {
 	    public void insertDiary(DiaryPostEntity diary);
 	 // 특정 ID의 다이어리 조회
 	    DiaryBoardEntity findById(@Param("id") Long id);
-	}
+	   
+
+}
