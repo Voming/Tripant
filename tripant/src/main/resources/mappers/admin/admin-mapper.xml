@@ -4,13 +4,13 @@
 	<select id="selectMemList" resultType="AdminMemEntity" >
 	select mem_nick,mem_email,mem_join_date,mem_role from member
 	</select>
-	<update id="adminMemRole" parameterType="_int">
-	<!-- parametertype string으로-->
-	<!-- update 구문 넣기 -->
-	<!-- update member set mem_role= #{memRole} where=${memEmail} -->
-	update member set mem_role= #{memRole} 
+	<update id="adminMemRole" parameterType="map">
+	update member set mem_role=#{memRole} where mem_email=#{memEmail}
 	</update>
 	<select id="boardList" resultType="AdminBoardEntity">
-	select diary_mem_email, diary_title,diary_date,diary_views from diary
+	select diary_id, diary_mem_email, diary_title,diary_date,diary_views from diary
 	</select>
+	<!-- <select id="" resultType="int">
+	select count(*) from diary
+	</select> -->
 </mapper>

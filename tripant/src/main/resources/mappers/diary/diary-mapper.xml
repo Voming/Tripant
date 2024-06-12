@@ -4,10 +4,12 @@
 	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
 	<!-- 글 리스트 목록 뿌리기 -->
 	<select id="selectDiaryList" resultType="DiaryBoardEntity">
-		SELECT DIARY_ID,
-		DIARY_MEM_EMAIL, DIARY_PLAN_ID, DIARY_TITLE, DIARY_CONTENT,
-		DIARY_DATE, DIARY_OPEN, DIARY_VIEWS, DIARY_THEME
-		FROM DIARY
+		SELECT D.DIARY_ID,
+		D.DIARY_MEM_EMAIL, D.DIARY_PLAN_ID, D.DIARY_TITLE, D.DIARY_CONTENT,
+		D.DIARY_DATE, D.DIARY_OPEN, D.DIARY_VIEWS, D.DIARY_THEME, M.MEM_NICK
+		AS memNick
+		FROM DIARY D
+		JOIN MEMBER M ON D.DIARY_MEM_EMAIL = M.MEM_EMAIL
 	</select>
 	<!-- 글 작성 등록 시키기 -->
 	<insert id="insertDiary" parameterType="DiaryPostEntity">
@@ -24,7 +26,8 @@
 		#{diaryTheme})
 	</insert>
 	<!-- 특정 ID의 다이어리 조회 -->
-	<select id="findById" parameterType="Long" resultType="DiaryBoardEntity">
+	<select id="findById" parameterType="Long"
+		resultType="DiaryBoardEntity">
 		SELECT * FROM DIARY WHERE DIARY_ID = #{id}
 	</select>
 	<!-- 공개된 일기 선택 -->
@@ -38,6 +41,8 @@
 		SELECT * FROM diary
 		WHERE DIARY_OPEN = '1'
 	</select>
+
+
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="string">
 		DELETE FROM diary

@@ -1,15 +1,21 @@
 package mclass.store.tripant.admin.controller;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.service.AdminMemSerivce;
 
 
@@ -33,12 +39,22 @@ public class AdminController {
 	
 	@PostMapping("/member/role")
 	@ResponseBody
-	public Integer MemberRole() {
+	public Integer MemberRole(Integer selectRole, String memEmail) {
 		
+		String memRole = "";
+		switch(selectRole) {
+		case 1: memRole = "ROLE_SLEEP"; break;
+		case 2: memRole = "ROLE_MEM"; break;
+		case 3: memRole = "ROLE_VIP"; break;
+		case 4: memRole = "ROLE_ADMIN"; break;
+		}
 		
-		//int result=adminservie.adminMemRole();
-
-		return 0;
+		Map<String, Object> map = new HashMap<>();
+		map.put("memRole", memRole);
+		map.put("memEmail", memEmail);
+		int result = adminservice.adminMemRole(map);
+		
+		return result;
 	}
 	
 	@GetMapping("/board")
@@ -73,4 +89,5 @@ public class AdminController {
 	public String bchart() {
 		return "admin/admin_bchart";
 	}
+
 }

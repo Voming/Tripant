@@ -1,11 +1,13 @@
 package mclass.store.tripant.trip.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.trip.domain.TripListEntity;
+import mclass.store.tripant.trip.domain.TripShareEntity;
 import mclass.store.tripant.trip.model.repository.TripListRepository;
 
 @Service
@@ -22,5 +24,10 @@ public class TripListService {
 	//여행삭제(planId -> PK)
 	public int delete(Integer planId) {
 		return repository.delete(planId);
+	}
+	
+	//유저검색
+	public List<TripShareEntity> find(Map<String, Object> map){
+		return repository.find(map);
 	}
 }

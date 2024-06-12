@@ -27,13 +27,14 @@
 						<option value="popularity">인기순</option>
 					</select>
 				</div>
-				<div th:replace="~{diary/diary_fragment :: arealist}"></div><!-- 지역 탭 -->
+				<div th:replace="~{diary/diary_fragment :: arealist}"></div>
+				<!-- 지역 탭 -->
 				<div class="diary-tab-content">
 					<div id="tab01">
 						<div class="wrap-diary">
 							<div class="wrap-d-content">
 								<!-- 공개글 데이터 가져오기  -->
-								 <th:block th:if="${diaries} != null">
+								<th:block th:if="${diaries} != null">
 									<th:block th:each="diary :  ${diaries}">
 										<div class="wrap-d-content">
 											<div class="diary-img">
@@ -41,24 +42,34 @@
 													alt="대표 이미지">
 											</div>
 											<div class="wrap-content">
-												<div class="diary-content"><a th:href="@{|/diary/read/${diary.diaryId}|}">
-													<p class="diary-title" style="font-size: var(--font3);"
-														th:text="${diary.diaryTitle}"></p></a>
+												<div class="diary-content">
+													<a th:href="@{|/diary/read/${diary.diaryId}|}">
+														<p class="diary-title" style="font-size: var(--font3);"
+															th:text="${diary.diaryTitle}"></p>
+													</a>
 													<p class="diary-date" style="font-size: var(--font4);"
 														th:text="${diary.diaryDate}"></p>
+													<p class="diary-nickname" style="font-size: var(--font5);"
+														th:text="${diary.memNick}"></p>
 													<p class="diary-preview" style="font-size: var(--font5);"
 														th:text="${diary.diaryContent}"></p>
 												</div>
 												<div class="diary-like">
 													<img th:src="@{/images/diary/diary_like_none.png}"
 														alt="하트아이콘" class="like-icon">
+													<div>
+														<p>조회수</p>
+														<p class="diary-diaryViews"
+															style="font-size: var(--font4);"
+															th:text="${diary.diaryViews}"></p>
+													</div>
 												</div>
 											</div>
 										</div>
 									</th:block>
-								</th:block> 
+								</th:block>
 							</div>
-						<!-- 	<div class="wrap-d-content">
+							<!-- 	<div class="wrap-d-content">
 								<div class="diary-img">
 									<img src="https://dummyimage.com/350x200/000/fff" alt="대표 이미지">
 								</div>
@@ -476,7 +487,7 @@
 				</div>
 				<!-- 글 리스트 7개씩 하고 for문으로 더보기 하기 -->
 				<div class="btn-more">
-					<button type="button" class="learn-more">더보기</button>
+					<button type="button" class="learn-more" onclick="loadMorePosts()">더보기</button>
 				</div>
 			</div>
 		</div>
@@ -487,6 +498,6 @@
 	</footer>
 
 </body>
- <script type="text/javascript" th:src="@{/js/diary/diary_board.js}"></script>
+<script type="text/javascript" th:src="@{/js/diary/diary_board.js}"></script>
 
 </html>

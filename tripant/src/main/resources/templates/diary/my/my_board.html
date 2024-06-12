@@ -3,9 +3,6 @@
 <link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet"
 	type="text/css">
 <link th:href="@{/css/diary/my/my_board.css}" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<!--my_board.js파일  -->
-<script type="text/javascript" th:src="@{/js/diary/diary_my_board.js}"></script>
 <head th:replace="~{common/header :: head('diaryboard')}"></head>
 
 </head>
@@ -19,22 +16,24 @@
 			<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
 			<!-- 나만의 글 가져오기   -->
 			<div class="board-list">
-				 <th:block th:if="${diaries} != null">
+				<th:block th:if="${diaries} != null">
 					<th:block th:each="diary :  ${diaries}">
 						<div class="wrap-diary">
 							<div class="diary-img">
 								<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
 							</div>
 							<div class="wrap-content">
-								<div class="diary-content"><a th:href="@{|/diary/read/${diary.diaryId}|}">
-									<p class="diary-title" th:text="${diary.diaryTitle}"></p></a>
+								<div class="diary-content">
+									<a th:href="@{|/diary/read/${diary.diaryId}|}">
+										<p class="diary-title" th:text="${diary.diaryTitle}"></p>
+									</a>
 									<p class="diary-date" th:text="${diary.diaryDate}"></p>
 									<p class="diary-open" th:text="${diary.diaryOpen}"></p>
 								</div>
 							</div>
 						</div>
 					</th:block>
-				</th:block> 
+				</th:block>
 				<!-- 4x4 로 뿌리기 -->
 
 
@@ -150,4 +149,5 @@
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
 </body>
+<script type="text/javascript" th:src="@{/js/diary/diary_my_board.js}"></script>
 </html>
