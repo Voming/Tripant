@@ -81,9 +81,9 @@ public class PlanController {
 	@PostMapping("/make/area")
 	@ResponseBody
 	public List<AreaEntity> makeArea(@RequestParam("areaName") String areaName) {
-		System.out.println("areaName :" + areaName);
+		//System.out.println("areaName :" + areaName);
 		List<AreaEntity> areaList = planService.selectAreaInfoList(areaName);
-		System.out.println(areaList);
+		//System.out.println(areaList);
 		return areaList;
 	}
 	
