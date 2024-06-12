@@ -1,6 +1,5 @@
 package mclass.store.tripant.diary.model.repository;
 
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -8,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.DiaryPostEntity;
-import mclass.store.tripant.diary.domain.NicknameEntity;
 
 @Mapper
 public interface DiaryRepository {
