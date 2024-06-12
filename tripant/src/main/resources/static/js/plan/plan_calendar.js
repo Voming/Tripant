@@ -52,6 +52,7 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 			var dateS = new Date(start);
 			var oneday = new Date(dateS.setDate(dateS.getDate() + i));
 
+			//월/일 형태로 변경
 			var month = ('0' + (oneday.getMonth() + 1)).slice(-2);
 			var day = ('0' + oneday.getDate()).slice(-2);
 
