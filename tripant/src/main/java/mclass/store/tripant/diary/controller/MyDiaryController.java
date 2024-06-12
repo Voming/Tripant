@@ -28,11 +28,6 @@ public class MyDiaryController {
 	@Autowired
 	private DiaryService diaryService;
 	
-	@GetMapping("/diary/test") // 나의 여행기(비공개글) 목록 가져오기
-	public String test(Model model) {
-		return "diary/ck_test";
-	}
-
 	// 나의 글보기
 	@GetMapping("/my/diary") // 나의 여행기(비공개글) 목록 가져오기
 	public String mydiary(Model model) {

@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.nimbusds.oauth2.sdk.Request;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.service.DiaryService;
@@ -34,7 +37,13 @@ public class DiaryController {
         model.addAttribute("diary", diary);
         return "diary/diary_read";
 	}
-//    @PostMapping("/report")
+    // 더보기
+    @PostMapping("/moreList")
+    public String diaryMoreList() {
+    	
+    	return null;
+    }
+    //    @PostMapping("/report")
 //    public int report() {
 //        int result = diaryService.
 //        return result;
