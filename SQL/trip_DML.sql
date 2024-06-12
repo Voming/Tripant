@@ -25,6 +25,13 @@ insert into plan_member values (14,'qothwls5@naver.com','0');
 insert into plan_member values (13,'qothwls5@naver.com','1');
 insert into plan_member values (12,'qothwls5@naver.com','1');
 
+insert into plan_member values (13,'dpdls898@naver.com','0');
+insert into plan_member values (13,'bomin1107@naver.com','0');
+
+insert into plan_member values (11,'dpdls898@naver.com','0');
+insert into plan_member values (11,'bomin1107@naver.com','0');
+insert into plan_member values (11,'seojw0730@naver.com','0');
+
 --area_code = 1
 --plan_area_code = 1
 --plan전체 + 지역이름 + 사진명
