@@ -34,7 +34,7 @@
 					</div>
 				</button>
 				<!-- 공유 modal fragment-->
-				<div th:replace="~{trip/triplist_fragment :: share}"></div> 
+				<div th:replace="~{trip/tl_modal_fragment :: share}"></div> 
 				
 			</div> <!-- each -->
 			<div style="height: 100px;" ></div>
@@ -43,6 +43,8 @@
 		
 		<h1 th:if="${#lists.isEmpty(planlist)}" class="nothing" >작성된 여행 일정이 없습니다</h1>
 	</div>
-	<script th:src="@{/js/trip/tripList.js}"></script>
+	<script th:src="@{/js/trip/list/triplist_findNick.js}"></script>
+	<script th:src="@{/js/trip/list/triplist_delete.js}"></script>
+	<script th:src="@{/js/trip/list/triplist_modal.js}"></script>
 </body>
 </html>
