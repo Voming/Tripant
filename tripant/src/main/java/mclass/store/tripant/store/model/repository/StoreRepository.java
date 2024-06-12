@@ -26,4 +26,8 @@ public interface StoreRepository {
 	
 	// 장바구니 삭제
 	public int cartDel(Map<String, Object> map);
+	
+	// 구매내역
+	// 구매내역 목록
+	public List<Map<String, Object>> buy(String memEmail);
 }
