@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee1c53ff7e4c7508a382a4c4e7af76e8"></script>
-<link rel="stylesheet" th:href="@{/css/plan/make/make_layout.css}">
-<link rel="stylesheet" th:href="@{/css/plan/make/make_day_modal.css}">
-<link rel="stylesheet" th:href="@{/css/plan/make/make_day_layout.css}">
+<link rel="stylesheet" th:href="@{/css/plan/plan_layout.css}">
+<link rel="stylesheet" th:href="@{/css/plan/plan_day_modal.css}">
+<link rel="stylesheet" th:href="@{/css/plan/plan_day_layout.css}">
 
 <head th:replace="~{common/header :: head('일정만들기')}">
 </head>
@@ -49,13 +49,43 @@
 		<div class="tab-content">
 			<div id="tab01">
 				<div class="flex">
-					<div class="plan-title" th:text="${planTitle}"></div>
-					<div class="plan-location" th:text="${areaShortName}"></div>
+					<div class="plan-title" th:text="${session.planTitle}"></div>
+					<div class="plan-location" th:text="${session.areaShortName}"></div>
 					<div class="wrap-priod">
 						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
 						<img class="plan-priod" th:src="@{/images/icons/calendar.png}" alt="달력">
 					</div>
 					<h5 class="plan-timeEx" style="font-size:var(--font5);"></h5> 
+					<h5 class="start"></h5>
+					<h5 class="end"></h5>
+					<div class="wrap-time">
+					 
+						<table>
+							<thead>
+								<tr>
+									<th>일자</th>
+									<th>요일</th>
+									<th>시작시간</th>
+									<th>종료시간</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>January</td>
+									<td>$100</td>
+									<td>January</td>
+									<td>$100</td>
+								</tr>
+								<tr>
+									<td>February</td>
+									<td>$80</td>
+									<td>January</td>
+									<td>$100</td>
+								</tr>
+							</tbody>
+						</table>
+					
+					</div>
 				</div>
 			</div>
 			<div id="tab02">

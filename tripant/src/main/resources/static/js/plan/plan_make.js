@@ -23,5 +23,6 @@ function btnLogoClickHandler(){
 }
 
 function btnPriodClickHandler(){
+	history.go(0);
 	$(".modal").addClass("show");
 }

@@ -1,5 +1,6 @@
 package mclass.store.tripant.plan.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.place.domain.AreaNameEntity;
 import mclass.store.tripant.plan.model.service.PlanService;
@@ -53,4 +56,18 @@ public class MainController {
 		System.out.println(areaList);
 		return areaList;
 	}
+	
+	@PostMapping("/plan/keep")
+	public String keep(@RequestParam("areaName") String areaName, 
+			@RequestParam("planTitle") String planTitle
+			, HttpSession session
+			) throws IOException {
+		session.setAttribute("areaName", areaName);
+		session.setAttribute("planTitle", planTitle);
+		//짧은 이름으로 넘기기 
+		String areaShortName = planService.selectAreaShortName(areaName);
+		session.setAttribute("areaShortName", areaShortName);
+		return "redirect:/plan";
+	}
+	
 }

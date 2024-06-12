@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mclass.store.tripant.place.domain.AreaEntity;
@@ -26,11 +27,11 @@ public class PlanController {
 	
 	@GetMapping("")
 	public String make(
-			//@ModelAttribute("areaName") String areaName, @ModelAttribute("planTitle") String planTitle
+			@SessionAttribute(name = "areaName") String areaName, @SessionAttribute(name = "planTitle") String planTitle
 			) {
-//		System.out.println("areaName :" + areaName);
-//		System.out.println("planTitle :" + planTitle);
-//		
+		System.out.println("areaName :" + areaName);
+		System.out.println("planTitle :" + planTitle);
+		
 		return "plan/make";
 	}
 	
@@ -42,18 +43,6 @@ public class PlanController {
 		return areaList;
 	}
 	
-	@PostMapping("/keep")
-	public String keep(@RequestParam("areaName") String areaName, 
-			@RequestParam("planTitle") String planTitle
-			, RedirectAttributes rttb
-			) throws IOException {
-		rttb.addFlashAttribute("areaName", areaName);
-		rttb.addFlashAttribute("planTitle", planTitle);
-		//짧은 이름으로 넘기기 
-		String areaShortName = planService.selectAreaShortName(areaName);
-		rttb.addFlashAttribute("areaShortName", areaShortName);
-		return "redirect:/plan";
-	}
 	
 	
 }

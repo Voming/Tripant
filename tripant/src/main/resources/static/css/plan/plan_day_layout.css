@@ -30,7 +30,6 @@
 }
 
 .main-wrapper .tab-content h4 {
-	
 	margin-bottom: 20px;
 }
 
@@ -43,4 +42,10 @@
 	float: left;
 	text-align: center;
 	margin-right: 5px;
+}
+
+.main-wrapper .wrap-time table, .main-wrapper .wrap-time th,
+	.main-wrapper .wrap-time td {
+	padding: 5px;
+	border: 1px solid black;
 }
