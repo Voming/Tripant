@@ -43,10 +43,10 @@
 											</div>
 											<div class="wrap-content">
 												<div class="diary-content">
-													<a th:href="@{|/diary/read/${diary.diaryId}|}">
+													<div th:href="@{|/diary/read/${diary.diaryId}|}">
 														<p class="diary-title" style="font-size: var(--font3);"
 															th:text="${diary.diaryTitle}"></p>
-													</a>
+													</div>
 													<p class="diary-date" style="font-size: var(--font4);"
 														th:text="${diary.diaryDate}"></p>
 													<p class="diary-nickname" style="font-size: var(--font5);"
