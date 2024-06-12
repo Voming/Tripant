@@ -47,7 +47,7 @@ function changeSelectAreaHandler() {
 	console.log(area);
 
 	$.ajax({
-		url: contextPath +"make/area"
+		url: contextPath +"plan/make/area"
 		, method: "post"
 		, data: {
 			areaName: area
@@ -81,7 +81,7 @@ function btnKeepClickHandler(){
 	console.log(area);
 	var title =  $(this).parent().find("input[name=planTitle]").val();
 	console.log(title);
-	planForm.action= contextPath +"make/keep";
+	planForm.action= contextPath +"plan/make/keep";
 	planForm.method="post";
 	planForm.submit();
 	

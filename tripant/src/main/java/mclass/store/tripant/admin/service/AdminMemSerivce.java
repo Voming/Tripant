@@ -1,6 +1,7 @@
 package mclass.store.tripant.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,16 @@ public class AdminMemSerivce {
 		return admindao.selectMemList();
 	}
 	
-	public Integer adminMemRole(int memRole) {
+	public Integer adminMemRole(Map<String, Object> map) {
 		
-		return admindao.adminMemRole(memRole);
+		return admindao.adminMemRole(map);
 	}
 	
 	public List<AdminBoardEntity> boardList(){
 		return admindao.boardList();
 	}
 	
+	
+	
+
 }

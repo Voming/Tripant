@@ -1,8 +1,8 @@
 package mclass.store.tripant.plan.model.service;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -20,12 +20,12 @@ import org.w3c.dom.NodeList;
 import com.nimbusds.jose.shaded.gson.GsonBuilder;
 
 import mclass.store.tripant.place.domain.PlaceEntity;
-import mclass.store.tripant.plan.model.repostiory.PlaceRepository;
+import mclass.store.tripant.plan.model.repostiory.PlaceRepositoryCrawling;
 
 @Service
-public class PlaceService {
+public class PlaceServiceCrawling {
 	@Autowired
-	private PlaceRepository placeRepository;
+	private PlaceRepositoryCrawling placeRepository;
 
 	// XML Element 값 꺼내기
 	public static String getTagValue(String tag, Element eElement) {
@@ -51,12 +51,12 @@ public class PlaceService {
 
 	// api 호출
 	// @Async
-	private int getApi(int cId, int aCode) { // 관광타입, 지역 코드
+	private int getApi(int cId, int aCode , boolean isModifiedData) { // 관광타입, 지역 코드
 		int result = 0;
 		// api 받아온 시간
-		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-		String gettime = format.format(date);
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate currentDate =  LocalDate.now();
+		String gettime = currentDate.format(dateFormat);
 		System.out.println("###########scheduled############" + gettime);
 
 		int numOfRows = 1000;
@@ -64,6 +64,7 @@ public class PlaceService {
 		int totalCount = 0;
 		// int maxPageNo = 1;
 
+		// 전체 개수 / 1000 + 1 만큼 반복문 돌림 
 		while (pageNo < totalCount / numOfRows + 1) {
 			pageNo++;
 
@@ -81,11 +82,11 @@ public class PlaceService {
 				doc.getDocumentElement().normalize();
 
 				// 파싱할 tag
+				// 총 개수를 통해 페이지 수를 계산하기
 				NodeList nTotalCount = doc.getElementsByTagName("totalCount");
 				try {
 					totalCount = Integer.parseInt(nTotalCount.item(0).getTextContent());
-					System.out.println("totalCount:" + totalCount + ", totalPage " + (totalCount / numOfRows + 1)
-							+ ": pageNo:" + pageNo);
+					System.out.println("totalCount:" + totalCount + ", totalPage " + (totalCount / numOfRows + 1) + ": pageNo:" + pageNo);
 				} catch (Exception e) {
 					System.out.println("!!!!!!!!!!!!!!!!!!!!!! ERROR 2 : " + totalCount);
 					e.printStackTrace();
@@ -93,6 +94,10 @@ public class PlaceService {
 					continue;
 				}
 
+				// 포맷변경 ( 년월일 시분초)
+				String yesterday = currentDate.plusDays(-1).format(dateFormat);
+				System.out.println("1일 전 : " + yesterday);
+				
 				// 파싱할 tag
 				NodeList nList = doc.getElementsByTagName("item");
 
@@ -102,11 +107,15 @@ public class PlaceService {
 					Element eElement = (Element) nNode;
 
 					String modifiedtime = getTagValue("modifiedtime", eElement);
-//				if(modifiedtime.compareTo(gettime) < 0 ) {
-					if (modifiedtime.compareTo("20240102030405") < 0) {
-						continue;
+				
+					if(isModifiedData) {
+						// 처음 insert 할 때 제외하고는 활성화 해두기(변경시간이 어제시간보다 앞이면)
+						if (modifiedtime.compareTo(yesterday) < 0) { 
+							continue;
+						}
 					}
 
+					//만약 주소가 없는 장소라면 insert 하지 않음
 					String add1 = getTagValue("addr1", eElement);
 					if (add1 == null || add1.length() == 0) {
 //					System.out.println("!!!!!!!!!!!!!!!!!!!!!! Add1  NULL");
@@ -171,9 +180,23 @@ public class PlaceService {
 ///////// 			System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(dtolist));
 				System.out.println("dtolist size : " + dtolist.size());
 				if (dtolist.size() > 0) {
-					int resultPerOnce = placeRepository.insertPlace(dtolist);
-					System.out.println("DB result : " + resultPerOnce);
-					result += resultPerOnce;
+				
+					 // 200개씩 끊어서 입력
+					int limitCount = 200;
+					int i = 0;
+					do {
+						List<PlaceEntity> dataListSlice = new ArrayList<>(dtolist.subList(i, Math.min(i+limitCount,  dtolist.size())));
+//						List<PlaceEntity> dataListSlice = dtolist.stream().skip(i).limit(limitCount).collect(Collectors.toList());
+						
+						int resultPerOnce = placeRepository.insertPlace(dataListSlice);
+				    	System.out.println("=====200씩==========" + i + "번째================");
+						System.out.println("DB result : " + resultPerOnce);
+						result += resultPerOnce;
+				        dataListSlice.clear();
+				        
+				        i = Math.min(i+limitCount,  dtolist.size());
+				        
+					} while(i < dtolist.size());
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -187,6 +210,8 @@ public class PlaceService {
 	// @Scheduled(cron = "* * 20 * * *") // 매일 20시에 실행
 	// 첫 번째 * 부터 초(0-59) 분(0-59) 시간(0-23) 일(1-31) 월(1-12) 요일(0-6) (0: 일, 1: 월, 2:화, 3:수, 4:목, 5:금, 6:토)
 	public int insertPlace() {
+		boolean isModifiedData = false;
+		
 		// 반복문 돌리기(12:관광지, 14:문화시설, 28:레포츠, 32:숙박, 38:쇼핑, 39:음식점)
 		int result = 0;
 
@@ -195,7 +220,7 @@ public class PlaceService {
 		while (arrTypeIdx < arrType.length) {
 			for (int i = 1; ((i <= 8) || (i >= 31 && i <= 39)); /* i++ */) {
 //			for(int i= 1; i<2;) {
-				result += getApi(arrType[arrTypeIdx], i);
+				result += getApi(arrType[arrTypeIdx], i, isModifiedData);
 				i = (i == 8) ? i = 31 : ++i;
 			}
 			System.out.println(arrTypeIdx + ": result : " + result);

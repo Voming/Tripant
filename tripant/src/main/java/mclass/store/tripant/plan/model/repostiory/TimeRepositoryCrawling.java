@@ -9,7 +9,7 @@ import mclass.store.tripant.place.domain.PlaceMoveTimeEntity;
 
 
 @Mapper
-public interface TimeRepository {
+public interface TimeRepositoryCrawling {
 	public int deleteAllPlaceMoveTime();
 	public List<PlaceMapEntity> selectPlaceMapList(int areacode);
 	public int insertPlaceMoveTime(PlaceMoveTimeEntity moveTimeEntity);

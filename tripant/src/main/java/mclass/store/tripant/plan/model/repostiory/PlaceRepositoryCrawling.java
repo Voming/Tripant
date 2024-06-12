@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import mclass.store.tripant.place.domain.PlaceEntity;
 
 @Mapper
-public interface PlaceRepository {
+public interface PlaceRepositoryCrawling {
 	public int insertPlace(List<PlaceEntity> dtolist);
 }
