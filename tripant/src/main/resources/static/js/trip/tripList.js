@@ -6,14 +6,60 @@ function loaededHandler(){
 	//삭제
 	$('.delete-plan').on("click",deleteHandler);
 	
+	//유저검색
+	$('.btn.find').on("click",findNickHandler);
+	
 	//케밥 아이콘 이벤트
 	$('.info').on("click",miniModalBtnHandler);
 }
 
-//친구공유 모달
-function shareModalHandler(){
-	$(this).parent().parent().siblings(".wrap-modal").css("display","block");
+//유저 검색
+function findNickHandler(){
+	
+	if($("[name=find]").val().trim().length==0){
+		Swal.fire({
+		  title: "공란",
+		  text:"빈문자열은 검색할 수 없습니다."
+		});		
+	}else{
+		//여행 아이디와 검색할 닉네임
+		var planId = $(this).data('plan-id');
+		var findNick=$(this).siblings('.wirte-nick').val()
+		
+		$.ajax({
+			url: "/trip/search/nick",
+			method:"post",
+			context:this,
+        	data: {planId:planId,findNick: findNick},
+			success : function(nickList) {
+				memlistHandler(nickList);
+				$(this).parent().next().html(htmlVal);
+			},
+			error:ajaxErrorHandler
+		});
+	}
 }
+//검색목록  html에 출력하기 위해 함수에 담기
+function memlistHandler(nickList){
+	htmlVal='';
+	for (var idx in nickList){
+		var entity = nickList[idx];
+		console.log("memNick");
+		console.log(entity.memNick);
+		htmlVal+=`
+			<div class="memNick flex" >${entity.memNick}<button type="button" class="btn 
+			`;
+		//추가되지 않은 맴버일 때	
+		if(entity.planMemRole == 0){
+			htmlVal+=`remove">삭제</button></div>`;
+		//추가된 맴버일 때	
+		}else if(entity.planMemRole == null){
+			htmlVal+=`add">추가</button></div>`;
+		}
+	}
+	return htmlVal;
+}
+
 //모든 모달 닫기
 $(document).mouseup(function(e) {
 	var LayerModal = $(".wrap-modal");
@@ -36,6 +82,10 @@ function miniModalBtnHandler(){
 	
 }
 
+//공유 열기
+function shareModalHandler(){
+	$(this).parent().parent().siblings(".wrap-modal").css("display","block");
+}
 
 //일정삭제
 function deleteHandler() {
@@ -65,7 +115,8 @@ function deleteHandler() {
 						Swal.fire({
 				     	title: "성공",
 				      	text: "삭제되었습니다",
-		                confirmButtonText: 'Ok'		      	
+  		     		    confirmButtonColor: "#000000",
+		                animation:false		      	
 				    }).then(() => {
 						location.reload();
 					});
