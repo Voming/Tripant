@@ -1,8 +1,5 @@
 $(loadedHandler);
 
-// 여기선 동작하지 않음. 
-//const contextPath2 = "[[@{/}]]"; console.log(contextPath2);
-
 function loadedHandler() {
 	$(".btn.find").on("click", btnFindClickHandler);
 
@@ -47,7 +44,7 @@ function changeSelectAreaHandler() {
 	console.log(area);
 
 	$.ajax({
-		url: contextPath +"plan/make/area"
+		url: contextPath +"plan/area"
 		, method: "post"
 		, data: {
 			areaName: area
@@ -77,26 +74,13 @@ function displayAreaInfo(datalist) {
 
 //일정 게속 만들기
 function btnKeepClickHandler(){
-	var area = $("#selectbox option:selected").text();
+	/*var area = $("#selectbox option:selected").text();
 	console.log(area);
 	var title =  $(this).parent().find("input[name=planTitle]").val();
-	console.log(title);
-	planForm.action= contextPath +"plan/make/keep";
+	console.log(title);*/
+	planForm.action= contextPath +"plan/keep";
 	planForm.method="post";
 	planForm.submit();
-	
-	//location.href="[@/make?areaName="+area+"&planTitle="+title+"]";
-	/*
-	$.ajax({
-		url: contextPath+"make/keep"
-		, method: "post"
-		, data: {
-			areaName: area,
-			planTitle : title
-		}
-		, error: ajaxErrorHandler
-	});
-	*/
 }
 
 

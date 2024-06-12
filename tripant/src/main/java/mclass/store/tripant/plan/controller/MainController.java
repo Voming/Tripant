@@ -39,7 +39,7 @@ public class MainController {
 		mv.addObject("memCount", planService.selectMemCount());
 		mv.addObject("areaNameList", planService.selectAreaNameList());
 		
-		mv.setViewName("plan/home");
+		mv.setViewName("main/home");
 		//System.out.println("insertPlace : " + placeService.insertPlace());
 		//System.out.println("selectPlaceMapList : " + timeService.selectPlaceMapList(1));
 		//timeService.makeTimeList(); //TODO

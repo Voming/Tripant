@@ -36,18 +36,29 @@ public class PlanController {
 	
 	@Autowired
 	private PlanService planService;
+	
+	@GetMapping("")
+	public String make(
+			//@ModelAttribute("areaName") String areaName, @ModelAttribute("planTitle") String planTitle
+			) {
+//		System.out.println("areaName :" + areaName);
+//		System.out.println("planTitle :" + planTitle);
+//		
+		return "/plan/make";
+	}
+	
 	//지역&제목 모달에서 선택한 지역 정보 가져오기
-	@PostMapping("/make/area")
+	@PostMapping("/area")
 	@ResponseBody
-	public List<AreaEntity> makeArea(@RequestParam("areaName") String areaName) {
+	public List<AreaEntity> area(@RequestParam("areaName") String areaName) {
 		//System.out.println("areaName :" + areaName);
 		List<AreaEntity> areaList = planService.selectAreaInfoList(areaName);
 		//System.out.println(areaList);
 		return areaList;
 	}
 	
-	@PostMapping("/make/keep")
-	public String makeKeep(@RequestParam("areaName") String areaName, 
+	@PostMapping("/keep")
+	public String keep(@RequestParam("areaName") String areaName, 
 			@RequestParam("planTitle") String planTitle
 			, RedirectAttributes rttb
 			) throws IOException {
@@ -56,16 +67,8 @@ public class PlanController {
 		//짧은 이름으로 넘기기 
 		String areaShortName = planService.selectAreaShortName(areaName);
 		rttb.addFlashAttribute("areaShortName", areaShortName);
-		return "redirect:/plan/make";
+		return "redirect:/plan";
 	}
 	
-	@GetMapping("/make")
-	public String make(
-			//@ModelAttribute("areaName") String areaName, @ModelAttribute("planTitle") String planTitle
-			) {
-//		System.out.println("areaName :" + areaName);
-//		System.out.println("planTitle :" + planTitle);
-//		
-		return "plan/make";
-	}
+	
 }
