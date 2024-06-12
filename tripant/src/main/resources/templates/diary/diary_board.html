@@ -49,7 +49,7 @@
 													</a>
 													<p class="diary-date" style="font-size: var(--font4);"
 														th:text="${diary.diaryDate}"></p>
-													<p class="diary-nickname" style="font-size: var(--font4);"
+													<p class="diary-nickname" style="font-size: var(--font5);"
 														th:text="${diary.memNick}"></p>
 													<p class="diary-preview" style="font-size: var(--font5);"
 														th:text="${diary.diaryContent}"></p>
@@ -487,7 +487,7 @@
 				</div>
 				<!-- 글 리스트 7개씩 하고 for문으로 더보기 하기 -->
 				<div class="btn-more">
-					<button type="button" class="learn-more">더보기</button>
+					<button type="button" class="learn-more" onclick="loadMorePosts()">더보기</button>
 				</div>
 			</div>
 		</div>

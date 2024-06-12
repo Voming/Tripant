@@ -116,7 +116,10 @@ select {
 	font-size: var(--font4);
 	margin: 8px;
 }
-
+.diary-nickname{
+	font-size: var(--font5);
+	margin: 8px;
+}
 .diary-preview {
 	font-size: var(--font5);
 	margin: 8px;
