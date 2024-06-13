@@ -1,3 +1,21 @@
+// 일정만들기에서 전체적으로 사용할 클래스
+class CalendarDate {
+	constructor(date, day) {
+		this.date = date;
+		this.day = day;
+	}
+	startTime;
+	endTime;
+	stay;
+}
+class CalendarPlan {
+	dateArr;
+	spotArr;
+}
+
+let calendarPlan = new CalendarPlan();
+calendarPlan.dateArr = new Array();
+
 $(loadedHandler);
 
 function loadedHandler() {

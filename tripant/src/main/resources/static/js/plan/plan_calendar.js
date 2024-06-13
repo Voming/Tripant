@@ -33,12 +33,8 @@ $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
 
 // 달력 기간 입력
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-	//console.log(picker.startDate.format('YYYY-MM-DD'));
-	//console.log(picker.endDate.format('YYYY-MM-DD'));
-
 	let diff = Math.abs(picker.endDate - picker.startDate);
 	diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-	//console.log(diff);
 
 	if (diff > 10) {
 		alert("기간이 너무 큽니다. 기간을 다시 입력해주세요.");
@@ -50,7 +46,6 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 
 		// 화면에 기간 정보 입력
 		const period = start + " ~ " + end;
-		console.log(period);
 		$('.plan-priod').html(period);
 
 		var htmlVal = `입력하신 여행 기간이 여행지 도착날짜와 여행지 출발 날짜가 맞는지 확인해주세요. 
@@ -73,22 +68,22 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 			//월/일 형태로 변경
 			let MM = ('0' + (oneday.getMonth() + 1)).slice(-2);
 			let dd = ('0' + oneday.getDate()).slice(-2);
-			let onedayFormat = MM + '/' + dd;
-			dates.push(onedayFormat);
+			let date = MM + '/' + dd;
+			dates.push(date);
 
 			//요일 가져오기
 			const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-			let dayOfWeek = WEEKDAY[oneday.getDay()];;
-			days.push(dayOfWeek);
+			let day = WEEKDAY[oneday.getDay()];
+			
+			calendarPlan.dateArr[i] = new CalendarDate(date, day);
+			days.push(day);
 		}
-		displayDayTable(dates, days);
+		displayDayTable();
 	}
 });
 
 // 시간 입력 테이블 
-function displayDayTable(dates, days) {
-	console.log(dates);
-	console.log(days);
+function displayDayTable() {
 	var htmlVal = `
 		<li>
 			<div class="time-h"><h5>일자</h5></div>
@@ -97,9 +92,9 @@ function displayDayTable(dates, days) {
 			<div class="time-h"><h5>종료 시각</h5></div>
 		</li>
 	`;
-	for (var idx in days) {
-		var date = dates[idx];
-		var day = days[idx];
+	for (var idx in calendarPlan.dateArr) {
+		var date = calendarPlan.dateArr[idx].date;
+		var day = calendarPlan.dateArr[idx].day;
 		htmlVal += `
 		<li>
 			<div><h5>${date}</h5></div>
@@ -114,6 +109,14 @@ function displayDayTable(dates, days) {
 	$('#timeForm input').on('input', timeInputCheck);
 	// 시간 입력 완료 -> 화면 이동
 	$(".time_btn").on("click", function() {
+		//각각 시간 값 저장
+		for (var idx in calendarPlan.dateArr) {
+			calendarPlan.dateArr[idx].startTime = $('#start-' + idx).val();
+			calendarPlan.dateArr[idx].endTime = $('#end-' + idx).val();;
+		}
+		console.log(calendarPlan);
+
+		
 		$('.tab-content > div').hide().filter(this.hash).fadeIn();
 		$('.tab-nav a').css('color', 'black');
 		$('.tab-nav a').removeClass('active');
@@ -124,7 +127,7 @@ function displayDayTable(dates, days) {
 		$(".main-wrapper .tab-content").css("width", "50%");
 	});
 }
-
+// 시간 입력 체크
 function timeInputCheck() {
 	//입력 범위 체크
 	var id = $(this).attr('id');
@@ -137,6 +140,7 @@ function timeInputCheck() {
 
 	var start = $('#start-' + id_num).val();
 	var end = $('#end-' + id_num).val();
+	
 	if (start > end) {
 		$(this).css('color', 'red');
 		console.log("시작시간이 더 큽니다.");
@@ -159,3 +163,4 @@ function timeInputCheck() {
 		$('.time_btn').prop('disabled', false);
 	}
 }
+
