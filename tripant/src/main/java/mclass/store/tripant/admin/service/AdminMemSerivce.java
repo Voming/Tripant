@@ -16,20 +16,24 @@ public class AdminMemSerivce {
 	@Autowired
 	private AdminDao admindao;
 	
+	//회원리스트
 	public List<AdminMemEntity> selectMemList(){
 		return admindao.selectMemList();
 	}
 	
+	//등급변경
 	public Integer adminMemRole(Map<String, Object> map) {
 		
 		return admindao.adminMemRole(map);
 	}
 	
+	//게시글리스트
 	public List<AdminBoardEntity> boardList(){
 		return admindao.boardList();
 	}
-	
-	
-	
 
+	//회원검색
+	public List<AdminMemEntity> search(String memNick){
+		return admindao.search(memNick);
+	}
 }
