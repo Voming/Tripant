@@ -22,4 +22,10 @@ public interface TripListRepository {
 	
 	//일정 공유 중인 맴버
 	public List<TripShareEntity> share(Map<String, Object> map);
+	
+	//유저 추가
+	public Integer add(Map<String, Object> map);
+	
+	//유저 추가
+	public Integer remove(Map<String, Object> map);
 }

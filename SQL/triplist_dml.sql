@@ -33,4 +33,10 @@ select mem_nick, plan_id, plan_mem_role from plan_member join member using (mem_
 
 --공유자 추가
 select mem_email from member where mem_nick='재원';
-insert into plan_member values (13,'gyrua34@gmail.com','0');
+insert into plan_member values (16,(select mem_email from member where mem_nick='재원'),'0');
+
+--공유자 추가
+select * from plan_member;
+delete from plan_member where plan_id = 11 and mem_email=(select mem_email from member where mem_nick='김보민')
+;
+ROLLBACK;
