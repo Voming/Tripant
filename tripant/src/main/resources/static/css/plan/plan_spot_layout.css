@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.tab-content #tab02 .spot{
+	width: 50%;
+	height:100%;
+	padding: 10px;
+}
+
+.tab-content #tab02 {
+	display: flex;
+	width: auto;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}

@@ -5,14 +5,14 @@
 <link rel="stylesheet" th:href="@{/css/plan/plan_layout.css}">
 <link rel="stylesheet" th:href="@{/css/plan/plan_day_modal.css}">
 <link rel="stylesheet" th:href="@{/css/plan/plan_day_layout.css}">
-<head th:replace="~{common/header :: head('일정만들기')}">
-</head>
+<link rel="stylesheet" th:href="@{/css/plan/plan_spot_layout.css}">
+<head th:replace="~{common/header :: head('일정만들기')}"></head>
+<script th:src="@{/js/plan/plan_spot.js}"></script>
 <script th:src="@{/js/plan/plan_make.js}"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 <body>
 	<div class="modal show">
 		<div class="modal_popup">
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			<div id="tab02">
-				<div class="first">
+				<div class="spot first">
 					<div class="flex">
 						<h1>2번입니다</h1>
 						<div class="plan-title" th:text="${session.planTitle}"></div>
@@ -76,7 +76,7 @@
 						<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
 					</div>
 				</div>
-				<div class="second">
+				<div class="spot second">
 					<div class="flex">
 						<h1>2번입니다</h1>
 						<div class="plan-title" th:text="${session.planTitle}"></div>
@@ -91,24 +91,12 @@
 				</div>
 			</div>
 			<div id="tab03">
-				<div class="flex">
-					<div class="plan-title" th:text="${session.planTitle}"></div>
-					<div class="plan-location" th:text="${session.areaShortName}"></div>
-					<div class="wrap-priod">
-						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
-						<img class="plan-priod" th:src="@{/images/icons/calendar.png}" alt="달력">
-					</div>
-					<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
-				</div>
 			</div>
 		</div>
-
-
 		<div class="map-wrapper">
 			<div id="map"></div>
 		</div>
 	</div>
-	
 	<script th:src="@{/js/plan/plan_map.js}"></script>
 	<script th:src="@{/js/plan/plan_calendar.js}"></script>
 </body>

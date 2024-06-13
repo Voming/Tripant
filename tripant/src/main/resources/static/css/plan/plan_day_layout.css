@@ -46,9 +46,6 @@
 	padding: 5px;
 	width: auto;
 	display: grid;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 }
 
 .tab-content .wrap-time .time-h {
