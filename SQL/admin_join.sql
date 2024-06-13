@@ -31,3 +31,10 @@ left join MEMBER b on a.diary_mem_email= b.mem_email) f on d.mem_email=f.mem_ema
 ;
 select * from diary_likes;
 select count(*) from diary_likes;
+
+--검색
+	select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, a.MEM_JOIN_DATE MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , b.MEM_QUIT_DATE
+	from member a
+	left join quit_member b
+	on a.MEM_EMAIL=b.MEM_EMAIL
+    where a.mem_nick like '%${memNick}%';

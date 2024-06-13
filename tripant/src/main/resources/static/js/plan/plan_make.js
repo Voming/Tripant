@@ -1,3 +1,21 @@
+// 일정만들기에서 전체적으로 사용할 클래스
+class CalendarDate {
+	constructor(date, day) {
+		this.date = date;
+		this.day = day;
+	}
+	startTime;
+	endTime;
+	stay;
+}
+class CalendarPlan {
+	dateArr;
+	spotArr;
+}
+
+let calendarPlan = new CalendarPlan();
+calendarPlan.dateArr = new Array();
+
 $(loadedHandler);
 
 function loadedHandler() {
@@ -40,7 +58,16 @@ function loadedHandler() {
 		$('.tab-nav a').css("color", "black");
 		$('.tab-nav a').removeClass('active');
 		$(this).addClass('active');
-
+		
+		var cls_name = $(this).attr("class");
+		cls_name = cls_name.replace(' active', ''); 
+		if(cls_name == 'nav-1'){
+			$(".main-wrapper .tab-content").css("width", "25%");
+		}else{
+			$(".main-wrapper .tab-content").css("width", "50%");
+		}
+		
+		
 		$(this).css("color", "#4BC9E5");
 		return false;
 	}).filter(':eq(0)').click();
