@@ -50,7 +50,9 @@ input[type="submit"] {
 	outline: 1.5px #000 solid;
 	border-radius: 5px;
 	padding-left: 10px;
-	background-color: #f4f5f7;
+	background-color:#0a0a0a; /* 버튼 배경색 */
+	color:#fff; /*글씨색  */
+	
 }
 
 input[type="submit"]:active {
@@ -61,8 +63,8 @@ input[type="submit"]:active {
 	border-radius: 5px;
 	outline: 1.5px #fff solid;
 	padding-left: 10px;
-	background-color: #0a0a0a;
-	color: white;
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
 }
 /*테마와 공개여부 나란히 두기  */
 .inline-wrapper {

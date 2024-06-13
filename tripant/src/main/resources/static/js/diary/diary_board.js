@@ -1,13 +1,24 @@
 /* 더보기 */
 $(loadedHandler);
 let morecnt = 0;
+
 function loadedHandler(){
 	$('.learn-more'),on("click", btnMoreclickHanlder);
 }
 function btnMoreclickHanlder(){
 	morecnt +=1;
 	$.ajax({
-		url:""
+		url:"${pageContext.request.contextPath}/diary/more"
+		,method:"post"
+		,data:{
+			more:morecnt
+		}
+		,dataType:'json'
+		,succes:function(result){
+			if(result != null){
+				dispaly
+			}
+		}
 	});
 }
 /*탭 전환 시키기  */
