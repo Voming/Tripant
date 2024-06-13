@@ -97,36 +97,11 @@ function btnFindClickHandler() {
 	$.ajax({
 		url: "find/area"
 		, method: "post"
+		, context:this
 		, data: { findArea: findArea }
-		, dataType: 'json'
-		, success: function(result) {
-			console.log(result);
-			displayFindArea(result)
-		}
+		//, dataType: 'json'
 		, error: ajaxErrorHandler
+	}).done(function(wrap_area) {
+		 $(this).parents(".wrap-area").find(".wrap-areaList").replaceWith(wrap_area);
 	});
-}
-
-//지역 검색 결과 리스트 출력
-function displayFindArea(datalist) {
-	var htmlVal = '';
-	for (var idx in datalist) {
-		var findDto = datalist[idx];
-		htmlVal += `
-				<li>
-					<div class="area_btn">
-						<img id="findArea-${idx}"  alt="지역">
-						<div class="description">
-							<p style="font-size: var(--font3);">${findDto.areaName}</p>
-							<p style="font-size: var(--font5);">${findDto.areaEngName}</p>
-						</div>
-					</div>
-				</li>`;
-
-	}
-	$(".area-box").html(htmlVal);
-	//이미지 재배치
-	for (var idx in datalist) {
-		$("#findArea-" + idx)[0].src = contextPath + "images/area/" + datalist[idx].areaFileName;
-	}
 }

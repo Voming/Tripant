@@ -68,7 +68,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="wrap-area">
+		<div class="wrap-area" th:fragment="warparea">
 			<div class="wrap-search">
 				<h2>어디로 여행을 떠나시나요?</h2>
 				<div class="search">
@@ -80,23 +80,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="wrap-area">
-				<ul class="area-box">
-					<th:block  th:if="${areaNameList} != null">
-						<th:block  th:each="area : ${areaNameList}">
-							<li>
-								<div class="area_btn">
-									<img th:src="@{|/images/area/${area.areaFileName}|}"alt="지역">
-									<div class="description">
-										<h3 th:text="${area.areaName}"></h3>
-										<h5 th:text="${area.areaEngName}"></h5>
-									</div>
-								</div>
-							</li>
-						</th:block>
-					</th:block>
-				</ul>
-			</div>
+			<div class="wrap-areaList" th:replace="~{main/wrap_arealist :: wraparealist}"></div>
 		</div>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,12 +50,11 @@ public class MainController {
 	
 	//지역 리스트 검색
 	@PostMapping("/find/area")
-	@ResponseBody
-	public List<AreaNameEntity> findArea(@RequestParam("findArea") String findArea) {
-		System.out.println("findArea :" + findArea);
-		List<AreaNameEntity> areaList = planService.selectAreaFindList(findArea);
-		System.out.println(areaList);
-		return areaList;
+	//@ResponseBody
+	public String findArea(Model model, @RequestParam("findArea") String findArea) {
+		List<AreaNameEntity> areaNameList = planService.selectAreaFindList(findArea);
+		model.addAttribute("areaNameList", areaNameList);
+		return "main/wrap_arealist";
 	}
 	
 	@PostMapping("/plan/keep")
