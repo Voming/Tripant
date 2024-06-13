@@ -75,7 +75,7 @@
 	border: 0;
 }
 
-.modal-left button{
+.modal-left button {
 	width: 130px;
 	height: 30px;
 	font-family: "Binggrae";
@@ -85,12 +85,13 @@
 	border: 0;
 	border-radius: 8px;
 	text-align: center;
+	cursor: pointer;
 }
 
-.modal-left button:disabled{
+.modal-left button:disabled {
 	background: var(--color_light_gray);
 	color: black;
-	cursor: pointer;
+	pointer-events: none;
 }
 
 .modal-right {
@@ -108,4 +109,3 @@
 	border-radius: 8px;
 	object-fit: cover;
 }
-
