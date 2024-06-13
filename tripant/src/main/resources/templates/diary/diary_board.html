@@ -44,10 +44,12 @@
 											</div>
 											<div class="wrap-content">
 												<div class="diary-content">
-													<a th:href="@{|/diary/read/${diary.diaryId}|}">
-														<p class="diary-title" style="font-size: var(--font3);"
-															th:text="${diary.diaryTitle}"></p>
-													</a>
+													<!-- a 태그 대신 연결하는 방법 -->
+													<div th:with="url=@{'/diary/read/' + ${diary.diaryId}}">
+														<p class="diary-title" style="font-size: var(--font3);">
+															<a th:href="${url}" th:text="${diary.diaryTitle}"></a>
+														</p>
+													</div>
 													<p class="diary-date" style="font-size: var(--font4);"
 														th:text="${diary.diaryDate}"></p>
 													<p class="diary-nickname" style="font-size: var(--font5);"
