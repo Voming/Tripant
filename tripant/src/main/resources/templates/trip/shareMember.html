@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<div class="memlist flex"  th:fragment="memlist" >  
+	<!-- 공유중인 유저 목록 ajax로 받아온 값-->
+	<div class="memNick flex"  th:each="entity : ${shareList}">
+		<p>[[${entity.memNick}]]</p>
+		<button type="button" class="btn remove">삭제</button>
+	</div>
+</div>
+</html>

@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Trip List Fragment</title>
-</head>
-<body>
 	<!-- 공유 모달 -->
     <div th:fragment="share" class="wrap-modal">
-        <div class="modal-content">
+        <div class="modal-content" th:data-plan-id="${plan.planId}">
             <h3 th:text="${plan.areaShortName}" class="area">지역명</h3>
             <h1 th:text="${plan.planTitle}" class="plan-title">제목</h1>
             <form class="frm-find wfull">
@@ -16,13 +11,10 @@
                    	<img class="search-btn " src="/images/icons/search.png" alt="검색"/>
                	</button>
             </form>
-            <div class="memlist flex " >  
-            	<!-- 공유중인 유저 목록 -->
-            	
-            </div>
+            <!-- 공유중인 유저 목록 -->
+            <div th:replace="~{trip/shareMember :: memlist}" ></div>
             
             <button type="button" class="btn confimed" ><p>확인</p></button>
         </div><!-- modal-content -->
     </div>	
-</body>
 </html>

@@ -34,19 +34,20 @@ function shareModalHandler(){
 	//미니모달 닫기
 	$(this).parent().parent().siblings(".wrap-modal").css("display","block");
 	
-	var planId = $(this).next().data('plan-id');
+	//var planId = $(this).next().data('plan-id');
+	var planId =$(this).parents(".trip-list.wfull").data('plan-id');
+	console.log('>>>shareModalHandler :planId : '+ planId);
 	$.ajax({
 		url: "/trip/share/nick",
 		method:"post",
 		context:this,
-    	data: {planId:planId},
-		success : function(shareList) {
-			//받아온 값 백틱이용하여 html형식으로 만들기
-			shareListHandler(shareList);
-			$(this).parent().parent().next().find(".memlist").html(htmlVal);
-			addAndRemoveHandler();
-		},
-		error:ajaxErrorHandler
+    	data: {planId:planId}
+	}).done( function(shareList) {
+		//받아온 값 백틱이용하여 html형식으로 만들기
+		//shareListHandler(shareList);
+		//$(this).parent().parent().next().find(".memlist").html(htmlVal);
+        $(this).parents(".trip-list.wfull").find(".memlist.flex").replaceWith(shareList);
+		//addAndRemoveHandler();
 	});
 }
 
