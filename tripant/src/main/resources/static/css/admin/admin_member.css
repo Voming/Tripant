@@ -17,7 +17,7 @@
 }
 
  .wrap-body .ad-search .search{
-	width:95%;
+	width:90%;
 	border-radius:20px;
 	height:30px;
 	border: solid black 1px;
@@ -90,4 +90,12 @@
 .col.list .btn:hover{
 	background-color:black;
 	color:white;
+}
+
+.wrap-body .ad-search .btn-search{
+	border: 0;
+	background-color: white;
+	position: absolute;
+	top: 16.5%;
+    right:7%;
 }

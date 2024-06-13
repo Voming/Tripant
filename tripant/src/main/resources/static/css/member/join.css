@@ -28,6 +28,10 @@
 	color: white;
 }
 
+.wrap-main input{
+	box-sizing: border-box;
+}
+
 .wrap-main .flex {
 	display: flex;
 }
@@ -50,8 +54,7 @@
 	font-size: var(--font1);
 }
 
-.wrap-main .inputlbl input, .wrap-main .inputbtn input, .wrap-main .flex.login button
-	{
+.wrap-main .flex.login button{
 	box-sizing: border-box;
 }
 
@@ -63,11 +66,11 @@
 	justify-content: space-between;
 }
 
-.wrap-main .inputbtn1, .wrap-main .inputchk1 {
+.wrap-main .inputbtn1, .wrap-main .inputchk1, .wrap-main .inputlbl2 {
 	width: 70%;
 }
 
-.wrap-main .inputbtn1 input, .wrap-main .inputchk1 input, .wrap-main .btn.join
+.wrap-main .inputbtn1 input, .wrap-main .inputchk1 input, .wrap-main .inputlbl2 input, .wrap-main .btn.join
 	{
 	width: 100%;
 }

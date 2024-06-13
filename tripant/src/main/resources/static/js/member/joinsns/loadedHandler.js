@@ -1,25 +1,17 @@
 $(loadedHandler);
-function loadedHandler() {
+function loadedHandler(){
 	//버튼:hover css
-	$('.btn').hover(function() {
-		if (!$(this).prop('disabled')) {
-			$(this).css('background-color', 'lightgray');
-			$(this).css('color', 'black');
-		}
-	}, function() {
-		if (!$(this).prop('disabled')) {
+	$('.btn').hover(function(){
+		if(!$(this).prop('disabled')){
 			$(this).css('background-color', 'black');
 			$(this).css('color', 'white');
 		}
+	}, function(){
+		if(!$(this).prop('disabled')){
+			$(this).css('background-color', 'var(--color_light_gray)');
+			$(this).css('color', 'black');
+		}
 	});
-	//인증번호 입력창 숨김
-	$(".inputbtn.check").addClass('hide');
-	//이메일 공란 시 경고 문구
-	$("input#memEmail").on("input", writeEmailHandler);
-	//인증코드 발송
-	$(".btn.sendCode").on("click", codeSendHandler);
-	//인증코드 확인
-	$(".btn.checkCode").on("click", codeCheckHandler);
 	//닉네임 검사
 	$("input#memNick").on("input", nickCheckHandler);
 	//비밀번호 검사

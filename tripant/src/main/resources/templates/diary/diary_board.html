@@ -27,6 +27,7 @@
 						<option value="popularity">인기순</option>
 					</select>
 				</div>
+				<!-- 지역 태그 -->
 				<div th:replace="~{diary/diary_fragment :: arealist}"></div>
 				<!-- 지역 탭 -->
 				<div class="diary-tab-content">
@@ -43,9 +44,11 @@
 											</div>
 											<div class="wrap-content">
 												<div class="diary-content">
-													<div th:href="@{|/diary/read/${diary.diaryId}|}">
-														<p class="diary-title" style="font-size: var(--font3);"
-															th:text="${diary.diaryTitle}"></p>
+													<!-- a 태그 대신 연결하는 방법 -->
+													<div th:with="url=@{'/diary/read/' + ${diary.diaryId}}">
+														<p class="diary-title" style="font-size: var(--font3);">
+															<a th:href="${url}" th:text="${diary.diaryTitle}"></a>
+														</p>
 													</div>
 													<p class="diary-date" style="font-size: var(--font4);"
 														th:text="${diary.diaryDate}"></p>
@@ -58,9 +61,9 @@
 													<img th:src="@{/images/diary/diary_like_none.png}"
 														alt="하트아이콘" class="like-icon">
 													<div>
-														<p>조회수</p>
+														<p style="font-size: var(--font6);">view</p>
 														<p class="diary-diaryViews"
-															style="font-size: var(--font4);"
+															style="font-size: var(--font6);"
 															th:text="${diary.diaryViews}"></p>
 													</div>
 												</div>

@@ -34,11 +34,11 @@
 				<a><img class="logo"
 					src="/images/tripant_logo_text.png"></a>
 				<ul class="tab-nav">
-					<li><a href="#tab01"> step 01<br>날짜확인
+					<li><a class="nav-1" href="#tab01"> step 01<br>날짜확인
 					</a></li>
-					<li><a href="#tab02"> step 02<br>장소선택
+					<li><a class="nav-2" href="#tab02"> step 02<br>장소선택
 					</a></li>
-					<li><a href="#tab03"> step 03<br>숙소설정
+					<li><a class="nav-3" href="#tab03"> step 03<br>숙소설정
 					</a></li>
 				</ul>
 			</nav>
@@ -57,53 +57,20 @@
 					</div>
 					<h5 class="plan-timeEx"></h5>
 					<div class="wrap-time">
-						<form action="/action_page.php">
-							<ul>
-								<li>
-									<div class="time-h"><h5>일자</h5></div>
-									<div class="time-h"><h5>요일</h5></div>
-									<div class="time-h"><h5>시작시간</h5></div>
-									<div class="time-h"><h5>종료시간</h5></div>
-								</li>
-								<li>
-									<div>
-										<h5>3/10</h5>
-									</div>
-									<div>
-										<h5>월요일</h5>
-									</div>
-									<div>
-										<input type="time">
-									</div>
-									<div>
-										<input type="time">
-									</div>
-								</li>
-								<li>
-									<div>
-										<h5>3/10</h5>
-									</div>
-									<div>
-										<h5>월요일</h5>
-									</div>
-									<div>
-										<input type="time">
-									</div>
-									<div>
-										<input type="time">
-									</div>
-								</li>
-							</ul>
+						<form id="timeForm">
+							<ul></ul>
 						</form>
 					</div>
+					<button type="button" form="timeForm" disabled class="time_btn">시간 설정 완료</button>
 				</div>
 			</div>
 			<div id="tab02">
 				<div class="flex">
+				<h1>2번입니다</h1>
 					<div class="plan-title" th:text="${session.planTitle}"></div>
 					<div class="plan-location" th:text="${session.areaShortName}"></div>
 					<div class="wrap-priod">
-						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
+						<h4 class="plan-priod"></h4>
 						<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
 							alt="달력">
 					</div>
@@ -116,8 +83,7 @@
 					<div class="plan-location" th:text="${session.areaShortName}"></div>
 					<div class="wrap-priod">
 						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
-						<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
-							alt="달력">
+						<img class="plan-priod" th:src="@{/images/icons/calendar.png}" alt="달력">
 					</div>
 					<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
 				</div>

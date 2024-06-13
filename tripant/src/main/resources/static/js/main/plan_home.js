@@ -19,10 +19,10 @@ function btnMakeClickHandler() {
 		$(".keep_btn").attr("disabled", true);
 		//일정 계속 만들기 활성화
 		$("#planForm input").on('input', function() {
-			if ($("#planForm input").val() == '' || $("#selectbox option:selected").text() == '--일정을 생성할 지역을 선택하세요--')
-				$(".keep_btn").attr("disabled", true);
+			if ($("#planForm input").val() == '')
+				$(".keep_btn").prop("disabled", true);
 			else
-				$(".keep_btn").attr("disabled", false);
+				$(".keep_btn").prop("disabled", false);
 		});
 		//일정 계속 만들기 
 		$(".keep_btn").on("click", btnKeepClickHandler);
