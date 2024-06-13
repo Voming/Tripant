@@ -43,8 +43,10 @@
 		
 		<h1 th:if="${#lists.isEmpty(planlist)}" class="nothing" >작성된 여행 일정이 없습니다</h1>
 	</div>
-	<script th:src="@{/js/trip/list/triplist_findNick.js}"></script>
-	<script th:src="@{/js/trip/list/triplist_delete.js}"></script>
-	<script th:src="@{/js/trip/list/triplist_modal.js}"></script>
+	<script th:src="@{/js/trip/triplist/loadedHandler.js}"></script>
+	<script th:src="@{/js/trip/triplist/findNick.js}"></script>
+	<script th:src="@{/js/trip/triplist/delete.js}"></script>
+	<script th:src="@{/js/trip/triplist/modal.js}"></script>
+	<script th:src="@{/js/trip/triplist/addAndRemove.js}"></script>
 </body>
 </html>
