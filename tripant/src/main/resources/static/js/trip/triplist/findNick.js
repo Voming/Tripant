@@ -1,17 +1,13 @@
-$(loaededHandler);
-function loaededHandler(){
-	
-	//유저검색
-	$('.btn.find').on("click",findNickHandler);
-}
 
 //유저 검색
 function findNickHandler(){
-	
-	if($("[name=find]").val().trim().length==0){
+	if($(this).siblings("[name=find]").val().trim().length==0){
 		Swal.fire({
 		  title: "공란",
-		  text:"빈문자열은 검색할 수 없습니다."
+		  text:"빈문자열은 검색할 수 없습니다.",
+		  animation:false,
+		  showConfirmButton:false,
+		  timer:1200
 		});		
 	}else{
 		//여행 아이디와 검색할 닉네임
@@ -36,8 +32,6 @@ function memlistHandler(nickList){
 	htmlVal='';
 	for (var idx in nickList){
 		var entity = nickList[idx];
-		console.log("memNick");
-		console.log(entity.memNick);
 		htmlVal+=`
 			<div class="memNick flex" >${entity.memNick}<button type="button" class="btn 
 			`;

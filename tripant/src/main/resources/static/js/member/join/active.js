@@ -2,7 +2,8 @@
 function joinActive(){
 	if($(".btn.sendCode").hasClass('hide') &&
 			$("#memNick-no").hasClass('hide') && 
-			$("#memPassword-no").hasClass('hide') && 
+			$("#memPassword-no").hasClass('hide') &&
+			$("#memTel").val().length > 9 && 
 			$("#memBirth").val() != '' &&
 			$("#agree-all").is(":checked")){
 		$("button.btn.join").attr("disabled", false);

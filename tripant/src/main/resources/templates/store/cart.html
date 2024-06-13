@@ -58,6 +58,8 @@
 
 .wrap-main .cart-list.empty{
 	font-size: var(--font1);
+	margin-bottom: 10px;
+	text-align: center;
 }
 .wrap-main .cart-info.flex{
 	border-top: 1px solid lightgray;
@@ -86,7 +88,7 @@
 	border: 1px solid black;
 	border-radius: 10px;
 	background-color: white;
-	left: 50px;
+	left: 20px;
 }
 .wrap-main div.sidebar{
 	flex-direction: column;
@@ -119,6 +121,9 @@
 	column-gap: 15px;
 }
 </style>
+<!-- iamport.payment.js -->
+<!-- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script> -->
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 <script>
 $(loadedHandler);
 function loadedHandler(){
@@ -143,27 +148,58 @@ function loadedHandler(){
 	
 	// 장바구니 삭제
 	$('.btn.del').on('click', cartDelHandler);
+	
+	// 장바구니 구매
+	$('.btn.pay').on('click', requestPayment);
+	
 }
 
-// 총 가격 계산
-function sumCalcHandler(){
-	let sum = 0;
-	$('input[name=cart-pick]:checked').each(function(index, item){
-		sum += item.nextElementSibling.value * 1;
-	});
-	let sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	let text = '총 가격 : '+sum2+' 원';
-	$('.sum').text(text);
-}
-
-// 버튼 활성화
-function btnActiveHandler(){
-	let checkNum = $('input[name=cart-pick]:checked').length;
-	if(checkNum == 0){
-		$('.btn').prop('disabled', true);
+//장바구니 구매
+async function requestPayment() {
+	let memEmail = '[[${memEmail}]]';
+	let memNick = '[[${memNick}]]';
+	let itemName = $('input:checked').first().parent().prev().prev().text();
+	let itemNum = $('input:checked').length;
+	let orderName;
+	if(itemNum > 1){
+		orderName = itemName+" 외 "+(itemNum-1)+"건";
 	}else{
-		$('.btn').prop('disabled', false);
+		orderName = itemName;
 	}
+	let buyId = '[[${buyId}]]';
+	const response = await PortOne.requestPayment({
+		  // Store ID 설정
+		  storeId: "store-63c12633-3bae-4f1c-be37-ad055e27ea79",
+		  // 채널 키 설정
+		  channelKey: "channel-key-b50725b6-b626-4ea1-8269-e7b27f1a8561",
+		  paymentId: `${crypto.randomUUID()}`,
+		  orderName: orderName ,
+		  totalAmount: $('input[name=pay]').val(),
+		  currency: "CURRENCY_KRW",
+		  payMethod: "CARD",
+		  customer: {
+			  customerId: memEmail, 
+			  fullName: memNick, 
+			  email: memEmail, 
+			  phoneNumber: '010-0000-0000'
+		  }
+		});
+	
+	if(response.code != null) {
+	    // 오류 발생
+	    return alert(response.message);
+	}
+	
+	// 고객사 서버에서 /payment/complete 엔드포인트를 구현해야 합니다.
+	// (다음 목차에서 설명합니다)
+	const notified = await fetch(contextPath+'payment/complete', {
+	    method: "POST",
+	    headers: { "Content-Type": "application/json" },
+	    // paymentId와 주문 정보를 서버에 전달합니다
+	    body: JSON.stringify({
+	      paymentId: paymentId 
+	    }),
+	});
 }
 
 // 장바구니 삭제
@@ -187,6 +223,30 @@ function cartDelHandler(){
 		}, 
 		error: ajaxErrorHandler 
 	});
+}
+
+// 총 가격 계산
+function sumCalcHandler(){
+	let sum = 0;
+	$('input[name=cart-pick]:checked').each(function(index, item){
+		sum += item.nextElementSibling.value * 1;
+	});
+	$('input[name=pay]').val(sum);
+	let sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	let text = '총 가격 : '+sum2+' 원';
+	$('.sum').text(text);
+}
+
+// 버튼 활성화
+function btnActiveHandler(){
+	
+	
+	let checkNum = $('input[name=cart-pick]:checked').length;
+	if(checkNum == 0){
+		$('.btn').prop('disabled', true);
+	}else{
+		$('.btn').prop('disabled', false);
+	}
 }
 </script>
 <body>
@@ -220,6 +280,7 @@ function cartDelHandler(){
 		</div>
 		<div class="cart-bottom flex">
 			<div class="sum">총 가격 : 0 원</div>
+			<input type="hidden" name="pay">
 			<div class="cart-button flex">
 				<button type="button" class="btn pay" disabled>구매</button>
 				<button type="button" class="btn del" disabled>삭제</button>

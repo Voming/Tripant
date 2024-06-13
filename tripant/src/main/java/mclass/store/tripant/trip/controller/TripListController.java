@@ -50,5 +50,14 @@ public class TripListController {
 		return nickList;
 	}
 	
-	
+	//공유 중인 유저 리스트
+	@PostMapping("/share/nick")//ajax
+	@ResponseBody
+	public List<TripShareEntity> shareNick(Integer planId,Principal principal) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("planId", planId);
+		map.put("memEmail",principal.getName());
+		List<TripShareEntity> shareList = tripListService.share(map);
+		return shareList;
+	}
 }

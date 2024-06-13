@@ -41,17 +41,18 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 			<div th:if="${diary != null}">
 
-
+				<!-- 글제목 -->
 				<div th:text="${diary.diaryTitle}" class="diary-title">Diary
 					Title</div>
+				<!-- 글 작성일시 -->
 				<p>날짜</p>
-
-
 				<div th:text="${#dates.format(diary.diaryDate, 'yyyy-MM-dd')}"
 					class="diary-date">Diary Date</div>
+				<!-- 작성자 이름: 닉네임으로 표기해야함 -->
 				<p>작성자</p>
-				
+				<div th:text="${diary.diaryMemEmail}" class="diary-MemEmail">Diary MemEmail</div>
 				<br>
+				<!--글 작성 내용 표기  -->
 				<div th:text="${diary.diaryContent}" class="diary-content">Diary
 					Content</div>
 			</div>
@@ -62,14 +63,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<!--  TODO 데이터 연결 -->
 		<div class="actions">
 			<!-- 조회수 표시 -->
-			<div>조회수</div>
-			<div >100</div>
+			<div >view</div>
+			<div th:text="${diary.diaryViews}" class="diary-Views"></div>
 			<!-- 좋아요 아이콘 누르면 하트아이콘  -->
 			<div class="diary-like">
 				<img th:src="@{/images/diary/diary_like_none.png}" alt="하트아이콘"
 					class="like-icon">
 			</div>
-			<div>좋아요 수 표시</div>
+			<div>좋아요 수</div>
 		</div>
 
 	</div>

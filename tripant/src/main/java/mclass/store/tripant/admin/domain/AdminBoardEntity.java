@@ -8,10 +8,10 @@ import lombok.Data;
 @Component
 public class AdminBoardEntity {
 
-	//TODO view 만들고 수정
-	private int diaryId;
+	private Integer diaryId;
 	private String diaryTitle;
-	private String diaryMemEmail;
 	private String diaryDate;
 	private Integer diaryViews;
+	private String likes;
+	private String memNick;
 }

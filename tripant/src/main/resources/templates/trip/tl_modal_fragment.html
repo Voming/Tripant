@@ -10,21 +10,19 @@
         <div class="modal-content">
             <h3 th:text="${plan.areaShortName}" class="area">지역명</h3>
             <h1 th:text="${plan.planTitle}" class="plan-title">제목</h1>
-            <form class="frm-find wfull" action="tripList.html" method="get" >
+            <form class="frm-find wfull">
                	<input type="text" name="find" class="wfull wirte-nick" placeholder="  일정을 공유할 유저의 닉네임을 입력하세요"/>
                	<button type="button" class="btn find" th:data-plan-id="${plan.planId}">
                    	<img class="search-btn " src="/images/icons/search.png" alt="검색"/>
                	</button>
             </form>
             <div class="memlist flex " >  
+            	<!-- 공유중인 유저 목록 -->
             	
-            	<div class="memNick flex"><p > 효겸 </p><button type="button" class="btn remove">삭제</button></div>
-            	<div class="memNick flex"><p > 지금긴옷입어서더워효 </p><button type="button" class="btn remove">삭제</button></div>
-            	<div class="memNick flex"><p > 초코는항상맛있어효 </p><button type="button" class="btn remove">삭제</button></div>
             </div>
             
             <button type="button" class="btn confimed" ><p>확인</p></button>
-        </div>
+        </div><!-- modal-content -->
     </div>	
 </body>
 </html>
