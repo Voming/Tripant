@@ -1,9 +1,5 @@
 @charset "UTF-8";
-.wrap-modal.show { display: block; }
-.wrap-modal .btn{	border:black solid 1px;
-	border-radius: 8px;
-	background-color: black;
-	color: white;}
+
 /*모달 팝업 영역 스타일링*/
 .main-wrapper .wrap-modal {
 	/*팝업 배경*/
@@ -58,6 +54,10 @@
 	flex-wrap: nowrap;
 	position: relative;
 }
+.wrap-modal .modal-content .memlist{
+	grid-column:1;
+	grid-row:4;
+}
 .wrap-modal .modal-content .confimed{
 	grid-column:1;
 	grid-row:5;
@@ -83,6 +83,7 @@
 }
 .wrap-modal .modal-content .memlist{
 	flex-direction: column;
+	overflow: auto;
 }
 .wrap-modal .modal-content .memlist .memNick{
 	justify-content: space-between;
@@ -94,3 +95,4 @@
 	background-color: white;
 	color:black;
 }
+
