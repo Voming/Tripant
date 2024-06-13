@@ -1,42 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('SNS 회원가입')}"></head>
 <link th:href="@{/css/member/join.css}" rel="stylesheet" type="text/css">
+<script type="text/javascript" th:src="@{/js/common/banDevTool.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/joinsns/loadedHandler.js}"></script>
 <script type="text/javascript" th:src="@{/js/member/join/check.js}"></script>
+<script type="text/javascript" th:src="@{/js/member/join/tel.js}"></script>
 <script type="text/javascript" th:src="@{/js/member/join/agree.js}"></script>
 <script type="text/javascript" th:src="@{/js/member/joinsns/robot.js}"></script>
 <script type="text/javascript" th:src="@{/js/member/joinsns/active.js}"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
-<head th:replace="~{common/header :: head('SNS 회원가입')}"></head>
-<script th:inline="javascript">
-$(loadedHandler);
-function loadedHandler(){
-	//버튼:hover css
-	$('.btn').hover(function(){
-		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'black');
-			$(this).css('color', 'white');
-		}
-	}, function(){
-		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'var(--color_light_gray)');
-			$(this).css('color', 'black');
-		}
-	});
-	//닉네임 검사
-	$("input#memNick").on("input", nickCheckHandler);
-	//비밀번호 검사
-	$("input#memPassword").on("input", pwdCheckHandler);
-	//비밀번호 보기
-	$("#seePwd").on("click", seePwdHandler);
-	//생년월일 입력 검사
-	$("input#memBirth").on("change", joinActive);
-	//약관 동의 클릭 이벤트
-	$("#agree-all").on("click", agreeAllHandler);
-	$("input[name=agree]").on("click", agreeDivHandler);
-	//구글 리캡차v2
-	$("#frm-join").on("submit", robotHandler);
-}
-</script>
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
@@ -48,6 +21,10 @@ function loadedHandler(){
 				<div id="exist-nick" class="hide"><p style="color:red;">중복된 닉네임입니다.</p></div>
 				<div th:replace="~{member/fragment :: inputchk('', 비밀번호, memPassword, password, '영문 대문자, 소문자, 숫자 포함 8~20자', 4)}"></div>
 				<div><input type="checkbox" id="seePwd">비밀번호 보기</div>
+				<div class="inputlbl">
+					<div class="flex inputlbl1"><label style="font-size: var(--font4)" for="memTel" id="memTel-lbl">휴대폰 번호</label></div>
+					<div class="flex inputlbl2" style="margin-top: 10px;"><input style="line-height: 1.5em;" type="tel" name="memTel" id="memTel" placeholder="휴대폰 번호를 입력해주세요." maxlength="13" pattern="01[0-9]-[0-9]{3,4}-[0-9]{4}"></div>
+				</div>
 				<div class="inputlbl">
 					<div class="flex inputlbl1"><label style="font-size: var(--font4)" for="memBirth" id="memBirth-lbl">생년월일 설정</label></div>
 					<div class="flex inputlbl2" style="margin-top: 10px;"><input style="line-height: 1.5em;" type="date" name="memBirth" id="memBirth" th:max="${today}"></div>
@@ -69,38 +46,5 @@ function loadedHandler(){
 		</form>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
-<!-- 
-<script>
-!function() {
-	  function detectDevTool(allow) {
-	    if(isNaN(+allow)) allow = 100;
-	    var start = +new Date(); // Validation of built-in Object tamper prevention.
-	    debugger;
-	    var end = +new Date(); // Validates too.
-	    if(isNaN(start) || isNaN(end) || end - start > allow) {
-	      alert('개발자 도구가 감지되었습니다.\n메인 페이지로 이동합니다.');
-	      location.href = '/';
-	    }
-	  }
-	  if(window.attachEvent) {
-	    if (document.readyState === "complete" || document.readyState === "interactive") {
-	        detectDevTool();
-	      window.attachEvent('onresize', detectDevTool);
-	      window.attachEvent('onmousemove', detectDevTool);
-	      window.attachEvent('onfocus', detectDevTool);
-	      window.attachEvent('onblur', detectDevTool);
-	    } else {
-	        setTimeout(argument.callee, 0);
-	    }
-	  } else {
-	    window.addEventListener('load', detectDevTool);
-	    window.addEventListener('resize', detectDevTool);
-	    window.addEventListener('mousemove', detectDevTool);
-	    window.addEventListener('focus', detectDevTool);
-	    window.addEventListener('blur', detectDevTool);
-	  }
-	}();
-</script>
- -->
 </body>
 </html>
