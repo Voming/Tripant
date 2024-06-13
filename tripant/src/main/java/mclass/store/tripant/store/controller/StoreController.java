@@ -75,10 +75,24 @@ public class StoreController {
 	public ModelAndView storeCart(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/cart");
 		if(principal != null) {
+		
+			// 사용자 이메일
 			String memEmail = principal.getName();
-			List<Map<String, Object>> map = storeService.cart(memEmail);
-			if(map.size() > 0) {
-				mv.addObject("cart", map);
+			mv.addObject("memEmail", memEmail);
+			
+			Map<String, Object> map = storeService.buyInfo(memEmail);
+			
+			// 사용자 닉네임
+			String memNick = (String) map.get("MEM_NICK");
+			mv.addObject("memNick", memNick);
+			
+			// 주문번호
+			int buyId = Integer.parseInt(String.valueOf(map.get("BUY_ID")));
+			mv.addObject("buyId", buyId);
+			
+			List<Map<String, Object>> list = storeService.cart(memEmail);
+			if(list.size() > 0) {
+				mv.addObject("cart", list);
 			}
 		}
 		return mv;

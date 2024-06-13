@@ -30,4 +30,7 @@ public interface StoreRepository {
 	// 구매내역
 	// 구매내역 목록
 	public List<Map<String, Object>> buy(String memEmail);
+	
+	// 주문정보
+	public Map<String, Object> buyInfo(String memEmail);
 }
