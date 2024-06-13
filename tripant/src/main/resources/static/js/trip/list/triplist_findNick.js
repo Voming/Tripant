@@ -7,8 +7,7 @@ function loaededHandler(){
 
 //유저 검색
 function findNickHandler(){
-	
-	if($("[name=find]").val().trim().length==0){
+	if($(this).siblings("[name=find]").val().trim().length==0){
 		Swal.fire({
 		  title: "공란",
 		  text:"빈문자열은 검색할 수 없습니다."
