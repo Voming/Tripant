@@ -1,10 +1,4 @@
-$(document).ready(function(){
-
-	//삭제
-	$('.delete-plan').on("click",deleteHandler);
-});
-
-//일정삭제
+//여행일정 삭제
 function deleteHandler() {
 	//data로 id와 title받아오기
 	var planId = $(this).data('plan-id');
