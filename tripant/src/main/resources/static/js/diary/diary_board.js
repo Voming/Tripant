@@ -1,3 +1,15 @@
+/* 더보기 */
+$(loadedHandler);
+let morecnt = 0;
+function loadedHandler(){
+	$('.learn-more'),on("click", btnMoreclickHanlder);
+}
+function btnMoreclickHanlder(){
+	morecnt +=1;
+	$.ajax({
+		url:""
+	});
+}
 /*탭 전환 시키기  */
 $(document).ready(function(){
 $('.area-tab-nav a').click(function() {

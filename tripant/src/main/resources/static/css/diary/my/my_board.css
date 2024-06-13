@@ -52,3 +52,7 @@
 .wrap-diary{
 	padding-bottom: 20px;
 }
+/* 공개/비공개 글씨크기 */
+.diary-open{
+	font-size: var(--font6);
+}
