@@ -29,36 +29,19 @@ function miniModalBtnHandler(){
 }
 
 
-//공유 열기
+//공유 중인 유저 리스트 출력
 function shareModalHandler(){
 	//미니모달 닫기
-	$(this).parent().parent().siblings(".wrap-modal").css("display","block");
+	$(this).parents().siblings(".wrap-modal").css("display","block");
 	
-	//var planId = $(this).next().data('plan-id');
 	var planId =$(this).parents(".trip-list.wfull").data('plan-id');
-	console.log('>>>shareModalHandler :planId : '+ planId);
 	$.ajax({
 		url: "/trip/share/nick",
 		method:"post",
 		context:this,
     	data: {planId:planId}
 	}).done( function(shareList) {
-		//받아온 값 백틱이용하여 html형식으로 만들기
-		//shareListHandler(shareList);
-		//$(this).parent().parent().next().find(".memlist").html(htmlVal);
         $(this).parents(".trip-list.wfull").find(".memlist.flex").replaceWith(shareList);
-		//addAndRemoveHandler();
+		addAndRemoveHandler();
 	});
-}
-
-//공유중인 맴버 html 삽입
-function shareListHandler(shareList){
-	htmlVal='';
-	for (var idx in shareList){
-		var entity = shareList[idx];
-		htmlVal+=`
-			<div class="memNick flex"><p>${entity.memNick}</p><button type="button" class="btn remove">삭제</button></div>
-			`;
-	}
-	return htmlVal;
 }
