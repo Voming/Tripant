@@ -61,7 +61,6 @@ function loadedHandler() {
 		
 		var cls_name = $(this).attr("class");
 		cls_name = cls_name.replace(' active', ''); 
-		console.log(cls_name);
 		if(cls_name == 'nav-1'){
 			$(".main-wrapper .tab-content").css("width", "25%");
 		}else{

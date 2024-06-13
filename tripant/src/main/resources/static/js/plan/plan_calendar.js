@@ -20,7 +20,7 @@ $(document).ready(function() {
 		"endDate": new Date(),
 		"drops": "auto"
 	}, function(start, end, label) {
-		console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+		//console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
 	});
 
 	$('#daterange').focus();
@@ -105,8 +105,10 @@ function displayDayTable() {
 		`;
 	}
 	$('.wrap-time ul').html(htmlVal);
+	
 	// 시간 입력 체크
 	$('#timeForm input').on('input', timeInputCheck);
+	
 	// 시간 입력 완료 -> 화면 이동
 	$(".time_btn").on("click", function() {
 		//각각 시간 값 저장
@@ -116,7 +118,7 @@ function displayDayTable() {
 		}
 		console.log(calendarPlan);
 
-		
+		//화면 이동
 		$('.tab-content > div').hide().filter(this.hash).fadeIn();
 		$('.tab-nav a').css('color', 'black');
 		$('.tab-nav a').removeClass('active');
@@ -130,24 +132,23 @@ function displayDayTable() {
 // 시간 입력 체크
 function timeInputCheck() {
 	//입력 범위 체크
-	var id = $(this).attr('id');
-	var id_num;
+	let id = $(this).attr('id');
+	let id_num;
 	if (id.includes("end-"))
 		id_num = id.replace('end-', '');
 	if (id.includes("start-"))
 		id_num = id.replace('start-', '');
-	console.log(id_num);
 
 	var start = $('#start-' + id_num).val();
 	var end = $('#end-' + id_num).val();
 	
 	if (start > end) {
 		$(this).css('color', 'red');
-		console.log("시작시간이 더 큽니다.");
+		//console.log("시작시간이 더 큽니다.");
 	}
 	else {
 		$('.timeRange').css('color', 'black');
-		console.log("괜찮음");
+		//console.log("괜찮음");
 	}
 
 	//시간 설정 완료 활성화
@@ -163,4 +164,3 @@ function timeInputCheck() {
 		$('.time_btn').prop('disabled', false);
 	}
 }
-
