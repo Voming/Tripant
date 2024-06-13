@@ -40,7 +40,17 @@ function loadedHandler() {
 		$('.tab-nav a').css("color", "black");
 		$('.tab-nav a').removeClass('active');
 		$(this).addClass('active');
-
+		
+		var cls_name = $(this).attr("class");
+		cls_name = cls_name.replace(' active', ''); 
+		console.log(cls_name);
+		if(cls_name == 'nav-1'){
+			$(".main-wrapper .tab-content").css("width", "25%");
+		}else{
+			$(".main-wrapper .tab-content").css("width", "50%");
+		}
+		
+		
 		$(this).css("color", "#4BC9E5");
 		return false;
 	}).filter(':eq(0)').click();

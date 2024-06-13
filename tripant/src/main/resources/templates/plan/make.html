@@ -65,16 +65,31 @@
 				</div>
 			</div>
 			<div id="tab02">
-				<div class="flex">
-				<h1>2번입니다</h1>
-					<div class="plan-title" th:text="${session.planTitle}"></div>
-					<div class="plan-location" th:text="${session.areaShortName}"></div>
-					<div class="wrap-priod">
-						<h4 class="plan-priod"></h4>
-						<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
-							alt="달력">
+				<div class="first">
+					<div class="flex">
+						<h1>2번입니다</h1>
+						<div class="plan-title" th:text="${session.planTitle}"></div>
+						<div class="plan-location" th:text="${session.areaShortName}"></div>
+						<div class="wrap-priod">
+							<h4 class="plan-priod"></h4>
+							<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
+								alt="달력">
+						</div>
+						<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
 					</div>
-					<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
+				</div>
+				<div class="second">
+					<div class="flex">
+						<h1>2번입니다</h1>
+						<div class="plan-title" th:text="${session.planTitle}"></div>
+						<div class="plan-location" th:text="${session.areaShortName}"></div>
+						<div class="wrap-priod">
+							<h4 class="plan-priod"></h4>
+							<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
+								alt="달력">
+						</div>
+						<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
+					</div>
 				</div>
 			</div>
 			<div id="tab03">

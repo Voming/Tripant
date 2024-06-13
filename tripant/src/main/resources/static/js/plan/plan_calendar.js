@@ -121,6 +121,7 @@ function displayDayTable(dates, days) {
 
 		$('.nav-2').css('color', '#4BC9E5');
 		$('.tab-content > #tab02').show();
+		$(".main-wrapper .tab-content").css("width", "50%");
 	});
 }
 
