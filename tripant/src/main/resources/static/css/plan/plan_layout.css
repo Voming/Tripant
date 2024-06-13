@@ -4,6 +4,10 @@
 	font-family: 'Binggrae';
 }
 
+.main-wrapper .flex {
+	display: flex;
+}
+
 .main-wrapper .btn, .main-wrapper a {
 	cursor: pointer;
 }
@@ -15,20 +19,16 @@
 	flex-direction: row;
 }
 
-.main-wrapper .flex {
-	display: flex;
-}
-
 /* 버튼 nav */
 .main-wrapper .nav-wrapper {
 	flex-direction: column;
 	justify-content: space-between;
-	width: 100px;
+	width: 6%;
 	padding: 15px 5px;
 	border-right: 1px solid var(--color_light_gray);
 }
 
-.main-wrapper .logo {
+.main-wrapper .nav-wrapper .logo {
 	margin: 5px 5px 20px 5px;
 	width: 80px;
 }
@@ -79,16 +79,26 @@
 }
 
 
+/* 내용 부분 크기 세팅 */
+.main-wrapper .tab-content {
+	flex-direction: column;
+	width: 24%;
+	padding: 0px 30px;
+}
+
+.main-wrapper .tab-content div {
+	flex-direction: column;
+	font-family: 'Binggrae';
+}
 
 /* 지도 */
+.main-wrapper .map-wrapper {
+	width: 70%;
+}
 
 .main-wrapper #map {
 	width: 100%;
 	height: 100%;
-}
-/* 지도 크기 세팅 */
-.main-wrapper .map-wrapper {
-	width: 80%;
 }
 
 /* 마커 위에 순서 표시 */

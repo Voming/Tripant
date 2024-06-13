@@ -16,19 +16,19 @@ function loadedHandler() {
 	}).filter(':eq(0)').click();
 }
 
+//F5로 새로고침 방지하기
 document.onkeydown = fkey;
 var wasPressed = false;
 
 function fkey(e) {
 	e = e || window.event;
 	if (wasPressed) return;
-	if (e.keyCode == 116) { 
-		if (confirm("지금 나가면 작업한 내용이 없어집니다. 괜찮습니까?") == true) {
+	if (e.keyCode == 116) {
+		if (confirm("지금 새로고침하면 작업한 내용이 없어집니다. 괜찮습니까?") == true) {
 			location.reload(true);
-		} else{
-			 event.preventDefault();
+		} else {
+			event.preventDefault();
 		}
-		
 	}
 }
 
@@ -39,8 +39,12 @@ function btnLogoClickHandler() {
 }
 
 function btnPriodClickHandler() {
-	history.go(0);
-	$(".modal").addClass("show");
+	if (confirm("기간을 다시 설정하면 작성한 내용이 없어집니다. 괜찮습니까?") == true) {
+		location.reload(true);
+		$(".modal").addClass("show");
+	} else {
+		event.preventDefault();
+	}
 }
 
 

@@ -1,51 +1,57 @@
 @charset "UTF-8";
 
-/* 지도 크기 세팅 */
-.main-wrapper .map-wrapper {
-	width: 70%;
-}
-
-/* 내용 부분 크기 세팅 */
-.main-wrapper .tab-content {
-	flex-direction: column;
-	width: 25%;
-	padding: 0px 30px;
-}
-
-.main-wrapper .tab-content #tab01 div {
-	flex-direction: column;
-	font-family: 'Binggrae';
-}
-
-.main-wrapper .tab-content  #tab01 .plan-title {
+/* 제목 & 기간 스타일 */
+.tab-content #tab01 .plan-title {
 	font-size: var(--font2);
 	font-weight: bold;
 	margin-top: 20px;
 }
 
-.main-wrapper .tab-content .plan-location {
+.tab-content #tab01 .plan-location {
 	font-size: var(--font2);
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
 
-.main-wrapper .tab-content h4 {
+.tab-content #tab01 h4 {
 	margin-bottom: 20px;
 }
 
-.main-wrapper .tab-content  img {
+.tab-content #tab01 .plan-timeEx{
+	font-size: var(--font4);
+	margin-bottom: 30px;
+}
+
+/* 기간 선택 */
+.tab-content .wrap-priod  img {
 	width: 15px;
 	height: 15px;
 }
 
-.main-wrapper .tab-content .wrap-priod .plan-priod {
+.tab-content .wrap-priod .plan-priod {
+	cursor: pointer;
 	float: left;
 	text-align: center;
 	margin-right: 5px;
 }
 
-.main-wrapper .wrap-time table, .main-wrapper .wrap-time th,
-	.main-wrapper .wrap-time td {
+/* 시간 선택 */
+.tab-content .wrap-time ul li {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1.5fr 1.5fr;
+	margin-bottom: 5px;
+}
+
+.tab-content .wrap-time ul li div {
 	padding: 5px;
+	
+	width: auto;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.tab-content .wrap-time .time-h {
 	border: 1px solid black;
 }

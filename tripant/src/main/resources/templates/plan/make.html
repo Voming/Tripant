@@ -55,22 +55,43 @@
 						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
 						<img class="plan-priod" th:src="@{/images/icons/calendar.png}" alt="달력">
 					</div>
-					<h5 class="plan-timeEx" style="font-size:var(--font5);"></h5> 
-					<h5 class="start"></h5>
-					<h5 class="end"></h5>
+					<h5 class="plan-timeEx"></h5>
 					<div class="wrap-time">
 						<form action="/action_page.php">
 							<ul>
 								<li>
-									<h5>일자</h5>
-									<h5>요일</h5>
-									<h5>시작시간</h5>
-									<h5>종료시간</h5>
+									<div class="time-h"><h5>일자</h5></div>
+									<div class="time-h"><h5>요일</h5></div>
+									<div class="time-h"><h5>시작시간</h5></div>
+									<div class="time-h"><h5>종료시간</h5></div>
 								</li>
 								<li>
-									<h5>일자</h5>
-									<h5>요일</h5> <input type="time" id="appt" name="appt"> <input
-									type="time" id="appt" name="appt">
+									<div>
+										<h5>3/10</h5>
+									</div>
+									<div>
+										<h5>월요일</h5>
+									</div>
+									<div>
+										<input type="time">
+									</div>
+									<div>
+										<input type="time">
+									</div>
+								</li>
+								<li>
+									<div>
+										<h5>3/10</h5>
+									</div>
+									<div>
+										<h5>월요일</h5>
+									</div>
+									<div>
+										<input type="time">
+									</div>
+									<div>
+										<input type="time">
+									</div>
 								</li>
 							</ul>
 						</form>
@@ -78,20 +99,27 @@
 				</div>
 			</div>
 			<div id="tab02">
-				<div>
-					<div class="plan-title">개미와 함꼐 떠나는 신나는 제주여행</div>
-					<span class="plan-location">제주</span> <span class="plan-priod">2024.06.01~2024.06.02</span>
-					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
-					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
+				<div class="flex">
+					<div class="plan-title" th:text="${session.planTitle}"></div>
+					<div class="plan-location" th:text="${session.areaShortName}"></div>
+					<div class="wrap-priod">
+						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
+						<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
+							alt="달력">
+					</div>
+					<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
 				</div>
 			</div>
 			<div id="tab03">
-				<div>
-					<div class="plan-title">개미와 함꼐 떠나는 신나는 제주여행</div>
-					<span class="plan-location">제주</span> <span class="plan-priod">2024.06.01~2024.06.02</span>
-					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
-					<h6>아래 칸을 클릭하면 달력이 나타납니다</h6>
-					
+				<div class="flex">
+					<div class="plan-title" th:text="${session.planTitle}"></div>
+					<div class="plan-location" th:text="${session.areaShortName}"></div>
+					<div class="wrap-priod">
+						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
+						<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
+							alt="달력">
+					</div>
+					<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
 				</div>
 			</div>
 		</div>
