@@ -1,10 +1,8 @@
 package mclass.store.tripant.member.domain;
 
-import org.springframework.stereotype.Component;
-
 import lombok.Data;
 
-@Data @Component
+@Data
 public class LoginEntity {
 	private String memEmail;
 	private String memNick;

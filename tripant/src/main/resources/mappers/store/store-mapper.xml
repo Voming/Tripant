@@ -27,6 +27,7 @@
 		</foreach>
 	select * from dual
 	</insert>
+	
 	<!-- 장바구니 -->
 	<!-- 장바구니 목록 -->
 	<select id="cart" resultType="map" parameterType="string">
@@ -39,4 +40,15 @@
 				#{code}
 			</foreach>
 	</delete>
+	
+	<!-- 구매내역 -->
+	<!-- 구매내역 목록 -->
+	<select id="buy" resultType="map" parameterType="string">
+		select item_name, to_char(item_price, '9,999') as item_price, to_char(buy_date, 'YYYY-MM-DD') from buy join item on buy_item_code = item_code where mem_email = #{mem_email}
+	</select>
+	<!-- 주문정보 -->
+	<select id="buyInfo" resultType="map">
+		select seq_buy_id.nextval as buy_id, mem_nick from member where mem_email = #{memEmail} 
+	</select>
+	
 </mapper>

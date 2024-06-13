@@ -28,33 +28,33 @@ a{
 
 .wrap-sidebar .ad-member{
 	margin-bottom:20px; 
-	font-size:17px;
+	font-size: var(--font3);
 }
 
 .wrap-sidebar .ad-menumember{
 	margin-bottom:10px; 
-	font-size:13px;
+	font-size: var(--font5);
 }
 
 .wrap-sidebar .ad-board{
 	margin-bottom:20px; 
 	margin-top:30px;
-	font-size:17px;
+	font-size:var(--font3);
 }
 
 .wrap-sidebar .ad-menuboard{
 	margin-bottom:10px; 
-	font-size:13px;
+	font-size: var(--font5);
 }
 
 .wrap-sidebar .ad-store{
 	margin-bottom:20px; 
 	margin-top:30px;
-	font-size:17px;
+	font-size: var(--font3);
 }
 
 .wrap-sidebar .ad-menustorea{
-	font-size:13px;
+	font-size: var(--font5);
 }
 
 .wrap-sidebar .ad-menustorea.a{

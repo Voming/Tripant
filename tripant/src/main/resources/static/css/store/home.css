@@ -65,6 +65,11 @@
 	overflow-x: scroll;
 }
 
+.wrap-main .list.none{
+	font-size: var(--font1);
+	line-height: 2em;
+}
+
 .wrap-main .item.flex {
 	flex-direction: column;
 	margin-bottom: 10px;
@@ -106,7 +111,7 @@
 	border: 1px solid black;
 	border-radius: 10px;
 	background-color: white;
-	left: 50px;
+	left: 20px;
 }
 
 .wrap-main div.sidebar {

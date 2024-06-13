@@ -45,4 +45,15 @@ public class StoreService {
 	public int cartDel(Map<String, Object> map) {
 		return storeRepository.cartDel(map);
 	}
+	
+	// 구매내역
+	// 구매내역 목록
+	public List<Map<String, Object>> buy(String memEmail){
+		return storeRepository.buy(memEmail);
+	}
+	
+	// 구매내역 주문번호
+	public Map<String, Object> buyInfo(String memEmail) {
+		return storeRepository.buyInfo(memEmail);
+	}
 }

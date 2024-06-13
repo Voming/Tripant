@@ -9,6 +9,7 @@ import lombok.Data;
 @Data 
 @Component
 public class AdminMemEntity {
+	
 	private String memNick;
 	private String memEmail;
 	private Date memJoinDate;
