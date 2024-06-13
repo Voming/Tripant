@@ -27,6 +27,7 @@
 						<option value="popularity">인기순</option>
 					</select>
 				</div>
+				<!-- 지역 태그 -->
 				<div th:replace="~{diary/diary_fragment :: arealist}"></div>
 				<!-- 지역 탭 -->
 				<div class="diary-tab-content">
@@ -43,10 +44,10 @@
 											</div>
 											<div class="wrap-content">
 												<div class="diary-content">
-													<div th:href="@{|/diary/read/${diary.diaryId}|}">
+													<a th:href="@{|/diary/read/${diary.diaryId}|}">
 														<p class="diary-title" style="font-size: var(--font3);"
 															th:text="${diary.diaryTitle}"></p>
-													</div>
+													</a>
 													<p class="diary-date" style="font-size: var(--font4);"
 														th:text="${diary.diaryDate}"></p>
 													<p class="diary-nickname" style="font-size: var(--font5);"
