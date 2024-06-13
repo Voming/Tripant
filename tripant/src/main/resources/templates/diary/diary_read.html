@@ -50,7 +50,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div th:text="${#dates.format(diary.diaryDate, 'yyyy-MM-dd')}"
 					class="diary-date">Diary Date</div>
 				<p>작성자</p>
-				
+				<div th:text="${diary.memNick}"
+					class="diary-nickname">Diary nickname</div>
 				<br>
 				<div th:text="${diary.diaryContent}" class="diary-content">Diary
 					Content</div>
@@ -62,8 +63,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<!--  TODO 데이터 연결 -->
 		<div class="actions">
 			<!-- 조회수 표시 -->
-			<div>조회수</div>
-			<div >100</div>
+			<div >view</div>
+			<div th:text="${diary.diaryViews}" class="diary-Views"></div>
 			<!-- 좋아요 아이콘 누르면 하트아이콘  -->
 			<div class="diary-like">
 				<img th:src="@{/images/diary/diary_like_none.png}" alt="하트아이콘"
