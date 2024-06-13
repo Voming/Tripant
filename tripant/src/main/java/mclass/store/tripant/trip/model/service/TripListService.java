@@ -35,4 +35,14 @@ public class TripListService {
 	public List<TripShareEntity> share(Map<String, Object> map){
 		return repository.share(map);
 	}
+	
+	//유저 추가
+	public int add(Map<String, Object> map) {
+		return repository.add(map);
+	}
+	
+	//유저 삭제
+	public int remove(Map<String, Object> map) {
+		return repository.remove(map);
+	}
 }

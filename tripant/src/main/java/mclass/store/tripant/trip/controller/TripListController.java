@@ -40,27 +40,18 @@ public class TripListController {
 	}
 	
 	//유저검색
-	@PostMapping("/search/nick")//ajax
-	@ResponseBody
-	public List<TripShareEntity> seachNick(Integer planId, String findNick,Principal principal) {
+	@PostMapping("/search/nick")//ajax+thymeleaf-fragmenet
+	public String seachNick(Model model,Integer planId, String findNick,Principal principal) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("planId", planId);
 		map.put("findNick", findNick);
 		map.put("memEmail",principal.getName());
 		List<TripShareEntity> nickList = tripListService.find(map);
-		return nickList;
+		model.addAttribute("shareList", nickList);
+		return "trip/shareMember";
 	}
 	
 	//공유 중인 유저 리스트
-//	@PostMapping("/share/nick")//ajax
-//	@ResponseBody
-//	public List<TripShareEntity> shareNick(Integer planId,Principal principal) {
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("planId", planId);
-//		map.put("memEmail",principal.getName());
-//		List<TripShareEntity> shareList = tripListService.share(map);
-//		return shareList;
-//	}
 	@PostMapping("/share/nick")//ajax+thymeleaf-fragmenet
 	public String shareNick(Model model, Integer planId,Principal principal) {
 		
@@ -75,14 +66,24 @@ public class TripListController {
 	
 	
 	//여행목록에 유저 추가
-	//@PostMapping("/add/nick")//ajax
-	//@ResponseBody
-//	public List<TripShareEntity> addNick(Integer planId,String addNick) {
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("planId", planId);
-//		map.put("addNick",addNick);
-//		//변경
-//		List<TripShareEntity> addList ;//tripListService.share(map);
-//		return addList;
-//	}
+	@PostMapping("/add/nick")//ajax
+	@ResponseBody
+	public int addNick(Integer planId,String addNick) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("planId", planId);
+		map.put("addNick",addNick);
+		int result = tripListService.add(map);
+		return result;
+	}
+	
+	//여행목록의 유저 삭제
+	@PostMapping("/remove/nick")//ajax
+	@ResponseBody
+	public int removeNick(Integer planId,String removeNick) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("planId", planId);
+		map.put("removeNick",removeNick);
+		int result = tripListService.remove(map);
+		return result;
+	}
 }

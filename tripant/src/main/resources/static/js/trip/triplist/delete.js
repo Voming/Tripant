@@ -1,7 +1,7 @@
 //여행일정 삭제
 function deleteHandler() {
 	//data로 id와 title받아오기
-	var planId = $(this).data('plan-id');
+	var planId =$(this).parents(".trip-list.wfull").data('plan-id');
 	var planTitle = $(this).data('title');
 	//data ajax로 넘기기
 	Swal.fire({

@@ -27,5 +27,15 @@
 		<select id="share" parameterType="map" resultType="TripShareEntity">
 			select mem_nick, plan_id, plan_mem_role from plan_member join member using (mem_email) where plan_id = #{planId} and plan_mem_role = 0 and not mem_email = #{memEmail}
 		</select>
-	
+		
+	<!-- 유저 추가-->		
+		<insert id="add" parameterType="map" >
+			insert into plan_member values (#{planId},(select mem_email from member where mem_nick=#{addNick}),'0')
+		</insert>
+
+	<!-- 유저 삭제-->	
+		<delete id="remove">
+			delete from plan_member where plan_id = #{planId} and mem_email=(select mem_email from member where mem_nick=#{removeNick})
+		</delete>
+		
 </mapper>
