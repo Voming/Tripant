@@ -12,7 +12,7 @@
 
 	<select id="selectAreaNameList" resultType="AreaNameEntity">
 		SELECT AREA_CODE, AREA_NAME, AREA_SHORT_NAME, AREA_ENG_NAME, AREA_FILE_NAME
-		FROM AREA ORDER BY AREA_NAME
+		FROM AREA ORDER BY AREA_CODE
 	</select>
 
 	<select id="selectAreaFindList" parameterType="string" resultType="AreaNameEntity">
