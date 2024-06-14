@@ -105,3 +105,9 @@
 input[type=checkbox] {
   accent-color:black;
 }
+
+/* 신고수 정렬버튼 */
+.wrap-body .ad-content .boardlist .btn-reports{
+	border: 0;
+	background-color: white;
+}

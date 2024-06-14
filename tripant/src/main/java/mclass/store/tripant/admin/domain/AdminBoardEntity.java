@@ -11,7 +11,9 @@ public class AdminBoardEntity {
 	private Integer diaryId;
 	private String diaryTitle;
 	private String diaryDate;
+	private String memNick;
+	
 	private Integer diaryViews;
 	private String likes;
-	private String memNick;
+	private String reports;
 }

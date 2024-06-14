@@ -36,4 +36,9 @@ public class AdminMemSerivce {
 	public List<AdminMemEntity> search(String memNick){
 		return admindao.search(memNick);
 	}
+	
+	//신고게시글
+	public List<AdminBoardEntity> complainList(){
+		return admindao.complainList();
+	}
 }
