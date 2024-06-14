@@ -44,7 +44,7 @@
 					<tr>
 						<td>
 
-							<div id="container">
+							<div id="container" name="diaryContent">
 								<div id="editor"></div>
 							</div>
 						</td>
@@ -83,7 +83,7 @@
 						</td>
 					</tr>
 					<tr class="diary_btn_submit">
-						<td><input type="submit" value="등록" class="btn_submit"></td>
+						<td><button type="submit" value="등록" class="btn_submit">등록</button></td>
 					</tr>
 				</table>
 
@@ -98,10 +98,10 @@
 	<!-- ckeditors -->
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
+	<!--글 등록  -->
+	<script type="text/javascript" th:src="@{/js/diary/diary_write.js}"></script>
 
 	<!-- ckeditor jsp 파일 -->
 	<script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
-	<!--글 등록  -->
-	<script type="text/javascript" th:src="@{/js/diary/diary_write.js}"></script>
 </body>
 </html>
