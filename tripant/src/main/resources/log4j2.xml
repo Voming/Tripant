@@ -45,7 +45,7 @@
 		<Logger name="mclass.store.tripant.admin" level="info" additivity="false">
 			<AppenderRef ref="ConsoleLog" />
 		</Logger>
-		<Logger name="mclass.store.tripant.diary" level="info" additivity="false">
+		<Logger name="mclass.store.tripant.diary" level="debug" additivity="false">
 			<AppenderRef ref="ConsoleLog" />
 		</Logger>
 		<!-- SQL Logger -->

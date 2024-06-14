@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.DiaryPostEntity;
@@ -46,6 +47,7 @@ public class MyDiaryController {
 
     // 글쓰기 처리
     @PostMapping("/write/post")
+    @ResponseBody
     public ResponseEntity<?> createDiary(@RequestBody DiaryPostEntity diaryForm) {
 
         // 로그인한 사용자의 이메일 가져오기

@@ -24,8 +24,10 @@
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100px;
-	padding: 15px 5px;
+	flex-shrink: 0; 
+	padding : 15px 5px;
 	border-right: 1px solid var(--color_light_gray);
+	padding: 15px 5px;
 }
 
 .main-wrapper .nav-wrapper .logo {
@@ -54,8 +56,9 @@
 .main-wrapper .nav-wrapper ul li a {
 	font-family: 'Binggrae';
 	font-size: var(--font4);
-	margin: 5px;
+	margin : 5px;
 	text-align: center;
+	margin: 5px;
 }
 
 /* 다음 버튼 */
@@ -78,11 +81,11 @@
 	text-align: center;
 }
 
-
 /* 내용 부분 크기 세팅 */
 .main-wrapper .tab-content {
 	flex-direction: column;
 	width: 25%;
+	flex-shrink: 0; 
 	padding: 0px 30px;
 }
 

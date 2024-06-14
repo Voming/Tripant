@@ -24,10 +24,11 @@ public class TripListController {
 	@Autowired
 	private TripListService tripListService;
 	
-	//여행목록 불러오기
+	//여행목록 불러오기 + 항목별 생성자,공유자 구별
 	@GetMapping("/list")
 	public String tripList(Model model , Principal principal /* ,@RequestParam String memEmail */) {
 		model.addAttribute("planlist", tripListService.selectTripList(principal.getName()));
+		
 		return "trip/tripList";
 	}
 	
