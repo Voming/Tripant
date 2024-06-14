@@ -16,7 +16,7 @@ public interface DiaryRepository {
 	    public List<DiaryBoardEntity> selectDiaryList();
 	    
 	    // 여행기 글 등록
-	    public void insertDiary(DiaryPostEntity diary);
+	    public void insertDiary(DiaryBoardEntity diary);
 	    // 특정 ID의 다이어리 조회
 	    DiaryBoardEntity findById(@Param("id") Long id);
 	  

@@ -26,7 +26,7 @@ public class DiaryService {
 	}
 
 	// 게시글 등록하기
-	public void save(DiaryPostEntity diary) {
+	public DiaryBoardEntity save(DiaryBoardEntity diary) {
 		diaryRepository.insertDiary(diary);
 
 		// 공개 설정
@@ -36,6 +36,7 @@ public class DiaryService {
 		diary.setDiaryOpen("1");
 
 		diaryRepository.insertDiary(diary);
+		return diary;
 	}
 
 	// planId로 PLAN 조회
