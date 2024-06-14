@@ -32,9 +32,17 @@ left join MEMBER b on a.diary_mem_email= b.mem_email) f on d.mem_email=f.mem_ema
 select * from diary_likes;
 select count(*) from diary_likes;
 
---검색
+--회원 검색
 	select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, a.MEM_JOIN_DATE MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , b.MEM_QUIT_DATE
 	from member a
 	left join quit_member b
 	on a.MEM_EMAIL=b.MEM_EMAIL
     where a.mem_nick like '%${memNick}%';
+    
+--신고게시글
+select diary_id, diary_title,to_char(diary_date,'yyyy-MM-dd') diary_date,reports,mem_nick from 
+((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date ,a.diary_mem_email, b.reports
+from DIARY a
+left join (select count (mem_email) reports , diary_id from diary_reports group by diary_id) b on a.diary_id= b.diary_id))
+join member on diary_mem_email=mem_email
+;

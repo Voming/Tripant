@@ -29,4 +29,6 @@ public interface AdminDao {
 	
 	public List<AdminMemEntity> search(String memNick);
 	
+	//신고게시글
+	public List<AdminBoardEntity> complainList();
 }
