@@ -32,7 +32,7 @@ input[type="text"] {
 	padding-left: 10px;
 }
 /* 내용 입력칸 */
-textarea {
+/* textarea {
 	border: 1.5px #000 solid;
 	width: 800px;
 	height: 500px;
@@ -40,9 +40,9 @@ textarea {
 	padding-left: 10px;
 	padding-top: 10px;
 	resize: none;
-}
+} */
 /*전송 버튼  */
-button[type="submit"] {
+/* button[type="submit"] {
 	width: 100px;
 	height: 40px;
 	font-size: 15px;
@@ -50,12 +50,11 @@ button[type="submit"] {
 	outline: 1.5px #000 solid;
 	border-radius: 5px;
 	padding-left: 10px;
-	background-color:#0a0a0a; /* 버튼 배경색 */
-	color:#fff; /*글씨색  */
-	
-}
+	background-color: #0a0a0a; 버튼 배경색
+	color: #fff; 글씨색 
+} */
 
-button[type="submit"]:active {
+/* button[type="submit"]:active {
 	width: 100px;
 	height: 40px;
 	font-size: 15px;
@@ -65,7 +64,7 @@ button[type="submit"]:active {
 	padding-left: 10px;
 	background-color: rgb(255, 255, 255);
 	color: rgb(0, 0, 0);
-}
+} */
 /*테마와 공개여부 나란히 두기  */
 .inline-wrapper {
 	display: flex;
@@ -78,10 +77,63 @@ button[type="submit"]:active {
 	justify-content: flex-end;
 }
 /* ckeditor */
-#container{
 
-}
 .ck-editor__editable[role="textbox"] {
 	/* Editing area */
 	min-height: 500px; /* text area 높이 지정 */
+}
+
+.diary-writes-main {
+	margin: 20px auto;
+	max-width: 960px;
+	padding: 20px;
+	border: 1px solid #eaeaea;
+	border-radius: 10px;
+	background-color: #fff;
+}
+
+.diary-write-table {
+	width: 100%;
+}
+
+.diary-write-table td {
+	padding: 10px 0;
+}
+
+.diary-write-table h1 {
+	text-align: center;
+	font-size: 24px;
+}
+
+.diary-write-table input[type="text"], .diary-write-table input[type="date"],
+	.diary-write-table select, .diary-write-table textarea {
+	width: 100%;
+	padding: 10px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.inline-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.inline-element, .inline-element2 {
+	width: 48%;
+}
+
+.btn_submit {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.btn_submit:hover {
+	background-color: #0056b3;
 }

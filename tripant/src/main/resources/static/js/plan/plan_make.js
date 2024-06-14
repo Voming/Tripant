@@ -1,7 +1,8 @@
 // 일정만들기에서 전체적으로 사용할 클래스
 class CalendarDate {
-	constructor(date, day) {
+	constructor(date, smalldate, day) {
 		this.date = date;
+		this.smalldate = smalldate;
 		this.day = day;
 	}
 	startTime;
@@ -14,26 +15,21 @@ class CalendarPlan {
 }
 
 let calendarPlan = new CalendarPlan();
-calendarPlan.dateArr = new Array();
+calendarPlan.dateArr = new Array(CalendarDate);
+
+// 저장되기 전에만 방지 처리
+var beforeSave = true;
+
+//창닫기, 새로고침 시 확인 이벤트
+$(window).bind("beforeunload", function (e){
+	if(beforeSave){
+		 return "창을 닫으실래요?";
+	}
+});
 
 $(loadedHandler);
 
 function loadedHandler() {
-	//F5로 새로고침 방지하기
-	document.onkeydown = fkey;
-	var wasPressed = false;
-
-	function fkey(e) {
-		e = e || window.event;
-		if (wasPressed) return;
-		if (e.keyCode == 116) {
-			if (confirm("지금 새로고침하면 작업한 내용이 없어집니다. 괜찮습니까?") == true) {
-				location.reload(true);
-			} else {
-				event.preventDefault();
-			}
-		}
-	}
 	
 	//달력 다시 열기
 	$(".plan-priod").on("click", function() {
@@ -64,7 +60,7 @@ function loadedHandler() {
 		if(cls_name == 'nav-1'){
 			$(".main-wrapper .tab-content").css("width", "25%");
 		}else{
-			$(".main-wrapper .tab-content").css("width", "50%");
+			$(".main-wrapper .tab-content").css("width", "40%");
 		}
 		
 		
