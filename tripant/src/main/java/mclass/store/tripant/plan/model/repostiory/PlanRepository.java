@@ -14,6 +14,6 @@ public interface PlanRepository {
 	public int selectMemCount();  //가입한 멤버 수
 	public List<AreaNameEntity> selectAreaNameList(); //지역명 리스트
 	public List<AreaNameEntity> selectAreaFindList(String findArea);  //지역명 검색
-	public List<AreaEntity> selectAreaInfoList(String areaName); // 지역 정보 
-	public String selectAreaShortName(String areaName); // 짧은 이름
+	public List<AreaEntity> selectAreaInfoList(int areaCode); // 지역 정보 
+	public String selectAreaShortName(int areaCode); // 짧은 이름
 }

@@ -21,11 +21,11 @@
 		WHERE AREA_NAME LIKE '%'||#{findArea}||'%'
 	</select>
 	
-	<select id="selectAreaInfoList" parameterType="string" resultType="AreaEntity">
-		SELECT * FROM AREA WHERE AREA_NAME = #{areaName}
+	<select id="selectAreaInfoList" parameterType="_int" resultType="AreaEntity">
+		SELECT * FROM AREA WHERE AREA_CODE = #{areaCode}
 	</select>
 
-	<select id="selectAreaShortName"  parameterType="string" resultType="string">
-		SELECT AREA_SHORT_NAME FROM AREA WHERE AREA_NAME = #{areaName}
+	<select id="selectAreaShortName"  parameterType="_int" resultType="string">
+		SELECT AREA_SHORT_NAME FROM AREA WHERE AREA_CODE = #{areaCode}
 	</select>
 </mapper>
