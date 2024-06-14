@@ -15,4 +15,5 @@ public class TripListEntity {
 	private Date planEndDay ;
 	private String planMakeDay ;
 	private String planDeleteDay ;
+	private Integer planMemRole;
 }
