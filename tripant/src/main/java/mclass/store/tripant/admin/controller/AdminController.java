@@ -71,7 +71,8 @@ public class AdminController {
 	
 
 	@GetMapping("/complain")
-	public String complain() {
+	public String complain(Model model) {
+		model.addAttribute("complainBoard",adminservice.complainList());
 		return "admin/admin_complain";
 	}
 	
