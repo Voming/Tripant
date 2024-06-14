@@ -659,7 +659,8 @@ BEGIN
    :OLD.MEM_TYPE, 
    :OLD.MEM_JOIN_DATE, 
    default, 
-   :OLD.MEM_BIRTH
+   :OLD.MEM_BIRTH, 
+   :OLD.MEM_TEL
    );
 END;
 /
