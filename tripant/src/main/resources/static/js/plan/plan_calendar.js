@@ -4,7 +4,7 @@ $(document).ready(function() {
 		opens: "center",
 		alwaysOpen: true,
 		"locale": {
-			"format": "YYYY-MM-DD",
+			"format": "YYYY.MM.DD",
 			"separator": " ~ ",
 			"applyLabel": "확인",
 			"cancelLabel": "취소",
@@ -41,8 +41,8 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 	if (diff > 10) {
 		alert("기간이 너무 큽니다. 기간을 다시 입력해주세요.");
 	} else {
-		var start = picker.startDate.format('YYYY/MM/DD');
-		var end = picker.endDate.format('YYYY/MM/DD');
+		var start = picker.startDate.format('YYYY.MM.DD');
+		var end = picker.endDate.format('YYYY.MM.DD');
 		//달력 모달 닫기
 		$('.modal').removeClass('show');
 
@@ -60,25 +60,21 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 		$('.plan-timeEx').html(htmlVal);
 
 		// 일정 시작, 끝 시간 테이블 만들기
-		var dates = [];
-		var days = [];
 		for (let i = 0; i < diff; i++) {
 			let dateStr = new Date(start);
 			//하루하루 정보
-			let oneday = new Date(dateStr.setDate(dateStr.getDate() + i));
-
+			let date = new Date(dateStr.setDate(dateStr.getDate() + i));
+			
 			//월/일 형태로 변경
-			let MM = ('0' + (oneday.getMonth() + 1)).slice(-2);
-			let dd = ('0' + oneday.getDate()).slice(-2);
-			let date = MM + '/' + dd;
-			dates.push(date);
+			let MM = ('0' + (date.getMonth() + 1)).slice(-2);
+			let dd = ('0' + date.getDate()).slice(-2);
+			let smalldate = MM + '/' + dd;
 
 			//요일 가져오기
 			const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-			let day = WEEKDAY[oneday.getDay()];
+			let day = WEEKDAY[date.getDay()];
 			
-			calendarPlan.dateArr[i] = new CalendarDate(date, day);
-			days.push(day);
+			calendarPlan.dateArr[i] = new CalendarDate(date, smalldate, day);
 		}
 		displayDayTable();
 	}
@@ -95,7 +91,7 @@ function displayDayTable() {
 		</li>
 	`;
 	for (var idx in calendarPlan.dateArr) {
-		var date = calendarPlan.dateArr[idx].date;
+		var date = calendarPlan.dateArr[idx].smalldate;
 		var day = calendarPlan.dateArr[idx].day;
 		htmlVal += `
 		<li>
