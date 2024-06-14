@@ -1,15 +1,75 @@
 @charset "UTF-8";
-
-.tab-content #tab02 .spot{
-	width: 50%;
-	height:100%;
-	padding: 10px;
-}
-
 .tab-content #tab02 {
 	display: flex;
 	width: auto;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
+}
+
+.tab-content #tab02 .spot{
+	width: 50%;
+	height:100%;
+	padding: 30px 0;
+}
+
+.tab-content #tab02 .spot.first{
+	margin-right: 10px;
+}
+
+.tab-content #tab02 .plan-title {
+	font-size: var(--font2);
+	font-weight: bold;
+}
+
+.tab-content #tab02 .plan-priod {
+	font-size: var(--font4);
+	margin: 10px 0 30px 0;
+	color: var(--color_gray);
+}
+
+
+/* 장소 찾기 */
+
+.tab-content #frm-find-spot{
+	margin: 15px 0;
+	position: relative;
+}
+
+.tab-content #frm-find-spot input {
+	height: 30px;
+	width: 100%;
+	border-radius: 8px;
+	border: 0;
+	background-color:white;
+	font-family: "Binggrae";
+	font-size: var(--font4);
+	box-shadow: 0 2px 8px 0 var(--color_gray) !important;
+}
+
+.tab-content #frm-find-spot button{
+	border: 0;
+	background-color: white;
+	position: absolute;
+    top: 13%;
+    right: 0%;
+}
+
+/* 장소 탭 */
+.tab-content  #tab02 .spot-tab-nav{
+	display: flex;
+	float: left;
+}
+
+.tab-content  #tab02 .spot-tab-nav li{
+	padding: 5px 10px;
+	border: 1px solid var(--color_gray);
+	border-radius: 8px;
+	margin-right: 5px;
+	font-size: var(--font5);
+}
+
+.tab-content #tab02 .spot-tab-content{
+	margin-top: 30px;
+	height: 100%
 }

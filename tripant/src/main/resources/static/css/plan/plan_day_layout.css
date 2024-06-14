@@ -4,13 +4,13 @@
 .tab-content #tab01 .plan-title {
 	font-size: var(--font2);
 	font-weight: bold;
-	margin-top: 20px;
+	margin-top: 30px;
 }
 
 .tab-content #tab01 .plan-location {
-	font-size: var(--font2);
-	margin-bottom: 20px;
-	margin-top: 20px;
+	font-size: var(--font3);
+	font-weight: bold;
+	margin: 10px 0;
 }
 
 .tab-content #tab01 h4 {
@@ -40,6 +40,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr 1.5fr 1.5fr;
 	margin-bottom: 5px;
+	text-align: center;
 }
 
 .tab-content .wrap-time ul li div {

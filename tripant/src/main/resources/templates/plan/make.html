@@ -29,15 +29,11 @@
 	<div class="main-wrapper">
 		<aside class="nav-wrapper flex">
 			<nav class="nav flex">
-				<a><img class="logo"
-					src="/images/tripant_logo_text.png"></a>
+				<a><img class="logo" src="/images/tripant_logo_text.png"></a>
 				<ul class="tab-nav">
-					<li><a class="nav-1" href="#tab01"> step 01<br>날짜확인
-					</a></li>
-					<li><a class="nav-2" href="#tab02"> step 02<br>장소선택
-					</a></li>
-					<li><a class="nav-3" href="#tab03"> step 03<br>숙소설정
-					</a></li>
+					<li><a class="nav-1" href="#tab01"> step 01<br>날짜확인</a></li>
+					<li><a class="nav-2" href="#tab02"> step 02<br>장소선택</a></li>
+					<li><a class="nav-3" href="#tab03"> step 03<br>숙소설정</a></li>
 				</ul>
 			</nav>
 			<div class="plan_next flex">
@@ -59,35 +55,42 @@
 							<ul></ul>
 						</form>
 					</div>
-					<button type="button" form="timeForm" disabled class="time_btn">시간 설정 완료</button>
+					<button type="button" form="timeForm" class="time_btn" style="display: none;">시간 설정 완료</button>
 				</div>
 			</div>
 			<div id="tab02">
-				<div class="spot first">
-					<div class="flex">
-						<h1>2번입니다</h1>
-						<div class="plan-title" th:text="${session.planTitle}"></div>
-						<div class="plan-location" th:text="${session.areaShortName}"></div>
-						<div class="wrap-priod">
-							<h4 class="plan-priod"></h4>
-							<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
-								alt="달력">
+				<div class="spot first flex">
+					<div class="plan-title" th:text="${session.planTitle}"></div>
+					<div class="plan-priod"></div>
+					<h3>장소 선택</h3>
+					<form id="frm-find-spot">
+						<input type="text" name="find-spot" placeholder="&nbsp;장소명을 입력하세요">
+						<button type="button" class="btn find-spot">
+							<img class="search-btn" th:src="@{/images/icons/search.png}" alt="찾기">
+						</button>
+					</form>
+					<ul class="spot-tab-nav">
+						<li><a href="#spot-tab01">관광지</a></li>
+						<li><a href="#spot-tab02">문화시설</a></li>
+						<li><a href="#spot-tab03">쇼핑</a></li>
+						<li><a href="#spot-tab03">음식점</a></li>
+					</ul>
+					<div class="spot-tab-content">
+						<div id="spot-tab01">
+							<div class="spot1-box">
+								<img class="spot-img" src="https://picsum.photos/id/237/200/300" alt="장소이미지">
+								<div>
+									<h3 class="spot-name"></h3>
+								</div>
+							</div>
+						
 						</div>
-						<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
+						<div id="spot-tab02">2번입니다</div>
+						<div id="spot-tab03"></div>
+						<div id="spot-tab04"></div>
 					</div>
 				</div>
-				<div class="spot second">
-					<div class="flex">
-						<h1>2번입니다</h1>
-						<div class="plan-title" th:text="${session.planTitle}"></div>
-						<div class="plan-location" th:text="${session.areaShortName}"></div>
-						<div class="wrap-priod">
-							<h4 class="plan-priod"></h4>
-							<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
-								alt="달력">
-						</div>
-						<h5 class="plan-timeEx" style="font-size: var(--font5);"></h5>
-					</div>
+				<div class="spot second flex">
 				</div>
 			</div>
 			<div id="tab03">

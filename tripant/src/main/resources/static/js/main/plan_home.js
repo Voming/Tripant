@@ -40,27 +40,27 @@ $(document).mouseup(function(e) {
 
 // 지역 선택시 값 변경-------------------------
 function changeSelectAreaHandler() {
-	var area = $("#selectbox option:selected").text();
-	console.log(area);
-
-	$.ajax({
-		url: contextPath +"plan/area"
-		, method: "post"
-		, data: {
-			areaName: area
-		}
-		, dataType: 'json'
-		, success: function(result) {
-			if (result != null) {
-				/*console.log(result);*/
-				displayAreaInfo(result);
+	var area = $("#selectbox option:selected").attr('value');
+	
+	if (area.length < 3) {
+		$.ajax({
+			url: contextPath + "plan/area"
+			, method: "post"
+			, data: {
+				areaCode: area
 			}
-		}
-		, error: ajaxErrorHandler
-	});
+			, dataType: 'json'
+			, success: function(result) {
+				if (result != null) {
+					/*console.log(result);*/
+					displayAreaInfo(result);
+				}
+			}
+		});
+	}
 }
 
-// 지역 선택시 값 넣기
+// 지역 선택시 값 넣기 TODO
 function displayAreaInfo(datalist) {
 	if (datalist[0] != null) {
 		var areaDto = datalist[0];
