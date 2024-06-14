@@ -33,6 +33,8 @@ $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
 
 // 달력 기간 입력
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+	$(".time_btn").show();
+	
 	let diff = Math.abs(picker.endDate - picker.startDate);
 	diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
@@ -52,7 +54,7 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 		기본 설정 시간은 오전 10시~오후 10시 총 12시간 입니다.
 		<br>
 		<p style="font-weight: bold; margin-top:5px;">
-		종료 시각이 입력되지 않았거나 종료 시각이 시작 시각 보다 크지 않을경우 글자가 빨간색으로 변합니다. 올바르게 입력하여 시간 설정을 완료해주세요.
+		기본 세팅 시간은 오전10시 부터 오후 10시입니다. 종료 시각이 시작 시각 보다 크지 않을경우 글자가 빨간색으로 변합니다. 올바르게 입력하여 시간 설정을 완료해주세요.
 		</p>
 		`;
 		$('.plan-timeEx').html(htmlVal);
@@ -99,8 +101,8 @@ function displayDayTable() {
 		<li>
 			<div><h5>${date}</h5></div>
 			<div><h5>${day}</h5></div>
-			<div><input type="time" class="timeRange" id="start-${idx}"></div>
-			<div><input type="time" class="timeRange" id="end-${idx}"></div>
+			<div><input type="time" class="timeRange" id="start-${idx}" value="10:00"></div>
+			<div><input type="time" class="timeRange" id="end-${idx}" value="22:00"></div>
 		</li>
 		`;
 	}
@@ -151,7 +153,7 @@ function timeInputCheck() {
 		//console.log("괜찮음");
 	}
 
-	//시간 설정 완료 활성화
+	/*//시간 설정 완료 활성화
 	var isEmpty = false;
 	$('#timeForm input').each(function() {
 		if ($(this).val() == '') {
@@ -162,5 +164,5 @@ function timeInputCheck() {
 	});
 	if (isEmpty == false) {
 		$('.time_btn').prop('disabled', false);
-	}
+	}*/
 }

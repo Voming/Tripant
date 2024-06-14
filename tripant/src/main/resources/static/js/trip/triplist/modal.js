@@ -45,3 +45,13 @@ function shareModalHandler(){
 		addAndRemoveHandler();
 	});
 }
+//로그인 유저의 role에 따른 공유 버튼 display 설정
+function divisionRoleHandler(){
+	
+	$(".trip-list.wfull").each(function(){
+		console.log($(this));
+	if($(this).data('role')==0){
+		$(this).find('.share-plan.modal').css('display','none');
+	}	
+	});
+}

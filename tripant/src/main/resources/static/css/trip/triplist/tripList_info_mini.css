@@ -41,20 +41,22 @@
 .main-wrapper .trip-list .mini-modal{
     box-shadow: 0 2px 8px 0 rgba(31, 38, 135, .08) !important;
     background-color: #fafafa;
-	width:150px;
-	height:90px;
+    flex-direction: column;
+	width:90px;
 	padding : 5px 10px;
 	position: absolute;
 	top: 0px;
 	right : 10px;
+	border-radius: 8px;
 }
-.main-wrapper .trip-list .mini-modal > div{
+.main-wrapper .trip-list .mini-modal>div {
+	display: flex;
+	flex-direction: column;
+}
+.main-wrapper .trip-list .mini-modal>div > div{
 	padding : 5px 0px;
 	border: none;
 	height: 20px;
 	width:100%;
 	cursor: pointer;
-}
-.main-wrapper .trip-list .mini-modal>div>a{
-	padding : 2px ;
 }

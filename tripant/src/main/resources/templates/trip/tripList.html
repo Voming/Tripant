@@ -13,7 +13,7 @@
 		<h1 class="title"> 나의 여행 </h1>
 		<!-- 일정 있을 경우 -->
 		<div class="full">
-			<div th:each="plan : ${planlist}" class="trip-list wfull" th:data-plan-id="${plan.planId}" th:data-title="${plan.planTitle}">
+			<div th:each="plan : ${planlist}" class="trip-list wfull" th:data-plan-id="${plan.planId}" th:data-title="${plan.planTitle}" th:data-role="${plan.planMemRole}">
 			    
 			    <!-- 일정 정보 -->
 				<div class="ntrip wfull" th:href="@{|trip/detail/${plan.planId}|}" ><!-- 해당 정보에 대한 trip 페이지로 이동 -->
@@ -28,11 +28,11 @@
 				<!-- 케밥 버튼 -->
 				<button class="info btn" > 
 					<img class="wfull img" src="/images/icons/kebabIcon.png"/>
-					<div class="mini-modal hide" > 
+					<div class="mini-modal hide" ><div ><!-- flex 설정 -->
 						<div class="show-detail">일정보기</div>
-						<div class="share-plan modal">공유</div>
+						<div class="share-plan modal">일행추가</div>
 						<div class="delete-plan">삭제</div>
-					</div>
+					</div></div>
 				</button>
 				<!-- 공유 modal fragment-->
 				<div th:replace="~{trip/tl_modal_fragment :: share}"></div> 
@@ -44,6 +44,7 @@
 		
 		<h1 th:if="${#lists.isEmpty(planlist)}" class="nothing" >작성된 여행 일정이 없습니다</h1>
 	</div>
+	<script th:src="@{/js/trip/triplist/movePage.js}"></script>
 	<script th:src="@{/js/trip/triplist/loadedHandler.js}"></script>
 	<script th:src="@{/js/trip/triplist/addAndRemove.js}"></script>
 	<script th:src="@{/js/trip/triplist/modal.js}"></script>
