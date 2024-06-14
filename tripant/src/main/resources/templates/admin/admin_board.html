@@ -37,11 +37,12 @@
 				<div class="ad-text">전체 게시글</div>
 			</div>
 			<div class="ad-search">
-				<select class="search-option" name="option">
+				<select class="search-option" name="option" style='border:none'>
 					<option value="nick" selected>닉네임</option>
 					<option value="title">제목</option>
 				</select>
 				<input class="search" type="text" placeholder="게시글검색">
+				<button type="button" class="btn-search"><img src="/images/icons/search.png" alt="검색"/></button>
 			</div>
 			<div class="ad-content">
 				<ul class="boardlist">
@@ -51,8 +52,8 @@
 							<li>제목</li>
 							<li>닉네임</li>
 							<li>날짜</li>
-							<li>조회수<span>▼</span></li>
-							<li>좋아요<span>▼</span></li>
+							<li>조회수<button type="button" class="btn view">▼</button></li>
+							<li>좋아요<button type="button" class="btn like">▼</button></li>
 						</ul>
 					</li>
 					<li>

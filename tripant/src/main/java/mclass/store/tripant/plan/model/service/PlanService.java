@@ -31,11 +31,11 @@ public class PlanService {
 		return planRepository.selectAreaFindList(findArea);
 	}
 	
-	public List<AreaEntity> selectAreaInfoList(String areaName){
-		return planRepository.selectAreaInfoList(areaName);
+	public List<AreaEntity> selectAreaInfoList(int areaCode){
+		return planRepository.selectAreaInfoList(areaCode);
 	}
 	
-	public String selectAreaShortName(String areaName) {
-		return planRepository.selectAreaShortName(areaName);
+	public String selectAreaShortName(int areaCode) {
+		return planRepository.selectAreaShortName(areaCode);
 	}
 }

@@ -92,10 +92,14 @@
 	color:white;
 }
 
+.wrap-body .ad-search{
+	position:relative;
+}
+
 .wrap-body .ad-search .btn-search{
 	border: 0;
 	background-color: white;
 	position: absolute;
-	top: 16.5%;
-    right:7%;
+	top: 49%;
+    right:8.5%;
 }

@@ -30,6 +30,13 @@
 		resultType="DiaryBoardEntity">
 		SELECT * FROM DIARY WHERE DIARY_ID = #{id}
 	</select>
+	<!-- 특정 ID의 PlAN 조회 -->
+	<select id="selectPlanById" parameterType="Long"
+		resultType="PlanEntity">
+		SELECT plan_id AS planId, plan_title AS planTitle
+		FROM plan
+		WHERE plan_id = #{planId}
+	</select>
 	<!-- 공개된 일기 선택 -->
 	<select id="selectPublicDiaries" resultType="DiaryBoardEntity">
 		SELECT * FROM diary

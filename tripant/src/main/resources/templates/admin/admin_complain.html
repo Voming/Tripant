@@ -9,6 +9,8 @@
 <link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_complain.css}" rel="stylesheet">
+<!--제이쿼리  -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
 
@@ -47,37 +49,21 @@
 							<li>제목</li>
 							<li>닉네임</li>
 							<li>날짜</li>
-							<li>신고수<span>▼</span></li>
+							<li>신고수<button type="button" class="btn-reports">▼</button></li>
 						</ul>
 					</li>
 					<li>
+						<th:block th:each="complainBoard:${complainBoard}">
 						<ul class="col list">
-								<li><input type="checkbox" class="check"></li>
-								<li>1</li>
-								<li>안녕하세요</li>
-								<li>oyeee</li>
-								<li>2024.05.20</li>
-								<li>4</li>
-							</ul>
-							<ul class="col list">
-								<li><input type="checkbox" class="check"></li>
-								<li>1</li>
-								<li>안녕하세요</li>
-								<li>oyeee</li>
-								<li>2024.05.20</li>
-								<li>4</li>
-							</ul>
-							<ul class="col list">
-								<li><input type="checkbox" class="check"></li>
-								<li>1</li>
-								<li>안녕하세요</li>
-								<li>oyeee</li>
-								<li>2024.05.20</li>
-								<li>4</li>
-							</ul>
-							
-							
-							
+							<li><input type="checkbox" class="check"></li>
+							<li th:text="${complainBoard.diaryId}"></li>
+							<li th:text="${complainBoard.diaryTitle}"></li>
+							<li th:text="${complainBoard.memNick}"></li>
+							<li th:text="${complainBoard.diaryDate}"></li>
+							<li th:text="${complainBoard.reports}"></li>
+							<li></li>
+						</ul>
+						</th:block>
 					</li>
 				</ul>
 				
