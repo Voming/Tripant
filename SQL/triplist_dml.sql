@@ -45,5 +45,5 @@ insert into plan_member values (16,(select mem_email from member where mem_nick=
 --공유자 삭제
 delete from plan_member where plan_id = 11 and mem_email=(select mem_email from member where mem_nick='김보민')
 ;
-
+commit;
 ROLLBACK;
