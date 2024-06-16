@@ -48,7 +48,7 @@
 	</select>
 	<!-- 주문정보 -->
 	<select id="buyInfo" resultType="map">
-		select seq_buy_id.nextval as buy_id, mem_nick from member where mem_email = #{memEmail} 
+		select seq_buy_id.nextval as buy_id, mem_nick, mem_tel from member where mem_email = #{memEmail} 
 	</select>
 	
 </mapper>
