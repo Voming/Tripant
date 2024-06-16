@@ -29,12 +29,10 @@ public class MemberSecurityService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String memEmail) throws UsernameNotFoundException {
 		log.debug("[sjw] membersecurityservice==============");
 		Optional<MemberEntity> memberEntityOp = Optional.ofNullable(memberRepository.login(memEmail));
-		System.out.println("[sjw] loginEntityOp = "+memberEntityOp);
 		if(memberEntityOp.isEmpty()) {
 			throw new UsernameNotFoundException("가입해");
 		}
 		MemberEntity memberEntity = memberEntityOp.get();
-		System.out.println("[sjw] loginEntity = "+memberEntity);
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		switch(memberEntity.getMemRole()) {
 			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole())); break;
