@@ -123,22 +123,44 @@ public class StoreController {
 	// 결제 상태
 	@PostMapping("/webhook")
 	@ResponseBody
-	public Map<String, Object> webhook(@RequestBody JSONObject jsonObject, HttpServletRequest request) throws IOException, InterruptedException, JSONException {
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		System.out.println("jsonObject >>>>>>>> "+jsonObject);
-		System.out.println("IP >>>>>>>>>> "+request.getHeader("X-Forwarded-For"));
-		Map<String, Object> map = new HashMap<>();
-		map.put("reqIp", request.getHeader("X-Forwarded-For"));
-		map.put("status", jsonObject.getString("status"));
-		return map;
-	}
-	
-	// 결제 검증
-	@PostMapping("/request/payment")
-	@ResponseBody
-	public int requestPayment(@RequestParam String paymentId) {
+	public int requestPayment(String paymentId, String totalAmount, String[] items, String buyId, Principal principal) throws IOException, InterruptedException{
 		
-		return 0;
+		// paymentId로 결제 단건 조회 API 호출
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.portone.io/payments/"+paymentId+"?storeId="+storeId))
+			    .header("Content-Type", "application/json")
+			    .header("Authorization", "PortOne "+paySecret)
+			    .method("GET", HttpRequest.BodyPublishers.ofString("{}"))
+			    .build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+		
+		// 결제 단건 조회 응답
+		Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
+		System.out.println("responseBody >>>>>>>>>>> "+responseBody);
+		
+		// 응답 중 결제 금액 세부 정보 항목 추출
+		Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
+		System.out.println("amount >>>>>>>>>>> "+amount);
+		// 그 중 지불된 금액
+		double paid = (double) amount.get("paid");
+		
+		int result;
+		// 결제 금액과 지불된 금액이 같다면
+		if(Double.parseDouble(totalAmount) == paid) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("memEmail", principal.getName());
+			map.put("buyId", buyId);
+			List<String> list = new ArrayList<>();
+			System.out.println("list >>>>>>>>>>> "+list);
+			for(int i = 0; i < items.length; i++) {
+				list.add(items[i]);
+			}
+			map.put("list", list);
+			result = storeService.pay(map);
+			return result;
+		}else {
+			return result = 0;
+		}
 	}
 	
 	// 장바구니 삭제
