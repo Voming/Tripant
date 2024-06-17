@@ -317,8 +317,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="cart-list empty" th:unless="${cart} != null">장바구니가
-				비었습니다.</div>
+			<div class="cart-list empty" th:if="${cart} == null" style="border-top: 1px solid lightgray; padding: 10px 0 0 0;">장바구니가 비었습니다.</div>
 		</div>
 		<div class="cart-bottom flex">
 			<div class="sum">총 가격 : 0 원</div>

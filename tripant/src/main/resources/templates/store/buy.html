@@ -54,6 +54,7 @@
 .wrap-main .item-info.flex{
 	margin-top: 10px;
 	align-items: center;
+	border-bottom: 1px solid lightgray;
 }
 
 .wrap-main .buy-list.empty{
@@ -141,14 +142,8 @@ function loadedHandler(){
 		}
 	});
 	
-	// 총 가격 계산
-	$('input[name=buy-pick]').on('click', sumCalcHandler);
-	
 	// 버튼 활성화
 	$('input[name=buy-pick]').on('click', btnActiveHandler);
-	
-	// 장바구니 삭제
-	$('.btn.del').on('click', cartDelHandler);
 }
 
 // 버튼 활성화
