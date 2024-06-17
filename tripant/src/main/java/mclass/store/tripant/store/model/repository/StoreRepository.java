@@ -18,7 +18,7 @@ public interface StoreRepository {
 	
 	// 장바구니에 담기
 	public int fontDel(String memEmail);
-	public int insertItems(List<Map<String, Object>> list);
+	public int insertItems(Map<String, Object> map);
 	
 	// 장바구니
 	// 장바구니 목록
@@ -33,4 +33,8 @@ public interface StoreRepository {
 	
 	// 주문정보
 	public Map<String, Object> buyInfo(String memEmail);
+	
+	// 구매내역 추가
+	public int beforePay(Map<String, Object> map);
+	public int pay(Map<String, Object> map);
 }

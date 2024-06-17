@@ -155,6 +155,11 @@ function loadedHandler(){
 
 //장바구니 구매
 async function requestPayment() {
+	let items = [];
+	$('input:checked').each(function(){
+		items.push($(this).val());
+	});
+	console.log("items >>>>>>>>> "+items);
 	let memEmail = "[[${memEmail}]]";
 	let memNick = "[[${memNick}]]";
 	let memTel = "[[${memTel}]]";
@@ -162,6 +167,8 @@ async function requestPayment() {
 		let itemName = $('input:checked').first().parent().prev().prev().text();
 		let itemNum = $('input:checked').length;
 	const totalAmount = $('input[name=pay]').val();
+	const storeId = "[[${storeId}]]";
+	const channelKey = "[[${channelKey}]]";
 	if(itemNum > 1){
 		orderName = itemName+' 외 '+(itemNum-1)+'건';
 	}else{
@@ -171,12 +178,12 @@ async function requestPayment() {
 	
 	// 결제창 표시
 	const response = await PortOne.requestPayment({
-			storeId: "store-63c12633-3bae-4f1c-be37-ad055e27ea79", // 고객사 storeId로 변경해주세요.
+			storeId: storeId, // 고객사 storeId로 변경해주세요.
 		    paymentId: buyId,
 		    orderName: orderName,
 		    totalAmount: totalAmount,
 		    currency: "CURRENCY_KRW",
-		    channelKey: "channel-key-886c82dd-f505-47c2-84ef-d0e8ca4029fb", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
+		    channelKey: channelKey, // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
 		    payMethod: "CARD",
 		    customer: {
 		    	fullName: memNick, 
@@ -185,12 +192,15 @@ async function requestPayment() {
 		    }
 		});
 	
-	// 
+	// 결제 검증
 	const ajax = await $.ajax({
-		url: "/request/payment", 
+		url: contextPath+"store/payment", 
 		type: "post", 
 		data: {
-			paymentId: response.paymentId
+			paymentId: response.paymentId, 
+			totalAmount: totalAmount, 
+			items: items, 
+			buyId: buyId
 		}
 	});
 	
@@ -198,10 +208,12 @@ async function requestPayment() {
 	    // 오류 발생
 	    return alert(response.message);
 	  } else {
-		  if (ajax == 1) {
-			  alert("성공");
+		  if (ajax > 0) {
+			  // 결제 검증 성공
+			  alert("결제가 완료되었습니다. 구매내역 페이지로 이동합니다.");
 		  } else {
-			  alert("실패");
+			  // 결제 검증 실패
+			  alert("요청 금액과 지불된 금액이 일치하지 않습니다. 메인 페이지로 이동합니다.");
 		  }
 	  }
 	

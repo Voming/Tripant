@@ -69,16 +69,16 @@
 .wrap-main .item-info.flex > div, 
 .wrap-main .buy-info.flex > div{
 	padding: 5px 10px;
-	flex-grow: 1;
+	width: 160px;
 	line-height: 2em;
 	font-size: var(--font3);
 }
 .wrap-main .item-info.flex .item-name, 
 .wrap-main .buy-info.flex .buy-name{
-	flex-grow: 3;
+	width: 480px;
 }
-.wrap-main .item-info.flex div:nth-child(n+2), 
-.wrap-main .buy-info.flex div:nth-child(n+2){
+.wrap-main .item-info.flex *, 
+.wrap-main .buy-info.flex *{
 	text-align: center;
 }
 
@@ -149,70 +149,6 @@ function loadedHandler(){
 	
 	// 장바구니 삭제
 	$('.btn.del').on('click', cartDelHandler);
-	
-	
-	const IMP = window.IMP; // 생략 가능
-	IMP.init("imp27878760"); // 예: imp00000000a
-	// 장바구니 구매
-	$('.btn.pay').on('click', cartPayHandler);
-}
-
-//장바구니 구매
-function cartPayHandler() {
-	IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
-	  IMP.request_pay({
-	    pg: "inicis",
-	    pay_method: "card",
-	    merchant_uid : 'merchant_'+new Date().getTime(),
-	    name : '결제테스트',
-	    amount : 100,
-	    buyer_email : 'seojw0730@naver.com',
-	    buyer_name : '서재원'
-	    // buyer_tel : '010-1234-5678',
-	    // buyer_addr : '서울특별시 강남구 삼성동',
-	    // buyer_postcode : '123-456'
-	  }, function (rsp) { // callback
-	      if (rsp.success) {
-	    	  alert('성공');
-	      } else {
-	    	  alert('오류가 발생했습니다.\n('+rsp.error_msg+')');
-	      }
-	  });
-}
-
-// 장바구니 삭제
-function cartDelHandler(){
-	let items = [];
-	$('input:checked').each(function(index, element){
-		items.push(element.value);
-	});
-	console.log(items);
-	$.ajax({
-		url: contextPath+'store/buy/del', 
-		type: 'post', 
-		data: {items : items}, 
-		success: function(result){
-			if(result == 1){
-				alert('선택하신 상품이 삭제되었습니다.');
-				location.reload();
-			}else{
-				alert('상품 삭제 중 오류가 발생했습니다.');
-			}
-		}, 
-		error: ajaxErrorHandler 
-	});
-}
-
-// 총 가격 계산
-function sumCalcHandler(){
-	let sum = 0;
-	$('input[name=buy-pick]:checked').each(function(index, item){
-		sum += item.nextElementSibling.value * 1;
-	});
-	$('input[name=pay]').val(sum);
-	let sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	let text = '총 가격 : '+sum2+' 원';
-	$('.sum').text(text);
 }
 
 // 버튼 활성화
@@ -231,19 +167,21 @@ function btnActiveHandler(){
 		<aside class="sidebar flex">
 			<div class="sidebar flex">
 				<div class="sidebar title"><a th:href="@{/store}">스토어</a></div>
-				<div class="sidebar item flex"><img th:src="@{/images/store/buy.png}" width="20px" height="20px"><a th:href="@{/store/buy}">장바구니</a></div>
+				<div class="sidebar item flex"><img th:src="@{/images/store/cart.png}" width="20px" height="20px"><a th:href="@{/store/cart}">장바구니</a></div>
 				<div class="sidebar item flex"><img th:src="@{/images/store/buy.png}" width="20px" height="20px"><a th:href="@{/store/buy}">구매내역</a></div>
 			</div>
 		</aside>
 		<div class="buy flex">
 			<div class="title">구매내역</div>
 			<div class="item-info flex">
+				<div class="item-buyId">주문번호</div>
 				<div class="item-name">상품명</div>
 				<div class="item-price">가격</div>
 				<div class="item-check">구매일자</div>
 			</div>
 			<div class="buy-list" th:if="${list} != null">
 				<div class="buy-info flex" th:each="item : ${list}">
+					<div class="buy-buyId" th:text="${item.BUY_ID}"></div>
 					<div class="buy-name" th:text="${item.ITEM_NAME}"></div>
 					<div class="buy-price" th:text="${item.ITEM_PRICE}+'원'"></div>
 					<div class="buy-date" th:text="${item.BUY_DATE}"></div>

@@ -37,17 +37,19 @@ import mclass.store.tripant.store.model.service.StoreService;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/store")
 public class StoreController {
 	
 	@Value("${pay.secret}")
 	private String paySecret;
+	@Value("${pay.storeId}")
+	private String storeId;
 	
 	private final StoreService storeService;
-	
 	private final Gson gson;
 	
 	// 스토어 페이지
-	@GetMapping("/store")
+	@GetMapping("")
 	public ModelAndView store(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/home");
 		String memEmail;
@@ -66,19 +68,19 @@ public class StoreController {
 	}
 	
 	// 장바구니에 담기
-	@PostMapping("/store/insert")
+	@PostMapping("/insert")
 	@ResponseBody
 	public int storeInsert(@RequestParam List<String> items, Principal principal) {
 		int size = items.size();
-		List<Map<String, Object>> list = new ArrayList<>();
+		Map<String, Object> map = new HashMap<>();
+		List<String> list = new ArrayList<>();
 		String memEmail = principal.getName();
+		map.put("memEmail", memEmail);
 		for(String itemCode : items) {
-			Map<String, Object> map = new HashMap<>();
-			map.put("itemCode", itemCode);
-			map.put("memEmail", memEmail);
-			list.add(map);
+			list.add(itemCode);
 		}
-		int insertNum = storeService.insertItems(memEmail, list);
+		map.put("list", list);
+		int insertNum = storeService.insertItems(memEmail, map);
 		int result;
 		if(size == insertNum) {
 			result = 1;
@@ -89,7 +91,7 @@ public class StoreController {
 	}
 	
 	// 장바구니 페이지
-	@GetMapping("/store/cart")
+	@GetMapping("/cart")
 	public ModelAndView storeCart(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/cart");
 		if(principal != null) {
@@ -121,7 +123,7 @@ public class StoreController {
 	}
 	
 	// 결제 상태
-	@PostMapping("/webhook")
+	@PostMapping("/payment")
 	@ResponseBody
 	public int requestPayment(String paymentId, String totalAmount, String[] items, String buyId, Principal principal) throws IOException, InterruptedException{
 		
@@ -136,11 +138,9 @@ public class StoreController {
 		
 		// 결제 단건 조회 응답
 		Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
-		System.out.println("responseBody >>>>>>>>>>> "+responseBody);
 		
 		// 응답 중 결제 금액 세부 정보 항목 추출
 		Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
-		System.out.println("amount >>>>>>>>>>> "+amount);
 		// 그 중 지불된 금액
 		double paid = (double) amount.get("paid");
 		
@@ -151,7 +151,6 @@ public class StoreController {
 			map.put("memEmail", principal.getName());
 			map.put("buyId", buyId);
 			List<String> list = new ArrayList<>();
-			System.out.println("list >>>>>>>>>>> "+list);
 			for(int i = 0; i < items.length; i++) {
 				list.add(items[i]);
 			}

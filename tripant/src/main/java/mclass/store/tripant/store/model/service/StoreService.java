@@ -29,9 +29,9 @@ public class StoreService {
 	
 	// 장바구니에 담기
 	@Transactional
-	public int insertItems(String memEmail, List<Map<String, Object>> list) {
+	public int insertItems(String memEmail, Map<String, Object> map) {
 		storeRepository.fontDel(memEmail);
-		int result = storeRepository.insertItems(list);
+		int result = storeRepository.insertItems(map);
 		return result;
 	}
 	
@@ -55,5 +55,13 @@ public class StoreService {
 	// 구매내역 주문번호
 	public Map<String, Object> buyInfo(String memEmail) {
 		return storeRepository.buyInfo(memEmail);
+	}
+	
+	// 구매내역 추가
+	@Transactional
+	public int pay(Map<String, Object> map) {
+		storeRepository.beforePay(map);
+		int result = storeRepository.pay(map);
+		return result;
 	}
 }
