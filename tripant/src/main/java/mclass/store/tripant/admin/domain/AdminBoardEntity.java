@@ -13,7 +13,7 @@ public class AdminBoardEntity {
 	private String diaryDate;
 	private String memNick;
 	
-	private Integer diaryViews;
-	private String likes;
-	private String reports;
+	private Integer diaryViews; //조회수
+	private Integer likes; //좋아요
+	private Integer reports;  //신고수
 }
