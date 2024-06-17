@@ -37,10 +37,4 @@ public interface AdminDao {
 	//페이지 당 나오는 회원정보 수 뽑기
 	//public List<AdminMemEntity> selectPage();
 
-	
-	public List<AdminMemEntity> search(String memNick);
-	
-	//신고게시글
-	public List<AdminBoardEntity> complainList();
-
 }
