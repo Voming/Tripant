@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.DiaryPostEntity;
+import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.plan.domain.PlanEntity;
 
 @Mapper
@@ -20,7 +21,7 @@ public interface DiaryRepository {
 	    // 특정 ID의 다이어리 조회
 	    DiaryBoardEntity findById(@Param("id") Long id);
 	  
-	 // PlanEntity 조회
-	 public PlanEntity selectPlanById(@Param("planId") Long planId);
 
+	        List<WritePlanTitleEntity> findByMemEmail(String memberEmail);
+	
 }
