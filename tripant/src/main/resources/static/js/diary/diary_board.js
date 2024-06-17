@@ -8,7 +8,7 @@ function loadedHandler(){
 function btnMoreclickHanlder(){
 	morecnt +=1;
 	$.ajax({
-		url:"${pageContext.request.contextPath}/diary/more"
+		url:"${pageContext.request.contextPath}/more/List"
 		,method:"post"
 		,data:{
 			more:morecnt
@@ -19,7 +19,7 @@ function btnMoreclickHanlder(){
 				dispaly
 			}
 		}
-	});
+		});
 }
 /*탭 전환 시키기  */
 $(document).ready(function(){

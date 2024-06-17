@@ -43,9 +43,7 @@ function loadedHandler() {
 	
 	//메인 화면 돌아가기
 	$(".logo").on("click", function() {
-		if (confirm("지금 나가면 작업한 내용이 없어집니다. 괜찮습니까?") == true) {
-			location.href = "/";
-		}
+		location.href = "/";
 	});
 
 	//좌측 탭
