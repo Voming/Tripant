@@ -6,7 +6,7 @@ import lombok.Data;
 
 //@Data
 public class DayDetailInfoEntity {
-	private Integer type;
+	private Integer placeType;
 	private Integer contentid;
 	private Integer travelOrder;
 	private String stayTime;
