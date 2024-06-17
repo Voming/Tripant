@@ -7,10 +7,10 @@ import lombok.Data;
 //@Data
 public class DayDetailInfoEntity {
 	private Integer type;
+	private Integer contentid;
 	private Integer travelOrder;
 	private String stayTime;
-	private String spotMemo;
-	private Integer contentid;
+	private String memo;
 	private String title;
 	private String address;
 	private String firstimage;
