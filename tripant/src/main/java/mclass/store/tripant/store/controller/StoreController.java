@@ -44,6 +44,8 @@ public class StoreController {
 	private String paySecret;
 	@Value("${pay.storeId}")
 	private String storeId;
+	@Value("${pay.channelKey}")
+	private String channelKey;
 	
 	private final StoreService storeService;
 	private final Gson gson;
@@ -94,6 +96,8 @@ public class StoreController {
 	@GetMapping("/cart")
 	public ModelAndView storeCart(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/cart");
+		mv.addObject("storeId", storeId);
+		mv.addObject("channelKey", channelKey);
 		if(principal != null) {
 		
 			// 사용자 이메일
@@ -135,12 +139,13 @@ public class StoreController {
 			    .method("GET", HttpRequest.BodyPublishers.ofString("{}"))
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		
 		// 결제 단건 조회 응답
 		Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
+		System.out.println("responseBody >>>>>>>>> "+responseBody.toString());
 		
 		// 응답 중 결제 금액 세부 정보 항목 추출
 		Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
+		System.out.println("amount >>>>>>>>> "+amount);
 		// 그 중 지불된 금액
 		double paid = (double) amount.get("paid");
 		
@@ -163,7 +168,7 @@ public class StoreController {
 	}
 	
 	// 장바구니 삭제
-	@PostMapping("/store/cart/del")
+	@PostMapping("/cart/del")
 	@ResponseBody
 	public int storeCartDel(@RequestParam List<String> items, Principal principal) {
 		int size = items.size();
@@ -182,7 +187,7 @@ public class StoreController {
 	}
 	
 	// 구매내역 페이지
-	@GetMapping("/store/buy")
+	@GetMapping("/buy")
 	public ModelAndView storeBuy(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/buy");
 		String memEmail;

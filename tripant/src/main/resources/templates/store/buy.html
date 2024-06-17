@@ -183,11 +183,11 @@ function btnActiveHandler(){
 				<div class="buy-info flex" th:each="item : ${list}">
 					<div class="buy-buyId" th:text="${item.BUY_ID}"></div>
 					<div class="buy-name" th:text="${item.ITEM_NAME}"></div>
-					<div class="buy-price" th:text="${item.ITEM_PRICE}+'원'"></div>
+					<div class="buy-price" th:text="${item.ITEM_PRICE_CHAR}+'원'"></div>
 					<div class="buy-date" th:text="${item.BUY_DATE}"></div>
 				</div>
 			</div>
-			<div class="buy-list empty" th:unless="${buy} != null">구매내역이 비었습니다.</div>
+			<div class="buy-list empty" th:if="${list} == null">구매내역이 비었습니다.</div>
 		</div>
 	</div>
 	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
