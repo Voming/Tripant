@@ -8,7 +8,7 @@
 				<h4 th:text="${daylist.count} + '일차'" class="nday"></h4>
 				<h6 th:text="${#dates.format(details.travelDate, 'yyyy-MM-dd')} + '('+${#dates.dayOfWeekName(details.travelDate).substring(0, 1)}+')'" class="date"></h6>
 			</div>
-		 	<div th:each="info,idxlist:${details}"  class="container flex wfull">
+		 	<div th:each="info,idxlist:${details.dayDetailInfoEntity}"  class="container flex wfull">
 			 	<div class="spot grid wfull">
 			 		<div class="spot-number backimg"><p th:text="${idxlist.count}"></p></div>
 			 		<div class="spot-staytime">10:00-11:00</div>

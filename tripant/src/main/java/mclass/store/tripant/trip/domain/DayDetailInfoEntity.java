@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import lombok.Data;
 
-//@Data
+@Data
 public class DayDetailInfoEntity {
 	private Integer placeType;
 	private Integer contentid;
