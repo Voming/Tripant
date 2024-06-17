@@ -60,7 +60,7 @@ function loadedHandler() {
 		if(cls_name == 'nav-1'){
 			$(".main-wrapper .tab-content").css("width", "25%");
 		}else{
-			$(".main-wrapper .tab-content").css("width", "40%");
+			$(".main-wrapper .tab-content").css("width", "50%");
 		}
 		
 		
