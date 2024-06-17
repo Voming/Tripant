@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="wrap-spotList" th:fragment="wrapspotlist">
+	<th:block th:if="${spotTypeList} != null">
+		<th:block th:each="spot : ${spotTypeList}">
+			<div class="spot-box flex">
+				<img class="spot-img" th:src="${spot.firstimage}" alt="장소이미지">
+				<div class="spot-txt">
+					<span class="spot-name" th:text="${spot.title}"></span> 
+					<span class="spot-address" th:text="${spot.add1}"></span>
+				</div>
+				<input type="checkbox" id="spot-check"><label for="spot-check"></label>
+			</div>
+		</th:block>
+	</th:block>
+</div>
+</html>

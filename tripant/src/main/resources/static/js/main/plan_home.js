@@ -95,7 +95,7 @@ function btnFindClickHandler() {
 	}
 
 	$.ajax({
-		url: "find/area"
+		url: contextPath + "find/area"
 		, method: "post"
 		, context:this
 		, data: { findArea: findArea }

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 .tab-content #tab02 {
 	display: flex;
 	width: auto;
@@ -7,13 +8,13 @@
 	flex-direction: row;
 }
 
-.tab-content #tab02 .spot{
+.tab-content #tab02 .spot {
 	width: 50%;
-	height:100%;
-	padding: 30px 0;
+	height: 100%;
+	padding: 30px 0 0 0;
 }
 
-.tab-content #tab02 .spot.first{
+.tab-content #tab02 .spot.first {
 	margin-right: 10px;
 }
 
@@ -28,10 +29,8 @@
 	color: var(--color_gray);
 }
 
-
 /* 장소 찾기 */
-
-.tab-content #frm-find-spot{
+.tab-content #frm-find-spot {
 	margin: 15px 0;
 	position: relative;
 }
@@ -41,27 +40,27 @@
 	width: 100%;
 	border-radius: 8px;
 	border: 0;
-	background-color:white;
+	background-color: white;
 	font-family: "Binggrae";
 	font-size: var(--font4);
 	box-shadow: 0 2px 8px 0 var(--color_gray) !important;
 }
 
-.tab-content #frm-find-spot button{
+.tab-content #frm-find-spot button {
 	border: 0;
 	background-color: white;
 	position: absolute;
-    top: 13%;
-    right: 0%;
+	top: 13%;
+	right: 0%;
 }
 
 /* 장소 탭 */
-.tab-content  #tab02 .spot-tab-nav{
+.tab-content  #tab02 .spot-tab-nav {
 	display: flex;
 	float: left;
 }
 
-.tab-content  #tab02 .spot-tab-nav li{
+.tab-content  #tab02 .spot-tab-nav li {
 	padding: 5px 10px;
 	border: 1px solid var(--color_gray);
 	border-radius: 8px;
@@ -69,31 +68,54 @@
 	font-size: var(--font5);
 }
 
-.tab-content #tab02 .spot-tab-content{
+.tab-content #tab02 .spot-tab-content {
 	margin-top: 30px;
-	height: 100%
+	height: 660px;
+	overflow-y: auto;
 }
 
-.spot-tab-content #spot-tab01 .spot1-box{
+.spot-tab-content #spot-tab01 .spot1-box {
 	width: 100%;
-	height: 100px;
+	height: 80px;
 	border-radius: 8px;
 	box-shadow: 0 2px 8px 0 var(--color_gray) !important;
 	align-items: center;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: flex-start;
+	margin: 5px 0;
+	margin-right: 5px;
 }
 
-.spot-tab-content #spot-tab01 .spot-img{
-	width: 80px;
-	height: 80px;
+.spot-tab-content #spot-tab01 .spot-img {
+	width: 70px;
+	height: 70px;
 	object-fit: cover;
-	margin-left:10px; 
+	margin-left: 10px;
 	border-radius: 8px;
 }
 
-.spot-tab-content #spot-tab01 .spot-txt{
+.spot-tab-content #spot-tab01 .spot-txt {
 	width: 170px;
 	margin: 0 10px;
+}
+
+/* 체크박스 커스텀 */
+.spot-tab-content #spot-tab01 input[type="checkbox"]+label {
+	display: block;
+	margin-left: auto;
+	margin-right: 10px;
+	width: 35px;
+	height: 55px;
+	background: url('/images/icons/spot_ck_bf.png') no-repeat 0 0px/contain;
+	z-index: 100;
+}
+
+/* TODO id 바꿔주기 */
+.spot-tab-content #spot-tab01 input[type='checkbox']:checked+label {
+	background: url('/images/icons/spot_ck_af.png') no-repeat 0 1px/contain;
+}
+
+.spot-tab-content #spot-tab01 input[type="checkbox"] {
+	display: none;
 }
