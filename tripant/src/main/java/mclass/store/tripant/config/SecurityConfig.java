@@ -22,7 +22,7 @@ public class SecurityConfig {
 	private final CustomAuthSuccessHandler customAuthSuccessHandler;
 	private final CustomAuthFailureHandler customAuthFailureHandler;
 	private final OAuth2FailureHandler oAuth2FailureHandler;
-	private final OAuth2SecurityService oAuth2MemberService;s
+	private final OAuth2SecurityService oAuth2MemberService;
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

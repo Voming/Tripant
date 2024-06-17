@@ -34,8 +34,8 @@ $(document).ready(function() {
 				, method: "post"
 				, context: this
 				, data: { 
-					areaCode: 1,
-					spotType: 1
+					areaCode: areacode,
+					spotType: spottype
 				 }
 				, error: ajaxErrorHandler
 			}).done(function(wrap_spot) {

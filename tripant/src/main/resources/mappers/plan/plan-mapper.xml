@@ -30,9 +30,8 @@
 	</select>
 	
 	<select id="selectSpotTypeList" parameterType="_int" resultType="SpotEntity">
-		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,''), MAPX, MAPY, MLEVEL, TEL, TITLE
-		FROM PLACE WHERE TYPE = #{spotType} AND AREACODE=#{areaCode}  AND ROWNUM <![CDATA[<=]]> 10
-		ORDER BY CONTENTID DESC
-		
+		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
+		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{spotType}  
+		AND ROWNUM <![CDATA[<=]]> 10
 	</select>
 </mapper>

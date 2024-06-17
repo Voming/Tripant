@@ -18,7 +18,6 @@ import mclass.store.tripant.member.model.service.MemberService;
 @Controller
 @RequestMapping("/my")
 @RequiredArgsConstructor
-@RequestMapping("/my")
 public class MypageController {
 
 	private final MemberService memberService;

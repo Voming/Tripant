@@ -59,7 +59,6 @@ public class PlanController {
 //	@ResponseBody
 	public String spot(Model model, @RequestParam("areaCode") Integer areaCode, @RequestParam("spotType") Integer spotType) throws IOException {
 		List<SpotEntity> spotTypeList = planService.selectSpotTypeList(areaCode, spotType);
-		System.out.println(spotTypeList);
 		model.addAttribute("spotTypeList", spotTypeList);
 		return "plan/spot_tab_content";
 	}
