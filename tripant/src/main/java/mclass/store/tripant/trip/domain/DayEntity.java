@@ -11,5 +11,4 @@ public class DayEntity {
 	private Date travelDate;
 	private Integer planId;
 	private List<DayDetailInfoEntity> dayDetailInfoEntity;
-	
 }
