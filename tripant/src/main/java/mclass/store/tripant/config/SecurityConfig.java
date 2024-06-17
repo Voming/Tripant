@@ -22,7 +22,7 @@ public class SecurityConfig {
 	private final CustomAuthSuccessHandler customAuthSuccessHandler;
 	private final CustomAuthFailureHandler customAuthFailureHandler;
 	private final OAuth2FailureHandler oAuth2FailureHandler;
-	private final OAuth2SecurityService oAuth2MemberService;
+	private final OAuth2SecurityService oAuth2MemberService;s
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -48,6 +48,8 @@ public class SecurityConfig {
 						new AntPathRequestMatcher("/store"), 
 						new AntPathRequestMatcher("/diary")
 						).permitAll()
+
+
 					)
 		.csrf((csrf) -> csrf
 				.disable()
