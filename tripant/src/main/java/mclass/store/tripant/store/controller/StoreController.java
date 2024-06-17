@@ -1,5 +1,10 @@
 package mclass.store.tripant.store.controller;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,26 +12,39 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.store.domain.ItemEntity;
 import mclass.store.tripant.store.model.service.StoreService;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class StoreController {
 	
 	@Value("${pay.secret}")
-	private String payKey;
+	private String paySecret;
 	
 	private final StoreService storeService;
+	
+	private final Gson gson;
 	
 	// 스토어 페이지
 	@GetMapping("/store")
@@ -86,6 +104,10 @@ public class StoreController {
 			String memNick = (String) map.get("MEM_NICK");
 			mv.addObject("memNick", memNick);
 			
+			// 사용자 휴대폰 번호
+			String memTel = (String) map.get("MEM_TEL");
+			mv.addObject("memTel", memTel);
+			
 			// 주문번호
 			int buyId = Integer.parseInt(String.valueOf(map.get("BUY_ID")));
 			mv.addObject("buyId", buyId);
@@ -96,6 +118,27 @@ public class StoreController {
 			}
 		}
 		return mv;
+	}
+	
+	// 결제 상태
+	@PostMapping("/webhook")
+	@ResponseBody
+	public Map<String, Object> webhook(@RequestBody JSONObject jsonObject, HttpServletRequest request) throws IOException, InterruptedException, JSONException {
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		System.out.println("jsonObject >>>>>>>> "+jsonObject);
+		System.out.println("IP >>>>>>>>>> "+request.getHeader("X-Forwarded-For"));
+		Map<String, Object> map = new HashMap<>();
+		map.put("reqIp", request.getHeader("X-Forwarded-For"));
+		map.put("status", jsonObject.getString("status"));
+		return map;
+	}
+	
+	// 결제 검증
+	@PostMapping("/request/payment")
+	@ResponseBody
+	public int requestPayment(@RequestParam String paymentId) {
+		
+		return 0;
 	}
 	
 	// 장바구니 삭제
