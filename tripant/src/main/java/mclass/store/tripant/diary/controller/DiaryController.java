@@ -38,8 +38,9 @@ public class DiaryController {
         return "diary/diary_read";
 	}
     // 더보기
-    @PostMapping("/moreList")
-    public String diaryMoreList() {
+    @PostMapping("/more/List")
+    
+    public String more() {
     	
     	return null;
     }

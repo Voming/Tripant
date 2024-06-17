@@ -70,13 +70,13 @@
 .wrap-main .item-info.flex > div, 
 .wrap-main .cart-info.flex > div{
 	padding: 5px 10px;
-	flex-grow: 1;
+	width: 160px;
 	line-height: 2em;
 	font-size: var(--font3);
 }
 .wrap-main .item-info.flex .item-name, 
 .wrap-main .cart-info.flex .cart-name{
-	flex-grow: 3;
+	width: 640px;
 }
 .wrap-main .item-info.flex div:nth-child(n+2), 
 .wrap-main .cart-info.flex div:nth-child(n+2){
@@ -168,6 +168,7 @@ async function requestPayment() {
 		let itemNum = $('input:checked').length;
 	const totalAmount = $('input[name=pay]').val();
 	const storeId = "[[${storeId}]]";
+	console.log(storeId);
 	const channelKey = "[[${channelKey}]]";
 	if(itemNum > 1){
 		orderName = itemName+' 외 '+(itemNum-1)+'건';
@@ -211,9 +212,11 @@ async function requestPayment() {
 		  if (ajax > 0) {
 			  // 결제 검증 성공
 			  alert("결제가 완료되었습니다. 구매내역 페이지로 이동합니다.");
+			  location.href = contextPath + "store/buy";
 		  } else {
 			  // 결제 검증 실패
 			  alert("요청 금액과 지불된 금액이 일치하지 않습니다. 메인 페이지로 이동합니다.");
+			  location.href = contextPath;
 		  }
 	  }
 	
@@ -223,8 +226,8 @@ async function requestPayment() {
 // 장바구니 삭제
 function cartDelHandler(){
 	let items = [];
-	$('input:checked').each(function(index, element){
-		items.push(element.value);
+	$('input:checked').each(function(){
+		items.push($(this).val());
 	});
 	console.log(items);
 	$.ajax({
@@ -246,8 +249,8 @@ function cartDelHandler(){
 // 총 가격 계산
 function sumCalcHandler(){
 	let sum = 0;
-	$('input[name=cart-pick]:checked').each(function(index, item){
-		sum += item.nextElementSibling.value * 1;
+	$('input[name=cart-pick]:checked').each(function(){
+		sum += $(this).next().val() * 1;
 	});
 	$('input[name=pay]').val(sum);
 	let sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -285,7 +288,7 @@ function btnActiveHandler(){
 			<div class="cart-list" th:if="${cart} != null">
 				<div class="cart-info flex" th:each="item : ${cart}">
 					<div class="cart-name" th:text="${item.ITEM_NAME}"></div>
-					<div class="cart-price" th:text="${item.ITEM_PRICE}+'원'"></div>
+					<div class="cart-price" th:text="${item.ITEM_PRICE_CHAR}+'원'"></div>
 					<div class="cart-check flex">
 						<input type="checkbox" name="cart-pick" th:value="${item.ITEM_CODE}" style="width: 20px; height: 20px;">
 						<input type="hidden" th:value="${item.ITEM_PRICE}">
