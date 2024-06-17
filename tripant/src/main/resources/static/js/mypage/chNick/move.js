@@ -5,7 +5,7 @@ function backClickHandler(){
 //닉네임 저장
 function saveClickHandler(){
 	$.ajax({
-		url: contextPath+'my/chNick', 
+		url: contextPath+'save/nick', 
 		type: 'post', 
 		data: $('#memNick'), 
 		success: function(result){

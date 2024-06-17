@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @Controller
-@RequestMapping("/my")
 @RequiredArgsConstructor
 public class MypageController {
 
@@ -40,7 +39,7 @@ public class MypageController {
 	}
 
 	// 닉네임 변경
-	@PostMapping("/chNick")
+	@PostMapping("/nick")
 	@ResponseBody
 	public int saveNick(String memNick, Principal principal) {
 		String memEmail = principal.getName();
@@ -58,7 +57,7 @@ public class MypageController {
 	}
 	
 	// 비밀번호 변경
-	@PostMapping("/chPwd")
+	@PostMapping("/pwd")
 	@ResponseBody
 	public int savePwd(String memPassword, Principal principal) {
 		String memEmail = principal.getName();

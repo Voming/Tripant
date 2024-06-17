@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -16,31 +15,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import mclass.store.tripant.trip.model.service.TripService;
 
 @Controller
 @RequestMapping(value = "/trip")
 public class TripController {
-	@Autowired
-	private TripService service;
 	
 	//test용
-//	@GetMapping("/detail")
-//	public String mapMain(Model model) {
-//		//model.addAttribute();
-//		return "trip/trip";
-//	}
-	
-	//ModelAndView -> log 찍을 때 모든 값을 볼 수 있어서 데이터 확인에 용이함
-	@GetMapping(value="/detail/{planId}")
-	public ModelAndView detail(ModelAndView mv,@PathVariable("planId") Integer planId) {
-		mv.addObject("detailInfoList", service.detailInfo(planId));
-		mv.setViewName("trip/trip");
-		return mv;
+	@GetMapping("/detail")
+	public String mapMain(Model model) {
+		//model.addAttribute();
+		return "trip/trip";
 	}
 	
+	@GetMapping(value="/detail/{planId}")
+	public String detail(Model model,@PathVariable("planId") Integer planId) {
+		//model.addAttribute();
+		return "trip/trip";
+	}
 	
 	
 	//sts꺼

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet">
 <link th:href="@{/css/diary/diary_read.css}" rel="stylesheet">
 <!-- modal CDN -->
@@ -46,11 +46,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					Title</div>
 				<!-- 글 작성일시 -->
 				<p>날짜</p>
-				<div th:text="${#dates.format(diary.diaryDate, 'yyyy-MM-dd')}"
-					class="diary-date">Diary Date</div>
+				<div th:text="${diary.diaryDate} " class="diary-date">Diary
+					Date</div>
 				<!-- 작성자 이름: 닉네임으로 표기해야함 -->
 				<p>작성자</p>
-				<div th:text="${diary.diaryMemEmail}" class="diary-MemEmail">Diary MemEmail</div>
+				<div th:text="${diary.diaryMemEmail}" class="diary-MemEmail">Diary
+					MemEmail</div>
 				<br>
 				<!--글 작성 내용 표기  -->
 				<div th:text="${diary.diaryContent}" class="diary-content">Diary
@@ -63,7 +64,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<!--  TODO 데이터 연결 -->
 		<div class="actions">
 			<!-- 조회수 표시 -->
-			<div >view</div>
+			<div>view</div>
 			<div th:text="${diary.diaryViews}" class="diary-Views"></div>
 			<!-- 좋아요 아이콘 누르면 하트아이콘  -->
 			<div class="diary-like">

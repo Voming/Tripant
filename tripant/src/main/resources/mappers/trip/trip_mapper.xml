@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mclass.store.tripant.trip.model.repository.TripRepository">
-
-	<!-- 여행 세부일정 목록 TODO VIEW 연결 -->
-	<resultMap type="DayEntity" id="DayEntityMap">
-		<id column="TRAVEL_DATE" property="travelDate"/>
-		<collection property="dayDetailInfoEntityList" ofType="DayDetailInfoEntity">
-			<result column="TYPE" property="type"/>
-			<result column="TRAVEL_ORDER" property="travelOrder"/>
-			<result column="STAY_TIME" property="stayTime"/>
-			<result column="SPOT_MEMO" property="spotMemo"/>
-			<result column="CONTENTID" property="contentid"/>
-			<result column="TITLE" property="title"/>
-			<result column="ADDRESS" property="address"/>
-			<result column="FIRSTIMAGE" property="firstimage"/>
-			<result column="LNG" property="lng"/>
-			<result column="LAT" property="lat"/>
-		</collection>
-	</resultMap>
-	<select id="detailInfo" parameterType="int" resultMap="DayEntityMap">
-		select stay_day travel_date,stay_type type,null travel_order,null stay_time,null spot_memo,p.* from plan_stay join (select contentid,title , add1 address,firstimage,mapx lng,mapy lat from place) p on stay_contentid= p.contentid where stay_plan_id  = #{planId}
-		union
-		select s.spot_day travel_date,s.spot_type,s.spot_order ,s.spot_stay_time,spot_memo,p.* from plan_spot s join (select contentid,title , add1 address,firstimage,mapx lng,mapy lat from place) p on s.spot_contentid = p.contentid where s.spot_plan_id = #{planId}
-		order by travel_date asc ,travel_order asc
-	</select>
-	
+	<!-- <update id=""></update> -->
 	
 </mapper>

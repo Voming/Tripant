@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
-import mclass.store.tripant.place.domain.SpotEntity;
 import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 
 @Service
@@ -38,9 +37,5 @@ public class PlanService {
 	
 	public String selectAreaShortName(int areaCode) {
 		return planRepository.selectAreaShortName(areaCode);
-	}
-	
-	public List<SpotEntity> selectSpotTypeList(int areaCode, int spotType){
-		return planRepository.selectSpotTypeList(areaCode, spotType);
 	}
 }

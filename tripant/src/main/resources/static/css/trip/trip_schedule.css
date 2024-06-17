@@ -31,8 +31,11 @@
 	justify-content: space-between;
 	margin:10px 0;
 }
-
+.main-wrapper .sub-title .nday{
+	font-size: var(--font4);
+}
 .main-wrapper .sub-title .date{
+	font-size: var(--font6);
 	color: var(--color_gray);
 }
 /*  scrollbar와 div무너짐 해결:flex의 상위 하위 너비지정*/
@@ -85,11 +88,10 @@
 	color:white;
 	position: relative;
 	}	
-/* 일정번호 위치 조정 */	
 .main-wrapper .tourlist .spot-number >p{
 	position: absolute;
 	left: 40%;
-	transform:translate(-50%,5%);
+	transform:translate(-50%,30%);
 }	
 .main-wrapper .spot-staytime{
 	font-size:var(--font5);

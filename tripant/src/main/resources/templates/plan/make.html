@@ -9,14 +9,10 @@
 <head th:replace="~{common/header :: head('일정만들기')}"></head>
 <script th:src="@{/js/plan/plan_spot.js}"></script>
 <script th:src="@{/js/plan/plan_make.js}"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 <body>
 	<div class="modal show">
 		<div class="modal_popup">
@@ -35,12 +31,9 @@
 			<nav class="nav flex">
 				<a><img class="logo" src="/images/tripant_logo_text.png"></a>
 				<ul class="tab-nav">
-					<li><a class="nav-1" href="#tab01"> step 01<br>날짜확인
-					</a></li>
-					<li><a class="nav-2" href="#tab02"> step 02<br>장소선택
-					</a></li>
-					<li><a class="nav-3" href="#tab03"> step 03<br>숙소설정
-					</a></li>
+					<li><a class="nav-1" href="#tab01"> step 01<br>날짜확인</a></li>
+					<li><a class="nav-2" href="#tab02"> step 02<br>장소선택</a></li>
+					<li><a class="nav-3" href="#tab03"> step 03<br>숙소설정</a></li>
 				</ul>
 			</nav>
 			<div class="plan_next flex">
@@ -50,13 +43,11 @@
 		<div class="tab-content">
 			<div id="tab01">
 				<div class="flex">
-					<div class="plan-areacode" th:text="${session.areaCode}"  th:value="${session.areaCode}" style="display:none;"></div>
-					<div class="plan-title" th:text="${session.planTitle}" th:value="${session.planTitle}"></div>
+					<div class="plan-title" th:text="${session.planTitle}"></div>
 					<div class="plan-location" th:text="${session.areaShortName}"></div>
 					<div class="wrap-priod">
 						<h4 class="plan-priod">먼저 기간을 입력해주세요</h4>
-						<img class="plan-priod" th:src="@{/images/icons/calendar.png}"
-							alt="달력">
+						<img class="plan-priod" th:src="@{/images/icons/calendar.png}" alt="달력">
 					</div>
 					<h5 class="plan-timeEx"></h5>
 					<div class="wrap-time">
@@ -64,8 +55,7 @@
 							<ul></ul>
 						</form>
 					</div>
-					<button type="button" form="timeForm" class="time_btn"
-						style="display: none;">시간 설정 완료</button>
+					<button type="button" form="timeForm" class="time_btn" style="display: none;">시간 설정 완료</button>
 				</div>
 			</div>
 			<div id="tab02">
@@ -76,8 +66,7 @@
 					<form id="frm-find-spot">
 						<input type="text" name="find-spot" placeholder="&nbsp;장소명을 입력하세요">
 						<button type="button" class="btn find-spot">
-							<img class="search-btn" th:src="@{/images/icons/search.png}"
-								alt="찾기">
+							<img class="search-btn" th:src="@{/images/icons/search.png}" alt="찾기">
 						</button>
 					</form>
 					<ul class="spot-tab-nav">
@@ -93,9 +82,12 @@
 						<div id="spot-tab04"><div class="wrap-spotList" th:replace="~{plan/spot_tab_content :: wrapspotlist}"></div></div>
 					</div>
 				</div>
-				<div class="spot second flex"></div>
+				<div class="spot second flex">
+				
+				</div>
 			</div>
-			<div id="tab03"></div>
+			<div id="tab03">
+			</div>
 		</div>
 		<div class="map-wrapper">
 			<div id="map"></div>

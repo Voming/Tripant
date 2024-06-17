@@ -73,9 +73,17 @@
 		    </form><!-- 더미값 -->
 		</div>
 	</div>
-<script th:src="@{/js/trip/loadedHandler.js}"></script>
 <script th:inline="javascript">
-
+$(document).ready(function(){
+	$(".edit").click(editHandler);
+	$(".cancel").click(cancelHandler);
+	$(".save").click(saveHandler);
+	$(".mapbtn").click(panTo);
+	$(".test-btn").click(durationHandler);
+	$(".img-memo").hover(memoHandler,memoNoHandler);
+	dragAndDrop();
+	circleColorHandler();
+});
 //n일차 버튼 생성
 function ndayBtnHandler(){
 	$('.column.flex').each(function(e){

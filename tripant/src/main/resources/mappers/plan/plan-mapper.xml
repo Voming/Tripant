@@ -28,10 +28,11 @@
 	<select id="selectAreaShortName"  parameterType="_int" resultType="string">
 		SELECT AREA_SHORT_NAME FROM AREA WHERE AREA_CODE = #{areaCode}
 	</select>
-	
+
 	<select id="selectSpotTypeList" parameterType="_int" resultType="SpotEntity">
 		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
 		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{spotType}  
 		AND ROWNUM <![CDATA[<=]]> 10
 	</select>
+
 </mapper>

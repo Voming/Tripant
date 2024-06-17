@@ -28,28 +28,13 @@ public class SecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-				.requestMatchers(
-						new AntPathRequestMatcher("/login"), 
-						new AntPathRequestMatcher("/join"), 
-						new AntPathRequestMatcher("/join/sns"), 
-						new AntPathRequestMatcher("/pwd")
-						).anonymous()
-				.requestMatchers(
-						new AntPathRequestMatcher("/my/**"), 
-						new AntPathRequestMatcher("/trip/**"), 
-						new AntPathRequestMatcher("/store/**"), 
-						new AntPathRequestMatcher("/make")
-						).hasAnyAuthority("MEM", "VIP")
-				.requestMatchers(
-						new AntPathRequestMatcher("/admin/**")
-						).hasAuthority("ADMIN")
-				.requestMatchers(
-						new AntPathRequestMatcher("/**"), 
-						new AntPathRequestMatcher("/store"), 
-						new AntPathRequestMatcher("/diary")
-						).permitAll()
-
-
+//				.requestMatchers(new AntPathRequestMatcher("/login")).anonymous()
+				.requestMatchers(new AntPathRequestMatcher("/my/*")
+						, new AntPathRequestMatcher("/trip/*")
+						, new AntPathRequestMatcher("/store/*"))
+						.hasAnyAuthority("MEM", "VIP")
+//				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyAuthority("ADMIN")
+				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 					)
 		.csrf((csrf) -> csrf
 				.disable()
