@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,6 +22,7 @@ import mclass.store.tripant.member.model.service.MemberService;
 
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/join")
 @Slf4j
 public class JoinController {
 	
@@ -29,7 +31,7 @@ public class JoinController {
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	//회원가입 페이지
-	@GetMapping("/join")
+	@GetMapping("")
 	public String join(Model model) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
@@ -39,7 +41,7 @@ public class JoinController {
 	}
 	
 	//SNS 회원가입 페이지
-	@GetMapping("/join/sns")
+	@GetMapping("/sns")
 	public String joinSns(Model model) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
@@ -49,7 +51,7 @@ public class JoinController {
 	}
 	
 	// 닉네임 중복 검사
-	@PostMapping("/join/nick/check")
+	@PostMapping("/nick/check")
 	@ResponseBody
 	public Integer joinNickCheck(@RequestParam String memNick) {
 		int result = memberService.existNick(memNick);
@@ -57,7 +59,7 @@ public class JoinController {
 	}
 	
 	// 회원가입
-	@PostMapping("/join")
+	@PostMapping("")
 	@ResponseBody
 	public int joinP(MemberEntity memberEntity, String recaptcha) {
 		
@@ -65,7 +67,6 @@ public class JoinController {
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
 		memberEntity.setMemType("T");
-		log.debug("[sjw] mem = "+memberEntity);
 		
 		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
 		try {
@@ -82,7 +83,7 @@ public class JoinController {
 	}
 	
 	// SNS 회원가입
-	@PostMapping("/join/sns")
+	@PostMapping("/sns")
 	@ResponseBody
 	public int joinSnsP(MemberEntity memberEntity, String recaptcha, HttpSession session) {
 		

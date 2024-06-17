@@ -5,7 +5,7 @@ function backClickHandler(){
 //비밀번호 변경
 function saveClickHandler(){
 	$.ajax({
-		url: '/save/pwd', 
+		url: contextPath+'my/chPwd', 
 		type: 'post', 
 		data: $('#memPassword'), 
 		success: function(result){

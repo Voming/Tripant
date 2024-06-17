@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @Controller
+@RequestMapping("/my")
 @RequiredArgsConstructor
 public class MypageController {
 
@@ -22,7 +24,7 @@ public class MypageController {
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	// 마이페이지
-	@GetMapping("/my/home")
+	@GetMapping("/home")
 	public String myHome(Model model, Principal principal) {
 		String memEmail = principal.getName();
 		Map<String, Object> map = memberService.myInfo(memEmail);
@@ -32,13 +34,13 @@ public class MypageController {
 	}
 
 	// 닉네임 변경 페이지
-	@GetMapping("/my/nick")
+	@GetMapping("/nick")
 	public String myNick() {
 		return "mypage/chNick";
 	}
 
 	// 닉네임 변경
-	@PostMapping("/save/nick")
+	@PostMapping("/chNick")
 	@ResponseBody
 	public int saveNick(String memNick, Principal principal) {
 		String memEmail = principal.getName();
@@ -50,13 +52,13 @@ public class MypageController {
 	}
 
 	// 비밀번호 변경 페이지
-	@GetMapping("/my/pwd")
+	@GetMapping("/pwd")
 	public String myPwd() {
 		return "mypage/chPwd";
 	}
 	
 	// 비밀번호 변경
-	@PostMapping("/save/pwd")
+	@PostMapping("/chPwd")
 	@ResponseBody
 	public int savePwd(String memPassword, Principal principal) {
 		String memEmail = principal.getName();
@@ -68,7 +70,7 @@ public class MypageController {
 	}
 
 	// 회원 탈퇴 페이지
-	@GetMapping("/my/quit")
+	@GetMapping("/quit")
 	public String myQuit() {
 		return "mypage/quit";
 	}
@@ -87,7 +89,7 @@ public class MypageController {
 	}
 	
 	// 회원 탈퇴
-	@PostMapping("/my/quit")
+	@PostMapping("/quit")
 	@ResponseBody
 	public int myQuit(Principal principal) {
 		String memEmail = principal.getName();
