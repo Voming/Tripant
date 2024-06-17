@@ -1,19 +1,23 @@
 
 ------view 생성 --CREATE OR REPLACE VIEW 수정할 때 
-CREATE VIEW DETAILINFO AS (
-select SPOT_PLAN_ID PLAN_ID, schedule_day TRAVEL_DATE, SCHEDULE_START, SCHEDULE_END,SPOT_TYPE TYPE,SPOT_CONTENTID CONTENTID, SPOT_ORDER TRAVEL_ORDER,SPOT_STAY_TIME STAY_TIME, SPOT_MEMO MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG,LAT from plan_schedule 
+----with read only : 읽기 전용 view 생성
+CREATE OR REPLACE VIEW DETAILINFO AS (
+select SPOT_PLAN_ID PLAN_ID, schedule_day TRAVEL_DATE, SCHEDULE_START, SCHEDULE_END,SPOT_TYPE PLACE_TYPE,SPOT_CONTENTID CONTENTID, SPOT_ORDER TRAVEL_ORDER,SPOT_STAY_TIME STAY_TIME, SPOT_MEMO MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG,LAT from plan_schedule 
 left join (select * from plan_spot s left join (select contentid,title , add1 address,firstimage,mapx lng,mapy lat from place) p on s.spot_contentid = p.contentid ) on schedule_plan_id = spot_plan_id 
 where schedule_day = spot_day --order by travel_date asc ,spot_order asc 
 union
-select SCHEDULE_PLAN_ID PLAN_ID, SCHEDULE_DAY TRAVEL_DATE, SCHEDULE_START,SCHEDULE_END,STAY_TYPE TYPE, STAY_CONTENTID CONTENTID, null TRAVEL_ORDER, null STAY_TIME, NULL MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG, LAT from plan_schedule
+select SCHEDULE_PLAN_ID PLAN_ID, SCHEDULE_DAY TRAVEL_DATE, SCHEDULE_START,SCHEDULE_END,STAY_TYPE PLACE_TYPE, STAY_CONTENTID CONTENTID, null TRAVEL_ORDER, null STAY_TIME, NULL MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG, LAT from plan_schedule
 left join (select * from plan_stay join (select contentid,title , add1 address,firstimage,mapx lng,mapy lat from place)  on stay_contentid= contentid ) on schedule_plan_id = stay_plan_id 
 where schedule_day = stay_day
-);
+)with read only;
 
+--여행 세부일정 목록 불러오기 
+SELECT TRAVEL_DATE , SCHEDULE_START ,SCHEDULE_END ,CONTENTID ,PLACE_TYPE , STAY_TIME ,
+TRAVEL_ORDER ,MEMO ,TITLE ,ADDRESS ,FIRSTIMAGE ,LNG ,LAT  FROM DETAILINFO  ORDER BY TRAVEL_DATE ASC ,TRAVEL_ORDER ASC;
 
-
-
-select * from detailinfo where plan_id = 13 order by travel_date asc ,travel_order asc;
+------------------
+desc DETAILINFO;
+desc plan_spot;
 
 
 
