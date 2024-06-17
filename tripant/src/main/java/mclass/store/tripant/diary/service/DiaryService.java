@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
-import mclass.store.tripant.diary.domain.DiaryPostEntity;
+
+import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.model.repository.DiaryRepository;
-import mclass.store.tripant.plan.domain.PlanEntity;
 
 @Service
 public class DiaryService {
@@ -40,8 +40,9 @@ public class DiaryService {
 	}
 
 	// planId로 PLAN 조회
-	public PlanEntity selectPlanById(Long planId) {
-		return diaryRepository.selectPlanById(planId);
-	}
+	  public List<WritePlanTitleEntity> getAllPlans(String memberEmail) {
+	        return diaryRepository.findByMemEmail(memberEmail);
+	    }
+	  
 
 }

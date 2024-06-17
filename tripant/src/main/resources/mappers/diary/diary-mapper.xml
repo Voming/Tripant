@@ -32,10 +32,12 @@
 	</select>
 	<!-- 특정 ID의 PlAN 조회 -->
 	<select id="selectPlanById" parameterType="Long"
-		resultType="PlanEntity">
-		SELECT plan_id AS planId, plan_title AS planTitle
-		FROM plan
-		WHERE plan_id = #{planId}
+		resultType="WritePlanTitleEntity">
+
+		SELECT p.plan_id AS planId, p.plan_title AS planTitle
+		FROM diary d
+		JOIN plan p ON d.diary_plan_id = p.plan_id
+		WHERE d.diary_mem_email = #{diaryMemEmail}
 	</select>
 	<!-- 공개된 일기 선택 -->
 	<select id="selectPublicDiaries" resultType="DiaryBoardEntity">
