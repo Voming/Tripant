@@ -3,19 +3,19 @@
 
 	<!-- tourlist -->
 	<div th:fragment="tourlist" class="tourlist scrollbar flex">
-		<div th:each="infolist,daylist:${detailInfoList}" class="column flex" data-columns="${daylist.count}" id="#tab01">
+		<div th:each="details,daylist:${detailList}" class="column flex" data-columns="${daylist.count}" id="#tab01">
 			<div class="sub-title flex ">
 				<h4 th:text="${daylist.count} + '일차'" class="nday"></h4>
-				<h6 th:text="${#dates.format(infolist.travelDate, 'yyyy-MM-dd')} + '('+${#dates.dayOfWeekName(infolist.travelDate).substring(0, 1)}+')'" class="date"></h6>
+				<h6 th:text="${#dates.format(details.travelDate, 'yyyy-MM-dd')} + '('+${#dates.dayOfWeekName(details.travelDate).substring(0, 1)}+')'" class="date"></h6>
 			</div>
-		 	<div th:each="info,idxlist:${infolist}"  class="container flex wfull">
+		 	<div th:each="info,idxlist:${details}"  class="container flex wfull">
 			 	<div class="spot grid wfull">
 			 		<div class="spot-number backimg"><p th:text="${idxlist.count}"></p></div>
 			 		<div class="spot-staytime">10:00-11:00</div>
 			 		<div class="spot-type">명소</div>
-			 		<div class="spot-title">제주국제공항</div>
-			 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;"  src="/images/icons/memoIcon.png"><span th:text="${info.memo}" class="memo">모든 국민은 법률이 정하는 바에 의하여 국방의 의무를 진다. 법관은 헌법과 법률에 의하여 그 양심에 따라 독립하여 심판한다. 법관은 탄핵 또는 금고 이상의 형의 선고에 의하지 아니하고는 파면되지 아니하며, 징계처분에 의하지 아니하고는 정직·감봉 기타 불리한 처분을 받지 아니한다. 대통령은 헌법과 법률이 정하는 바에 의하여 국군을 통수한다.</span></div>
-			 		<div class="spot-img"><img src="https://placehold.co/70x70/000000/FFFFFF.png"></div>
+			 		<div class="spot-title" th:text="${info.title}"></div>
+			 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span th:text="${info.memo}" class="memo"></span></div>
+			 		<div class="spot-img"><img th:src="${info.firstimage}" alt="장소이미지"></div>
 			 		<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
 			 		<div class="spot-move"> 45분> </div>
 			    </div>
