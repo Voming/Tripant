@@ -44,7 +44,7 @@ public class SecurityConfig {
 						new AntPathRequestMatcher("/admin/**")
 						).hasAuthority("ADMIN")
 				.requestMatchers(
-						new AntPathRequestMatcher("/"), 
+						new AntPathRequestMatcher("/**"), 
 						new AntPathRequestMatcher("/store"), 
 						new AntPathRequestMatcher("/diary")
 						).permitAll()
