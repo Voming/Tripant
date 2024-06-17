@@ -11,7 +11,7 @@ import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.model.repository.AdminDao;
 
 @Service
-public class AdminMemSerivce {
+public class AdminSerivce {
 	
 	@Autowired
 	private AdminDao admindao;
@@ -27,14 +27,20 @@ public class AdminMemSerivce {
 		return admindao.adminMemRole(map);
 	}
 	
+	//회원검색
+	public List<AdminMemEntity> search(String memNick){
+		return admindao.search(memNick);
+	}
+	
 	//게시글리스트
 	public List<AdminBoardEntity> boardList(){
 		return admindao.boardList();
 	}
 
-	//회원검색
-	public List<AdminMemEntity> search(String memNick){
-		return admindao.search(memNick);
+	//좋아요 정렬
+	public Integer boardLikes() {
+		
+		return admindao.boardLike();
 	}
 	
 	//신고게시글
