@@ -1,5 +1,10 @@
 package mclass.store.tripant.store.controller;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,29 +12,37 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.store.domain.ItemEntity;
 import mclass.store.tripant.store.model.service.StoreService;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
+@RequestMapping("/store")
 public class StoreController {
-	
 	@Value("${pay.secret}")
-	private String payKey;
+	private String paySecret;
+	@Value("${pay.storeId}")
+	private String storeId;
+	@Value("${pay.channelKey}")
+	private String channelKey;
 	
 	private final StoreService storeService;
+	private final Gson gson;
 	
 	// 스토어 페이지
-	@GetMapping("/store")
+	@GetMapping("")
 	public ModelAndView store(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/home");
 		String memEmail;
@@ -48,19 +61,19 @@ public class StoreController {
 	}
 	
 	// 장바구니에 담기
-	@PostMapping("/store/insert")
+	@PostMapping("/insert")
 	@ResponseBody
 	public int storeInsert(@RequestParam List<String> items, Principal principal) {
 		int size = items.size();
-		List<Map<String, Object>> list = new ArrayList<>();
+		Map<String, Object> map = new HashMap<>();
 		String memEmail = principal.getName();
+		List<String> list = new ArrayList<>();
 		for(String itemCode : items) {
-			Map<String, Object> map = new HashMap<>();
-			map.put("itemCode", itemCode);
-			map.put("memEmail", memEmail);
-			list.add(map);
+			list.add(itemCode);
 		}
-		int insertNum = storeService.insertItems(memEmail, list);
+		map.put("memEmail", memEmail);
+		map.put("list", list);
+		int insertNum = storeService.insertItems(memEmail, map);
 		int result;
 		if(size == insertNum) {
 			result = 1;
@@ -71,9 +84,11 @@ public class StoreController {
 	}
 	
 	// 장바구니 페이지
-	@GetMapping("/store/cart")
+	@GetMapping("/cart")
 	public ModelAndView storeCart(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/cart");
+		mv.addObject("storeId", storeId);
+		mv.addObject("channelKey", channelKey);
 		if(principal != null) {
 		
 			// 사용자 이메일
@@ -85,6 +100,10 @@ public class StoreController {
 			// 사용자 닉네임
 			String memNick = (String) map.get("MEM_NICK");
 			mv.addObject("memNick", memNick);
+			
+			// 사용자 휴대폰 번호
+			String memTel = (String) map.get("MEM_TEL");
+			mv.addObject("memTel", memTel);
 			
 			// 주문번호
 			int buyId = Integer.parseInt(String.valueOf(map.get("BUY_ID")));
@@ -98,8 +117,44 @@ public class StoreController {
 		return mv;
 	}
 	
+	// 선택 상품 구매
+	@PostMapping("/payment")
+	@ResponseBody
+	public int requestPayment(String paymentId, String totalAmount, List<String> items, Principal principal) throws IOException, InterruptedException{
+		
+		// paymentId로 결제 단건 조회 API 호출
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.portone.io/payments/"+paymentId+"?storeId="+storeId))
+			    .header("Content-Type", "application/json")
+			    .header("Authorization", "PortOne "+paySecret)
+			    .method("GET", HttpRequest.BodyPublishers.ofString("{}"))
+			    .build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+		
+		// 결제 단건 조회 응답
+		Map<String, Object> responseBody = gson.fromJson(response.body(), Map.class);
+		System.out.println("responseBody >>>>>>>>>>> "+responseBody);
+		
+		// 응답 중 결제 금액 세부 정보 항목 추출
+		Map<String, Object> amount = gson.fromJson(gson.toJson(responseBody.get("amount")), Map.class);
+		System.out.println("amount >>>>>>>>>>> "+amount);
+		// 그 중 지불된 금액
+		double paid = (double) amount.get("paid");
+		
+		// 결제 금액과 지불된 금액이 같다면
+		if(Double.parseDouble(totalAmount) == paid) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("memEmail", principal.getName());
+			map.put("itemCode", items);
+			storeService.cartDel(map);
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
 	// 장바구니 삭제
-	@PostMapping("/store/cart/del")
+	@PostMapping("/cart/del")
 	@ResponseBody
 	public int storeCartDel(@RequestParam List<String> items, Principal principal) {
 		int size = items.size();
@@ -118,7 +173,7 @@ public class StoreController {
 	}
 	
 	// 구매내역 페이지
-	@GetMapping("/store/buy")
+	@GetMapping("/buy")
 	public ModelAndView storeBuy(ModelAndView mv, Principal principal) {
 		mv.setViewName("store/buy");
 		String memEmail;

@@ -19,12 +19,6 @@
 		<java.version>17</java.version>
 		<org.aspectj-version>1.9.22</org.aspectj-version>
 	</properties>
-	<repositories>
-	  <repository>
-	    <id>jitpack.io</id>
-	    <url>https://jitpack.io</url>
-	  </repository>
-	</repositories>
 	<dependencies>
 		
 		<dependency>
@@ -160,21 +154,11 @@
 			<artifactId>javax.json</artifactId>
 			<version>1.1</version>
 		</dependency>
-<!--
-		https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
-		
-		<!-- iamport-rest-client-java -->
-		<dependency>
-		  <groupId>com.github.iamport</groupId>
-		  <artifactId>iamport-rest-client-java</artifactId>
-		  <version>0.2.14</version>
-		</dependency>
-
-
 	</dependencies>
 
 	<build>

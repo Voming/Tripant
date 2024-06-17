@@ -4,6 +4,7 @@ package mclass.store.tripant.diary.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,21 +16,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.DiaryPostEntity;
+import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.service.DiaryService;
 import mclass.store.tripant.member.model.service.MemberService;
+import mclass.store.tripant.plan.model.service.PlanService;
+
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @Controller
 public class MyDiaryController {
 
+	private static final Long Long = null;
 	@Autowired
 	private DiaryService diaryService;
     @Autowired
 	private MemberService memberService; // MemberService 주입
-	
+
 	// 나의 글보기
 	@GetMapping("/my/diary") // 나의 여행기(비공개글) 목록 가져오기
 	public String mydiary(Model model) {
@@ -78,5 +87,15 @@ public class MyDiaryController {
 
         // 저장된 DiaryPostEntity를 ResponseEntity로 반환
         return ResponseEntity.ok().body(diary);
+    }
+    	//글 작성 시 planId 꺼내기
+    @GetMapping("/write/post")
+    public ModelAndView showDiaryForm(@RequestParam("memberEmail") String memberEmail) {
+        ModelAndView mv = new ModelAndView();
+        List<WritePlanTitleEntity> plans = diaryService.getAllPlans(memberEmail);
+        mv.addObject("plans", plans);
+        mv.addObject("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
+        mv.setViewName("diary/my/my_write");
+        return mv;
     }
 }

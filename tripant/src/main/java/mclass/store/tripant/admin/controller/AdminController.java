@@ -24,6 +24,7 @@ public class AdminController {
 	@Autowired
 	private AdminMemSerivce adminservice;
 	
+	//회원
 	@GetMapping("/member")
 	public ModelAndView Member(ModelAndView mv) {
 		
@@ -35,7 +36,8 @@ public class AdminController {
 		//return "admin/admin_member";
 	}
 	
-	@PostMapping("/member/role")  //등급변경
+	 //등급변경  ajax
+	@PostMapping("/member/role") 
 	@ResponseBody
 	public Integer MemberRole(Integer selectRole, String memEmail) {
 		
@@ -55,13 +57,15 @@ public class AdminController {
 		return result;
 	}
 	
-	@PostMapping("/member/search") //검색
+	//검색 ajax
+	@PostMapping("/member/search") 
 	@ResponseBody
 	public List<AdminMemEntity> MemberSearch(String searchMem) {
 		List<AdminMemEntity> memList=adminservice.search(searchMem);
 		return memList ;
 	}
 	
+	//게시글
 	@GetMapping("/board")
 	public String board(Model model) {
 		model.addAttribute("memBoard",adminservice.boardList());
@@ -69,7 +73,7 @@ public class AdminController {
 		return "admin/admin_board";
 	}
 	
-
+	//신고게시글
 	@GetMapping("/complain")
 	public String complain(Model model) {
 		model.addAttribute("complainBoard",adminservice.complainList());
