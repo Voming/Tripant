@@ -75,5 +75,32 @@
 		</form>
 	</div>
 </div>	
+
+<script>
+$(loadedHandler);
+
+function loadedHandler() {
+	$(".btn.like").on("click", ClickLikeHandler);
+}
+
+function ClickLikeHandler(){
+	$.ajax({
+		url:"/admin/like",
+		 method:"post",
+		 data: {},
+		 success : function(result) {
+			 		
+				},
+	 error : function(request, status, error) {
+				alert("code: " + request.status + "\n"
+						+ "message: " + request.responseText + "\n"
+						+ "error: " + error);
+			}
+		
+	});
+} 
+
+
+</script>
 </body>
 </html>
