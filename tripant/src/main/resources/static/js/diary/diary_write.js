@@ -1,14 +1,13 @@
 $(document).ready(function() {
-    // CKEditor 초기화
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .catch(error => {
-            console.error(error);
-        });
+    // CKEditor 초기화 - param div/textarea id
+    let ckInstance1 = makeTripAntCkeditor("editor");
+    // CKEditor 입력값을 넣어 줄 변수 지정 
+	let editor1;
+    ckInstance1.then( b => {editor1 = b; } );
 
 	//폼 제출 시 처리
-	$('#diaryForm').submit(function(event) {
-		event.preventDefault(); //폼의 기본 제출 동작을 막음
+	$('#diaryForm .btn_submit').click(function(event) {
+		//event.preventDefault(); //폼의 기본 제출 동작을 막음
 
 		//필수 입력값 검사
 		var diaryPlanId = $("select[name=diaryPlanId]").val();
@@ -17,23 +16,38 @@ $(document).ready(function() {
 		var diaryDate = $("input[name=diaryDate]").val();
 		var diaryTheme = $("select[name=diaryTheme]").val();
 		var diaryOpen = $("input[name=diaryOpen]:checked").val();
-		var diaryContent = CKEditor.instances.editor.getData().trim(); // CKEditor에서 내용 가져오기
-
+		var diaryContent = editor1.getData(); // CKEditor 에서 내용 가져오기
+				
 		if (diaryPlanId === "") {
 			alert("일정을 선택해주세요.");
 			return;
 		}
-		if (diaryTitle === "") {
+		if (diaryTitle == "") {
 			alert("제목을 입력해주세요.");
 			return;
 		}
 		
-		if (diaryContent === "") {
+		if (diaryContent.trim() == "") {
 			alert("내용을 입력해주세요.");
 			return;
 		}
 		// 서버로 데이터 전송 (spring MVC 예시)
-		var url = "/write/post";
+		
+		/*{
+				diaryPlanId: diaryPlanId,
+				diaryDiaryId: diaryId,
+				diaryTitle: diaryTitle,
+				diaryDate: diaryDate,
+				diaryTheme: diaryTheme,
+				diaryOpen: diaryOpen,
+				diaryContent: diaryContent
+		}*/
+		//$('#diaryForm').serialize() == query string ==> diaryPlanId=3&diaryDiaryId=202&,,,,
+		
+		//$("textarea[name=diaryContent]").val(diaryContent);// CKEditor 에서 내용 가져오기
+		//var formData = new FormData($("#diaryForm")[0]);
+		
+		var url = "/my/post";
 		$.ajax({
 			type: "post",
 			url: url,

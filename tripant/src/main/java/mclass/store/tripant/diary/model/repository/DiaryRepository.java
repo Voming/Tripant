@@ -12,16 +12,16 @@ import mclass.store.tripant.plan.domain.PlanEntity;
 
 @Mapper
 public interface DiaryRepository {
-	
-	    // 일기 목록을 선택하는 메서드
-	    public List<DiaryBoardEntity> selectDiaryList();
-	    
-	    // 여행기 글 등록
-	    public void insertDiary(DiaryBoardEntity diary);
-	    // 특정 ID의 다이어리 조회
-	    DiaryBoardEntity findById(@Param("id") Long id);
-	  
 
-	        List<WritePlanTitleEntity> findByMemEmail(String memberEmail);
-	
+	// 일기 목록을 선택하는 메서드
+	public List<DiaryBoardEntity> selectDiaryList();
+
+	// 여행기 글 등록
+	public void insertDiary(DiaryBoardEntity diary);
+
+	// 특정 ID의 다이어리 조회
+	DiaryBoardEntity findById(@Param("id") Long id);
+
+	List<WritePlanTitleEntity> selectPlanById(String memberEmail);
+
 }

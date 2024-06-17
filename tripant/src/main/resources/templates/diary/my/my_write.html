@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+
+>
 <link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet"
 	type="text/css">
 <link th:href="@{/css/diary/my/my_write.css}" rel="stylesheet">
@@ -12,7 +14,7 @@
 	</header>
 	<section class="diary-writes-main">
 		<div class="diary-write-wrap">
-			<form id="diaryForm" method="post">
+			<form id="diaryForm">
 
 				<table class="diary-write-table">
 					<tr>
@@ -52,8 +54,8 @@
 					<tr>
 						<td>
 
-							<div id="container" name="diaryContent">
-								<div id="editor"></div>
+							<div id="container">
+								<textarea id="editor" name="diaryContent"></textarea>
 							</div>
 						</td>
 					</tr>
@@ -86,7 +88,7 @@
 						</td>
 					</tr>
 					<tr class="diary_btn_submit">
-						<td><button type="submit" value="등록" class="btn_submit">등록</button></td>
+						<td><button type="button" value="등록" class="btn_submit">등록</button></td>
 					</tr>
 				</table>
 
@@ -98,13 +100,12 @@
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
 
-	<!-- ckeditors -->
-	<script
-		src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
+	<!-- ckeditor5 super-build js 파일 순서대로 적용 ! 중요 -->
+	<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
+	<script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
+
 	<!--글 등록  -->
 	<script type="text/javascript" th:src="@{/js/diary/diary_write.js}"></script>
 
-	<!-- ckeditor jsp 파일 -->
-	<script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
 </body>
 </html>

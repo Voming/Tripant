@@ -29,7 +29,10 @@ public class SecurityConfig {
 		http
 		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
 //				.requestMatchers(new AntPathRequestMatcher("/login")).anonymous()
-//				.requestMatchers(new AntPathRequestMatcher("/my/*"), new AntPathRequestMatcher("/trip/*"), new AntPathRequestMatcher("/store/*")).hasAnyRole("MEM", "VIP")
+				.requestMatchers(new AntPathRequestMatcher("/my/*")
+						, new AntPathRequestMatcher("/trip/*")
+						, new AntPathRequestMatcher("/store/*"))
+						.hasAnyAuthority("MEM", "VIP")
 //				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyAuthority("ADMIN")
 				.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 					)

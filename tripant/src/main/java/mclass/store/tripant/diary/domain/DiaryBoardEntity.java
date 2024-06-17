@@ -24,7 +24,7 @@ public class DiaryBoardEntity {
 	private Integer diaryPlanId;
 	private String diaryTitle;
 	private String diaryContent;
-	private Date diaryDate; // java.sql.Date 타입으로 변경
+	private String diaryDate; // java.sql.Date 타입으로 변경
 	private String diaryOpen;
 	private Integer diaryViews;
 	private String diaryTheme;

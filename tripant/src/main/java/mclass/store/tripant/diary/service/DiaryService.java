@@ -27,13 +27,11 @@ public class DiaryService {
 
 	// 게시글 등록하기
 	public DiaryBoardEntity save(DiaryBoardEntity diary) {
-		diaryRepository.insertDiary(diary);
-
-		// 공개 설정
-		diary.setDiaryOpen("0");
-
-		// 비공개 설정
-		diary.setDiaryOpen("1");
+//		diaryRepository.insertDiary(diary);
+//		// 공개 설정
+//		diary.setDiaryOpen("0");
+//		// 비공개 설정
+//		diary.setDiaryOpen("1");
 
 		diaryRepository.insertDiary(diary);
 		return diary;
@@ -41,7 +39,7 @@ public class DiaryService {
 
 	// planId로 PLAN 조회
 	  public List<WritePlanTitleEntity> getAllPlans(String memberEmail) {
-	        return diaryRepository.findByMemEmail(memberEmail);
+	        return diaryRepository.selectPlanById(memberEmail);
 	    }
 	  
 

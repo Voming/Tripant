@@ -12,7 +12,7 @@
 		JOIN MEMBER M ON D.DIARY_MEM_EMAIL = M.MEM_EMAIL
 	</select>
 	<!-- 글 작성 등록 시키기 -->
-	<insert id="insertDiary" parameterType="DiaryPostEntity">
+	<insert id="insertDiary" parameterType="DiaryBoardEntity">
 		INSERT INTO diary (
 		DIARY_ID, DIARY_MEM_EMAIL,
 		DIARY_PLAN_ID, DIARY_TITLE, DIARY_CONTENT,
@@ -22,18 +22,17 @@
 		(diary_seq.NEXTVAL, #{diaryMemEmail},
 		#{diaryPlanId}, #{diaryTitle},
 		#{diaryContent},
-		#{diaryDate}, #{diaryOpen}, #{diaryViews},
+		to_date(#{diaryDate}, 'yyyy-mm-dd'), #{diaryOpen}, #{diaryViews},
 		#{diaryTheme})
 	</insert>
 	<!-- 특정 ID의 다이어리 조회 -->
-	<select id="findById" parameterType="Long"
+	<select id="findById" parameterType="long"
 		resultType="DiaryBoardEntity">
 		SELECT * FROM DIARY WHERE DIARY_ID = #{id}
 	</select>
 	<!-- 특정 ID의 PlAN 조회 -->
-	<select id="selectPlanById" parameterType="Long"
+	<select id="selectPlanById" parameterType="string"
 		resultType="WritePlanTitleEntity">
-
 		SELECT p.plan_id AS planId, p.plan_title AS planTitle
 		FROM diary d
 		JOIN plan p ON d.diary_plan_id = p.plan_id
