@@ -10,19 +10,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import mclass.store.tripant.admin.domain.AdminMemEntity;
-import mclass.store.tripant.admin.service.AdminMemSerivce;
+import mclass.store.tripant.admin.service.AdminSerivce;
 
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
 
 	@Autowired
-	private AdminMemSerivce adminservice;
+	private AdminSerivce adminservice;
 	
 	@GetMapping("/member")
 	public ModelAndView Member(ModelAndView mv) {
@@ -35,7 +34,10 @@ public class AdminController {
 		//return "admin/admin_member";
 	}
 	
-	@PostMapping("/member/role")  //등급변경
+
+	// ajax
+	 //등급변경 
+	@PostMapping("/member/role") 
 	@ResponseBody
 	public Integer MemberRole(Integer selectRole, String memEmail) {
 		
@@ -55,7 +57,10 @@ public class AdminController {
 		return result;
 	}
 	
-	@PostMapping("/member/search") //검색
+
+	//ajax
+	//검색 
+	@PostMapping("/member/search") 
 	@ResponseBody
 	public List<AdminMemEntity> MemberSearch(String searchMem) {
 		List<AdminMemEntity> memList=adminservice.search(searchMem);
@@ -70,6 +75,15 @@ public class AdminController {
 	}
 	
 
+	//ajax
+	//좋아요 정렬
+	@PostMapping("/like")
+	public Integer boardLike() {
+		
+		return 0;
+	}
+	
+	//신고게시글
 	@GetMapping("/complain")
 	public String complain(Model model) {
 		model.addAttribute("complainBoard",adminservice.complainList());

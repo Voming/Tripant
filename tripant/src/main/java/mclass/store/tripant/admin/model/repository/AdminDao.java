@@ -17,18 +17,30 @@ public interface AdminDao {
 	//회원정보 한페이지에 나열
 	public List<AdminMemEntity> selectMemList();
 	
+	//회원 등급 변경
 	public Integer adminMemRole(Map<String, Object> map);
+	
+	//회원검색
+	public List<AdminMemEntity> search(String memNick);
 	
 	//전체게시글
 	public List<AdminBoardEntity> boardList();
+	
+	//좋아요 많은 순으로 정렬
+	public Integer boardLike();
+	
+	//신고게시글
+	public List<AdminBoardEntity> complainList();
 	
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 
 	//페이지 당 나오는 회원정보 수 뽑기
 	//public List<AdminMemEntity> selectPage();
+
 	
 	public List<AdminMemEntity> search(String memNick);
 	
 	//신고게시글
 	public List<AdminBoardEntity> complainList();
+
 }
