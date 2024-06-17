@@ -126,10 +126,10 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 결제 상태
+	// 결제 검증
 	@PostMapping("/payment")
 	@ResponseBody
-	public int requestPayment(String paymentId, String totalAmount, String[] items, String buyId, Principal principal) throws IOException, InterruptedException{
+	public int storePayment(String paymentId, String totalAmount, String[] items, String buyId, Principal principal) throws IOException, InterruptedException{
 		
 		// paymentId로 결제 단건 조회 API 호출
 		HttpRequest request = HttpRequest.newBuilder()

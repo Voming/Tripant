@@ -23,12 +23,12 @@
 	padding: 5px 10px;
 }
 
-.wrap-main .btn:disabled{
+.wrap-main .btn:disabled {
 	background-color: lightgray;
 	color: white;
 }
 
-.wrap-main .hide{
+.wrap-main .hide {
 	display: none;
 }
 
@@ -36,77 +36,86 @@
 	display: flex;
 	row-gap: 10px;
 }
-.wrap-main .flex.cart{
+
+.wrap-main .flex.cart {
 	flex-direction: column;
 	width: 100%;
 }
-.wrap-main .checked{
+
+.wrap-main .checked {
 	background-color: var(--color_light_gray);
 	font-size: var(--font3);
 	line-height: 2em;
 	padding: 0 10px;
 	border-radius: 10px;
 }
-.wrap-main .title{
+
+.wrap-main .title {
 	font-size: var(--font1);
 	margin-top: 15px;
 }
 
-.wrap-main .item-info.flex{
+.wrap-main .item-info.flex {
 	margin-top: 10px;
 	align-items: center;
 }
 
-.wrap-main .cart-list.empty{
+.wrap-main .cart-list.empty {
 	font-size: var(--font1);
 	margin-bottom: 10px;
 	text-align: center;
 }
-.wrap-main .cart-info.flex{
+
+.wrap-main .cart-info.flex {
 	border-top: 1px solid lightgray;
 	padding: 10px 0;
 	align-items: center;
 }
-.wrap-main .item-info.flex > div, 
-.wrap-main .cart-info.flex > div{
+
+.wrap-main .item-info.flex>div, .wrap-main .cart-info.flex>div {
 	padding: 5px 10px;
 	width: 160px;
 	line-height: 2em;
 	font-size: var(--font3);
 }
-.wrap-main .item-info.flex .item-name, 
-.wrap-main .cart-info.flex .cart-name{
+
+.wrap-main .item-info.flex .item-name, .wrap-main .cart-info.flex .cart-name
+	{
 	width: 640px;
 }
-.wrap-main .item-info.flex div:nth-child(n+2), 
-.wrap-main .cart-info.flex div:nth-child(n+2){
+
+.wrap-main .item-info.flex div:nth-child(n+2), .wrap-main .cart-info.flex div:nth-child(n+2)
+	{
 	text-align: center;
 }
 
 /* 사이드바 */
-.wrap-main aside.sidebar{
+.wrap-main aside.sidebar {
 	position: fixed;
 	border: 1px solid black;
 	border-radius: 10px;
 	background-color: white;
 	left: 20px;
 }
-.wrap-main div.sidebar{
+
+.wrap-main div.sidebar {
 	flex-direction: column;
 	align-items: center;
 	padding: 5px 10px;
 }
-.wrap-main .sidebar.item{
+
+.wrap-main .sidebar.item {
 	flex-direction: row;
 	column-gap: 10px;
 	margin-bottom: 10px;
 }
-.wrap-main .sidebar.item a{
+
+.wrap-main .sidebar.item a {
 	margin-top: 5px;
 }
 
 /* 가격 + 구매버튼 */
-.wrap-main .cart-bottom.flex{
+.wrap-main .cart-bottom.flex {
 	flex-direction: row;
 	border-top: 1px solid lightgray;
 	padding-top: 10px;
@@ -114,168 +123,180 @@
 	align-items: center;
 	justify-content: space-between
 }
-.wrap-main .cart-check.flex{
+
+.wrap-main .cart-check.flex {
 	align-items: center;
 	justify-content: center;
 }
-.wrap-main .cart-button.flex{
+
+.wrap-main .cart-button.flex {
 	column-gap: 15px;
 }
 </style>
 
 <script>
-$(loadedHandler);
-function loadedHandler(){
-	//버튼:hover css
-	$('.btn').hover(function(){
-		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'lightgray');
-			$(this).css('color', 'black');
-		}
-	}, function(){
-		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'black');
-			$(this).css('color', 'white');
-		}
-	});
-	
-	// 총 가격 계산
-	$('input[name=cart-pick]').on('click', sumCalcHandler);
-	
-	// 버튼 활성화
-	$('input[name=cart-pick]').on('click', btnActiveHandler);
-	
-	// 장바구니 삭제
-	$('.btn.del').on('click', cartDelHandler);
-	
-	// 장바구니 구매
-	$('.btn.pay').on('click', requestPayment);
-	
-}
+	$(loadedHandler);
+	function loadedHandler() {
+		//버튼:hover css
+		$('.btn').hover(function() {
+			if (!$(this).prop('disabled')) {
+				$(this).css('background-color', 'lightgray');
+				$(this).css('color', 'black');
+			}
+		}, function() {
+			if (!$(this).prop('disabled')) {
+				$(this).css('background-color', 'black');
+				$(this).css('color', 'white');
+			}
+		});
 
-//장바구니 구매
-async function requestPayment() {
-	let items = [];
-	$('input:checked').each(function(){
-		items.push($(this).val());
-	});
-	console.log("items >>>>>>>>> "+items);
-	let memEmail = "[[${memEmail}]]";
-	let memNick = "[[${memNick}]]";
-	let memTel = "[[${memTel}]]";
-	let orderName;
+		// 총 가격 계산
+		$('input[name=cart-pick]').on('click', sumCalcHandler);
+
+		// 버튼 활성화
+		$('input[name=cart-pick]').on('click', btnActiveHandler);
+
+		// 장바구니 삭제
+		$('.btn.del').on('click', cartDelHandler);
+
+		// 장바구니 구매
+		$('.btn.pay').on('click', requestPayment);
+
+	}
+
+	//장바구니 구매
+	async function requestPayment() {
+		let items = [];
+		$('input:checked').each(function() {
+			items.push($(this).val());
+		});
+		console.log("items >>>>>>>>> " + items);
+		let memEmail = "[[${memEmail}]]";
+		let memNick = "[[${memNick}]]";
+		let memTel = "[[${memTel}]]";
+		let orderName;
 		let itemName = $('input:checked').first().parent().prev().prev().text();
 		let itemNum = $('input:checked').length;
-	const totalAmount = $('input[name=pay]').val();
-	const storeId = "[[${storeId}]]";
-	console.log(storeId);
-	const channelKey = "[[${channelKey}]]";
-	if(itemNum > 1){
-		orderName = itemName+' 외 '+(itemNum-1)+'건';
-	}else{
-		orderName = itemName;
-	}
-	let buyId = "[[${buyId}]]";
-	
-	// 결제창 표시
-	const response = await PortOne.requestPayment({
-			storeId: storeId, // 고객사 storeId로 변경해주세요.
-		    paymentId: buyId,
-		    orderName: orderName,
-		    totalAmount: totalAmount,
-		    currency: "CURRENCY_KRW",
-		    channelKey: channelKey, // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
-		    payMethod: "CARD",
-		    customer: {
-		    	fullName: memNick, 
-		    	phoneNumber: memTel, 
-		    	email: memEmail
-		    }
-		});
-	
-	// 결제 검증
-	const ajax = await $.ajax({
-		url: contextPath+"store/payment", 
-		type: "post", 
-		data: {
-			paymentId: response.paymentId, 
-			totalAmount: totalAmount, 
-			items: items, 
-			buyId: buyId
+		const totalAmount = $('input[name=pay]').val();
+		const storeId = "[[${storeId}]]";
+		console.log(storeId);
+		const channelKey = "[[${channelKey}]]";
+		if (itemNum > 1) {
+			orderName = itemName + ' 외 ' + (itemNum - 1) + '건';
+		} else {
+			orderName = itemName;
 		}
-	});
-	
-	if (response.code != null) {
-	    // 오류 발생
-	    return alert(response.message);
-	  } else {
-		  if (ajax > 0) {
-			  // 결제 검증 성공
-			  alert("결제가 완료되었습니다. 구매내역 페이지로 이동합니다.");
-			  location.href = contextPath + "store/buy";
-		  } else {
-			  // 결제 검증 실패
-			  alert("요청 금액과 지불된 금액이 일치하지 않습니다. 메인 페이지로 이동합니다.");
-			  location.href = contextPath;
-		  }
-	  }
-	
-		
-}
+		let buyId = "[[${buyId}]]";
 
-// 장바구니 삭제
-function cartDelHandler(){
-	let items = [];
-	$('input:checked').each(function(){
-		items.push($(this).val());
-	});
-	console.log(items);
-	$.ajax({
-		url: contextPath+'store/cart/del', 
-		type: 'post', 
-		data: {items : items}, 
-		success: function(result){
-			if(result == 1){
-				alert('선택하신 상품이 삭제되었습니다.');
-				location.reload();
-			}else{
-				alert('상품 삭제 중 오류가 발생했습니다.');
+		// 결제창 표시
+		const response = await PortOne.requestPayment({
+			storeId : storeId, // 고객사 storeId로 변경해주세요.
+			paymentId : buyId,
+			orderName : orderName,
+			totalAmount : totalAmount,
+			currency : "CURRENCY_KRW",
+			channelKey : channelKey, // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
+			payMethod : "CARD",
+			customer : {
+				fullName : memNick,
+				phoneNumber : memTel,
+				email : memEmail,
 			}
-		}, 
-		error: ajaxErrorHandler 
-	});
-}
+		});
 
-// 총 가격 계산
-function sumCalcHandler(){
-	let sum = 0;
-	$('input[name=cart-pick]:checked').each(function(){
-		sum += $(this).next().val() * 1;
-	});
-	$('input[name=pay]').val(sum);
-	let sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	let text = '총 가격 : '+sum2+' 원';
-	$('.sum').text(text);
-}
-
-// 버튼 활성화
-function btnActiveHandler(){
-	let checkNum = $('input[name=cart-pick]:checked').length;
-	if(checkNum == 0){
-		$('.btn').prop('disabled', true);
-	}else{
-		$('.btn').prop('disabled', false);
+		if (response.code) {
+			// 오류 발생
+			return alert(response.message);
+		} else {
+			// 결제 검증
+			$.ajax({
+				url : contextPath + "store/payment",
+				type : "post",
+				data : {
+					paymentId : response.paymentId,
+					totalAmount : totalAmount,
+					items : items,
+					buyId : buyId
+				},
+				error : ajaxErrorHandler,
+				success : function(data) {
+					if (data == 1) {
+						if(confirm("결제가 완료되었습니다. 구매내역으로 이동하시겠습니까?")){
+							location.href = contextPath + "store/buy";
+						}
+						return;
+					} else {
+						alert("결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.");
+						return;
+					}
+				}
+			});
+		}
 	}
-}
+
+	// 장바구니 삭제
+	function cartDelHandler() {
+		let items = [];
+		$('input:checked').each(function() {
+			items.push($(this).val());
+		});
+		console.log(items);
+		$.ajax({
+			url : contextPath + 'store/cart/del',
+			type : 'post',
+			data : {
+				items : items
+			},
+			success : function(result) {
+				if (result == 1) {
+					alert('선택하신 상품이 삭제되었습니다.');
+					location.reload();
+				} else {
+					alert('상품 삭제 중 오류가 발생했습니다.');
+				}
+			},
+			error : ajaxErrorHandler
+		});
+	}
+
+	// 총 가격 계산
+	function sumCalcHandler() {
+		let sum = 0;
+		$('input[name=cart-pick]:checked').each(function() {
+			sum += $(this).next().val() * 1;
+		});
+		$('input[name=pay]').val(sum);
+		let sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		let text = '총 가격 : ' + sum2 + ' 원';
+		$('.sum').text(text);
+	}
+
+	// 버튼 활성화
+	function btnActiveHandler() {
+		let checkNum = $('input[name=cart-pick]:checked').length;
+		if (checkNum == 0) {
+			$('.btn').prop('disabled', true);
+		} else {
+			$('.btn').prop('disabled', false);
+		}
+	}
 </script>
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
 		<aside class="sidebar flex">
 			<div class="sidebar flex">
-				<div class="sidebar title"><a th:href="@{/store}">스토어</a></div>
-				<div class="sidebar item flex"><img th:src="@{/images/store/cart.png}" width="20px" height="20px"><a th:href="@{/store/cart}">장바구니</a></div>
-				<div class="sidebar item flex"><img th:src="@{/images/store/buy.png}" width="20px" height="20px"><a th:href="@{/store/buy}">구매내역</a></div>
+				<div class="sidebar title">
+					<a th:href="@{/store}">스토어</a>
+				</div>
+				<div class="sidebar item flex">
+					<img th:src="@{/images/store/cart.png}" width="20px" height="20px"><a
+						th:href="@{/store/cart}">장바구니</a>
+				</div>
+				<div class="sidebar item flex">
+					<img th:src="@{/images/store/buy.png}" width="20px" height="20px"><a
+						th:href="@{/store/buy}">구매내역</a>
+				</div>
 			</div>
 		</aside>
 		<div class="cart flex">
@@ -290,12 +311,14 @@ function btnActiveHandler(){
 					<div class="cart-name" th:text="${item.ITEM_NAME}"></div>
 					<div class="cart-price" th:text="${item.ITEM_PRICE_CHAR}+'원'"></div>
 					<div class="cart-check flex">
-						<input type="checkbox" name="cart-pick" th:value="${item.ITEM_CODE}" style="width: 20px; height: 20px;">
+						<input type="checkbox" name="cart-pick"
+							th:value="${item.ITEM_CODE}" style="width: 20px; height: 20px;">
 						<input type="hidden" th:value="${item.ITEM_PRICE}">
 					</div>
 				</div>
 			</div>
-			<div class="cart-list empty" th:unless="${cart} != null">장바구니가 비었습니다.</div>
+			<div class="cart-list empty" th:unless="${cart} != null">장바구니가
+				비었습니다.</div>
 		</div>
 		<div class="cart-bottom flex">
 			<div class="sum">총 가격 : 0 원</div>
