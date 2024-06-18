@@ -1,6 +1,11 @@
 @charset "UTF-8";
-.main-wrapper *{font-family: 'Binggrae';}
-
+.main-wrapper *{
+	font-family: 'Binggrae';
+	line-height: 120%;}
+/* 모든 이미지에 radius적용 */
+.main-wrapper img{ 
+	object-fit: cover;	
+	border-radius: 8px;}
 .main-wrapper{
 	width: 100%;
 	height:100vh;
@@ -17,8 +22,6 @@
 .main-wrapper .wfull{ width:100%;}
 .main-wrapper .w250{width:250px;}
 .main-wrapper .w220{width:220px;}
-/* 모든 이미지에 radius적용 */
-.main-wrapper img{border-radius: 8px;}
 
 /* 스크롤바 설정 */
 .scrollbar::-webkit-scrollbar{

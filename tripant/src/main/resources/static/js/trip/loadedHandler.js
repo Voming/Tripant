@@ -12,7 +12,11 @@ function loadedHanlder(){
 	dragAndDrop();
 	//일차별 동그라미 색 변경
 	circleColorHandler();
+	//장소별 머무는 시간 출력
+	staytimeHandler();
 	//test용
 	$(".mapbtn").click(panTo);
 	$(".test-btn").click(durationHandler);
+	
+	
 }

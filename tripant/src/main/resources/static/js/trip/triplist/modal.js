@@ -49,7 +49,6 @@ function shareModalHandler(){
 function divisionRoleHandler(){
 	
 	$(".trip-list.wfull").each(function(){
-		console.log($(this));
 	if($(this).data('role')==0){
 		$(this).find('.share-plan.modal').css('display','none');
 	}	
