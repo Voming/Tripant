@@ -43,10 +43,14 @@ public class AdminController {
 		
 		String memRole = "";
 		switch(selectRole) {
-		case 1: memRole = "ROLE_SLEEP"; break;
-		case 2: memRole = "ROLE_MEM"; break;
-		case 3: memRole = "ROLE_VIP"; break;
-		case 4: memRole = "ROLE_ADMIN"; break;
+		case 1: memRole = "ROLE_SLEEP"; 
+				break;
+		case 2: memRole = "ROLE_MEM"; 
+				break;
+		case 3: memRole = "ROLE_VIP"; 
+				break;
+		case 4: memRole = "ROLE_ADMIN"; 
+				break;
 		}
 		
 		Map<String, Object> map = new HashMap<>();
@@ -74,14 +78,14 @@ public class AdminController {
 		return "admin/admin_board";
 	}
 	
-
 	//ajax
 	//좋아요 정렬
 	@PostMapping("/like")
-	public Integer boardLike() {
+	@ResponseBody
+	public void boardLike(Model model) {
 		
-		return 0;
 	}
+	
 	
 	//신고게시글
 	@GetMapping("/complain")
