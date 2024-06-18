@@ -55,7 +55,7 @@
 													<p class="diary-nickname" style="font-size: var(--font5);"
 														th:text="${diary.memNick}"></p>
 													<p class="diary-preview" style="font-size: var(--font5);"
-														th:text="${diary.diaryContent}"></p>
+														th:utext="${diary.diaryContent}"></p>
 												</div>
 												<div class="diary-like">
 													<img th:src="@{/images/diary/diary_like_none.png}"
@@ -490,7 +490,7 @@
 				</div>
 				<!-- 글 리스트 7개씩 하고 for문으로 더보기 하기 -->
 				<div class="btn-more">
-					<button type="button" class="learn-more" onclick="loadMorePosts()">더보기</button>
+					<button type="button"  id="load-more" class="learn-more" onclick="loadMorePosts()">더보기</button>
 				</div>
 			</div>
 		</div>

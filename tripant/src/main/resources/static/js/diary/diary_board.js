@@ -1,5 +1,5 @@
 /* 더보기 */
-$(loadedHandler);
+/*$(loadedHandler);
 let morecnt = 0;
 
 function loadedHandler(){
@@ -20,7 +20,7 @@ function btnMoreclickHanlder(){
 			}
 		}
 		});
-}
+}*/
 /*탭 전환 시키기  */
 $(document).ready(function(){
 $('.area-tab-nav a').click(function() {
@@ -54,9 +54,11 @@ $(document).ready(function() {
 						}
 					});
 		});
-		
-/*글 클릭하기*/
-$(document).ready(function(){
-	
+
 });
-});
+// 글 8개만 보이게 하기
+$('.wrap-d-content:gt(8)').css("display", "none");
+
+//TODO- 더보기 클릭 이벤트
+
+

@@ -47,4 +47,15 @@ public class AdminSerivce {
 	public List<AdminBoardEntity> complainList(){
 		return admindao.complainList();
 	}
+	
+	// 결제 취소 페이지
+	// 결제 목록
+	public List<Map<String, Object>> payList(){
+		return admindao.payList();
+	}
+
+	// 결제 취소
+	public Integer payCancel(Map<String, Object> map) {
+		return admindao.payCancel(map);
+	}
 }

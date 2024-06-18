@@ -311,8 +311,7 @@
 					<div class="cart-name" th:text="${item.ITEM_NAME}"></div>
 					<div class="cart-price" th:text="${item.ITEM_PRICE_CHAR}+'원'"></div>
 					<div class="cart-check flex">
-						<input type="checkbox" name="cart-pick"
-							th:value="${item.ITEM_CODE}" style="width: 20px; height: 20px;">
+						<input type="checkbox" name="cart-pick" th:value="${item.ITEM_CODE}" style="width: 20px; height: 20px;">
 						<input type="hidden" th:value="${item.ITEM_PRICE}">
 					</div>
 				</div>

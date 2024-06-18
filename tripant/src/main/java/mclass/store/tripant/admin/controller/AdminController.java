@@ -1,10 +1,16 @@
 package mclass.store.tripant.admin.controller;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.service.AdminSerivce;
@@ -22,6 +30,14 @@ public class AdminController {
 
 	@Autowired
 	private AdminSerivce adminservice;
+	
+	@Autowired
+	private Gson gson;
+	
+	@Value("${pay.secret}")
+	private String paySecret;
+	@Value("${pay.storeId}")
+	private String storeId;
 	
 	@GetMapping("/member")
 	public ModelAndView Member(ModelAndView mv) {
@@ -43,10 +59,14 @@ public class AdminController {
 		
 		String memRole = "";
 		switch(selectRole) {
-		case 1: memRole = "ROLE_SLEEP"; break;
-		case 2: memRole = "ROLE_MEM"; break;
-		case 3: memRole = "ROLE_VIP"; break;
-		case 4: memRole = "ROLE_ADMIN"; break;
+		case 1: memRole = "ROLE_SLEEP"; 
+				break;
+		case 2: memRole = "ROLE_MEM"; 
+				break;
+		case 3: memRole = "ROLE_VIP"; 
+				break;
+		case 4: memRole = "ROLE_ADMIN"; 
+				break;
 		}
 		
 		Map<String, Object> map = new HashMap<>();
@@ -58,11 +78,11 @@ public class AdminController {
 	}
 	
 
-	//ajax
+	//ajax  TODO fragment
 	//검색 
 	@PostMapping("/member/search") 
 	@ResponseBody
-	public List<AdminMemEntity> MemberSearch(String searchMem) {
+	public List<AdminMemEntity> MemberSearch(Model model, String searchMem) {
 		List<AdminMemEntity> memList=adminservice.search(searchMem);
 		return memList ;
 	}
@@ -74,14 +94,14 @@ public class AdminController {
 		return "admin/admin_board";
 	}
 	
-
 	//ajax
 	//좋아요 정렬
 	@PostMapping("/like")
-	public Integer boardLike() {
+	@ResponseBody
+	public void boardLike(Model model) {
 		
-		return 0;
 	}
+	
 	
 	//신고게시글
 	@GetMapping("/complain")
@@ -95,9 +115,50 @@ public class AdminController {
 		return "admin/admin_goods";
 	}
 	
+	// 결제 취소 페이지
 	@GetMapping("/cancel")
-	public String cancel() {
-		return "admin/admin_cancel";
+	public ModelAndView cancel(ModelAndView mv) {
+		mv.setViewName("admin/admin_cancel");
+		List<Map<String, Object>> list = adminservice.payList();
+		if(list != null) {
+			mv.addObject("list", list);
+		}
+		return mv;
+	}
+	
+	// 결제 취소
+	@PostMapping("/cancel")
+	@ResponseBody
+	public int cancelP(String memEmail, String buyId) throws IOException, InterruptedException {
+		Map<String, Object> requestBody = new HashMap<>();
+		requestBody.put("reason", "고객 요청으로 결제 취소");
+		
+		// 결제 취소 API 호출
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.portone.io/payments/"+buyId+"/cancel"))
+			    .header("Content-Type", "application/json")
+			    .header("Authorization", "PortOne " + paySecret)
+			    .method("POST", HttpRequest.BodyPublishers.ofString(gson.toJson(requestBody)))
+			    .build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
+		Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
+		String status = (String) cancellation.get("status");
+		int result;
+		// 결제 취소 완료 상태면 결제 내역 테이블에서 삭제
+		if(status != null) {
+			if(status.equals("SUCCEEDED")) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("buyId", Integer.parseInt(buyId));
+				map.put("memEmail", memEmail);
+				result = adminservice.payCancel(map);
+				return result;
+			}else {
+				return 0;
+			}
+		}else {
+			return 0;
+		}
 	}
 	
 	@GetMapping("/mchart")
@@ -109,5 +170,6 @@ public class AdminController {
 	public String bchart() {
 		return "admin/admin_bchart";
 	}
+	
 
 }

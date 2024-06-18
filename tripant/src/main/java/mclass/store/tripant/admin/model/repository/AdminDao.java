@@ -31,10 +31,17 @@ public interface AdminDao {
 	
 	//신고게시글
 	public List<AdminBoardEntity> complainList();
+
+	// 결제 취소 페이지
+	// 결제 목록
+	public List<Map<String, Object>> payList();
+
+	// 결제 취소
+	public Integer payCancel(Map<String, Object> map);
 	
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 
 	//페이지 당 나오는 회원정보 수 뽑기
 	//public List<AdminMemEntity> selectPage();
-
+	
 }

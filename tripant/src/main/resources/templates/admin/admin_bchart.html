@@ -36,12 +36,15 @@
 	</div>
 	
 	<div class="wrap-body">
-		<div class="ad-header">
-			<div class="ad-text">게시글통계</div>
+		<form action ="/logout" method="post">
+			<div class="ad-header">
+				<div class="ad-text">게시글통계</div>
+				<button type="submit" class="btn-logout">로그아웃</button>
+			</div>
+		</form>	
+			<canvas id="myChart" style="height:90vh; width:80vw"></canvas>
 		</div>
-		<canvas id="myChart" style="height:90vh; width:80vw"></canvas>
-	</div>
-</div>		
+	</div>		
 		
 <script th:line="javascript" th:src="@{/js/admin/board/board_chart.js}" ></script>
 </body>

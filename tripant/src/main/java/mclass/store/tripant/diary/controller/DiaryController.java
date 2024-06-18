@@ -38,12 +38,11 @@ public class DiaryController {
         return "diary/diary_read";
 	}
     // 더보기
-    @PostMapping("/more/List")
-    
-    public String more() {
-    	
-    	return null;
-    }
+//@GetMapping
+//public String getLists(Model model) {
+	// 처음에는 첫 번째 페이지의 글 8개를 불러옴
+//	List<>
+}
     //    @PostMapping("/report")
 //    public int report() {
 //        int result = diaryService.
@@ -51,5 +50,5 @@ public class DiaryController {
 //    }
 
     
-}
+//}
 

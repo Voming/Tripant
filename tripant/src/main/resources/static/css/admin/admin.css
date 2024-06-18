@@ -78,3 +78,16 @@ a{
     background: black;
     color:white;
 }
+
+/* 로그아웃 버튼 */
+.wrap-body .ad-header{
+	display:flex;
+}
+.ad-header .btn-logout{
+	border-radius:8px;
+	border:solid black 1px;
+	height:30px;
+	width:70px;
+	background-color:white;
+	margin:15px 15px 0 auto;
+}
