@@ -35,6 +35,9 @@ public interface AdminDao {
 	// 결제 취소 페이지
 	// 결제 목록
 	public List<Map<String, Object>> payList();
+
+	// 결제 취소
+	public Integer payCancel(Map<String, Object> map);
 	
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 

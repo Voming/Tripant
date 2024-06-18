@@ -8,7 +8,7 @@
 		 where substr(item_code, 1, 1) = 'T' 
 		 <if test="#{memEmail} != null">
 		  and item_code not in (select item_code from cart where substr(item_code, 1, 1) = 'T' and mem_email = #{memEmail}) 
-		   and item_code not in (select buy_item_code from buy where substr(buy_item_code, 1, 1) = 'T' and mem_email = #{memEmail}) 
+		   and item_code not in (select item_code from buy where substr(item_code, 1, 1) = 'T' and mem_email = #{memEmail}) 
 		 </if>
 		    order by item_code 
 	</select>
@@ -44,7 +44,7 @@
 	<!-- 구매내역 -->
 	<!-- 구매내역 목록 -->
 	<select id="buy" resultType="map" parameterType="string">
-		select buy_id, item_name, to_char(item_price, '9,999') as item_price_char, item_price, to_char(buy_date, 'YYYY-MM-DD') as buy_date from buy join item on buy_item_code = item_code where mem_email = #{mem_email} order by buy_id desc
+		select buy_id, item_name, to_char(item_price, '9,999') as item_price_char, item_price, to_char(buy_date, 'YYYY-MM-DD') as buy_date from buy b join item i on b.item_code = i.item_code where mem_email = #{mem_email} order by buy_id desc
 	</select>
 	<!-- 주문정보 -->
 	<select id="buyInfo" resultType="map">

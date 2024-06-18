@@ -53,4 +53,9 @@ public class AdminSerivce {
 	public List<Map<String, Object>> payList(){
 		return admindao.payList();
 	}
+
+	// 결제 취소
+	public Integer payCancel(Map<String, Object> map) {
+		return admindao.payCancel(map);
+	}
 }

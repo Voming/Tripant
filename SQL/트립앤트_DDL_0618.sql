@@ -649,7 +649,7 @@ where schedule_day = stay_day
 )with read only;
 ---- 관리자 페이지 결제 취소 목록
 create or replace view V_PAY_LIST as(
-select m.mem_nick, m.mem_email, i.item_name, b.buy_date, b.item_code from buy b
+select b.buy_id, m.mem_nick, m.mem_email, i.item_name, b.buy_date, b.item_code from buy b
 join member m on m.mem_email = b.mem_email
     join item i on b.item_code = i.item_code
 ) with read only;

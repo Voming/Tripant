@@ -1,10 +1,16 @@
 package mclass.store.tripant.admin.controller;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.service.AdminSerivce;
@@ -22,6 +30,14 @@ public class AdminController {
 
 	@Autowired
 	private AdminSerivce adminservice;
+	
+	@Autowired
+	private Gson gson;
+	
+	@Value("${pay.secret}")
+	private String paySecret;
+	@Value("${pay.storeId}")
+	private String storeId;
 	
 	@GetMapping("/member")
 	public ModelAndView Member(ModelAndView mv) {
@@ -109,6 +125,22 @@ public class AdminController {
 		}
 		return mv;
 	}
+	
+	// 결제 취소
+	@PostMapping("/cancel")
+	@ResponseBody
+	public int cancelP(String memEmail, String buyId) throws IOException, InterruptedException {
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.portone.io/payments/paymentId/pre-register"))
+			    .header("Content-Type", "application/json")
+			    .header("Authorization", "PortOne " + paySecret)
+			    .method("POST", HttpRequest.BodyPublishers.ofString("{}"))
+			    .build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+		System.out.println(response.body());
+		return 0;
+	}
+	
 	
 	@GetMapping("/mchart")
 	public String mchart() {
