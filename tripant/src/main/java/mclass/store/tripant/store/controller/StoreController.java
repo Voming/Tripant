@@ -161,7 +161,7 @@ public class StoreController {
 			}
 			map.put("list", list);
 			result = storeService.pay(map);
-			return result;
+			return 1;
 		}else {
 			return result = 0;
 		}
