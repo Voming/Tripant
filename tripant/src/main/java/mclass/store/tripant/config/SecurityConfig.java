@@ -42,13 +42,7 @@ public class SecurityConfig {
 						new AntPathRequestMatcher("/admin/**")
 						).hasAnyAuthority("ADMIN")
 				.requestMatchers(
-						new AntPathRequestMatcher("/css/**")
-						, new AntPathRequestMatcher("/js/**")
-						, new AntPathRequestMatcher("/images/**")
-						, new AntPathRequestMatcher("/fonts/**")
-						, new AntPathRequestMatcher("/diary")
-						, new AntPathRequestMatcher("/store")
-						, new AntPathRequestMatcher("/")
+						new AntPathRequestMatcher("/**")
 						).permitAll()
 					)
 		.csrf((csrf) -> csrf

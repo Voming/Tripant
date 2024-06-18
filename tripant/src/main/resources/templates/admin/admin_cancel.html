@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>결제취소</title>
-<!-- reset.css -->
-<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
-<!-- 레이아웃 설정 -->
-<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<head th:replace="~{common/header :: head('결제취소')}"></head>
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_cancel.css}" rel="stylesheet">
-
-<!--제이쿼리  -->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-</head>
 <body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
 		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
-		<div class="ad-menu"> 관리자메뉴</div>
+		<div class="ad-menu">관리자메뉴</div>
 		<div class="ad-member">회원관리</div>
 		<div class="ad-menumember a"><a href="/admin/member">회원관리</a></div>
 		<div class="ad-menumember b"><a href="/admin/mchart">회원통계</a></div>
@@ -57,7 +47,7 @@
 						</ul>
 					</li>
 					<li>
-						<ul class="col list" th:each="map : ${list}">
+						<ul class="col list" th:each="map : ${list}" th:data-id="${map.BUY_ID}" th:data-email="${map.MEM_EMAIL}">
 							<li th:text="${map.BUY_ID}"></li>
 							<li th:text="${map.MEM_NICK}"></li>
 							<li th:text="${map.MEM_EMAIL}"></li>
@@ -77,27 +67,33 @@
 <script>
 $(loadedHandler);
 function loadedHandler() {
+	// 결제 취소 버튼
 	$(".btn.cancel").on("click", payCancelHandler);
 }
 
+// 결제 취소
 function payCancelHandler(){
-	const memEmail = $(this).parent().prev().prev().prev().text();
-	$.ajax({
-		url: contextPath + "admin/cancel", 
-		type: "post", 
-		data: {
-			memEmail: memEmail
-		}, 
-		error: ajaxErrorHandler, 
-		success: function(data){
-			if(data > 0){
-				alert("결제 취소가 완료되었습니다.");
-				location.reload();
-			}else{
-				alert("결제 취소 중 오류가 발생했습니다.");
+	const buyId = $(this).parents(".col.list").data("id").toString();
+	const memEmail = $(this).parents(".col.list").data("email");
+	if(confirm("해당 주문번호의 모든 건이 취소됩니다.\n진행하시겠습니까?")){
+		$.ajax({
+			url: contextPath + "admin/cancel", 
+			type: "post", 
+			data: {
+				buyId: buyId, 
+				memEmail: memEmail 
+			}, 
+			error: ajaxErrorHandler, 
+			success: function(data){
+				if(data > 0){
+					alert("결제 취소가 완료되었습니다.");
+					location.reload();
+				}else{
+					alert("결제 취소 중 오류가 발생했습니다.");
+				}
 			}
-		}
-	});
+		});
+	}
 }
 </script>
 </body>

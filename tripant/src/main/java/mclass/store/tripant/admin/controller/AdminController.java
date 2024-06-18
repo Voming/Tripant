@@ -130,17 +130,36 @@ public class AdminController {
 	@PostMapping("/cancel")
 	@ResponseBody
 	public int cancelP(String memEmail, String buyId) throws IOException, InterruptedException {
+		Map<String, Object> requestBody = new HashMap<>();
+		requestBody.put("reason", "고객 요청으로 결제 취소");
+		
+		// 결제 취소 API 호출
 		HttpRequest request = HttpRequest.newBuilder()
-			    .uri(URI.create("https://api.portone.io/payments/paymentId/pre-register"))
+			    .uri(URI.create("https://api.portone.io/payments/"+buyId+"/cancel"))
 			    .header("Content-Type", "application/json")
 			    .header("Authorization", "PortOne " + paySecret)
-			    .method("POST", HttpRequest.BodyPublishers.ofString("{}"))
+			    .method("POST", HttpRequest.BodyPublishers.ofString(gson.toJson(requestBody)))
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		System.out.println(response.body());
-		return 0;
+		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
+		Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
+		String status = (String) cancellation.get("status");
+		int result;
+		// 결제 취소 완료 상태면 결제 내역 테이블에서 삭제
+		if(status != null) {
+			if(status.equals("SUCCEEDED")) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("buyId", Integer.parseInt(buyId));
+				map.put("memEmail", memEmail);
+				result = adminservice.payCancel(map);
+				return result;
+			}else {
+				return 0;
+			}
+		}else {
+			return 0;
+		}
 	}
-	
 	
 	@GetMapping("/mchart")
 	public String mchart() {
