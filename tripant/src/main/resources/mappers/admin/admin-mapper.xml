@@ -54,4 +54,11 @@
 	join member on diary_mem_email=mem_email
 	where reports>=1
 	</select>
+	
+	<!-- 결제 취소 페이지 -->
+	<!-- 결제 목록 -->
+	<select id="payList" resultType="map" >
+	select mem_nick, mem_email, item_name, to_char(buy_date, 'YYYY-MM-DD') as buy_date, item_code from v_pay_list
+	</select>
+	
 </mapper>

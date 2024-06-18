@@ -99,9 +99,15 @@ public class AdminController {
 		return "admin/admin_goods";
 	}
 	
+	// 결제 취소 페이지
 	@GetMapping("/cancel")
-	public String cancel() {
-		return "admin/admin_cancel";
+	public ModelAndView cancel(ModelAndView mv) {
+		mv.setViewName("admin/admin_cancel");
+		List<Map<String, Object>> list = adminservice.payList();
+		if(list != null) {
+			mv.addObject("list", list);
+		}
+		return mv;
 	}
 	
 	@GetMapping("/mchart")
@@ -113,5 +119,6 @@ public class AdminController {
 	public String bchart() {
 		return "admin/admin_bchart";
 	}
+	
 
 }
