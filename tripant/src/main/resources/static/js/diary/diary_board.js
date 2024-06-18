@@ -56,26 +56,9 @@ $(document).ready(function() {
 		});
 
 });
+// 글 8개만 보이게 하기
+$('.wrap-d-content:gt(8)').css("display", "none");
 
-document.addEventListener('DOMContentLoaded', function() {
-    const loadMoreButton = document.getElementById('#load-more');
-    const diaryContainer = document.querySelector('.wrap-d-content');
-
-    let startIndex = 8; // 처음에 보여질 항목 개수
-
-    loadMoreButton.addEventListener('click', function() {
-        // 예시로 간단히 추가할 다이어리 항목 생성
-        for (let i = startIndex; i < startIndex + 4; i++) {
-            const newDiaryItem = document.createElement('div');
-            newDiaryItem.classList.add('wrap-content');
-            // 새로운 다이어리 항목의 내용을 생성하여 추가
-            // 예: newDiaryItem.innerHTML = '새로운 다이어리 항목 내용';
-
-            diaryContainer.appendChild(newDiaryItem);
-        }
-
-        startIndex += 4; // 다음에 로드할 항목의 시작 인덱스 업데이트
-    });
-});
+//TODO- 더보기 클릭 이벤트
 
 
