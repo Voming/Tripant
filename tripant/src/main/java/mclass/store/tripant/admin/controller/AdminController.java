@@ -78,11 +78,11 @@ public class AdminController {
 	}
 	
 
-	//ajax
+	//ajax  TODO fragment
 	//검색 
 	@PostMapping("/member/search") 
 	@ResponseBody
-	public List<AdminMemEntity> MemberSearch(String searchMem) {
+	public List<AdminMemEntity> MemberSearch(Model model, String searchMem) {
 		List<AdminMemEntity> memList=adminservice.search(searchMem);
 		return memList ;
 	}
