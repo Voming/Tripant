@@ -32,10 +32,13 @@
 	</div>
 	
 	<div class="wrap-body">
-		<form>
+		<form action ="/logout" method="post">
 			<div class="ad-header">
 				<div class="ad-text">전체 게시글</div>
+				<button type="submit" class="btn-logout">로그아웃</button>
 			</div>
+		</form>
+			
 			<div class="ad-search">
 				<select class="search-option" name="option" style='border:none'>
 					<option value="nick" selected>닉네임</option>
@@ -72,7 +75,6 @@
 					</li>
 				</ul>
 			</div>
-		</form>
 	</div>
 </div>	
 
@@ -87,19 +89,33 @@ function ClickLikeHandler(){
 	$.ajax({
 		url:"/admin/like",
 		 method:"post",
-		 data: {},
 		 success : function(result) {
-			 		
+			 LikeHandler(result)
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"
 						+ "message: " + request.responseText + "\n"
 						+ "error: " + error);
 			}
-		
 	});
 } 
-
+function LikeHandler(like){
+	var htmlVal = '';
+	for (var idx in like){
+		var memBoard = like[idx];
+		htmlVal+=`
+			<ul class="col list">
+			<li th:text="${memBoard.diaryId}"></li>
+			<li th:text="${memBoard.diaryTitle}"></li>
+			<li th:text="${memBoard.memNick}"></li>
+			<li th:text="${memBoard.diaryDate}"></li>
+			<li th:text="${memBoard.diaryViews}"></li>
+			<li th:text="${memBoard.likes}"></li>
+			<li></li>
+		</ul>
+			`;
+	}
+}
 
 </script>
 </body>
