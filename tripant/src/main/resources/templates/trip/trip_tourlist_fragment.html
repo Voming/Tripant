@@ -3,19 +3,19 @@
 
 	<!-- tourlist -->
 	<div th:fragment="tourlist" class="tourlist scrollbar flex">
-		<div th:each="details,daylist:${detailList}" class="column flex" data-columns="${daylist.count}" id="#tab01">
+		<div th:each="details,daylist:${detailList}" class="column flex" th:data-columns="${daylist.count}" th:id="'#tab'+${daylist.count}">
 			<div class="sub-title flex ">
 				<h4 th:text="${daylist.count} + '일차'" class="nday"></h4>
 				<h6 th:text="${#dates.format(details.travelDate, 'yyyy-MM-dd')} + '('+${#dates.dayOfWeekName(details.travelDate).substring(0, 1)}+')'" class="date"></h6>
 			</div>
 		 	<div th:each="info,idxlist:${details.dayDetailInfoEntity}"  class="container flex wfull">
-			 	<div class="spot grid wfull">
+			 	<div class="spot grid wfull" th:data-spot-order="${idxlist.count}"  th:data-stay-time="${info.stayTime}" th:data-info="${info}">
 			 		<div class="spot-number backimg"><p th:text="${idxlist.count}"></p></div>
 			 		<div class="spot-staytime">10:00-11:00</div>
 			 		<div class="spot-type">명소</div>
-			 		<div class="spot-title" th:text="${info.title}"></div>
+			 		<div class="spot-title wfull" th:text="${info.title}"></div>
 			 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span th:text="${info.memo}" class="memo"></span></div>
-			 		<div class="spot-img"><img th:src="${info.firstimage}" alt="장소이미지"></div>
+			 		<div class="spot-img wfull hfull"><img class=" wfull hfull" th:src="${info.firstimage}" onerror="this.onerror=null; this.src='/images/icons/spot_sample.png';" ></div>
 			 		<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
 			 		<div class="spot-move"> 45분> </div>
 			    </div>
