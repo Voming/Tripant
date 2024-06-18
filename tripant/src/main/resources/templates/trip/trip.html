@@ -5,26 +5,20 @@
     <link rel="stylesheet" th:href="@{/css/trip/trip_layout.css}">
     <link rel="stylesheet" th:href="@{/css/trip/trip_nav.css}">
     <link rel="stylesheet" th:href="@{/css/trip/trip_schedule.css}">
+    <link rel="stylesheet" th:href="@{/css/trip/trip_spot_info.css}">
     <link rel="stylesheet" th:href="@{/css/trip/tripMap.css}">
-<head th:replace="~{common/header :: head('trip')}">
+<head th:replace="~{common/header :: head('여행일정')}">
 </head>
 <body>
 	<div class="main-wrapper">
 		<aside class="nav-wrapper flex">
-			<nav class="nav flex">
+			<nav class="nav flex" >
 				<a th:href="@{/}"><img class="logo" src="/images/tripant_logo_text.png"></a>
 				<div class="dayn"><a href="#tab00">전체일정</a></div>
-				<!-- 일정 수 만큼 each로 가져오기 -->
-				<div class="dayn"><a href="#tab01">1일차</a></div>
-				<div class="dayn"><a href="#tab02">2일차</a></div>
-				<div class="dayn"><a href="#tab03">3일차</a></div>
-				<div class="dayn"><a href="#tab04">4일차</a></div>
-				<div class="dayn"><a href="#tab05">5일차</a></div>
-				<div class="dayn"><a href="#tab06">6일차</a></div>
-				<div class="dayn"><a href="#tab07">7일차</a></div>
-				<div class="dayn"><a href="#tab08">8일차</a></div>
-				<div class="dayn"><a href="#tab09">9일차</a></div>
-				<div class="dayn"><a href="#tab10">10일차</a></div>
+				<!-- 일정 수 만큼 each로 가져오기 th:block 묶음처리-->
+				<th:block th:each="details,daylist:${detailList}">
+				<div class="dayn"><a href="'#tab'+${daylist.count}">[[${daylist.count}]]일차</a></div>
+				</th:block>
 			</nav>
 			<div class="plan_update flex">
 				<button type="button" class="edit btn">편집</button>
@@ -211,6 +205,7 @@ function memoNoHandler(){
 
 
 </script>
+<script type="text/javascript" th:src="@{/js/trip/time.js}"></script>
 <script type="text/javascript" th:src="@{/js/trip/tripMap.js}"></script>
 <script type="text/javascript" th:src="@{/js/trip/nav_btn.js}"></script>
 </body>
