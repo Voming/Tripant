@@ -55,7 +55,7 @@
 													<p class="diary-nickname" style="font-size: var(--font5);"
 														th:text="${diary.memNick}"></p>
 													<p class="diary-preview" style="font-size: var(--font5);"
-														th:text="${diary.diaryContent}"></p>
+														th:utext="${diary.diaryContent}"></p>
 												</div>
 												<div class="diary-like">
 													<img th:src="@{/images/diary/diary_like_none.png}"
