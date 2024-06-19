@@ -5,7 +5,8 @@
 .wrap-main{
 	display:flex;
 	flex-direction:row;
-    margin: 0 auto;
+   /*  margin: 0 auto; */
+    width:1900px;
 }
 
 
