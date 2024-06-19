@@ -41,6 +41,7 @@ public class MyDiaryController {
 	public String mydiary(Model model) {
 		diaryService.selectDiaryList();
 		model.addAttribute("diaries", diaryService.selectDiaryList());
+		
 		System.out.println("======mydiary controller===" + diaryService.selectDiaryList());
 		return "diary/my/my_board";
 	}

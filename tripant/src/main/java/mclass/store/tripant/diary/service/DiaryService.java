@@ -15,32 +15,34 @@ public class DiaryService {
 	@Autowired
 	private DiaryRepository diaryRepository;
 
-// 여행기, 나만의 여행기 글 리스트 가져오기	
-	public List<DiaryBoardEntity> selectDiaryList() {
-		return diaryRepository.selectDiaryList();
-	}
+	// 다이어리 리스트 가져오기
+    public List<DiaryBoardEntity> selectDiaryList() {
+        return diaryRepository.selectDiaryList();
+    }
 
-	// 특정 ID의 다이어리 가져오기
-	public DiaryBoardEntity findById(Long id) {
-		return diaryRepository.findById(id);
-	}
+    // 특정 ID의 다이어리 가져오기
+    public DiaryBoardEntity findById(Long id) {
+        return diaryRepository.findById(id);
+    }
 
-	// 게시글 등록하기
-	public DiaryBoardEntity save(DiaryBoardEntity diary) {
-//		diaryRepository.insertDiary(diary);
-//		// 공개 설정
-//		diary.setDiaryOpen("0");
-//		// 비공개 설정
-//		diary.setDiaryOpen("1");
+    // 다이어리 등록하기
+    public DiaryBoardEntity save(DiaryBoardEntity diary) {
+        diaryRepository.insertDiary(diary);
+        return diary;
+    }
 
-		diaryRepository.insertDiary(diary);
-		return diary;
-	}
+    // 회원의 모든 여행 계획 가져오기
+    public List<WritePlanTitleEntity> getAllPlans(String memberEmail) {
+        return diaryRepository.selectPlanById(memberEmail);
+    }
 
-	// planId로 PLAN 조회
-	  public List<WritePlanTitleEntity> getAllPlans(String memberEmail) {
-	        return diaryRepository.selectPlanById(memberEmail);
-	    }
-	  
-
+    // 다이어리 좋아요 수 증가하기
+    public boolean incrementLikes(Long diaryId) {
+        try {
+            diaryRepository.incrementLikes(diaryId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
