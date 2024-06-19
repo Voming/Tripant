@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-	<div class="wrap-d-content" th:fragment="diaryitemlist"> 
+	<div class="wrap-d-content"  th:fragment="diaryitemlist"> 
 		<!-- 공개글 데이터 가져오기  -->
 		<th:block th:if="${diaries} != null">
 			<th:block th:each="diary :  ${diaries}">
