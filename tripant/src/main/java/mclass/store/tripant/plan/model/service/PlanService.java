@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
-import mclass.store.tripant.place.domain.SpotEntity;
+import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 
 @Service
@@ -40,11 +40,11 @@ public class PlanService {
 		return planRepository.selectAreaShortName(areaCode);
 	}
 
-	public List<SpotEntity> selectTypeList(int areaCode, int spotType){
-		return planRepository.selectTypeList(areaCode, spotType);
+	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType){
+		return planRepository.selectTypeList(areaCode, placeType);
 	}
 	
-	public List<SpotEntity> selectTypeListMore(int areaCode, int spotType, int maxNum){
-		return planRepository.selectTypeListMore(areaCode, spotType, maxNum);
+	public List<PlaceboxEntity> selectTypeListMore(int areaCode, int placeType, int maxNum){
+		return planRepository.selectTypeListMore(areaCode, placeType, maxNum);
 	}
 }

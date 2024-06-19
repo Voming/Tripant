@@ -1,4 +1,3 @@
-//장소 탭
 var clickspotnum = 0;
 var areacode;
 var spottype;
@@ -23,6 +22,7 @@ function spotMoreBtnClickHandler(thisElement) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
 	});
 }
+
 $(document).ready(function() {
 	$('.spot-tab-nav a').click(function() {
 		$('.spot-tab-content > div').hide().filter(this.hash).fadeIn();

@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class SpotEntity {
+public class PlaceboxEntity {
 //	TYPE          NOT NULL NUMBER         
 //	CONTENTID     NOT NULL NUMBER         
 //	ADD1          NOT NULL VARCHAR2(500)  

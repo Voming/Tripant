@@ -9,11 +9,13 @@
 					<span class="stay-name" th:text="${stay.title}"></span> 
 					<span class="stay-address" th:text="${stay.add1}"></span>
 				</div>
-				<input type="checkbox" th:data-stayid="${stay.contentid}" th:id="|stay-check-${stayStat.index}|">
-				<label th:for="|stay-check-${stayStat.index}|"></label>
+				<input type="checkbox" th:data-stayid="${stay.contentid}"
+					th:id="|stay-check-${stayStat.index}|"> <label
+					th:for="|stay-check-${stayStat.index}|"></label>
 			</div>
 		</th:block>
 	</th:block>
-	<div><button type="button" class="stay_more_btn">더보기</button></div>
+	<div><button type="button" onclick="stayMoreBtnClickHandler(this);" class="stay_more_btn">더보기</button></div>
 </div>
+
 </html>

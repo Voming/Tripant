@@ -29,15 +29,15 @@
 		SELECT AREA_SHORT_NAME FROM AREA WHERE AREA_CODE = #{areaCode}
 	</select>
 
-	<select id="selectTypeList" parameterType="_int" resultType="SpotEntity">
+	<select id="selectTypeList" parameterType="_int" resultType="PlaceboxEntity">
 		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
-		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{spotType}  
+		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{placeType}  
 		AND ROWNUM <![CDATA[<=]]> 10
 	</select>
 	
-	<select id="selectTypeListMore" parameterType="_int" resultType="SpotEntity">
+	<select id="selectTypeListMore" parameterType="_int" resultType="PlaceboxEntity">
 	SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
-		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{spotType}  
+		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{placeType}  
 		AND ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
 

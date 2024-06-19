@@ -1,3 +1,28 @@
+var clickstaynum = 0;
+var areacode;
+var staytype;
+
+function stayMoreBtnClickHandler(thisElement) {
+	clickstaynum += 1;
+	console.log(clickstaynum);
+	console.log("들어옴" +areacode + staytype);
+
+
+	$.ajax({
+		url: contextPath + "plan/stay/more"
+		, method: "post"
+		, context: this
+		, data: {
+			areaCode: areacode,
+			stayType: staytype,
+			clickStayNum : clickstaynum
+		}
+		, error: ajaxErrorHandler
+	}).done(function(wrap_stay) {
+		$(".wrap-stayList").replaceWith(wrap_stay);
+	});
+}
+
 //장소 탭
 $(document).ready(function() {
 	$('.stay-tab-nav a').click(function() {
@@ -14,7 +39,6 @@ $(document).ready(function() {
 		var stayTypeS = $(this).text();
 
 		// type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장)
-		var staytype;
 		if (stayTypeS == '숙박') {
 			staytype = 5;
 		} else if (stayTypeS == '캠핑장') {
