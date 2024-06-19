@@ -45,6 +45,9 @@ public class DiaryService {
             return false;
         }
     }
-
+    // 글 더보기 클릭시
+    public List<DiaryBoardEntity> selectDiaryListMore(int offset, int limit){
+    	return diaryRepository.selectDiaryListMore();
+    }
 	
 }

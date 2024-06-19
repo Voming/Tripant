@@ -55,3 +55,23 @@ $(document).ready(function() {
         });
     });
 });
+
+//장소 더보기 클릭
+var clicknum = 0;
+function MoreBtnClickHandler(thisElement) {
+	clicknum += 1;
+
+	$.ajax({
+		url: contextPath + "diary/more"
+		, method: "post"
+		, context: this
+		, data: {
+			areaCode: areacode,
+			placeType: placetype,
+			clickNum : clicknum
+		}
+		, error: ajaxErrorHandler
+	}).done(function(wrap_place) {
+		$(".wrap-placeList").replaceWith(wrap_place);
+	});
+}
