@@ -5,6 +5,8 @@ SELECT * FROM diary_reports;
 -- planId, memberemail -> 닉네임
 SELECT * FROM plan;
 SELECT * FROM member;
+-- 지역 코드, 지역명 join해서 쿼리문 짜기
+select*from area;
 
 DESC diary;
 --DIARY_ID 컬럼을 자동으로 증가 시퀀스
@@ -62,5 +64,34 @@ SELECT p.plan_id AS planId, p.plan_title AS planTitle
 FROM diary d
 JOIN plan p ON d.diary_plan_id = p.plan_id
 WHERE d.diary_mem_email = 'qothwls5@naver.com';
+
+
+----view 생성 하고 read only 사용
+create or replace view view_diary_member
+as 
+(
+select d.*, m.mem_nick 
+-- add column
+from diary d
+left outer join member m on (d.diary_mem_email = m.mem_email)
+)
+with read only
+;
+create or replace view view_diary_member_plan
+as 
+(
+select d.*, m.mem_nick, p.plan_area_code
+-- add column
+from diary d
+left outer join member m on (d.diary_mem_email = m.mem_email)
+left outer join plan p on (d.diary_plan_id = p.plan_id)
+)
+with read only
+;
+--지역 코드 연결하기
+select d.diary_id, d.diary_title, d.diary_content, d.diary_date, d.mem_nick, d.diary_views from view_diary_member D
+join plan P on(D.diary_plan_id = P.plan_id)
+where P.plan_area_code ='1'
+;
 
 commit;
