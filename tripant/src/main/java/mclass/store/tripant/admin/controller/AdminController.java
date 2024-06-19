@@ -114,9 +114,11 @@ public class AdminController {
 	//신고수 초기화
 	@PostMapping("/reset")
 	@ResponseBody
-	public String complain() {
-		return "";
+	public int complainReset(Integer diaryId) {
+		int result=adminservice.complainReset(diaryId);
+		return result;
 	}
+	
 	@GetMapping("/goods")
 	public String goods() {
 		return "admin/admin_goods";
