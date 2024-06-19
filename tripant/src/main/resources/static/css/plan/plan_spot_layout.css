@@ -74,7 +74,7 @@
 	overflow-y: auto;
 }
 
-.spot-tab-content div .spot-box {
+.spot-tab-content div .place-box {
 	width: 100%;
 	height: 80px;
 	border-radius: 8px;
@@ -87,7 +87,7 @@
 	margin-right: 5px;
 }
 
-.spot-tab-content div .spot-img {
+.spot-tab-content div .place-img {
 	width: 70px;
 	height: 70px;
 	object-fit: cover;
@@ -95,7 +95,7 @@
 	border-radius: 8px;
 }
 
-.spot-tab-content div .spot-txt {
+.spot-tab-content div .place-txt {
 	width: 200px;
 	margin: 0 10px;
 	font-size: var(--font5);
@@ -124,7 +124,7 @@
 }
 
 /*더보기 버튼*/
-.tab-content  #tab02 .spot-tab-content .spot_more_btn {
+.tab-content  #tab02 .spot-tab-content .place_more_btn {
 	margin-top: 20px;
 	width: 100%;
 	height: 40px;
@@ -139,7 +139,7 @@
 	cursor: pointer;
 }
 
-.tab-content  #tab02 .spot-tab-content .spot_more_btn:hover {
+.tab-content  #tab02 .spot-tab-content .place_more_btn:hover {
 	background: black;
 	color: white;
 }

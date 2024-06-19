@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
-import mclass.store.tripant.place.domain.SpotEntity;
+import mclass.store.tripant.place.domain.PlaceboxEntity;
 
 @Mapper
 public interface PlanRepository {
@@ -17,7 +17,7 @@ public interface PlanRepository {
 	public List<AreaNameEntity> selectAreaFindList(String findArea);  //지역명 검색
 	public List<AreaEntity> selectAreaInfoList(int areaCode); // 지역 정보 
 	public String selectAreaShortName(int areaCode); // 짧은 이름
-	public List<SpotEntity> selectTypeList(int areaCode, int spotType); //지역, 타입 별 장소
-	public List<SpotEntity> selectTypeListMore(int areaCode, int spotType, int maxNum); //더보기 클릭 시
+	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType); //지역, 타입 별 장소
+	public List<PlaceboxEntity> selectTypeListMore(int areaCode, int placeType, int maxNum); //더보기 클릭 시
 	
 }
