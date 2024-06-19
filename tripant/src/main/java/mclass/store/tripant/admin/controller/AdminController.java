@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.service.AdminSerivce;
 
@@ -82,7 +83,7 @@ public class AdminController {
 	//검색 
 	@PostMapping("/member/search") 
 	@ResponseBody
-	public List<AdminMemEntity> MemberSearch(Model model, String searchMem) {
+	public List<AdminMemEntity> memberSearch(Model model, String searchMem) {
 		List<AdminMemEntity> memList=adminservice.search(searchMem);
 		return memList ;
 	}
@@ -117,6 +118,14 @@ public class AdminController {
 	public int complainReset(Integer diaryId) {
 		int result=adminservice.complainReset(diaryId);
 		return result;
+	}
+	
+	//신고게시글 검색
+	@PostMapping("/complain/search")
+	@ResponseBody
+	public List<AdminBoardEntity> boardSearch(Model model, String memNick){
+		List<AdminBoardEntity> boardList=adminservice.boardSearch(memNick);
+		return boardList;
 	}
 	
 	@GetMapping("/goods")

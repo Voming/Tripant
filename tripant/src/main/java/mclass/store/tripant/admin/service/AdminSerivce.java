@@ -48,6 +48,11 @@ public class AdminSerivce {
 		return admindao.complainList();
 	}
 	
+	//신고게시글 검색
+	public List<AdminBoardEntity> boardSearch(String memNick){
+		return admindao.boardsearch(memNick);
+	}
+	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId) {
 		return admindao.complainReset(diaryId);
