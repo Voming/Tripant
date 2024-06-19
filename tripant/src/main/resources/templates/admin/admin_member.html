@@ -16,7 +16,7 @@
 <!--제이쿼리  -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
-<script th:line="javascript" th:src="@{/js/admin/member/member_role.js}"></script>
+
 <body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
@@ -64,7 +64,7 @@
 					</li>
 					
 					<li>
-						
+						<!-- <th:block th:replace="~{admin/memberlist_fragment :: list}"></th:block> -->
 						<th:block th:each="memList:${memList}">
 						<ul class="col list">
 							<li th:text="${memList.memNick}"></li>
@@ -81,48 +81,8 @@
 			</div> 
 	</div>
 </div>
-<script>
-$(loaededHandler);
-function loaededHandler(){
-	$('.btn-search').on("click",searchHandler);
-}
-
-function searchHandler(){
-	var searchMem = $("[name=search]").val().trim();
-	$.ajax({
-		url:"/admin/member/search",
-		 method:"post",
-		 data: {searchMem:searchMem},
-		 success : function(result) {
-			 memListHandler(result)
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
-			}
-		
-	});
-}
-
-function memListHandler(searchList){
-	var htmlVal = '';
-	for (var idx in searchList){
-		var memList = searchList[idx];
-		htmlVal+=`
-			<ul class="col list">
-				<li>${memList.memNick}</li>
-				<li>${memList.memEmail}</li>
-				<li>${memList.memJoinDate}</li>
-				<li>${memList.memQuitDate}</li>
-				<li>${memList.memRole}</li>
-				<li><button type="button" class="btn">편집</button></li>
-			</ul>
-			`;
-	}
-}
-
-</script>
+<script th:line="javascript" th:src="@{/js/admin/member/member_role.js}"></script>
+<script th:line="javascript" th:src="@{/js/admin/member/member_search.js}"></script>
 </body>
 </html>
 

@@ -34,39 +34,35 @@ $(document).ready(function() {
 		$(this).parent().css("background-color", "var(--color_day9_blue)");
 		
 		//더보기 클릭 횟수 초기화
-		clickspotnum = 0;
+		clicknum = 0;
 
 		areacode = $(".plan-areacode").attr("value");
-		var spotTypeS = $(this).text();
+		var placeTypeS = $(this).text();
 
-		// type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장)
-		if (spotTypeS == '관광지') {
-			spottype = 1;
-		} else if (spotTypeS == '문화시설') {
-			spottype = 2;
-		} else if (spotTypeS == '쇼핑') {
-			spottype = 3;
-		} else if (spotTypeS == '음식점') {
-			spottype = 4;
+		if (placeTypeS == '관광지') {
+			placetype = 1;
+		} else if (placeTypeS == '문화시설') {
+			placetype = 2;
+		} else if (placeTypeS == '쇼핑') {
+			placetype = 3;
+		} else if (placeTypeS == '음식점') {
+			placetype = 4;
 		}
 
-		console.log(areacode + spottype);
-
 		$.ajax({
-			url: contextPath + "plan/spot"
+			url: contextPath + "plan/box"
 			, method: "post"
 			, context: this
 			, data: {
 				areaCode: areacode,
-				spotType: spottype
+				placeType: placetype
 			}
 			, error: ajaxErrorHandler
-		}).done(function(wrap_spot) {
-			$(".wrap-spotList").replaceWith(wrap_spot);
+		}).done(function(wrap_place) {
+			$(".wrap-placeList").replaceWith(wrap_place);
 		});
 
 		return false;
 	}).filter(':eq(0)').click();
-	
 });
 

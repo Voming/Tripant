@@ -6,15 +6,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
-import mclass.store.tripant.diary.domain.DiaryPostEntity;
+
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
-import mclass.store.tripant.plan.domain.PlanEntity;
+
 
 @Mapper
 public interface DiaryRepository {
 
 	// 일기 목록을 선택하는 메서드
-	public List<DiaryBoardEntity> selectDiaryList();
+	public List<DiaryBoardEntity> selectDiaryList(String areaname);
 
 	// 여행기 글 등록
 	public void insertDiary(DiaryBoardEntity diary);
@@ -26,3 +26,4 @@ public interface DiaryRepository {
     // 좋아요 카운트 증가 메서드
     void incrementLikes(Long diaryId);
 }
+  

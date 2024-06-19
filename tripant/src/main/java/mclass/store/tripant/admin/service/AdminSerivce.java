@@ -48,6 +48,11 @@ public class AdminSerivce {
 		return admindao.complainList();
 	}
 	
+	//신고수 초기화
+	public Integer complainReset(Integer diaryId) {
+		return admindao.complainReset(diaryId);
+	}
+	
 	// 결제 취소 페이지
 	// 결제 목록
 	public List<Map<String, Object>> payList(){

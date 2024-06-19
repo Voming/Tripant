@@ -78,7 +78,6 @@ public class PlanController {
 		List<PlaceboxEntity> stayTypeList = planService.selectTypeList(areaCode, stayType);
 		model.addAttribute("stayTypeList", stayTypeList);
 		return "plan/stay_tab_content";
-	}
 
 	@PostMapping("/stay/more")
 	public String stayMore(Model model, @RequestParam("areaCode") Integer areaCode,

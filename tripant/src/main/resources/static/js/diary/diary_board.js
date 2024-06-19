@@ -6,7 +6,24 @@ $(document).ready(function() {
         $('.area-tab-nav li').css("background-color", "white");
         $('.area-tab-nav a').removeClass('active');
         $(this).addClass('active');
+        console.log($(this).text());
         $(this).parent().css("background-color", "black");
+        
+        // ajax로 지역 태그 활성화
+        console.log(contextPath + "diary");
+        var areaname = $(this).text().trim();
+        areaname = (areaname == "전체" ? "":areaname);
+        // ajax
+		$.ajax({
+			url: contextPath + "diary"
+			, method: "post"
+			, data : {areaname : areaname}
+			, context: this
+			, error: ajaxErrorHandler
+		}).done(function(wrap_content) {
+			$(".wrap-d-content").replaceWith(wrap_content);
+		})
+        
         return false;
     }).filter(':eq(0)').click(); // 첫 번째 탭 활성화
 
@@ -37,32 +54,4 @@ $(document).ready(function() {
             }
         });
     });
-
-    // 초기화: 더보기 기능
-    var morecnt = 0; // 더보기 횟수 초기화
-
-    $('.learn-more').on('click', function() {
-        morecnt += 1;
-        $.ajax({
-            url: '${pageContext.request.contextPath}/more/List',
-            method: 'post',
-            data: { more: morecnt },
-            dataType: 'json',
-            success: function(result) {
-                if (result != null) {
-                    // 데이터를 화면에 출력하는 코드 작성
-                    // 예시: display(result);
-                }
-            },
-            error: function(err) {
-                console.error('Error while loading more items:', err);
-            }
-        });
-    });
-
-    // display 함수 예시
-    function display(data) {
-        // 데이터를 적절히 화면에 출력하는 로직 작성
-    }
-
 });

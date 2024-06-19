@@ -1,3 +1,4 @@
+
 var clickstaynum = 0;
 var areacode;
 var staytype;
@@ -23,7 +24,6 @@ function stayMoreBtnClickHandler(thisElement) {
 	});
 }
 
-//장소 탭
 $(document).ready(function() {
 	$('.stay-tab-nav a').click(function() {
 		$('.stay-tab-content > div').hide().filter(this.hash).fadeIn();
@@ -33,33 +33,33 @@ $(document).ready(function() {
 		$(this).addClass('active');
 		$(this).css("color", "white");
 		$(this).parent().css("background-color", "var(--color_day9_blue)");
+		
+		//더보기 클릭 횟수 초기화
+		clicknum = 0;
 
+		areacode = $(".plan-areacode").attr("value");
+		var placeTypeS = $(this).text();
 
-		var areacode = $(".plan-areacode").attr("value");
-		var stayTypeS = $(this).text();
-
-		// type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장)
-		if (stayTypeS == '숙박') {
-			staytype = 5;
-		} else if (stayTypeS == '캠핑장') {
-			staytype = 6;
-		}
-
-		console.log(areacode + staytype);
+		if (placeTypeS == '숙박') {
+			placetype = 5;
+		} else if (placeTypeS == '캠핑장') {
+			placetype = 6;
+		} 
 
 		$.ajax({
-			url: contextPath + "plan/stay"
+			url: contextPath + "plan/box"
 			, method: "post"
 			, context: this
 			, data: {
 				areaCode: areacode,
-				stayType: staytype
+				placeType: placetype
 			}
 			, error: ajaxErrorHandler
-		}).done(function(wrap_stay) {
-			$(".wrap-stayList").replaceWith(wrap_stay);
+		}).done(function(wrap_place) {
+			$(".wrap-placeList").replaceWith(wrap_place);
 		});
 
 		return false;
 	}).filter(':eq(0)').click();
 });
+
