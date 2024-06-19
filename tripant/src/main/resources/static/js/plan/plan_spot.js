@@ -9,10 +9,7 @@ $(document).ready(function() {
 		$(this).css("color", "white");
 		$(this).parent().css("background-color", "var(--color_day9_blue)");
 
-
-
 		var areacode = $(".plan-areacode").attr("value");
-
 		var spotTypeS = $(this).text();
 
 		// type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장)
@@ -26,21 +23,21 @@ $(document).ready(function() {
 		} else if (spotTypeS == '음식점') {
 			spottype = 4;
 		}
-		
+
 		console.log(areacode + spottype);
 
 		$.ajax({
-				url: contextPath + "plan/spot"
-				, method: "post"
-				, context: this
-				, data: { 
-					areaCode: areacode,
-					spotType: spottype
-				 }
-				, error: ajaxErrorHandler
-			}).done(function(wrap_spot) {
-				$(".wrap-spotList").replaceWith(wrap_spot);
-			});
+			url: contextPath + "plan/spot"
+			, method: "post"
+			, context: this
+			, data: {
+				areaCode: areacode,
+				spotType: spottype
+			}
+			, error: ajaxErrorHandler
+		}).done(function(wrap_spot) {
+			$(".wrap-spotList").replaceWith(wrap_spot);
+		});
 
 		return false;
 	}).filter(':eq(0)').click();

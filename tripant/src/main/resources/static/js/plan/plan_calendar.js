@@ -28,7 +28,11 @@ $(document).ready(function() {
 
 // 달력 취소 시 메인으로 돌아감
 $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
-	location.href = "/";
+	if (confirm("메인화면으로 돌아가면 작성한 내용이 없어집니다. 괜찮습니까?") == true) {
+			location.href = "/";
+		} else {
+			event.preventDefault();
+		}
 });
 
 // 달력 기간 입력
