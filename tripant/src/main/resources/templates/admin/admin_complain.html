@@ -57,7 +57,7 @@
 					<li>
 						<th:block th:each="complainBoard:${complainBoard}">
 						<ul class="col list">
-							<li><input type="checkbox" class="check" name="check"></li>
+							<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" th:data-reports="${complainBoard.reports}"></li>
 							<li th:text="${complainBoard.diaryId}"></li>
 							<li th:text="${complainBoard.diaryTitle}"></li>
 							<li th:text="${complainBoard.memNick}"></li>
@@ -74,42 +74,6 @@
 	</div>	
 </div>
 
-<script>
-$(loadedHandler);
-function loadedHandler(){
-	$('input[name=check]').on('click',CheckSetHandler);
-	$('.btn-reset').on('click',ClickSetHandler);
-	
-}
-/* 체크표시가 되면 버튼 활성화 */
-function CheckSetHandler(){
-	$('input[name=check]').each(function(){
-		if($(this).is(":checked")==true){
-			$('.btn-reset').prop('disabled',false).css('background-color','black').css('color','white').css('border','solid black 1px');
-		}else{
-			$('.btn-reset').prop('disabled',true).css('background-color','white').css('color','black').css('border','solid black 1px');
-		}
-	})
-}
-
-/* 버튼 누르면 체크박스에 체크된 신고수 0으로 */
-function ClickSetHandler(){
-	let checkSet=$('input[name=check]:checked');
-	$.ajax({
-		url:"/admin/reset",
-		 method:"post",
-		 data: {reports:reports},
-		 success : function(result) {
-			 
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
-			}
-	});
-} 
-
-</script>
+<script th:line="javascript" th:src="@{/js/admin/board/board_complain.js}"></script>
 </body>
 </html>
