@@ -98,7 +98,7 @@ public class AdminController {
 	//좋아요 정렬
 	@PostMapping("/like")
 	@ResponseBody
-	public void boardLike(Model model) {
+	public void boardLike() {
 		
 	}
 	
