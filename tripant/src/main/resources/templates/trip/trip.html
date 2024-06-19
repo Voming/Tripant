@@ -72,56 +72,10 @@
 //n일차 버튼 생성
 function ndayBtnHandler(){
 	$('.column.flex').each(function(e){
-		
-		
 	});
 }
 
-//동그라미 이미지 색 변경
-function circleColorHandler(){
 
-	var circleCss;
-	$('.column.flex').each(function(e){  //e : element
-		//현재 고른 	$('.column.flex') 각각에 아래 함수를 적용
-		//현재 고른 $('.column.flex')것에 적용해야하니 this사용! $('.column.flex')를 사용하면 무조건 첫번째 태그만 가져옴 this의 중요성!!!
-		circleCss = $(this).data('columns'); //type이 number이므로 case에 값 넣을 때 작은따옴표 X
-		switch(circleCss){
-		case 1:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
-			break;
-		case 2:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle2_purple.png')");
-			break;
-		case 3:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle3_pink.png')");
-			break;
-		case 4:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle4_orange.png')");
-			break;
-		case 5:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle5_skyblue.png')");
-			break;
-		case 6:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle6_yellow.png')");
-			break;
-		case 7:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
-			break;
-		case 8:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
-			break;
-		case 9:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
-			break;
-		case 10:
-			$(this).children().find('.backimg').css('background-image',"url('/images/loacation/circle10_navy.png')");
-			break;
-		default:
-			console.log($(this).children().find('.backimg'));
-			console.log('>>>>>backimg 실패 확인해보세요');
-		}
-	});
-}
 
 
 //드래그 앤 드랍
@@ -205,6 +159,7 @@ function memoNoHandler(){
 </script>
 
 <script th:inline="javascript" th:src="@{/js/trip/time.js}"></script>
+<script th:inline="javascript" th:src="@{/js/trip/changeColor.js}"></script>
 <script type="text/javascript" th:src="@{/js/trip/tripMap.js}"></script>
 <script type="text/javascript" th:src="@{/js/trip/nav_btn.js}"></script>
 </body>

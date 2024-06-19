@@ -40,9 +40,9 @@ public class TripController {
 	@GetMapping(value="/detail/{planId}")
 	public ModelAndView detail(ModelAndView mv,@PathVariable("planId") Integer planId) {
 		List<DayEntity> dayEntityList= service.detailList(planId);
-		mv.addObject("detailListJson", new Gson().toJson(dayEntityList));
-		mv.addObject("detailList", dayEntityList);
-		mv.addObject("planId", planId);
+//		mv.addObject("detailListJson", new Gson().toJson(dayEntityList));
+//		mv.addObject("detailList", dayEntityList);
+//		mv.addObject("planId", planId);
 		mv.setViewName("trip/trip");
 		return mv;
 	}

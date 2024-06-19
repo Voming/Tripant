@@ -43,7 +43,7 @@ for(var i=0; i<detailList.length; i++ ){
 	var count = i+1;
 	//var dateStr = details.travelDate;
 	htmlval += `
-	<div  class="column flex" data-columns="${count}" id="'#tab'+${count}">
+	<div class="column flex" data-columns="${count}" id="'#tab'+${count}">
 		<div class="sub-title flex ">
 			<h4 class="nday">${count}일차</h4>
 			<h6  class="date">${details.travelDate}</h6>
@@ -54,7 +54,7 @@ for(var i=0; i<detailList.length; i++ ){
 			var infoCount = j+1;
 			htmlval += `
 		 	<div class="container flex wfull">
-			 	<div class="spot grid wfull" data-spot-order="${infoCount}"  data-stay-time="${info.stayTime}" data-info="${info}">
+			 	<div class="spot grid wfull" data-spot-order="${infoCount}"  data-stay-time="${info.stayTime}">
 			 		<div class="spot-number backimg"><p>${infoCount}</p></div>
 			 		<div class="spot-staytime">10:00-11:00</div>
 			 		<div class="spot-type">명소</div>
@@ -71,22 +71,7 @@ for(var i=0; i<detailList.length; i++ ){
 	</div>	
 	`;
 }
-$(".tourlist .wrap-detaillist").html(htmlval);
+$(".tourlist .wrap-detaillist.flex").html(htmlval);
 
 
 }
-        /*
-        window.onload = function() {
-            // detailsJson 데이터를 Thymeleaf에서 JavaScript 객체로 가져옵니다.
-            const detailsJson =  $('.test').data('test');
-			console.log( detailsJson[0]);
-            // 첫 번째 여행 일정의 첫 번째 상세 정보에서 stayTime을 가져옵니다.
-            let stayTime ;
-            if (detailsJson.length > 0 && detailsJson[0].dayDetailInfoEntity && detailsJson[0].dayDetailInfoEntity.length > 0) {
-                stayTime = detailsJson[0].dayDetailInfoEntity[0].stayTime;
-            }
-
-            // stayTime을 화면에 출력합니다.
-            document.getElementById('stayTime').innerText = stayTime;
-        }
-        */
