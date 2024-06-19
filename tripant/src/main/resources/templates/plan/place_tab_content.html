@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="wrap-placeList flex" th:fragment="wrapplacelist">
+	<th:block th:if="${placeTypeList} != null">
+		<th:block th:each="place, placeStat : ${placeTypeList}">
+			<div class="place-box flex">
+				<img class="place-img" th:src="${place.firstimage}" alt="장소이미지">
+				<div class="place-txt">
+					<span class="place-name" th:text="${place.title}"></span> 
+					<span class="place-address" th:text="${place.add1}"></span>
+				</div>
+				<input type="checkbox" th:data-placeid="${place.contentid}"
+					th:id="|place-check-${placeStat.index}|"> <label
+					th:for="|place-check-${placeStat.index}|"></label>
+			</div>
+		</th:block>
+	</th:block>
+	<div><button type="button" onclick="placeMoreBtnClickHandler(this);" class="place_more_btn">더보기</button></div>
+</div>
+
+</html>

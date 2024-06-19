@@ -7,7 +7,7 @@ $(document).ready(function() {
 			"format": "YYYY.MM.DD",
 			"separator": " ~ ",
 			"applyLabel": "확인",
-			"cancelLabel": "취소",
+			"cancelLabel": "일정 만들기 취소",
 			"fromLabel": "From",
 			"toLabel": "To",
 			"customRangeLabel": "Custom",
@@ -28,6 +28,7 @@ $(document).ready(function() {
 
 // 달력 취소 시 메인으로 돌아감
 $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+	beforeSave = false;  //무조건 메인으로 돌아감
 	location.href = "/";
 });
 

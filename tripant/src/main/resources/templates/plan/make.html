@@ -79,11 +79,10 @@
 						<li><a href="#spot-tab03">음식점</a></li>
 					</ul>
 					<div class="spot-tab-content">
-						<div id="spot-tab01"><div class="wrap-spotList" th:replace="~{plan/spot_tab_content :: wrapspotlist}"></div></div>
-						<div id="spot-tab02"><div class="wrap-spotList" th:replace="~{plan/spot_tab_content :: wrapspotlist}"></div></div>
-						<div id="spot-tab03"><div class="wrap-spotList" th:replace="~{plan/spot_tab_content :: wrapspotlist}"></div></div>
-						<div id="spot-tab04"><div class="wrap-spotList" th:replace="~{plan/spot_tab_content :: wrapspotlist}"></div></div>
-						
+						<div id="spot-tab01"><div class="wrap-spotList" th:replace="~{plan/place_tab_content :: wrapplacelist}"></div></div>
+						<div id="spot-tab02"><div class="wrap-spotList" th:replace="~{plan/place_tab_content :: wrapplacelist}"></div></div>
+						<div id="spot-tab03"><div class="wrap-spotList" th:replace="~{plan/place_tab_content :: wrapplacelist}"></div></div>
+						<div id="spot-tab04"><div class="wrap-spotList" th:replace="~{plan/place_tab_content :: wrapplacelist}"></div></div>
 					</div>
 				</div>
 				<div class="spot second flex">
@@ -102,13 +101,12 @@
 						</button>
 					</form>
 					<ul class="stay-tab-nav">
-				 <!-- type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장) -->
 						<li><a href="#stay-tab01">숙박</a></li>
 						<li><a href="#stay-tab02">캠핑장</a></li>
 					</ul>
 					<div class="stay-tab-content">
-						<div id="stay-tab01"><div class="wrap-stayList" th:replace="~{plan/stay_tab_content :: wrapstaylist}"></div></div>
-						<div id="stay-tab02"><div class="wrap-stayList" th:replace="~{plan/stay_tab_content :: wrapstaylist}"></div></div>
+						<div id="stay-tab01"><div class="wrap-stayList" th:replace="~{plan/place_tab_content :: wrapplacelist}"></div></div>
+						<div id="stay-tab02"><div class="wrap-stayList" th:replace="~{plan/place_tab_content :: wrapplacelist}"></div></div>
 					</div>
 				</div>
 				<div class="stay second flex">
