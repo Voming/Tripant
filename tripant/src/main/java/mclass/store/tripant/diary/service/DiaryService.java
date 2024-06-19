@@ -45,10 +45,6 @@ public class DiaryService {
             return false;
         }
     }
-    //지역코드
-    public List<DiaryBoardEntity> selectDiariesByAreaCode(String areaCode) {
-		return diaryRepository.selectDiariesByAreaCode(areaCode);
-	}
 
 	
 }

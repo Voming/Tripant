@@ -11,5 +11,5 @@ public class WritePlanTitleEntity {
 	private Integer planId;
 	private String planTitle;
 	private String diaryMemEmail;
-	private String planAreaCode;
+	
 }
