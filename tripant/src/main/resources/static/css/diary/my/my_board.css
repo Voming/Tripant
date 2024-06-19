@@ -47,12 +47,21 @@
 .diary-title{
 		margin-top: 10px;
 		font-size: var(--font5);
+		height: 20px;
 }
 /* 여행일지 밑 간격 띄우기 */
 .wrap-diary{
 	padding-bottom: 20px;
+	    width: 200px;/* 넚이 주기 */
 }
 /* 공개/비공개 글씨크기 */
 .diary-open{
 	font-size: var(--font6);
 }
+.diary-title > a {
+text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;}

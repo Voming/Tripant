@@ -54,7 +54,7 @@
 					MemEmail</div>
 				<br>
 				<!--글 작성 내용 표기  -->
-				<div th:text="${diary.diaryContent}" class="diary-content">Diary
+				<div th:utext="${diary.diaryContent}" class="diary-content">Diary
 					Content</div>
 			</div>
 			<div th:if="${diary == null}">
@@ -64,7 +64,7 @@
 		<!--  TODO 데이터 연결 -->
 		<div class="actions">
 			<!-- 조회수 표시 -->
-			<div>view</div>
+			<div class="viewcount">view</div>
 			<div th:text="${diary.diaryViews}" class="diary-Views"></div>
 			<!-- 좋아요 아이콘 누르면 하트아이콘  -->
 			<div class="diary-like">

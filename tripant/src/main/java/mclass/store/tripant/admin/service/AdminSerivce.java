@@ -38,7 +38,7 @@ public class AdminSerivce {
 	}
 
 	//좋아요 정렬
-	public Integer boardLikes() {
+	public String boardLikes() {
 		
 		return admindao.boardLike();
 	}

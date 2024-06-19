@@ -1,5 +1,8 @@
 package mclass.store.tripant.diary.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.service.DiaryService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/diary")
@@ -37,12 +41,22 @@ public class DiaryController {
         model.addAttribute("diary", diary);
         return "diary/diary_read";
 	}
+    // 좋아요 기능
+    @PostMapping("/like/{diaryId}")
+    @ResponseBody
+    public Map<String, Object> likeDiary(@PathVariable Long diaryId) {
+        boolean success = diaryService.incrementLikes(diaryId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", success);
+        return response;
+    }
+}
     // 더보기
 //@GetMapping
 //public String getLists(Model model) {
 	// 처음에는 첫 번째 페이지의 글 8개를 불러옴
 //	List<>
-}
+//}
     //    @PostMapping("/report")
 //    public int report() {
 //        int result = diaryService.

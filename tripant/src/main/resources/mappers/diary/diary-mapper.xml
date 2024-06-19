@@ -22,7 +22,8 @@
 		(diary_seq.NEXTVAL, #{diaryMemEmail},
 		#{diaryPlanId}, #{diaryTitle},
 		#{diaryContent},
-		to_date(#{diaryDate}, 'yyyy-mm-dd'), #{diaryOpen}, #{diaryViews},
+		to_date(#{diaryDate}, 'yyyy-mm-dd'), #{diaryOpen},
+		#{diaryViews},
 		#{diaryTheme})
 	</insert>
 	<!-- 특정 ID의 다이어리 조회 -->
@@ -34,9 +35,11 @@
 	<select id="selectPlanById" parameterType="string"
 		resultType="WritePlanTitleEntity">
 		SELECT p.plan_id AS planId, p.plan_title AS planTitle
-		FROM diary d
+		FROM
+		diary d
 		JOIN plan p ON d.diary_plan_id = p.plan_id
-		WHERE d.diary_mem_email = #{diaryMemEmail}
+		WHERE
+		d.diary_mem_email = #{diaryMemEmail}
 	</select>
 	<!-- 공개된 일기 선택 -->
 	<select id="selectPublicDiaries" resultType="DiaryBoardEntity">
@@ -67,5 +70,9 @@
 		DIARY_THEME =
 		#{diaryTheme}
 		WHERE DIARY_ID = #{diaryId}
+	</update>
+	<update id="incrementLikes">
+		UPDATE diary_board SET diary_likes = diary_likes + 1 WHERE diary_id =
+		#{diaryId}
 	</update>
 </mapper>

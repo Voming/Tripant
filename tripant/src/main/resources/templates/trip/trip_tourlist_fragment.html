@@ -3,6 +3,12 @@
 
 	<!-- tourlist -->
 	<div th:fragment="tourlist" class="tourlist scrollbar flex">
+	<div th:each="detailsJson:${detailListJson}">
+	<td th:text="${detailsJson.get(0)}"></td>
+<!-- 	<th:block th:each="keyName : ${detailsJson.names()}">
+            <td th:text="${keyName}"></td>
+    </th:block> -->
+	</div>
 		<div th:each="details,daylist:${detailList}" class="column flex" th:data-columns="${daylist.count}" th:id="'#tab'+${daylist.count}">
 			<div class="sub-title flex ">
 				<h4 th:text="${daylist.count} + '일차'" class="nday"></h4>

@@ -27,7 +27,7 @@ public interface AdminDao {
 	public List<AdminBoardEntity> boardList();
 	
 	//좋아요 많은 순으로 정렬
-	public Integer boardLike();
+	public String boardLike();
 	
 	//신고게시글
 	public List<AdminBoardEntity> complainList();
