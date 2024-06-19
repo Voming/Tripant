@@ -39,8 +39,7 @@
 									<th:block th:each="diary :  ${diaries}">
 										<div class="wrap-d-content">
 											<div class="diary-img">
-												<img src="https://dummyimage.com/350x200/000/fff"
-													alt="대표 이미지">
+												<img th:src="@{/images/diary/diary_empty_image.png}"alt="대표 이미지">
 											</div>
 											<div class="wrap-content">
 												<div class="diary-content">
