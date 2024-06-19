@@ -1,12 +1,14 @@
 package mclass.store.tripant.diary.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
-
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.service.DiaryService;
+import mclass.store.tripant.place.domain.PlaceboxEntity;
+
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -55,6 +60,16 @@ public class DiaryController {
 		response.put("success", success);
 		return response;
 	}
+	// 더보기
+	@PostMapping("/more")
+	@ResponseBody
+	public List<DiaryBoardEntity> diaryMore(@RequestParam("clickNum") Integer clickNum) throws IOException {
+	    int offset = clickNum *3;
+	    List<DiaryBoardEntity> selectDiaryListMore = diaryService.selectDiaryListMore(offset, 10);
+	    return selectDiaryListMore;
+	}
+	
+
 
 
 }

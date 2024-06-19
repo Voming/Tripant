@@ -25,5 +25,7 @@ public interface DiaryRepository {
 	List<WritePlanTitleEntity> selectPlanById(String memberEmail);
     // 좋아요 카운트 증가 메서드
     void incrementLikes(Long diaryId);
+    // 글 더보기 클릭시 
+    public List<DiaryBoardEntity> selectDiaryListMore();
 }
   
