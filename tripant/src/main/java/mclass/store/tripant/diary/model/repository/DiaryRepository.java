@@ -14,7 +14,7 @@ import mclass.store.tripant.plan.domain.PlanEntity;
 public interface DiaryRepository {
 
 	// 일기 목록을 선택하는 메서드
-	public List<DiaryBoardEntity> selectDiaryList();
+	public List<DiaryBoardEntity> selectDiaryList(String areaname);
 
 	// 여행기 글 등록
 	public void insertDiary(DiaryBoardEntity diary);
@@ -25,4 +25,6 @@ public interface DiaryRepository {
 	List<WritePlanTitleEntity> selectPlanById(String memberEmail);
     // 좋아요 카운트 증가 메서드
     void incrementLikes(Long diaryId);
+    // 지역
+  public  List<DiaryBoardEntity> selectDiariesByAreaCode(@Param("areaCode") String areaCode);
 }
