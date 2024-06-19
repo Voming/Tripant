@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="wrap-stayList flex" th:fragment="wrapstaylist">
+	<th:block th:if="${stayTypeList} != null">
+		<th:block th:each="stay, stayStat : ${stayTypeList}">
+			<div class="stay-box flex">
+				<img class="stay-img" th:src="${stay.firstimage}" alt="장소이미지">
+				<div class="stay-txt">
+					<span class="stay-name" th:text="${stay.title}"></span> 
+					<span class="stay-address" th:text="${stay.add1}"></span>
+				</div>
+				<input type="checkbox" th:data-stayid="${stay.contentid}" th:id="|stay-check-${stayStat.index}|">
+				<label th:for="|stay-check-${stayStat.index}|"></label>
+			</div>
+		</th:block>
+	</th:block>
+	<div><button type="button" class="stay_more_btn"><p>더보기</p></button></div>
+</div>
+</html>

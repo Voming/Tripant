@@ -54,11 +54,17 @@ public class PlanController {
 	}
 	
 	@PostMapping("/spot")
-//	@ResponseBody
 	public String spot(Model model, @RequestParam("areaCode") Integer areaCode, @RequestParam("spotType") Integer spotType) throws IOException {
-		List<SpotEntity> spotTypeList = planService.selectSpotTypeList(areaCode, spotType);
+		List<SpotEntity> spotTypeList = planService.selectTypeList(areaCode, spotType);
 		model.addAttribute("spotTypeList", spotTypeList);
 		return "plan/spot_tab_content";
+	}
+	
+	@PostMapping("/stay")
+	public String stay(Model model, @RequestParam("areaCode") Integer areaCode, @RequestParam("stayType") Integer stayType) throws IOException {
+		List<SpotEntity> stayTypeList = planService.selectTypeList(areaCode, stayType);
+		model.addAttribute("stayTypeList", stayTypeList);
+		return "plan/stay_tab_content";
 	}
 	
 	@ExceptionHandler

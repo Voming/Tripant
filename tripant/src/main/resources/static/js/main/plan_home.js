@@ -41,7 +41,7 @@ $(document).mouseup(function(e) {
 // 지역 선택시 값 변경-------------------------
 function changeSelectAreaHandler() {
 	var area = $("#selectbox option:selected").attr('value');
-	
+
 	if (area.length < 3) {
 		$.ajax({
 			url: contextPath + "plan/area"

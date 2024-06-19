@@ -21,26 +21,17 @@ calendarPlan.dateArr = new Array(CalendarDate);
 var beforeSave = true;
 
 //창닫기, 새로고침 시 확인 이벤트
-$(window).bind("beforeunload", function (e){
-	if(beforeSave){
-		 return "창을 닫으실래요?";
+$(window).bind("beforeunload", function(e) {
+	if (beforeSave) {
+		return "창을 닫으실래요?";
 	}
 });
 
 $(loadedHandler);
 
 function loadedHandler() {
-	
-	//달력 다시 열기
-	$(".plan-priod").on("click", function() {
-		if (confirm("기간을 다시 설정하면 작성한 내용이 없어집니다. 괜찮습니까?") == true) {
-			location.reload(true);
-			$(".modal").addClass("show");
-		} else {
-			event.preventDefault();
-		}
-	});
-	
+	var areacode = $(".plan-areacode").attr("value");
+
 	//메인 화면 돌아가기
 	$(".logo").on("click", function() {
 		location.href = "/";
@@ -52,16 +43,16 @@ function loadedHandler() {
 		$('.tab-nav a').css("color", "black");
 		$('.tab-nav a').removeClass('active');
 		$(this).addClass('active');
-		
+
 		var cls_name = $(this).attr("class");
-		cls_name = cls_name.replace(' active', ''); 
-		if(cls_name == 'nav-1'){
+		cls_name = cls_name.replace(' active', '');
+		if (cls_name == 'nav-1') {
 			$(".main-wrapper .tab-content").css("width", "25%");
-		}else{
+		} else {
 			$(".main-wrapper .tab-content").css("width", "50%");
 		}
-		
-		
+
+
 		$(this).css("color", "#4BC9E5");
 		return false;
 	}).filter(':eq(0)').click();

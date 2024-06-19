@@ -40,7 +40,7 @@ public class PlanService {
 		return planRepository.selectAreaShortName(areaCode);
 	}
 
-	public List<SpotEntity> selectSpotTypeList(int areaCode, int spotType){
-		return planRepository.selectSpotTypeList(areaCode, spotType);
+	public List<SpotEntity> selectTypeList(int areaCode, int spotType){
+		return planRepository.selectTypeList(areaCode, spotType);
 	}
 }

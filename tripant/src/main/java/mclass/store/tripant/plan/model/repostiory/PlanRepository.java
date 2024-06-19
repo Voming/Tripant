@@ -17,5 +17,5 @@ public interface PlanRepository {
 	public List<AreaNameEntity> selectAreaFindList(String findArea);  //지역명 검색
 	public List<AreaEntity> selectAreaInfoList(int areaCode); // 지역 정보 
 	public String selectAreaShortName(int areaCode); // 짧은 이름
-	public List<SpotEntity> selectSpotTypeList(int areaCode, int spotType); //지역, 타입 별 장소
+	public List<SpotEntity> selectTypeList(int areaCode, int spotType); //지역, 타입 별 장소
 }
