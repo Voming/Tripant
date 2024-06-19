@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
+import mclass.store.tripant.trip.domain.DayEntity;
 import mclass.store.tripant.trip.model.service.TripService;
 
 @Controller
@@ -35,7 +39,9 @@ public class TripController {
 	
 	@GetMapping(value="/detail/{planId}")
 	public ModelAndView detail(ModelAndView mv,@PathVariable("planId") Integer planId) {
-		mv.addObject("detailList", service.detailList(planId));
+		List<DayEntity> dayEntityList= service.detailList(planId);
+		mv.addObject("detailListJson", new Gson().toJson(dayEntityList));
+		mv.addObject("detailList", dayEntityList);
 		mv.setViewName("trip/trip");
 		return mv;
 	}

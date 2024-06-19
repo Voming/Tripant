@@ -21,8 +21,10 @@ function staytimeHandler(){
 		console.log($(this).data('spot-order'));
 		console.log(">>>>>> [[${info}]]");
 		console.log($(this).data('info'));
-		const memoMatch = $(this).data('info').match(/stayTime=([^,]+)/);
+		const memoMatch = "$(this).data('info')".match(/stayTime=([^,]+)/);
+		console.log($(this).data('info').match(/^[]/));
 		console.log(memoMatch[1]);
+		console.log(memoMatch);
 	
 		let spotOrder = $(this);
 		
