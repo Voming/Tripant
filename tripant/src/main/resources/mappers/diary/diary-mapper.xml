@@ -3,13 +3,17 @@
 <mapper
 	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
 	<!-- 글 리스트 목록 뿌리기 -->
-	<select id="selectDiaryList" resultType="DiaryBoardEntity">
+	<select id="selectDiaryList" resultType="DiaryBoardEntity" parameterType="string">
 		SELECT D.DIARY_ID,
-		D.DIARY_MEM_EMAIL, D.DIARY_PLAN_ID, D.DIARY_TITLE, D.DIARY_CONTENT,
-		D.DIARY_DATE, D.DIARY_OPEN, D.DIARY_VIEWS, D.DIARY_THEME, M.MEM_NICK
-		AS memNick
-		FROM DIARY D
-		JOIN MEMBER M ON D.DIARY_MEM_EMAIL = M.MEM_EMAIL
+		D.DIARY_MEM_EMAIL, D.MEM_NICK, D.DIARY_PLAN_ID, D.DIARY_TITLE, D.DIARY_CONTENT,
+		D.DIARY_DATE, D.DIARY_OPEN, D.DIARY_VIEWS, D.DIARY_THEME, d.plan_area_code
+		FROM view_diary_member_plan D
+		<if test="areaname != null and !areaname.equals('') ">
+		where plan_area_code = 
+			(select area_code from area 
+				where area_short_name =#{areaname} 
+			)
+		</if>
 	</select>
 	<!-- 글 작성 등록 시키기 -->
 	<insert id="insertDiary" parameterType="DiaryBoardEntity">
@@ -52,7 +56,16 @@
 		SELECT * FROM diary
 		WHERE DIARY_OPEN = '1'
 	</select>
+	<!--지역코드  -->
+	<select id="selectAreaCode"  parameterType="string" resultType="DiaryBoardEntity">
+		select d.diary_id,
+		d.diary_title, d.diary_content, d.diary_date,
+		d.diary_mem_email,
+		d.diary_views from diary D
+		join plan P on D.diary_plan_id = P.plan_id
+		where P.plan_area_code = #{planAreaCode}
 
+	</select>
 
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="string">
@@ -71,8 +84,9 @@
 		#{diaryTheme}
 		WHERE DIARY_ID = #{diaryId}
 	</update>
-	<update id="incrementLikes">
-		UPDATE diary_board SET diary_likes = diary_likes + 1 WHERE diary_id =
+	<update id="incrementLikes" parameterType="DiaryPostEntity">
+		UPDATE diary_board SET diary_likes = diary_likes + 1
+		WHERE diary_id =
 		#{diaryId}
 	</update>
 </mapper>
