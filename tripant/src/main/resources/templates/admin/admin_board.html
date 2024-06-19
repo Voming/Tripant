@@ -44,7 +44,7 @@
 					<option value="nick" selected>닉네임</option>
 					<option value="title">제목</option>
 				</select>
-				<input class="search" type="text" placeholder="게시글검색">
+				<input class="search" type="text" name="search" placeholder="게시글검색">
 				<button type="button" class="btn-search"><img src="/images/icons/search.png" alt="검색"/></button>
 			</div>
 			<div class="ad-content">
@@ -77,46 +77,6 @@
 			</div>
 	</div>
 </div>	
-
-<script>
-$(loadedHandler);
-
-function loadedHandler() {
-	$(".btn.like").on("click", ClickLikeHandler);
-}
-
-function ClickLikeHandler(){
-	$.ajax({
-		url:"/admin/like",
-		 method:"post",
-		 success : function(result) {
-			 LikeHandler(result)
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
-			}
-	});
-} 
-function LikeHandler(like){
-	var htmlVal = '';
-	for (var idx in like){
-		var memBoard = like[idx];
-		htmlVal+=`
-			<ul class="col list">
-			<li th:text="${memBoard.diaryId}"></li>
-			<li th:text="${memBoard.diaryTitle}"></li>
-			<li th:text="${memBoard.memNick}"></li>
-			<li th:text="${memBoard.diaryDate}"></li>
-			<li th:text="${memBoard.diaryViews}"></li>
-			<li th:text="${memBoard.likes}"></li>
-			<li></li>
-		</ul>
-			`;
-	}
-}
-
-</script>
+<script th:line="javascript" th:src="@{/js/admin/board/board.js}"></script>
 </body>
 </html>
