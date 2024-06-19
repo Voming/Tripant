@@ -1,12 +1,8 @@
 var clickspotnum = 0;
-var areacode;
 var spottype;
 
 function spotMoreBtnClickHandler(thisElement) {
 	clickspotnum += 1;
-	console.log(clickspotnum);
-	console.log("들어옴" +areacode + spottype);
-
 
 	$.ajax({
 		url: contextPath + "plan/spot/more"
@@ -40,26 +36,26 @@ $(document).ready(function() {
 		var placeTypeS = $(this).text();
 
 		if (placeTypeS == '관광지') {
-			placetype = 1;
+			spottype = 1;
 		} else if (placeTypeS == '문화시설') {
-			placetype = 2;
+			spottype = 2;
 		} else if (placeTypeS == '쇼핑') {
-			placetype = 3;
+			spottype = 3;
 		} else if (placeTypeS == '음식점') {
-			placetype = 4;
+			spottype = 4;
 		}
 
 		$.ajax({
-			url: contextPath + "plan/box"
+			url: contextPath + "plan/spot"
 			, method: "post"
 			, context: this
 			, data: {
 				areaCode: areacode,
-				placeType: placetype
+				spotType: spottype
 			}
 			, error: ajaxErrorHandler
-		}).done(function(wrap_place) {
-			$(".wrap-placeList").replaceWith(wrap_place);
+		}).done(function(wrap_spot) {
+			$(".wrap-spotList").replaceWith(wrap_spot);
 		});
 
 		return false;

@@ -27,29 +27,8 @@ $(window).bind("beforeunload", function(e) {
 	}
 });
 
-
-var areacode;  //지역 코드
-var placetype; //type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장)
-
-//장소 더보기 클릭
-var clicknum = 0;
-function placeMoreBtnClickHandler(thisElement) {
-	clicknum += 1;
-
-	$.ajax({
-		url: contextPath + "plan/more"
-		, method: "post"
-		, context: this
-		, data: {
-			areaCode: areacode,
-			placeType: placetype,
-			clickNum : clicknum
-		}
-		, error: ajaxErrorHandler
-	}).done(function(wrap_place) {
-		$(".wrap-placeList").replaceWith(wrap_place);
-	});
-}
+//지역 코드
+var areacode;  
 
 $(loadedHandler);
 

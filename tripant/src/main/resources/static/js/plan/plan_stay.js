@@ -1,13 +1,8 @@
-
 var clickstaynum = 0;
-var areacode;
 var staytype;
 
 function stayMoreBtnClickHandler(thisElement) {
 	clickstaynum += 1;
-	console.log(clickstaynum);
-	console.log("들어옴" +areacode + staytype);
-
 
 	$.ajax({
 		url: contextPath + "plan/stay/more"
@@ -41,22 +36,22 @@ $(document).ready(function() {
 		var placeTypeS = $(this).text();
 
 		if (placeTypeS == '숙박') {
-			placetype = 5;
+			staytype = 5;
 		} else if (placeTypeS == '캠핑장') {
-			placetype = 6;
+			staytype = 6;
 		} 
 
 		$.ajax({
-			url: contextPath + "plan/box"
+			url: contextPath + "plan/stay"
 			, method: "post"
 			, context: this
 			, data: {
 				areaCode: areacode,
-				placeType: placetype
+				stayType: staytype
 			}
 			, error: ajaxErrorHandler
-		}).done(function(wrap_place) {
-			$(".wrap-placeList").replaceWith(wrap_place);
+		}).done(function(wrap_stay) {
+			$(".wrap-stayList").replaceWith(wrap_stay);
 		});
 
 		return false;
