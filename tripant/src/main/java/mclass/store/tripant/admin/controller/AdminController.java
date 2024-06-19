@@ -107,9 +107,16 @@ public class AdminController {
 	@GetMapping("/complain")
 	public String complain(Model model) {
 		model.addAttribute("complainBoard",adminservice.complainList());
+		
 		return "admin/admin_complain";
 	}
 	
+	//신고수 초기화
+	@PostMapping("/reset")
+	@ResponseBody
+	public String complain() {
+		return "";
+	}
 	@GetMapping("/goods")
 	public String goods() {
 		return "admin/admin_goods";
