@@ -60,6 +60,17 @@ public class PlanController {
 		return "plan/spot_tab_content";
 	}
 	
+	@PostMapping("/spot/more")
+	public String spotMore(Model model, @RequestParam("areaCode") Integer areaCode, @RequestParam("spotType") Integer spotType,
+			 @RequestParam("clickSpotNum") Integer clickSpotNum ) throws IOException {
+		//10개씩 더 출력하기
+		int maxNum = (clickSpotNum+1) * 10;
+		List<SpotEntity> spotTypeList = planService.selectTypeListMore(areaCode, spotType, maxNum);
+		model.addAttribute("spotTypeList", spotTypeList);
+		return "plan/spot_tab_content";
+	}
+	
+	
 	@PostMapping("/stay")
 	public String stay(Model model, @RequestParam("areaCode") Integer areaCode, @RequestParam("stayType") Integer stayType) throws IOException {
 		List<SpotEntity> stayTypeList = planService.selectTypeList(areaCode, stayType);

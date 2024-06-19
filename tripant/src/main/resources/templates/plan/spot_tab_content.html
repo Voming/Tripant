@@ -9,11 +9,13 @@
 					<span class="spot-name" th:text="${spot.title}"></span> 
 					<span class="spot-address" th:text="${spot.add1}"></span>
 				</div>
-				<input type="checkbox" th:data-spotid="${spot.contentid}" th:id="|spot-check-${spotStat.index}|">
-				<label th:for="|spot-check-${spotStat.index}|"></label>
+				<input type="checkbox" th:data-spotid="${spot.contentid}"
+					th:id="|spot-check-${spotStat.index}|"> <label
+					th:for="|spot-check-${spotStat.index}|"></label>
 			</div>
 		</th:block>
 	</th:block>
-	<div><button type="button" class="spot_more_btn"><p>더보기</p></button></div>
+	<div><button type="button" onclick="spotMoreBtnClickHandler(this);" class="spot_more_btn">더보기</button></div>
 </div>
+
 </html>

@@ -34,5 +34,11 @@
 		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{spotType}  
 		AND ROWNUM <![CDATA[<=]]> 10
 	</select>
+	
+	<select id="selectTypeListMore" parameterType="_int" resultType="SpotEntity">
+	SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
+		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{spotType}  
+		AND ROWNUM <![CDATA[<=]]> #{maxNum}
+	</select>
 
 </mapper>

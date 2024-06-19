@@ -43,4 +43,8 @@ public class PlanService {
 	public List<SpotEntity> selectTypeList(int areaCode, int spotType){
 		return planRepository.selectTypeList(areaCode, spotType);
 	}
+	
+	public List<SpotEntity> selectTypeListMore(int areaCode, int spotType, int maxNum){
+		return planRepository.selectTypeListMore(areaCode, spotType, maxNum);
+	}
 }

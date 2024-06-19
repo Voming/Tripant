@@ -1,4 +1,28 @@
 //장소 탭
+var clickspotnum = 0;
+var areacode;
+var spottype;
+
+function spotMoreBtnClickHandler(thisElement) {
+	clickspotnum += 1;
+	console.log(clickspotnum);
+	console.log("들어옴" +areacode + spottype);
+
+
+	$.ajax({
+		url: contextPath + "plan/spot/more"
+		, method: "post"
+		, context: this
+		, data: {
+			areaCode: areacode,
+			spotType: spottype,
+			clickSpotNum : clickspotnum
+		}
+		, error: ajaxErrorHandler
+	}).done(function(wrap_spot) {
+		$(".wrap-spotList").replaceWith(wrap_spot);
+	});
+}
 $(document).ready(function() {
 	$('.spot-tab-nav a').click(function() {
 		$('.spot-tab-content > div').hide().filter(this.hash).fadeIn();
@@ -8,12 +32,14 @@ $(document).ready(function() {
 		$(this).addClass('active');
 		$(this).css("color", "white");
 		$(this).parent().css("background-color", "var(--color_day9_blue)");
+		
+		//더보기 클릭 횟수 초기화
+		clickspotnum = 0;
 
-		var areacode = $(".plan-areacode").attr("value");
+		areacode = $(".plan-areacode").attr("value");
 		var spotTypeS = $(this).text();
 
 		// type(1:관광지, 2:문화시설, 3:쇼핑, 4:음식점, 5:숙박, 6:캠핑장)
-		var spottype;
 		if (spotTypeS == '관광지') {
 			spottype = 1;
 		} else if (spotTypeS == '문화시설') {
@@ -41,4 +67,6 @@ $(document).ready(function() {
 
 		return false;
 	}).filter(':eq(0)').click();
+	
 });
+

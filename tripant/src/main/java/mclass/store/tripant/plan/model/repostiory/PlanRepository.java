@@ -18,4 +18,6 @@ public interface PlanRepository {
 	public List<AreaEntity> selectAreaInfoList(int areaCode); // 지역 정보 
 	public String selectAreaShortName(int areaCode); // 짧은 이름
 	public List<SpotEntity> selectTypeList(int areaCode, int spotType); //지역, 타입 별 장소
+	public List<SpotEntity> selectTypeListMore(int areaCode, int spotType, int maxNum); //더보기 클릭 시
+	
 }
