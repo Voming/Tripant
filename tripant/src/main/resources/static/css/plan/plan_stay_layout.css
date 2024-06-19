@@ -116,7 +116,7 @@
 
 /* TODO id 바꿔주기 */
 .stay-tab-content input[type='checkbox']:checked+label {
-	background: url('/images/icons/spot_ck_af.png') no-repeat 0 1px/contain;
+	background: url('/images/icons/stay_ck_af.png') no-repeat 0 1px/contain;
 }
 
 .stay-tab-content input[type="checkbox"] {

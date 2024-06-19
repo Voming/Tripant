@@ -31,15 +31,6 @@ $(loadedHandler);
 
 function loadedHandler() {
 	var areacode = $(".plan-areacode").attr("value");
-	//달력 다시 열기
-	$(".plan-priod").on("click", function() {
-		if (confirm("기간을 다시 설정하면 작성한 내용이 없어집니다. 괜찮습니까?") == true) {
-			location.reload(true);
-			$(".modal").addClass("show");
-		} else {
-			event.preventDefault();
-		}
-	});
 
 	//메인 화면 돌아가기
 	$(".logo").on("click", function() {
