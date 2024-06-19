@@ -1,5 +1,20 @@
 $(loadedHanlder);
 function loadedHanlder(){
+	console.log("==??")
+	$.ajax({
+		method:"post",
+		context:this,
+//    	data: {planId:planId}
+		dataType:"json"
+	}).done( function(dayEntityList) {
+        console.log(dayEntityList);
+        dayEntityList_org = dayEntityList;
+        console.log("=========1");
+		console.log(dayEntityList_org);
+        //장소별 머무는 시간 출력
+		staytimeHandler();
+	});	
+	
 	//편집
 	$(".edit").click(editHandler);
 	//편집 취소
@@ -12,8 +27,8 @@ function loadedHanlder(){
 	dragAndDrop();
 	//일차별 동그라미 색 변경
 	circleColorHandler();
-	//장소별 머무는 시간 출력
-	staytimeHandler();
+    //장소별 머무는 시간 출력
+	//staytimeHandler();
 	//test용
 	$(".mapbtn").click(panTo);
 	$(".test-btn").click(durationHandler);

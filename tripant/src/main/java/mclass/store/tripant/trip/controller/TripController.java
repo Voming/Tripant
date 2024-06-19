@@ -42,11 +42,17 @@ public class TripController {
 		List<DayEntity> dayEntityList= service.detailList(planId);
 		mv.addObject("detailListJson", new Gson().toJson(dayEntityList));
 		mv.addObject("detailList", dayEntityList);
+		mv.addObject("planId", planId);
 		mv.setViewName("trip/trip");
 		return mv;
 	}
 	
-	
+	@PostMapping(value="/detail/{planId}")
+	@ResponseBody
+	public List<DayEntity> detail2(ModelAndView mv,@PathVariable("planId") Integer planId) {
+		List<DayEntity> dayEntityList= service.detailList(planId);
+		return dayEntityList;
+	}
 	//sts꺼
 	@Value("${kakao.map.rest.api}")
 	private String apikey;
