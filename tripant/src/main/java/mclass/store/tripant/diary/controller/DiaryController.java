@@ -56,10 +56,5 @@ public class DiaryController {
 		return response;
 	}
 
-//	   @GetMapping("/diary/{areaCode}")
-//	    public String getDiariesByArea(@PathVariable String areaCode, Model model) {
-//	       
-//	        model.addAttribute("diaries", diary());
-//	        return "diary_board";
-//	   }
+
 }

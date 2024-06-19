@@ -2,16 +2,14 @@ package mclass.store.tripant.diary.controller;
 
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.service.DiaryService;
-import mclass.store.tripant.member.model.service.MemberService;
+
 
 
 
@@ -30,20 +28,19 @@ import mclass.store.tripant.member.model.service.MemberService;
 @RequestMapping("/my")
 public class MyDiaryController {
 
-	private static final Long Long = null;
+
 	@Autowired
 	private DiaryService diaryService;
-    @Autowired
-	private MemberService memberService; // MemberService 주입
+
 
 	// 나의 글보기
 	@GetMapping("/diary") // 나의 여행기(비공개글) 목록 가져오기
-	public String mydiary(Model model) {
-		diaryService.selectDiaryList();
-		model.addAttribute("diaries", diaryService.selectDiaryList());
-		
-		System.out.println("======mydiary controller===" + diaryService.selectDiaryList());
-		return "diary/my/my_board";
+	public ModelAndView mydiary(ModelAndView mv) {
+//		diaryService.selectDiaryList();
+//		model.addAttribute("diaries", diaryService.selectDiaryList(null));
+		mv.setViewName("diary/my/my_board");
+		System.out.println("======mydiary controller===" + diaryService.selectDiaryList(null));
+		return mv;
 	}
 
 //		글쓰기 페이지 보이기
