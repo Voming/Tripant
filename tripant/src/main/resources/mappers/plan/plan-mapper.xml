@@ -60,5 +60,23 @@
 		AND TITLE LIKE '%'||#{findArea}||'%'
 		AND ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
+	
+	<select id="selectStayFindList" parameterType="string" resultType="PlaceboxEntity">
+		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
+		FROM PLACE 
+		WHERE AREACODE=#{areaCode} 
+		AND TYPE IN (5,6)
+		AND TITLE LIKE '%'||#{findArea}||'%'
+		AND ROWNUM <![CDATA[<=]]> 20
+	</select>
+	
+	<select id="selectStayFindMoreList" parameterType="string" resultType="PlaceboxEntity">
+		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
+		FROM PLACE 
+		WHERE AREACODE=#{areaCode} 
+		AND TYPE IN (5,6)
+		AND TITLE LIKE '%'||#{findArea}||'%'
+		AND ROWNUM <![CDATA[<=]]> #{maxNum}
+	</select>
 
 </mapper>

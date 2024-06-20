@@ -92,10 +92,6 @@ public class PlanController {
 		return "plan/spot_tab_content";
 	}
 
-	
-	
-	
-	
 	//-------------------------------------stay-------------------------------------------
 	@PostMapping("/stay")
 	public String stay(Model model, @RequestParam("areaCode") Integer areaCode,
@@ -115,7 +111,27 @@ public class PlanController {
 		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
 	}
+	
+	@PostMapping("/stay/find")
+	public String stayFind(Model model, @RequestParam("findArea") String findArea,
+			@RequestParam("areaCode") String areaCode) {
+		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode);
+		model.addAttribute("stayList", stayList);
+		return "plan/stay_tab_content";
+	}
+	
+	@PostMapping("/stay/find/more")
+	public String stayFindMore(Model model, @RequestParam("findArea") String findArea,
+			@RequestParam("areaCode") String areaCode, @RequestParam("clickStayFindNum") Integer clickStayFindNum) {
+		// 20개씩 더 출력하기
+		int maxNum = (clickStayFindNum + 1) * 20;
+		List<PlaceboxEntity> stayList = planService.selectStayFindMoreList(findArea, areaCode, maxNum+"");
+		model.addAttribute("stayList", stayList);
+		return "plan/stay_tab_content";
+	}
 
+	
+	//---------------------------------numberFormatException-------------------------------------------
 	@ExceptionHandler
 	public String numberFormatExceptionHandler(NumberFormatException e) {
 		e.printStackTrace();

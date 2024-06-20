@@ -21,4 +21,6 @@ public interface PlanRepository {
 	public List<PlaceboxEntity> selectTypeListMore(int areaCode, int placeType, int maxNum); //더보기 클릭 시
 	public List<PlaceboxEntity> selectSpotFindList(String findArea, String areaCode); //장소명 검색
 	public List<PlaceboxEntity> selectSpotFindMoreList(String findArea, String areaCode, String maxNum); //장소명 검색 더보기
+	public List<PlaceboxEntity> selectStayFindList(String findArea, String areaCode); //장소명 검색
+	public List<PlaceboxEntity> selectStayFindMoreList(String findArea, String areaCode, String maxNum); //장소명 검색 더보기
 }

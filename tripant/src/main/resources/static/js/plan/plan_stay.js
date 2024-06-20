@@ -1,5 +1,13 @@
 var clickstaynum = 0;
+var clickstayfindnum = 0;
 var staytype;
+//검색명
+var findArea;
+
+//체크박스 클릭
+function stayCkBtnClickHandler(thisElement){
+	console.log(thisElement);
+}
 
 function stayMoreBtnClickHandler(thisElement) {
 	clickstaynum += 1;
@@ -21,6 +29,11 @@ function stayMoreBtnClickHandler(thisElement) {
 
 $(document).ready(function() {
 	$('.stay-tab-nav a').click(function() {
+		//검색했던게 있으면 지우기
+		if ($("#find-stay").val().trim().length != 0) {
+			$("#find-stay").val("");
+		}
+		
 		$('.stay-tab-content > div').hide().filter(this.hash).fadeIn();
 		$('.stay-tab-nav a').css("color", "var(--color_gray)");
 		$('.stay-tab-nav li').css("background-color", "white");
@@ -52,9 +65,91 @@ $(document).ready(function() {
 			, error: ajaxErrorHandler
 		}).done(function(wrap_stay) {
 			$(".wrap-stayList").replaceWith(wrap_stay);
+			
+			//결과값 null 체크
+			var stayboxCount = $(".stay-box").length;
+			if (stayboxCount.length == 0) { //결과 없음
+				$(".stay_more_btn").css('display', 'none');
+				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
+				$(".resultStayCheck").html(htmlVal);
+			}
 		});
 
 		return false;
 	}).filter(':eq(0)').click();
+	
+	//검색
+	$(".btn.find-stay").on("click", btnStayFindClickHandler);
 });
 
+//검색
+function btnStayFindClickHandler() {
+	//버튼 클릭 초기화
+	clickstayfindnum = 0;
+	//타입 전체 선택 해제
+	$('.stay-tab-nav a').css("color", "var(--color_gray)");
+	$('.stay-tab-nav li').css("background-color", "white");
+	$('.stay-tab-nav a').removeClass('active');
+	
+	findArea = $("input[name=find-stay]").val().trim();
+	if (findArea.length == 0) {
+		alert("빈문자열만 입력할 수 없습니다. 검색할 장소명을 입력해주세요.");
+		return;
+	}
+
+	$.ajax({
+		url: "/plan/stay/find"
+		, method: "post"
+		, context: this
+		, data: {
+			findArea: findArea,
+			areaCode: areacode,
+		}
+		, error: ajaxErrorHandler
+	}).done(function(wrap_stay) {
+		$(".wrap-stayList").replaceWith(wrap_stay);
+		
+		//결과값 null(검색 결과 더보기) 체크
+		var stayboxCount = $(".stay-box").length;
+		console.log(stayboxCount);
+		var htmlVal;
+		if (stayboxCount == 0) { //결과 없음
+			htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
+		} else if (stayboxCount >= 30) { //더보기 필요
+			htmlVal = `
+				<button type="button" onclick="stayFindMoreBtnClickHandler(this);"
+				class="stay_find_more_btn">더보기</button>`;
+		} 
+		$(".resultStayCheck").html(htmlVal);
+		$(".stay_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+	});
+}
+
+//검색 더보기
+function stayFindMoreBtnClickHandler(thisElement) {
+	clickstayfindnum += 1;
+
+	$.ajax({
+		url: contextPath + "plan/stay/find/more"
+		, method: "post"
+		, context: this
+		, data: {
+			areaCode: areacode,
+			findArea: findArea,
+			clickStayFindNum: clickstayfindnum
+		}
+		, error: ajaxErrorHandler
+	}).done(function(wrap_stay) {
+		$(".wrap-stayList").replaceWith(wrap_stay);
+		
+		//결과값 null(검색 결과 더보기) 체크
+		var stayboxCount = $(".stay-box").length;
+		if (stayboxCount >= 30*clickstayfindnum) {
+			var htmlVal = `
+				<button type="button" onclick="stayFindMoreBtnClickHandler(this);"
+				class="stay_find_more_btn">더보기</button>`;
+		} 
+		$(".resultStayCheck").html(htmlVal);
+		$(".stay_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+	});
+}
