@@ -87,3 +87,16 @@ function shareHandler() {
         window.open(shareUrl, '_blank');
     });
 }
+
+/*좋아요 누르기  */
+function btnLikeClickHandler(thisElement){
+	console.log("눌림");
+/*	console.log(thisElement);*/
+     // 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
+        if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
+            $(thisElement).attr('src', '/images/diary/diary_like_icon.png');
+        } else {
+            // 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
+            $(thisElement).attr('src', '/images/diary/diary_like_none.png');
+        }
+}
