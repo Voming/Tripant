@@ -60,20 +60,22 @@
 }
 
 .memberlist > li> .col >li:first-child{
-	width:15%;
+	width:16.6%;
 }
-
 .memberlist > li> .col >li:first-child+li{
-	width:23%;
+	width:16.6%;
 }
 .memberlist > li> .col >li:first-child+li+li{
-	width:18%;
+	width:16.6%;
 }
 .memberlist > li> .col >li:first-child+li+li+li{
-	width:20%;
+	width:16.6%;
 }
 .memberlist > li> .col >li:first-child+li+li+li+li{
-	width:18%;
+	width:16.6%;
+}
+.memberlist > li> .col >li:first-child+li+li+li+li+li{
+	width:16.6%;
 }
 
 /* 상품추가버튼 */
@@ -83,6 +85,30 @@
 	height:35px;
 	width:80px;
 	background-color:white;
+}
+
+/* 상품추가 창 */
+.swal2-container *{
+	font-family: "Binggrae";
+}
+.flex{
+	display: flex;
+}
+.item-add{
+	flex-direction: column;
+	row-gap: 20px;
+}
+.add-info{
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	font-size: var(--font4);
+}
+.add-info input{
+	box-sizing: border-box;
+	border-radius: 8px;
+	padding: 4px 8px;
+	border: 1px solid black;
 }
 
 /*수정버튼 */

@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -128,11 +129,6 @@ public class AdminController {
 		return boardList;
 	}
 	
-	@GetMapping("/goods")
-	public String goods() {
-		return "admin/admin_goods";
-	}
-	
 	// 결제 취소 페이지
 	@GetMapping("/cancel")
 	public ModelAndView cancel(ModelAndView mv) {
@@ -177,6 +173,35 @@ public class AdminController {
 		}else {
 			return 0;
 		}
+	}
+
+	// 상품관리 페이지
+	@GetMapping("/goods")
+	public ModelAndView goods(ModelAndView mv) {
+		mv.setViewName("admin/admin_goods");
+		mv.addObject("itemList", adminservice.itemList());
+		return mv;
+	}
+	
+	// 상품추가
+	@PostMapping("/goods/insert")
+	@ResponseBody
+	public int goodsInsert(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("itemCode", itemCode);
+		map.put("itemName", itemName);
+		map.put("itemPrice", itemPrice);
+		if(itemDur != null && itemSale != null) {
+			map.put("itemDur", itemDur);
+			map.put("itemSale", itemDur);
+		}else {
+			map.put("itemDur", null);
+			map.put("itemSale", null);
+		}
+		
+		int result = adminservice.itemInsert(map);
+		
+		return result;
 	}
 	
 	@GetMapping("/mchart")

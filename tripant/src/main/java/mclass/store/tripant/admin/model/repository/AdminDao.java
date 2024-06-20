@@ -43,7 +43,13 @@ public interface AdminDao {
 	public List<Map<String, Object>> payList();
 
 	// 결제 취소
-	public Integer payCancel(Map<String, Object> map);
+	public int payCancel(Map<String, Object> map);
+	
+	// 상품 관리 페이지
+	// 상품목록
+	public List<Map<String, Object>> itemList();
+	// 상품추가
+	public int itemInsert(Map<String, Object> map); 
 	
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 

@@ -29,6 +29,10 @@ public class SecurityConfig {
 		http
 		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
 				.requestMatchers(
+						new AntPathRequestMatcher("/store")
+						, new AntPathRequestMatcher("/diary")
+						).permitAll()
+				.requestMatchers(
 						new AntPathRequestMatcher("/login")
 						, new AntPathRequestMatcher("/join")
 						, new AntPathRequestMatcher("/join/sns")
@@ -40,7 +44,7 @@ public class SecurityConfig {
 						).hasAnyAuthority("MEM", "VIP")
 				.requestMatchers(
 						new AntPathRequestMatcher("/admin/**")
-						).hasAnyAuthority("ADMIN")
+						).hasAuthority("ADMIN")
 				.requestMatchers(
 						new AntPathRequestMatcher("/**")
 						).permitAll()

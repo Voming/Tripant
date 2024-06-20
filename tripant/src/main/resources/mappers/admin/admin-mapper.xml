@@ -80,4 +80,14 @@
 	delete from buy where mem_email = #{memEmail} and buy_id = #{buyId} 
 	</delete>
 	
+	<!-- 상품 관리 페이지 -->
+	<!-- 상품목록 -->
+	<select id="itemList" resultType="map">
+	select item_code, item_name, item_price, to_char(item_price, '9,999') as item_price_char, item_dur, item_sale from item order by item_code asc
+	</select>
+	<!-- 상품추가 -->
+	<insert id="itemInsert" parameterType="map">
+	insert into item values (#{itemCode}, #{itemName}, #{itemPrice}, #{itemDur}, #{itemSale})
+	</insert>
+	
 </mapper>
