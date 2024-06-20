@@ -30,6 +30,18 @@ public class MypageController {
 		Map<String, Object> map = memberService.myInfo(memEmail);
 		model.addAttribute("memEmail", map.get("MEM_EMAIL"));
 		model.addAttribute("memNick", map.get("MEM_NICK"));
+		
+		String memTypeStr = (String) map.get("MEM_TYPE");
+		int memType = Integer.parseInt(memTypeStr, 2);
+		
+		int isKakao = memType & Integer.parseInt("0100", 2);
+		int isNaver = memType & Integer.parseInt("0010", 2);
+		int isGoogle = memType & Integer.parseInt("0001", 2);
+		
+		model.addAttribute("isKakao", isKakao);
+		model.addAttribute("isNaver", isNaver);
+		model.addAttribute("isGoogle", isGoogle);
+		
 		return "mypage/home";
 	}
 
