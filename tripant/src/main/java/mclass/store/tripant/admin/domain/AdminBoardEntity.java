@@ -20,4 +20,5 @@ public class AdminBoardEntity {
 	//검색필터
 	private String type;
 	private String keyword;
+	
 }
