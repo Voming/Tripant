@@ -19,5 +19,5 @@ public interface PlanRepository {
 	public String selectAreaShortName(int areaCode); // 짧은 이름
 	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType); //지역, 타입 별 장소
 	public List<PlaceboxEntity> selectTypeListMore(int areaCode, int placeType, int maxNum); //더보기 클릭 시
-	
+	public List<PlaceboxEntity> selectPlaceFindList(String findArea, String areaCode); //장소명 검색
 }
