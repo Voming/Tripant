@@ -16,10 +16,17 @@ SELECT TRAVEL_DATE , SCHEDULE_START ,SCHEDULE_END ,CONTENTID ,PLACE_TYPE , STAY_
 TRAVEL_ORDER ,MEMO ,TITLE ,ADDRESS ,FIRSTIMAGE ,LNG ,LAT  FROM DETAILINFO  ORDER BY TRAVEL_DATE ASC ,TRAVEL_ORDER ASC;
 
 ------------------
+--plan : plan_id,plan_area_code, plan_title, start,end
+--area : area_code, area_short_name,area_x, area_y
+--세부 일정에서 띄울 여행일정의 기본 정보값
+SELECT TO_CHAR(PLAN_AREA_CODE) CODE,PLAN_TITLE TITLE,TO_CHAR(PLAN_START_DAY,'YYYY.MM.DD') STARTDAY,TO_CHAR(PLAN_END_DAY,'YYYY.MM.DD') ENDDAY, AREA_SHORT_NAME AREANAME, AREA_X LNG, AREA_Y LAT 
+FROM PLAN JOIN AREA ON AREA_CODE = PLAN_AREA_CODE WHERE PLAN_ID = 13
+;
+------------------
+--date -> char 형태로 변경
 select to_char(schedule_day,'YYYY-MM-DD(DY)') from plan_schedule;
 
-
-
+desc plan;
 ------------------
 desc DETAILINFO;
 desc plan_spot;

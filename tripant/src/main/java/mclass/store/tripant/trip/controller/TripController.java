@@ -29,19 +29,22 @@ import mclass.store.tripant.trip.model.service.TripService;
 public class TripController {
 	@Autowired
 	private TripService service;
-	//sts꺼
+	
+	//map 위치간 이동시간
 	@Value("${kakao.map.rest.api}")
 	private String apikey;
 	
-	@GetMapping(value="/detail")
-	public String detail(Model modal) {
-		
+	//여행 기본정보 불러오기
+	@GetMapping(value="/detail/{planId}")
+	public String detail(Model model,@PathVariable Integer planId ) {
+		model.addAttribute("planInfo", service.planInfo(planId));
 		return "trip/trip";
 	}
 	
-	@PostMapping(value="/detail/a")
+	//여행 세부일정 데이터 불러오기
+	@PostMapping(value="/detail/{planId}/info")
 	@ResponseBody
-	public List<DayEntity> detail2(ModelAndView mv, Integer planId) {
+	public List<DayEntity> detail2(ModelAndView mv,@PathVariable Integer planId) {
 		List<DayEntity> dayEntityList= service.detailList(planId);
 		return dayEntityList;
 	}
