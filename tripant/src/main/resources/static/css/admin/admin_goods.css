@@ -85,6 +85,30 @@
 	background-color:white;
 }
 
+/* 상품추가 창 */
+.swal2-container *{
+	font-family: "Binggrae";
+}
+.flex{
+	display: flex;
+}
+.item-add{
+	flex-direction: column;
+	row-gap: 20px;
+}
+.add-info{
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	font-size: var(--font4);
+}
+.add-info input{
+	box-sizing: border-box;
+	border-radius: 8px;
+	padding: 4px 8px;
+	border: 1px solid black;
+}
+
 /*수정버튼 */
 .col.list .btn{
 	border-radius:8px;

@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-<meta charset="UTF-8">
-<title>상품관리</title>
-<!-- reset.css -->
-<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
-<!-- 레이아웃 설정 -->
-<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<head th:replace="~{common/header :: head('상품관리')}"></head>
+<!-- css -->
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_goods.css}" rel="stylesheet">
-<!-- CDN -->
+<!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
-<!--제이쿼리  -->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-</head>
 <body>
-
 <div class="wrap-main">
 	<div class="wrap-sidebar">
 		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">
@@ -75,34 +66,62 @@
 $(loadedHandler);
 
 function loadedHandler() {
-	$(".btn-add").on("click", ClickHandler);
+	// 상품 추가 버튼
+	$(".btn-add").on("click", itemAddHandler);
 }
-async function ClickHandler(){
-const { value: formValues } = await Swal.fire({
-  title: " <p style='font-size:17px; font-family:Binggrae'>" + "상품추가" + "</p>",
-  confirmButtonText:"추가",
-  confirmButtonTextFont:"Binggrae",
-  confirmButtonColor:"black",
-  width:"390px",
-  html: `
-    <span style='font-family:Binggrae; font-size:13px'>상품코드</span><input id="swal-input1" class="swal2-input" style='width:200px; height:45px'>
-    <span style='font-family:Binggrae; font-size:13px'>상품명 </span><input id="swal-input2" class="swal2-input" style='width:200px; height:45px'>
-    <span style='font-family:Binggrae; font-size:13px'>상품가격</span><input id="swal-input3" class="swal2-input" style='width:200px; height:45px'>
-    <span style='font-family:Binggrae; font-size:13px'>상품기간</span><input id="swal-input4" class="swal2-input" style='width:200px; height:45px'>
-  `,
-  focusConfirm: false,
-  preConfirm: () => {
-    return [
-      document.getElementById("swal-input1").value,
-      document.getElementById("swal-input2").value,
-      document.getElementById("swal-input3").value,
-      document.getElementById("swal-input4").value
-    ];
-  }
-});
-if (formValues) {
-  Swal.fire(JSON.stringify(formValues));
-}
+async function itemAddHandler(){
+	const { value: formValues } = await Swal.fire({
+		title: "<div style='font-size: var(--font2);'>상품 추가</div>",
+		confirmButtonText:"추가",
+		confirmButtonTextFont:"Binggrae",
+		confirmButtonColor:"black",
+		width:"390px",
+		html: `
+		<div class="item-add flex">
+			<div class="add-info flex">
+				<div>상품코드</div>
+				<div><input type="text" id="item-code" name="item-code"></div>
+			</div>
+			<div class="add-info flex">
+				<div>상품명</div>
+				<div><input type="text" id="item-name" name="item-name"></div>
+			</div>
+			<div class="add-info flex">
+				<div>상품가격(원)</div>
+				<div><input type="number" min="0" id="item-price" name="item-price"></div>
+			</div>
+			<div class="add-info flex">
+				<div>상품기간(일)</div>
+				<div><input type="number" min="0" id="item-dur" name="item-dur"></div>
+			</div>
+		</div>
+	  `,
+	  focusConfirm: false,
+	  preConfirm: () => {
+		return [
+			$("#item-code").val()
+			, $("#item-name").val()
+			, $("#item-price").val()
+			, $("#item-dur").val()
+	    ];
+	  }
+	});
+	if(formValues[0].trim().length > 0
+			&& formValues[1].trim().length > 0
+			&& formValues[2].trim().length > 0) {
+		$.ajax({
+			url: contextPath + ""
+		});
+		Swal.fire({
+			text: "상품 추가가 완료되었습니다.", 
+			icon: "success"
+		});
+	}else{
+		Swal.fire({
+			text: "상품 기간을 제외한 항목은 필수 입력 사항입니다.", 
+			icon: "error"
+		});
+	}
 }
 </script>
 
