@@ -94,6 +94,10 @@ async function itemAddHandler(){
 				<div>상품기간(일)</div>
 				<div><input type="number" min="0" id="item-dur" name="item-dur"></div>
 			</div>
+			<div class="add-info flex">
+				<div>상품할인율(%)</div>
+				<div><input type="number" min="0" id="item-dur" name="item-sale"></div>
+			</div>
 		</div>
 	  `,
 	  focusConfirm: false,
@@ -102,7 +106,6 @@ async function itemAddHandler(){
 			$("#item-code").val()
 			, $("#item-name").val()
 			, $("#item-price").val()
-			, $("#item-dur").val()
 	    ];
 	  }
 	});
@@ -110,15 +113,36 @@ async function itemAddHandler(){
 			&& formValues[1].trim().length > 0
 			&& formValues[2].trim().length > 0) {
 		$.ajax({
-			url: contextPath + ""
-		});
-		Swal.fire({
-			text: "상품 추가가 완료되었습니다.", 
-			icon: "success"
+			url: contextPath + "admin/goods/insert", 
+			type: "post", 
+			data: {
+				itemCode: formValues[0], 
+				itemName: formValues[1], 
+				itemPrice: formValues[2], 
+				itemDur: formValues[3], 
+				itemSale: formValues[4], 
+			}, 
+			success: function(data){
+				if(data > 0){
+					Swal.fire({
+						title: "상품 추가가 완료되었습니다.", 
+						icon: "success"
+					});
+				}
+			}, 
+			error: function(request, status, error){
+				Swal.fire({
+					title: "상품 추가 중 오류가 발생했습니다.", 
+					text: "code: "+request.status + "\n" + "message: " 
+					+ request.responseText + "\n"
+					+ "error: "+error, 
+					icon: "warning"
+				});
+			}
 		});
 	}else{
 		Swal.fire({
-			text: "상품 기간을 제외한 항목은 필수 입력 사항입니다.", 
+			title: "상품 기간을 제외한 항목은 필수 입력 사항입니다.", 
 			icon: "error"
 		});
 	}

@@ -80,4 +80,10 @@
 	delete from buy where mem_email = #{memEmail} and buy_id = #{buyId} 
 	</delete>
 	
+	<!-- 상품 관리 페이지 -->
+	<!-- 상품추가 -->
+	<insert id="itemInsert" parameterType="map">
+	insert into item values (#{itemCode}, #{itemName}, #{itemPrice}, #{itemDur}, #{itemSale})
+	</insert>
+	
 </mapper>

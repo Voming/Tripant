@@ -65,7 +65,13 @@ public class AdminSerivce {
 	}
 
 	// 결제 취소
-	public Integer payCancel(Map<String, Object> map) {
+	public int payCancel(Map<String, Object> map) {
 		return admindao.payCancel(map);
+	}
+	
+	// 상품 관리 페이지
+	// 상품추가
+	public int itemInsert(Map<String, Object> map) {
+		return admindao.itemInsert(map);
 	}
 }
