@@ -70,6 +70,10 @@ public class AdminSerivce {
 	}
 	
 	// 상품 관리 페이지
+	// 상품목록
+	public List<Map<String, Object>> itemList(){
+		return admindao.itemList();
+	}
 	// 상품추가
 	public int itemInsert(Map<String, Object> map) {
 		return admindao.itemInsert(map);

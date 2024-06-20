@@ -46,6 +46,8 @@ public interface AdminDao {
 	public int payCancel(Map<String, Object> map);
 	
 	// 상품 관리 페이지
+	// 상품목록
+	public List<Map<String, Object>> itemList();
 	// 상품추가
 	public int itemInsert(Map<String, Object> map); 
 	
