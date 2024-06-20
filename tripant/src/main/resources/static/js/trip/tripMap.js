@@ -1,3 +1,7 @@
+/* 추가한 일정들 객체화하여 좌표 넣기 , points 글로벌변수 선언*/
+let points = [ ];//지도에 표시될 위치 (일정 추가일 때) - 제주 
+
+function test(){
 /* 1. 지도 생성*/
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
@@ -21,14 +25,8 @@ kakao.maps.event.addListener(map, 'dragend', function() {
 }); 
 
 
-//버튼을 클릭하면 아래 배열의 좌표들이 모두 보이게 지도 범위를 재설정합니다 
+//버튼을 클릭하면 points내의 좌표들이 모두 보이게 지도 범위를 재설정합니다 
 
-/* 추가한 일정들 객체화하여 좌표 넣기 */
-var points = [ //지도에 표시될 위치 (일정 추가일 때) - 제주
-	new kakao.maps.LatLng(33.5063870002, 126.4639059537),
-    new kakao.maps.LatLng(33.4843271774, 126.3911377809),
-    new kakao.maps.LatLng(33.5187500203, 126.4953529380)
-];
 //지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
 var bounds = new kakao.maps.LatLngBounds();   
 
@@ -99,4 +97,9 @@ function panTo() {
     // 지도 중심을 부드럽게 이동시킵니다
     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
     map.panTo(moveLatLon);       
+}
+
+//test용
+	$(".mapbtn").click(panTo);
+
 }
