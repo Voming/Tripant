@@ -57,6 +57,8 @@ public interface AdminDao {
 	public int itemInsert(Map<String, Object> map); 
 	// 상품수정
 	public int itemUpdate(Map<String, Object> map);
+	//상품삭제
+	public int  itemDelete(String itemCode);
 	
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 

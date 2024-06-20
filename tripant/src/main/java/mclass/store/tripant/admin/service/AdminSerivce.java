@@ -91,4 +91,8 @@ public class AdminSerivce {
 	public int itemUpdate(Map<String, Object> map) {
 		return admindao.itemUpdate(map);
 	}
+	//상품 삭제
+	public int itemDelete(String itemCode) {
+		return admindao.itemDelete(itemCode);
+	}
 }

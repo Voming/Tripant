@@ -268,6 +268,14 @@ public class AdminController {
 		return result;
 	}
 	
+	//상품삭제
+	@PostMapping("/goods/delete")
+	@ResponseBody
+	public int goodsDelete(String itemCode) {
+		int result=adminservice.itemDelete(itemCode);
+		return result;
+	}
+	
 	@GetMapping("/mchart")
 	public String mchart() {
 		return "admin/admin_mchart";
