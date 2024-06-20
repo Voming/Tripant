@@ -32,6 +32,7 @@ public class PlanController {
 	@GetMapping("")
 	public String make(@SessionAttribute(name = "areaCode") Integer areaCode,
 			@SessionAttribute(name = "planTitle") String planTitle) {
+		planService.selectAreaPoint(areaCode);
 		return "plan/make";
 	}
 

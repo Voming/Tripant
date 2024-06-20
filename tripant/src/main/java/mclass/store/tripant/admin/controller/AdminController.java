@@ -6,7 +6,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +25,7 @@ import com.google.gson.Gson;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
+import mclass.store.tripant.admin.domain.AdminStoreEntity;
 import mclass.store.tripant.admin.service.AdminSerivce;
 
 @Controller
@@ -270,13 +270,21 @@ public class AdminController {
 	}
 	
 	//상품삭제
+	//ajax
 	@PostMapping("/goods/delete")
 	@ResponseBody
 	public int goodsDelete(String itemCode) {
 		int result=adminservice.itemDelete(itemCode);
 		return result;
 	}
-	
+	//상품검색
+	//ajax
+	@PostMapping("/goods/search")
+	@ResponseBody
+	public List<AdminStoreEntity> itemsearch(Model model, String itemCode){
+		List<AdminStoreEntity> itemsearchList=adminservice.itemsearch(itemCode);
+		return itemsearchList;
+	}
 	@GetMapping("/mchart")
 	public String mchart() {
 		return "admin/admin_mchart";

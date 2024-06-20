@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
+import mclass.store.tripant.admin.domain.AdminStoreEntity;
 import mclass.store.tripant.admin.model.repository.AdminDao;
 
 @Service
@@ -94,5 +95,9 @@ public class AdminSerivce {
 	//상품 삭제
 	public int itemDelete(String itemCode) {
 		return admindao.itemDelete(itemCode);
+	}
+	//상품검색
+	public List<AdminStoreEntity> itemsearch(String itemCode){
+		return admindao.itemsearch(itemCode);
 	}
 }

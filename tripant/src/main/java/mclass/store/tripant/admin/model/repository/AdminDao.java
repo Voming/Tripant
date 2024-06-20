@@ -9,11 +9,13 @@ import org.apache.ibatis.annotations.Mapper;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
+import mclass.store.tripant.admin.domain.AdminStoreEntity;
 
 
 @Mapper
 public interface AdminDao {
 	
+	//회원관리
 	//회원정보 한페이지에 나열
 	public List<AdminMemEntity> selectMemList();
 	
@@ -23,6 +25,7 @@ public interface AdminDao {
 	//회원검색
 	public List<AdminMemEntity> search(String memNick);
 	
+	//게시글관리
 	//전체게시글
 	public List<AdminBoardEntity> boardList();
 	
@@ -32,6 +35,7 @@ public interface AdminDao {
 	//좋아요 많은 순으로 정렬
 	public String boardLike();
 	
+	//신고게시글 관리
 	//신고게시글
 	public List<AdminBoardEntity> complainList();
 	
@@ -59,7 +63,8 @@ public interface AdminDao {
 	public int itemUpdate(Map<String, Object> map);
 	//상품삭제
 	public int  itemDelete(String itemCode);
-	
+	//검색기능(아이템코드)
+	public List<AdminStoreEntity> itemsearch(String itemCode);
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 
 	//페이지 당 나오는 회원정보 수 뽑기
