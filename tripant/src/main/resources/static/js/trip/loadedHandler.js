@@ -1,34 +1,34 @@
-
-
 $(loadedHanlder);
+
 function loadedHanlder(){
 	var url = window.location.pathname;
 	var param = window.location.search;
 	console.log("==??"+url);
 	$.ajax({
-		url: url+"/a"+param,
+		url: url+"/info",
 		method:"post",
-    	//data: {planId:planId},
 		dataType:"json",
 		success : function(dayEntityList) {
-	        console.log(dayEntityList);
 	        dayEntityList_org = dayEntityList;
-	        console.log("=========1");
-			console.log(dayEntityList_org);
 			setEvent();
         }
 	});
-
 }
+
 function setEvent(){
 	//화면에 뿌릴 장소 정보 백틱으로 한번에 담아오기
 	displayInfo();
-	
+
 	//장소별 머무는 시간 출력
 	staytimeHandler();
+
+	//map 화면 출력
+	mapDisplay();
 	
 	//일차별 동그라미 색 변경
 	circleColorHandler();
+	
+
 
 	//드래그 앤 드랍
 	dragAndDrop();
@@ -43,7 +43,7 @@ function setEvent(){
 	$(".img-memo").hover(memoHandler,memoNoHandler);
 
 	//좌측 탭
-	//TODO 안 됨...시바
+	//TODO 안 됨
 	$(".dayn").click(function(){
 		$('.dayn a').css("color", "black");
 		$('.dayn a').removeClass('active');
@@ -54,10 +54,6 @@ function setEvent(){
 	}).filter(':eq(0)').click();
 	
 	
-	test();
-	
 	//test
 	$(".test-btn").click(durationHandler);
-	
-	
 }

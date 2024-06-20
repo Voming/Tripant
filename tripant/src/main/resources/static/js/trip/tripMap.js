@@ -1,11 +1,16 @@
-/* 추가한 일정들 객체화하여 좌표 넣기 , points 글로벌변수 선언*/
-let points = [ ];//지도에 표시될 위치 (일정 추가일 때) - 제주 
+function mapDisplay( areaCode ){
+areaCode = "1";
+let basedLatLng = [];
+basedLatLng[1] = {lat : 37.55298702, lng: 126.9725917  };
+basedLatLng[2] = {lat : 33.511111, lng:126.492778  };
+basedLatLng[3] = {lat : 33.511111, lng:126.492778  };
+basedLatLng[4] = {lat : 33.511111, lng:126.492778  };
+basedLatLng[13] = {lat : 33.511111, lng:126.492778  };
 
-function test(){
 /* 1. 지도 생성*/
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-	center: new kakao.maps.LatLng(33.511111, 126.492778), // 지도의 중심좌표 :  제주공항 여행 지역 별 중심좌표 차등 부여
+	center: new kakao.maps.LatLng(basedLatLng[areaCode].lat, basedLatLng[areaCode].lng), // 지도의 중심좌표 :  제주공항 여행 지역 별 중심좌표 차등 부여
         level: 9// 지도의 확대 레벨 큰 숫자 : 큰 범위
     };
 //지도를 생성합니다
@@ -37,43 +42,52 @@ var imageSrc = '/images/loacation/location1.png', // 마커이미지의 주소�
 //var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 var markerImage = new kakao.maps.MarkerImage(imageSrc,imageSize);
 
+/*마커 커스터마이징*/
+for(j = 0; j<dayPoints.length; j++){
+		console.log("j+1");
+		console.log(j+1);
+		dayPoint = dayPoints[j];
+		imageSrc=mapCircleHandler(j+1);
+		console.log(imageSrc);
+	for (i = 0; i < dayPoint.length; i++) {
+	//    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
+	//    marker = new kakao.maps.Marker(
+	//    	{position : points[i],
+	//	    image : markerImage });
 	
-for (i = 0; i < points.length; i++) {
-//    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
-//    marker = new kakao.maps.Marker(
-//    	{position : points[i],
-//	    image : markerImage });
-
-     // customOverlay 생성 - 마커위에 숫자 올리기
-    var content = `       
-	    <div class="custom-marker" th:fragment="markernum(i)">
-	        <img src="${imageSrc}" style="width: 30px; height: 32px;">
-	        <span>${i + 1}</span>
-	    </div>`;
-    var customOverlay = new kakao.maps.CustomOverlay({
-        position: points[i],
-        content: content,
-        yAnchor: 1
-    });
+		
+	     // customOverlay 생성 - 마커위에 숫자 올리기
+	    var content = `       
+		    <div class="custom-marker" th:fragment="markernum(i)">
+		        <img src="${imageSrc}" style="width: 30px; height: 32px;">
+		        <span>${i + 1}</span>
+		    </div>`;
+	    var customOverlay = new kakao.maps.CustomOverlay({
+	        position: dayPoint[i],
+	        content: content,
+	        yAnchor: 1
+	    });
+		    
+	    //marker.setMap(map); //지도 위에 마커 표시
+	    customOverlay.setMap(map); //지도 위에 마커 표시
 	    
-    //marker.setMap(map); //지도 위에 마커 표시
-    customOverlay.setMap(map); //지도 위에 마커 표시
-    
- 	/*지도에 표시할 선을 생성합니다*/ 
-    var polyline = new kakao.maps.Polyline({
-        path: points, // 선을 구성하는 좌표배열 입니다
-        strokeWeight: 2, // 선의 두께 입니다
-        strokeColor: '#E54B4B', // 선의 색깔입니다
-        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-        strokeStyle: 'shortdash' // 선의 스타일입니다
-    });
-    
- 	// 지도에 선을 표시합니다 
-    polyline.setMap(map);  
-    
-    // LatLngBounds 객체에 좌표를 추가합니다
-    bounds.extend(points[i]);
-}
+	 	/*지도에 표시할 선을 생성합니다*/ 
+	 	var lineColor;
+	    var polyline = new kakao.maps.Polyline({
+	        path: dayPoint, // 선을 구성하는 좌표배열 입니다
+	        strokeWeight: 2, // 선의 두께 입니다
+	        strokeColor: mapLineHandler(j+1), // 선의 색깔입니다
+	        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	        strokeStyle: 'shortdash' // 선의 스타일입니다
+	    });
+	 	// 지도에 선을 표시합니다 
+	    polyline.setMap(map);  
+	    
+	    // LatLngBounds 객체에 좌표를 추가합니다
+	    bounds.extend(dayPoint[i]);
+	} 
+}//마커 커스터마이징
+
 
 /* 3. 지도 범위 재설정 */
 function setBounds() {
