@@ -1,6 +1,5 @@
 package mclass.store.tripant.trip.domain;
 
-import java.sql.Date;
 import java.util.List;
 
 import lombok.Data;

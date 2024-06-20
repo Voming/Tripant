@@ -1,12 +1,10 @@
 package mclass.store.tripant.trip.domain;
 
-import java.sql.Date;
-
 import lombok.Data;
 
 @Data
 public class DayDetailInfoEntity {
-	private Integer placeType;
+	private String placeType;
 	private Integer contentid;
 	private Integer travelOrder;
 	private String stayTime;
