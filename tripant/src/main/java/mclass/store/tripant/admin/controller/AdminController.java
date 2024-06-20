@@ -177,8 +177,10 @@ public class AdminController {
 
 	// 상품관리 페이지
 	@GetMapping("/goods")
-	public String goods() {
-		return "admin/admin_goods";
+	public ModelAndView goods(ModelAndView mv) {
+		mv.setViewName("admin/admin_goods");
+		mv.addObject("itemList", adminservice.itemList());
+		return mv;
 	}
 	
 	// 상품추가
@@ -189,8 +191,13 @@ public class AdminController {
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
 		map.put("itemPrice", itemPrice);
-		map.put("itemDur", itemDur);
-		map.put("itemSale", itemDur);
+		if(itemDur != null && itemSale != null) {
+			map.put("itemDur", itemDur);
+			map.put("itemSale", itemDur);
+		}else {
+			map.put("itemDur", null);
+			map.put("itemSale", null);
+		}
 		
 		int result = adminservice.itemInsert(map);
 		
