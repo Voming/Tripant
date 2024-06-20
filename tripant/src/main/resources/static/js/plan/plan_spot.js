@@ -5,7 +5,7 @@ var spottype;
 var findArea;
 
 //체크박스 클릭
-function spotCkBtnClickHandler(thisElement){
+function spotCkBtnClickHandler(thisElement) {
 	console.log(thisElement);
 }
 
@@ -95,7 +95,7 @@ function btnSpotFindClickHandler() {
 	$('.spot-tab-nav a').css("color", "var(--color_gray)");
 	$('.spot-tab-nav li').css("background-color", "white");
 	$('.spot-tab-nav a').removeClass('active');
-	
+
 	findArea = $("input[name=find-spot]").val().trim();
 	if (findArea.length == 0) {
 		alert("빈문자열만 입력할 수 없습니다. 검색할 장소명을 입력해주세요.");
@@ -113,7 +113,7 @@ function btnSpotFindClickHandler() {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
-		
+
 		//결과값 null(검색 결과 더보기) 체크
 		var spotboxCount = $(".spot-box").length;
 		var htmlVal;
@@ -123,7 +123,7 @@ function btnSpotFindClickHandler() {
 			htmlVal = `
 				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
 				class="spot_find_more_btn">더보기</button>`;
-		} 
+		}
 		$(".resultSpotCheck").html(htmlVal);
 		$(".spot_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
 	});
@@ -145,14 +145,14 @@ function spotFindMoreBtnClickHandler(thisElement) {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
-		
+
 		//결과값 null(검색 결과 더보기) 체크
 		var spotboxCount = $(".spot-box").length;
-		if (spotboxCount >= 40*clickspotfindnum) {
+		if (spotboxCount >= 40 * clickspotfindnum) {
 			var htmlVal = `
 				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
 				class="spot_find_more_btn">더보기</button>`;
-		} 
+		}
 		$(".resultSpotCheck").html(htmlVal);
 		$(".spot_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
 	});

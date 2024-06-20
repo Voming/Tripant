@@ -39,7 +39,6 @@ public class MyDiaryController {
 //		diaryService.selectDiaryList();
 //		model.addAttribute("diaries", diaryService.selectDiaryList(null));
 		mv.setViewName("diary/my/my_board");
-		System.out.println("======mydiary controller===" + diaryService.selectDiaryList(null));
 		return mv;
 	}
 

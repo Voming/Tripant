@@ -14,7 +14,7 @@ import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 public interface DiaryRepository {
 
 	// 일기 목록을 선택하는 메서드
-	public List<DiaryBoardEntity> selectDiaryList(String areaname);
+	public List<DiaryBoardEntity> selectDiaryList(@Param("areaname") String areaname, @Param("maxNum") int maxNum);
 
 	// 여행기 글 등록
 	public void insertDiary(DiaryBoardEntity diary);

@@ -36,13 +36,15 @@ public class DiaryController {
 		mv.setViewName("diary/diary_board");
 		return mv;
 	}
+
 	// 전체 글보기(공개 글)
 	@PostMapping("")
-	public String diary2(Model model, String areaname) {
-		model.addAttribute("diaries", diaryService.selectDiaryList(areaname));
+	public String diary2(Model model, String areaname, Integer clickNum) {
+		int maxNum = (clickNum + 1) * 8;
+		model.addAttribute("diaries", diaryService.selectDiaryList(areaname, maxNum));
 		return "diary/diary_area_fragment";
 	}
-	
+
 	// 글 상세보기
 	@GetMapping("/read/{id}")
 	public String diartRead(@PathVariable Long id, Model model) {
@@ -60,16 +62,14 @@ public class DiaryController {
 		response.put("success", success);
 		return response;
 	}
+
 	// 더보기
-	@PostMapping("/more")
-	@ResponseBody
-	public List<DiaryBoardEntity> diaryMore(@RequestParam("clickNum") Integer clickNum) throws IOException {
-	    int offset = clickNum *3;
-	    List<DiaryBoardEntity> selectDiaryListMore = diaryService.selectDiaryListMore(offset, 10);
-	    return selectDiaryListMore;
+	@PostMapping("/list/more")
+	public String listMore(Model model) {
+		// 클릭시 8개씩 뿌리기
+		int size = 8;
+		
+		return "diary/diary_board";
 	}
-	
-
-
 
 }

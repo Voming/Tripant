@@ -3,17 +3,19 @@
 <mapper
 	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
 	<!-- 글 리스트 목록 뿌리기 -->
-	<select id="selectDiaryList" resultType="DiaryBoardEntity" parameterType="string">
+	<select id="selectDiaryList" resultType="DiaryBoardEntity" parameterType="map">
 		SELECT D.DIARY_ID,
 		D.DIARY_MEM_EMAIL, D.MEM_NICK, D.DIARY_PLAN_ID, D.DIARY_TITLE, D.DIARY_CONTENT,
-		D.DIARY_DATE, D.DIARY_OPEN, D.DIARY_VIEWS, D.DIARY_THEME, d.plan_area_code
-		FROM view_diary_member_plan D
+		D.DIARY_DATE, D.DIARY_OPEN, D.DIARY_VIEWS, D.DIARY_THEME, D.PLAN_AREA_CODE
+		FROM VIEW_DIARY_MEMBER_PLAN D
+		WHERE
 		<if test="areaname != null and !areaname.equals('') ">
-		where plan_area_code = 
-			(select area_code from area 
-				where area_short_name =#{areaname} 
-			)
+		 PLAN_AREA_CODE = 
+			(SELECT AREA_CODE FROM AREA 
+				WHERE AREA_SHORT_NAME = #{areaname} 
+			) AND 
 		</if>
+		ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
 	<!-- 글 작성 등록 시키기 -->
 	<insert id="insertDiary" parameterType="DiaryBoardEntity">
@@ -66,7 +68,7 @@
 		where P.plan_area_code = #{planAreaCode}
 
 	</select>
-
+	
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="string">
 		DELETE FROM diary

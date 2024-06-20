@@ -16,8 +16,8 @@ public class DiaryService {
 	private DiaryRepository diaryRepository;
 
 	// 다이어리 리스트 가져오기
-    public List<DiaryBoardEntity> selectDiaryList(String areaname) {
-        return diaryRepository.selectDiaryList(areaname);
+    public List<DiaryBoardEntity> selectDiaryList(String areaname, int maxNum) {
+        return diaryRepository.selectDiaryList(areaname, maxNum);
     }
 
     // 특정 ID의 다이어리 가져오기
@@ -46,7 +46,7 @@ public class DiaryService {
         }
     }
     // 글 더보기 클릭시
-    public List<DiaryBoardEntity> selectDiaryListMore(int offset, int limit){
+    public List<DiaryBoardEntity> selectDiaryListMore(){
     	return diaryRepository.selectDiaryListMore();
     }
 	
