@@ -48,8 +48,12 @@ public interface AdminDao {
 	// 상품 관리 페이지
 	// 상품목록
 	public List<Map<String, Object>> itemList();
+	// 상품정보
+	public Map<String, Object> itemInfo(String itemCode);
 	// 상품추가
 	public int itemInsert(Map<String, Object> map); 
+	// 상품수정
+	public int itemUpdate(Map<String, Object> map);
 	
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 
