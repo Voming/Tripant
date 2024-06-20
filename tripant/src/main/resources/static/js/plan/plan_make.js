@@ -1,14 +1,23 @@
 // 일정만들기에서 전체적으로 사용할 클래스
 class CalendarDate {
 	constructor(date, smalldate, day) {
-		this.date = date;
-		this.smalldate = smalldate;
-		this.day = day;
+		this.date = date; //2024.06.06
+		this.smalldate = smalldate; //06/06
+		this.day = day; //목요일
 	}
-	startTime;
-	endTime;
-	stay;
+	startTime; //10:00
+	endTime;   //22:00
+	stay;      //숙소명
 }
+
+class spot {
+	constructor(title, mapx, mapy) {
+		this.title = title;
+		this.mapx = mapx;
+		this.mapy = mapy;
+	}
+}
+
 class CalendarPlan {
 	dateArr;
 	spotArr;
@@ -16,6 +25,7 @@ class CalendarPlan {
 
 let calendarPlan = new CalendarPlan();
 calendarPlan.dateArr = new Array(CalendarDate);
+calendarPlan.spotArr = new Array(spot);
 
 // 저장되기 전에만 방지 처리
 var beforeSave = true;

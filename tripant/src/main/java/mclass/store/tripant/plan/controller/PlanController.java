@@ -55,77 +55,47 @@ public class PlanController {
 	}
 
 	//-------------------------------------spot-------------------------------------------
+
 	@PostMapping("/spot")
 	public String spot(Model model, @RequestParam("areaCode") Integer areaCode,
-			@RequestParam("spotType") Integer spotType) throws IOException {
-		List<PlaceboxEntity> spotList = planService.selectTypeList(areaCode, spotType);
-		model.addAttribute("spotList", spotList);
-		return "plan/spot_tab_content";
-	}
-
-	@PostMapping("/spot/more")
-	public String spotMore(Model model, @RequestParam("areaCode") Integer areaCode,
 			@RequestParam("spotType") Integer spotType, @RequestParam("clickSpotNum") Integer clickSpotNum)
 			throws IOException {
 		// 20개씩 더 출력하기
 		int maxNum = (clickSpotNum + 1) * 10;
-		List<PlaceboxEntity> spotList = planService.selectTypeListMore(areaCode, spotType, maxNum);
+		List<PlaceboxEntity> spotList = planService.selectTypeList(areaCode, spotType, maxNum);
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
 
 	@PostMapping("/spot/find")
-	public String spotFind(Model model, @RequestParam("findArea") String findArea,
-			@RequestParam("areaCode") String areaCode) {
-		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode);
-		model.addAttribute("spotList", spotList);
-		return "plan/spot_tab_content";
-	}
-	
-	@PostMapping("/spot/find/more")
 	public String spotFindMore(Model model, @RequestParam("findArea") String findArea,
 			@RequestParam("areaCode") String areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
 		// 20개씩 더 출력하기
 		int maxNum = (clickSpotFindNum + 1) * 20;
-		List<PlaceboxEntity> spotList = planService.selectSpotFindMoreList(findArea, areaCode, maxNum+"");
+		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode, maxNum+"");
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
 
 	//-------------------------------------stay-------------------------------------------
-	@PostMapping("/stay")
-	public String stay(Model model, @RequestParam("areaCode") Integer areaCode,
-			@RequestParam("stayType") Integer stayType) throws IOException {
-		List<PlaceboxEntity> stayList = planService.selectTypeList(areaCode, stayType);
-		model.addAttribute("stayList", stayList);
-		return "plan/stay_tab_content";
-	}
 
-	@PostMapping("/stay/more")
+	@PostMapping("/stay")
 	public String stayMore(Model model, @RequestParam("areaCode") Integer areaCode,
 			@RequestParam("stayType") Integer stayType, @RequestParam("clickStayNum") Integer clickStayNum)
 			throws IOException {
 		// 10개씩 더 출력하기
 		int maxNum = (clickStayNum + 1) * 10;
-		List<PlaceboxEntity> stayList = planService.selectTypeListMore(areaCode, stayType, maxNum);
+		List<PlaceboxEntity> stayList = planService.selectTypeList(areaCode, stayType, maxNum);
 		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
 	}
-	
+
 	@PostMapping("/stay/find")
-	public String stayFind(Model model, @RequestParam("findArea") String findArea,
-			@RequestParam("areaCode") String areaCode) {
-		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode);
-		model.addAttribute("stayList", stayList);
-		return "plan/stay_tab_content";
-	}
-	
-	@PostMapping("/stay/find/more")
 	public String stayFindMore(Model model, @RequestParam("findArea") String findArea,
 			@RequestParam("areaCode") String areaCode, @RequestParam("clickStayFindNum") Integer clickStayFindNum) {
 		// 20개씩 더 출력하기
 		int maxNum = (clickStayFindNum + 1) * 20;
-		List<PlaceboxEntity> stayList = planService.selectStayFindMoreList(findArea, areaCode, maxNum+"");
+		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode, maxNum+"");
 		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
 	}

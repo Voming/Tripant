@@ -13,7 +13,7 @@ function stayMoreBtnClickHandler(thisElement) {
 	clickstaynum += 1;
 
 	$.ajax({
-		url: contextPath + "plan/stay/more"
+		url: contextPath + "plan/stay"
 		, method: "post"
 		, context: this
 		, data: {
@@ -43,7 +43,7 @@ $(document).ready(function() {
 		$(this).parent().css("background-color", "var(--color_day9_blue)");
 		
 		//더보기 클릭 횟수 초기화
-		clicknum = 0;
+		clickstaynum = 0;
 
 		areacode = $(".plan-areacode").attr("value");
 		var placeTypeS = $(this).text();
@@ -60,7 +60,8 @@ $(document).ready(function() {
 			, context: this
 			, data: {
 				areaCode: areacode,
-				stayType: staytype
+				stayType: staytype,
+				clickStayNum : clickstaynum
 			}
 			, error: ajaxErrorHandler
 		}).done(function(wrap_stay) {
@@ -104,6 +105,7 @@ function btnStayFindClickHandler() {
 		, data: {
 			findArea: findArea,
 			areaCode: areacode,
+			clickStayFindNum: clickstayfindnum
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_stay) {
@@ -130,7 +132,7 @@ function stayFindMoreBtnClickHandler(thisElement) {
 	clickstayfindnum += 1;
 
 	$.ajax({
-		url: contextPath + "plan/stay/find/more"
+		url: contextPath + "plan/stay/find"
 		, method: "post"
 		, context: this
 		, data: {
