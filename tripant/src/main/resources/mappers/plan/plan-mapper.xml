@@ -54,5 +54,8 @@
 		AND TITLE LIKE '%'||#{findArea}||'%'
 		AND ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
-
+	
+	<select id="selectAreaPoint" parameterType="_int" resultType="AreaPointEntity">
+		SELECT AREA_X, AREA_Y FROM AREA WHERE AREA_CODE = #{areaCode}
+	</select>
 </mapper>

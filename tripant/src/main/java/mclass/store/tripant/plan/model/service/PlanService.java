@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
+import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 
@@ -49,5 +50,9 @@ public class PlanService {
 	
 	public List<PlaceboxEntity> selectStayFindList(String findArea, String areaCode,  String maxNum) {
 		return planRepository.selectStayFindList(findArea, areaCode, maxNum);
+	}
+	
+	public AreaPointEntity selectAreaPoint(int findArea) {
+		return planRepository.selectAreaPoint(findArea);
 	}
 }
