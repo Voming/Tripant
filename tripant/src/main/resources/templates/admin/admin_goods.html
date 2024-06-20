@@ -5,9 +5,6 @@
 <!-- css -->
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_goods.css}" rel="stylesheet">
-<!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
 <body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
@@ -34,7 +31,8 @@
 			</div>
 		</form>		
 			<div class="ad-search">
-				<input class="search" type="text" placeholder="상품명 검색">
+				<input class="search" type="text"  name="search" placeholder="상품명 검색">
+				<button type="button" class="btn-search"><img src="/images/icons/search.png" alt="검색"/></button>
 			</div>
 			<div class="ad-content">
 				<ul class="memberlist">
@@ -50,8 +48,8 @@
 					</li>
 					
 					<li>
-						<ul th:each="item : ${itemList}" class="col list">
-							<li th:text="${item.ITEM_CODE}"></li>
+						<ul th:each="item : ${itemList}" class="col list" th:data-item-code="${item.ITEM_CODE}">
+							<li th:text="${item.ITEM_CODE}" ></li>
 							<li th:text="${item.ITEM_NAME}"></li>
 							<li th:text="${item.ITEM_PRICE_CHAR}"></li>
 							<li th:text="${item.ITEM_DUR}" th:if="${item.ITEM_DUR} != null"></li>
@@ -75,6 +73,9 @@ function loadedHandler() {
 	
 	// 상품 수정 버튼
 	$(".btn.update").on("click", itemUpdateHandler);
+	
+	//상품삭제버튼
+	$(".btn.delete").on("click", itemDeleteHandler);
 }
 
 // 상품 수정
@@ -134,6 +135,8 @@ async function itemUpdateHandler(){
 				$("#item-code").val()
 				, $("#item-name").val()
 				, $("#item-price").val()
+				, $("#item-dur").val()
+				, $("#item-sale").val()
 		    ];
 		  }
 		});
@@ -150,11 +153,22 @@ async function itemUpdateHandler(){
 					itemDur: formValues[3], 
 					itemSale: formValues[4], 
 				}, 
+				error: function(request, status, error){
+					Swal.fire({
+						title: "상품 수정 중 오류가 발생했습니다.", 
+						text: "code: "+request.status + "\n" + "message: " 
+						+ request.responseText + "\n"
+						+ "error: "+error, 
+						icon: "warning", 
+						iconColor: "#000000"
+					});
+				}, 
 				success: async function(data){
 					if(data > 0){
 						const updateSuccess = await Swal.fire({
 							title: "상품 수정이 완료되었습니다.", 
-							icon: "success"
+							icon: "success", 
+							iconColor: "#000000"
 						});
 						if(updateSuccess.isConfirmed){
 							location.reload();
@@ -162,18 +176,10 @@ async function itemUpdateHandler(){
 					}else{
 						Swal.fire({
 							title: "알 수 없는 이유로 상품 수정이 완료되지 않았습니다.", 
-							icon: "question"
+							icon: "question", 
+							iconColor: "#000000"
 						});
 					}
-				}, 
-				error: function(request, status, error){
-					Swal.fire({
-						title: "상품 수정 중 오류가 발생했습니다.", 
-						text: "code: "+request.status + "\n" + "message: " 
-						+ request.responseText + "\n"
-						+ "error: "+error, 
-						icon: "warning"
-					});
 				}
 			});
 		}else{
@@ -272,6 +278,38 @@ async function itemInsertHandler(){
 		});
 	}
 }
+
+//상품삭제
+
+function itemDeleteHandler(){
+	var itemCode=$(this).parents('.col.list').data('item-code');
+	console.log(itemCode);
+	$.ajax({
+		url:"/admin/goods/delete",
+		method:"post",
+		data: {itemCode:itemCode},
+		success : function(result) {
+			 	location.reload();
+				},
+	 	error : async function(request, status, error) {
+		 	if(request.responseText.indexOf('ORA-02292')){
+		 		const payCancelSuccess = await Swal.fire({
+					title: "장바구니 혹은 구매내역에 존재하는 상품은 삭제할 수 없습니다.\n운영팀에 문의해주시기 바랍니다.", 
+					icon: "error", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
+				});
+		 	}else{
+		 		Swal.fire({
+		 			title: "알 수 없는 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
+		 			confirmButtonColor: "#000000", 
+		 			confirmButtonText: "확인"
+		 		});
+	 		}
+		}
+	});
+}
+
 </script>
 
 </body>

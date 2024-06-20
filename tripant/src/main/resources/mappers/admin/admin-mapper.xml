@@ -97,5 +97,8 @@
 	<update id="itemUpdate" parameterType="map">
 	update item set item_name = #{itemName}, item_price = #{itemPrice}, item_dur = #{itemDur}, item_sale = #{itemSale} where item_code = #{itemCode}
 	</update>
-	
+	<!-- 상품삭제 -->
+	<delete id="itemDelete" parameterType="string">
+	delete from item where item_code=#{itemCode}
+	</delete>
 </mapper>

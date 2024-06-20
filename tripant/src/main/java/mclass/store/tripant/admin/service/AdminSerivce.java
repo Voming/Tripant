@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
+import mclass.store.tripant.admin.domain.AdminStoreEntity;
 import mclass.store.tripant.admin.model.repository.AdminDao;
 
 @Service
@@ -35,6 +36,11 @@ public class AdminSerivce {
 	//게시글리스트
 	public List<AdminBoardEntity> boardList(){
 		return admindao.boardList();
+	}
+	
+	//게시글 검색(키워드 선택)
+	public List<AdminBoardEntity> keywordsearch(String memNick, String title){
+		return admindao.keywordsearch(memNick,title);
 	}
 
 	//좋아요 정렬
@@ -85,5 +91,13 @@ public class AdminSerivce {
 	// 상품수정
 	public int itemUpdate(Map<String, Object> map) {
 		return admindao.itemUpdate(map);
+	}
+	//상품 삭제
+	public int itemDelete(String itemCode) {
+		return admindao.itemDelete(itemCode);
+	}
+	//상품검색
+	public List<AdminStoreEntity> itemsearch(String itemCode){
+		return admindao.itemsearch(itemCode);
 	}
 }

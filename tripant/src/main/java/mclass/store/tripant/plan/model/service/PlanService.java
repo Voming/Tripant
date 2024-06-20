@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
+import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 
@@ -39,15 +40,19 @@ public class PlanService {
 		return planRepository.selectAreaShortName(areaCode);
 	}
 
-	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType) {
-		return planRepository.selectTypeList(areaCode, placeType);
+	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType, int maxNum) {
+		return planRepository.selectTypeList(areaCode, placeType, maxNum);
 	}
-
-	public List<PlaceboxEntity> selectTypeListMore(int areaCode, int placeType, int maxNum) {
-		return planRepository.selectTypeListMore(areaCode, placeType, maxNum);
+	
+	public List<PlaceboxEntity> selectSpotFindList(String findArea, String areaCode,  String maxNum) {
+		return planRepository.selectSpotFindList(findArea, areaCode, maxNum);
 	}
-
-	public List<PlaceboxEntity> selectPlaceFindList(String findArea, String areaCode) {
-		return planRepository.selectPlaceFindList(findArea, areaCode);
+	
+	public List<PlaceboxEntity> selectStayFindList(String findArea, String areaCode,  String maxNum) {
+		return planRepository.selectStayFindList(findArea, areaCode, maxNum);
+	}
+	
+	public AreaPointEntity selectAreaPoint(int findArea) {
+		return planRepository.selectAreaPoint(findArea);
 	}
 }

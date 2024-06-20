@@ -4,8 +4,8 @@
 	type="text/css">
 <link th:href="@{/css/diary/my/my_board.css}" rel="stylesheet">
 <head th:replace="~{common/header :: head('diaryboard')}"></head>
+<script type="text/javascript" th:src="@{/js/diary/diary_my_board.js}"></script>
 
-</head>
 <body>
 	<header>
 		<div class="header" th:insert="~{common/header :: wrap-header}"></div>
@@ -43,108 +43,7 @@
 						</div>
 					</th:block>
 				</th:block>
-				<!-- 4x4 로 뿌리기 -->
-
-
-				<!-- db 연동 전 데모글  -->
-				<!-- <div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제목</p>
-							<p class="diary-date">yy-mm-dd</p>
-							<p class="diary-open">비공개</p>
-						</div>
-					</div>
-				</div>
-				<div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제목</p>
-							<p class="diary-date">yy-mm-dd</p>
-							<p class="diary-open">비공개</p>
-						</div>
-					</div>
-				</div>
-				<div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제목</p>
-							<p class="diary-date">yy-mm-dd</p>
-							<p class="diary-open">비공개</p>
-						</div>
-					</div>
-				</div>
-				<div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제목</p>
-							<p class="diary-date">yy-mm-dd</p>
-							<p class="diary-open">비공개</p>
-						</div>
-					</div>
-				</div>
-				<div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제목</p>
-							<p class="diary-date">yy-mm-dd</p>
-							<p class="diary-open">비공개</p>
-						</div>
-					</div>
-				</div>
-				<div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제목</p>
-							<p class="diary-date">yy-mm-dd</p>
-							<p class="diary-open">비공개</p>
-						</div>
-					</div>
-				</div>
-				<div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제목</p>
-							<p class="diary-date">yy-mm-dd</p>
-							<p class="diary-open">비공개</p>
-						</div>
-					</div>
-				</div>
-				<div class="wrap-diary">
-					<div class="diary-img">
-						<img src="https://dummyimage.com/200x200/000/fff" alt="대표 이미지">
-					</div>
-					<div class="wrap-content">
-						<div class="diary-content">
-							<p class="diary-title">제목</p>
-							<p class="diary-date">yy-mm-dd</p>
-							<p class="diary-open">비공개</p>
-						</div>
-					</div>
-				</div> -->
-				<!-- 더미 글 끝 -->
-
+				
 
 			</div>
 
@@ -153,10 +52,10 @@
 			</div>
 		</div>
 	</section>
-	<!-- <aside> <div class="aside" th:insert="~{common/diary_aside :: wrap-aside}"></div></aside> -->
+
 	<footer>
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
 </body>
-<script type="text/javascript" th:src="@{/js/diary/diary_my_board.js}"></script>
+
 </html>

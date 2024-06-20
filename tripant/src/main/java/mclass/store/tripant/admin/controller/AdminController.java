@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
+import mclass.store.tripant.admin.domain.AdminStoreEntity;
 import mclass.store.tripant.admin.service.AdminSerivce;
 
 @Controller
@@ -90,11 +91,25 @@ public class AdminController {
 		return memList ;
 	}
 	
+	//게시글
 	@GetMapping("/board")
 	public String board(Model model) {
 		model.addAttribute("memBoard",adminservice.boardList());
 		
 		return "admin/admin_board";
+	}
+	
+	//ajax
+	//게시글 검색(키워드 선택)
+	@GetMapping("/keyword")
+	@ResponseBody
+	public List<AdminBoardEntity> keywordSearch(@RequestParam("type") String type ,
+			@RequestParam("keyword") String keyword , Model model) {
+		AdminBoardEntity boarddto=new AdminBoardEntity();
+		boarddto.setType(type);
+		boarddto.setKeyword(keyword);
+		
+		return adminservice.keywordsearch(type, keyword);
 	}
 	
 	//ajax
@@ -220,8 +235,10 @@ public class AdminController {
 		map.put("itemName", itemName);
 		map.put("itemPrice", itemPrice);
 
-		if(itemDur != null && itemSale != null) {
+		if(itemDur != null) {
 			map.put("itemDur", itemDur);
+		}
+		if(itemSale != null) {
 			map.put("itemSale", itemSale);
 		}
 		
@@ -236,11 +253,14 @@ public class AdminController {
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
 		map.put("itemPrice", itemPrice);
-		if(itemDur != null && itemSale != null) {
+		if(itemDur != null) {
 			map.put("itemDur", itemDur);
-			map.put("itemSale", itemDur);
 		}else {
 			map.put("itemDur", null);
+		}
+		if(itemSale != null) {
+			map.put("itemSale", itemDur);
+		}else {
 			map.put("itemSale", null);
 		}
 		
@@ -249,6 +269,22 @@ public class AdminController {
 		return result;
 	}
 	
+	//상품삭제
+	//ajax
+	@PostMapping("/goods/delete")
+	@ResponseBody
+	public int goodsDelete(String itemCode) {
+		int result=adminservice.itemDelete(itemCode);
+		return result;
+	}
+	//상품검색
+	//ajax
+	@PostMapping("/goods/search")
+	@ResponseBody
+	public List<AdminStoreEntity> itemsearch(Model model, String itemCode){
+		List<AdminStoreEntity> itemsearchList=adminservice.itemsearch(itemCode);
+		return itemsearchList;
+	}
 	@GetMapping("/mchart")
 	public String mchart() {
 		return "admin/admin_mchart";

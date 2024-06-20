@@ -14,6 +14,11 @@ public class AdminBoardEntity {
 	private String memNick;
 	
 	private Integer diaryViews; //조회수
-	private Integer likes; //좋아요
+	private Integer likes; //좋아요수
 	private Integer reports;  //신고수
+	
+	//검색필터
+	private String type;
+	private String keyword;
+	
 }

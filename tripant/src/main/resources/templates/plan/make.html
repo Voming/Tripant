@@ -6,7 +6,9 @@
 <link rel="stylesheet" th:href="@{/css/plan/plan_day_modal.css}">
 <link rel="stylesheet" th:href="@{/css/plan/plan_day_layout.css}">
 <link rel="stylesheet" th:href="@{/css/plan/plan_spot_layout.css}">
+<link rel="stylesheet" th:href="@{/css/plan/plan_spot_check_layout.css}">
 <link rel="stylesheet" th:href="@{/css/plan/plan_stay_layout.css}">
+
 <head th:replace="~{common/header :: head('일정만들기')}"></head>
 <script th:src="@{/js/plan/plan_make.js}"></script>
 <script th:src="@{/js/plan/plan_spot.js}"></script>
@@ -95,7 +97,7 @@
 					<div class="plan-priod"></div>
 					<h3>장소 선택</h3>
 					<form id="frm-find-stay">
-						<input type="text" name="find-stay" placeholder="&nbsp;장소명을 입력하세요">
+						<input type="text" id="find-stay" name="find-stay" placeholder="&nbsp;장소명을 입력하세요">
 						<button type="button" class="btn find-stay">
 							<img class="search-btn" th:src="@{/images/icons/search.png}" alt="찾기">
 						</button>
@@ -120,5 +122,6 @@
 	</div>
 	<script th:src="@{/js/plan/plan_map.js}"></script>
 	<script th:src="@{/js/plan/plan_calendar.js}"></script>
+	<script th:src="@{/js/plan/plan_spot_check.js}"></script>
 </body>
 </html>

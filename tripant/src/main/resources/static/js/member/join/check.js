@@ -26,11 +26,7 @@ function nickCheckHandler(){
 				joinActive();
 			}
 		}, 
-		error: function (request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
+		error: ajaxErrorHandler
 	});
 }
 //비밀번호 검사

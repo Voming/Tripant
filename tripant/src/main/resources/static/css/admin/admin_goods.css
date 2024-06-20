@@ -123,3 +123,16 @@
 .col.list .btn.delete{
 	margin-left:10px;
 }
+
+/* 찾기버튼 */
+.wrap-body .ad-search{
+	position:relative;
+}
+
+.wrap-body .ad-search .btn-search{
+	border: 0;
+	background-color: white;
+	position: absolute;
+	top: 49%;
+    right:5%;
+}

@@ -1,11 +1,16 @@
 var clickspotnum = 0;
+var clickspotfindnum = 0;
 var spottype;
+//검색명
+var findArea;
 
+
+//더보기
 function spotMoreBtnClickHandler(thisElement) {
 	clickspotnum += 1;
 
 	$.ajax({
-		url: contextPath + "plan/spot/more"
+		url: contextPath + "plan/spot"
 		, method: "post"
 		, context: this
 		, data: {
@@ -35,7 +40,7 @@ $(document).ready(function() {
 		$(this).parent().css("background-color", "var(--color_day9_blue)");
 
 		//더보기 클릭 횟수 초기화
-		clicknum = 0;
+		clickspotnum = 0;
 
 		areacode = $(".plan-areacode").attr("value");
 		var placeTypeS = $(this).text();
@@ -56,19 +61,19 @@ $(document).ready(function() {
 			, context: this
 			, data: {
 				areaCode: areacode,
-				spotType: spottype
+				spotType: spottype,
+				clickSpotNum : clickspotnum
 			}
 			, error: ajaxErrorHandler
 		}).done(function(wrap_spot) {
 			$(".wrap-spotList").replaceWith(wrap_spot);
 
 			//결과값 null 체크
-			var spotname = $(".spot-name").text();
-			if (spotname.length == 0) {
+			spotboxCount = $(".spot-box").length;
+			if (spotboxCount.length == 0) { //결과 없음
 				$(".spot_more_btn").css('display', 'none');
-
 				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
-				$(".resultCheck").html(htmlVal);
+				$(".resultSpotCheck").html(htmlVal);
 			}
 		});
 
@@ -76,22 +81,23 @@ $(document).ready(function() {
 	}).filter(':eq(0)').click();
 
 	//검색
-	$(".btn.find-spot").on("click", btnFindClickHandler);
+	$(".btn.find-spot").on("click", btnSpotFindClickHandler);
 });
 
-function btnFindClickHandler() {
-	var findArea = $("input[name=find-spot]").val().trim();
-
-
-	if (findArea.length == 0) {
-		alert("빈문자열만 입력할 수 없습니다. 검색할 장소명을 입력해주세요.");
-		return;
-	}
-
+//검색
+function btnSpotFindClickHandler() {
+	//버튼 클릭 초기화
+	clickspotfindnum = 0;
 	//타입 전체 선택 해제
 	$('.spot-tab-nav a').css("color", "var(--color_gray)");
 	$('.spot-tab-nav li').css("background-color", "white");
 	$('.spot-tab-nav a').removeClass('active');
+
+	findArea = $("input[name=find-spot]").val().trim();
+	if (findArea.length == 0) {
+		alert("빈문자열만 입력할 수 없습니다. 검색할 장소명을 입력해주세요.");
+		return;
+	}
 
 	$.ajax({
 		url: "/plan/spot/find"
@@ -100,18 +106,53 @@ function btnFindClickHandler() {
 		, data: {
 			findArea: findArea,
 			areaCode: areacode,
+			clickSpotFindNum: clickspotfindnum
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
-		//결과값 null 체크
-		var spotname = $(".spot-name").text();
-		if (spotname.length == 0) {
-			$(".spot_more_btn").css('display', 'none');
 
-			var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
-			$(".resultCheck").html(htmlVal);
+		//결과값 null(검색 결과 더보기) 체크
+		var spotboxCount = $(".spot-box").length;
+		var htmlVal;
+		if (spotboxCount == 0) { //결과 없음
+			htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
+		} else if (spotboxCount >= 80) { //더보기 필요
+			htmlVal = `
+				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
+				class="spot_find_more_btn">더보기</button>`;
 		}
+		$(".resultSpotCheck").html(htmlVal);
+		$(".spot_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+	});
+}
+
+//검색 더보기
+function spotFindMoreBtnClickHandler(thisElement) {
+	clickspotfindnum += 1;
+
+	$.ajax({
+		url: contextPath + "plan/spot/find"
+		, method: "post"
+		, context: this
+		, data: {
+			areaCode: areacode,
+			findArea: findArea,
+			clickSpotFindNum: clickspotfindnum
+		}
+		, error: ajaxErrorHandler
+	}).done(function(wrap_spot) {
+		$(".wrap-spotList").replaceWith(wrap_spot);
+
+		//결과값 null(검색 결과 더보기) 체크
+		var spotboxCount = $(".spot-box").length;
+		if (spotboxCount >= 40 * clickspotfindnum) {
+			var htmlVal = `
+				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
+				class="spot_find_more_btn">더보기</button>`;
+		}
+		$(".resultSpotCheck").html(htmlVal);
+		$(".spot_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
 	});
 }
 

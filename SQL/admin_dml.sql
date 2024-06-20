@@ -60,19 +60,19 @@ select diary_id, diary_title,to_char(diary_date,'yyyy-MM-dd') diary_date,reports
 delete from diary_reports where diary_id=79;
 
 --insert
+--신고 추가
 insert INTO diary_reports values (79,'seojw0730@gmail.com',1);
+insert into diary_reports values(74,'dpdls898@naver.com',1);   
+insert into diary_reports values(79,'gyrua34@gmail.com',1);
 
 select * from diary_reports;
-commit;
+
 desc member;
 
+--좋아요 추가
+insert INTO diary_likes values(74,'gyrua34@gmail.com');
 select * from diary;
 select * from diary_likes;
-
-insert INTO diary_likes values(74,'gyrua34@gmail.com');
  
-insert into diary_reports values(74,'dpdls898@naver.com',1);   
-insert into diary_reports values(79,'gyrua34@gmail.com',1); 
-select* from diary_reports;
-
 select * from member;
+commit;

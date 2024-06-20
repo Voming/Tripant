@@ -3,15 +3,16 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet">
 <link th:href="@{/css/diary/diary_read.css}" rel="stylesheet">
-<!-- modal CDN -->
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
 <head th:replace="~{common/header :: head('diaryboard')}">
-<meta charset="UTF-8">
-
-</head>
+<meta charset="UTF-8"></head>
+<!--자바 스크립트   -->
+<script type="text/javascript" th:src="@{/js/diary/diary_read.js}"></script>
+<!-- modal CDN -->
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
 <body>
 	<!--헤더영역  -->
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
@@ -81,6 +82,5 @@
 	<!-- 푸터영역 -->
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
-<!--자바 스크립트   -->
-<script type="text/javascript" th:src="@{/js/diary/diary_read.js}"></script>
+
 </html>
