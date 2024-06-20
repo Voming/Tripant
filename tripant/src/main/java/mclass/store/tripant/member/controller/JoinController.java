@@ -64,7 +64,7 @@ public class JoinController {
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
-		memberEntity.setMemType("T");
+		memberEntity.setMemType("1000");
 		log.debug("[sjw] mem = "+memberEntity);
 		
 		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
@@ -88,17 +88,11 @@ public class JoinController {
 		
 		String memEmail = (String) session.getAttribute("memEmail");
 		String memType = (String) session.getAttribute("memType");
-		if(memEmail != null && memType != null) {
-			memberEntity.setMemEmail(memEmail);
-		}else {
-			memType = "T";
-		}
-		log.debug("[sjw] memEmail = "+memEmail);
+		memberEntity.setMemEmail(memEmail);
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
 		memberEntity.setMemType(memType);
-		log.debug("[sjw] mem = "+memberEntity);
 		
 		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
 		try {

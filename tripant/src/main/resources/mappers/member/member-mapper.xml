@@ -6,6 +6,10 @@
 		<select id="login" parameterType="string" resultType="MemberEntity">
 			select mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_birth from member where mem_email = #{memEmail}
 		</select>
+		<!-- SNS 유형 갱신 -->
+		<update id="updateType" parameterType="map">
+			update member set mem_type = #{memType} where mem_email = #{memEmail}
+		</update>
 		<!-- 로그인 기록 -->
 		<insert id="log" parameterType="map">
 			insert into log values(default, #{logIp}, #{memEmail}, #{logTf})

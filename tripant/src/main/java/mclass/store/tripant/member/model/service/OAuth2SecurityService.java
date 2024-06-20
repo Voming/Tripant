@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.member.domain.CustomOAuth2User;
+import mclass.store.tripant.member.domain.LoginEntity;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.domain.MemberRole;
 import mclass.store.tripant.member.model.repository.MemberRepository;
@@ -35,17 +36,119 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 		OAuth2User oAuth2User = super.loadUser(userRequest);
 		String email = "";
 		Map<String, Object> map = new HashMap<>();
-		if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
-			map.put("memType", "K");
+		String snsType = userRequest.getClientRegistration().getRegistrationId();
+		
+		// 카카오 로그인
+		if(snsType.equals("kakao")) {
+			Map<String, Object> newMap = new HashMap<>();
+			
+			// 카카오 이메일
 			Map<String, Object> kakaoAttributes = oAuth2User.getAttribute("kakao_account");
-			email = (String) kakaoAttributes.get("email"); 
-		}else if(userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
-			map.put("memType", "N");
-			Map<String, Object> naverAttributes = oAuth2User.getAttribute("response");
-			email = (String) naverAttributes.get("email"); 
-		}else if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
-			map.put("memType", "G");
+			email = (String) kakaoAttributes.get("email");
+			
+			// 로그인 정보
+			MemberEntity memberEntity = memberRepository.login(email);
+			
+			// 이미 가입된 경우
+			if(memberEntity != null) {
+				String memTypeStr = memberEntity.getMemType();
+				// sns 유형
+				int memType = Integer.parseInt(memTypeStr, 2);
+				
+				// 카카오 유형
+				String kakaoStr = "0100";
+				
+				// 카카오 가입 여부
+				int isKakao = Integer.parseInt(memTypeStr, 2) & Integer.parseInt(kakaoStr, 2);
+				if(isKakao != 4) {
+					memType += 4;
+				}
+				
+				String newMemType = Integer.toBinaryString(memType);
+				newMap.put("memEmail", email);
+				newMap.put("memType", newMemType);
+				
+				// SNS 유형 갱신
+				memberRepository.updateType(newMap);
+				
+			}
+			// 카카오로 가입하는 경우
+			else {
+				map.put("memType", "1100");
+			}
+		}else if(snsType.equals("naver")) {
+			Map<String, Object> newMap = new HashMap<>();
+			
+			// 네이버 이메일
+			Map<String, Object> kakaoAttributes = oAuth2User.getAttribute("response");
+			email = (String) kakaoAttributes.get("email");
+			
+			// 로그인 정보
+			MemberEntity memberEntity = memberRepository.login(email);
+			
+			// 이미 가입된 경우
+			if(memberEntity != null) {
+				String memTypeStr = memberEntity.getMemType();
+				// sns 유형
+				int memType = Integer.parseInt(memTypeStr, 2);
+				
+				// 네이버 유형
+				String naverStr = "0010";
+				
+				// 네이버 가입 여부
+				int isNaver = Integer.parseInt(memTypeStr, 2) & Integer.parseInt(naverStr, 2);
+				if(isNaver != 2) {
+					memType += 2;
+				}
+				
+				String newMemType = Integer.toBinaryString(memType);
+				newMap.put("memEmail", email);
+				newMap.put("memType", newMemType);
+				
+				// SNS 유형 갱신
+				memberRepository.updateType(newMap);
+				
+			}
+			// 네이버로 가입하는 경우
+			else {
+				map.put("memType", "1010");
+			}
+		}else if(snsType.equals("google")){
+			Map<String, Object> newMap = new HashMap<>();
+			
+			// 구글 이메일
 			email = (String) oAuth2User.getAttributes().get("email");
+			
+			// 로그인 정보
+			MemberEntity memberEntity = memberRepository.login(email);
+			
+			// 이미 가입된 경우
+			if(memberEntity != null) {
+				String memTypeStr = memberEntity.getMemType();
+				// sns 유형
+				int memType = Integer.parseInt(memTypeStr, 2);
+				
+				// 구글 유형
+				String googleStr = "0001";
+				
+				// 구글 가입 여부
+				int isGoogle = Integer.parseInt(memTypeStr, 2) & Integer.parseInt(googleStr, 2);
+				if(isGoogle != 1) {
+					memType += 1;
+				}
+				
+				String newMemType = Integer.toBinaryString(memType);
+				newMap.put("memEmail", email);
+				newMap.put("memType", newMemType);
+				
+				// SNS 유형 갱신
+				memberRepository.updateType(newMap);
+				
+			}
+			// 구글로 가입하는 경우
+			else {
+				map.put("memType", "1001");
+			}
 		}
 		map.put("memEmail", email);
 		

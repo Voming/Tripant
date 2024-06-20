@@ -12,6 +12,9 @@ public interface MemberRepository {
 	// 로그인
 	public MemberEntity login(String memEmail);
 	
+	// SNS 유형 갱신
+	public int updateType(Map<String, Object> map);
+	
 	// 로그인 기록
 	public int log(Map<String, Object> map);
 

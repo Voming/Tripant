@@ -70,7 +70,7 @@ COMMENT ON COLUMN "MEMBER"."MEM_ROLE" IS '회원 권한 등급 [휴면회원(ROL
 
 COMMENT ON COLUMN "MEMBER"."MEM_ENABLED" IS '활성 여부 [비활성(0), 활성(1)]';
 
-COMMENT ON COLUMN "MEMBER"."MEM_TYPE" IS 'SNS 여부 [이메일, 카카오, 네이버, 구글] 순서';
+COMMENT ON COLUMN "MEMBER"."MEM_TYPE" IS 'SNS 여부 [이메일(8), 카카오(4), 네이버(2), 구글(1)]';
 
 COMMENT ON COLUMN "MEMBER"."MEM_JOIN_DATE" IS '가입날짜';
 
@@ -100,7 +100,7 @@ COMMENT ON COLUMN "QUIT_MEMBER"."MEM_ROLE" IS '회원 권한 등급 [휴면회�
 
 COMMENT ON COLUMN "QUIT_MEMBER"."MEM_ENABLED" IS '활성 여부 [비활성(0), 활성(1)]';
 
-COMMENT ON COLUMN "QUIT_MEMBER"."MEM_TYPE" IS 'SNS 여부 [이메일, 카카오, 네이버, 구글] 순서';
+COMMENT ON COLUMN "QUIT_MEMBER"."MEM_TYPE" IS 'SNS 여부 [이메일(8), 카카오(4), 네이버(2), 구글(1)]';
 
 COMMENT ON COLUMN "QUIT_MEMBER"."MEM_JOIN_DATE" IS '가입날짜';
 
