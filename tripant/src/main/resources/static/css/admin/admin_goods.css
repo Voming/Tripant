@@ -79,7 +79,7 @@
 }
 
 /* 상품추가버튼 */
-.col .btn-add{
+.col .btn.insert{
 	border-radius:8px;
 	border:solid black 1px;
 	height:35px;
@@ -94,17 +94,17 @@
 .flex{
 	display: flex;
 }
-.item-add{
+.item-insert, .item-update{
 	flex-direction: column;
 	row-gap: 20px;
 }
-.add-info{
+.item-info{
 	flex-direction: row;
 	justify-content: space-between;
 	width: 100%;
 	font-size: var(--font4);
 }
-.add-info input{
+.item-info input{
 	box-sizing: border-box;
 	border-radius: 8px;
 	padding: 4px 8px;
@@ -120,6 +120,6 @@
 	background-color:white;
 }
 /* 삭제버튼 */
-.col.list .btn.cancel{
+.col.list .btn.delete{
 	margin-left:10px;
 }

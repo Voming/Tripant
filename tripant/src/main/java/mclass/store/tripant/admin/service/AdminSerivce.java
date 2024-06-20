@@ -74,8 +74,16 @@ public class AdminSerivce {
 	public List<Map<String, Object>> itemList(){
 		return admindao.itemList();
 	}
+	// 상품정보
+	public Map<String, Object> itemInfo(String itemCode){
+		return admindao.itemInfo(itemCode);
+	}
 	// 상품추가
 	public int itemInsert(Map<String, Object> map) {
 		return admindao.itemInsert(map);
+	}
+	// 상품수정
+	public int itemUpdate(Map<String, Object> map) {
+		return admindao.itemUpdate(map);
 	}
 }

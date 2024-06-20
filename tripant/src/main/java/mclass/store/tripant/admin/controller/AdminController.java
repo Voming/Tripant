@@ -1,6 +1,7 @@
 package mclass.store.tripant.admin.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -200,6 +201,50 @@ public class AdminController {
 		}
 		
 		int result = adminservice.itemInsert(map);
+		
+		return result;
+	}
+	
+	// 상품정보 불러오기
+	@PostMapping("/goods/info")
+	@ResponseBody
+	public Map<String, Object> goodsInfo(String itemCode) {
+		Map<String, Object> map = adminservice.itemInfo(itemCode);
+		
+		String itemName = (String) map.get("ITEM_NAME");
+		BigDecimal itemPrice = (BigDecimal) map.get("ITEM_PRICE");
+		BigDecimal itemDur = (BigDecimal) map.get("ITEM_DUR");
+		BigDecimal itemSale = (BigDecimal) map.get("ITEM_SALE");
+		
+		map.put("itemCode", itemCode);
+		map.put("itemName", itemName);
+		map.put("itemPrice", itemPrice);
+
+		if(itemDur != null && itemSale != null) {
+			map.put("itemDur", itemDur);
+			map.put("itemSale", itemSale);
+		}
+		
+		return map;
+	}
+	
+	// 상품수정
+	@PostMapping("/goods/update")
+	@ResponseBody
+	public int goodsUpdate(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("itemCode", itemCode);
+		map.put("itemName", itemName);
+		map.put("itemPrice", itemPrice);
+		if(itemDur != null && itemSale != null) {
+			map.put("itemDur", itemDur);
+			map.put("itemSale", itemDur);
+		}else {
+			map.put("itemDur", null);
+			map.put("itemSale", null);
+		}
+		
+		int result = adminservice.itemUpdate(map);
 		
 		return result;
 	}
