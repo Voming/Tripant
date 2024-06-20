@@ -1,6 +1,8 @@
 var clickspotnum = 0;
+var clickspotfindnum = 0;
 var spottype;
-
+var findArea;
+//더보기
 function spotMoreBtnClickHandler(thisElement) {
 	clickspotnum += 1;
 
@@ -18,6 +20,39 @@ function spotMoreBtnClickHandler(thisElement) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
 	});
 }
+//검색 더보기
+function spotFindMoreBtnClickHandler(thisElement) {
+	clickspotfindnum += 1;
+
+	$.ajax({
+		url: contextPath + "plan/spot/find/more"
+		, method: "post"
+		, context: this
+		, data: {
+			areaCode: areacode,
+			findArea: findArea,
+			clickSpotFindNum: clickspotfindnum
+		}
+		, error: ajaxErrorHandler
+	}).done(function(wrap_spot) {
+		$(".wrap-spotList").replaceWith(wrap_spot);
+		
+		//결과값 null 체크
+		var boxCount = $(".spot-box").length;
+		console.log(boxCount);
+		if (boxCount == 0) {
+			var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
+			$(".resultCheck").html(htmlVal);
+		} else if (boxCount >= 40*clickspotfindnum) {
+			var htmlVal = `
+				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
+				class="spot_find_more_btn">더보기</button>`;
+			$(".resultCheck").html(htmlVal);
+		} 
+		$(".spot_more_btn").css('display', 'none');
+	});
+}
+
 
 $(document).ready(function() {
 	$('.spot-tab-nav a').click(function() {
@@ -80,7 +115,9 @@ $(document).ready(function() {
 });
 
 function btnFindClickHandler() {
-	var findArea = $("input[name=find-spot]").val().trim();
+	//버튼 클릭 초기화
+	clickspotfindnum = 0;
+	findArea = $("input[name=find-spot]").val().trim();
 
 
 	if (findArea.length == 0) {
@@ -104,14 +141,21 @@ function btnFindClickHandler() {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
+		
 		//결과값 null 체크
-		var spotname = $(".spot-name").text();
-		if (spotname.length == 0) {
-			$(".spot_more_btn").css('display', 'none');
-
+		var boxCount = $(".spot-box").length;
+		console.log(boxCount);
+		if (boxCount == 0) {
 			var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
 			$(".resultCheck").html(htmlVal);
-		}
+		} else if (boxCount >= 80) {
+			var htmlVal = `
+				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
+				class="spot_find_more_btn">더보기</button>`;
+			$(".resultCheck").html(htmlVal);
+		} 
+		$(".spot_more_btn").css('display', 'none');
+
 	});
 }
 

@@ -47,7 +47,10 @@ public class PlanService {
 		return planRepository.selectTypeListMore(areaCode, placeType, maxNum);
 	}
 
-	public List<PlaceboxEntity> selectPlaceFindList(String findArea, String areaCode) {
-		return planRepository.selectPlaceFindList(findArea, areaCode);
+	public List<PlaceboxEntity> selectSpotFindList(String findArea, String areaCode) {
+		return planRepository.selectSpotFindList(findArea, areaCode);
+	}
+	public List<PlaceboxEntity> selectSpotFindMoreList(String findArea, String areaCode,  String maxNum) {
+		return planRepository.selectSpotFindMoreList(findArea, areaCode, maxNum);
 	}
 }

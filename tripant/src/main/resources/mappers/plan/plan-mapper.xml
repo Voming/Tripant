@@ -19,6 +19,8 @@
 		SELECT AREA_CODE, AREA_NAME, AREA_SHORT_NAME,AREA_ENG_NAME,AREA_FILE_NAME 
 		FROM AREA 
 		WHERE AREA_NAME LIKE '%'||#{findArea}||'%'
+		OR AREA_SHORT_NAME LIKE '%'||#{findArea}||'%'
+		OR AREA_ENG_NAME LIKE '%'||#{findArea}||'%'
 	</select>
 	
 	<select id="selectAreaInfoList" parameterType="_int" resultType="AreaEntity">
@@ -41,12 +43,22 @@
 		AND ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
 	
-	<select id="selectPlaceFindList" parameterType="string" resultType="PlaceboxEntity">
+	<select id="selectSpotFindList" parameterType="string" resultType="PlaceboxEntity">
 		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
 		FROM PLACE 
 		WHERE AREACODE=#{areaCode} 
+		AND TYPE IN (1,2,3,4)
 		AND TITLE LIKE '%'||#{findArea}||'%'
-		AND ROWNUM <![CDATA[<=]]> 50
+		AND ROWNUM <![CDATA[<=]]> 20
+	</select>
+	
+	<select id="selectSpotFindMoreList" parameterType="string" resultType="PlaceboxEntity">
+		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
+		FROM PLACE 
+		WHERE AREACODE=#{areaCode} 
+		AND TYPE IN (1,2,3,4)
+		AND TITLE LIKE '%'||#{findArea}||'%'
+		AND ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
 
 </mapper>

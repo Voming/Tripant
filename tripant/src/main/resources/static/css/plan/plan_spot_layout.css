@@ -143,3 +143,24 @@
 	background: black;
 	color: white;
 }
+
+/*검색 후 더보기 버튼*/
+.tab-content  #tab02 .spot-tab-content .spot_find_more_btn {
+	margin-top: 20px;
+	width: 100%;
+	height: 40px;
+	font-family: "Binggrae";
+	font-size: var(--font4);
+	font-weight: bold;
+	background:var(--color_light_gray);
+	color: black;
+	border: 0;
+	border-radius: 8px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.tab-content  #tab02 .spot-tab-content .spot_find_more_btn:hover {
+	background: black;
+	color: white;
+}
