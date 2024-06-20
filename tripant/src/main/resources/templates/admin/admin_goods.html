@@ -51,8 +51,8 @@
 					</li>
 					
 					<li>
-						<ul th:each="item : ${itemList}" class="col list">
-							<li th:text="${item.ITEM_CODE}"></li>
+						<ul th:each="item : ${itemList}" class="col list" th:data-item-code="${item.ITEM_CODE}">
+							<li th:text="${item.ITEM_CODE}" ></li>
 							<li th:text="${item.ITEM_NAME}"></li>
 							<li th:text="${item.ITEM_PRICE_CHAR}"></li>
 							<li th:text="${item.ITEM_DUR}" th:if="${item.ITEM_DUR} != null"></li>
@@ -76,6 +76,9 @@ function loadedHandler() {
 	
 	// 상품 수정 버튼
 	$(".btn.update").on("click", itemUpdateHandler);
+	
+	//상품삭제버튼
+	$(".btn.delete").on("click", itemDeleteHandler);
 }
 
 // 상품 수정
@@ -275,6 +278,32 @@ async function itemInsertHandler(){
 		});
 	}
 }
+
+//상품삭제
+
+function itemDeleteHandler(){
+	var itemCode=$(this).parents('.col.list').data('item-code');
+	console.log(itemCode);
+	$.ajax({
+		url:"/admin/goods/delete",
+		 method:"post",
+		 data: {itemCode:itemCode},
+		 success : function(result) {
+			 	location.reload();
+				},
+	 error : function(request, status, error) {
+		 	if(request.responseText.indexOf('ORA-02292')){
+		 		alert('지울 수 없습니다.')
+		 	}else{
+				alert("code: " + request.status + "\n"
+						+ "message: " + request.responseText + "\n"
+						+ "error: " + error);
+				}
+	 		}
+		
+	});
+}
+
 </script>
 
 </body>
