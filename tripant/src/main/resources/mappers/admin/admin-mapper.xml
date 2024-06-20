@@ -55,6 +55,16 @@
 	where reports is not null
 	</select>
 	
+	<!-- 신고게시글 검색 -->
+	<select id="boardsearch" resultType="AdminBoardEntity">
+	select diary_id, diary_title,to_char(diary_date,'yyyy-MM-dd') diary_date,reports,mem_nick from 
+	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date ,a.diary_mem_email, b.reports
+	from DIARY a
+	left join (select count (mem_email) reports , diary_id from diary_reports group by diary_id) b on a.diary_id= b.diary_id))
+	join member on diary_mem_email=mem_email
+	where reports is not null and mem_nick like '%${memNick}%'
+	</select>
+	
 	<!--신고수 초기화 -->
 	<delete id="complainReset" parameterType="_int">
 	delete from diary_reports where diary_id = #{diaryId}
@@ -69,5 +79,23 @@
 	<delete id="payCancel" parameterType="map">
 	delete from buy where mem_email = #{memEmail} and buy_id = #{buyId} 
 	</delete>
+	
+	<!-- 상품 관리 페이지 -->
+	<!-- 상품목록 -->
+	<select id="itemList" resultType="map">
+	select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur, item_sale from item order by item_code asc
+	</select>
+	<!-- 상품정보 -->
+	<select id="itemInfo" resultType="map" parameterType="string">
+	select item_name, item_price, item_dur, item_sale from item where item_code = #{itemCode} 
+	</select>
+	<!-- 상품추가 -->
+	<insert id="itemInsert" parameterType="map">
+	insert into item values (#{itemCode}, #{itemName}, #{itemPrice}, #{itemDur}, #{itemSale})
+	</insert>
+	<!-- 상품수정 -->
+	<update id="itemUpdate" parameterType="map">
+	update item set item_name = #{itemName}, item_price = #{itemPrice}, item_dur = #{itemDur}, item_sale = #{itemSale} where item_code = #{itemCode}
+	</update>
 	
 </mapper>

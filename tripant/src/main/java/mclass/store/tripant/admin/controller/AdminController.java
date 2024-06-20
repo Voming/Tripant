@@ -1,6 +1,7 @@
 package mclass.store.tripant.admin.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -16,11 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.service.AdminSerivce;
 
@@ -82,7 +85,7 @@ public class AdminController {
 	//검색 
 	@PostMapping("/member/search") 
 	@ResponseBody
-	public List<AdminMemEntity> MemberSearch(Model model, String searchMem) {
+	public List<AdminMemEntity> memberSearch(Model model, String searchMem) {
 		List<AdminMemEntity> memList=adminservice.search(searchMem);
 		return memList ;
 	}
@@ -119,9 +122,12 @@ public class AdminController {
 		return result;
 	}
 	
-	@GetMapping("/goods")
-	public String goods() {
-		return "admin/admin_goods";
+	//신고게시글 검색
+	@PostMapping("/complain/search")
+	@ResponseBody
+	public List<AdminBoardEntity> boardSearch(Model model, String memNick){
+		List<AdminBoardEntity> boardList=adminservice.boardSearch(memNick);
+		return boardList;
 	}
 	
 	// 결제 취소 페이지
@@ -168,6 +174,79 @@ public class AdminController {
 		}else {
 			return 0;
 		}
+	}
+
+	// 상품관리 페이지
+	@GetMapping("/goods")
+	public ModelAndView goods(ModelAndView mv) {
+		mv.setViewName("admin/admin_goods");
+		mv.addObject("itemList", adminservice.itemList());
+		return mv;
+	}
+	
+	// 상품추가
+	@PostMapping("/goods/insert")
+	@ResponseBody
+	public int goodsInsert(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("itemCode", itemCode);
+		map.put("itemName", itemName);
+		map.put("itemPrice", itemPrice);
+		if(itemDur != null && itemSale != null) {
+			map.put("itemDur", itemDur);
+			map.put("itemSale", itemDur);
+		}else {
+			map.put("itemDur", null);
+			map.put("itemSale", null);
+		}
+		
+		int result = adminservice.itemInsert(map);
+		
+		return result;
+	}
+	
+	// 상품정보 불러오기
+	@PostMapping("/goods/info")
+	@ResponseBody
+	public Map<String, Object> goodsInfo(String itemCode) {
+		Map<String, Object> map = adminservice.itemInfo(itemCode);
+		
+		String itemName = (String) map.get("ITEM_NAME");
+		BigDecimal itemPrice = (BigDecimal) map.get("ITEM_PRICE");
+		BigDecimal itemDur = (BigDecimal) map.get("ITEM_DUR");
+		BigDecimal itemSale = (BigDecimal) map.get("ITEM_SALE");
+		
+		map.put("itemCode", itemCode);
+		map.put("itemName", itemName);
+		map.put("itemPrice", itemPrice);
+
+		if(itemDur != null && itemSale != null) {
+			map.put("itemDur", itemDur);
+			map.put("itemSale", itemSale);
+		}
+		
+		return map;
+	}
+	
+	// 상품수정
+	@PostMapping("/goods/update")
+	@ResponseBody
+	public int goodsUpdate(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("itemCode", itemCode);
+		map.put("itemName", itemName);
+		map.put("itemPrice", itemPrice);
+		if(itemDur != null && itemSale != null) {
+			map.put("itemDur", itemDur);
+			map.put("itemSale", itemDur);
+		}else {
+			map.put("itemDur", null);
+			map.put("itemSale", null);
+		}
+		
+		int result = adminservice.itemUpdate(map);
+		
+		return result;
 	}
 	
 	@GetMapping("/mchart")

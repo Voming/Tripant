@@ -48,6 +48,11 @@ public class AdminSerivce {
 		return admindao.complainList();
 	}
 	
+	//신고게시글 검색
+	public List<AdminBoardEntity> boardSearch(String memNick){
+		return admindao.boardsearch(memNick);
+	}
+	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId) {
 		return admindao.complainReset(diaryId);
@@ -60,7 +65,25 @@ public class AdminSerivce {
 	}
 
 	// 결제 취소
-	public Integer payCancel(Map<String, Object> map) {
+	public int payCancel(Map<String, Object> map) {
 		return admindao.payCancel(map);
+	}
+	
+	// 상품 관리 페이지
+	// 상품목록
+	public List<Map<String, Object>> itemList(){
+		return admindao.itemList();
+	}
+	// 상품정보
+	public Map<String, Object> itemInfo(String itemCode){
+		return admindao.itemInfo(itemCode);
+	}
+	// 상품추가
+	public int itemInsert(Map<String, Object> map) {
+		return admindao.itemInsert(map);
+	}
+	// 상품수정
+	public int itemUpdate(Map<String, Object> map) {
+		return admindao.itemUpdate(map);
 	}
 }

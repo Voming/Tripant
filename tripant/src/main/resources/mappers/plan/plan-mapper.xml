@@ -36,9 +36,17 @@
 	</select>
 	
 	<select id="selectTypeListMore" parameterType="_int" resultType="PlaceboxEntity">
-	SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
+		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
 		FROM PLACE WHERE AREACODE=#{areaCode} AND TYPE = #{placeType}  
 		AND ROWNUM <![CDATA[<=]]> #{maxNum}
+	</select>
+	
+	<select id="selectPlaceFindList" parameterType="string" resultType="PlaceboxEntity">
+		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
+		FROM PLACE 
+		WHERE AREACODE=#{areaCode} 
+		AND TITLE LIKE '%'||#{findArea}||'%'
+		AND ROWNUM <![CDATA[<=]]> 50
 	</select>
 
 </mapper>

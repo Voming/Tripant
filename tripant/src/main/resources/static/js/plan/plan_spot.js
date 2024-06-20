@@ -11,7 +11,7 @@ function spotMoreBtnClickHandler(thisElement) {
 		, data: {
 			areaCode: areacode,
 			spotType: spottype,
-			clickSpotNum : clickspotnum
+			clickSpotNum: clickspotnum
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
@@ -21,6 +21,11 @@ function spotMoreBtnClickHandler(thisElement) {
 
 $(document).ready(function() {
 	$('.spot-tab-nav a').click(function() {
+		//검색했던게 있으면 지우기
+		if ($("#find-spot").val().trim().length != 0) {
+			$("#find-spot").val("");
+		}
+
 		$('.spot-tab-content > div').hide().filter(this.hash).fadeIn();
 		$('.spot-tab-nav a').css("color", "var(--color_gray)");
 		$('.spot-tab-nav li').css("background-color", "white");
@@ -28,7 +33,7 @@ $(document).ready(function() {
 		$(this).addClass('active');
 		$(this).css("color", "white");
 		$(this).parent().css("background-color", "var(--color_day9_blue)");
-		
+
 		//더보기 클릭 횟수 초기화
 		clicknum = 0;
 
@@ -56,9 +61,57 @@ $(document).ready(function() {
 			, error: ajaxErrorHandler
 		}).done(function(wrap_spot) {
 			$(".wrap-spotList").replaceWith(wrap_spot);
+
+			//결과값 null 체크
+			var spotname = $(".spot-name").text();
+			if (spotname.length == 0) {
+				$(".spot_more_btn").css('display', 'none');
+
+				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
+				$(".resultCheck").html(htmlVal);
+			}
 		});
 
 		return false;
 	}).filter(':eq(0)').click();
+
+	//검색
+	$(".btn.find-spot").on("click", btnFindClickHandler);
 });
+
+function btnFindClickHandler() {
+	var findArea = $("input[name=find-spot]").val().trim();
+
+
+	if (findArea.length == 0) {
+		alert("빈문자열만 입력할 수 없습니다. 검색할 장소명을 입력해주세요.");
+		return;
+	}
+
+	//타입 전체 선택 해제
+	$('.spot-tab-nav a').css("color", "var(--color_gray)");
+	$('.spot-tab-nav li').css("background-color", "white");
+	$('.spot-tab-nav a').removeClass('active');
+
+	$.ajax({
+		url: "/plan/spot/find"
+		, method: "post"
+		, context: this
+		, data: {
+			findArea: findArea,
+			areaCode: areacode,
+		}
+		, error: ajaxErrorHandler
+	}).done(function(wrap_spot) {
+		$(".wrap-spotList").replaceWith(wrap_spot);
+		//결과값 null 체크
+		var spotname = $(".spot-name").text();
+		if (spotname.length == 0) {
+			$(".spot_more_btn").css('display', 'none');
+
+			var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
+			$(".resultCheck").html(htmlVal);
+		}
+	});
+}
 

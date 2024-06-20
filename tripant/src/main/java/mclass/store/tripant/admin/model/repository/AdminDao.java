@@ -32,6 +32,9 @@ public interface AdminDao {
 	//신고게시글
 	public List<AdminBoardEntity> complainList();
 	
+	//신고게시글 검색
+	public List<AdminBoardEntity> boardsearch(String memNick);
+	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId);
 
@@ -40,7 +43,17 @@ public interface AdminDao {
 	public List<Map<String, Object>> payList();
 
 	// 결제 취소
-	public Integer payCancel(Map<String, Object> map);
+	public int payCancel(Map<String, Object> map);
+	
+	// 상품 관리 페이지
+	// 상품목록
+	public List<Map<String, Object>> itemList();
+	// 상품정보
+	public Map<String, Object> itemInfo(String itemCode);
+	// 상품추가
+	public int itemInsert(Map<String, Object> map); 
+	// 상품수정
+	public int itemUpdate(Map<String, Object> map);
 	
 	//총 페이지 수가 결정됨
 	//public int selectTotalPageCount(); 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
 import mclass.store.tripant.place.domain.AreaEntity;
+import mclass.store.tripant.place.domain.AreaNameEntity;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.plan.model.service.PlanService;
 
@@ -56,8 +57,8 @@ public class PlanController {
 	@PostMapping("/spot")
 	public String spot(Model model, @RequestParam("areaCode") Integer areaCode,
 			@RequestParam("spotType") Integer spotType) throws IOException {
-		List<PlaceboxEntity> spotTypeList = planService.selectTypeList(areaCode, spotType);
-		model.addAttribute("spotTypeList", spotTypeList);
+		List<PlaceboxEntity> spotList = planService.selectTypeList(areaCode, spotType);
+		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
 
@@ -67,16 +68,24 @@ public class PlanController {
 			throws IOException {
 		// 10개씩 더 출력하기
 		int maxNum = (clickSpotNum + 1) * 10;
-		List<PlaceboxEntity> spotTypeList = planService.selectTypeListMore(areaCode, spotType, maxNum);
-		model.addAttribute("spotTypeList", spotTypeList);
+		List<PlaceboxEntity> spotList = planService.selectTypeListMore(areaCode, spotType, maxNum);
+		model.addAttribute("spotList", spotList);
+		return "plan/spot_tab_content";
+	}
+
+	@PostMapping("/spot/find")
+	public String spotFind(Model model, @RequestParam("findArea") String findArea,
+			@RequestParam("areaCode") String areaCode) {
+		List<PlaceboxEntity> spotList = planService.selectPlaceFindList(findArea, areaCode);
+		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
 
 	@PostMapping("/stay")
 	public String stay(Model model, @RequestParam("areaCode") Integer areaCode,
 			@RequestParam("stayType") Integer stayType) throws IOException {
-		List<PlaceboxEntity> stayTypeList = planService.selectTypeList(areaCode, stayType);
-		model.addAttribute("stayTypeList", stayTypeList);
+		List<PlaceboxEntity> stayList = planService.selectTypeList(areaCode, stayType);
+		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
 	}
 
@@ -86,8 +95,8 @@ public class PlanController {
 			throws IOException {
 		// 10개씩 더 출력하기
 		int maxNum = (clickStayNum + 1) * 10;
-		List<PlaceboxEntity> stayTypeList = planService.selectTypeListMore(areaCode, stayType, maxNum);
-		model.addAttribute("stayTypeList", stayTypeList);
+		List<PlaceboxEntity> stayList = planService.selectTypeListMore(areaCode, stayType, maxNum);
+		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
 	}
 

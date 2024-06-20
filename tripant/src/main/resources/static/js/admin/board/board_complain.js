@@ -5,6 +5,8 @@ function loadedHandler(){
 	$('input[name=check]').on('click',CheckSetHandler);
 	//초기화버튼
 	$('.btn-reset').on('click',ClickSetHandler);  
+	//검색
+	$('.btn-search').on("click",searchHandler);
 	
 }
 /* 체크표시가 되면 버튼 활성화 */
@@ -38,4 +40,42 @@ function ClickSetHandler(){
 						+ "error: " + error);
 			}
 	});
+} 
+
+//검색
+function searchHandler(){
+	var searchBoard = $("[name=search]").val().trim();
+
+	$.ajax({
+		url:"/admin/complain/search",
+		 method:"post",
+		 data: {searchBoard:searchBoard},
+		 success : function(result) {
+			 memListHandler(result)
+				},
+	 error : function(request, status, error) {
+				alert("code: " + request.status + "\n"
+						+ "message: " + request.responseText + "\n"
+						+ "error: " + error);
+			}
+		
+	});
+}
+
+function memListHandler(complainList){
+	var htmlVal = '';
+	for (var idx in complainList){
+		var complainBoard = complainList[idx];
+		htmlVal+=`
+			<ul class="col list">
+				<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" th:data-reports="${complainBoard.reports}"></li>
+				<li th:text="${complainBoard.diaryId}"></li>
+				<li th:text="${complainBoard.diaryTitle}"></li>
+				<li th:text="${complainBoard.memNick}"></li>
+				<li th:text="${complainBoard.diaryDate}"></li>
+				<li th:text="${complainBoard.reports}"></li>
+				<li></li>
+			</ul>
+			`;
+	}
 } 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="wrap-stayList flex" th:fragment="wrapstaylist">
-	<th:block th:if="${stayTypeList} != null">
-		<th:block th:each="stay, stayStat : ${stayTypeList}">
+	<th:block th:if="${stayList} != null">
+		<th:block th:each="stay, stayStat : ${stayList}">
 			<div class="stay-box flex">
 				<img class="stay-img" th:src="${stay.firstimage}" alt="장소이미지">
 				<div class="stay-txt">

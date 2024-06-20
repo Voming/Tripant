@@ -28,16 +28,24 @@ $(window).bind("beforeunload", function(e) {
 });
 
 //지역 코드
-var areacode;  
+var areacode;
 
 $(loadedHandler);
-
 function loadedHandler() {
-	var areacode = $(".plan-areacode").attr("value");
-
 	//메인 화면 돌아가기
 	$(".logo").on("click", function() {
 		location.href = "/";
+	});
+
+	//달력 다시 열기
+	$(".plan-priod").on("click", function() {
+		beforeSave = false;
+		if (confirm("기간을 다시 설정하면 작성한 내용이 없어집니다. 괜찮습니까?") == true) {
+			location.reload(true);
+			$(".modal").addClass("show");
+		} else {
+			event.preventDefault();
+		}
 	});
 
 	//좌측 탭
@@ -55,8 +63,8 @@ function loadedHandler() {
 			$(".main-wrapper .tab-content").css("width", "50%");
 		}
 
-
 		$(this).css("color", "#4BC9E5");
 		return false;
 	}).filter(':eq(0)').click();
 }
+
