@@ -235,8 +235,10 @@ public class AdminController {
 		map.put("itemName", itemName);
 		map.put("itemPrice", itemPrice);
 
-		if(itemDur != null && itemSale != null) {
+		if(itemDur != null) {
 			map.put("itemDur", itemDur);
+		}
+		if(itemSale != null) {
 			map.put("itemSale", itemSale);
 		}
 		
@@ -251,7 +253,6 @@ public class AdminController {
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
 		map.put("itemPrice", itemPrice);
-		System.out.println(itemDur);
 		if(itemDur != null) {
 			map.put("itemDur", itemDur);
 		}else {

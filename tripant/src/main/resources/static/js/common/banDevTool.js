@@ -1,12 +1,19 @@
 !function() {
-	  function detectDevTool(allow) {
+	  async function detectDevTool(allow) {
 	    if(isNaN(+allow)) allow = 100;
 	    var start = +new Date(); // Validation of built-in Object tamper prevention.
 	    debugger;
 	    var end = +new Date(); // Validates too.
 	    if(isNaN(start) || isNaN(end) || end - start > allow) {
-	      alert('개발자 도구가 감지되었습니다.\n메인 페이지로 이동합니다.');
-	      location.href = '/';
+			Swal.fire({
+					title: "개발자 도구가 감지되었습니다.\n메인 페이지로 이동합니다.", 
+					icon: "warning",
+					showConfirmButton: false, 
+					timer: 2000,
+  					timerProgressBar: true
+				}).then(function(){
+			    	location.href = '/';
+				});
 	    }
 	  }
 	  if(window.attachEvent) {

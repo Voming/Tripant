@@ -7,10 +7,19 @@ function loaededHandler(){
 }
 
 // 결제 취소
-function payCancelHandler(){
+async function payCancelHandler(){
 	const buyId = $(this).parents(".col.list").data("id").toString();
 	const memEmail = $(this).parents(".col.list").data("email");
-	if(confirm("해당 주문번호의 모든 건이 취소됩니다.\n진행하시겠습니까?")){
+	const payCancel = await Swal.fire({
+		title: "해당 주문번호의 모든 건이 취소됩니다.\n진행하시겠습니까?", 
+		icon: "warning", 
+		showCancelButton: true, 
+		confirmButtonText: "결제 취소", 
+		confirmButtonColor: "#ff0000", 
+		cancelButtonText: "돌아가기", 
+		cancelButtonColor: "#000000"
+	});
+	if(payCancel.isConfirmed){
 		$.ajax({
 			url: contextPath + "admin/cancel", 
 			type: "post", 
@@ -19,12 +28,24 @@ function payCancelHandler(){
 				memEmail: memEmail 
 			}, 
 			error: ajaxErrorHandler, 
-			success: function(data){
+			success: async function(data){
 				if(data > 0){
-					alert("결제 취소가 완료되었습니다.");
-					location.reload();
+					const payCancelSuccess = await Swal.fire({
+						title: "결제 취소가 완료되었습니다.", 
+						icon: "success", 
+						confirmButtonColor: "#000000", 
+						confirmButtonText: "확인"
+					});
+					if(payCancelSuccess.isConfirmed){
+						location.reload();
+					}
 				}else{
-					alert("결제 취소 중 오류가 발생했습니다.");
+					Swal.fire({
+						title: "결제 취소 중 오류가 발생했습니다.", 
+						icon: "error", 
+						confirmButtonColor: "#000000", 
+						confirmButtonText: "확인"
+					});
 				}
 			}
 		});
@@ -36,17 +57,12 @@ function searchHandler(){
 	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
 		url:"/admin/member/search",
-		 method:"post",
-		 data: {searchMem:searchMem},
-		 success : function(result) {
+		method:"post",
+		data: {searchMem:searchMem},
+		success : function(result) {
 			 memListHandler(result)
 				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
-			}
-		
+	 	error : ajaxErrorHandler
 	});
 }
 

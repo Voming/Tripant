@@ -8,15 +8,27 @@ function saveClickHandler(){
 		url: '/save/pwd', 
 		type: 'post', 
 		data: $('#memPassword'), 
-		success: function(result){
+		success: async function(result){
 			if(result == 1){
-				alert('비밀번호가 변경되었습니다.\n새로운 비밀번호로 로그인 해주시기 바랍니다.');
-				let form = document.getElementById('frm-chPwd');
-				form.action = contextPath+'logout';
-				form.method = 'POST';
-				form.submit();
+				const chPwdSuccess = await Swal.fire({
+					title: "비밀번호가 변경되었습니다.\n새로운 비밀번호로 로그인 해주시기 바랍니다.", 
+					icon: "success", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
+				});
+				if(chPwdSuccess.isConfirmed){
+					let form = document.getElementById('frm-chPwd');
+					form.action = contextPath+'logout';
+					form.method = 'POST';
+					form.submit();
+				}
 			}else{
-				alert('비밀번호 변경 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.');
+				Swal.fire({
+					title: "비밀번호 변경 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
+					icon: "error", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
+				});
 			}
 		}, 
 		error: ajaxErrorHandler

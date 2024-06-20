@@ -6,21 +6,34 @@ function codeSendHandler(){
 		type: 'post', 
 		async: false, 
 		data: {memEmail: memEmail}, 
-		success: function(result){
+		success: async function(result){
 			if(result === "1"){
-				alert("인증번호가 발송되었습니다.");
-				$(".inputbtn.check").removeClass('hide');
+				const sendSuccess = await Swal.fire({
+					title: "인증번호가 발송되었습니다.", 
+					icon: "success", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
+				});
+				if(sendSuccess.isConfirmed){
+					$(".inputbtn.check").removeClass('hide');
+				}
 			}else if(result === "0"){
-				alert('인증번호 발송 중 오류가 발생했습니다.');
+				Swal.fire({
+					title: "인증번호 발송 중 오류가 발생했습니다.", 
+					icon: "error", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
+				});
 			}else if(result === "-1"){
-				alert('이미 가입된 회원입니다.');
+				Swal.fire({
+					title: "이미 가입된 회원입니다.", 
+					icon: "info", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
+				});
 			}
 		},  
-		error: function (request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
+		error: ajaxErrorHandler
 	});
 }
 //인증코드 확인
@@ -31,21 +44,29 @@ function codeCheckHandler(){
 		type: "post", 
 		async: false, 
 		data: {inputCode: inputCode}, 
-		success: function(result){
+		success: async function(result){
 			if(result == 1){
-				alert("이메일 인증에 성공하였습니다.");
-				$(".inputbtn.check").addClass('hide');
-				$(".btn.sendCode").addClass('hide');
-				$("#memEmail").attr("readonly", true);
-				joinActive();
+				const codeSuccess = await Swal.fire({
+					title: "이메일 인증에 성공하였습니다.", 
+					icon: "success", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
+				});
+				if(codeSuccess.isConfirmed){
+					$(".inputbtn.check").addClass('hide');
+					$(".btn.sendCode").addClass('hide');
+					$("#memEmail").attr("readonly", true);
+					joinActive();
+				}
 			}else{
-				alert('인증번호가 일치하지 않습니다.');
+				Swal.fire({
+					title: "인증번호가 일치하지 않습니다.", 
+					icon: "warning", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
+				});
 			}
 		}, 
-		error: function (request, status, error){
-			alert("code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error);
-		}
+		error: ajaxErrorHandler
 	});
 }
