@@ -83,8 +83,8 @@ async function itemUpdateHandler(){
 	let itemCode = $(this).parents(".col.list").children("li:first-child").text();
 	let itemName = "";
 	let itemPrice = "";
-	let itemDur = "";
-	let itemSale = "";
+	let itemDur = null;
+	let itemSale = null;
 	const itemInfo = await $.ajax({
 		url: contextPath + "admin/goods/info", 
 		type: "post", 
@@ -135,6 +135,8 @@ async function itemUpdateHandler(){
 				$("#item-code").val()
 				, $("#item-name").val()
 				, $("#item-price").val()
+				, $("#item-dur").val()
+				, $("#item-sale").val()
 		    ];
 		  }
 		});
@@ -151,6 +153,15 @@ async function itemUpdateHandler(){
 					itemDur: formValues[3], 
 					itemSale: formValues[4], 
 				}, 
+				error: function(request, status, error){
+					Swal.fire({
+						title: "상품 수정 중 오류가 발생했습니다.", 
+						text: "code: "+request.status + "\n" + "message: " 
+						+ request.responseText + "\n"
+						+ "error: "+error, 
+						icon: "warning"
+					});
+				}, 
 				success: async function(data){
 					if(data > 0){
 						const updateSuccess = await Swal.fire({
@@ -166,15 +177,6 @@ async function itemUpdateHandler(){
 							icon: "question"
 						});
 					}
-				}, 
-				error: function(request, status, error){
-					Swal.fire({
-						title: "상품 수정 중 오류가 발생했습니다.", 
-						text: "code: "+request.status + "\n" + "message: " 
-						+ request.responseText + "\n"
-						+ "error: "+error, 
-						icon: "warning"
-					});
 				}
 			});
 		}else{

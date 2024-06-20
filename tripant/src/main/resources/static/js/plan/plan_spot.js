@@ -4,17 +4,13 @@ var spottype;
 //검색명
 var findArea;
 
-//체크박스 클릭
-function spotCkBtnClickHandler(thisElement) {
-	console.log(thisElement);
-}
 
 //더보기
 function spotMoreBtnClickHandler(thisElement) {
 	clickspotnum += 1;
 
 	$.ajax({
-		url: contextPath + "plan/spot/more"
+		url: contextPath + "plan/spot"
 		, method: "post"
 		, context: this
 		, data: {
@@ -44,7 +40,7 @@ $(document).ready(function() {
 		$(this).parent().css("background-color", "var(--color_day9_blue)");
 
 		//더보기 클릭 횟수 초기화
-		clicknum = 0;
+		clickspotnum = 0;
 
 		areacode = $(".plan-areacode").attr("value");
 		var placeTypeS = $(this).text();
@@ -65,7 +61,8 @@ $(document).ready(function() {
 			, context: this
 			, data: {
 				areaCode: areacode,
-				spotType: spottype
+				spotType: spottype,
+				clickSpotNum : clickspotnum
 			}
 			, error: ajaxErrorHandler
 		}).done(function(wrap_spot) {
@@ -109,6 +106,7 @@ function btnSpotFindClickHandler() {
 		, data: {
 			findArea: findArea,
 			areaCode: areacode,
+			clickSpotFindNum: clickspotfindnum
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
@@ -134,7 +132,7 @@ function spotFindMoreBtnClickHandler(thisElement) {
 	clickspotfindnum += 1;
 
 	$.ajax({
-		url: contextPath + "plan/spot/find/more"
+		url: contextPath + "plan/spot/find"
 		, method: "post"
 		, context: this
 		, data: {

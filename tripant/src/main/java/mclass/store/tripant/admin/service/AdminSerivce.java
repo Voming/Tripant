@@ -36,6 +36,11 @@ public class AdminSerivce {
 	public List<AdminBoardEntity> boardList(){
 		return admindao.boardList();
 	}
+	
+	//게시글 검색(키워드 선택)
+	public List<AdminBoardEntity> keywordsearch(String memNick, String title){
+		return admindao.keywordsearch(memNick,title);
+	}
 
 	//좋아요 정렬
 	public String boardLikes() {

@@ -26,6 +26,9 @@ public interface AdminDao {
 	//전체게시글
 	public List<AdminBoardEntity> boardList();
 	
+	//게시글 검색(키워드 선택)
+	public List<AdminBoardEntity> keywordsearch(String memNick, String title);
+	
 	//좋아요 많은 순으로 정렬
 	public String boardLike();
 	

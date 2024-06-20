@@ -17,10 +17,7 @@ public interface PlanRepository {
 	public List<AreaNameEntity> selectAreaFindList(String findArea);  //지역명 검색
 	public List<AreaEntity> selectAreaInfoList(int areaCode); // 지역 정보 
 	public String selectAreaShortName(int areaCode); // 짧은 이름
-	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType); //지역, 타입 별 장소
-	public List<PlaceboxEntity> selectTypeListMore(int areaCode, int placeType, int maxNum); //더보기 클릭 시
-	public List<PlaceboxEntity> selectSpotFindList(String findArea, String areaCode); //장소명 검색
-	public List<PlaceboxEntity> selectSpotFindMoreList(String findArea, String areaCode, String maxNum); //장소명 검색 더보기
-	public List<PlaceboxEntity> selectStayFindList(String findArea, String areaCode); //장소명 검색
-	public List<PlaceboxEntity> selectStayFindMoreList(String findArea, String areaCode, String maxNum); //장소명 검색 더보기
+	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType, int maxNum); //더보기 클릭 시
+	public List<PlaceboxEntity> selectSpotFindList(String findArea, String areaCode, String maxNum); //장소명 검색 더보기
+	public List<PlaceboxEntity> selectStayFindList(String findArea, String areaCode, String maxNum); //장소명 검색 더보기
 }
