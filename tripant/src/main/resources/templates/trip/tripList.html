@@ -16,7 +16,7 @@
 			<div th:each="plan : ${planlist}" class="trip-list wfull" th:data-plan-id="${plan.planId}" th:data-title="${plan.planTitle}" th:data-role="${plan.planMemRole}">
 			    
 			    <!-- 일정 정보 -->
-				<div class="ntrip wfull" th:href="@{|trip/detail/${plan.planId}|}" ><!-- 해당 정보에 대한 trip 페이지로 이동 -->
+				<div class="ntrip wfull"  ><!-- 해당 정보에 대한 trip 페이지로 이동 -->
 					<img th:src="@{|/images/area/${plan.areaFileName}|}" alt="img"  class="location-img"/>
 					<div class="trip-info">
 						<h4 th:text="${plan.areaShortName}" class="trip-location"></h4>
