@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,11 +91,25 @@ public class AdminController {
 		return memList ;
 	}
 	
+	//게시글
 	@GetMapping("/board")
 	public String board(Model model) {
 		model.addAttribute("memBoard",adminservice.boardList());
 		
 		return "admin/admin_board";
+	}
+	
+	//ajax
+	//게시글 검색(키워드 선택)
+	@GetMapping("/keyword")
+	@ResponseBody
+	public List<AdminBoardEntity> keywordSearch(@RequestParam("type") String type ,
+			@RequestParam("keyword") String keyword , Model model) {
+		AdminBoardEntity boarddto=new AdminBoardEntity();
+		boarddto.setType(type);
+		boarddto.setKeyword(keyword);
+		
+		return adminservice.keywordsearch(type, keyword);
 	}
 	
 	//ajax
