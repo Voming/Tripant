@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>신고게시글</title>
-<!-- reset.css -->
-<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
-<!-- 레이아웃 설정 -->
-<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<head th:replace="~{common/header :: head('신고게시글')}"></head>
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_complain.css}" rel="stylesheet">
-<!--제이쿼리  -->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-</head>
-<body>
 
+<body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
 		<img th:src="@{/images/tripant_logo_text.png}" alt="로고">

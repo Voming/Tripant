@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>회원통계</title>
-<!-- reset.css -->
-<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
-<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<head th:replace="~{common/header :: head('회원통계')}"></head>
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_mchart.css}" rel="stylesheet">
 <!--chart.js CDN  -->
 <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js}"  rel="stylesheet">
 <script th:src="@{https://fastly.jsdelivr.net/npm/chart.js}"></script>
- <!--제이쿼리  -->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
-</head>
+
 <body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
