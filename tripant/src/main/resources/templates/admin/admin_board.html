@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>게시글관리</title>
-<!-- reset.css -->
-<link th:href="@{/css/common/reset.css}" rel="stylesheet" type="text/css">
-<!-- 레이아웃 설정 -->
-<link th:href="@{/css/common/core.css}" rel="stylesheet" type="text/css">
+<head th:replace="~{common/header :: head('게시글관리')}"></head>
 <link th:href="@{/css/admin/admin.css}" rel="stylesheet">
 <link th:href="@{/css/admin/admin_board.css}" rel="stylesheet">
-<!--제이쿼리  -->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-</head>
+
 <body>
 <div class="wrap-main">
 	<div class="wrap-sidebar">
