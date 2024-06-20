@@ -251,11 +251,14 @@ public class AdminController {
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
 		map.put("itemPrice", itemPrice);
-		if(itemDur != null && itemSale != null) {
+		if(itemDur != null) {
 			map.put("itemDur", itemDur);
-			map.put("itemSale", itemDur);
 		}else {
 			map.put("itemDur", null);
+		}
+		if(itemSale != null) {
+			map.put("itemSale", itemDur);
+		}else {
 			map.put("itemSale", null);
 		}
 		
