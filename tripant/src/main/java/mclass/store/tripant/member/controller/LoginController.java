@@ -74,5 +74,11 @@ public class LoginController {
 		int result = memberService.setPwd(map);
 		return result;
 	}
+	
+	// 접근 불가 페이지
+	@GetMapping("/errors/access-denied")
+	public String errorsDenied() {
+		return "common/denied";
+	}
 }
 

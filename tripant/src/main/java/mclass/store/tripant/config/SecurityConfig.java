@@ -78,6 +78,9 @@ public class SecurityConfig {
 				.logoutSuccessUrl("/")
 				.invalidateHttpSession(true)
 				)
+		.exceptionHandling((exceptionHandling) -> exceptionHandling
+				.accessDeniedPage("/errors/access-denied")
+				)
 			;
 		return http.build();
 	}
