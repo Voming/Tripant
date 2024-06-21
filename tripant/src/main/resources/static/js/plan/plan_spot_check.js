@@ -7,7 +7,15 @@ function spotCkBtnClickHandler(thisElement) {
 	console.log(latx + ":" + lngy);
 
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx);
+	// 확대 크기 변경
+	map.setLevel(6);
+	// 지도 이동
 	map.setCenter(moveLatLon);
+	// 지도에 마커를 표시합니다
+	marker.setMap(moveLatLon);
+	// 마커 위치를 클릭한 위치로 옮깁니다
+	marker.setPosition(moveLatLon);
+
 
 	//체크된 리스트 반복 
 	$(".wrap-spotList").find('input:checked').each(function(index) {
@@ -20,6 +28,7 @@ function spotCkBtnClickHandler(thisElement) {
 
 	console.log(calendarPlan.dateArr);
 }
+
 
 
 // 바로 이동
