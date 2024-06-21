@@ -70,7 +70,7 @@ function loadedHandler() {
 		if (cls_name == 'nav-1') {
 			$(".main-wrapper .tab-content").css("width", "25%");
 		} else {
-			$(".main-wrapper .tab-content").css("width", "50%");
+			$(".main-wrapper .tab-content").css("width", "40%");
 		}
 
 		$(this).css("color", "#4BC9E5");

@@ -1,9 +1,9 @@
 //체크박스 클릭
 function spotCkBtnClickHandler(thisElement) {
+	console.log(thisElement);
 	var latx = $(thisElement).parent().find(".spot-x").attr("value");
 	var lngy = $(thisElement).parent().find(".spot-y").attr("value");
 
-	$(thisElement).setAttribute("checked", "checked");
 	console.log(latx + ":" + lngy);
 
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx);

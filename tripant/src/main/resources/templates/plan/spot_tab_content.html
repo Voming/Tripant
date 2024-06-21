@@ -12,9 +12,9 @@
 					<span class="spot-y" th:value="${spot.mapy}" style ="display:none"></span> 
 				</div>
 				<input type="checkbox" th:data-spotid="${spot.contentid}"
-					th:id="|spot-check-${spotStat.index}|"
+					th:id="|spotcheck${spot.contentid}${spotStat.index}|"
 					onclick="spotCkBtnClickHandler(this);"> 
-				<label th:for="|spot-check-${spotStat.index}|"></label>
+				<label th:for="|spotcheck${spot.contentid}${spotStat.index}|"></label>
 			</div>
 		</th:block>
 		<div class="resultSpotCheck">

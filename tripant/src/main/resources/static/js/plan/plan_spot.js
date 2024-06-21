@@ -44,7 +44,8 @@ $(document).ready(function() {
 
 		areacode = $(".plan-areacode").attr("value");
 		var placeTypeS = $(this).text();
-
+		
+		var spotId = "";
 		if (placeTypeS == '관광지') {
 			spottype = 1;
 		} else if (placeTypeS == '문화시설') {
@@ -54,6 +55,7 @@ $(document).ready(function() {
 		} else if (placeTypeS == '음식점') {
 			spottype = 4;
 		}
+		spotId = "#spot-tab0" + spottype + " .wrap-spotList" //필요한 탭 content만 값 넣기
 
 		$.ajax({
 			url: contextPath + "plan/spot"
@@ -62,11 +64,11 @@ $(document).ready(function() {
 			, data: {
 				areaCode: areacode,
 				spotType: spottype,
-				clickSpotNum : clickspotnum
+				clickSpotNum: clickspotnum
 			}
 			, error: ajaxErrorHandler
 		}).done(function(wrap_spot) {
-			$(".wrap-spotList").replaceWith(wrap_spot);
+			$(spotId).replaceWith(wrap_spot);
 
 			//결과값 null 체크
 			spotboxCount = $(".spot-box").length;
