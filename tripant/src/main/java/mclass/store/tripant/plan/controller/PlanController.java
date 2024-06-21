@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import jakarta.servlet.http.HttpSession;
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
+import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.plan.model.service.PlanService;
 
@@ -32,8 +33,16 @@ public class PlanController {
 	@GetMapping("")
 	public String make(@SessionAttribute(name = "areaCode") Integer areaCode,
 			@SessionAttribute(name = "planTitle") String planTitle) {
-		planService.selectAreaPoint(areaCode);
+
 		return "plan/make";
+	}
+
+	// 전체 글보기(공개 글)
+	@PostMapping("")
+	@ResponseBody
+	public AreaPointEntity point(@RequestParam("areaCode") Integer areaCode) {
+		AreaPointEntity point = planService.selectAreaPoint(areaCode);
+		return point;
 	}
 
 	// 지역&제목 모달에서 선택한 지역 정보 가져오기
@@ -55,7 +64,7 @@ public class PlanController {
 		return "redirect:/plan";
 	}
 
-	//-------------------------------------spot-------------------------------------------
+	// -------------------------------------spot-------------------------------------------
 
 	@PostMapping("/spot")
 	public String spot(Model model, @RequestParam("areaCode") Integer areaCode,
@@ -73,12 +82,12 @@ public class PlanController {
 			@RequestParam("areaCode") String areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
 		// 20개씩 더 출력하기
 		int maxNum = (clickSpotFindNum + 1) * 20;
-		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode, maxNum+"");
+		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode, maxNum + "");
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
 
-	//-------------------------------------stay-------------------------------------------
+	// -------------------------------------stay-------------------------------------------
 
 	@PostMapping("/stay")
 	public String stayMore(Model model, @RequestParam("areaCode") Integer areaCode,
@@ -96,13 +105,12 @@ public class PlanController {
 			@RequestParam("areaCode") String areaCode, @RequestParam("clickStayFindNum") Integer clickStayFindNum) {
 		// 20개씩 더 출력하기
 		int maxNum = (clickStayFindNum + 1) * 20;
-		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode, maxNum+"");
+		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode, maxNum + "");
 		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
 	}
 
-	
-	//---------------------------------numberFormatException-------------------------------------------
+	// ---------------------------------numberFormatException-------------------------------------------
 	@ExceptionHandler
 	public String numberFormatExceptionHandler(NumberFormatException e) {
 		e.printStackTrace();
