@@ -21,6 +21,11 @@ public class MemberService {
 		return memberRepository.login(memEmail);
 	}
 	
+	// 토큰 값 가져오기
+	public Map<String, Object> tokenValue(String memEmail){
+		return memberRepository.tokenValue(memEmail);
+	}
+	
 	// 로그인 기록
 	public int log(Map<String, Object> map) {
 		return memberRepository.log(map);

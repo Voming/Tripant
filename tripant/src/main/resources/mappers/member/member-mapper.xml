@@ -6,10 +6,30 @@
 	<select id="login" parameterType="string" resultType="MemberEntity">
 		select mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_birth from member where mem_email = #{memEmail}
 	</select>
+	<!-- SNS 토큰 -->
+	<update id="updateToken" parameterType="map">
+		update member set
+		<choose>
+			<when test="#{kakaoToken} != null">
+			 mem_token_kakao = #{kakaoToken} 
+			</when>
+			<when test="#{naverToken} != null">
+			 mem_token_naver = #{naverToken} 
+			</when>
+			<when test="#{googleToken} != null">
+			 mem_token_google = #{googleToken} 
+			</when>
+		</choose>
+			 where mem_email = #{memEmail}
+	</update>
 	<!-- SNS 유형 갱신 -->
 	<update id="updateType" parameterType="map">
 		update member set mem_type = #{memType} where mem_email = #{memEmail}
 	</update>
+	<!-- 토큰 값 불러오기 -->
+	<select id="tokenValue" parameterType="string" resultType="map">
+		select mem_token_kakao, mem_token_naver, mem_token_google from member where mem_email = #{memEmail}
+	</select>
 	<!-- 로그인 기록 -->
 	<insert id="log" parameterType="map">
 		insert into log values(default, #{logIp}, #{memEmail}, #{logTf})

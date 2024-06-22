@@ -20,13 +20,34 @@
 			</div>
 			<div class="ch nick"><button type="button" class="btn chNick">닉네임 변경</button></div>
 			<div class="ch pwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
-			
-			<div class="unlink kakao flex" th:if="${isKakao} == 4"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"><a th:href="@{/my/quit}">연동 해제</a></div>
-			<div class="unlink naver flex" th:if="${isNaver} == 2"><img th:src="@{/images/member/login_naver.png}" style="width: 34px; height: 34px;"><a th:href="@{/my/quit}">연동 해제</a></div>
-			<div class="unlink google flex" th:if="${isGoogle} == 1"><img th:src="@{/images/member/login_google.png}" style="width: 34px; height: 34px; background-color: white;"><a th:href="@{/my/quit}">연동 해제</a></div>
-			<div class="quit"><a th:href="@{/my/quit}">회원 탈퇴</a></div>
+			<form id="frm-unlink-kakao">
+				<div class="unlink kakao flex" th:if="${isKakao} == 4"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"><button type="button" class="btn unlink-kakao">연동 해제</button></div>
+				<div class="unlink naver flex" th:if="${isNaver} == 2"><img th:src="@{/images/member/login_naver.png}" style="width: 34px; height: 34px;"><a th:href="@{/my/quit}">연동 해제</a></div>
+				<div class="unlink google flex" th:if="${isGoogle} == 1"><img th:src="@{/images/member/login_google.png}" style="width: 34px; height: 34px; background-color: white;"><a th:href="@{/my/quit}">연동 해제</a></div>
+				<div class="quit"><a th:href="@{/my/quit}">회원 탈퇴</a></div>
+			</form>
 		</div>
 	</div>
 	<footer class="footer" th:insert="~{common/footer :: wrap-footer}"></footer>
+	<script>
+		function unlinkKakaoHandler(){
+			$.ajax({
+				url: contextPath + "my/unlink/kakao", 
+				type: "post",
+				error: ajaxErrorHandler, 
+				success: function(data){
+					if(data > 0){
+						alert("성공");
+						let form = document.getElementById('frm-unlink-kakao');
+						form.action = contextPath + 'logout';
+						form.method = 'POST';
+						form.submit();
+					}else{
+						alert("실패");
+					}
+				}
+			});
+		}
+	</script>
 </body>
 </html>

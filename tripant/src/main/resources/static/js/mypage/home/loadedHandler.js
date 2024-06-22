@@ -16,4 +16,7 @@ function loadedHandler(){
 	$('.btn.chPwd').on('click', function(){
 		location.href = '/my/pwd';
 	});
+	
+	// 카카오 연동 해제
+	$(".btn.unlink-kakao").on("click", unlinkKakaoHandler);
 }
