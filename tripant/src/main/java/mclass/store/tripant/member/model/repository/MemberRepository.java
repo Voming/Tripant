@@ -12,6 +12,12 @@ public interface MemberRepository {
 	// 로그인
 	public MemberEntity login(String memEmail);
 	
+	// SNS 토큰
+	public int updateToken(Map<String, Object> map);
+	
+	// 토큰 값 가져오기
+	public Map<String, Object> tokenValue(String memEmail);
+	
 	// SNS 유형 갱신
 	public int updateType(Map<String, Object> map);
 	

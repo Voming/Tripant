@@ -1,16 +1,26 @@
 package mclass.store.tripant.member.controller;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.member.model.service.MemberService;
@@ -22,6 +32,10 @@ public class MypageController {
 
 	private final MemberService memberService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final Gson gson;
+	
+	@Value("${kakao.javascript.key}")
+	private String kakaoKey;
 
 	// 마이페이지
 	@GetMapping("/home")
@@ -31,8 +45,8 @@ public class MypageController {
 		model.addAttribute("memEmail", map.get("MEM_EMAIL"));
 		model.addAttribute("memNick", map.get("MEM_NICK"));
 		
-		String memTypeStr = (String) map.get("MEM_TYPE");
-		int memType = Integer.parseInt(memTypeStr, 2);
+		BigDecimal memTypeDec = (BigDecimal) map.get("MEM_TYPE");
+		int memType = Integer.parseInt(String.valueOf(memTypeDec), 2);
 		
 		int isKakao = memType & Integer.parseInt("0100", 2);
 		int isNaver = memType & Integer.parseInt("0010", 2);
@@ -43,6 +57,26 @@ public class MypageController {
 		model.addAttribute("isGoogle", isGoogle);
 		
 		return "mypage/home";
+	}
+	
+	// 카카오 연동 해제
+	@PostMapping("/unlink/kakao")
+	@ResponseBody
+	public int unlinkKakao(Principal principal) throws IOException, InterruptedException {
+		int result;
+		String memEmail = principal.getName();
+		Map<String, Object> map = memberService.tokenValue(memEmail);
+		
+		HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://kauth.kakao.com/oauth/authorize"))
+			    .header("Content-Type", "application/json")
+			    .header("Authorization", "Bearer " + map.get("MEM_TOKEN_KAKAO"))
+			    .method("POST", HttpRequest.BodyPublishers.ofString("{}"))
+			    .build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+		System.out.println(response.body());
+		
+		return result = 1;
 	}
 
 	// 닉네임 변경 페이지

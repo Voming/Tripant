@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.member.domain.CustomOAuth2User;
@@ -32,7 +33,6 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 	
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-		log.debug("[sjw] loadUser===========");
 		OAuth2User oAuth2User = super.loadUser(userRequest);
 		String email = "";
 		Map<String, Object> map = new HashMap<>();
@@ -45,6 +45,12 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			// 카카오 이메일
 			Map<String, Object> kakaoAttributes = oAuth2User.getAttribute("kakao_account");
 			email = (String) kakaoAttributes.get("email");
+			
+			// 카카오 토큰 업데이트
+			Map<String, Object> updateToken = new HashMap<>();
+			updateToken.put("memEmail", email);
+			updateToken.put("kakaoToken", userRequest.getAccessToken().getTokenValue());
+			memberRepository.updateToken(updateToken);
 			
 			// 로그인 정보
 			MemberEntity memberEntity = memberRepository.login(email);
@@ -83,6 +89,12 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			Map<String, Object> kakaoAttributes = oAuth2User.getAttribute("response");
 			email = (String) kakaoAttributes.get("email");
 			
+			// 네이버 토큰 업데이트
+			Map<String, Object> updateToken = new HashMap<>();
+			updateToken.put("memEmail", email);
+			updateToken.put("naverToken", userRequest.getAccessToken().getTokenValue());
+			memberRepository.updateToken(updateToken);
+			
 			// 로그인 정보
 			MemberEntity memberEntity = memberRepository.login(email);
 			
@@ -118,6 +130,12 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			
 			// 구글 이메일
 			email = (String) oAuth2User.getAttributes().get("email");
+			
+			// 구글 토큰 업데이트
+			Map<String, Object> updateToken = new HashMap<>();
+			updateToken.put("memEmail", email);
+			updateToken.put("googleToken", userRequest.getAccessToken().getTokenValue());
+			memberRepository.updateToken(updateToken);
 			
 			// 로그인 정보
 			MemberEntity memberEntity = memberRepository.login(email);
