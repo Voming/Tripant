@@ -23,7 +23,8 @@ function setEvent(){
 	staytimeHandler();
 
 	//map 화면 출력
-	mapDisplay();
+	displayMap();
+	//setBounds();
 	
 	//일차별 동그라미 색 변경
 	circleColorHandler();

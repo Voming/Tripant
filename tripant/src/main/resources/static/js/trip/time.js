@@ -26,7 +26,7 @@ function staytimeHandler(){``
 		//앞의 시간 11:00 을 :을 기준으로 시와 분으로 담기
 		let[hours,minutes] = time.split(':').map(number);
 		// 분단위로 바꿔서 도착시간과 머무는 시간 합하기
-		let totalMinutes = hours*60 +minutes*1 +Math.floor(stayTime/60);addTime
+		let totalMinutes = hours*60 +minutes*1 +Math.floor(stayTime/60);
 		// 도착시간 + 머무는시간 = 떠나는 시간 구하기
 		let finalHours = Math.floor(totalMinutes/60);
 		let finalMinutes = totalMinutes%60;

@@ -1,4 +1,4 @@
-function mapDisplay( areaCode ){
+function displayMap( areaCode ){
 areaCode = "1";
 let basedLatLng = [];
 basedLatLng[1] = {lat : 37.55298702, lng: 126.9725917  };
@@ -95,7 +95,8 @@ function setBounds() {
     // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
     map.setBounds(bounds);
 }
-
+//지도 범위 재설정 함수 실행
+setBounds();
 /* 지도 중심 이동하기*/
 //이동할 좌표 입력
 function panTo() {
