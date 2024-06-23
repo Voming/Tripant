@@ -2,6 +2,7 @@
 /* 글에 여백 주기 */
 .mydiary-wrap {
 	width: 960px;
+	height: 100%;/*더보기시 footer 밑으로 가게끔  */
 	margin: auto;
 	padding-top: 110px; /*사이드바랑 나란히  */
 	padding-bottom: 5%;
