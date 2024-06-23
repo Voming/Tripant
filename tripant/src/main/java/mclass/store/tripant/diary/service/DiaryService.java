@@ -1,7 +1,10 @@
 package mclass.store.tripant.diary.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,13 @@ public class DiaryService {
 	@Autowired
 	private DiaryRepository diaryRepository;
 
-	// 다이어리 리스트 가져오기
+	// 전체글 리스트 가져오기
     public List<DiaryBoardEntity> selectDiaryList(String areaname, int maxNum) {
         return diaryRepository.selectDiaryList(areaname, maxNum);
+    }
+    public List<DiaryBoardEntity> selectMyDiaryList(String diaryMemEmail, int maxNum) {
+    
+        return diaryRepository.selectMyDiaryList(diaryMemEmail, maxNum);
     }
 
     // 특정 ID의 다이어리 가져오기
@@ -45,9 +52,5 @@ public class DiaryService {
             return false;
         }
     }
-    // 글 더보기 클릭시
-    public List<DiaryBoardEntity> selectDiaryListMore(){
-    	return diaryRepository.selectDiaryListMore();
-    }
-	
+
 }

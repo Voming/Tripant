@@ -20,7 +20,9 @@
 					<th:block th:each="diary :  ${diaries}">
 						<div class="wrap-diary">
 							<div class="diary-img">
-								<img th:src="@{/images/diary/diary_empty_iamge_size_200x200.png}"alt="대표 이미지">
+								<img
+									th:src="@{/images/diary/diary_empty_iamge_size_200x200.png}"
+									alt="대표 이미지">
 							</div>
 							<div class="wrap-content">
 								<div class="diary-content">
@@ -43,12 +45,13 @@
 						</div>
 					</th:block>
 				</th:block>
-				
+
 
 			</div>
 
 			<div class="btn-more">
-				<button type="button" class="learn-more">더보기</button>
+				<button type="button" onclick="moreBtnClickHandler(this);"
+					class="learn-more">더보기</button>
 			</div>
 		</div>
 	</section>
@@ -57,5 +60,4 @@
 		<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 	</footer>
 </body>
-
 </html>

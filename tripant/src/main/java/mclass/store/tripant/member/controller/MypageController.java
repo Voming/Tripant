@@ -34,9 +34,6 @@ public class MypageController {
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	private final Gson gson;
 	
-	@Value("${kakao.javascript.key}")
-	private String kakaoKey;
-
 	// 마이페이지
 	@GetMapping("/home")
 	public String myHome(Model model, Principal principal) {

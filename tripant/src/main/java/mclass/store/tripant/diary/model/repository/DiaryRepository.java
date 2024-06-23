@@ -1,6 +1,7 @@
 package mclass.store.tripant.diary.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,9 +14,12 @@ import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 @Mapper
 public interface DiaryRepository {
 
-	// 일기 목록을 선택하는 메서드
+	// 전체글 목록
 	public List<DiaryBoardEntity> selectDiaryList(@Param("areaname") String areaname, @Param("maxNum") int maxNum);
-
+	// 나의글 목록
+	public List<DiaryBoardEntity> selectMyDiaryList(String diaryMemEmail, int maxNum);
+	
+	
 	// 여행기 글 등록
 	public void insertDiary(DiaryBoardEntity diary);
 
@@ -25,7 +29,8 @@ public interface DiaryRepository {
 	List<WritePlanTitleEntity> selectPlanById(String memberEmail);
     // 좋아요 카운트 증가 메서드
     void incrementLikes(Long diaryId);
-    // 글 더보기 클릭시 
-    public List<DiaryBoardEntity> selectDiaryListMore();
+
+
+   
 }
   
