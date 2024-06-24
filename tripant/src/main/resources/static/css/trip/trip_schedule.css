@@ -3,7 +3,7 @@
 .main-wrapper .schedule-wrapper{
 	flex-direction:column;
 	width: 30%;
-	padding : 0px 30px;
+	padding: 0 0 0 30px;
 }
 .main-wrapper .schedule-wrapper .plan-info{
 	flex-direction: column;
@@ -40,7 +40,7 @@
 }
 /*  scrollbar와 div무너짐 해결:flex의 상위 하위 너비지정*/
 .main-wrapper .edit-tourlist,
-.main-wrapper .tourlist{    flex-direction: row; overflow: scroll;}
+.main-wrapper .tourlist{    flex-direction: row; overflow: scroll; width:100%;}
 .main-wrapper .tourlist .column,
 .main-wrapper .edit-tourlist .column {flex-wrap: nowrap;}
 

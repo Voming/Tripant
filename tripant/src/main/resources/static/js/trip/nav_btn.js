@@ -8,7 +8,6 @@ function editHandler(){
 	
 	$(this).parents().find('.tourlist').addClass('hide');
 	$(this).parents().find('.edit-tourlist').removeClass('hide');
-	setBounds(); //지도 리로드
 }
 function cancelHandler(){
 	$(this).hide(); //취소 숨김
@@ -18,7 +17,6 @@ function cancelHandler(){
 	
 	$(this).parents().find('.tourlist').removeClass('hide');
 	$(this).parents().find('.edit-tourlist').addClass('hide');
-	setBounds(); //지도 리로드
 }
 function saveHandler(){
 	$(this).siblings('.cancel').hide(); //취소 숨김
@@ -28,26 +26,25 @@ function saveHandler(){
 	//일정 목록보여주기
 	$(this).parents().find('.tourlist').removeClass('hide');
 	$(this).parents().find('.edit-tourlist').addClass('hide');
-	setBounds(); //지도 리로드
 	//DB이동 ajax
 }
 function navHandler(){
 	//좌측 탭
 	$('.dayn a').click(function() {
-		$('.dayn > div').hide().filter(this.hash).fadeIn();
 		$('.dayn a').css("color", "black");
-		$('.dayn a').removeClass('active');
-		$(this).addClass('active');
-		
-		var cls_name = $(this).attr("class");
-		cls_name = cls_name.replace(' active', '');
-/*		if (cls_name == 'nav-1') {
-			$(".main-wrapper .tab-content").css("width", "25%");
-		} else {
-			$(".main-wrapper .tab-content").css("width", "40%");
-		}*/
-
+		//클릭한 버튼만 css 변경
 		$(this).css("color", "#4BC9E5");
+		
+		//전체일정일 때, 일일 버튼 클릭할 때에 따른 일정 display
+		hash = $(this).prop('hash');
+		if(hash == '#tab0'){
+			$('.column.flex').removeClass('hide');
+		}
+		else{
+			$('.column.flex').addClass('hide');
+			$(hash).removeClass('hide');
+		}
+
 		return false;
 	}).filter(':eq(0)').click();
 }
