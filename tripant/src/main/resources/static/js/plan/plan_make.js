@@ -11,7 +11,8 @@ class CalendarDate {
 }
 
 class spot {
-	constructor(title, mapx, mapy) {
+	constructor(id, title, mapx, mapy) {
+		this.id = id;
 		this.title = title;
 		this.mapx = mapx;
 		this.mapy = mapy;
