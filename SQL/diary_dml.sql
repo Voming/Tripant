@@ -94,4 +94,30 @@ join plan P on(D.diary_plan_id = P.plan_id)
 where P.plan_area_code ='1'
 ;
 
+-- 나의 글 더보기 4개씩 뿌리기
+
+select * from (
+    select t1.*, ROWNUM rn from (
+    SELECT 
+            DIARY_ID,
+            DIARY_MEM_EMAIL, 
+            MEM_NICK, 
+            DIARY_PLAN_ID, 
+            DIARY_TITLE, 
+            DIARY_CONTENT,
+            DIARY_DATE,
+            DIARY_OPEN, 
+            DIARY_VIEWS, 
+            DIARY_THEME,
+            PLAN_AREA_CODE
+        FROM 
+            VIEW_DIARY_MEMBER_PLAN D
+        WHERE 
+            DIARY_MEM_EMAIL = 'qothwls5@naver.com'
+        ORDER BY 
+            DIARY_DATE DESC
+    ) t1
+)
+where 8-4 < rn and rn <= 8;
+
 commit;

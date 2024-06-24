@@ -18,5 +18,9 @@ function loadedHandler(){
 	});
 	
 	// 카카오 연동 해제
-	$(".btn.unlink-kakao").on("click", unlinkKakaoHandler);
+	$(".button.unlink-kakao").on("click", unlinkKakaoHandler);
+	// 네이버 연동 해제
+	$(".button.unlink-naver").on("click", unlinkNaverHandler);
+	// 구글 연동 해제
+	// $(".button.unlink-google").on("click", unlinkGoogleHandler);
 }

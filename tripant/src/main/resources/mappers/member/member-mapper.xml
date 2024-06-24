@@ -10,17 +10,17 @@
 	<update id="updateToken" parameterType="map">
 		update member set
 		<choose>
-			<when test="#{kakaoToken} != null">
+			<when test="kakaoToken != null">
 			 mem_token_kakao = #{kakaoToken} 
 			</when>
-			<when test="#{naverToken} != null">
+			<when test="naverToken != null">
 			 mem_token_naver = #{naverToken} 
 			</when>
-			<when test="#{googleToken} != null">
+			<otherwise>
 			 mem_token_google = #{googleToken} 
-			</when>
+			</otherwise>
 		</choose>
-			 where mem_email = #{memEmail}
+		 where mem_email = #{memEmail}
 	</update>
 	<!-- SNS 유형 갱신 -->
 	<update id="updateType" parameterType="map">

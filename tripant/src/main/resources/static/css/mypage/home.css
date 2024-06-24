@@ -85,7 +85,13 @@
 	margin-bottom: 20px;
 }
 
-.wrap-main a {
+.wrap-main a, .wrap-main #frm-unlink .button {
 	color: #7e7e7e;
+	background-color: transparent;
 	font-size: var(--font5);
+	border: 0;
+	cursor: pointer;
+}
+.wrap-main .quit{
+	text-align: center;
 }
