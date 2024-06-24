@@ -6,7 +6,7 @@ function codeSendHandler(){
 		type: "post", 
 		async: false, 
 		data: {memEmail: memEmail}, 
-		success: async function(result){
+		success: function(result){
 			if(result === "1"){
 				Swal.fire({
 					title: "인증번호가 발송되었습니다.", 
