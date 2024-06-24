@@ -221,13 +221,8 @@ public class AdminController {
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
 		map.put("itemPrice", itemPrice);
-		if(itemDur != null && itemSale != null) {
-			map.put("itemDur", itemDur);
-			map.put("itemSale", itemDur);
-		}else {
-			map.put("itemDur", null);
-			map.put("itemSale", null);
-		}
+		map.put("itemDur", itemDur != null ? itemDur : null);
+		map.put("itemSale", itemSale != null ? itemSale : null);
 		
 		int result = adminservice.itemInsert(map);
 		
@@ -238,25 +233,7 @@ public class AdminController {
 	@PostMapping("/goods/info")
 	@ResponseBody
 	public Map<String, Object> goodsInfo(String itemCode) {
-		Map<String, Object> map = adminservice.itemInfo(itemCode);
-		
-		String itemName = (String) map.get("ITEM_NAME");
-		BigDecimal itemPrice = (BigDecimal) map.get("ITEM_PRICE");
-		BigDecimal itemDur = (BigDecimal) map.get("ITEM_DUR");
-		BigDecimal itemSale = (BigDecimal) map.get("ITEM_SALE");
-		
-		map.put("itemCode", itemCode);
-		map.put("itemName", itemName);
-		map.put("itemPrice", itemPrice);
-
-		if(itemDur != null) {
-			map.put("itemDur", itemDur);
-		}
-		if(itemSale != null) {
-			map.put("itemSale", itemSale);
-		}
-		
-		return map;
+		return adminservice.itemInfo(itemCode);
 	}
 	
 	// 상품수정
@@ -267,16 +244,8 @@ public class AdminController {
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
 		map.put("itemPrice", itemPrice);
-		if(itemDur != null) {
-			map.put("itemDur", itemDur);
-		}else {
-			map.put("itemDur", null);
-		}
-		if(itemSale != null) {
-			map.put("itemSale", itemDur);
-		}else {
-			map.put("itemSale", null);
-		}
+		map.put("itemDur", itemDur != null ? itemDur : null);
+		map.put("itemSale", itemSale != null ? itemSale : null);
 		
 		int result = adminservice.itemUpdate(map);
 		
