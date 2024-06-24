@@ -4,7 +4,7 @@
 	<!-- 스토어 -->
 	<!-- 테마 목록 -->
 	<select id="themeList" resultType="itemEntity" parameterType="string">
-		select item_code, item_name, to_char(item_price, '999,999') as item_price, item_sale from item 
+		select item_code, item_name, to_char(item_price, '999,999') as item_price, item_sale, item_color from item 
 		 where substr(item_code, 1, 1) = 'T' 
 		 <if test="#{memEmail} != null">
 		  and item_code not in (select item_code from cart where substr(item_code, 1, 1) = 'T' and mem_email = #{memEmail}) 
