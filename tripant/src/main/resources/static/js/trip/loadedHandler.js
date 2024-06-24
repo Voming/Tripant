@@ -20,7 +20,7 @@ function setEvent(){
 	displayInfo();
 
 	//장소별 머무는 시간 출력
-	staytimeHandler();
+	//staytimeHandler();
 
 	//map 화면 출력
 	displayMap();
