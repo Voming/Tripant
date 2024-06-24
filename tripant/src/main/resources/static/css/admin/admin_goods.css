@@ -60,22 +60,25 @@
 }
 
 .memberlist > li> .col >li:first-child{
-	width:16.6%;
+	width:14.28%;
 }
 .memberlist > li> .col >li:first-child+li{
-	width:16.6%;
+	width:14.28%;
 }
 .memberlist > li> .col >li:first-child+li+li{
-	width:16.6%;
+	width:14.28%;
 }
 .memberlist > li> .col >li:first-child+li+li+li{
-	width:16.6%;
+	width:14.28%;
 }
 .memberlist > li> .col >li:first-child+li+li+li+li{
-	width:16.6%;
+	width:14.28%;
 }
 .memberlist > li> .col >li:first-child+li+li+li+li+li{
-	width:16.6%;
+	width:14.28%;
+}
+.memberlist > li> .col >li:first-child+li+li+li+li+li+li{
+	width:14.28%;
 }
 
 /* 상품추가버튼 */
