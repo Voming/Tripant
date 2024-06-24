@@ -100,7 +100,7 @@ public class AdminController {
 	}
 	
 	//ajax
-	//게시글 검색(키워드 선택)
+	//게시글 검색(키워드 선택)  //TODO
 	@GetMapping("/keyword")
 	@ResponseBody
 	public List<AdminBoardEntity> keywordSearch(@RequestParam("type") String type ,
@@ -113,7 +113,7 @@ public class AdminController {
 	}
 	
 	//ajax
-	//좋아요 정렬
+	//좋아요 정렬   //TODO
 	@PostMapping("/like")
 	@ResponseBody
 	public void boardLike() {
