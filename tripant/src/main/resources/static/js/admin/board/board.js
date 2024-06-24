@@ -14,8 +14,9 @@ function ClickLikeHandler(){
 	$.ajax({
 		url:"/admin/like",
 		 method:"post",
-		 success : function(result) {
-			 LikeHandler(result)
+		 success : function(like) {
+			 console.log(like);
+			 $('#list').replaceWith(LikeHandler(like));
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"
@@ -30,16 +31,17 @@ function LikeHandler(like){
 		var memBoard = like[idx];
 		htmlVal+=`
 			<ul class="col list">
-			<li th:text="${memBoard.diaryId}"></li>
-			<li th:text="${memBoard.diaryTitle}"></li>
-			<li th:text="${memBoard.memNick}"></li>
-			<li th:text="${memBoard.diaryDate}"></li>
-			<li th:text="${memBoard.diaryViews}"></li>
-			<li th:text="${memBoard.likes}"></li>
-			<li></li>
-		</ul>
+				<li>${memBoard.diaryId}</li>
+				<li>${memBoard.diaryTitle}</li>
+				<li>${memBoard.memNick}</li>
+				<li>${memBoard.diaryDate}</li>
+				<li>${memBoard.diaryViews}</li>
+				<li>${memBoard.likes}</li>
+				<li></li>
+			</ul>
 			`;
 	}
+	return htmlVal;
 }
 
 //option 선택값  

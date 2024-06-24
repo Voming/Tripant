@@ -29,11 +29,11 @@ public interface AdminDao {
 	//전체게시글
 	public List<AdminBoardEntity> boardList();
 	
-	//게시글 검색(키워드 선택)
+	//게시글 검색(select)
 	public List<AdminBoardEntity> keywordsearch(String memNick, String title);
 	
 	//좋아요 많은 순으로 정렬
-	public String boardLike();
+	public List<AdminBoardEntity> boardLike();
 	
 	//신고게시글 관리
 	//신고게시글
@@ -65,9 +65,7 @@ public interface AdminDao {
 	public int  itemDelete(String itemCode);
 	//검색기능(아이템코드)
 	public List<AdminStoreEntity> itemsearch(String itemCode);
-	//총 페이지 수가 결정됨
-	//public int selectTotalPageCount(); 
-	//페이지 당 나오는 회원정보 수 뽑기
-	//public List<AdminMemEntity> selectPage();
 	
+	//페이징처리
+	public List<Map<String, Object>> page(Map<String, Object> map);
 }

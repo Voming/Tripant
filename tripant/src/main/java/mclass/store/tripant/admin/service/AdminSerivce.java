@@ -24,7 +24,6 @@ public class AdminSerivce {
 	
 	//등급변경
 	public Integer adminMemRole(Map<String, Object> map) {
-		
 		return admindao.adminMemRole(map);
 	}
 	
@@ -38,13 +37,13 @@ public class AdminSerivce {
 		return admindao.boardList();
 	}
 	
-	//게시글 검색(키워드 선택)
+	//게시글 검색(select)
 	public List<AdminBoardEntity> keywordsearch(String memNick, String title){
 		return admindao.keywordsearch(memNick,title);
 	}
 
 	//좋아요 정렬
-	public String boardLikes() {
+	public List<AdminBoardEntity> boardLikes() {
 		
 		return admindao.boardLike();
 	}
@@ -99,5 +98,26 @@ public class AdminSerivce {
 	//상품검색
 	public List<AdminStoreEntity> itemsearch(String itemCode){
 		return admindao.itemsearch(itemCode);
+	}
+	
+	//페이징처리
+	public List<Map<String,Object>> list(Map<String , Object> map){
+		int curPage=0;
+		int pageScale=0;
+		
+		if(map.isEmpty()) {
+			curPage=1;
+			pageScale=10;
+		}else {
+			curPage=Integer.parseInt(map.get("curPage").toString());
+			pageScale=Integer.parseInt(map.get("pageScale").toString());
+		}
+		int pageBegin=(curPage-1)*pageScale+1;
+		int pageEnd=pageBegin+pageScale-1;
+		
+		map.put("pageBegin", pageBegin);
+		map.put("pageEnd", pageEnd);
+	
+		return admindao.page(map);
 	}
 }

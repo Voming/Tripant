@@ -54,8 +54,8 @@
 						</ul>
 					</li>
 					<li>
-						<th:block th:each="memBoard:${memBoard}">
-						<ul class="col list">
+						<th:block  th:each="memBoard:${memBoard}">
+						<ul class="col list"  id="list"  >
 							<li th:text="${memBoard.diaryId}"></li>
 							<li th:text="${memBoard.diaryTitle}"></li>
 							<li th:text="${memBoard.memNick}"></li>
