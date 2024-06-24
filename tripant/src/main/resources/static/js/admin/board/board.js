@@ -15,8 +15,8 @@ function ClickLikeHandler(){
 		url:"/admin/like",
 		 method:"post",
 		 success : function(like) {
-			 console.log(like);
-			 $('#list').replaceWith(LikeHandler(like));
+			 console.log(LikeHandler(like));
+			 $('#list').html(LikeHandler(like));
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"
