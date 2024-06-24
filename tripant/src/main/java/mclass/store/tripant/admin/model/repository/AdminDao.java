@@ -46,6 +46,9 @@ public interface AdminDao {
 	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId);
+	
+	//신고수 정렬
+	public List<AdminBoardEntity> boardReport();
 
 	// 결제 취소 페이지
 	// 결제 목록

@@ -2,15 +2,17 @@
 $(loadedHandler);
 function loadedHandler(){
 	 //체크박스
-	$('input[name=check]').on('click',CheckSetHandler);
+	$('input[name=check]').on('click',checkSetHandler);
 	//초기화버튼
-	$('.btn-reset').on('click',ClickSetHandler);  
+	$('.btn-reset').on('click',cickSetHandler);  
 	//검색
 	$('.btn-search').on("click",searchHandler);
+	//신고수 정렬
+	$('.btn-reports').on("click",clickReportHandler);
 	
 }
 /* 체크표시가 되면 버튼 활성화 */
-function CheckSetHandler(){
+function checkSetHandler(){
 	$('input[name=check]').each(function(){
 		if($('input[name=check]').is(":checked")==true){
 			$('.btn-reset').prop('disabled',false).css('background-color','black').css('color','white').css('border','solid black 1px');
@@ -21,7 +23,7 @@ function CheckSetHandler(){
 }
 
 /* 초기화버튼 누르면 체크박스 체크된 게시글 신고수 0으로 */
-function ClickSetHandler(){
+function cickSetHandler(){
 	 //배열선언
 	var diaryId=new Array();
 	$('input[name=check]:checked').each(function(){ //체크된 체크박스의 data값 가져오기
@@ -79,3 +81,41 @@ function memListHandler(complainList){
 			`;
 	}
 } 
+
+
+
+//신고수 정렬
+function clickReportHandler(){
+	$.ajax({
+		url:"/admin/report",
+		 method:"post",
+		 success : function(report) {
+			 console.log(ReportHandler(report));
+			 $('#list').html(ReportHandler(report));
+				},
+	 error : function(request, status, error) {
+				alert("code: " + request.status + "\n"
+						+ "message: " + request.responseText + "\n"
+						+ "error: " + error);
+			}
+	});
+}
+
+function ReportHandler(report){
+	var htmlVal = '';
+	for (var idx in report){
+		var complainBoard = report[idx];
+		htmlVal+=`
+			<ul class="col list">
+			<li><input type="checkbox" class="check" name="check"></li>
+				<li>${complainBoard.diaryId}</li>
+				<li>${complainBoard.diaryTitle}</li>
+				<li>${complainBoard.memNick}</li>
+				<li>${complainBoard.diaryDate}</li>
+				<li>${complainBoard.reports}</li>
+				<li></li>
+			</ul>
+			`;
+	}
+	return htmlVal;
+}

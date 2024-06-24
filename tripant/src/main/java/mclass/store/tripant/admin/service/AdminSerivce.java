@@ -47,11 +47,11 @@ public class AdminSerivce {
 		
 		return admindao.boardLike();
 	}
-	//좋아요 정렬
-		public List<AdminBoardEntity> boardView() {
+	//조회수 정렬
+	public List<AdminBoardEntity> boardView() {
 			
-			return admindao.boardView();
-		}
+		return admindao.boardView();
+	}
 		
 	//신고게시글
 	public List<AdminBoardEntity> complainList(){
@@ -66,6 +66,11 @@ public class AdminSerivce {
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId) {
 		return admindao.complainReset(diaryId);
+	}
+	
+	//신고수 정렬
+	public List<AdminBoardEntity> boardReport(){
+		return admindao.boardReport();
 	}
 	
 	// 결제 취소 페이지

@@ -46,7 +46,7 @@
 							<li>신고수<button type="button" class="btn-reports">▼</button></li>
 						</ul>
 					</li>
-					<li>
+					<li id="list">
 						<th:block th:each="complainBoard:${complainBoard}">
 						<ul class="col list">
 							<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" th:data-reports="${complainBoard.reports}"></li>

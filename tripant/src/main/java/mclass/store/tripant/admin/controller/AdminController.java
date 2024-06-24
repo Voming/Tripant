@@ -121,7 +121,7 @@ public class AdminController {
 	}
 	
 	//ajax
-	//좋아요 정렬   
+	//조회수 정렬   
 	@PostMapping("/view")
 	@ResponseBody
 	public List<AdminBoardEntity> boardView() {
@@ -153,6 +153,12 @@ public class AdminController {
 		return boardList;
 	}
 	
+	//신고수 정렬
+	@PostMapping("/report")
+	@ResponseBody
+	public List<AdminBoardEntity> boardReport() {
+		return adminservice.boardReport();
+	}
 	// 결제 취소 페이지
 	@GetMapping("/cancel")
 	public ModelAndView cancel(ModelAndView mv) {
