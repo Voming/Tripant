@@ -1,7 +1,7 @@
 //체크박스 클릭
-function spotCkBtnClickHandler(thisElement) {
-	var latx = $(thisElement).parent().find(".spot-x").attr("value");
-	var lngy = $(thisElement).parent().find(".spot-y").attr("value");
+function stayCkBtnClickHandler(thisElement) {
+	var latx = $(thisElement).parent().find(".stay-x").attr("value");
+	var lngy = $(thisElement).parent().find(".stay-y").attr("value");
 
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx);
 	// 확대 크기 변경
@@ -12,17 +12,17 @@ function spotCkBtnClickHandler(thisElement) {
 	//마커가 담길 배열
 	var positions = [];
 	//체크된 리스트 반복 
-	$(".wrap-spotList").find('input:checked').each(function(index) {
-		var title = $(this).parent().find(".spot-name").attr("value");
-		var mapx = $(this).parent().find(".spot-x").attr("value");
-		var mapy = $(this).parent().find(".spot-y").attr("value");
-		calendarPlan.spotArr[index] = new spot(title, mapx, mapy);  //전체 일정 만들기 장소 정보 저장
+	$(".wrap-stayList").find('input:checked').each(function(index) {
+		var title = $(this).parent().find(".stay-name").attr("value");
+		var mapx = $(this).parent().find(".stay-x").attr("value");
+		var mapy = $(this).parent().find(".stay-y").attr("value");
+		//calendarPlan.spotArr[index] = new spot(title, mapx, mapy);  //TODO 전체 일정 만들기 정보 저장
 		positions.push({ latlng: new kakao.maps.LatLng(mapy, mapx) }); //마커 표시할 위치 저장
 	});
 	//console.log(calendarPlan);
 
 	// 마커 이미지의 이미지 주소입니다
-	var imageSrc = "/images/loacation/location5.png";
+	var imageSrc = "/images/loacation/location3.png";
 	for (var i = 0; i < positions.length; i++) {
 		// 마커 이미지의 이미지 크기 입니다
 		var imageSize = new kakao.maps.Size(24, 26);
