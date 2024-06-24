@@ -47,7 +47,12 @@ public class AdminSerivce {
 		
 		return admindao.boardLike();
 	}
-	
+	//좋아요 정렬
+		public List<AdminBoardEntity> boardView() {
+			
+			return admindao.boardView();
+		}
+		
 	//신고게시글
 	public List<AdminBoardEntity> complainList(){
 		return admindao.complainList();

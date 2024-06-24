@@ -35,6 +35,14 @@
     </select>
     
 	<!-- 조회수 순으로 정렬 -->
+	<select id="boardView" resultType="AdminBoardEntity">
+	select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
+	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
+	from DIARY a
+	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
+	join member on diary_mem_email=mem_email
+    order by diary_views desc nulls last
+	</select>
 	
 	<!--회원검색 -->
 	<select id="search" resultType="AdminMemEntity">

@@ -113,13 +113,21 @@ public class AdminController {
 	}
 	
 	//ajax
-	//좋아요 정렬   //TODO
+	//좋아요 정렬   
 	@PostMapping("/like")
 	@ResponseBody
 	public List<AdminBoardEntity> boardLike() {
 		return adminservice.boardLikes();
 	}
 	
+	//ajax
+	//좋아요 정렬   
+	@PostMapping("/view")
+	@ResponseBody
+	public List<AdminBoardEntity> boardView() {
+		return adminservice.boardView();
+	}
+		
 	
 	//신고게시글
 	@GetMapping("/complain")

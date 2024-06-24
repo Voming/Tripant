@@ -3,6 +3,8 @@ $(loadedHandler);
 function loadedHandler() {
 	//좋아요
 	$(".btn.like").on("click", ClickLikeHandler);
+	//조회수
+	$(".btn.view").on("click", ClickViewHandler);
 	//검색
 	$('.btn-search').on("click",searchHandler);
 	//옵션 선택 
@@ -44,6 +46,40 @@ function LikeHandler(like){
 	return htmlVal;
 }
 
+//조회수 정렬
+function ClickViewHandler(){
+	$.ajax({
+		url:"/admin/view",
+		 method:"post",
+		 success : function(view) {
+			 console.log(ViewHandler(view));
+			 $('#list').html(ViewHandler(view));
+				},
+	 error : function(request, status, error) {
+				alert("code: " + request.status + "\n"
+						+ "message: " + request.responseText + "\n"
+						+ "error: " + error);
+			}
+	});
+} 
+function ViewHandler(view){
+	var htmlVal = '';
+	for (var idx in view){
+		var memBoard = view[idx];
+		htmlVal+=`
+			<ul class="col list">
+				<li>${memBoard.diaryId}</li>
+				<li>${memBoard.diaryTitle}</li>
+				<li>${memBoard.memNick}</li>
+				<li>${memBoard.diaryDate}</li>
+				<li>${memBoard.diaryViews}</li>
+				<li>${memBoard.likes}</li>
+				<li></li>
+			</ul>
+			`;
+	}
+	return htmlVal;
+}
 //option 선택값  
 function pickHandler(){
 	//선택한 option text값 가져오기
