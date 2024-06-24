@@ -9,8 +9,9 @@ function searchHandler(){
 		url:"/admin/member/search",
 		 method:"post",
 		 data: {searchMem:searchMem},
-		 success : function(result) {
-			 memListHandler(result)
+		 success : function(searchList) {
+			 $('#list').html(memListHandler(searchList));
+			 
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"
@@ -36,4 +37,5 @@ function memListHandler(searchList){
 			</ul>
 			`;
 	}
+	return htmlVal;
 } 
