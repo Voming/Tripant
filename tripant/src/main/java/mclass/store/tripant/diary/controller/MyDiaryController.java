@@ -33,17 +33,17 @@ public class MyDiaryController {
 	private DiaryService diaryService;
 
     @GetMapping("/diary") // 특정 사용자가 작성한 모든 글 조회
-    public ModelAndView mydiary(ModelAndView mv,String diaryMemEmail) {
- //       List<DiaryBoardEntity> diaries = diaryService.selectMyDiaryList(userEmail, maxNum);
-    		mv.setViewName("diary/my/my_board");
+    public ModelAndView mydiary(ModelAndView mv, Principal principal) {
+    	mv.addObject("diaries", diaryService.selectMyDiaryList(principal.getName(), 4));
+    	mv.setViewName("diary/my/my_board");
         return mv;
     }
 
-	@PostMapping("/diary")// 특정 사용자가 작성한 모든 글 조회 더보기
-	public String mydiaryMore(Model model,String email,Integer clickNum) {
+	@PostMapping("/diary/more")// 특정 사용자가 작성한 모든 글 조회 더보기
+	public String mydiaryMore(Model model, Principal principal, Integer clickNum) {
 		int maxNum = (clickNum + 1) * 4;
-		model.addAttribute("diaries", diaryService.selectDiaryList(email, maxNum));
-		return "diary/my/my_board";
+		model.addAttribute("diaries", diaryService.selectMyDiaryList(principal.getName(), maxNum));
+		return "diary/my/board_more_fragment";
 	}
 	
 	

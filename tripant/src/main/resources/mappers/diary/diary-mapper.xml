@@ -18,27 +18,31 @@
 		ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
 		<!-- 나의 글리스트 목록 뿌리기 -->
-<select id="selectMyDiaryList" resultType="DiaryBoardEntity" parameterType="map">
-    SELECT 
-        DIARY_ID,
-        DIARY_MEM_EMAIL, 
-        MEM_NICK, 
-        DIARY_PLAN_ID, 
-        DIARY_TITLE, 
-        DIARY_CONTENT,
-        DIARY_DATE,
-        DIARY_OPEN, 
-        DIARY_VIEWS, 
-        DIARY_THEME,
-        PLAN_AREA_CODE
-    FROM 
-        VIEW_DIARY_MEMBER_PLAN D
-    WHERE 
-        DIARY_MEM_EMAIL = #{email}
-        AND ROWNUM <![CDATA[<=]]> #{maxNum}
-    ORDER BY 
-        DIARY_DATE DESC
-</select>
+	<select id="selectMyDiaryList" resultType="DiaryBoardEntity" parameterType="map">
+		select * from (
+		    select t1.*, ROWNUM rn from (
+		    SELECT 
+		            DIARY_ID,
+		            DIARY_MEM_EMAIL, 
+		            MEM_NICK, 
+		            DIARY_PLAN_ID, 
+		            DIARY_TITLE, 
+		            DIARY_CONTENT,
+		            DIARY_DATE,
+		            DIARY_OPEN, 
+		            DIARY_VIEWS, 
+		            DIARY_THEME,
+		            PLAN_AREA_CODE
+		        FROM 
+		            VIEW_DIARY_MEMBER_PLAN D
+		        WHERE 
+		            DIARY_MEM_EMAIL = #{email}
+		        ORDER BY 
+		            DIARY_DATE DESC
+		    ) t1
+		)
+		where #{maxNum}-4 <![CDATA[<]]> rn and rn <![CDATA[<=]]> #{maxNum}
+	</select>
         
 	
 	<!-- 글 작성 등록 시키기 -->
