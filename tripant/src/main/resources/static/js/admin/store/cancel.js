@@ -61,8 +61,8 @@ function searchHandler(){
 		url:"/admin/member/search",
 		method:"post",
 		data: {searchMem:searchMem},
-		success : function(result) {
-			 memListHandler(result)
+		success : function(searchList) {
+			 $('#list').html(memListHandler(searchList));
 				},
 	 	error : ajaxErrorHandler
 	});
@@ -73,15 +73,15 @@ function memListHandler(searchList){
 	for (var idx in searchList){
 		var map = searchList[idx];
 		htmlVal+=`
-				<ul class="col list" th:each="map : ${list}" th:data-id="${map.BUY_ID}" th:data-email="${map.MEM_EMAIL}">
-							<li th:text="${map.BUY_ID}"></li>
-							<li th:text="${map.MEM_NICK}"></li>
-							<li th:text="${map.MEM_EMAIL}"></li>
-							<li th:text="${map.ITEM_NAME}"></li>
-							<li th:text="${map.BUY_DATE}"></li>
+				<ul class="col list" th:each="map : ${list}">
+							<li>${map.BUY_ID}</li>
+							<li>${map.MEM_NICK}</li>
+							<li>${map.MEM_EMAIL}</li>
+							<li>${map.ITEM_NAME}</li>
+							<li>${map.BUY_DATE}</li>
 							<li>
 								<button type="button" class="btn cancel">결제취소</button>
-								<input type="hidden" th:value="${map.ITEM_CODE}">
+								<input type="hidden" value="${map.ITEM_CODE}">
 							</li>
 						</ul>
 			`;

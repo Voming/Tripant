@@ -47,7 +47,7 @@
 							<li>취소 여부</li>
 						</ul>
 					</li>
-					<li>
+					<li id="list">
 						<ul class="col list" th:each="map : ${list}" th:data-id="${map.BUY_ID}" th:data-email="${map.MEM_EMAIL}">
 							<li th:text="${map.BUY_ID}"></li>
 							<li th:text="${map.MEM_NICK}"></li>

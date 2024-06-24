@@ -52,8 +52,8 @@ function searchHandler(){
 		url:"/admin/complain/search",
 		 method:"post",
 		 data: {searchBoard:searchBoard},
-		 success : function(result) {
-			 memListHandler(result)
+		 success : function(complainList) {
+			 $('#list').html( memListHandler(complainList));
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"
@@ -80,6 +80,7 @@ function memListHandler(complainList){
 			</ul>
 			`;
 	}
+	return htmlVal;
 } 
 
 
@@ -90,7 +91,6 @@ function clickReportHandler(){
 		url:"/admin/report",
 		 method:"post",
 		 success : function(report) {
-			 console.log(ReportHandler(report));
 			 $('#list').html(ReportHandler(report));
 				},
 	 error : function(request, status, error) {

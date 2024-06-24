@@ -17,7 +17,6 @@ function ClickLikeHandler(){
 		url:"/admin/like",
 		 method:"post",
 		 success : function(like) {
-			 console.log(LikeHandler(like));
 			 $('#list').html(LikeHandler(like));
 				},
 	 error : function(request, status, error) {
@@ -52,7 +51,6 @@ function ClickViewHandler(){
 		url:"/admin/view",
 		 method:"post",
 		 success : function(view) {
-			 console.log(ViewHandler(view));
 			 $('#list').html(ViewHandler(view));
 				},
 	 error : function(request, status, error) {
@@ -115,8 +113,8 @@ function searchHandler(){
 		url:"/admin/keyword",
 		 method:"post",
 		 data: {pick:pick, write:write},
-		 success : function(result) {
-			 memListHandler(result)
+		 success : function(searchList) {
+			  $('#list').html(memListHandler(searchList));
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"
@@ -133,14 +131,15 @@ function memListHandler(searchList){
 		var memBoard = searchList[idx];
 		htmlVal+=`
 			<ul class="col list">
-				<li th:text="${memBoard.diaryId}"></li>
-				<li th:text="${memBoard.diaryTitle}"></li>
-				<li th:text="${memBoard.memNick}"></li>
-				<li th:text="${memBoard.diaryDate}"></li>
-				<li th:text="${memBoard.diaryViews}"></li>
-				<li th:text="${memBoard.likes}"></li>
+				<li>${memBoard.diaryId}</li>
+				<li>${memBoard.diaryTitle}</li>
+				<li>${memBoard.memNick}</li>
+				<li>${memBoard.diaryDate}</li>
+				<li>${memBoard.diaryViews}</li>
+				<li>${memBoard.likes}</li>
 				<li></li>
 			</ul>
 			`;
 	}
+	return htmlVal;
 }
