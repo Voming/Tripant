@@ -4,6 +4,8 @@ function spotCkBtnClickHandler(thisElement) {
 	var latx = $(thisElement).parent().find(".spot-x").attr("value");
 	var lngy = $(thisElement).parent().find(".spot-y").attr("value");
 	var title = $(thisElement).parent().find(".spot-name").attr("value");
+	var img = $(thisElement).parent().find(".spot-img").attr("src");
+	var addr = $(thisElement).parent().find(".spot-address").attr("value");
 
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx);
 	// 확대 크기 변경
@@ -32,13 +34,56 @@ function spotCkBtnClickHandler(thisElement) {
 			}
 		});
 		//console.log(calendarPlan);
-	} else {
+	} else { //체크박스 선택
 		calendarPlan.spotArr[markers.length] = new spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
 		addMarker(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"));
+		var htmlVal = "";
+		htmlVal += `
+		<div>
+			<div class="selected-spot-box ">
+				<div class="wrap-box flex">
+					<div class="selected-spot-number">
+						<p>${markers.length}</p>
+					</div>
+	
+					<img class="selected-spot-img" src="${img}">
+					<div class="selected-spot-txt">
+						<span>${title}</span>
+						<span>${addr}</span>
+					</div>
+					<div>
+						<p class="time ${markers.length}" onclick="timeRangeBtnClickHandler(this);">2시간 0분</p>
+					</div>
+				</div>
+				<div class="timerange-modal flex" style="display:none;">
+					<p style="margin-left:30px; font-weight: bold;">머무는 시간 설정</p>
+					<input name="hours" type='number' value="2"></input>
+					<p>시간</p>
+					<input name="mins" type='number' value="0"></input>
+					<p>분</p>
+					<p class="timerange-done" onclick="timeDoneBtnClickHandler(this);">완료</p>
+				</div>
+			</div>
+		</div>`;
+		$(".selected-spot-list").append(htmlVal);
+	
 	}
 	// 마커 지도에 표시하기
 	setMarkers(map);
 }
+
+function timeRangeBtnClickHandler(thisElement){
+	$(thisElement).parents('.wrap-box').hide();
+	$(thisElement).parents('.wrap-box').next().show();
+}
+
+function timeDoneBtnClickHandler(thisElement){
+	$(thisElement).parents('.timerange-modal').prev().show();
+	$(thisElement).parents(".timerange-modal").hide();
+}
+
+
+
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position, title, id) {
