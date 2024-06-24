@@ -14,7 +14,7 @@
 	</select>
 	<!-- 폰트 목록 -->
 	<select id="fontList" resultType="itemEntity">
-		select item_code, item_name, to_char(item_price, '999,999') as item_price, item_sale from item where substr(item_code, 1, 1) = 'F' order by item_code 
+		select item_code, item_name, to_char(item_price, '999,999') as item_price, item_sale, to_char(item_price*(1-0.01*item_sale), '999,999') as sale_price from item where substr(item_code, 1, 1) = 'F' order by item_code 
 	</select>
 	<!-- 장바구니에 담기 -->
 	<delete id="fontDel" parameterType="string">

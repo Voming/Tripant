@@ -8,5 +8,7 @@ public class ItemEntity {
 	private String itemName;
 	private String itemPrice;
 	private Integer itemDur;
+	private Integer itemSale;
 	private String itemColor;
+	private String salePrice;
 }
