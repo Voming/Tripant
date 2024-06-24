@@ -31,21 +31,6 @@ $(document).ready(function() {
 			alert("내용을 입력해주세요.");
 			return;
 		}
-		// 서버로 데이터 전송 (spring MVC 예시)
-		
-		/*{
-				diaryPlanId: diaryPlanId,
-				diaryDiaryId: diaryId,
-				diaryTitle: diaryTitle,
-				diaryDate: diaryDate,
-				diaryTheme: diaryTheme,
-				diaryOpen: diaryOpen,
-				diaryContent: diaryContent
-		}*/
-		//$('#diaryForm').serialize() == query string ==> diaryPlanId=3&diaryDiaryId=202&,,,,
-		
-		//$("textarea[name=diaryContent]").val(diaryContent);// CKEditor 에서 내용 가져오기
-		//var formData = new FormData($("#diaryForm")[0]);
 		
 		var url = "/my/post";
 		$.ajax({
@@ -65,7 +50,7 @@ $(document).ready(function() {
 				//서버로 부터 응답을 받았을 때 처리 (예: 성공 메시지 출력 등)
 				console.log("글 등록 성공:", response);
 				alert("글이 성공적으로 등록되었습니다.");
-				//필요한 후속 작업 추가
+				
 			},
 			error: function(xhr, status, error) {
 				//오류 발생 시 처리

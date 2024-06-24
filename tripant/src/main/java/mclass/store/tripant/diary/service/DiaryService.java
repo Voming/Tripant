@@ -52,7 +52,13 @@ public class DiaryService {
             return false;
         }
     }
-
-
+    // 최신순 정렬
+    public List<DiaryBoardEntity> getLatestDiaries() {
+        return diaryRepository.selectLatest();
+    }
+    //좋아요순 정렬
+    public List<DiaryBoardEntity> getPopularDiaries() {
+        return diaryRepository.selectPopular();
+    }
 
 }

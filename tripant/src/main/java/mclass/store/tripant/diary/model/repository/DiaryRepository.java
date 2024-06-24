@@ -29,6 +29,10 @@ public interface DiaryRepository {
     // 좋아요 카운트 증가 메서드
     void incrementLikes(Long diaryId);
     
+    //최신순 정렬
+    List<DiaryBoardEntity> selectLatest();
+    //인기순 정렬
+    List<DiaryBoardEntity> selectPopular();
 
 
 

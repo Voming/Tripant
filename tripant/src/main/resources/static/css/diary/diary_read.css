@@ -112,14 +112,11 @@
 	cursor: pointer;
 }
 .viewcount{
-	position: absolute;
-	left: 320px; /*view 글씨 하단 왼쪽으로 위치 조정  */
+	position: relative;
 	
 }
 .diary-Views{
-	left: 360px;
-    position: absolute;
-    top: 732px; /* 조회수 글씨옆 나란히 고정 */
+		position: relative;
 }
 .diary-date{
 	position: relative;

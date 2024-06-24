@@ -21,6 +21,7 @@ import mclass.store.tripant.place.domain.PlaceboxEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping(value = "/diary")
@@ -53,23 +54,26 @@ public class DiaryController {
 		return "diary/diary_read";
 	}
 
-	// 좋아요 기능
-	@PostMapping("/like/{diaryId}")
-	@ResponseBody
-	public Map<String, Object> likeDiary(@PathVariable Long diaryId) {
-		boolean success = diaryService.incrementLikes(diaryId);
-		Map<String, Object> response = new HashMap<>();
-		response.put("success", success);
-		return response;
+	/*
+	 * // 좋아요 기능
+	 * 
+	 * @PostMapping("/like/{Id}")
+	 * 
+	 * @ResponseBody public Map<String, Object> likeDiary(@PathVariable Long Id) {
+	 * boolean success = diaryService.incrementLikes(Id); Map<String, Object>
+	 * response = new HashMap<>(); response.put("success", success); return
+	 * response; }
+	 */
+	// 최신순 정렬
+	@GetMapping("/latest")
+	public List<DiaryBoardEntity> getLatestDiaries() {
+		return diaryService.getLatestDiaries();
 	}
 
-	// 더보기
-	@PostMapping("/list/more")
-	public String listMore(Model model) {
-		// 클릭시 8개씩 뿌리기
-		int size = 8;
-		
-		return "diary/diary_board";
+	// 좋아요순 정렬
+	@GetMapping("/popular")
+	public List<DiaryBoardEntity> getPopularDiaries() {
+		return diaryService.getPopularDiaries();
 	}
 
 }

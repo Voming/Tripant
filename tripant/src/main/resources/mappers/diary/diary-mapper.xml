@@ -86,16 +86,17 @@
 		SELECT * FROM diary
 		WHERE DIARY_OPEN = '1'
 	</select>
-	<!--지역코드  -->
-	<select id="selectAreaCode"  parameterType="string" resultType="DiaryBoardEntity">
-		select d.diary_id,
-		d.diary_title, d.diary_content, d.diary_date,
-		d.diary_mem_email,
-		d.diary_views from diary D
-		join plan P on D.diary_plan_id = P.plan_id
-		where P.plan_area_code = #{planAreaCode}
-
+	<!--최신순  -->
+	<select id="selectLatest" resultType="DiaryBoardEntity">
+	SELECT * FROM diary
+	order by diary_date DESC
 	</select>
+	
+	<!-- 인기순 -->
+    <select id="selectPopular" resultType="DiaryBoardEntity">
+        SELECT * FROM diary ORDER BY diary_views DESC
+    </select>
+	
 	
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="string">
@@ -114,9 +115,5 @@
 		#{diaryTheme}
 		WHERE DIARY_ID = #{diaryId}
 	</update>
-	<update id="incrementLikes" parameterType="DiaryPostEntity">
-		UPDATE diary_board SET diary_likes = diary_likes + 1
-		WHERE diary_id =
-		#{diaryId}
-	</update>
+	
 </mapper>

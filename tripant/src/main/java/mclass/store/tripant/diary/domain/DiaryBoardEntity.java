@@ -1,8 +1,5 @@
 package mclass.store.tripant.diary.domain;
 
-import java.sql.Date;
-
-
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -24,7 +21,7 @@ public class DiaryBoardEntity {
 	private Integer diaryPlanId;
 	private String diaryTitle;
 	private String diaryContent;
-	private String diaryDate; // java.sql.Date 타입으로 변경
+	private String diaryDate; 
 	private String diaryOpen;
 	private Integer diaryViews;
 	private String diaryTheme;
