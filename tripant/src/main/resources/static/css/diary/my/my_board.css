@@ -1,13 +1,14 @@
 @charset "UTF-8";
 /* 글에 여백 주기 */
-.mydiary-mian-wrap{
+.mydiary-mian-wrap {
 	width: 960px;
-	height: 100%;/*더보기시 footer 밑으로 가게끔  */
+	height: 100%; /*더보기시 footer 밑으로 가게끔  */
 	margin: auto;
 	padding-top: 110px; /*사이드바랑 나란히  */
 	padding-bottom: 5%;
 	font-family: 'Binggrae';
 }
+
 .mydiary-wrap {
 	/* width: 960px;
 	height: 100%;더보기시 footer 밑으로 가게끔 
@@ -15,6 +16,7 @@
 	padding-top: 110px; 사이드바랑 나란히 
 	padding-bottom: 5%;
 	font-family: 'Binggrae'; */
+	
 }
 /* 나의 글 리스트 배열 글 밑으로 가게 */
 .board-list {
@@ -22,7 +24,6 @@
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	align-items: center;
-	 
 }
 /* 버튼 가운데 정렬 */
 .btn-more {
@@ -43,6 +44,7 @@
 	text-align: center;
 	padding-top: 7px;
 }
+
 .btn-more button:hover {
 	background: var(--color_light_gray);
 	color: black;
@@ -53,29 +55,35 @@
 	margin-top: 10px;
 	font-size: var(--font6);
 }
-.diary-title{
-		margin-top: 10px;
-		font-size: var(--font5);
-		height: 20px;
+
+.diary-title {
+	margin-top: 10px;
+	font-size: var(--font5);
+	height: 20px;
 }
 /* 여행일지 밑 간격 띄우기 */
-.wrap-diary{
+.wrap-diary {
 	padding-bottom: 20px;
-	    width: 200px;/* 넚이 주기 */
+	width: 200px; /* 넚이 주기 */
 }
 /* 공개/비공개 글씨크기 */
-.diary-open{
+.diary-open {
 	font-size: var(--font6);
 }
-.diary-title > a {
-text-overflow: ellipsis;
-    word-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;}
-    
-.board-list > .board_more{
-     display: flex;
-    flex-direction: row;
-    justify-content: space-between;}
+
+.diary-title>a {
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.board-list>.board_more {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 960px;/* 양옆 간격 유지 */
+	padding-bottom: 30px;/* 아래 간격 유지  */
+}
