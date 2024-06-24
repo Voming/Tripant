@@ -31,3 +31,23 @@ function saveHandler(){
 	setBounds(); //지도 리로드
 	//DB이동 ajax
 }
+function navHandler(){
+	//좌측 탭
+	$('.dayn a').click(function() {
+		$('.dayn > div').hide().filter(this.hash).fadeIn();
+		$('.dayn a').css("color", "black");
+		$('.dayn a').removeClass('active');
+		$(this).addClass('active');
+		
+		var cls_name = $(this).attr("class");
+		cls_name = cls_name.replace(' active', '');
+/*		if (cls_name == 'nav-1') {
+			$(".main-wrapper .tab-content").css("width", "25%");
+		} else {
+			$(".main-wrapper .tab-content").css("width", "40%");
+		}*/
+
+		$(this).css("color", "#4BC9E5");
+		return false;
+	}).filter(':eq(0)').click();
+}
