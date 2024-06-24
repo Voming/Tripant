@@ -1,10 +1,11 @@
 //인증코드 발송 및 입력창 표시
 function codeSendHandler(){
 	var memEmail = $("#memEmail").val();
+	
 	$.ajax({
 		url: contextPath+'code/send', 
-		type: 'post', 
-		async: false, 
+		type: 'post' ,
+	 async: false, 
 		data: {memEmail: memEmail}, 
 		success: async function(result){
 			if(result === "1"){
