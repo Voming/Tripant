@@ -84,15 +84,15 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			Map<String, Object> newMap = new HashMap<>();
 			
 			// 네이버 이메일
-			Map<String, Object> kakaoAttributes = oAuth2User.getAttribute("response");
-			email = (String) kakaoAttributes.get("email");
+			Map<String, Object> naverAttributes = oAuth2User.getAttribute("response");
+			email = (String) naverAttributes.get("email");
 			
 			// 네이버 토큰 업데이트
 			Map<String, Object> updateToken = new HashMap<>();
 			updateToken.put("memEmail", email);
 			updateToken.put("naverToken", userRequest.getAccessToken().getTokenValue());
-			System.out.println("토큰 >>>>>>>>>> "+userRequest.getAccessToken().getTokenValue());
 			memberRepository.updateToken(updateToken);
+			System.out.println("네이버 토큰 >>>>>>>>>>>>> "+userRequest.getAdditionalParameters());
 			
 			// 로그인 정보
 			MemberEntity memberEntity = memberRepository.login(email);
