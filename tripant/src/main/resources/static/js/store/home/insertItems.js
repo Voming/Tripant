@@ -18,7 +18,7 @@ function insertItemsHandler(){
 					confirmButtonText: "이동하기", 
 					confirmButtonColor: "#000000", 
 					cancelButtonText: "돌아가기", 
-					cancelButtonColor: "#000000"
+					cancelButtonColor: "#ff0000"
 				}).then((swal) => {
 					if(swal.isConfirmed){
 						location.href = contextPath + "store/cart";

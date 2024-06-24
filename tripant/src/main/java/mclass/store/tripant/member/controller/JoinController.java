@@ -64,7 +64,7 @@ public class JoinController {
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
-		memberEntity.setMemType("1000");
+		memberEntity.setMemType(4);
 		log.debug("[sjw] mem = "+memberEntity);
 		
 		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
@@ -87,7 +87,7 @@ public class JoinController {
 	public int joinSnsP(MemberEntity memberEntity, String recaptcha, HttpSession session) {
 		
 		String memEmail = (String) session.getAttribute("memEmail");
-		String memType = (String) session.getAttribute("memType");
+		int memType = (int) session.getAttribute("memType");
 		memberEntity.setMemEmail(memEmail);
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);

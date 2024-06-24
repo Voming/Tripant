@@ -26,6 +26,11 @@ public class MemberService {
 		return memberRepository.tokenValue(memEmail);
 	}
 	
+	// SNS 유형 갱신
+	public int updateType(Map<String, Object> map) {
+		return memberRepository.updateType(map);
+	}
+	
 	// 로그인 기록
 	public int log(Map<String, Object> map) {
 		return memberRepository.log(map);

@@ -14,10 +14,10 @@ function payCancelHandler(){
 		title: "해당 주문번호의 모든 건이 취소됩니다.\n진행하시겠습니까?", 
 		icon: "warning", 
 		showCancelButton: true, 
-		confirmButtonText: "결제 취소", 
-		confirmButtonColor: "#ff0000", 
+		confirmButtonText: "결제취소", 
+		confirmButtonColor: "#000000", 
 		cancelButtonText: "돌아가기", 
-		cancelButtonColor: "#000000"
+		cancelButtonColor: "#ff0000"
 	}).then((swal) => {
 		if(swal.isConfirmed){
 			$.ajax({

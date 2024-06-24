@@ -10,9 +10,9 @@ function quitClickHandler(){
 		icon: "question", 
 		showCancelButton: true, 
 		confirmButtonText: "탈퇴하기", 
-		confirmButtonColor: "#ff0000", 
+		confirmButtonColor: "#000000", 
 		cancelButtonText: "돌아가기", 
-		cancelButtonColor: "#000000"
+		cancelButtonColor: "#ff0000"
 	}).then((swal) => {
 		if(swal.isConfirmed){
 			$.ajax({

@@ -23,7 +23,7 @@ public class MemberEntity implements UserDetails, OAuth2User {
 	private String memPassword;
 	private String memRole;
 	private Integer memEnabled;
-	private String memType;
+	private Integer memType;
 	private String memJoinDate;
 	private String memBirth;
 	private Map<String, Object> attributes;

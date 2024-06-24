@@ -57,22 +57,20 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			
 			// 이미 가입된 경우
 			if(memberEntity != null) {
-				String memTypeStr = memberEntity.getMemType();
 				// sns 유형
-				int memType = Integer.parseInt(memTypeStr, 2);
+				int memType = memberEntity.getMemType();
 				
 				// 카카오 유형
 				String kakaoStr = "0100";
 				
 				// 카카오 가입 여부
-				int isKakao = Integer.parseInt(memTypeStr, 2) & Integer.parseInt(kakaoStr, 2);
+				int isKakao = memType & Integer.parseInt(kakaoStr, 2);
 				if(isKakao != 4) {
 					memType += 4;
 				}
 				
-				String newMemType = Integer.toBinaryString(memType);
 				newMap.put("memEmail", email);
-				newMap.put("memType", newMemType);
+				newMap.put("memType", memType);
 				
 				// SNS 유형 갱신
 				memberRepository.updateType(newMap);
@@ -93,6 +91,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			Map<String, Object> updateToken = new HashMap<>();
 			updateToken.put("memEmail", email);
 			updateToken.put("naverToken", userRequest.getAccessToken().getTokenValue());
+			System.out.println("토큰 >>>>>>>>>> "+userRequest.getAccessToken().getTokenValue());
 			memberRepository.updateToken(updateToken);
 			
 			// 로그인 정보
@@ -100,22 +99,19 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			
 			// 이미 가입된 경우
 			if(memberEntity != null) {
-				String memTypeStr = memberEntity.getMemType();
-				// sns 유형
-				int memType = Integer.parseInt(memTypeStr, 2);
+				int memType = memberEntity.getMemType();
 				
 				// 네이버 유형
 				String naverStr = "0010";
 				
 				// 네이버 가입 여부
-				int isNaver = Integer.parseInt(memTypeStr, 2) & Integer.parseInt(naverStr, 2);
+				int isNaver = memType & Integer.parseInt(naverStr, 2);
 				if(isNaver != 2) {
 					memType += 2;
 				}
 				
-				String newMemType = Integer.toBinaryString(memType);
 				newMap.put("memEmail", email);
-				newMap.put("memType", newMemType);
+				newMap.put("memType", memType);
 				
 				// SNS 유형 갱신
 				memberRepository.updateType(newMap);
@@ -142,22 +138,20 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			
 			// 이미 가입된 경우
 			if(memberEntity != null) {
-				String memTypeStr = memberEntity.getMemType();
 				// sns 유형
-				int memType = Integer.parseInt(memTypeStr, 2);
+				int memType = memberEntity.getMemType();
 				
 				// 구글 유형
 				String googleStr = "0001";
 				
 				// 구글 가입 여부
-				int isGoogle = Integer.parseInt(memTypeStr, 2) & Integer.parseInt(googleStr, 2);
+				int isGoogle = memType & Integer.parseInt(googleStr, 2);
 				if(isGoogle != 1) {
 					memType += 1;
 				}
 				
-				String newMemType = Integer.toBinaryString(memType);
 				newMap.put("memEmail", email);
-				newMap.put("memType", newMemType);
+				newMap.put("memType", memType);
 				
 				// SNS 유형 갱신
 				memberRepository.updateType(newMap);
