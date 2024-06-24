@@ -1,5 +1,5 @@
 !function() {
-	  async function detectDevTool(allow) {
+	  function detectDevTool(allow) {
 	    if(isNaN(+allow)) allow = 100;
 	    var start = +new Date(); // Validation of built-in Object tamper prevention.
 	    debugger;
@@ -11,7 +11,7 @@
 					showConfirmButton: false, 
 					timer: 2000,
   					timerProgressBar: true
-				}).then(function(){
+				}).then(() => {
 			    	location.href = '/';
 				});
 	    }

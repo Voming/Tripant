@@ -163,16 +163,17 @@ async function itemUpdateHandler(){
 						iconColor: "#000000"
 					});
 				}, 
-				success: async function(data){
+				success: function(data){
 					if(data > 0){
-						const updateSuccess = await Swal.fire({
+						Swal.fire({
 							title: "상품 수정이 완료되었습니다.", 
 							icon: "success", 
 							iconColor: "#000000"
+						}).then((swal) => {
+							if(swal.isConfirmed){
+								location.reload();
+							}
 						});
-						if(updateSuccess.isConfirmed){
-							location.reload();
-						}
 					}else{
 						Swal.fire({
 							title: "알 수 없는 이유로 상품 수정이 완료되지 않았습니다.", 
@@ -245,15 +246,16 @@ async function itemInsertHandler(){
 				itemDur: formValues[3], 
 				itemSale: formValues[4], 
 			}, 
-			success: async function(data){
+			success: function(data){
 				if(data > 0){
-					const insertSuccess = await Swal.fire({
+					Swal.fire({
 						title: "상품 추가가 완료되었습니다.", 
 						icon: "success"
+					}).then((swal) => {
+						if(swal.isConfirmed){
+							location.reload();
+						}
 					});
-					if(insertSuccess.isConfirmed){
-						location.reload();
-					}
 				}else{
 					Swal.fire({
 						title: "알 수 없는 이유로 상품 추가가 완료되지 않았습니다.", 
@@ -289,11 +291,11 @@ function itemDeleteHandler(){
 		method:"post",
 		data: {itemCode:itemCode},
 		success : function(result) {
-			 	location.reload();
+			 		location.reload();
 				},
-	 	error : async function(request, status, error) {
+	 	error : function(request, status, error) {
 		 	if(request.responseText.indexOf('ORA-02292')){
-		 		const payCancelSuccess = await Swal.fire({
+		 		Swal.fire({
 					title: "장바구니 혹은 구매내역에 존재하는 상품은 삭제할 수 없습니다.\n운영팀에 문의해주시기 바랍니다.", 
 					icon: "error", 
 					confirmButtonColor: "#000000", 

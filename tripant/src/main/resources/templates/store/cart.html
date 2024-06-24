@@ -227,7 +227,7 @@
 				error : ajaxErrorHandler,
 				success : async function(data) {
 					if (data == 1) {
-						const paySuccess = await Swal.fire({
+						Swal.fire({
 							title: "결제가 완료되었습니다.\n구매내역으로 이동하시겠습니까?", 
 							icon: "success", 
 							showCancelButton: true, 
@@ -235,10 +235,11 @@
 							confirmButtonColor: "#000000", 
 							cancelButtonText: "돌아가기", 
 							cancelButtonColor: "#000000"
+						}).then((swal) => {
+							if(swal.isConfirmed){
+								location.href = contextPath + "store/buy";
+							}
 						});
-						if(paySuccess.isConfirmed){
-							location.href = contextPath + "store/buy";
-						}
 						return;
 					} else {
 						Swal.fire({
@@ -269,15 +270,16 @@
 			},
 			success : async function(result) {
 				if (result == 1) {
-					const cartDelSuccess = await Swal.fire({
+					Swal.fire({
 						title: "선택하신 상품이 삭제되었습니다.", 
 						icon: "success", 
 						confirmButtonText: "확인", 
 						confirmButtonColor: "#000000", 
+					}).then((swal) => {
+						if(swal.isConfirmed){
+							location.reload();
+						}
 					});
-					if(cartDelSuccess.isConfirmed){
-						location.reload();
-					}
 				} else {
 					Swal.fire({
 						title: "상품 삭제 중 오류가 발생했습니다.", 

@@ -23,20 +23,21 @@ function robotHandler() {
 		url: contextPath+'join',
 		type: 'post',
 		data: memberEntity,
-		success: async function(data) {
+		success: function(data) {
 			switch (data) {
 				case 1:
-					const joinSuccess = await Swal.fire({
+					Swal.fire({
 						title: "회원가입이 완료되었습니다.\n로그인 페이지로 이동합니다.", 
 						icon: "success", 
 						confirmButtonColor: "#000000", 
 						confirmButtonText: "확인"
+					}).then((swal) => {
+						console.log("자동 가입 방지 봇 통과");
+						captcha = 1;
+						if(swal.isConfirmed){
+							location.href = contextPath + "login";
+						}
 					});
-					console.log("자동 가입 방지 봇 통과");
-					captcha = 1;
-					if(joinSuccess.isConfirmed){
-						location.href = contextPath + "login";
-					}
 					break;
 				case 0:
 					Swal.fire({

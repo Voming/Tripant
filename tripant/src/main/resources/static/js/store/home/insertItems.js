@@ -9,9 +9,9 @@ function insertItemsHandler(){
 		url: contextPath+'store/insert', 
 		type: 'post', 
 		data: {items : items}, 
-		success: async function(result){
+		success: function(result){
 			if(result == 1){
-				const insertItemsSuccess = await Swal.fire({
+				Swal.fire({
 					title: "선택하신 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?", 
 					icon: "question", 
 					showCancelButton: true, 
@@ -19,12 +19,13 @@ function insertItemsHandler(){
 					confirmButtonColor: "#000000", 
 					cancelButtonText: "돌아가기", 
 					cancelButtonColor: "#000000"
+				}).then((swal) => {
+					if(swal.isConfirmed){
+						location.href = contextPath + "store/cart";
+					}else{
+						location.reload();					
+					}
 				});
-				if(insertItemsSuccess.isConfirmed){
-					location.href = contextPath + "store/cart";
-				}else{
-					location.reload();					
-				}
 			}else{
 				Swal.fire({
 					title: "장바구니에 상품을 담는 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
