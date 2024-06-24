@@ -7,18 +7,17 @@ function codeSendHandler() {
 		type: 'post',
 		async: false,
 		data: { memEmail: memEmail },
-		success: function(result) {
+		success: async function(result) {
 			if (result === "1") {
-				Swal.fire({
+				const a = await Swal.fire({
 					title: "인증번호가 발송되었습니다.",
 					icon: "success",
 					confirmButtonColor: "#000000",
 					confirmButtonText: "확인"
-				}).then((swal) => {
-					if (swal.isConfirmed) {
-						$(".inputbtn.check").removeClass('hide');
-					}
 				});
+				if (a.isConfirmed) {
+					$(".inputbtn.check").removeClass('hide');
+				}
 			} else if (result === "0") {
 				Swal.fire({
 					title: "인증번호 발송 중 오류가 발생했습니다.",
@@ -46,21 +45,20 @@ function codeCheckHandler() {
 		type: "post",
 		async: false,
 		data: { inputCode: inputCode },
-		success: function(result) {
+		success: async function(result) {
 			if (result == 1) {
-				Swal.fire({
+				const a = await Swal.fire({
 					title: "이메일 인증에 성공하였습니다.",
 					icon: "success",
 					confirmButtonColor: "#000000",
 					confirmButtonText: "확인"
-				}).then((swal) => {
-					if (swal.isConfirmed) {
-						$(".inputbtn.check").addClass('hide');
-						$(".btn.sendCode").addClass('hide');
-						$("#memEmail").attr("readonly", true);
-						joinActive();
-					}
 				});
+				if (a.isConfirmed) {
+					$(".inputbtn.check").addClass('hide');
+					$(".btn.sendCode").addClass('hide');
+					$("#memEmail").attr("readonly", true);
+					joinActive();
+				}
 			} else {
 				Swal.fire({
 					title: "인증번호가 일치하지 않습니다.",
