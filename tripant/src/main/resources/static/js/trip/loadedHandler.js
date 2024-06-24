@@ -29,7 +29,11 @@ function setEvent(){
 	//일차별 동그라미 색 변경
 	circleColorHandler();
 	
+	//좌측 탭 이벤트 설정
+	navHandler();
 
+	
+	
 
 	//드래그 앤 드랍
 	dragAndDrop();
