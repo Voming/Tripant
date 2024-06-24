@@ -22,9 +22,10 @@ public class DiaryService {
     public List<DiaryBoardEntity> selectDiaryList(String areaname, int maxNum) {
         return diaryRepository.selectDiaryList(areaname, maxNum);
     }
-    public List<DiaryBoardEntity> selectMyDiaryList(String diaryMemEmail, int maxNum) {
+    // mydiary 모든 내가 쓴 글()조회해서 가져오기
+    public List<DiaryBoardEntity> selectMyDiaryList(String email, int maxNum) {
     
-        return diaryRepository.selectMyDiaryList(diaryMemEmail, maxNum);
+        return diaryRepository.selectMyDiaryList(email, maxNum);
     }
 
     // 특정 ID의 다이어리 가져오기
@@ -52,5 +53,7 @@ public class DiaryService {
             return false;
         }
     }
+
+
 
 }

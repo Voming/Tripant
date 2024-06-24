@@ -34,7 +34,7 @@
     FROM 
         VIEW_DIARY_MEMBER_PLAN D
     WHERE 
-        DIARY_MEM_EMAIL = #{diaryMemEmail}
+        DIARY_MEM_EMAIL = #{email}
         AND ROWNUM <![CDATA[<=]]> #{maxNum}
     ORDER BY 
         DIARY_DATE DESC

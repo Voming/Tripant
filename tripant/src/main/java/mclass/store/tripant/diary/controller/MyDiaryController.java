@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,16 +32,21 @@ public class MyDiaryController {
 	@Autowired
 	private DiaryService diaryService;
 
-	@GetMapping("/diary") // 나의 여행기(비공개글) 목록 가져오기
-	public ModelAndView mydiary(ModelAndView mv) {
-	    String diaryMemEmail = "example@example.com"; // 사용자의 이메일
-	    int maxNum = 8; // 가져올 최대 다이어리 수
-	    List<DiaryBoardEntity> diaries = diaryService.selectMyDiaryList(diaryMemEmail, maxNum);
-	    mv.addObject("diaries", diaries);  
-	    mv.setViewName("diary/my/my_board");
-	    return mv;
-	}
+    @GetMapping("/diary") // 특정 사용자가 작성한 모든 글 조회
+    public ModelAndView mydiary(ModelAndView mv,String diaryMemEmail) {
+ //       List<DiaryBoardEntity> diaries = diaryService.selectMyDiaryList(userEmail, maxNum);
+    		mv.setViewName("diary/my/my_board");
+        return mv;
+    }
 
+	@PostMapping("/diary")// 특정 사용자가 작성한 모든 글 조회 더보기
+	public String mydiaryMore(Model model,String email,Integer clickNum) {
+		int maxNum = (clickNum + 1) * 4;
+		model.addAttribute("diaries", diaryService.selectDiaryList(email, maxNum));
+		return "diary/my/my_board";
+	}
+	
+	
 	@GetMapping("/post")
 	public ModelAndView showDiaryForm(Principal pricipal) {
 		ModelAndView mv = new ModelAndView();
