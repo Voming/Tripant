@@ -27,17 +27,24 @@ public interface DiaryRepository {
 	// 특정 ID의 다이어리 조회
 	DiaryBoardEntity findById(@Param("id") Long id);
 
-	
 	DiaryBoardEntity selectDiaryById(@Param("diaryId") int diaryId);
-
-	
-	void incrementDiaryViews(@Param("diaryId") int diaryId);
 
 	List<WritePlanTitleEntity> selectPlanById(String memberEmail);
 
 	// 좋아요 카운트 증가 메서드
-	void incrementLikes(Long diaryId);
+	void incrementDiaryViews(@Param("diaryId") int diaryId);
 
+	void insertDiaryLike(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
+
+	void deleteDiaryLike(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
+
+	int selectDiaryLike(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
+
+	
+	// 다이어리 삭제
+	  void deleteDiaryById(@Param("diaryId") int diaryId);
+	
+	
 	// 최신순 정렬
 	List<DiaryBoardEntity> selectLatest();
 
