@@ -652,11 +652,11 @@ REFERENCES "MEMBER" (
 -- VIEW
 ---- 여행 세부 정보 목록
 CREATE OR REPLACE VIEW DETAILINFO AS (
-select SPOT_PLAN_ID PLAN_ID, schedule_day TRAVEL_DATE, SCHEDULE_START, SCHEDULE_END,SPOT_TYPE PLACE_TYPE,SPOT_CONTENTID CONTENTID, SPOT_ORDER TRAVEL_ORDER,SPOT_STAY_TIME STAY_TIME, SPOT_MEMO MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG,LAT from plan_schedule 
+select SPOT_PLAN_ID PLAN_ID, to_char(schedule_day,'YYYY-MM-DD(DY)') TRAVEL_DATE, SCHEDULE_START, SCHEDULE_END,SPOT_TYPE PLACE_TYPE,SPOT_CONTENTID CONTENTID, SPOT_ORDER TRAVEL_ORDER,SPOT_STAY_TIME STAY_TIME, SPOT_MEMO MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG,LAT from plan_schedule 
 left join (select * from plan_spot s left join (select contentid,title , add1 address,firstimage,mapx lng,mapy lat from place) p on s.spot_contentid = p.contentid ) on schedule_plan_id = spot_plan_id 
 where schedule_day = spot_day --order by travel_date asc ,spot_order asc 
 union
-select SCHEDULE_PLAN_ID PLAN_ID, SCHEDULE_DAY TRAVEL_DATE, SCHEDULE_START,SCHEDULE_END,STAY_TYPE PLACE_TYPE, STAY_CONTENTID CONTENTID, null TRAVEL_ORDER, null STAY_TIME, NULL MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG, LAT from plan_schedule
+select SCHEDULE_PLAN_ID PLAN_ID, to_char(schedule_day,'YYYY-MM-DD(DY)') TRAVEL_DATE, SCHEDULE_START,SCHEDULE_END,STAY_TYPE PLACE_TYPE, STAY_CONTENTID CONTENTID, null TRAVEL_ORDER, null STAY_TIME, NULL MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG, LAT from plan_schedule
 left join (select * from plan_stay join (select contentid,title , add1 address,firstimage,mapx lng,mapy lat from place)  on stay_contentid= contentid ) on schedule_plan_id = stay_plan_id 
 where schedule_day = stay_day
 )with read only;
