@@ -277,7 +277,7 @@ public class AdminController {
 	public String itemsearch(Model model, String itemCode){
 		List<AdminStoreEntity> itemsearchList=adminservice.itemsearch(itemCode);
 		model.addAttribute("goodsList", itemsearchList);
-		return "admin/admin_goods";
+		return "admin/goods_fragment";
 		
 	}
 	

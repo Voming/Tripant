@@ -269,9 +269,9 @@ function searchHandler(){
 	$.ajax({
 		url:"/admin/goods/search",
 		method:"post",
-		data: {itemCode:itemCode}
+		data: {itemCode:itemCode},
 		}).done( function(goodsList) {
 			console.log(goodsList)
 			 $('#list').replaceWith(goodsList);
-				});
+				}).fail(ajaxErrorHandler);
 }
