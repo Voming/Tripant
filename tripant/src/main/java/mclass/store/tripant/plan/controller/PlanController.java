@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
 import mclass.store.tripant.place.domain.AreaEntity;
-import mclass.store.tripant.place.domain.AreaNameEntity;
 import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.plan.model.service.PlanService;

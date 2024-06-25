@@ -94,9 +94,6 @@ function displayDayTable() {
 	for (var idx in calendarPlan.dateArr) {
 		var date = calendarPlan.dateArr[idx].smalldate;
 		var day = calendarPlan.dateArr[idx].day;
-		// 시간 기본 값
-		calendarPlan.dateArr[idx].startTime = "10:00";
-		calendarPlan.dateArr[idx].endTime = "22:00";
 		htmlVal += `
 		<li>
 			<div><h5>${date}</h5></div>
@@ -106,9 +103,6 @@ function displayDayTable() {
 		</li>
 		`;
 	}
-	// 초 기본 값
-	calendarPlan.timeRange = 43200 * (calendarPlan.dateArr.length + 1);
-
 	$('.wrap-time ul').html(htmlVal);
 
 	// 시간 입력 체크

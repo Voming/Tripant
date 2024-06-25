@@ -71,14 +71,13 @@ function loadedHandler() {
 
 		cls_name = $(this).attr("class");
 		cls_name = cls_name.replace(' active', '');
+		$(this).css("color", "#4BC9E5");
 		if (cls_name == 'nav-1') {
 			$(".main-wrapper .tab-content").css("width", "25%");
 		} else  {
 			saveTimeInfo();
 			$(".main-wrapper .tab-content").css("width", "40%");
 		}
-
-		$(this).css("color", "#4BC9E5");
 		return false;
 	}).filter(':eq(0)').click();
 
@@ -114,7 +113,6 @@ function loadedHandler() {
 			} else if (cls_name ==='nav-3 active') {
 				// 일정 만들기 알고리즘 돌리기
 			}
-			
 		});
 	});
 }
