@@ -22,6 +22,11 @@
 	min-height: 500px;  /*내용 세로 길이 고정  */
 	margin-bottom: 20px;
 }
+.diary-list .co {
+	display: flex;
+	flex-direction: column;
+	row-gap: 30px;
+}
 
 .menubar {
 	text-align: right;
@@ -114,18 +119,28 @@
 }
 .views-count{
 	position: relative;
-	    right: 80%;
-	
+	right: 80%;
 }
 .diary-Views{
-		position: relative;
-		right: 78%;
-}
-.diary-date{
 	position: relative;
-	left: 37px; /* 날짜와 나란히 위치 */
-	bottom: 17px; /* 날짜 옆으로 올리기 */
+	right: 78%;
 }
+/* 
+.diary-date ,  .diary-MemEmail{
+	position: relative;
+	left: 37px; 날짜와 나란히 위치
+	bottom: 17px; 날짜 옆으로 올리기
+}
+ */
+.diary-date-wrap ,  .diary-MemEmail-wrap{
+	display: flex;
+	column-gap: 20px;
+}
+.diary-content-wrap {
+	display: flex;
+	overflow: auto;
+}
+
 .writer{
 	position: relative;
 	left: 320px;
