@@ -25,7 +25,7 @@
 .main-wrapper .schedule-wrapper .list-box .column{
 	flex-direction: column;
 	width: 275px;
-	padding-right: 20px;
+	padding: 0 10px;
 }
 .main-wrapper .column .sub-title{
 	justify-content: space-between;
@@ -39,17 +39,18 @@
 	color: var(--color_gray);
 }
 /*  scrollbar와 div무너짐 해결:flex의 상위 하위 너비지정*/
-.main-wrapper .edit-tourlist,
-.main-wrapper .tourlist{    flex-direction: row; overflow: scroll; width:100%;}
+.main-wrapper .scrollbar{    flex-direction: row; overflow: scroll; width:100%;}
 .main-wrapper .tourlist .column,
 .main-wrapper .edit-tourlist .column {flex-wrap: nowrap;}
 
 .main-wrapper .tourlist .column.flex > div,
-.main-wrapper .edit-tourlist .column.flex > div {width: 250px; padding-right:10px;}
+.main-wrapper .edit-tourlist .column.flex > div {width:100%; }
 
-.main-wrapper  .column .container{	flex-direction: column;	}
-.main-wrapper .edit-tourlist .column .container{
-	background-color: #F7F8F9;
+.main-wrapper  .column .container {	flex-direction: column;}
+
+/* 편집 */
+.main-wrapper .edit-tourlist .column {
+	background-color: #F7F8F9; 
 	border-radius: 8px;
 	padding:0 5px;
 }

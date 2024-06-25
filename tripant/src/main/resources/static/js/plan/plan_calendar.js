@@ -35,7 +35,7 @@ $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
 // 달력 기간 입력
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 	$(".time_btn").show();
-	
+
 	let diff = Math.abs(picker.endDate - picker.startDate);
 	diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
@@ -65,7 +65,7 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 			let dateStr = new Date(start);
 			//하루하루 정보
 			let date = new Date(dateStr.setDate(dateStr.getDate() + i));
-			
+
 			//월/일 형태로 변경
 			let MM = ('0' + (date.getMonth() + 1)).slice(-2);
 			let dd = ('0' + date.getDate()).slice(-2);
@@ -74,7 +74,7 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 			//요일 가져오기
 			const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 			let day = WEEKDAY[date.getDay()];
-			
+
 			calendarPlan.dateArr[i] = new CalendarDate(date, smalldate, day);
 		}
 		displayDayTable();
@@ -98,24 +98,53 @@ function displayDayTable() {
 		<li>
 			<div><h5>${date}</h5></div>
 			<div><h5>${day}</h5></div>
-			<div><input type="time" class="timeRange" id="start-${idx}" value="10:00"></div>
-			<div><input type="time" class="timeRange" id="end-${idx}" value="22:00"></div>
+			<div><input type="time" class="timeRange" id="start-${idx}" value="10:00" step="5"></div>
+			<div><input type="time" class="timeRange" id="end-${idx}" value="22:00" step="5"></div>
 		</li>
 		`;
 	}
 	$('.wrap-time ul').html(htmlVal);
-	
+
 	// 시간 입력 체크
 	$('#timeForm input').on('input', timeInputCheck);
-	
+
 	// 시간 입력 완료 -> 화면 이동
 	$(".time_btn").on("click", function() {
+		var rangeSecSum = 0;
 		//각각 시간 값 저장
 		for (var idx in calendarPlan.dateArr) {
-			calendarPlan.dateArr[idx].startTime = $('#start-' + idx).val();
-			calendarPlan.dateArr[idx].endTime = $('#end-' + idx).val();;
+			var startstr = $('#start-' + idx).val(); // 시작
+			var startArr = startstr.split(':');
+			var startH = parseInt(startArr[0]); // 시작 시각
+			var startM = parseInt(startArr[1]); // 시작 분
+			var startSumSec = (startH * 60 * 60) + (startM * 60); //초로 변환하기
+			//console.log(startSumSec);
+
+			var endstr = $('#end-' + idx).val(); // 종료
+			var endArr = endstr.split(':');
+			var endH = parseInt(endArr[0]); // 종료 시각
+			var endM = parseInt(endArr[1]); // 종료 분
+			var endSumSec = (endH * 60 * 60) + (endM * 60); //초로 변환하기
+			//console.log(endSumSec);
+			
+			rangeSecSum += (endSumSec - startSumSec);  // 하루치 활동 시간 초
+
+			// 시간 정보 저장
+			calendarPlan.dateArr[idx].startTime = startstr;
+			calendarPlan.dateArr[idx].endTime = endstr;
 		}
+		//전체 시간 범위 넣어주기
+		calendarPlan.timeRange = rangeSecSum;
 		console.log(calendarPlan);
+		
+		var rangeHouers = 0;
+		var rangeMins = 0;
+		//초 -> 시간, 분
+		var rangeHouers = Math.floor(calendarPlan.timeRange / 3600);
+		var rangeMins = Math.floor((calendarPlan.timeRange - rangeHouers * 3600) / 60);
+
+		var timeVal =  "0시간 0분 /" + rangeHouers + "시간 " + rangeMins + "분";
+		$(".time-sum").html(timeVal);
 
 		//화면 이동
 		$('.tab-content > div').hide().filter(this.hash).fadeIn();
@@ -140,7 +169,7 @@ function timeInputCheck() {
 
 	var start = $('#start-' + id_num).val();
 	var end = $('#end-' + id_num).val();
-	
+
 	if (start > end) {
 		$(this).css('color', 'red');
 		//console.log("시작시간이 더 큽니다.");

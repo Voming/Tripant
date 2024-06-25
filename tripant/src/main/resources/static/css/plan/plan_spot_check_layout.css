@@ -81,7 +81,7 @@
 
 .selected-spot-box .wrap-box .time {
 	display: block;
-	width: 55px;
+	width: 60px;
 	margin-left: auto;
 	margin-right: 10px;
 	font-size: var(--font6);
@@ -91,6 +91,7 @@
 	padding: 3px;
 	border-radius: 3px;
 	margin-right: 10px;
+	text-align: center;
 }
 
 /* 시간 모달 */

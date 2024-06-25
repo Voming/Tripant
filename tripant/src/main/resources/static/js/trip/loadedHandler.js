@@ -47,18 +47,4 @@ function setEvent(){
 	//hover 시 메모내용 표시
 	$(".img-memo").hover(memoHandler,memoNoHandler);
 
-	//좌측 탭
-	//TODO 안 됨
-	$(".dayn").click(function(){
-		$('.dayn a').css("color", "black");
-		$('.dayn a').removeClass('active');
-		$(this).addClass('active');
-		
-		$(this).css("color", "#4BC9E5");
-		return false;
-	}).filter(':eq(0)').click();
-	
-	
-	//test
-	$(".test-btn").click(durationHandler);
 }

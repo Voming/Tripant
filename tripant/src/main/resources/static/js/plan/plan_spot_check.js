@@ -16,7 +16,7 @@ function spotCkBtnClickHandler(thisElement) {
 	map.panTo(moveLatLon);
 
 
-	// 체크박스 해제
+	//=======================================체크박스 해제=========================================
 	if ($(thisElement).is(":checked") == false) {
 		//마커 삭제
 		setMarkers(null);
@@ -38,7 +38,7 @@ function spotCkBtnClickHandler(thisElement) {
 			}
 		});
 		//console.log(calendarPlan);
-		//화면 리스트 삭제
+		// 박스 리스트 삭제
 		$(".selected-spot-box." + id).remove();
 		$(".count-sum").html(markers.length);
 
@@ -51,7 +51,7 @@ function spotCkBtnClickHandler(thisElement) {
 		$(".count-sum").html(markers.length);
 		timeInfoUpdate();// 총 시간 업데이트
 
-	} else { //체크박스 선택
+	} else { //=====================================체크박스 선택=========================================
 		calendarPlan.spotArr[markers.length] = new spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
 		addMarker(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markers.length); // 마커 추가
 		setMarkers(map); // 마커 지도에 표시하기
@@ -77,9 +77,9 @@ function spotCkBtnClickHandler(thisElement) {
 				</div>
 				<div class="timerange-modal flex" style="display:none;">
 					<p style="margin-left:30px; font-weight: bold;">머무는 시간 설정</p>
-					<input class="spot-hours" type='number' value="2"></input>
+					<input class="spot-hours" type='number' value="2" min="0" max="23"></input>
 					<p>시간</p>
-					<input class="spot-mins" type='number' value="0"></input>
+					<input class="spot-mins" type='number' value="0" min="0" max="55" step="5"></input>
 					<p>분</p>
 					<p class="timerange-done" onclick="timeDoneBtnClickHandler(this);">완료</p>
 				</div>
@@ -91,6 +91,7 @@ function spotCkBtnClickHandler(thisElement) {
 		timeInfoUpdate();// 총 시간 업데이트
 	}
 }
+
 // 장소 설정 정보 부분 업데이트
 function timeInfoUpdate() {
 	var calcHouers = 0;
@@ -101,16 +102,22 @@ function timeInfoUpdate() {
 		var mins = $(this).children('.spot-mins').val();
 		secSum += (hours * 60 * 60) + (mins * 60); //초로 변환하기
 
-		//초 -> 시간, 분
+		// 선텍한(초 -> 시간, 분)
 		calcHouers = Math.floor(secSum / 3600);
 		calcMins = Math.floor((secSum - calcHouers * 3600) / 60);
 	});
+	
+	var rangeHouers = 0;
+	var rangeMins = 0;
+	// 사용 가능한(초 -> 시간, 분)
+	var rangeHouers = Math.floor(calendarPlan.timeRange / 3600);
+	var rangeMins = Math.floor((calendarPlan.timeRange - rangeHouers * 3600) / 60);
 
-	var timeVal = calcHouers + "시간 " + calcMins + "분 / 총 가능 시간";
+	var timeVal = calcHouers + "시간 " + calcMins + "분 /" + rangeHouers + "시간 " + rangeMins + "분";
 	$(".time-sum").html(timeVal);
 }
 
-//시간 설정 모달 열림
+// 시간 설정 모달 열림
 function timeRangeBtnClickHandler(thisElement) {
 	$(thisElement).parents('.wrap-box').hide();
 	$(thisElement).parents('.wrap-box').next().show();
@@ -130,7 +137,7 @@ function timeDoneBtnClickHandler(thisElement) {
 }
 
 // 장소 설정 초기화
-function spotResetBtnClickHandler(thisElement) {
+function spotResetBtnClickHandler() {
 	$(".selected-spot-box").remove();
 	calendarPlan.spotArr.length = 0;
 	//체크박스 해제
