@@ -111,12 +111,14 @@
 	width: 30px;
 	cursor: pointer;
 }
-.viewcount{
+.views-count{
 	position: relative;
+	    right: 80%;
 	
 }
 .diary-Views{
 		position: relative;
+		right: 78%;
 }
 .diary-date{
 	position: relative;
@@ -127,4 +129,14 @@
 	position: relative;
 	left: 320px;
 	bottom: 32px;
+}
+.like-num{
+    position: relative;
+    right: 1%;
+}
+
+.diary-like {
+    position: relative;
+    right: 2%;
+    
 }

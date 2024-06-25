@@ -7,7 +7,8 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
 <head th:replace="~{common/header :: head('diaryboard')}">
-<meta charset="UTF-8"></head>
+<meta charset="UTF-8">
+</head>
 <!--자바 스크립트   -->
 <script type="text/javascript" th:src="@{/js/diary/diary_read.js}"></script>
 <!-- modal CDN -->
@@ -54,9 +55,12 @@
 				<div th:text="${diary.diaryMemEmail}" class="diary-MemEmail">Diary
 					MemEmail</div>
 				<br>
-				<!--글 작성 내용 표기  -->
-				<div th:utext="${diary.diaryContent}" class="diary-content">Diary
-					Content</div>
+				<div class="diary-content-wrap">
+					<!--글 작성 내용 표기  -->
+					<div th:utext="${diary.diaryContent}" class="diary-content">Diary
+						Content</div>
+				</div>
+
 			</div>
 			<div th:if="${diary == null}">
 				<p>일기를 찾을 수 없습니다.</p>
@@ -65,14 +69,15 @@
 		<!--  TODO 데이터 연결 -->
 		<div class="actions">
 			<!-- 조회수 표시 -->
-			<div class="viewcount">view</div>
+			<div class="views-count">view</div>
 			<div th:text="${diary.diaryViews}" class="diary-Views"></div>
 			<!-- 좋아요 아이콘 누르면 하트아이콘  -->
 			<div class="diary-like">
 				<img th:src="@{/images/diary/diary_like_none.png}" alt="하트아이콘"
 					class="like-icon" onclick="btnLikeClickHandler(this);">
 			</div>
-			<div>좋아요 수</div>
+			<!-- 좋아요 수 연결 -->
+			<div class="like-num">100</div>
 		</div>
 
 	</div>
