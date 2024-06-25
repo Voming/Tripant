@@ -7,6 +7,7 @@ var findArea;
 
 //더보기
 function spotMoreBtnClickHandler(thisElement) {
+	// 클릭횟수 증가
 	clickspotnum += 1;
 
 	$.ajax({
@@ -21,6 +22,19 @@ function spotMoreBtnClickHandler(thisElement) {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
+		// 미리 클릭해 둔 리스트 다시 활성화
+		listCheck();
+	});
+
+}
+// 미리 클릭해 둔 리스트 다시 활성화
+function listCheck() {
+	$.each(calendarPlan.spotArr, function(idx, element) {  // 체크박스 선택
+		//체크박스 선택
+		console.log(element.id);
+		var goId = "#" + element.id;
+		console.log(goId);
+		$(goId).attr("checked", true);
 	});
 }
 
@@ -44,7 +58,7 @@ $(document).ready(function() {
 
 		areacode = $(".plan-areacode").attr("value");
 		var placeTypeS = $(this).text();
-		
+
 		var spotId = "";
 		if (placeTypeS == '관광지') {
 			spottype = 1;
@@ -155,6 +169,9 @@ function spotFindMoreBtnClickHandler(thisElement) {
 		}
 		$(".resultSpotCheck").html(htmlVal);
 		$(".spot_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+	
+		// 미리 클릭해 둔 리스트 다시 활성화
+		listCheck();
 	});
 }
 
