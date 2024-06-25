@@ -5,6 +5,8 @@ function loaededHandler(){
 	
 	//신고하기
 	$('.report').on("click",reportHandler);
+	// 삭제하기
+	$('.delete').on("click",deleteHandler);
 	
 	//케밥 아이콘 이벤트
 	$('.info').on("click",miniModalBtnHandler);
@@ -99,4 +101,41 @@ function btnLikeClickHandler(thisElement){
             // 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
             $(thisElement).attr('src', '/images/diary/diary_like_none.png');
         }
+}
+// 삭제하기
+function deleteHandler(){
+	var deleteId = $(this).data('"delete"');
+	console.log(deleteId);
+		Swal.fire({
+		  title: "이 글을 삭제하시겠습니까?",
+		  text: "삭제하실 경우 되돌릴 수 없습니다.",
+		  showCancelButton: true,
+		  confirmButtonColor: "#000000",
+		  cancelButtonColor: "#d33",
+		  confirmButtonText: "확인",
+		  cancelButtonText: "취소",
+	   	  confirmButtonTextFont:"Binggrae",
+	   	   animation:false
+		}).then((result) => {
+		  if (result.isConfirmed) {
+	         $.ajax({
+        	 url:"/diary/delete",
+        	 method:"post",
+        	 data: {deleteId:deleteId},
+			 //success: 1이면 업데이트 완료 0이면 실패
+			 success : function(result) {
+				if(result == 1){
+						Swal.fire({
+				     	title: "성공",
+				      	text: "삭제되었습니다",
+		                confirmButtonText: 'Ok'		      	
+				    }).then(() => {
+						location.reload();
+					});
+				}
+			 },
+			 error : ajaxErrorHandler
+         	});//ajax
+		  }//if
+		});
 }

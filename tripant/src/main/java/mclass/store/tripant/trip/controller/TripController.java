@@ -1,14 +1,9 @@
 package mclass.store.tripant.trip.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 
 import mclass.store.tripant.trip.domain.DayEntity;
 import mclass.store.tripant.trip.model.service.TripService;
@@ -38,6 +32,7 @@ public class TripController {
 	@GetMapping(value="/detail/{planId}")
 	public String detail(Model model,@PathVariable Integer planId ) {
 		model.addAttribute("planInfo", service.planInfo(planId));
+		model.addAttribute("detailList", service.detailList(planId));
 		return "trip/trip";
 	}
 	

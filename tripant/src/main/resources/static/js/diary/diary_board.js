@@ -36,6 +36,12 @@ $(document).ready(function() {
 			, error: ajaxErrorHandler
 		}).done(function(wrap_content) {
 			$(".wrap-d-content").replaceWith(wrap_content);
+			//TODO with voming
+			$.each($(".diary-preview"), function(idx, thisElement) {
+				var contentElement = $(thisElement).html();
+				console.log(thisElement);
+				console.log(idx);
+			});
 		})
 
 		return false;
@@ -70,6 +76,12 @@ function moreBtnClickHandler(thisElement) {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_content) {
 		$(".wrap-d-content").replaceWith(wrap_content);
+		//TODO with voming
+		$.each($(".diary-preview"), function(idx, thisElement) {
+			var contentElement = $(thisElement).html();
+			console.log($(thisElement).text());
+			console.log(contentElement);
+		});
 	})
 
 }

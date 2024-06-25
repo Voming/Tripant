@@ -29,15 +29,13 @@
 			<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
 			<div class="menubar">
 				<ul class="menu">
-				
 					<li  class="kebab-menu"><img class="wfull img"
 							src="/images/icons/kebabIcon.png" style="width: 30px;" />
 						<ul class="submenu" style="width: 100px;">
 							<li class="share" th:data-report="${diary.diaryId}"><a>공유하기</a></li>
 							<li class="report" th:data-report="${diary.diaryId}"><a>신고하기</a></li>
 							<!-- 로그인시 활성화 -->
-							<li class="delete" onclick="confirmDelete()"><a>삭제하기</a></li>
-
+							<li class="delete" th:data-report="${diary.diaryId}" onclick="confirmDelete()"><a>삭제하기</a></li>
 						</ul></li>
 				</ul>
 			</div>
