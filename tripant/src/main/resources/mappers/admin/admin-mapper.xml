@@ -64,7 +64,7 @@
 	</select>
 	
 	<!-- 신고게시글 검색 -->
-	<select id="boardsearch" resultType="AdminBoardEntity">
+	<select id="complainsearch" resultType="AdminBoardEntity">
 	select diary_id, diary_title,to_char(diary_date,'yyyy-MM-dd') diary_date,reports,mem_nick from 
 	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date ,a.diary_mem_email, b.reports
 	from DIARY a

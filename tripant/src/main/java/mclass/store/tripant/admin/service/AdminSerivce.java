@@ -59,8 +59,8 @@ public class AdminSerivce {
 	}
 	
 	//신고게시글 검색
-	public List<AdminBoardEntity> boardSearch(String memNick){
-		return admindao.boardsearch(memNick);
+	public List<AdminBoardEntity> complainsearch(String memNick){
+		return admindao.complainsearch(memNick);
 	}
 	
 	//신고수 초기화

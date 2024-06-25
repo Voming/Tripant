@@ -46,12 +46,12 @@ function cickSetHandler(){
 
 //검색
 function searchHandler(){
-	var searchBoard = $("[name=search]").val().trim();
+	var memNick = $("[name=search]").val().trim();
 
 	$.ajax({
 		url:"/admin/complain/search",
 		 method:"post",
-		 data: {searchBoard:searchBoard},
+		 data: {memNick:memNick},
 		 success : function(complainList) {
 			 $('#list').html( memListHandler(complainList));
 				},
@@ -70,12 +70,12 @@ function memListHandler(complainList){
 		var complainBoard = complainList[idx];
 		htmlVal+=`
 			<ul class="col list">
-				<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" th:data-reports="${complainBoard.reports}"></li>
-				<li th:text="${complainBoard.diaryId}"></li>
-				<li th:text="${complainBoard.diaryTitle}"></li>
-				<li th:text="${complainBoard.memNick}"></li>
-				<li th:text="${complainBoard.diaryDate}"></li>
-				<li th:text="${complainBoard.reports}"></li>
+				<li><input type="checkbox" class="check" name="check" th:data-diary-id="${complainBoard.diaryId}" th:data-reports="${complainBoard.reports}" th:data-mem-nick="${complainBoard.memNick}"></li>
+				<li>${complainBoard.diaryId}</li>
+				<li>${complainBoard.diaryTitle}</li>
+				<li>${complainBoard.memNick}</li>
+				<li>${complainBoard.diaryDate}</li>
+				<li>${complainBoard.reports}</li>
 				<li></li>
 			</ul>
 			`;

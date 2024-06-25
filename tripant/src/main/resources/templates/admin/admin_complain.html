@@ -47,9 +47,9 @@
 						</ul>
 					</li>
 					<li id="list">
-						<th:block th:each="complainBoard:${complainBoard}">
+						<th:block th:each="complainBoard:${complainBoard}" th:data-reports="${complainBoard.reports}">
 						<ul class="col list">
-							<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" th:data-reports="${complainBoard.reports}"></li>
+							<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" ></li>
 							<li th:text="${complainBoard.diaryId}"></li>
 							<li th:text="${complainBoard.diaryTitle}"></li>
 							<li th:text="${complainBoard.memNick}"></li>

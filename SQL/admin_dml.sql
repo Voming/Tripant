@@ -64,7 +64,7 @@ delete from diary_reports where diary_id=79;
 insert INTO diary_reports values (79,'seojw0730@gmail.com',1);
 insert into diary_reports values(74,'dpdls898@naver.com',1);   
 insert into diary_reports values(79,'gyrua34@gmail.com',1);
-
+insert into diary_reports values(79,'dpdls898@naver.com',1);
 select * from diary_reports;
 
 desc member;

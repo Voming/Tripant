@@ -42,7 +42,7 @@ public interface AdminDao {
 	public List<AdminBoardEntity> complainList();
 	
 	//신고게시글 검색
-	public List<AdminBoardEntity> boardsearch(String memNick);
+	public List<AdminBoardEntity> complainsearch(String memNick);
 	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId);

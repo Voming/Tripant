@@ -148,8 +148,8 @@ public class AdminController {
 	//신고게시글 검색
 	@PostMapping("/complain/search")
 	@ResponseBody
-	public List<AdminBoardEntity> boardSearch(Model model, String memNick){
-		List<AdminBoardEntity> boardList=adminservice.boardSearch(memNick);
+	public List<AdminBoardEntity> complainsearch(Model model, String memNick){
+		List<AdminBoardEntity> boardList=adminservice.complainsearch(memNick);
 		return boardList;
 	}
 	
