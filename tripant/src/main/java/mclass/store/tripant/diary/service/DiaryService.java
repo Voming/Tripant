@@ -60,5 +60,10 @@ public class DiaryService {
     public List<DiaryBoardEntity> getPopularDiaries() {
         return diaryRepository.selectPopular();
     }
+    //조회수 증가
+    public DiaryBoardEntity getDiaryById(int diaryId) {
+    	diaryRepository.incrementDiaryViews(diaryId);
+        return diaryRepository.selectDiaryById(diaryId);
 
+}
 }

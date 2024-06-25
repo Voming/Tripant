@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 @Controller
 @RequestMapping(value = "/diary")
 public class DiaryController {
@@ -47,33 +48,33 @@ public class DiaryController {
 	}
 
 	// 글 상세보기
-	@GetMapping("/read/{id}")
-	public String diartRead(@PathVariable Long id, Model model) {
-		DiaryBoardEntity diary = diaryService.findById(id);
+	@GetMapping("/read/{diaryId}")
+	public String diartRead(@PathVariable int diaryId, Model model) {
+		DiaryBoardEntity diary = diaryService.getDiaryById(diaryId);
 		model.addAttribute("diary", diary);
 		return "diary/diary_read";
 	}
+	
 
-	/*
-	 * // 좋아요 기능
-	 * 
-	 * @PostMapping("/like/{Id}")
-	 * 
-	 * @ResponseBody public Map<String, Object> likeDiary(@PathVariable Long Id) {
-	 * boolean success = diaryService.incrementLikes(Id); Map<String, Object>
-	 * response = new HashMap<>(); response.put("success", success); return
-	 * response; }
-	 */
-	// 최신순 정렬
+/*	// 좋아요 기능
+	@PostMapping("/like/{Id}")
+	@ResponseBody
+	public Map<String, Object> likeDiary(@PathVariable Long Id) {
+		boolean success = diaryService.incrementLikes(Id);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", success);
+		return response;
+	}*/
+	//최신순 정렬
 	@GetMapping("/latest")
-	public List<DiaryBoardEntity> getLatestDiaries() {
-		return diaryService.getLatestDiaries();
+    public List<DiaryBoardEntity> getLatestDiaries() {
+        return diaryService.getLatestDiaries();
+    }
+// 좋아요순 정렬
+    @GetMapping("/popular")
+    public List<DiaryBoardEntity> getPopularDiaries() {
+        return diaryService.getPopularDiaries();
+    }
+	
 	}
 
-	// 좋아요순 정렬
-	@GetMapping("/popular")
-	public List<DiaryBoardEntity> getPopularDiaries() {
-		return diaryService.getPopularDiaries();
-	}
-
-}

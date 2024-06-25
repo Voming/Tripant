@@ -3,48 +3,57 @@
 <mapper
 	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
 	<!--전체글 리스트 목록 뿌리기 -->
-	<select id="selectDiaryList" resultType="DiaryBoardEntity" parameterType="map">
+	<select id="selectDiaryList" resultType="DiaryBoardEntity"
+		parameterType="map">
 		SELECT D.DIARY_ID,
-		D.DIARY_MEM_EMAIL, D.MEM_NICK, D.DIARY_PLAN_ID, D.DIARY_TITLE, D.DIARY_CONTENT,
-		D.DIARY_DATE, D.DIARY_OPEN, D.DIARY_VIEWS, D.DIARY_THEME, D.PLAN_AREA_CODE
-		FROM VIEW_DIARY_MEMBER_PLAN D
+		D.DIARY_MEM_EMAIL, D.MEM_NICK, D.DIARY_PLAN_ID,
+		D.DIARY_TITLE, D.DIARY_CONTENT,
+		D.DIARY_DATE, D.DIARY_OPEN,
+		D.DIARY_VIEWS, D.DIARY_THEME, D.PLAN_AREA_CODE
+		FROM
+		VIEW_DIARY_MEMBER_PLAN D
 		WHERE
 		<if test="areaname != null and !areaname.equals('') ">
-		 PLAN_AREA_CODE = 
-			(SELECT AREA_CODE FROM AREA 
-				WHERE AREA_SHORT_NAME = #{areaname} 
-			) AND 
+			PLAN_AREA_CODE =
+			(SELECT AREA_CODE FROM AREA
+			WHERE
+			AREA_SHORT_NAME = #{areaname}
+			) AND
 		</if>
-		ROWNUM <![CDATA[<=]]> #{maxNum}
+		ROWNUM <![CDATA[<=]]>
+		#{maxNum}
 	</select>
-		<!-- 나의 글리스트 목록 뿌리기 -->
-	<select id="selectMyDiaryList" resultType="DiaryBoardEntity" parameterType="map">
+	<!-- 나의 글리스트 목록 뿌리기 -->
+	<select id="selectMyDiaryList" resultType="DiaryBoardEntity"
+		parameterType="map">
 		select * from (
-		    select t1.*, ROWNUM rn from (
-		    SELECT 
-		            DIARY_ID,
-		            DIARY_MEM_EMAIL, 
-		            MEM_NICK, 
-		            DIARY_PLAN_ID, 
-		            DIARY_TITLE, 
-		            DIARY_CONTENT,
-		            DIARY_DATE,
-		            DIARY_OPEN, 
-		            DIARY_VIEWS, 
-		            DIARY_THEME,
-		            PLAN_AREA_CODE
-		        FROM 
-		            VIEW_DIARY_MEMBER_PLAN D
-		        WHERE 
-		            DIARY_MEM_EMAIL = #{email}
-		        ORDER BY 
-		            DIARY_DATE DESC
-		    ) t1
+		select t1.*, ROWNUM rn from (
+		SELECT
+		DIARY_ID,
+		DIARY_MEM_EMAIL,
+		MEM_NICK,
+		DIARY_PLAN_ID,
+		DIARY_TITLE,
+		DIARY_CONTENT,
+		DIARY_DATE,
+		DIARY_OPEN,
+		DIARY_VIEWS,
+		DIARY_THEME,
+		PLAN_AREA_CODE
+		FROM
+		VIEW_DIARY_MEMBER_PLAN D
+		WHERE
+		DIARY_MEM_EMAIL = #{email}
+		ORDER BY
+		DIARY_DATE DESC
+		) t1
 		)
-		where #{maxNum}-4 <![CDATA[<]]> rn and rn <![CDATA[<=]]> #{maxNum}
+		where #{maxNum}-4 <![CDATA[<]]>
+		rn and rn <![CDATA[<=]]>
+		#{maxNum}
 	</select>
-        
-	
+
+
 	<!-- 글 작성 등록 시키기 -->
 	<insert id="insertDiary" parameterType="DiaryBoardEntity">
 		INSERT INTO diary (
@@ -86,18 +95,56 @@
 		SELECT * FROM diary
 		WHERE DIARY_OPEN = '1'
 	</select>
-	<!--최신순  -->
+	<!--최신순 -->
 	<select id="selectLatest" resultType="DiaryBoardEntity">
-	SELECT * FROM diary
-	order by diary_date DESC
+		select diary_id,
+		diary_title ,to_char(diary_date,'yyyy-MM-dd')
+		diary_date,diary_views,
+		nvl(likes,0) likes, mem_nick from
+		((select a.diary_id, a.diary_title
+		diary_title, a.diary_date diary_date,
+		a.diary_views
+		diary_views,a.diary_mem_email, b.likes
+		from DIARY a
+		left join (select
+		count (mem_email) likes , diary_id from diary_likes
+		group by diary_id)
+		b on a.diary_id= b.diary_id))
+		join member on diary_mem_email=mem_email
+		order by diary_views desc nulls last
+	</select>
+
+	<!-- 인기순 -->
+	<select id="selectPopular" resultType="DiaryBoardEntity">
+		select diary_id,
+		diary_title ,to_char(diary_date,'yyyy-MM-dd')
+		diary_date,diary_views,
+		nvl(likes,0) likes, mem_nick from
+		((select a.diary_id, a.diary_title
+		diary_title, a.diary_date diary_date,
+		a.diary_views
+		diary_views,a.diary_mem_email, b.likes
+		from DIARY a
+		left
+		join (select
+		count (mem_email) likes , diary_id from diary_likes group
+		by diary_id)
+		b on a.diary_id= b.diary_id))
+		join member on
+		diary_mem_email=mem_email
+		order by likes desc nulls last
 	</select>
 	
-	<!-- 인기순 -->
-    <select id="selectPopular" resultType="DiaryBoardEntity">
-        SELECT * FROM diary ORDER BY diary_views DESC
+	 <select id="selectDiaryById" parameterType="int" resultType="DiaryBoardEntity">
+        SELECT * FROM diary WHERE DIARY_ID = #{diaryId}
     </select>
-	
-	
+	<!-- 조회수 증가 -->
+	<update id="incrementDiaryViews" parameterType="int">
+		UPDATE diary
+		SET DIARY_VIEWS = COALESCE(DIARY_VIEWS, 0) + 1
+		WHERE DIARY_ID = #{diaryId}
+	</update>
+
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="string">
 		DELETE FROM diary
@@ -115,5 +162,5 @@
 		#{diaryTheme}
 		WHERE DIARY_ID = #{diaryId}
 	</update>
-	
+
 </mapper>

@@ -74,4 +74,3 @@ function moreBtnClickHandler(thisElement) {
 
 }
 
-
