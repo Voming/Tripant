@@ -6,18 +6,19 @@ function spotCkBtnClickHandler(thisElement) {
 	var title = $(thisElement).parent().find(".spot-name").attr("value");
 	var img = $(thisElement).parent().find(".spot-img").attr("src");
 	var addr = $(thisElement).parent().find(".spot-address").attr("value");
+	//선택된 id 저장
+	var id = $(thisElement).attr("id");
 
-	var moveLatLon = new kakao.maps.LatLng(lngy, latx);
+	var moveLatLon = new kakao.maps.LatLng(lngy, latx); // 맵 위치로 변환
 	// 확대 크기 변경
 	map.setLevel(6);
 	// 지도 이동 [setCenter()(바로 이동) -  panTo()(부드럽게 이동)]
 	map.panTo(moveLatLon);
-	
-	//선택된 id 저장
-	var id = $(thisElement).attr("id"); 
-	
-	if ($(thisElement).is(":checked") == false) {  // 체크박스 해제
-		//마커 지우기
+
+
+	// 체크박스 해제
+	if ($(thisElement).is(":checked") == false) {
+		//마커 삭제
 		$.each(markers, function(idx, element) {
 			if (element.id == id) {
 				markers[idx].marker.setMap(null);
@@ -26,7 +27,7 @@ function spotCkBtnClickHandler(thisElement) {
 			}
 		});
 		//console.log(markers);
-		// 장소 정보 지우기
+		// 장소 정보 삭제
 		$.each(calendarPlan.spotArr, function(idx, element) {  // 체크박스 선택
 			if (element.id == id) {
 				calendarPlan.spotArr.splice(idx, 1);
@@ -34,13 +35,25 @@ function spotCkBtnClickHandler(thisElement) {
 			}
 		});
 		//console.log(calendarPlan);
+		//화면 리스트 삭제
+		$(".selected-spot-box." + id).remove();
+		$(".count-sum").html(markers.length);
+		
+		// 번호 다시 붙이기
+		$(".selected-spot-box").each(function(idx, thisElement) {
+			$(thisElement).find(".selected-spot-number").children().text(idx+1);
+		});
+		
 	} else { //체크박스 선택
 		calendarPlan.spotArr[markers.length] = new spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
-		addMarker(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"));
+		addMarker(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id")); // 마커 추가
+		setMarkers(map); // 마커 지도에 표시하기
+
+		//화면 리스트 추가
 		var htmlVal = "";
 		htmlVal += `
-		<div>
-			<div class="selected-spot-box ">
+			<div class="selected-spot-box ${id}">
+				<span class="box-id" value="${id}" style ="display:none"></span> 
 				<div class="wrap-box flex">
 					<div class="selected-spot-number">
 						<p>${markers.length}</p>
@@ -57,29 +70,78 @@ function spotCkBtnClickHandler(thisElement) {
 				</div>
 				<div class="timerange-modal flex" style="display:none;">
 					<p style="margin-left:30px; font-weight: bold;">머무는 시간 설정</p>
-					<input name="hours" type='number' value="2"></input>
+					<input class="spot-hours" type='number' value="2"></input>
 					<p>시간</p>
-					<input name="mins" type='number' value="0"></input>
+					<input class="spot-mins" type='number' value="0"></input>
 					<p>분</p>
 					<p class="timerange-done" onclick="timeDoneBtnClickHandler(this);">완료</p>
 				</div>
-			</div>
-		</div>`;
+			</div>`;
 		$(".selected-spot-list").append(htmlVal);
-	
+
+		// 장소 설정 정보 부분 업데이트
+		$(".count-sum").html(markers.length);
+
+		var calcHouers;
+		var calcMins;
+		var secSum = 0;
+		$(".timerange-modal").each(function() {
+			var hours = parseInt($(this).children('.spot-hours').attr("value"));
+			var mins = parseInt($(this).children('.spot-mins').attr("value"));
+			secSum += (hours * 60 * 60) + (mins * 60); //초로 변환하기
+
+			//초 -> 시간, 분
+			calcHouers = Math.floor(secSum / 3600);
+			calcMins = Math.floor((secSum - calcHouers * 3600) / 60);
+		});
+
+		var timeVal = calcHouers + "시간 " + calcMins + "분 / 총 가능 시간";
+		$(".time-sum").html(timeVal);
 	}
-	// 마커 지도에 표시하기
-	setMarkers(map);
 }
 
-function timeRangeBtnClickHandler(thisElement){
+//시간 설정 모달 열림
+function timeRangeBtnClickHandler(thisElement) {
 	$(thisElement).parents('.wrap-box').hide();
 	$(thisElement).parents('.wrap-box').next().show();
 }
-
-function timeDoneBtnClickHandler(thisElement){
+// 시간 설정 완료
+function timeDoneBtnClickHandler(thisElement) {
 	$(thisElement).parents('.timerange-modal').prev().show();
-	$(thisElement).parents(".timerange-modal").hide();
+	$(thisElement).parents('.timerange-modal').hide();
+
+	$(".timerange-modal").each(function() {
+		console.log($(this));
+		var id = $(this).prev().prev().attr("value");
+		hours += parseInt($(this).children('.spot-hours').attr("value"));
+		mins += parseInt($(this).children('.spot-mins').attr("value"));
+		console.log(hours + ":" + mins);
+		//초로 변환하기
+		var secSum = (hours * 60 * 60) + (mins * 60);
+		console.log(id + ":" + secSum + "초");
+		//장소 정보 업데이트
+		$.each(calendarPlan.spotArr, function(idx, element) {  // 체크박스 선택
+			if (element.id == id) {
+				calendarPlan.spotArr[idx].timeSecSum = secSum;
+			}
+		});
+		console.log(calendarPlan);
+	});
+
+}
+
+// 장소 설정 초기화
+function spotResetBtnClickHandler(thisElement) {
+	$(".selected-spot-box").remove();
+	calendarPlan.spotArr.length = 0;
+	//체크박스 해제
+	$(".spotcheck").prop("checked", false);
+	//마커 삭제
+	setMarkers(null);
+	markers.length = 0;
+	// 장소 설정 정보 삭제
+	$(".time-sum").html("");
+	$(".count-sum").html(0);
 }
 
 
