@@ -71,8 +71,8 @@ select * from plan_stay;
 select * from plan_spot;
 
 --컬럼 데이터타입 변경 DATE -> VARCHAR2
-alter table plan_schedule modify SCHEDULE_START VARCHAR2(20);
-alter table plan_schedule modify SCHEDULE_END VARCHAR2(20);
+--alter table plan_schedule modify SCHEDULE_START VARCHAR2(20);
+--alter table plan_schedule modify SCHEDULE_END VARCHAR2(20);
 
 commit;
 
