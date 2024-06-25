@@ -31,7 +31,7 @@ function spotCkBtnClickHandler(thisElement) {
 		});
 
 		// 장소 정보 삭제
-		$.each(calendarPlan.spotArr, function(idx, element) {  // 체크박스 선택
+		$.each(calendarPlan.spotArr, function(idx, element) {  
 			if (element.id == id) {
 				calendarPlan.spotArr.splice(idx, 1);
 				return false;

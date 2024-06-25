@@ -5,6 +5,7 @@ var spottype;
 var findArea;
 
 
+
 //더보기
 function spotMoreBtnClickHandler(thisElement) {
 	// 클릭횟수 증가
@@ -22,22 +23,13 @@ function spotMoreBtnClickHandler(thisElement) {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
+		
 		// 미리 클릭해 둔 리스트 다시 활성화
 		listCheck();
 	});
-
-}
-// 미리 클릭해 둔 리스트 다시 활성화
-function listCheck() {
-	$.each(calendarPlan.spotArr, function(idx, element) {  // 체크박스 선택
-		//체크박스 선택
-		console.log(element.id);
-		var goId = "#" + element.id;
-		console.log(goId);
-		$(goId).attr("checked", true);
-	});
 }
 
+//탭 눌렀을때 기본 리스트 뿌리기
 $(document).ready(function() {
 	$('.spot-tab-nav a').click(function() {
 		//검색했던게 있으면 지우기
@@ -87,10 +79,13 @@ $(document).ready(function() {
 			//결과값 null 체크
 			spotboxCount = $(".spot-box").length;
 			if (spotboxCount.length == 0) { //결과 없음
-				$(".spot_more_btn").css('display', 'none');
+				$(".spot_more_btn").remove();
 				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
 				$(".resultSpotCheck").html(htmlVal);
 			}
+
+			// 미리 클릭해 둔 리스트 다시 활성화
+			listCheck();
 		});
 
 		return false;
@@ -139,7 +134,10 @@ function btnSpotFindClickHandler() {
 				class="spot_find_more_btn">더보기</button>`;
 		}
 		$(".resultSpotCheck").html(htmlVal);
-		$(".spot_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+		$(".spot_more_btn").remove(); //검색아닌 더보기 지우기
+
+		// 미리 클릭해 둔 리스트 다시 활성화
+		listCheck();
 	});
 }
 
@@ -168,10 +166,19 @@ function spotFindMoreBtnClickHandler(thisElement) {
 				class="spot_find_more_btn">더보기</button>`;
 		}
 		$(".resultSpotCheck").html(htmlVal);
-		$(".spot_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
-	
+		$(".spot_more_btn").remove(); //검색아닌 더보기 지우기
+
 		// 미리 클릭해 둔 리스트 다시 활성화
 		listCheck();
 	});
 }
 
+// 미리 클릭해 둔 리스트 다시 활성화
+function listCheck() {
+	$.each(calendarPlan.spotArr, function(idx, element) { 
+		console.log(element.id);
+		var goId = "#" + element.id;
+		console.log(goId);
+		$(goId).attr("checked", true);
+	});
+}
