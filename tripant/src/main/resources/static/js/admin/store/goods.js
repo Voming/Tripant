@@ -269,29 +269,9 @@ function searchHandler(){
 	$.ajax({
 		url:"/admin/goods/search",
 		method:"post",
-		data: {itemCode:itemCode},
-		success : function(searchList) {
-			 $('#list').html(goodsListHandler(searchList));
-				},
-	 	error : ajaxErrorHandler
-	});
+		data: {itemCode:itemCode}
+		}).done( function(goodsList) {
+			console.log(goodsList)
+			 $('#list').replaceWith(goodsList);
+				});
 }
-
-function goodsListHandler(searchList){
-	var htmlVal = '';
-	for (var idx in searchList){
-		var item = searchList[idx];
-		htmlVal+=`
-			<ul th:each="item : ${itemList}" class="col list" th:data-item-code="${item.ITEM_CODE}">
-				<li>${item.ITEM_CODE}</li>
-				<li>${item.ITEM_NAME}</li>
-				<li>${item.ITEM_PRICE_CHAR}</li>
-				<li>${item.ITEM_DUR}</li>
-				<li>${item.ITEM_SALE}</li>
-				<li>${item.ITEM_COLOR}</li>
-				<li><button type="button" class="btn update">수정</button> <button type="button" class="btn delete">삭제</button> </li>
-			</ul>
-			`;
-	}
-	return htmlVal;
-} 
