@@ -17,6 +17,7 @@ class spot {
 		this.mapx = mapx;
 		this.mapy = mapy;
 	}
+	timeSecSum;
 }
 
 class CalendarPlan {
