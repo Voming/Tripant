@@ -134,19 +134,21 @@
 		diary_mem_email=mem_email
 		order by likes desc nulls last
 	</select>
-	
-	 <select id="selectDiaryById" parameterType="int" resultType="DiaryBoardEntity">
-        SELECT * FROM diary WHERE DIARY_ID = #{diaryId}
-    </select>
+
+	<select id="selectDiaryById" parameterType="int"
+		resultType="DiaryBoardEntity">
+		SELECT * FROM diary WHERE DIARY_ID = #{diaryId}
+	</select>
 	<!-- 조회수 증가 -->
 	<update id="incrementDiaryViews" parameterType="int">
 		UPDATE diary
-		SET DIARY_VIEWS = COALESCE(DIARY_VIEWS, 0) + 1
+		SET
+		DIARY_VIEWS = COALESCE(DIARY_VIEWS, 0) + 1
 		WHERE DIARY_ID = #{diaryId}
 	</update>
 
 	<!-- 글 삭제 -->
-	<delete id="deleteDiaryById" parameterType="string">
+	<delete id="deleteDiaryById" parameterType="int">
 		DELETE FROM diary
 		WHERE DIARY_ID = #{diaryId}
 	</delete>
@@ -162,5 +164,21 @@
 		#{diaryTheme}
 		WHERE DIARY_ID = #{diaryId}
 	</update>
+	<!-- 좋아요 누르기/ 해제하기 -->
+	<insert id="insertDiaryLike" parameterType="map">
+		INSERT INTO diary_likes (DIARY_ID, MEM_EMAIL)
+		VALUES (#{diaryId}, #{memEmail})
+	</insert>
 
+	<delete id="deleteDiaryLike" parameterType="map">
+		DELETE FROM diary_likes
+		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}
+	</delete>
+
+	<select id="selectDiaryLike" parameterType="map"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM diary_likes
+		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}
+	</select>
 </mapper>

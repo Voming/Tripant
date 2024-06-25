@@ -71,16 +71,19 @@ function displayInfo(){
 		details =  detailList[i];
 		var count = i+1;
 		
+		//좌측 탭 태그 넣기
 		navHtmlval +=`
 			<div class="dayn"><a href="#tab${count}">${count}일차</a></div>
 			`;
 			
+		//세부일정 목록 넣기	
 		htmlval += `
 		<div class="column flex" data-columns="${count}" id="tab${count}">
 			<div class="sub-title flex ">
 				<h4 class="nday">${count}일차</h4>
 				<h6  class="date">${details.travelDate}</h6>
 			</div>
+			<div class="container flex wfull">
 			`;
 			
 			//DayDetailInfoEntity 값 list에 넣기
@@ -121,8 +124,8 @@ function displayInfo(){
 				
 				//백틱에 값 넣기
 				htmlval += `
-			 	<div class="container flex wfull">
-				 	<div class="spot grid wfull" data-spot-order="${infoCount}"  data-stay-time="${info.stayTime}">
+					<div class="spot-block">
+				 	<div class=" spot grid wfull" data-spot-order="${infoCount}"  data-stay-time="${info.stayTime}">
 				 		<div class="spot-number backimg"><p>${infoCount}</p></div>
 				 		<div class="spot-staytime">${startTime} - ${endTime}</div>
 				 		<div class="spot-type">명소</div>
@@ -139,9 +142,7 @@ function displayInfo(){
 					<div class="spot-img wfull hfull"><img class=" wfull hfull" src='/images/icons/spot_sample.png' ></div>
 					`;
 				 }
-/*				 		
-		 		htmlval += `
-				 		<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>`;*/
+
 				 		
 				//이동시간 표시 및 자동차 아이콘 표시 		
 		 		if(infoCount != daylength){
@@ -156,12 +157,12 @@ function displayInfo(){
 					;
 				}
 
-			    htmlval +=`</div> </div>  `;
-		    }
+			    htmlval +=`</div></div>`;
+		    }/* 이중 for문 중 내부 for문 종료*/
 		    dayPoints.push(points);
 		    points=[]; // 배열 초기화
 		htmlval += `
-		</div>	
+		</div>	 </div>  
 		`;
 	}
 	//장소정보 넣기

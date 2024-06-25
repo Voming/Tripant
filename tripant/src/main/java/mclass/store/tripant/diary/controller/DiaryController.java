@@ -56,15 +56,20 @@ public class DiaryController {
 	}
 	
 
-/*	// 좋아요 기능
-	@PostMapping("/like/{Id}")
-	@ResponseBody
-	public Map<String, Object> likeDiary(@PathVariable Long Id) {
-		boolean success = diaryService.incrementLikes(Id);
-		Map<String, Object> response = new HashMap<>();
-		response.put("success", success);
-		return response;
-	}*/
+	// 좋아요 기능
+	 @PostMapping("/read/{diaryId}/like")
+    public String likeDiary(@PathVariable int diaryId, @RequestParam String memEmail) {
+        diaryService.likeDiary(diaryId, memEmail);
+        return "redirect:/diary/" + diaryId;
+    }
+
+    @PostMapping("/read/{diaryId}/unlike")
+    public String unlikeDiary(@PathVariable int diaryId, @RequestParam String memEmail) {
+        diaryService.unlikeDiary(diaryId, memEmail);
+        return "redirect:/diary/" + diaryId;
+    }
+    
+    
 	//최신순 정렬
 	@GetMapping("/latest")
     public List<DiaryBoardEntity> getLatestDiaries() {

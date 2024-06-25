@@ -1,40 +1,45 @@
 @charset "UTF-8";
 
 /* edit part */
-.main-wrapper .edit-tourlist .column .container .spot-info{
+.main-wrapper .edit-tourlist .column .container .spot{/*spot-info  */
 	background-color: #fff;
 	border-radius: 8px;
-	width:80%;
-	height:50px;
+	width:100%;
+
+}
+/* 블록처리를 위한 클래스 */
+.main-wrapper .spot-block{
+	display: inline-block;
 }
 /* tourlist part - grid */
-.main-wrapper .tourlist .spot{
+.main-wrapper .spot{/*  */
 	grid-template-columns :25px 150px 75px;
-	grid-template-rows :repeat(6,21px);  
+	grid-template-rows :repeat(5,21px);  
 	gap:5px;
+	margin-bottom: 30px;
 	}
-.main-wrapper .tourlist .spot>:not(:first-child){
+.main-wrapper .spot>:not(:first-child){/*  */
 	align-self: center;
 }	
-/* grid-items 규격설정 */	
-.main-wrapper .tourlist .spot-number{grid-column:1; grid-row: 1 ; }
-.main-wrapper .tourlist .spot-staytime{grid-column:2; grid-row: 1 ;}
-.main-wrapper .tourlist .spot-type{grid-column:2; grid-row: 2 ;}
-.main-wrapper .tourlist .spot-title{grid-column:2; grid-row: 3 ;}
-.main-wrapper .tourlist .spot-memo{grid-column:2; grid-row: 4 ;}
-.main-wrapper .tourlist .spot-img{grid-column:3; grid-row: 2 / 5; border-radius: 8px;}
-.main-wrapper .tourlist .spot-caricon{grid-column:1; grid-row: 5 ;}
-.main-wrapper .tourlist .spot-move{grid-column:2; grid-row: 5 ;}
+/* grid-items 규격설정 */	/*  */
+.main-wrapper .spot-number{grid-column:1; grid-row: 1 ; }
+.main-wrapper .spot-staytime{grid-column:2; grid-row: 1 ;}
+.main-wrapper .spot-type{grid-column:2; grid-row: 2 ;}
+.main-wrapper .spot-title{grid-column:2; grid-row: 3 ;}
+.main-wrapper .spot-memo{grid-column:2; grid-row: 4 ;}
+.main-wrapper .spot-img{grid-column:3; grid-row: 2 / 5; border-radius: 8px;}
+.main-wrapper .spot-caricon{grid-column:1; grid-row: 5 ;}
+.main-wrapper .spot-move{grid-column:2; grid-row: 5 ;}
 
 /* background 이미지 규격 설정 */
-.main-wrapper .tourlist .spot-number.backimg{
+.main-wrapper .spot-number.backimg{/*  */
 	background-image: url('/images/loacation/circle1_red.png');
 	background-size : contain ;
 	background-repeat : no-repeat;
 	color:white;
 	position: relative;
 }	
-.main-wrapper .tourlist .spot-number >p{
+.main-wrapper .spot-number >p{/*  */
 	position: absolute;
 	left: 40%;
 	transform:translate(-50%,10%);
@@ -43,7 +48,7 @@
 	font-size:var(--font5);
 	color: var(--color_gray);
 }
-.main-wrapper .tourlist .spot-title{
+.main-wrapper .spot-title{/*  */
       overflow:hidden;
       text-overflow:ellipsis;
       height: 100%;
@@ -69,4 +74,12 @@
  	background-color:  #fafafa;
  	border:2px solid var(--color_gray);
 }
-
+/* 드래그 스타일 설정 */
+.main-wrapper .draggable{
+    box-sizing: border-box;
+    cursor: move;
+}
+.main-wrapper .draggable.dragging {
+    opacity: 0.5;
+    border: 2px dashed var(--color_day1_red);
+}

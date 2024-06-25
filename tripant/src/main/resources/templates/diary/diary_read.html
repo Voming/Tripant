@@ -12,8 +12,8 @@
 <!--자바 스크립트   -->
 <script type="text/javascript" th:src="@{/js/diary/diary_read.js}"></script>
 <!-- modal CDN -->
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+
+</script>
 <body>
 	<!--헤더영역  -->
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
@@ -29,13 +29,14 @@
 			<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
 			<div class="menubar">
 				<ul class="menu">
-					<li><a href="#"><img class="wfull img"
-							src="/images/icons/kebabIcon.png" style="width: 30px;" /></a>
+				
+					<li  class="kebab-menu"><img class="wfull img"
+							src="/images/icons/kebabIcon.png" style="width: 30px;" />
 						<ul class="submenu" style="width: 100px;">
 							<li class="share" th:data-report="${diary.diaryId}"><a>공유하기</a></li>
 							<li class="report" th:data-report="${diary.diaryId}"><a>신고하기</a></li>
 							<!-- 로그인시 활성화 -->
-							<li><a href="#" sec:authorize="isAuthenticated()">삭제하기</a></li>
+							<li class="delete" onclick="confirmDelete()"><a>삭제하기</a></li>
 
 						</ul></li>
 				</ul>
@@ -71,13 +72,16 @@
 			<!-- 조회수 표시 -->
 			<div class="views-count">view</div>
 			<div th:text="${diary.diaryViews}" class="diary-Views"></div>
-			<!-- 좋아요 아이콘 누르면 하트아이콘  -->
-			<div class="diary-like">
-				<img th:src="@{/images/diary/diary_like_none.png}" alt="하트아이콘"
-					class="like-icon" onclick="btnLikeClickHandler(this);">
-			</div>
-			<!-- 좋아요 수 연결 -->
-			<div class="like-num">100</div>
+		<!-- 좋아요 아이콘 누르면 하트아이콘  -->
+        <div class="diary-like">
+            <img th:src="@{/images/diary/diary_like_none.png}" alt="하트아이콘"
+                 class="like-icon"
+                 th:data-diary-id="${diary.diaryId}"
+                 th:data-mem-email="${#authentication.name}"
+                 onclick="btnLikeClickHandler(this);">
+        </div>
+        <!-- 좋아요 수 연결 -->
+        <div class="like-num">100</div>
 		</div>
 
 	</div>
