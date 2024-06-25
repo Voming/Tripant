@@ -667,6 +667,22 @@ join member m on m.mem_email = b.mem_email
     join item i on b.item_code = i.item_code
 ) with read only;
 
+
+--view diary
+CREATE OR REPLACE FORCE NONEDITIONABLE VIEW "TRIPANT"."VIEW_DIARY_MEMBER" ("DIARY_ID", "DIARY_MEM_EMAIL", "DIARY_PLAN_ID", "DIARY_TITLE", "DIARY_CONTENT", "DIARY_DATE", "DIARY_OPEN", "DIARY_VIEWS", "DIARY_THEME", "MEM_NICK") AS 
+  (
+select d."DIARY_ID",d."DIARY_MEM_EMAIL",d."DIARY_PLAN_ID",d."DIARY_TITLE",d."DIARY_CONTENT",d."DIARY_DATE",d."DIARY_OPEN",d."DIARY_VIEWS",d."DIARY_THEME", m.mem_nick 
+-- add column
+from diary d
+left outer join member m on (d.diary_mem_email = m.mem_email)
+)
+with read only;
+;
+
+-- diary title 연결 
+create or replace view view_plan_member 
+as (select * from plan join plan_member using (plan_id) )
+;
 -- TRIGGER
 ---- 회원 탈퇴 시 insert into quit_member-> delete from member
 create or replace NONEDITIONABLE TRIGGER trg_member_quit
