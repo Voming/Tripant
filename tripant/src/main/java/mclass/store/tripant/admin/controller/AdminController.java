@@ -270,6 +270,7 @@ public class AdminController {
 		int result=adminservice.itemDelete(itemCode);
 		return result;
 	}
+	
 	//상품검색
 	//ajax
 	@PostMapping("/goods/search")
@@ -278,6 +279,7 @@ public class AdminController {
 		List<AdminStoreEntity> itemsearchList=adminservice.itemsearch(itemCode);
 		return itemsearchList;
 	}
+	
 	@GetMapping("/mchart")
 	public String mchart() {
 		return "admin/admin_mchart";

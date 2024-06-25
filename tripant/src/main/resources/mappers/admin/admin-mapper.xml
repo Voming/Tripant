@@ -127,4 +127,11 @@
 	<delete id="itemDelete" parameterType="string">
 	delete from item where item_code=#{itemCode}
 	</delete>
+	<!--상품검색 -->
+	<select id="itemsearch" resultType="AdminStoreEntity">
+	select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur, item_sale, item_color 
+	from item 
+	where item_code like '%${itemCode}%'
+	order by item_code asc
+	</select>
 </mapper>

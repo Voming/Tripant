@@ -71,7 +71,7 @@ public interface AdminDao {
 	public int itemUpdate(Map<String, Object> map);
 	//상품삭제
 	public int  itemDelete(String itemCode);
-	//검색기능(아이템코드)
+	//상품검색
 	public List<AdminStoreEntity> itemsearch(String itemCode);
 	
 	//페이징처리
