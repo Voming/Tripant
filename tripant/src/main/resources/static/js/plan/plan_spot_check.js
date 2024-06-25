@@ -65,7 +65,6 @@ function spotCkBtnClickHandler(thisElement) {
 					<div class="selected-spot-number">
 						<p>${markers.length}</p>
 					</div>
-	
 					<img class="selected-spot-img" src="${img}">
 					<div class="selected-spot-txt">
 						<span>${title}</span>
