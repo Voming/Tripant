@@ -17,12 +17,13 @@ class spot {
 		this.mapx = mapx;
 		this.mapy = mapy;
 	}
-	timeSecSum;
+	spotTime;
 }
 
 class CalendarPlan {
 	dateArr;
 	spotArr;
+	timeRange=0;
 }
 
 let calendarPlan = new CalendarPlan();
