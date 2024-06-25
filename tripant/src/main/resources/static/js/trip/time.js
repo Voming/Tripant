@@ -1,3 +1,4 @@
+var detailList;
 //ajax이용해서 장소간 이동시간 api값 가져오기
 function durationHandler(startLngStr,startLatStr,endLngStr,endLatStr){
 	var returndata;
@@ -55,7 +56,7 @@ function addTime(time, stayTime){
 
 function displayInfo(){
 	//DB에서 받아온 original 정보
-	var detailList=dayEntityList_org;
+	detailList=dayEntityList_org;
 	//html에 뿌릴 정보 백틱에 담기
 	var navHtmlval =""; 		
 	var htmlval = "";
@@ -124,7 +125,7 @@ function displayInfo(){
 				
 				//백틱에 값 넣기
 				htmlval += `
-					<div class="spot-block draggable">
+					<div class="spot-block">
 				 	<div class=" spot grid wfull" data-spot-order="${infoCount}"  data-stay-time="${info.stayTime}">
 				 		<div class="spot-number backimg"><p>${infoCount}</p></div>
 				 		<div class="spot-staytime">${startTime} - ${endTime}</div>

@@ -11,12 +11,9 @@ function editHandler(){
 	$(this).hide();
 	//저장btn 활성화 css변경
 	$(this).siblings('.save').attr('disabled',false);
-	//드래그 활성화
-	$(this).parents().find('.spot-block').attr('draggable',true);
-	$(this).parents().find('.draggable').css('cursor','move');
 	//일정 목록보여주기
-	$(this).parents().find('.change-list').addClass('edit-tourlist');
-	$(this).parents().find('.change-list').removeClass('tourlist');
+	$(this).parents().find('.tourlist').addClass('hide');
+	$(this).parents().find('.edit-tourlist').removeClass('hide');
 }
 //취소
 function cancelHandler(){
@@ -31,12 +28,9 @@ function cancelHandler(){
 	//n일차 btn 보여줌
 	$(this).parent().prevAll().find('.dayn').show(); 
 	
-	//드래그 비활성화
-	$(this).parents().find('.spot-block').attr('draggable',false);
-	$(this).parents().find('.draggable').css('cursor','Default');
 	//일정 목록보여주기
-	$(this).parents().find('.change-list').removeClass('edit-tourlist');
-	$(this).parents().find('.change-list').addClass('tourlist');
+	$(this).parents().find('.tourlist').removeClass('hide');
+	$(this).parents().find('.edit-tourlist').addClass('hide');
 }
 //저장
 function saveHandler(){
@@ -47,12 +41,9 @@ function saveHandler(){
 	$(this).attr('disabled',true); //저장 비활성화
 	$(this).parent().prevAll().find('.dayn').show(); //n일차 btn 보여줌
 
-	//드래그 비활성화
-	$(this).parents().find('.spot-block').attr('draggable',false);
-	$(this).parents().find('.draggable').css('cursor','Default');
 	//일정 목록보여주기
-	$(this).parents().find('.change-list').removeClass('edit-tourlist');
-	$(this).parents().find('.change-list').addClass('tourlist');
+	$(this).parents().find('.tourlist').removeClass('hide');
+	$(this).parents().find('.edit-tourlist').addClass('hide');
 	//DB이동 ajax
 }
 //좌측 탭

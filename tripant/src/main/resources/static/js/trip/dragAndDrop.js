@@ -7,7 +7,7 @@ function dragAndDrop(){
  * [x] dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
  */
 
-(() => {
+ 
     const $ = (select) => document.querySelectorAll(select);
     const draggables = $('.draggable');
     const containers = $('.container');
@@ -45,6 +45,6 @@ function dragAndDrop(){
             container.insertBefore(draggable, afterElement)
         })
     });
-})();
+
 
 }
