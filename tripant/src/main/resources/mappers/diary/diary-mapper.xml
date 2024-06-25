@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper
-	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
+<mapper	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
+
+<resultMap type="DiaryBoardEntity" id="aaa">
+    <result property="diaryContent" column="DIARY_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+</resultMap>
+
 	<!--전체글 리스트 목록 뿌리기 -->
 	<select id="selectDiaryList" resultType="DiaryBoardEntity"
 		parameterType="map">
 		SELECT D.DIARY_ID,
 		D.DIARY_MEM_EMAIL, D.MEM_NICK, D.DIARY_PLAN_ID,
-		D.DIARY_TITLE, D.DIARY_CONTENT,
+		D.DIARY_TITLE,
+		DBMS_LOB.SUBSTR(D.DIARY_CONTENT, 1000) DIARY_CONTENT,
 		D.DIARY_DATE, D.DIARY_OPEN,
 		D.DIARY_VIEWS, D.DIARY_THEME, D.PLAN_AREA_CODE
 		FROM
@@ -27,26 +32,25 @@
 	<select id="selectMyDiaryList" resultType="DiaryBoardEntity"
 		parameterType="map">
 		select * from (
-		select t1.*, ROWNUM rn from (
-		SELECT
-		DIARY_ID,
-		DIARY_MEM_EMAIL,
-		MEM_NICK,
-		DIARY_PLAN_ID,
-		DIARY_TITLE,
-		DIARY_CONTENT,
-		DIARY_DATE,
-		DIARY_OPEN,
-		DIARY_VIEWS,
-		DIARY_THEME,
-		PLAN_AREA_CODE
-		FROM
-		VIEW_DIARY_MEMBER_PLAN D
-		WHERE
-		DIARY_MEM_EMAIL = #{email}
-		ORDER BY
-		DIARY_DATE DESC
-		) t1
+			select t1.*, ROWNUM rn from (
+			SELECT
+			DIARY_ID,
+			DIARY_MEM_EMAIL,
+			MEM_NICK,
+			DIARY_PLAN_ID,
+			DIARY_TITLE,
+			DIARY_DATE,
+			DIARY_OPEN,
+			DIARY_VIEWS,
+			DIARY_THEME,
+			PLAN_AREA_CODE
+			FROM
+			VIEW_DIARY_MEMBER_PLAN D
+			WHERE
+			DIARY_MEM_EMAIL = #{email}
+			ORDER BY
+			DIARY_DATE DESC
+			) t1
 		)
 		where #{maxNum}-4 <![CDATA[<]]>
 		rn and rn <![CDATA[<=]]>
@@ -58,13 +62,20 @@
 	<insert id="insertDiary" parameterType="DiaryBoardEntity">
 		INSERT INTO diary (
 		DIARY_ID, DIARY_MEM_EMAIL,
-		DIARY_PLAN_ID, DIARY_TITLE, DIARY_CONTENT,
+		DIARY_PLAN_ID, DIARY_TITLE,
+		DIARY_CONTENT,
 		DIARY_DATE, DIARY_OPEN,
-		DIARY_VIEWS, DIARY_THEME)
+		DIARY_VIEWS,
+		DIARY_THEME)
 		VALUES
 		(diary_seq.NEXTVAL, #{diaryMemEmail},
 		#{diaryPlanId}, #{diaryTitle},
-		#{diaryContent},
+		<!-- 
+		<foreach collection="diaryContentArrList" item="content4000" separator="||" close=",">
+		to_clob(#{content4000})
+		</foreach>
+		 -->
+		NVL(#{diaryContent:VARCHAR}, EMPTY_CLOB()), 
 		to_date(#{diaryDate}, 'yyyy-mm-dd'), #{diaryOpen},
 		#{diaryViews},
 		#{diaryTheme})
@@ -72,17 +83,15 @@
 	<!-- 특정 ID의 다이어리 조회 -->
 	<select id="findById" parameterType="long"
 		resultType="DiaryBoardEntity">
-		SELECT * FROM DIARY WHERE DIARY_ID = #{id}
+		SELECT * FROM DIARY WHERE DIARY_ID = 
 	</select>
 	<!-- 특정 ID의 PlAN 조회 -->
 	<select id="selectPlanById" parameterType="string"
 		resultType="WritePlanTitleEntity">
-		SELECT p.plan_id AS planId, p.plan_title AS planTitle
-		FROM
-		diary d
-		JOIN plan p ON d.diary_plan_id = p.plan_id
-		WHERE
-		d.diary_mem_email = #{diaryMemEmail}
+		SELECT plan_id AS planId, plan_title AS planTitle
+		FROM view_plan_member
+        WHERE mem_email = #{MemEmail}
+        
 	</select>
 	<!-- 공개된 일기 선택 -->
 	<select id="selectPublicDiaries" resultType="DiaryBoardEntity">
@@ -98,7 +107,7 @@
 	<!--최신순 -->
 	<select id="selectLatest" resultType="DiaryBoardEntity">
 		select diary_id,
-		diary_title ,to_char(diary_date,'yyyy-MM-dd')
+		diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date
 		diary_date,diary_views,
 		nvl(likes,0) likes, mem_nick from
 		((select a.diary_id, a.diary_title
@@ -117,8 +126,8 @@
 	<!-- 인기순 -->
 	<select id="selectPopular" resultType="DiaryBoardEntity">
 		select diary_id,
-		diary_title ,to_char(diary_date,'yyyy-MM-dd')
-		diary_date,diary_views,
+		diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,
+		diary_views,
 		nvl(likes,0) likes, mem_nick from
 		((select a.diary_id, a.diary_title
 		diary_title, a.diary_date diary_date,
@@ -135,8 +144,7 @@
 		order by likes desc nulls last
 	</select>
 
-	<select id="selectDiaryById" parameterType="int"
-		resultType="DiaryBoardEntity">
+	<select id="selectDiaryById" parameterType="int" resultMap="aaa">
 		SELECT * FROM diary WHERE DIARY_ID = #{diaryId}
 	</select>
 	<!-- 조회수 증가 -->
@@ -157,7 +165,7 @@
 		UPDATE diary
 		SET
 		DIARY_TITLE = #{diaryTitle},
-		DIARY_CONTENT = #{diaryContent},
+		DIARY_CONTENT = to_clob(#{diaryContent}),
 		DIARY_DATE = #{diaryDate},
 		DIARY_OPEN = #{diaryOpen},
 		DIARY_THEME =
@@ -175,8 +183,7 @@
 		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}
 	</delete>
 
-	<select id="selectDiaryLike" parameterType="map"
-		resultType="int">
+	<select id="selectDiaryLike" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM diary_likes
 		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}

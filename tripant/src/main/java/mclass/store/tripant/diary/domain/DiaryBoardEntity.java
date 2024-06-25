@@ -1,10 +1,16 @@
 package mclass.store.tripant.diary.domain;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
-@Data@Component
+
+@Data
+@Component
 public class DiaryBoardEntity {
 
 //	DIARY_ID        NOT NULL NUMBER         
@@ -21,10 +27,21 @@ public class DiaryBoardEntity {
 	private Integer diaryPlanId;
 	private String diaryTitle;
 	private String diaryContent;
-	private String diaryDate; 
+	private List<String> diaryContentArrList;
+	private String diaryDate;
 	private String diaryOpen;
 	private Integer diaryViews;
 	private String diaryTheme;
 	private String memNick;
-	
+
+	public void setDiaryContent(String diaryContent) {
+		this.diaryContent = diaryContent;
+
+		// 추가로 UTF-8 - 4000byte List<String> diaryContentArrList
+		//this.diaryContentArrList = StringLengthApi.getMaxByteStringList(diaryContent, 4000, 1000);
+//		for (String item : diaryContentArrList) {
+//			System.out.println("---- : "+ item.getBytes().length);
+//			System.out.println(item);
+//		}
+	}
 }
