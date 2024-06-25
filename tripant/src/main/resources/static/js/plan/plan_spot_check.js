@@ -107,6 +107,13 @@ function timeInfoUpdate() {
 		calcMins = Math.floor((secSum - calcHouers * 3600) / 60);
 	});
 	
+	if(calendarPlan.timeRange < secSum){
+		alert("총 이용가능 시간보다 장소 이용시간이 많을 수 없습니다. 다시 설정해주세요");
+		$(".time-sum").css("color", "red");
+	} else{
+		$(".time-sum").css("color", "black");
+	}
+	
 	var rangeHouers = 0;
 	var rangeMins = 0;
 	// 사용 가능한(초 -> 시간, 분)
