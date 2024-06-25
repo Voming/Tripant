@@ -84,6 +84,11 @@ public class AdminSerivce {
 		return admindao.payCancel(map);
 	}
 	
+	//결제취소 회원 검색
+	public List<AdminStoreEntity> cancelSearch(String memNick){
+		return admindao.cancelSearch(memNick);
+	}
+	
 	// 상품 관리 페이지
 	// 상품목록
 	public List<Map<String, Object>> itemList(){

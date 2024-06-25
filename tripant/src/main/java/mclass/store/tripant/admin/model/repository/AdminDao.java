@@ -57,6 +57,9 @@ public interface AdminDao {
 	// 결제 취소
 	public int payCancel(Map<String, Object> map);
 	
+	//결제 취소 회원 검색
+	public List<AdminStoreEntity> cancelSearch(String memNick);
+	
 	// 상품 관리 페이지
 	// 상품목록
 	public List<Map<String, Object>> itemList();

@@ -204,7 +204,15 @@ public class AdminController {
 			return 0;
 		}
 	}
-
+	
+	//결제취소 회원 검색
+	@PostMapping("/cancel/search")
+	@ResponseBody
+	public List<AdminStoreEntity> cancelSearch(Model model, String memNick){
+		List<AdminStoreEntity> boardList=adminservice.cancelSearch(memNick);
+		return boardList;
+	}
+	
 	// 상품관리 페이지
 	@GetMapping("/goods")
 	public ModelAndView goods(ModelAndView mv) {

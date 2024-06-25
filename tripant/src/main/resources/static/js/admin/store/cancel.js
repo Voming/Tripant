@@ -1,6 +1,6 @@
 $(loaededHandler);
 function loaededHandler(){
-	//찾기 버튼
+	//찾기(검색) 버튼
 	$('.btn-search').on("click",searchHandler);
 	// 결제 취소 버튼
 	$(".btn.cancel").on("click", payCancelHandler);
@@ -56,11 +56,11 @@ function payCancelHandler(){
 
 //회원검색
 function searchHandler(){
-	var searchMem = $("[name=search]").val().trim();
+	var memNick = $("[name=search]").val().trim();
 	$.ajax({
-		url:"/admin/member/search",
+		url:"/admin/cancel/search",
 		method:"post",
-		data: {searchMem:searchMem},
+		data: {memNick:memNick},
 		success : function(searchList) {
 			 $('#list').html(memListHandler(searchList));
 				},
@@ -86,4 +86,5 @@ function memListHandler(searchList){
 						</ul>
 			`;
 	}
+	return htmlVal;
 } 
