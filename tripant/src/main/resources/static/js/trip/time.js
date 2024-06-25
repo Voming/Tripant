@@ -124,7 +124,7 @@ function displayInfo(){
 				
 				//백틱에 값 넣기
 				htmlval += `
-					<div class="spot-block">
+					<div class="spot-block draggable">
 				 	<div class=" spot grid wfull" data-spot-order="${infoCount}"  data-stay-time="${info.stayTime}">
 				 		<div class="spot-number backimg"><p>${infoCount}</p></div>
 				 		<div class="spot-staytime">${startTime} - ${endTime}</div>

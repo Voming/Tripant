@@ -8,15 +8,14 @@
 
 }
 /* 블록처리를 위한 클래스 */
-.main-wrapper .spot-block{
-	display: inline-block;
-}
+/* .main-wrapper .spot-block{
+
+} */
 /* tourlist part - grid */
 .main-wrapper .spot{/*  */
 	grid-template-columns :25px 150px 75px;
 	grid-template-rows :repeat(5,21px);  
 	gap:5px;
-	margin-bottom: 30px;
 	}
 .main-wrapper .spot>:not(:first-child){/*  */
 	align-self: center;
@@ -76,10 +75,11 @@
 }
 /* 드래그 스타일 설정 */
 .main-wrapper .draggable{
-    box-sizing: border-box;
-    cursor: move;
+   	display: inline-block;
+	margin-bottom: 30px;
 }
-.main-wrapper .draggable.dragging {
+.main-wrapper .draggable.dragging  {
     opacity: 0.5;
+    box-sizing: border-box;
     border: 2px dashed var(--color_day1_red);
 }

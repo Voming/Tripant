@@ -58,9 +58,10 @@ let  dayEntityList_org ;
 /* memo장 표시 - 투명도 설정 */ 
 function memoHandler(){
 	$(this).siblings('.memo').css('opacity','1');
+	$(this).siblings('.memo').css('display','block');
 }
 function memoNoHandler(){
-	$(this).siblings('.memo').css('opacity','0');
+	$(this).siblings('.memo').css('display','none');
 }
 
 
