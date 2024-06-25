@@ -24,7 +24,10 @@ function dragAndDrop(){
 
     function getDragAfterElement(container, y) {
         const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
-      
+        
+        //일차별 동그라미 색 변경
+		circleColorHandler();
+		
         return draggableElements.reduce((closest, child) => {
           const box = child.getBoundingClientRect() //해당 엘리먼트에 top값, height값 담겨져 있는 메소드를 호출해 box변수에 할당
           const offset = y - box.top - box.height / 2 //수직 좌표 - top값 - height값 / 2의 연산을 통해서 offset변수에 할당
@@ -33,6 +36,7 @@ function dragAndDrop(){
           } else {
             return closest
           }
+
         }, { offset: Number.NEGATIVE_INFINITY }).element
     };
 

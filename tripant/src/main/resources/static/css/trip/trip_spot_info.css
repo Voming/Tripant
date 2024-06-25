@@ -8,9 +8,9 @@
 
 }
 /* 블록처리를 위한 클래스 */
-/* .main-wrapper .spot-block{
-
-} */
+.main-wrapper .spot-block{
+	margin-bottom: 30px;
+}
 /* tourlist part - grid */
 .main-wrapper .spot{/*  */
 	grid-template-columns :25px 150px 75px;
@@ -76,7 +76,6 @@
 /* 드래그 스타일 설정 */
 .main-wrapper .draggable{
    	display: inline-block;
-	margin-bottom: 30px;
 	cursor: move;
 }
 .main-wrapper .draggable.dragging  {
