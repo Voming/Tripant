@@ -48,20 +48,9 @@
 						</ul>
 					</li>
 					
-					<li id="list">
-						<ul th:each="item : ${itemList}" class="col list" th:data-item-code="${item.ITEM_CODE}">
-							<li th:text="${item.ITEM_CODE}" ></li>
-							<li th:text="${item.ITEM_NAME}"></li>
-							<li th:text="${item.ITEM_PRICE_CHAR}"></li>
-							<li th:text="${item.ITEM_DUR}" th:if="${item.ITEM_DUR} != null"></li>
-							<li th:if="${item.ITEM_DUR} == null"></li>
-							<li th:text="${item.ITEM_SALE}" th:if="${item.ITEM_SALE} != null"></li>
-							<li th:if="${item.ITEM_SALE} == null"></li>
-							<li th:text="${item.ITEM_COLOR}" th:if="${item.ITEM_COLOR} != null"></li>
-							<li th:if="${item.ITEM_COLOR} == null"></li>
-							<li><button type="button" class="btn update">수정</button> <button type="button" class="btn delete">삭제</button> </li>
-						</ul>
+					<li id="list" th:replace="~{admin/goods_fragment :: goodsList}">
 					</li>
+					
 				</ul>	
 			</div> 
 	</div>

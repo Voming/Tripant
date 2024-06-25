@@ -272,12 +272,13 @@ public class AdminController {
 	}
 	
 	//상품검색
-	//ajax
+	//ajax + fragment
 	@PostMapping("/goods/search")
-	@ResponseBody
-	public List<AdminStoreEntity> itemsearch(Model model, String itemCode){
+	public String itemsearch(Model model, String itemCode){
 		List<AdminStoreEntity> itemsearchList=adminservice.itemsearch(itemCode);
-		return itemsearchList;
+		model.addAttribute("goodsList", itemsearchList);
+		return "admin/admin_goods";
+		
 	}
 	
 	@GetMapping("/mchart")
