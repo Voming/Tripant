@@ -44,11 +44,11 @@ public class PlanService {
 		return planRepository.selectTypeList(areaCode, placeType, maxNum);
 	}
 	
-	public List<PlaceboxEntity> selectSpotFindList(String findArea, String areaCode,  String maxNum) {
+	public List<PlaceboxEntity> selectSpotFindList(String findArea, int areaCode,  int maxNum) {
 		return planRepository.selectSpotFindList(findArea, areaCode, maxNum);
 	}
 	
-	public List<PlaceboxEntity> selectStayFindList(String findArea, String areaCode,  String maxNum) {
+	public List<PlaceboxEntity> selectStayFindList(String findArea, int areaCode, int maxNum) {
 		return planRepository.selectStayFindList(findArea, areaCode, maxNum);
 	}
 	
