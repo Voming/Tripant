@@ -176,9 +176,7 @@ function spotFindMoreBtnClickHandler(thisElement) {
 // 미리 클릭해 둔 리스트 다시 활성화
 function listCheckSpot() {
 	$.each(calendarPlan.spotArr, function(idx, element) { 
-		console.log(element.id);
 		var checkId = "#" + element.id;
-		console.log(checkId);
 		$(checkId).attr("checked", true);
 	});
 }
