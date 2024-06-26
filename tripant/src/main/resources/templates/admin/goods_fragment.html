@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
-
+<ul>
 <li id="list" th:fragment="goodsList" >
 	<ul  th:each="item : ${itemList}"  class="col list" th:data-item-code="${item.ITEM_CODE}">
 		<li th:text="${item.ITEM_CODE}" ></li>
@@ -15,4 +15,5 @@
 		<li><button type="button" class="btn update">수정</button> <button type="button" class="btn delete">삭제</button> </li>
 	</ul>
 </li>
+</ul>
 </html>
