@@ -43,7 +43,7 @@ public class LoginController {
 				msg = "계정이 존재하지 않습니다. 회원가입 진행 후 로그인 해주세요.";
 				break;
 			case "AuthenticationException":
-				msg = "탈퇴 처리된 회원입니다. 관리자에게 문의해주세요.";
+				msg = "정지된 회원입니다. 관리자에게 문의해주세요.";
 				break;
 			default:
 				msg = "알 수 없는 이유로 로그인에 실패하였습니다. 관리자에게 문의해주세요.";
@@ -79,6 +79,13 @@ public class LoginController {
 	@GetMapping("/errors/access-denied")
 	public String errorsDenied() {
 		return "common/denied";
+	}
+	
+	// 오류 페이지
+	@GetMapping("/exception")
+	public String exception(Model model, @RequestParam String code) {
+		model.addAttribute("code", code);
+		return "/common/exception";
 	}
 }
 
