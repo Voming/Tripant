@@ -1,28 +1,30 @@
 //초기 숙소 들어갈 부분 세팅(plan_calendar.js에서 호출)
 function displayStayBox() {
-	//화면 리스트 추가
-	var htmlVal = "";
-	htmlVal += `
-			<div class="selected-stay-box ${id}">
-				<span class="box-id" value="${id}" style ="display:none"></span> 
+	console.log(calendarPlan);
+	for(var i = 0; i < calendarPlan.dateArr.length - 1; i++){
+		var start = calendarPlan.dateArr[i].smalldate;
+		var end = calendarPlan.dateArr[i+1].smalldate;
+		//화면 리스트 추가
+		var htmlVal = "";
+		htmlVal += `
+			<div class="selected-stay-box">
+				<span class="box-id" value="" style ="display:none"></span> 
 				<div class="wrap-box flex">
 					<div class="selected-stay-number">
-						<p>${markers.length}</p>
+						<p>${i+1}</p>
 					</div>
-					<img class="selected-stay-img" src="${img}">
+					<img class="selected-stay-img" src="/images/plan/stay_plus.png">
 					<div class="selected-stay-txt">
-						<span>${title}</span>
-						<span>${addr}</span>
+						<span style="font-size:var(--font5); color:var(--color_gray);">${start} ~ ${end}</span>
+						<span style="font-size:var(--font6); color:pink;">숙소를 추가해주세요</span>
 					</div>
 					<div>
-						<p class="time ${markers.length}" onclick="timeRangeBtnClickHandler(this);">2시간 0분</p>
+						<img class="delete btn" src="/images/icons/trashcan.png" onclick="stayDeleteBtnClickHandler(this);">
 					</div>
 				</div>
 			</div>`;
-	$(".selected-stay-list").append(htmlVal);
-
-	// 장소 설정 정보 부분 업데이트
-	$(".count-stay").html(markers.length);
+		$(".selected-stay-list").append(htmlVal);
+	}
 }
 
 
@@ -99,7 +101,7 @@ function stayCkBtnClickHandler(thisElement) {
 						<span>${addr}</span>
 					</div>
 					<div>
-						<p class="time ${markersStay.length}" onclick="stayDeleteBtnClickHandler(this);">2시간 0분</p>
+						<img class="delete btn" src="/images/icons/trashcan.png" onclick="stayDeleteBtnClickHandler(this);">
 					</div>
 				</div>
 			</div>`;
