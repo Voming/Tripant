@@ -16,6 +16,19 @@ body{
 	margin: 0;
 }
 
+/* 스크롤바 설정 */
+html::-webkit-scrollbar{
+     height: 10px;  /* 오른쪽 왼쪽 스크롤바 폭 너비 */
+     width: 10px;  /* 위 아래 스크롤바 폭 너비 */
+}
+html::-webkit-scrollbar-thumb{
+   border-radius: 10px;
+   border: 7px solid var(--color_gray);
+}
+html::-webkit-scrollbar-corner{
+   background: transparent;
+}
+
 footer {
     background-color: var(--color_light_gray);
 
