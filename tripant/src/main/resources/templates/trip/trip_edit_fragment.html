@@ -10,132 +10,54 @@
 				</div>
 			 	<div  class="container flex wfull">
 			 		<div th:each="info,idxlist:${details.dayDetailInfoEntity}"  class="spot-block draggable"  draggable ="true">
-					 	<div class="spot grid wfull" th:data-spot-order="${idxlist.count}"  th:data-stay-time="${info.stayTime}" th:data-info="${info}">
+					 	
+					 	<!-- 머무는 시간 설정 -->
+					 	<div class="timerange-modal hide" >
+							<div><p style="margin-left:30px; font-weight: bold; padding: 10px 0;">머무는 시간 설정</p></div>
+							<div class="flex ">
+								<input class="spot-hours" type='number' value="2" min="0" max="23"></input>
+								<p>시간</p>
+								<input class="spot-mins" type='number' value="0" min="0" max="55" step="5"></input>
+								<p>분</p>
+								<p class="timerange-done" onclick="timeDoneBtnClickHandler(this);">완료</p>
+							</div>
+						</div>
+						
+						<!-- 장소정보 -->
+					 	<div class="spot grid wfull" th:data-spot-order="${idxlist.count}"  
+					 		th:data-stay-time="${info.stayTime}" th:data-info="${info}"
+					 		th:value = "${info}">
 					 		<div class="spot-number backimg"><p th:text="${idxlist.count}"></p></div>
-					 		<div class="spot-staytime">10:00-11:00</div>
+					 		<div class="spot-staytime" onclick="timeRangeBtnClickHandler(this);">
+					 			<p class="timerange">10:00-11:00</p>
+					 		</div>
+					 		
 					 		<div class="spot-type">명소</div>
 					 		<div class="spot-title wfull" th:text="${info.title}"></div>
-					 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span th:text="${info.memo}" class="memo"></span></div>
-					 		<div class="spot-img wfull hfull"><img class=" wfull hfull" th:src="${info.firstimage}" onerror="this.onerror=null; this.src='/images/icons/spot_sample.png';" ></div>
-					 		<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" th:src="@{/images/icons/memoIcon.png}" ><span th:text="${info.memo}" class="memo"></span></div>
+					 		
+					 		<!-- 이미지 유무에 따른 src 설정 -->
+					 		<div class="spot-img wfull hfull"> 
+						 		<img th:if="${info.firstimage}" class=" wfull hfull" th:src="${info.firstimage}">
+						 		<img th:unless="${info.firstimage}" class=" wfull hfull" th:src="@{/images/icons/spot_sample.png}"  >
+					 		</div>
+					 		
+					 		<div class="spot-caricon"><img style="width:20px;height: 20px;" th:src="@{/images/icons/carIcon.png}" /></div>
 					 		<div class="spot-move"> 45분> </div>
-					    </div>
+					 	<!-- 쓰레기통 버튼 -->
+							<button class="spot-setting" > 
+								<img class="wfull img trash-bin "  th:src="@{/images/icons/cancel.png}"/>
+							</button>
+					    </div><!-- spot-block  -->
 				    </div>
 			    </div> <!-- container  -->
 			</div>	<!-- column -->
-<!-- 		<div class="column flex w250 "  data-columns="1">
-			<div class="sub-title flex ">
-				<div class="nday">1일차</div>
-				<div class="date">2024-06-01(토)</div>
+	    <!-- 미니 모달창 -->
+			<div class="mini-modal hide" > <!-- flex 설정 -->
+				<div class="show-detail">일정보기</div>
+				<div class="share-plan modal">일행추가</div>
+				<div class="delete-plan">삭제</div>
 			</div>
-		 	<div class="container flex wfull">
-			 	<div class="spot draggable"  draggable="true">
-			        <div class=" spot-info">
-			            <span class="ico-drag">1번</span>
-			            <div class="el">
-			            	<div class="spot-title">제주국제공항</div>
-			            	<div class="spot-stay-time">10:00-11:00</div>
-			            </div>
-			        </div>
-			    </div>
-			 	<div class="spot wfull draggable"  draggable="true">
-			 		<div class="move-time">10분</div>
-			        <div class=" spot-info">
-			            <span class="ico-drag">2번</span>
-			            <div class="el">
-			            	<div class="spot-title">금돈가 제주본점</div>
-			            	<div class="spot-stay-time">12:00-13:00</div>
-			            </div>
-			        </div>
-			    </div>
-			 	<div class="spot wfull draggable" draggable="true">
-			 		<div class="move-time">20분</div>
-			        <div class=" spot-info" >
-			            <span class="ico-drag">3번</span>
-			            <div class="el">
-			            	<div class="spot-title">김희선제주몸국</div>
-			            	<div class="spot-stay-time">14:00-15:00</div>
-			            </div>
-			        </div>
-			    </div>
-		    </div> container 
-		</div>	column
-		
-		<div class="column flex w250" data-columns="2">
-			<div class="sub-title flex">
-				<div class="nday">2일차</div>
-				<div class="date">2024-06-01(토)</div>
-			</div>
-		    <div class="container flex">
-			 	<div class="spot wfull">
-			        <div class="draggable spot-info" draggable="true">
-			            <span class="ico-drag">1번</span>
-			            <div class="el">
-			            	<div class="spot-title">제주국제공항2</div>
-			            	<div class="spot-stay-time">10:00-11:00</div>
-			            </div>
-			        </div>
-			    </div>
-			 	<div class="spot wfull">
-			 		<div class="move-time">10분</div>
-			        <div class="draggable spot-info" draggable="true">
-			            <span class="ico-drag">2번</span>
-			            <div class="el">
-			            	<div class="spot-title">금돈가 제주본점2</div>
-			            	<div class="spot-stay-time">12:00-13:00</div>
-			            </div>
-			        </div>
-			    </div>
-			 	<div class="spot wfull">
-			 		<div class="move-time">20분</div>
-			        <div class="draggable spot-info" draggable="true">
-			            <span class="ico-drag">3번</span>
-			            <div class="el">
-			            	<div class="spot-title">김희선제주몸국2</div>
-			            	<div class="spot-stay-time">14:00-15:00</div>
-			            </div>
-			        </div>
-			    </div>
-		    </div> container 
-		</div>	column
-		<div class="column flex" data-columns="3">
-			<div class="sub-title flex w250">
-				<div class="nday">2일차</div>
-				<div class="date">2024-06-01(토)</div>
-			</div>
-		    <div class="container flex">
-			 	<div class="spot wfull">
-			        <div class="draggable spot-info" draggable="true">
-			            <span class="ico-drag">1번</span>
-			            <div class="el">
-			            	<div class="spot-title">제주국제공항2</div>
-			            	<div class="spot-stay-time">10:00-11:00</div>
-			            </div>
-			        </div>
-			    </div>
-			 	<div class="spot wfull">
-			 		<div class="move-time">10분</div>
-			        <div class="draggable spot-info" draggable="true">
-			            <span class="ico-drag">2번</span>
-			            <div class="el">
-			            	<div class="spot-title">금돈가 제주본점2</div>
-			            	<div class="spot-stay-time">12:00-13:00</div>
-			            </div>
-			        </div>
-			    </div>
-			 	<div class="spot wfull">
-			 		<div class="move-time">20분</div>
-			        <div class="draggable spot-info" draggable="true">
-			            <span class="ico-drag">3번</span>
-			            <div class="el">
-			            	<div class="spot-title">김희선제주몸국2</div>
-			            	<div class="spot-stay-time">14:00-15:00</div>
-			            </div>
-			        </div>
-			    </div>
-		    </div> container 
-		</div>	column -->
-		
-	</div> <!-- wrap-detaillist -->
+		</div> <!-- wrap-detaillist -->
 	</div>
 </html>

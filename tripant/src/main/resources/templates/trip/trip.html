@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/trip/trip_nav.css}">
     <link rel="stylesheet" th:href="@{/css/trip/trip_schedule.css}">
     <link rel="stylesheet" th:href="@{/css/trip/trip_spot_info.css}">
+    <link rel="stylesheet" th:href="@{/css/trip/trip_edit_spot_info.css}">
     <link rel="stylesheet" th:href="@{/css/trip/tripMap.css}">
 <head th:replace="~{common/header :: head('여행일정')}">
 </head>
@@ -34,7 +35,6 @@
 				<div th:replace="~{trip/trip_tourlist_fragment :: tourlist}"></div><!-- tourlist -->
 				<div th:replace="~{trip/trip_edit_fragment :: edit-tourlist}" > </div><!-- edit-tourlist -->
 			</div>
-		    <!-- 더미 -->
 		</div><!-- schedule-wrapper -->
 		
 		<div class="map-wrapper" >
@@ -72,5 +72,6 @@ function memoNoHandler(){
 <script th:inline="javascript" th:src="@{/js/trip/tripMap.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/nav_btn.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/dragAndDrop.js}"></script>
+<script th:inline="javascript" th:src="@{/js/trip/editHandler.js}"></script>
 </body>
 </html>
