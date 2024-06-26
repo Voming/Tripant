@@ -1,4 +1,11 @@
 var detailList;
+//planId값 url에서 가져오기
+const url = window.location.href;
+const parts = url.split('/'); // Split the URL by '/'
+planId = parts.pop(); // Get the last element of the array
+
+//여행일자별 순서
+var tripIdx ;
 //ajax이용해서 장소간 이동시간 api값 가져오기
 function durationHandler(startLngStr,startLatStr,endLngStr,endLatStr){
 	var returndata;
@@ -66,6 +73,10 @@ function displayInfo(){
 	//이동시간 변수
 	var duration ="";
 	var prevDuration ="";
+	var sessionOrder=0;
+	editStorage.clear(); //세션스토리지 초기화
+	
+	
 	for(var i=0; i<detailList.length; i++ ){
 		
 		//DayEntity를 list에 담기
@@ -118,6 +129,25 @@ function displayInfo(){
 					startTime =  addTime(endTime,prevDuration);
 					endTime = 	details.scheduleEnd;
 				}
+				tripIdx = i;
+				//sessionStorage 에 담을 객체
+				spotInfo = {
+					'travelDate' : details.travelDate,
+					'stayTime' : info.stayTime,
+					'travelOrder' : info.travelOrder,
+					'title' : info.title,
+					'memo' : info.memo,
+					'lat' : info.lat,
+					'lng' : info.lng,
+					'startTime' : startTime,
+					'endTime':endTime,
+					'tripIdx' : i,
+					'idx' :sessionOrder 
+				}
+				
+				editStorage.setItem(tripIdx,JSON.stringify(spotInfo));
+				sessionOrder += 1;
+				
 				
 				//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
 				//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
@@ -168,7 +198,6 @@ function displayInfo(){
 	}
 	//장소정보 넣기
 	$(".tourlist .wrap-detaillist.flex").html(htmlval);
-	
 	//nav버튼 일차 수 만큼 넣기
 	$(".whole").after(navHtmlval);
 }

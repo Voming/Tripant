@@ -1,4 +1,24 @@
 $(loadedHanlder);
+//세션스토리지값 저장
+let editStorage = window.sessionStorage;
+
+//장소 정보를 담을 객체 생성
+//constructor : 값이 null이어도 해당 key의 공간을 확보해둠
+/*class SpotInfo {
+    constructor() {
+        this.planId = null;
+        this.day = null;
+        this.stayTime = null;
+        this.travelOrder = null;
+        this.title = null;
+        this.memo = null;
+        this.lat = null;
+        this.lng = null;
+        this.startTime = null;
+        this.endTime = null;
+    }
+}*/
+
 
 function loadedHanlder(){
 	var url = window.location.pathname;
@@ -32,7 +52,7 @@ function setEvent(){
 	//좌측 탭 이벤트 설정
 	navHandler();
 
-	
+	displayEditInfo();
 	
 
 	//드래그 앤 드랍
