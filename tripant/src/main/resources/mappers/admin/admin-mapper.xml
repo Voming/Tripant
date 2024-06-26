@@ -35,7 +35,7 @@
 	
 	<!--게시글 조건검색(select)  -->
 	<select id="keywordsearch"  resultType="AdminBoardEntity">
-	select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views,likes, mem_nick from 
+	select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
 	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
 	from DIARY a
 	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
@@ -145,4 +145,18 @@
 	where item_code like '%${itemCode}%'
 	order by item_code asc
 	</select>
+	
+	
+	<!-- 페이지처리
+		<select id="selectPage" resultType="BoardListDto" parameterType="map">
+		SELECT T2.* FROM
+		(SELECT T1.*, ROWNUM RN FROM
+		(SELECT BOARD_ID, TITLE, to_char(WRITE_TIME, 'yyyy-mm-dd hh24:mi') WRITE_TIME,
+		BOARD_WRITER, READ_COUNT FROM BOARD 
+		<if test="memId != null">
+		WHERE BOARD_WRITER = #{memId}
+		</if>
+		 ORDER BY BOARD_ID DESC) T1 ) T2
+		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
+	</select> -->
 </mapper>
