@@ -74,17 +74,18 @@
 		<foreach collection="diaryContentArrList" item="content4000" separator="||" close=",">
 		to_clob(#{content4000})
 		</foreach>
+		NVL(#{diaryContent:CLOB}, EMPTY_CLOB()),  oracle
 		 -->
-		NVL(#{diaryContent:VARCHAR}, EMPTY_CLOB()), 
-		to_date(#{diaryDate}, 'yyyy-mm-dd'), #{diaryOpen},
+		#{diaryContent},
+		default, #{diaryOpen},
 		#{diaryViews},
 		#{diaryTheme})
 	</insert>
-	<!-- 특정 ID의 다이어리 조회 -->
-	<select id="findById" parameterType="long"
+
+<!-- 	<select id="findById" parameterType="long"
 		resultType="DiaryBoardEntity">
-		SELECT * FROM DIARY WHERE DIARY_ID = 
-	</select>
+		SELECT * FROM DIARY WHERE DIARY_ID = {}
+	</select> -->
 	<!-- 특정 ID의 PlAN 조회 -->
 	<select id="selectPlanById" parameterType="string"
 		resultType="WritePlanTitleEntity">
@@ -104,7 +105,7 @@
 		SELECT * FROM diary
 		WHERE DIARY_OPEN = '1'
 	</select>
-	<!--최신순 -->
+	<!--최신순 (날짜 최신순)-->
 	<select id="selectLatest" resultType="DiaryBoardEntity">
 		select diary_id,
 		diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date
@@ -123,7 +124,7 @@
 		order by diary_views desc nulls last
 	</select>
 
-	<!-- 인기순 -->
+	<!-- 인기순 정렬(좋아요 순) -->
 	<select id="selectPopular" resultType="DiaryBoardEntity">
 		select diary_id,
 		diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,
@@ -143,7 +144,7 @@
 		diary_mem_email=mem_email
 		order by likes desc nulls last
 	</select>
-
+	<!-- 특정 ID의 다이어리 조회 -->
 	<select id="selectDiaryById" parameterType="int" resultMap="aaa">
 		SELECT * FROM diary WHERE DIARY_ID = #{diaryId}
 	</select>
