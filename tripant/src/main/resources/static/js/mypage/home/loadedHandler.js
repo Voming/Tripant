@@ -22,5 +22,5 @@ function loadedHandler(){
 	// 네이버 연동 해제
 	$(".button.unlink-naver").on("click", unlinkNaverHandler);
 	// 구글 연동 해제
-	// $(".button.unlink-google").on("click", unlinkGoogleHandler);
+	$(".button.unlink-google").on("click", unlinkGoogleHandler);
 }

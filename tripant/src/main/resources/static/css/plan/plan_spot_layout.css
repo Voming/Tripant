@@ -109,7 +109,6 @@
 	width: 35px;
 	height: 55px;
 	background: url('/images/plan/spot_ck_bf.png') no-repeat 0 0px/contain;
-	z-index: 100;
 }
 
 /* TODO id 바꿔주기 */

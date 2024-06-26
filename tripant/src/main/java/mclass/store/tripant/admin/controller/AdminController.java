@@ -212,8 +212,8 @@ public class AdminController {
 	// 상품관리 페이지
 	@GetMapping("/goods")
 	public ModelAndView goods(ModelAndView mv) {
+		mv.addObject("goodsList", adminservice.itemList());
 		mv.setViewName("admin/admin_goods");
-		mv.addObject("itemList", adminservice.itemList());
 		return mv;
 	}
 	
@@ -286,5 +286,10 @@ public class AdminController {
 		return "admin/admin_bchart";
 	}
 	
+	@GetMapping()
+	public String page(Model model) {
+	
+		return "";
+	}
 	
 }

@@ -11,7 +11,7 @@ public class AdminStoreEntity {
 	//상품관리
 		private String itemCode;
 		private String itemName;
-		private Integer itemPrice;
+		private String itemPriceChar;
 		private Integer itemDur;
 		private Integer itemSale;
 		private String itemColor;

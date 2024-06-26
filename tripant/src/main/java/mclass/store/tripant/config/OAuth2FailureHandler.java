@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
@@ -26,12 +27,15 @@ public class OAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler 
 			request.getSession().setAttribute("memEmail", map.get("memEmail"));
 			request.getSession().setAttribute("memType", map.get("memType"));
 			response.setContentType("text/html; charset=utf-8");
-			response.getWriter()
-			.append("<script type=\"text/javascript\">")
-			.append("alert('회원가입을 위해 회원정보 입력 페이지로 이동합니다.');")
-			.append("location.href = '/join/sns'")
-			.append("</script>")
-			.close();
+			response.getWriter().append("<script type=\"text/javascript\">"
+					+ "location.href = \"/exception?code=4011\";"
+					+ "</script>").close();
+		}
+		if(exception instanceof OAuth2AuthenticationException) {
+			response.setContentType("text/html; charset=utf-8");
+			response.getWriter().append("<script type=\"text/javascript\">"
+					+ "location.href = \"/exception?code=4012\";"
+					+ "</script>").close();
 		}
 	}
 }

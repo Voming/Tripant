@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('오류')}"></head>
+<body>
+<script th:inline="javascript">
+var code = new URL(window.location.href).searchParams.get("code");
+var msg;
+var page;
+if(code == "4011"){
+	msg = "추가 정보 입력을 위해 회원가입 페이지로 이동합니다.";
+	page = contextPath + "join/sns";
+}
+if(code == "4012"){
+	msg = "정지된 회원입니다. 관리자에게 문의해주시기 바랍니다.";
+	page = contextPath;
+}
+Swal.fire({
+	title: msg, 
+	icon: "warning", 
+	confirmButtonColor: "#000000", 
+	confirmButtonText: "확인"
+}).then((swal) => {
+	if(swal.isConfirmed){
+		location.href = page;
+	}
+});
+</script>
+</body>
+</html>

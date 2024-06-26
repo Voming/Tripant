@@ -30,4 +30,9 @@ public class CustomOAuth2User extends User implements OAuth2User {
 	public String getName() {
 		return null;
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }
