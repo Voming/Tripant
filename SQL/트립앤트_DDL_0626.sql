@@ -62,7 +62,8 @@ CREATE TABLE "MEMBER" (
 	"MEM_TOKEN_KAKAO"	VARCHAR2(200)		NULL,
 	"MEM_TOKEN_NAVER"	VARCHAR2(200)		NULL,
 	"MEM_TOKEN_RE_NAVER"	VARCHAR2(200)		NULL,
-	"MEM_TOKEN_GOOGLE"	VARCHAR2(200)		NULL
+	"MEM_TOKEN_GOOGLE"	VARCHAR2(200)		NULL,
+	"MEM_REPORT_NUM"	NUMBER	DEFAULT 0	NULL
 );
 
 COMMENT ON COLUMN "MEMBER"."MEM_EMAIL" IS '회원 이메일';
@@ -92,6 +93,8 @@ COMMENT ON COLUMN "MEMBER"."MEM_TOKEN_NAVER" IS '네이버 토큰 값';
 COMMENT ON COLUMN "MEMBER"."MEM_TOKEN_RE_NAVER" IS '네이버 갱신토큰 값';
 
 COMMENT ON COLUMN "MEMBER"."MEM_TOKEN_GOOGLE" IS '구글 토큰 값';
+
+COMMENT ON COLUMN "MEMBER"."MEM_REPORT_NUM" IS '신고 횟수';
 
 CREATE TABLE "QUIT_MEMBER" (
 	"MEM_EMAIL"	VARCHAR2(100)		NOT NULL,
@@ -812,5 +815,16 @@ BEGIN
    :OLD.MEM_BIRTH, 
    :OLD.MEM_TEL
    );
+END;
+/
+---- 회원별 신고 누적 10개 시 정지
+create or replace NONEDITIONABLE TRIGGER trg_member_stop
+    after insert ON diary_reports
+    REFERENCING new AS new
+    FOR EACH ROW
+DECLARE
+BEGIN
+   update member set mem_enabled = 0 where (select count(*) from diary_reports join diary using (diary_id) where diary_id in (select diary_id from member where mem_email = (select diary_mem_email from diary join diary_reports using (diary_id) where diary_id = :new.diary_id))) >= 10;
+   commit;
 END;
 /
