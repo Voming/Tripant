@@ -271,6 +271,7 @@ function searchHandler(){
 		method:"post",
 		data: {itemCode:itemCode},
 		}).done( function(goodsList) {
+			console.log(itemCode)
 			console.log(goodsList)
 			 $('#list').replaceWith(goodsList);
 				}).fail(ajaxErrorHandler);

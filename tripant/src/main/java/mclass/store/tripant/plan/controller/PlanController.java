@@ -78,10 +78,10 @@ public class PlanController {
 
 	@PostMapping("/spot/find")
 	public String spotFindMore(Model model, @RequestParam("findArea") String findArea,
-			@RequestParam("areaCode") String areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
+			@RequestParam("areaCode") Integer areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
 		// 20개씩 더 출력하기
 		int maxNum = (clickSpotFindNum + 1) * 20;
-		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode, maxNum + "");
+		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode, maxNum);
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
@@ -101,10 +101,10 @@ public class PlanController {
 
 	@PostMapping("/stay/find")
 	public String stayFindMore(Model model, @RequestParam("findArea") String findArea,
-			@RequestParam("areaCode") String areaCode, @RequestParam("clickStayFindNum") Integer clickStayFindNum) {
+			@RequestParam("areaCode") Integer areaCode, @RequestParam("clickStayFindNum") Integer clickStayFindNum) {
 		// 20개씩 더 출력하기
 		int maxNum = (clickStayFindNum + 1) * 20;
-		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode, maxNum + "");
+		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode, maxNum);
 		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
 	}

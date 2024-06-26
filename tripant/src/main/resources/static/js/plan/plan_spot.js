@@ -25,7 +25,7 @@ function spotMoreBtnClickHandler(thisElement) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
 		
 		// 미리 클릭해 둔 리스트 다시 활성화
-		listCheck();
+		listCheckSpot();
 	});
 }
 
@@ -85,7 +85,7 @@ $(document).ready(function() {
 			}
 
 			// 미리 클릭해 둔 리스트 다시 활성화
-			listCheck();
+			listCheckSpot();
 		});
 
 		return false;
@@ -137,7 +137,7 @@ function btnSpotFindClickHandler() {
 		$(".spot_more_btn").remove(); //검색아닌 더보기 지우기
 
 		// 미리 클릭해 둔 리스트 다시 활성화
-		listCheck();
+		listCheckSpot();
 	});
 }
 
@@ -169,16 +169,14 @@ function spotFindMoreBtnClickHandler(thisElement) {
 		$(".spot_more_btn").remove(); //검색아닌 더보기 지우기
 
 		// 미리 클릭해 둔 리스트 다시 활성화
-		listCheck();
+		listCheckSpot();
 	});
 }
 
 // 미리 클릭해 둔 리스트 다시 활성화
-function listCheck() {
+function listCheckSpot() {
 	$.each(calendarPlan.spotArr, function(idx, element) { 
-		console.log(element.id);
-		var goId = "#" + element.id;
-		console.log(goId);
-		$(goId).attr("checked", true);
+		var checkId = "#" + element.id;
+		$(checkId).attr("checked", true);
 	});
 }

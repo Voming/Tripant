@@ -1,7 +1,6 @@
 package mclass.store.tripant.admin.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -82,7 +81,7 @@ public class AdminController {
 	}
 	
 
-	//ajax  TODO fragment
+	//ajax  
 	//검색 
 	@PostMapping("/member/search") 
 	@ResponseBody
@@ -101,15 +100,12 @@ public class AdminController {
 	
 	//ajax
 	//게시글 검색(select)  //TODO
-	@GetMapping("/keyword")
+	@PostMapping("/keyword")
 	@ResponseBody
-	public List<AdminBoardEntity> keywordSearch(@RequestParam("type") String type ,
-			@RequestParam("keyword") String keyword , Model model) {
-		AdminBoardEntity boarddto=new AdminBoardEntity();
-		boarddto.setType(type);
-		boarddto.setKeyword(keyword);
+	public List<AdminBoardEntity> keywordSearch(String write, Model model) {
+		List<AdminBoardEntity> keywordList=adminservice.keywordsearch( write);
 		
-		return adminservice.keywordsearch(type, keyword);
+		return keywordList;
 	}
 	
 	//ajax
@@ -272,13 +268,12 @@ public class AdminController {
 	}
 	
 	//상품검색
-	//ajax + fragment
+	//ajax + fragment  //TODO
 	@PostMapping("/goods/search")
 	public String itemsearch(Model model, String itemCode){
 		List<AdminStoreEntity> itemsearchList=adminservice.itemsearch(itemCode);
 		model.addAttribute("goodsList", itemsearchList);
 		return "admin/goods_fragment";
-		
 	}
 	
 	@GetMapping("/mchart")

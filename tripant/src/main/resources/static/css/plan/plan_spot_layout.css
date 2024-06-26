@@ -77,7 +77,6 @@
 	width: 100%;
 	height: 80px;
 	border-radius: 8px;
-	box-shadow: 0 2px 8px 0 var(--color_gray) !important;
 	align-items: center;
 	flex-direction: row;
 	/* flex-wrap: wrap; */
@@ -109,13 +108,13 @@
 	margin-right: 10px;
 	width: 35px;
 	height: 55px;
-	background: url('/images/icons/spot_ck_bf.png') no-repeat 0 0px/contain;
+	background: url('/images/plan/spot_ck_bf.png') no-repeat 0 0px/contain;
 	z-index: 100;
 }
 
 /* TODO id 바꿔주기 */
 .spot-tab-content input[type='checkbox']:checked+label {
-	background: url('/images/icons/spot_ck_af.png') no-repeat 0 1px/contain;
+	background: url('/images/plan/spot_ck_af.png') no-repeat 0 1px/contain;
 }
 
 .spot-tab-content input[type="checkbox"] {

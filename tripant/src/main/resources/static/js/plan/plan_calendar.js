@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	// TODO 바로 열리게 하는 방법 있는지 찾아보기
 	$('#daterange').daterangepicker({
 		opens: "center",
 		alwaysOpen: true,
+		"maxSpan": { "days": 10 },
 		"locale": {
 			"format": "YYYY.MM.DD",
 			"separator": " ~ ",
@@ -38,9 +38,10 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 
 	let diff = Math.abs(picker.endDate - picker.startDate);
 	diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-
-	if (diff > 10) {
-		alert("기간이 너무 큽니다. 기간을 다시 입력해주세요.");
+	console.log(diff);
+	if (diff == 1) {
+		alert("기간이 너무 작습니다. 기간을 다시 입력해주세요.");
+		$('#daterange').focus();
 	} else {
 		var start = picker.startDate.format('YYYY.MM.DD');
 		var end = picker.endDate.format('YYYY.MM.DD');
@@ -77,7 +78,9 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 
 			calendarPlan.dateArr[i] = new CalendarDate(date, smalldate, day);
 		}
+		//시간 테이블 생성
 		displayDayTable();
+		displayStayBox();
 	}
 });
 
@@ -159,7 +162,7 @@ function saveTimeInfo() {
 	var rangeMins = Math.floor((calendarPlan.timeRange - rangeHouers * 3600) / 60);
 
 	var timeVal = "0시간 0분 /" + rangeHouers + "시간 " + rangeMins + "분";
-	$(".time-sum").html(timeVal);
+	$(".time-spot").html(timeVal);
 }
 
 // 시간 입력 체크
