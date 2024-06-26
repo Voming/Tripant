@@ -48,6 +48,7 @@
 .main-wrapper .spot-staytime{
 	font-size:var(--font5);
 	color: var(--color_gray);
+	z-index:3;
 }
 .main-wrapper .spot-title{/*  */
       overflow:hidden;
