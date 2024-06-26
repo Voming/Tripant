@@ -55,7 +55,6 @@
 					</li>
 					
 					<li id="list">
-						<!-- <th:block th:replace="~{admin/memberlist_fragment :: list}"></th:block> -->
 						<th:block th:each="memList:${memList}">
 						<ul class="col list">
 							<li th:text="${memList.memNick}"></li>

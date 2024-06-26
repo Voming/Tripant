@@ -1,3 +1,15 @@
+// 외부영역 클릭 시 모달 닫기
+$(document).mouseup(function(e) {
+	var LayerModal = $(".stay-modal");
+	if (LayerModal.has(e.target).length === 0) {
+		LayerModal.removeClass("show");
+	}
+});
+
+function stayModalDoneBtnClickHandler(){
+	
+}
+
 //초기 숙소 들어갈 부분 세팅(plan_calendar.js에서 호출)
 function displayStayBox() {
 	console.log(calendarPlan);
@@ -10,7 +22,7 @@ function displayStayBox() {
 			<div class="selected-stay-box">
 				<span class="box-id" value="" style ="display:none"></span> 
 				<div class="wrap-box flex">
-					<div class="selected-stay-number">
+					<div class="selected-stay-number" style="background-color:var(--color_gray);">
 						<p>${i+1}</p>
 					</div>
 					<img class="selected-stay-img" src="/images/plan/stay_plus.png">
@@ -24,7 +36,27 @@ function displayStayBox() {
 				</div>
 			</div>`;
 		$(".selected-stay-list").append(htmlVal);
+		
+		var modalVal = "";
+		modalVal = `
+		<div class="wrap-stay-tab">
+			<p class="stay-tab-day">${start}</p>
+			<img class="stay-tab-img" src="/images/plan/stay_plus.png" onclick="stayTabBtnClickHandler(this);>
+			<p class="stay-tab-name">호텔 선택</p>
+		</div>
+		`;
+		$(".modal-stay-list").append(modalVal);
 	}
+}
+
+// 숙소 + 탭 클릭
+function stayTabBtnClickHandler(thisElement) {
+	console.log("클릭됨");
+}
+
+// 숙소 삭제
+function stayDeleteBtnClickHandler(thisElement) {
+	console.log("삭제 클릭됨");
 }
 
 
@@ -82,6 +114,8 @@ function stayCkBtnClickHandler(thisElement) {
 		timeInfoUpdate();// 총 시간 업데이트*/
 
 	} else { //=====================================체크박스 선택=========================================
+		$(".stay-modal").addClass("show");
+		
 		//calendarPlan.stayArr[markersStay.length] = new stay(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
 		addMarkerStay(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersStay.length); // 마커 추가
 		setMarkersStay(map); // 마커 지도에 표시하기
@@ -112,9 +146,6 @@ function stayCkBtnClickHandler(thisElement) {
 	}
 }
 
-// 숙소 삭제
-function stayDeleteBtnClickHandler(thisElement) {
-}
 
 // 숙소 설정 초기화
 function stayResetBtnClickHandler() {

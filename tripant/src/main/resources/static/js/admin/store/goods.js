@@ -269,10 +269,12 @@ function searchHandler(){
 	$.ajax({
 		url:"/admin/goods/search",
 		method:"post",
+		context:this,
 		data: {itemCode:itemCode},
+		error:ajaxErrorHandler
 		}).done( function(goodsList) {
 			console.log(itemCode)
-			console.log(goodsList)
+			console.log(goodsList);
 			 $('#list').replaceWith(goodsList);
-				}).fail(ajaxErrorHandler);
+				});
 }
