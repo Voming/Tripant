@@ -5,10 +5,10 @@ function loadedHandler() {
 	$(".btn.like").on("click", ClickLikeHandler);
 	//조회수
 	$(".btn.view").on("click", ClickViewHandler);
-	//검색
+	//조건검색
 	$('.btn-search').on("click",searchHandler);
 	//옵션 선택 
-	$("select[name=option]").on("change",pickHandler);
+	//$("select[name=option]").on("change",pickHandler);
 }
 
 //좋아요수 정렬
@@ -80,12 +80,12 @@ function ViewHandler(view){
 }
 //option 선택값  
 function pickHandler(){
-	//선택한 option text값 가져오기
-	//var pick=$("select[name=option] option:selected").text();
+	/*//선택한 option text값 가져오기
+	var pick=$("select[name=option] option:selected").text();
 	//value로 가져오기
-	//var pick=$(this).val(); 
-	//var write=$('[name=search]').val().tirm();
-	//console.log(write);
+	var pick=$(this).val(); 
+	var write=$('[name=search]').val().tirm();
+	console.log(write);*/
 	
 	/*$.ajax({
 		url:"/admin/keyword" ,
@@ -107,14 +107,20 @@ function pickHandler(){
 
 // 검색
 function searchHandler(){
-	var pick=$(this).val(); 
+	var pick=$("select[name=option] option:selected").val(); 
 	var write = $("[name=search]").val().trim();
+	console.log(write);
+	console.log(pick);
 	$.ajax({
 		url:"/admin/keyword",
 		 method:"post",
 		 data: {pick:pick, write:write},
 		 success : function(searchList) {
-			  $('#list').html(memListHandler(searchList));
+			if(pick='nick'){
+				console.log(searchList);
+				 $('#list').html(memListHandler(searchList));
+				}
+			 
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"
