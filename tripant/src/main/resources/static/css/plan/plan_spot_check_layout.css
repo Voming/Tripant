@@ -2,11 +2,12 @@
 
 .tab-content #tab02 .spot.second {
 	margin-left: 10px;
-	max-height: 870px;
+	height: 870px;
 }
 
 .tab-content #tab02 .spot.second .wrap-selected-spot {
 	overflow-y: auto;
+	height: 100%;
 }
 /* 위에 글자들 */
 .tab-content #tab02 .selected-spot-info {
@@ -17,12 +18,12 @@
 	margin-bottom: 20px;
 }
 
-#tab02 .selected-spot-info .count-sum {
+#tab02 .selected-spot-info .count-spot {
 	font-size: var(--font3);
 	font-weight: bold;
 }
 
-#tab02 .selected-spot-info .time-sum {
+#tab02 .selected-spot-info .time-spot {
 	font-size: var(--font5);
 }
 

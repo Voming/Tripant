@@ -76,7 +76,9 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 
 			calendarPlan.dateArr[i] = new CalendarDate(date, smalldate, day);
 		}
+		//시간 테이블 생성
 		displayDayTable();
+		//displayStayBox(); TODO
 	}
 });
 
@@ -158,7 +160,7 @@ function saveTimeInfo() {
 	var rangeMins = Math.floor((calendarPlan.timeRange - rangeHouers * 3600) / 60);
 
 	var timeVal = "0시간 0분 /" + rangeHouers + "시간 " + rangeMins + "분";
-	$(".time-sum").html(timeVal);
+	$(".time-spot").html(timeVal);
 }
 
 // 시간 입력 체크

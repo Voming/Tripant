@@ -1,1 +1,88 @@
 @charset "UTF-8";
+
+.tab-content #tab03 .stay.second {
+	margin-left: 10px;
+	height: 870px;
+}
+
+.tab-content #tab03 .stay.second .wrap-selected-stay {
+	overflow-y: auto;
+	height: 100%;
+}
+/* 위에 글자들 */
+.tab-content #tab03 .selected-stay-info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+#tab03 .selected-stay-info .count-stay {
+	font-size: var(--font3);
+	font-weight: bold;
+}
+
+#tab03 .selected-stay-info .time-stay {
+	font-size: var(--font5);
+}
+
+#tab03 .selected-stay-info .reset-stay {
+	font-size: var(--font6);
+	color: red;
+}
+
+#tab03 .wrap-selected-stay .explan-stay {
+	font-size: var(--font5);
+	background-color: var(--color_light_gray);
+	padding: 10px;
+}
+
+/* 박스 */
+#tab03 .selected-stay-box .wrap-box{
+	width: 100%;
+	height: 70px;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px 0 var(--color_gray) !important;
+	align-items: center;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin: 10px 0;
+	margin-right: 5px;
+	width: 100%;
+	
+}
+
+#tab03 .wrap-box .selected-stay-number{
+	font-size: var(--font5);
+	color: white;
+	background-color: var(--color_day5_skyblue); 
+	border-radius: 50%;
+	display: block;
+	width: 22px;
+	height: 20px;
+	flex-shrink: 0;
+	align-items: center;
+	text-align: center;
+	padding: 3px 1px 0 0;
+	margin: 0 0 0 10px;
+}
+
+#tab03 .selected-stay-box .wrap-box img {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	margin-left: 10px;
+	border-radius: 8px;
+}
+
+.selected-stay-box .wrap-box .selected-stay-txt {
+	margin: 0 10px;
+	width: 100%;
+	font-size: var(--font5);
+	display: flex;
+	line-height: 120%;
+	white-space: nowrap;
+    overflow: hidden;
+}
+
