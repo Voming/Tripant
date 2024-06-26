@@ -19,7 +19,7 @@
 	display: block;
 }
 
-.modal .modal_popup {
+.modal .modal-popup {
 	/*팝업*/
 	position: absolute;
 	top: 50%;
@@ -33,32 +33,32 @@
 	justify-content: center;
 }
 
-.modal .modal_popup div {
+.modal .modal-popup div {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.modal .modal_popup h2 {
+.modal .modal-popup h2 {
 	margin-bottom: 10px;
 }
 
-.modal .modal_popup h4 {
+.modal .modal-popup h4 {
 	margin-bottom: 20px;
 	 text-decoration: underline;
 }
-.modal .modal_popup h5 {
+.modal .modal-popup h5 {
 	margin-bottom: 10px;
 }
 
-.modal .modal_popup #daterange{
+.modal .modal-popup #daterange{
 	width: 200px;
 	height: 30px;
 	text-align: center;
 	font-size: var(--font5);
 }
 
-.modal .modal_popup .wrap-calendar {
+.modal .modal-popup .wrap-calendar {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -71,4 +71,5 @@
 	border-radius: 8px;
 	width: 120px;
 	height: 30px;
+	font-weight: normal;
 }
