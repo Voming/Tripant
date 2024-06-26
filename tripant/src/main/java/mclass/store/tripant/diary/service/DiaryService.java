@@ -88,5 +88,7 @@ public class DiaryService {
             e.printStackTrace();
             return 0; // 삭제 실패
         }
+        
 }
+	// 이미지 url 담아오기
 }

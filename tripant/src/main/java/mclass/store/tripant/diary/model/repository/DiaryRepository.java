@@ -50,5 +50,7 @@ public interface DiaryRepository {
 
 	// 인기순 정렬
 	List<DiaryBoardEntity> selectPopular();
+	
+	// 이미지 url 받아오기
 
 }
