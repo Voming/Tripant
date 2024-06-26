@@ -37,7 +37,7 @@
 		AND ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
 	
-	<select id="selectSpotFindList" parameterType="string" resultType="PlaceboxEntity">
+	<select id="selectSpotFindList" parameterType="map" resultType="PlaceboxEntity">
 		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
 		FROM PLACE 
 		WHERE AREACODE=#{areaCode} 
@@ -46,7 +46,7 @@
 		AND ROWNUM <![CDATA[<=]]> #{maxNum}
 	</select>
 	
-	<select id="selectStayFindList" parameterType="string" resultType="PlaceboxEntity">
+	<select id="selectStayFindList" parameterType="map" resultType="PlaceboxEntity">
 		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
 		FROM PLACE 
 		WHERE AREACODE=#{areaCode} 

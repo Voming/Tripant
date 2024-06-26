@@ -4,6 +4,7 @@ package mclass.store.tripant.plan.model.repostiory;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
@@ -19,8 +20,8 @@ public interface PlanRepository {
 	public List<AreaEntity> selectAreaInfoList(int areaCode); // 지역 정보 
 	public String selectAreaShortName(int areaCode); // 짧은 이름
 	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType, int maxNum); //더보기 클릭 시
-	public List<PlaceboxEntity> selectSpotFindList(String findArea, String areaCode, String maxNum); //장소명 검색 더보기
-	public List<PlaceboxEntity> selectStayFindList(String findArea, String areaCode, String maxNum); //장소명 검색 더보기
+	public List<PlaceboxEntity> selectSpotFindList(String findArea, @Param("areaCode") int areaCode, @Param("maxNum") int  maxNum); //장소명 검색 더보기
+	public List<PlaceboxEntity> selectStayFindList(String findArea, @Param("areaCode") int  areaCode, @Param("maxNum") int  maxNum); //장소명 검색 더보기
 	public AreaPointEntity selectAreaPoint(int findArea);
 	
 }
