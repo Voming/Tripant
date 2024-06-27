@@ -90,16 +90,33 @@ function shareHandler() {
 }
 
 /*좋아요 누르기  */
-function btnLikeClickHandler(thisElement){
-	console.log("눌림");
-/*	console.log(thisElement);*/
-     // 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
-        if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
-            $(thisElement).attr('src', '/images/diary/diary_like_icon.png');
-        } else {
-            // 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
-            $(thisElement).attr('src', '/images/diary/diary_like_none.png');
-        }
+function btnLikeClickHandler(thisElement, diaryId) {
+	console.log("btnLikeClickHandler 눌림");
+	console.log(diaryId);
+	/*	console.log(thisElement);*/
+	if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
+		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
+		// ajax 요청
+		$.ajax({
+			url: contextPath + "my/diary/like/" + diaryId
+			, method: "post"
+			, error: ajaxErrorHandler
+		}).done(function(result) {
+			if(result > 0)
+			$(thisElement).attr('src', '/images/diary/diary_like_icon.png');
+		})
+	} else {
+		// 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
+		// ajax 요청
+		$.ajax({
+			url: contextPath + "my/diary/unlike/" + diaryId
+			, method: "post"
+			, error: ajaxErrorHandler
+		}).done(function(result) {
+			if(result>0)
+			$(thisElement).attr('src', '/images/diary/diary_like_none.png');
+		})
+	}
 }
 // 삭제하기
 function deleteHandler(){
