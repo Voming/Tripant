@@ -1,20 +1,18 @@
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 var markersSpot = [];  //아이디 , 마커 담김 
 function spotCkBtnClickHandler(thisElement) {
+	var id = $(thisElement).attr("id");
+	var title = $(thisElement).parent().find(".spot-name").attr("value");
 	var latx = $(thisElement).parent().find(".spot-x").attr("value");
 	var lngy = $(thisElement).parent().find(".spot-y").attr("value");
-	var title = $(thisElement).parent().find(".spot-name").attr("value");
 	var img = $(thisElement).parent().find(".spot-img").attr("src");
 	var addr = $(thisElement).parent().find(".spot-address").attr("value");
-	//선택된 id 저장
-	var id = $(thisElement).attr("id");
 
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx); // 맵 위치로 변환
 	// 확대 크기 변경
 	map.setLevel(6);
 	// 지도 이동 [setCenter()(바로 이동) -  panTo()(부드럽게 이동)]
 	map.panTo(moveLatLon);
-
 
 	//=======================================체크박스 해제=========================================
 	if ($(thisElement).is(":checked") == false) {
@@ -52,7 +50,7 @@ function spotCkBtnClickHandler(thisElement) {
 		timeInfoUpdate();// 총 시간 업데이트
 
 	} else { //=====================================체크박스 선택=========================================
-		calendarPlan.spotArr[markersSpot.length] = new spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
+		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
 		setMarkersSpot(map); // 마커 지도에 표시하기
 

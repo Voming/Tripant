@@ -10,13 +10,13 @@
 	on a.MEM_EMAIL=b.MEM_EMAIL
 	</select>
 	
-	<!-- 등급변경 -->
-	<update id="adminMemRole" parameterType="map">
-	update member set mem_role=#{memRole} where mem_email=#{memEmail}
+	<!-- 등급변경 , 활성화 여부-->
+	<update id="adminMemInfo" parameterType="map">
+	update member set mem_role=#{memRole} , mem_enabled=#{memEnabled} where mem_email=#{memEmail}
 	</update>
-	<!-- 활성화 여부 -->
+	<!--  -->
 	<update id="adminMemActive" parameterType="map">
-	update member set mem_enabled=#{memEnabled} where mem_email=#{memEmail}
+	
 	</update>
 	<!--회원검색 -->
 	<select id="search" resultType="AdminMemEntity">
@@ -133,19 +133,19 @@
 	<!-- 상품 관리 페이지 -->
 	<!-- 상품목록 -->
 	<select id="itemList" resultType="AdminStoreEntity">
-	select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur, item_sale, item_color from item order by item_code asc
+	select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur, item_sale, item_color, item_src from item order by item_code asc
 	</select>
 	<!-- 상품정보 -->
 	<select id="itemInfo" resultType="map" parameterType="string">
-	select item_name, item_price, item_dur, item_sale, item_color from item where item_code = #{itemCode} 
+	select item_name, item_price, item_dur, item_sale, item_color, item_src from item where item_code = #{itemCode} 
 	</select>
 	<!-- 상품추가 -->
 	<insert id="itemInsert" parameterType="map">
-	insert into item values (#{itemCode}, #{itemName}, #{itemPrice}, #{itemDur}, #{itemSale}, #{itemColor})
+	insert into item values (#{itemCode}, #{itemName}, #{itemPrice}, #{itemDur}, #{itemSale}, #{itemColor}, #{itemSrc})
 	</insert>
 	<!-- 상품수정 -->
 	<update id="itemUpdate" parameterType="map">
-	update item set item_name = #{itemName}, item_price = #{itemPrice}, item_dur = #{itemDur}, item_sale = #{itemSale}, item_color = #{itemColor} where item_code = #{itemCode}
+	update item set item_name = #{itemName}, item_price = #{itemPrice}, item_dur = #{itemDur}, item_sale = #{itemSale}, item_color = #{itemColor}, item_src = #{itemSrc} where item_code = #{itemCode}
 	</update>
 	<!-- 상품삭제 -->
 	<delete id="itemDelete" parameterType="string">

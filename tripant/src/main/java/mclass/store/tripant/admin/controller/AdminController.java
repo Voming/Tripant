@@ -55,11 +55,14 @@ public class AdminController {
 	
 
 	 //ajax
-	 //등급변경 
-	@PostMapping("/member/role") 
+	 //회원정보 수정(등급변경 , 활성화여부)
+	@PostMapping("/member/info") 
 	@ResponseBody
-	public Integer MemberRole(Integer selectRole, String memEmail) {
+	public Integer MemberInfo(Integer selectRole, String memEmail,Integer selectActive) {
 		
+		System.out.println("###########"+selectRole);
+		System.out.println("###########"+selectActive);
+		System.out.println("###########"+memEmail);
 		String memRole = "";
 		switch(selectRole) {
 		case 1: memRole = "ROLE_SLEEP"; 
@@ -75,32 +78,14 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("memRole", memRole);
 		map.put("memEmail", memEmail);
-		int result = adminservice.adminMemRole(map);
+		map.put("memEnabled", selectActive);
+		int result = adminservice.adminMemInfo(map);
 		
 		return result;
 	}
 	
-	//ajax
-	//활성화 여부
-	@PostMapping("/member/active")
-	@ResponseBody
-	public Integer MemberActive(Integer selectActive, String memEmail) {
-		System.out.println("###########"+selectActive);
-		System.out.println("###########"+memEmail);
-		/*
-		 * String memEnabled=""; 
-		 * switch(selectActive) { case 1 :memEnabled="비활성화";
-		 * break; case 2: memEnabled="활성화"; break; }
-		 */
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("memEnabled", selectActive);
-		map.put("memEmail", memEmail);
-		int result= adminservice.adminMemActive(map);
-		
-		return result;
-	}
-
+	
+	
 	//ajax  
 	//검색 
 	@PostMapping("/member/search") 
@@ -243,7 +228,7 @@ public class AdminController {
 	// 상품추가
 	@PostMapping("/goods/insert")
 	@ResponseBody
-	public int goodsInsert(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale, String itemColor) {
+	public int goodsInsert(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale, String itemColor, String itemSrc) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
@@ -251,6 +236,7 @@ public class AdminController {
 		map.put("itemDur", itemDur != null ? itemDur : null);
 		map.put("itemSale", itemSale != null ? itemSale : null);
 		map.put("itemColor", itemColor != null ? itemColor : null);
+		map.put("itemSrc", itemSrc != null ? itemSrc : null);
 		
 		int result = adminservice.itemInsert(map);
 		
@@ -267,7 +253,7 @@ public class AdminController {
 	// 상품수정
 	@PostMapping("/goods/update")
 	@ResponseBody
-	public int goodsUpdate(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale, String itemColor) {
+	public int goodsUpdate(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale, String itemColor, String itemSrc) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
@@ -275,6 +261,7 @@ public class AdminController {
 		map.put("itemDur", itemDur != null ? itemDur : null);
 		map.put("itemSale", itemSale != null ? itemSale : null);
 		map.put("itemColor", itemColor != null ? itemColor : "");
+		map.put("itemSrc", itemSrc != null ? itemSrc : null);
 		
 		int result = adminservice.itemUpdate(map);
 		
