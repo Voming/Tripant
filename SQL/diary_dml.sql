@@ -84,7 +84,6 @@ select * from
 	    ) t1
 	) where rn  BETWEEN 1  AND  8;
 ---좋아요 조회
-
 select * from 
 (   select t1.*, rownum rn from 
         (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
@@ -209,10 +208,95 @@ select t1.*, ROWNUM rn from (
 		DIARY_DATE DESC
 		) t1
 		)
-		where 4-4  < 
-		rn and rn  <= 
-		4
+		where 4-4  < 		rn and rn  <= 		4
 ;
 select * from diary;
 delete from diary  where diary_id in (95, 96);
+
+
+
+-----------------------------24/06/27 
+-- 한개의 다이어리에 여러명의 이메일로 눌린 하트의 개수 구하기
+SELECT COUNT(*) likes
+		FROM diary_likes
+		WHERE DIARY_ID='111'
+        ;
+SELECT COUNT(*) is_my_likes		FROM diary_likes 		WHERE DIARY_ID = 111  and mem_email = 'qothwls5@naver.com'
+        ;
+SELECT diary_id		FROM diary_likes		WHERE mem_email = 'qothwls5@naver.com'
+;
+SELECT COUNT(*) likes, (SELECT COUNT(*) from diary_likes t2 where t1.DIARY_ID = t2.DIARY_ID and mem_email = 'qothwls5@naver.com') is_my_likes
+		FROM diary_likes t1
+		WHERE t1.DIARY_ID = 111
+        ;
+select diary_id, diary_views, nvl(likes,0) likes, mem_nick, diary_title, to_char(diary_date,'yyyy-MM-dd') diary_date, diary_mem_email
+    from VIEW_DIARY_MEMBER 
+        left join (select	count (mem_email) likes, diary_id from diary_likes group by diary_id) 
+        using (diary_id)
+    order by diary_views desc nulls last
+;
+select diary_id, diary_views, nvl(likes,0) likes, mem_nick, diary_title, to_char(diary_date,'yyyy-MM-dd') diary_date, diary_mem_email
+    from VIEW_DIARY_MEMBER 
+        left join (select	count (mem_email) likes, diary_id from diary_likes group by diary_id)   using (diary_id)
+    order by likes desc nulls last
+;
+select diary_id, diary_views, nvl(likes,0) likes, mem_nick, diary_title, to_char(DIARY_DATE,'yyyy-MM-dd') diary_date, diary_mem_email
+            , DBMS_LOB.SUBSTR(D.DIARY_CONTENT, 1000) DIARY_CONTENT
+            , DIARY_THEME
+            , PLAN_AREA_CODE
+            , DIARY_OPEN
+            , diary_date diary_date_real -- realtime dto just order by
+    from VIEW_DIARY_MEMBER 
+        left join (select	count (mem_email) likes, diary_id from diary_likes group by diary_id) 
+        using (diary_id)
+    order by diary_date_real desc nulls last
+;
+desc diary_likes;
+
+-- 나의 조회수 
+select 
+    (SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID  and t1.mem_email = 'seojw0730@gmail.com') is_my_likes, 
+    t2.* 
+from 
+(   select t1.*, rownum rn from 
+        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+             NVL(likes,0) likes,
+                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+                , diary_date diary_date_real
+                FROM   VIEW_DIARY_MEMBER_PLAN 
+            LEFT OUTER JOIN (select	count (mem_email) likes, diary_id from diary_likes group by diary_id)  USING (diary_id)
+                WHERE
+                    DIARY_OPEN = 0 
+            --AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = '서울')
+                ORDER BY likes DESC NULLS LAST
+    ) t1
+)t2 where rn between 1 and 100  
+;
+  
+  select 
+    (SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID  and t1.mem_email = 'seojw0730@gmail.com') is_my_likes, 
+    t2.* 
+from 
+(   select t1.*, rownum rn from 
+        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+                , diary_date diary_date_real
+                FROM   VIEW_DIARY_MEMBER_PLAN 
+                WHERE
+                    DIARY_OPEN = 0 
+            --AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = '서울')
+                ORDER BY diary_date_real DESC NULLS LAST
+    ) t1
+)t2 where rn between 1 and 100  
+--OK
+;
+  
+  
+        
 commit;
