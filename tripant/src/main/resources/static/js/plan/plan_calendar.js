@@ -80,7 +80,9 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 		}
 		//시간 테이블 생성
 		displayDayTable();
-		displayStayBox();
+		//숙소 화면 초기화
+		restStayBox();
+		restStaytab();
 	}
 });
 
