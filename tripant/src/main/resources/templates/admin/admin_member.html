@@ -50,6 +50,7 @@
 							<li>가입일자</li>
 							<li>탈퇴일자</li>
 							<li>등급</li>
+							<li>활성화</li>
 							<li></li>
 						</ul>
 					</li>
@@ -62,6 +63,7 @@
 							<li th:text="${memList.memJoinDate}"></li>
 							<li th:text="${memList.memQuitDate}"></li>
 							<li th:text="${memList.memRole}"></li>
+							<li><button type="button" class="btn-ac">활성화</button></li>
 							<li><button type="button" class="btn">편집</button></li>
 						</ul>
 						</th:block>
