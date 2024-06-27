@@ -15,6 +15,7 @@ public class AdminStoreEntity {
 		private Integer itemDur;
 		private Integer itemSale;
 		private String itemColor;
+		private String itemSrc;
 		
 		private String memNick;
 		private String memEmail;
