@@ -56,10 +56,13 @@ public class AdminController {
 
 	 //ajax
 	 //등급변경 
-	@PostMapping("/member/role") 
+	@PostMapping("/member/info") 
 	@ResponseBody
-	public Integer MemberRole(Integer selectRole, String memEmail) {
+	public Integer MemberInfo(Integer selectRole, String memEmail,Integer selectActive) {
 		
+		System.out.println("###########"+selectRole);
+		System.out.println("###########"+selectActive);
+		System.out.println("###########"+memEmail);
 		String memRole = "";
 		switch(selectRole) {
 		case 1: memRole = "ROLE_SLEEP"; 
@@ -75,32 +78,12 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("memRole", memRole);
 		map.put("memEmail", memEmail);
-		int result = adminservice.adminMemRole(map);
+		map.put("memEnabled", selectActive);
+		int result = adminservice.adminMemInfo(map);
 		
 		return result;
 	}
 	
-	//ajax
-	//활성화 여부
-	@PostMapping("/member/active")
-	@ResponseBody
-	public Integer MemberActive(Integer selectActive, String memEmail) {
-		System.out.println("###########"+selectActive);
-		System.out.println("###########"+memEmail);
-		/*
-		 * String memEnabled=""; 
-		 * switch(selectActive) { case 1 :memEnabled="비활성화";
-		 * break; case 2: memEnabled="활성화"; break; }
-		 */
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("memEnabled", selectActive);
-		map.put("memEmail", memEmail);
-		int result= adminservice.adminMemActive(map);
-		
-		return result;
-	}
-
 	//ajax  
 	//검색 
 	@PostMapping("/member/search") 

@@ -89,14 +89,6 @@
 	background-color:white;
 }
 
-.col.list .btn-ac{
-	border-radius:8px;
-	border:solid black 1px;
-	height:30px;
-	width:55px;
-	background-color:white;
-}
-
 .col.list .btn:hover{
 	background-color:black;
 	color:white;
