@@ -600,7 +600,7 @@ ALTER TABLE "CART" ADD CONSTRAINT "FK_MEMBER_TO_CART_1" FOREIGN KEY (
 )
 REFERENCES "MEMBER" (
 	"MEM_EMAIL"
-);
+) ON DELETE CASCADE; 
 
 ALTER TABLE "PLAN_SPOT" ADD CONSTRAINT "FK_PLAN_SCHEDULE_TO_PLAN_SPOT_1" FOREIGN KEY (
 	"SPOT_DAY"
@@ -670,7 +670,7 @@ ALTER TABLE "PLAN_MEMBER" ADD CONSTRAINT "FK_MEMBER_TO_PLAN_MEMBER_1" FOREIGN KE
 )
 REFERENCES "MEMBER" (
 	"MEM_EMAIL"
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE "PLAN_SCHEDULE" ADD CONSTRAINT "FK_PLAN_TO_PLAN_SCHEDULE_1" FOREIGN KEY (
 	"SCHEDULE_PLAN_ID"
@@ -684,7 +684,7 @@ ALTER TABLE "DIARY" ADD CONSTRAINT "FK_MEMBER_TO_DIARY_1" FOREIGN KEY (
 )
 REFERENCES "MEMBER" (
 	"MEM_EMAIL"
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE "DIARY" ADD CONSTRAINT "FK_PLAN_TO_DIARY_1" FOREIGN KEY (
 	"DIARY_PLAN_ID"
@@ -733,7 +733,7 @@ ALTER TABLE "DIARY_LIKES" ADD CONSTRAINT "FK_MEMBER_TO_DIARY_LIKES_1" FOREIGN KE
 )
 REFERENCES "MEMBER" (
 	"MEM_EMAIL"
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE "DIARY_REPORTS" ADD CONSTRAINT "FK_DIARY_TO_DIARY_REPORTS_1" FOREIGN KEY (
 	"DIARY_ID"
@@ -747,7 +747,7 @@ ALTER TABLE "DIARY_REPORTS" ADD CONSTRAINT "FK_MEMBER_TO_DIARY_REPORTS_1" FOREIG
 )
 REFERENCES "MEMBER" (
 	"MEM_EMAIL"
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE "DIARY_SAVE" ADD CONSTRAINT "FK_DIARY_TO_DIARY_SAVE_1" FOREIGN KEY (
 	"DIARY_ID"
@@ -852,6 +852,7 @@ BEGIN
 select item_dur into font_dur from item where item_code = :new.item_code;
 if(substr(:new.item_code, 1, 1) = 'F') then
 update member set mem_font_dur = mem_font_dur + font_dur where mem_email = :new.mem_email;
+update member set mem_role = 'ROLE_VIP' where mem_email = :new.mem_email;
 end if;
 END;
 /
@@ -874,5 +875,32 @@ if(substr(:new.item_code, 1, 1) = 'F') then
     update member set mem_font_dur = mem_font_dur - del_dur where mem_email = :new.mem_email;
     end if;
 end if;
+END;
+/
+
+-- 스케줄러
+---- 회원
+------ 글꼴 여부로 등급 변경
+create or replace procedure pro_mem_is_vip
+as
+begin
+    update member set mem_font_dur = mem_font_dur - 1;
+    update member set mem_role = 'ROLE_MEM' where mem_font_dur = 0;
+    commit;
+end;
+/
+
+BEGIN
+DBMS_SCHEDULER.CREATE_JOB (
+            job_name => 'mem_is_vip',
+            job_type => 'plsql_block',
+            job_action => 'pro_mem_is_vip',
+            number_of_arguments => 0,
+            start_date => TRUNC(SYSDATE+1),
+            repeat_interval => 'FREQ=DAILY;INTERVAL=1',
+            end_date => NULL,
+            enabled => FALSE,
+            auto_drop => FALSE,
+            comments => '글꼴 보유 여부');
 END;
 /
