@@ -52,7 +52,7 @@ function spotCkBtnClickHandler(thisElement) {
 		timeInfoUpdate();// 총 시간 업데이트
 
 	} else { //=====================================체크박스 선택=========================================
-		calendarPlan.spotArr[markersSpot.length] = new spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
+		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
 		setMarkersSpot(map); // 마커 지도에 표시하기
 
