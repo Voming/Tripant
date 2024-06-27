@@ -115,9 +115,11 @@ select {
 	font-size: var(--font3);
 	margin: 10px;
 }
+
 .diary-date_nickname {
-	display:flex;
+	display: flex;
 }
+
 .diary-date {
 	font-size: var(--font4);
 	margin: 8px;
@@ -167,14 +169,26 @@ select {
 	cursor: pointer;
 	width: 32px; /* 아이콘 크기 조절 */
 	height: 32px;
+	align-content: center;
 }
 /*view 위치 조정  */
 .diary-views {
 	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;;
+	align-items: flex-end;
 }
+
 .diary-diaryViews {
 	margin: 10px;
 }
-.views-t{
+.diary-like{
+	/* 하트 가운데 정렬하기 */
+	display:flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.views-t {
 	margin: 10px;
-} 
+}
