@@ -29,18 +29,4 @@ function timeDoneBtnClickHandler(thisElement) {
 
 let editArr = [];
 
-function displayEditInfo(){
-	sessionLength = editStorage.length;
-	for(var i = 0 ; i<sessionLength ; i++){
-		let obj = JSON.parse(editStorage.getItem(i));
-		let objKey = obj.travelOrder;
-		
-		let existArr = editArr.find(arr => arr[0].a ===objKey); 
-		if(!existArr){
-			editArr.push([obj]);
-		}else{
-			existArr.push(obj);
-		}
-	}
-	console.log(editArr);
-}
+

@@ -40,10 +40,27 @@ function unescapeHtml(str) {
 
 }
 /* 시간 관련 js 설정*/
+//
+function secToHoursAndMin(stayTime){
+	let hours = Math.floor(stayTime/3600);
+	let minutes = stayTime % 3600;
+	return [hours,minutes];
+}
+
+// 시, 분으로 값 분리
+function dividTime(timeStr){
+	 //time.split(':') >> ["11", "30"]로 분리
+	 //.map(Number) >> [11, 30]로 분리하여 각 변수 hours, minutes에 할당
+	let[hours,minutes] = timeStr.split(':').map(Number);
+	
+	//배열로 반환
+	return [hours,minutes];
+}
+
 //시간 더하기
-function addTime(time, stayTime){
+function addTime(timeStr, stayTime){
 	//앞 장소의 떠나는 시각(또는 하루 일정 시작 시각) 11:00 을 :을 기준으로 시와 분으로 담기
-	let[hours,minutes] = time.split(':').map(Number);
+	let[hours,minutes] =dividTime(timeStr);
 	
 	// 분단위로 바꿔서 도착시간과 머무는 시간 합하기
 	//도착시각 + 머무는 시간 또는 이전 장소에서 출발 시각 + 이동시간
@@ -135,13 +152,16 @@ function displayInfo(){
 					startTime =  addTime(endTime,prevDuration);
 					endTime = 	details.scheduleEnd;
 				}
+				
 				tripIdx = i;
 				//sessionStorage 에 담을 객체
 				spotInfo = {
 					'travelDate' : details.travelDate,
+					'travelStart' : details.scheduleStart,
+					'travelEnd' : details.scheduleEnd,
 					'tripIdx' : i,  /*여행 기간*/
 					'jdx': j,
-					'travelOrder' : info.travelOrder, /* 하루 내 장소 방문 순서*/
+					'travelOrder' : info.travelOrder, /* 하루 내 장소 방문 순서 //  숙소 : null*/
 					'stayTime' : info.stayTime,
 					'title' : info.title,
 					'memo' : info.memo,
@@ -158,7 +178,7 @@ function displayInfo(){
 				
 				//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
 				//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
-				prevDuration = duration
+				prevDuration = duration;
 				
 
 				
@@ -174,7 +194,7 @@ function displayInfo(){
 				 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>`;
 				 
 				 //이미지 링크 유무에 따른 src 설정		
-				 if(infoCount.firstimage != null){ //이미지 값이 있을 때
+				 if(info.firstimage != null){ //이미지 값이 있을 때
 					htmlval += `
 					<div class="spot-img wfull hfull"><img class=" wfull hfull" src="${info.firstimage}" ></div>
 					`;

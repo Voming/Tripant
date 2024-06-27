@@ -2,14 +2,14 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 	<!-- edit trip list -->
 	<div th:fragment="edit-tourlist" class="edit-tourlist hide scrollbar flex">
-		<div class="wrap-detaillist flex" th:with="idx=0"> 
+		<div class="wrap-detaillist flex" > 
 			<div th:each="details,daylist:${detailList}" class="column flex" th:data-columns="${daylist.count}" th:id="'#tab'+${daylist.count}" th:with="jdx=0">
 				<div class="sub-title flex ">
 					<h4 th:text="${daylist.count} + '일차'" class="nday"></h4>
 					<h6 th:text="${details.travelDate}" class="date"></h6>
 				</div>
 			 	<div  class="container flex wfull">
-			 		<div th:each="info,idxlist:${details.dayDetailInfoEntity}"  class="spot-block draggable"  draggable ="true" th:attr="data-idx = ${idx}, data-jdx=${jdx} " th:with="idx=${idx+1}, jdx= ${jdx+1}">
+			 		<div th:each="info,idxlist:${details.dayDetailInfoEntity}"  class="spot-block draggable"  draggable ="true" >
 					 	
 					 	<!-- 머무는 시간 설정 -->
 					 	<div class="timerange-modal hide" >
@@ -42,12 +42,12 @@
 					 		
 					 		<div class="spot-caricon"><img style="width:20px;height: 20px;" th:src="@{/images/icons/carIcon.png}" /></div>
 					 		<div class="spot-move"> 45분> </div>
-					 	<!-- 쓰레기통 버튼 -->
+					 	<!-- x 버튼 -->
 							<button class="spot-setting" > 
 								<img class="wfull img trash-bin "  th:src="@{/images/icons/cancel.png}"/>
 							</button>
-					    </div><!-- spot-block  -->
-				    </div>
+					    </div><!-- spot  -->
+				    </div><!-- spot-block  -->
 			    </div> <!-- container  -->
 			</div>	<!-- column -->
 	    <!-- 미니 모달창 -->
