@@ -22,6 +22,18 @@ public class DiaryService {
 	public List<DiaryBoardEntity> selectDiaryList(String areaname, int maxNum) {
 		return diaryRepository.selectDiaryList(areaname, maxNum);
 	}
+	// 최신순 정렬
+	public List<DiaryBoardEntity> getLatestDiaries(String areaname, int maxNum) {
+		return diaryRepository.selectLatest(areaname, maxNum);
+	}
+	// 좋아요 정렬
+	public List<DiaryBoardEntity> selectLikesPopular(String areaname, int maxNum) {
+		return diaryRepository.selectLikesPopular(areaname, maxNum);
+	}
+	// 조회수 정렬
+	public List<DiaryBoardEntity> selectViewsPopular(String areaname, int maxNum) {
+		return diaryRepository.selectViewsPopular(areaname, maxNum);
+	}
 
 	// mydiary 모든 내가 쓴 글()조회해서 가져오기
 	public List<DiaryBoardEntity> selectMyDiaryList(String email, int maxNum) {
@@ -61,16 +73,7 @@ public class DiaryService {
 		}
 	}
 
-	// 최신순 정렬
-	public List<DiaryBoardEntity> getLatestDiaries() {
-		return diaryRepository.selectLatest();
-	}
-
-	// 좋아요순 정렬
-	public List<DiaryBoardEntity> getPopularDiaries() {
-		return diaryRepository.selectPopular();
-	}
-
+	
 	// 조회수 증가
 	public DiaryBoardEntity getDiaryById(int diaryId) {
 		diaryRepository.incrementDiaryViews(diaryId);

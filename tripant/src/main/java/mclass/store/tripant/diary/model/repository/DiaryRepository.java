@@ -17,7 +17,13 @@ public interface DiaryRepository {
 
 	// 전체글 목록
 	public List<DiaryBoardEntity> selectDiaryList(@Param("areaname") String areaname, @Param("maxNum") int maxNum);
-
+	// 최신순 정렬
+	List<DiaryBoardEntity> selectLatest(@Param("areaname") String areaname, @Param("maxNum") int maxNum);
+	// 좋아요 정렬
+	List<DiaryBoardEntity> selectLikesPopular(@Param("areaname") String areaname, @Param("maxNum") int maxNum);
+	// 조회수 정렬
+	List<DiaryBoardEntity> selectViewsPopular(@Param("areaname") String areaname, @Param("maxNum") int maxNum);
+	
 	// 나의 모든 글 조회
 	public List<DiaryBoardEntity> selectMyDiaryList(@Param("email") String diaryMemEmail, @Param("maxNum") int maxNum);
 
@@ -44,12 +50,7 @@ public interface DiaryRepository {
 	// 다이어리 삭제
 	  void deleteDiaryById(@Param("diaryId") int diaryId);
 	
-	
-	// 최신순 정렬
-	List<DiaryBoardEntity> selectLatest();
 
-	// 인기순 정렬
-	List<DiaryBoardEntity> selectPopular();
 	
 	// 이미지 url 받아오기
 

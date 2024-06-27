@@ -2,7 +2,6 @@ $(loaededHandler);
 function loaededHandler(){
 	//공유-모달창
 	$('.share').on("click",shareHandler);
-	
 	//신고하기
 	$('.report').on("click",reportHandler);
 	// 삭제하기
