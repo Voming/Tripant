@@ -34,13 +34,23 @@
 	</select>
 	
 	<!--게시글 조건검색(select)  -->
-	<select id="keywordsearch"  resultType="AdminBoardEntity">
+	<select id="keywordsearch"  parameterType="map" resultType="AdminBoardEntity">
 	select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
 	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
 	from DIARY a
 	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
 	join member on diary_mem_email=mem_email
-	where mem_nick like '%${memNick}%'
+	<if test='write != null and write !=""'>
+		<bind name="keyword" value="'%'+write+'%'" />
+		<choose>
+			<when test="pick.equals('title')">
+				where diary_title like #{keyword}
+			</when>
+			<when test="pick.equals('nick')">
+				where mem_nick like #{keyword}
+			</when>
+		</choose>
+	</if>
 	</select>
 	
 	<!--좋아요 순으로 정렬 -->

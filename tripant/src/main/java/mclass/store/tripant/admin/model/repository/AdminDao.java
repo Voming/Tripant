@@ -30,7 +30,7 @@ public interface AdminDao {
 	public List<AdminBoardEntity> boardList();
 	
 	//게시글 검색(select)
-	public List<AdminBoardEntity> keywordsearch(String memNick);
+	public String keywordsearch(Map<String, Object> map);
 	
 	//좋아요 많은 순으로 정렬
 	public List<AdminBoardEntity> boardLike();
@@ -76,4 +76,6 @@ public interface AdminDao {
 	
 	//페이징처리
 	public List<Map<String, Object>> page(Map<String, Object> map);
+	public int getCount();
+	
 }
