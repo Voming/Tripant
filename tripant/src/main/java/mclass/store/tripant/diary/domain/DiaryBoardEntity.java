@@ -33,6 +33,7 @@ public class DiaryBoardEntity {
 	private Integer diaryViews;
 	private String diaryTheme;
 	private String memNick;
+	private Integer isMyLikes;
 
 //	public void setDiaryContent(String diaryContent) {
 //		this.diaryContent = diaryContent;

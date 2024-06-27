@@ -29,10 +29,11 @@ function restStayBox() {
 					<div class="selected-stay-number" style="background-color:var(--color_gray);">
 						<p>${i + 1}</p>
 					</div>
-					<img class="selected-stay-img" src="/images/plan/stay_plus.png">
-					<div class="selected-stay-txt">
+					<img class="box-stay-img" src="/images/plan/stay_plus.png">
+					<div class="box-stay-txt">
 						<span style="font-size:var(--font5); color:var(--color_gray);">${start} ~ ${end}</span>
 						<span style="font-size:var(--font6); color:pink;">숙소를 추가해주세요</span>
+						<span class="box-start" value="${start}" style ="display:none"></span> 
 					</div>
 					<div>
 						<img class="delete btn" src="/images/icons/trashcan.png" onclick="stayDeleteBtnClickHandler(this);">
@@ -72,15 +73,21 @@ function stayModalDoneBtnClickHandler() {
 
 	//모달 닫기
 	$(".stay-modal").removeClass("show");
+	//저장 전 전체 초기화 체크박스 해제
+	$(".staycheck").prop("checked", false);
+	markersStay.length = 0;
+	setMarkersStay(null);
+	
 	//화면에 있던 정보 저장(stay-tab 개수 만큼 반복문)
-
+	$(".wrap-stay-tab").each(function(tabElement) {
+		console.log($(tabElement));
+		$(".selected-stay-box").each(function(boxElement) {
+			console.log($(boxElement));
+		});
+	});
 
 	// 장소 설정 정보 부분 업데이트
 	$(".count-stay").html(markersStay.length);
-
-	$(".wrap-stay-tab").each(function() {
-		console.log(this);
-	});
 }
 
 // 숙소 + 탭 클릭

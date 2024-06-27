@@ -37,9 +37,7 @@
 				<div class="diary-tab-content">
 					<th:block th:each="num : ${#numbers.sequence(1,18)}">
 						<div th:id="'tab'+${num}">
-							<div class="wrap-diary">
-								<div class="wrap-d-content" th:replace="~{diary/diary_area_fragment :: diaryitemlist}" ></div>
-							</div>
+							<div class="wrap-diary" th:replace="~{diary/diary_area_fragment :: diaryitemlist}">	</div>
 						</div>
 					</th:block>
 				</div>

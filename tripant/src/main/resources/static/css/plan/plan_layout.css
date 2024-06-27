@@ -4,6 +4,19 @@
 	font-family: 'Binggrae';
 }
 
+/* 스크롤바 설정 */
+.scrollbar::-webkit-scrollbar{
+     height: 10px;  /* 오른쪽 왼쪽 스크롤바 폭 너비 */
+     width: 10px;  /* 위 아래 스크롤바 폭 너비 */
+}
+.scrollbar::-webkit-scrollbar-thumb{
+   border-radius: 10px;
+   border: 7px solid var(--color_gray);
+}
+.scrollbar::-webkit-scrollbar-corner {
+   background: transparent;
+}
+
 .main-wrapper .flex {
 	display: flex;
 }

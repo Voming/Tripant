@@ -76,14 +76,18 @@ select {
 /* 글 리스트 */
 .wrap-d-content {
 	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row; /*수평 정렬*/
+	/* 기본값으로 삭제함. 
+	flex-wrap: nowrap;
+	flex-direction: row; 수평 정렬
+	 */
 	margin-top: 24px;
 	margin-bottom: 24px;
 }
 
 .wrap-content {
 	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 
 .wrap-d-content:nth-child(2n) {
@@ -93,7 +97,7 @@ select {
 .diary-img {
 	width: 350px;
 }
-
+/* 
 .wrap-d-content:nth-child(2n-1) .diary-like {
 	position: absolute;
 	top: 0;
@@ -104,13 +108,16 @@ select {
 	position: absolute;
 	bottom: 0;
 	right: 0;
-}
-/* 제목, 날짜, 미리보기  */
+} 
+*/
+/* 제목, 날짜, 닉네임, 미리보기  */
 .diary-title {
 	font-size: var(--font3);
 	margin: 10px;
 }
-
+.diary-date_nickname {
+	display:flex;
+}
 .diary-date {
 	font-size: var(--font4);
 	margin: 8px;
@@ -128,7 +135,8 @@ select {
 
 /*글 가운데로 넓이 줘서 고정시키기  */
 .diary-content {
-	width: 610px;
+	/* width: 610px; */
+	display: flex;
 }
 /* 버튼 가운데 정렬 */
 .btn-more {
@@ -161,12 +169,12 @@ select {
 	height: 32px;
 }
 /*view 위치 조정  */
+.diary-views {
+	display: flex;
+}
 .diary-diaryViews {
-	top: 120px;
-	position: relative;
+	margin: 10px;
 }
 .views-t{
-	top: 132px;
-	right:32px;
-    position: relative;
-}
+	margin: 10px;
+} 
