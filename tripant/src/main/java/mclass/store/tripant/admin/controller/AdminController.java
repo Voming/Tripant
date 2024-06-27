@@ -102,7 +102,7 @@ public class AdminController {
 	//게시글 검색(select)  //TODO
 	@PostMapping("/keyword")
 	@ResponseBody
-	public String keywordSearch(Model model,@RequestParam String write, @RequestParam String pick) {
+	public List<AdminBoardEntity> keywordSearch(Model model,@RequestParam String write, @RequestParam String pick) {
 		Map<String, Object> map=new HashMap<>();
 		map.put("write",write);
 		map.put("pick",pick);

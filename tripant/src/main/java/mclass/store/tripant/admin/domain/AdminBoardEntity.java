@@ -17,6 +17,4 @@ public class AdminBoardEntity {
 	private Integer likes; //좋아요수
 	private Integer reports;  //신고수
 	
-
-	
 }

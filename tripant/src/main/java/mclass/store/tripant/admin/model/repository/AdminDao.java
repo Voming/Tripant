@@ -30,7 +30,7 @@ public interface AdminDao {
 	public List<AdminBoardEntity> boardList();
 	
 	//게시글 검색(select)
-	public String keywordsearch(Map<String, Object> map);
+	public List<AdminBoardEntity> keywordsearch(Map<String, Object> map);
 	
 	//좋아요 많은 순으로 정렬
 	public List<AdminBoardEntity> boardLike();
