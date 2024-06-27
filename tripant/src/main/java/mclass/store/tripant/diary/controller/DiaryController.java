@@ -36,14 +36,14 @@ public class DiaryController {
 		mv.setViewName("diary/diary_board");
 		return mv;
 	}
-	// 전체 글보기(공개 글)
-	@PostMapping("")
-	public String diary2(Model model, String areaname, Integer clickNum) {
-		int maxNum = (clickNum + 1) * 3;
-		model.addAttribute("diaries", diaryService.selectDiaryList(areaname, maxNum));
-		return "diary/diary_area_fragment";
-	}
-	//최신순 정렬
+	// 전체 글보기(공개 글) -- 
+//	@PostMapping("")
+//	public String diary2(Model model, String areaname, Integer clickNum) {
+//		int maxNum = (clickNum + 1) * 3;
+//		model.addAttribute("diaries", diaryService.selectDiaryList(areaname, maxNum));
+//		return "diary/diary_area_fragment";
+//	}
+	//최신순 정렬 // 전체 글보기(공개 글) 
     @PostMapping("/popular/latest")
     public String getLatestDiaries(Model model, String areaname, Integer clickNum) {
 		int maxNum = (clickNum + 1) * 3;

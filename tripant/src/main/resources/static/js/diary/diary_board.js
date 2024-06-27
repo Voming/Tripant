@@ -32,7 +32,7 @@ function tabMenuClickHandler() {
 
 	// ajax 요청
 	$.ajax({
-		url: contextPath + "diary"
+		url: contextPath + "diary" + "/popular/" + $("#sortOption").val()
 		, method: "post"
 		, data: {
 			areaname: areaname,
@@ -67,9 +67,10 @@ function btnLikeClickHandler(thisElement) {
 
 function moreBtnClickHandler(thisElement) {
 	clicknum += 1;
+
 	// ajax 요청
 	$.ajax({
-		url: contextPath + "diary"
+		url: contextPath + "diary" + "/popular/" + $("#sortOption").val()
 		, method: "post"
 		, data: {
 			areaname: areaname,
@@ -79,7 +80,7 @@ function moreBtnClickHandler(thisElement) {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_content) {
 		$(".wrap-d-content").replaceWith(wrap_content);
-		//TODO with voming
+		
 		$.each($(".diary-preview"), function(idx, thisElement) {
 			var contentElement = $(thisElement).html();
 			console.log($(thisElement).text());

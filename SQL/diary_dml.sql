@@ -65,7 +65,45 @@ FROM diary d
 JOIN plan p ON d.diary_plan_id = p.plan_id
 WHERE d.diary_mem_email = 'qothwls5@naver.com';
 
+--여행기 조회하기
+select * from 
+	(   select t1.*, rownum rn from 
+	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+	                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+	                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+	                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+	                , diary_date diary_date_real
+	                FROM   VIEW_DIARY_MEMBER_PLAN 
+	                WHERE
+	                    DIARY_OPEN = 0
+	             		
+	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = '서울')
+	            		
+	                ORDER BY diary_date_real DESC NULLS LAST
+	    ) t1
+	) where rn  BETWEEN 1  AND  8;
+---좋아요 조회
 
+select * from 
+(   select t1.*, rownum rn from 
+        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+             NVL(likes,0) likes,
+                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+                , diary_date diary_date_real
+                FROM   VIEW_DIARY_MEMBER_PLAN 
+            LEFT OUTER JOIN (select	count (mem_email) likes, diary_id from diary_likes group by diary_id)  USING (diary_id)
+                WHERE
+                    DIARY_OPEN = 0 
+            --AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = '서울')
+                ORDER BY likes DESC NULLS LAST
+    ) t1
+) where rn <= 3  
+--OK
+;
 ----view 생성 하고 read only 사용
 create or replace view view_diary_member
 as 
