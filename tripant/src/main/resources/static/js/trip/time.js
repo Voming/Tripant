@@ -41,6 +41,7 @@ function unescapeHtml(str) {
 }
 /* 시간 관련 js 설정*/
 //
+let arrLeng=[];
 function secToHoursAndMin(stayTime){
 	let hours = Math.floor(stayTime/3600);
 	let minutes = stayTime % 3600;
@@ -60,7 +61,6 @@ function dividTime(timeStr){
 //시간 더하기
 function addTime(timeStr, stayTime){
 	//앞 장소의 떠나는 시각(또는 하루 일정 시작 시각) 11:00 을 :을 기준으로 시와 분으로 담기
-	console.log(timeStr);
 	let[hours,minutes] =dividTime(timeStr);
 	
 	// 분단위로 바꿔서 도착시간과 머무는 시간 합하기
@@ -169,7 +169,8 @@ function displayInfo(){
 					'lat' : info.lat,
 					'lng' : info.lng,
 					'startTime' : startTime,
-					'endTime':endTime
+					'endTime':endTime,
+					'sessionOrder':sessionOrder
 				}
 				
 				//각 spot의 정보를 객체에 담아 번호순대로 key값을 지정하여 sessionStorage에 넣기

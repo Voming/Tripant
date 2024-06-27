@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.main-wrapper .schedule-wrapper .edit-tourlist{
+	    background-color: #F7F8F9;
+}
 .main-wrapper .edit-tourlist .spot-setting{
 	/* 모든 설정 초기화 */
     border: none;
