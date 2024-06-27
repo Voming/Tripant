@@ -797,7 +797,8 @@ create or replace view view_plan_member
 as (select * from plan join plan_member using (plan_id) )
 ;
 -- TRIGGER
----- 회원 탈퇴 시 insert into quit_member-> delete from member
+---- 회원
+------ 회원 탈퇴 시 insert into quit_member-> delete from member
 create or replace NONEDITIONABLE TRIGGER trg_member_quit
     BEFORE delete ON member
     REFERENCING OLD AS OLD
@@ -817,7 +818,7 @@ BEGIN
    );
 END;
 /
----- 회원별 신고 누적 10개 시 정지
+------ 회원별 신고 누적 10개 시 정지
 create or replace NONEDITIONABLE TRIGGER trg_member_stop
     after insert ON diary_reports
     REFERENCING new AS new
@@ -837,5 +838,41 @@ BEGIN
     -- 정지
     update member set mem_enabled = 0 where mem_email = stop_email;
     end if;
+END;
+/
+---- 스토어
+------ 글꼴 구매 시 글꼴 기간 연장
+create or replace NONEDITIONABLE TRIGGER trg_member_font
+    after insert ON buy
+    REFERENCING new AS new
+    FOR EACH ROW
+DECLARE
+font_dur item.item_dur%type;
+BEGIN
+select item_dur into font_dur from item where item_code = :new.item_code;
+if(substr(:new.item_code, 1, 1) = 'F') then
+update member set mem_font_dur = mem_font_dur + font_dur where mem_email = :new.mem_email;
+end if;
+END;
+/
+------ 글꼴 구매 취소 시 글꼴 기간 단축
+create or replace NONEDITIONABLE TRIGGER trg_member_font
+    after delete ON buy
+    REFERENCING new AS new
+    FOR EACH ROW
+DECLARE
+font_dur member.mem_font_dur%type;
+del_dur item.item_dur%type;
+BEGIN
+select mem_font_dur into font_dur from member where mem_email = :new.mem_email;
+select item_dur into del_dur from item where item_code = :new.item_code;
+if(substr(:new.item_code, 1, 1) = 'F') then
+    if(font_dur < del_dur) then
+    update member set mem_font_dur = 0 where mem_email = :new.mem_email;
+    end if;
+    if(font_dur >= del_dur) then
+    update member set mem_font_dur = mem_font_dur - del_dur where mem_email = :new.mem_email;
+    end if;
+end if;
 END;
 /
