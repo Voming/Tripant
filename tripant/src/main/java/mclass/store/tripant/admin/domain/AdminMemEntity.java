@@ -13,4 +13,5 @@ public class AdminMemEntity {
 	private String memJoinDate;
 	private String memQuitDate;
 	private String memRole;
+	private Integer memEnabled;
 }

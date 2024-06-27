@@ -1,6 +1,7 @@
 var clickspotnum = 0;
 var clickspotfindnum = 0;
 var spottype;
+var spotboxCount;
 //검색명
 var findArea;
 
@@ -124,7 +125,7 @@ function btnSpotFindClickHandler() {
 		$(".wrap-spotList").replaceWith(wrap_spot);
 
 		//결과값 null(검색 결과 더보기) 체크
-		var spotboxCount = $(".spot-box").length;
+		spotboxCount = $(".spot-box").length;
 		var htmlVal;
 		if (spotboxCount == 0) { //결과 없음
 			htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
@@ -159,7 +160,7 @@ function spotFindMoreBtnClickHandler(thisElement) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
 
 		//결과값 null(검색 결과 더보기) 체크
-		var spotboxCount = $(".spot-box").length;
+		spotboxCount = $(".spot-box").length;
 		if (spotboxCount >= 40 * clickspotfindnum) {
 			var htmlVal = `
 				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"

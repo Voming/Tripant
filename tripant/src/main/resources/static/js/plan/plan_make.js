@@ -7,7 +7,7 @@ class CalendarDate {
 	}
 	startTime; //10:00
 	endTime;   //22:00
-	stay;      //숙소명
+	stay = new Stay();  //숙소
 }
 
 class Spot {
@@ -18,6 +18,15 @@ class Spot {
 		this.mapy = mapy;
 	}
 	spotTime;
+}
+
+class Stay {
+	constructor(id, title, mapx, mapy, img) {
+		this.id = id;
+		this.title = title;
+		this.mapx = mapx;
+		this.mapy = mapy;
+	}
 }
 
 class CalendarPlan {

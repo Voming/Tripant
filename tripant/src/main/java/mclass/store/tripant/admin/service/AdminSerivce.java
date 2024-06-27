@@ -22,9 +22,9 @@ public class AdminSerivce {
 		return admindao.selectMemList();
 	}
 	
-	//등급변경
-	public Integer adminMemRole(Map<String, Object> map) {
-		return admindao.adminMemRole(map);
+	//등급변경 활성화 여부
+	public Integer adminMemInfo(Map<String, Object> map) {
+		return admindao.adminMemInfo(map);
 	}
 	
 	//회원검색

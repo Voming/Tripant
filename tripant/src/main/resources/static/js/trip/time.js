@@ -41,6 +41,7 @@ function unescapeHtml(str) {
 }
 /* 시간 관련 js 설정*/
 //
+let arrLeng=[];
 function secToHoursAndMin(stayTime){
 	let hours = Math.floor(stayTime/3600);
 	let minutes = stayTime % 3600;
@@ -168,7 +169,8 @@ function displayInfo(){
 					'lat' : info.lat,
 					'lng' : info.lng,
 					'startTime' : startTime,
-					'endTime':endTime
+					'endTime':endTime,
+					'sessionOrder':sessionOrder
 				}
 				
 				//각 spot의 정보를 객체에 담아 번호순대로 key값을 지정하여 sessionStorage에 넣기

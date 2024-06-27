@@ -13,20 +13,18 @@ function timeDoneBtnClickHandler(thisElement) {
 
 	var hours = $(thisElement).parent().children('.spot-hours').val();
 	var mins = $(thisElement).parent().children('.spot-mins').val();
-	var idx =  $(thisElement).parents('.spot-block').data('idx');
+	var key = $(thisElement).parents('.spot-block.draggable').data('sessionkey');
 	
 	var timeVal = hours*3600 + mins*60;
-	console.log("timeVal");
-	console.log(timeVal);
+	var temp = JSON.parse(editStorage.getItem(key));
 	
-	changeStayTime= JSON.parse(editStorage.getItem(idx));
-	changeStayTime.stayTime=timeVal;
+	temp.stayTime = timeVal;
 	
-	console.log(editStorage.setItem(idx,JSON.stringify(changeStayTime)));
+	// 수정된 객체를 다시 JSON 문자열로 변환하여 sessionStorage에 저장
+	editStorage.setItem(key, JSON.stringify(temp));
 	
-	$(thisElement).parents('.spot-block').find('.timerange').text(timeVal);
+	displayEditInfo();
+	circleColorHandler();
 }
-
-let editArr = [];
 
 

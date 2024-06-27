@@ -22,6 +22,7 @@ async function itemUpdateHandler(){
 	let itemDur = "";
 	let itemSale = "";
 	let itemColor = "";
+	let itemSrc = "";
 	const itemInfo = await $.ajax({
 		url: contextPath + "admin/goods/info", 
 		type: "post", 
@@ -37,6 +38,11 @@ async function itemUpdateHandler(){
 			itemColor = data.ITEM_COLOR;
 		}else{
 			itemColor = "";
+		}
+		if(data.ITEM_SRC != null){
+			itemSrc = data.ITEM_SRC;
+		}else{
+			itemSrc = "";
 		}
 	}).fail(ajaxErrorHandler);
 	
@@ -73,6 +79,10 @@ async function itemUpdateHandler(){
 					<div>테마색상(헥사코드)</div>
 					<div><input type="text" id="item-color" name="item-color" value="${itemColor}"></div>
 				</div>
+				<div class="item-info flex">
+					<div>이미지경로</div>
+					<div><input type="text" id="item-src" name="item-src" value="${itemSrc}"></div>
+				</div>
 			</div>
 		  `,
 		  focusConfirm: false,
@@ -84,6 +94,7 @@ async function itemUpdateHandler(){
 				, $("#item-dur").val()
 				, $("#item-sale").val()
 				, $("#item-color").val()
+				, $("#item-src").val()
 		    ];
 		  }
 		});
@@ -100,6 +111,7 @@ async function itemUpdateHandler(){
 					, itemDur: formValues[3] 
 					, itemSale: formValues[4]
 					, itemColor: formValues[5]
+					, itemSrc: formValues[6]
 				}, 
 				error: function(request, status, error){
 					Swal.fire({
@@ -171,6 +183,10 @@ async function itemInsertHandler(){
 				<div>테마색상(헥사코드)</div>
 				<div><input type="text" id="item-color" name="item-color"></div>
 			</div>
+			<div class="item-info flex">
+				<div>이미지경로</div>
+				<div><input type="text" id="item-src" name="item-src"></div>
+			</div>
 		</div>
 	  `,
 	  focusConfirm: false,
@@ -182,6 +198,7 @@ async function itemInsertHandler(){
 			, $("#item-dur").val()
 			, $("#item-sale").val()
 			, $("#item-color").val()
+			, $("#item-src").val()
 	    ];
 	  }
 	});
@@ -197,6 +214,7 @@ async function itemInsertHandler(){
 				itemPrice: formValues[2], 
 				itemDur: formValues[3], 
 				itemSale: formValues[4], 
+				itemSrc: formValues[5], 
 			}, 
 			success: function(data){
 				if(data > 0){

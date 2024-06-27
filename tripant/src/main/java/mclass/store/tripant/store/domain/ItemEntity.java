@@ -11,4 +11,5 @@ public class ItemEntity {
 	private Integer itemSale;
 	private String itemColor;
 	private String salePrice;
+	private String itemSrc;
 }
