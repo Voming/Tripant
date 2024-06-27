@@ -22,6 +22,9 @@ public interface AdminDao {
 	//회원 등급 변경
 	public Integer adminMemRole(Map<String, Object> map);
 	
+	//활성화 여부 
+	public Integer adminMemActive(Map<String, Object> map);
+	
 	//회원검색
 	public List<AdminMemEntity> search(String memNick);
 	

@@ -54,6 +54,7 @@ function ClickHandler() {
      });
 	 
 }
+//활성화여부 
 function ClickBtnHandler(){
 	Swal.fire({
          title: " <p style='font-size:17px'>" + "활성화 여부" + "</p>",
@@ -63,8 +64,8 @@ function ClickBtnHandler(){
          confirmButtonTextFont:"Binggrae",
          html: `
              <select name="selectRole" id="selectActive" style='font-family:Binggrae; font-size:13px; height:25px'>
-                 <option value="0">비활성화</option>
-                 <option value="1">활성화</option>
+                 <option value="1">비활성화</option>
+                 <option value="2">활성화</option>
              </select>
          `,
          focusConfirm: false,

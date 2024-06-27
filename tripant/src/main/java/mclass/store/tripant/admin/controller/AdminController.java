@@ -54,7 +54,7 @@ public class AdminController {
 	}
 	
 
-	// ajax
+	 //ajax
 	 //등급변경 
 	@PostMapping("/member/role") 
 	@ResponseBody
@@ -80,6 +80,28 @@ public class AdminController {
 		return result;
 	}
 	
+	//ajax
+	//활성화 여부
+	@PostMapping("/member/active")
+	@ResponseBody
+	public Integer MemberActive(Integer selectActive, String memEmail) {
+		System.out.println("###########"+selectActive);
+		System.out.println("###########"+memEmail);
+		String memEnabled="";
+		switch(selectActive) {
+			case 1 :memEnabled="비활성화";
+				break;
+			case 2: memEnabled="활성화";
+				break;
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memEnabled", memEnabled);
+		map.put("memEmail", memEmail);
+		int result= adminservice.adminMemActive(map);
+		
+		return result;
+	}
 
 	//ajax  
 	//검색 
@@ -99,7 +121,7 @@ public class AdminController {
 	}
 	
 	//ajax
-	//게시글 검색(select)  //TODO
+	//게시글 검색(select)  
 	@PostMapping("/keyword")
 	@ResponseBody
 	public List<AdminBoardEntity> keywordSearch(Model model,@RequestParam String write, @RequestParam String pick) {

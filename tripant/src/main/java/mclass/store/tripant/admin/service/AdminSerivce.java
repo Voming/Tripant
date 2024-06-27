@@ -27,6 +27,11 @@ public class AdminSerivce {
 		return admindao.adminMemRole(map);
 	}
 	
+	//활성화 여부
+	public Integer adminMemActive(Map<String, Object> map) {
+			return admindao.adminMemActive(map);
+	}
+	
 	//회원검색
 	public List<AdminMemEntity> search(String memNick){
 		return admindao.search(memNick);
