@@ -2,6 +2,21 @@
 function initializeSessionArr() {
     sessionArr = [];
 }
+//insertion sort - 삽입정렬
+function insertionSort(arr ,leng){
+	var i, j ,key, temp;
+	
+	for(var i = 1 ; i<leng ; i++){
+		key=arr[i];
+
+		for(var j = i-1; j>=0 && arr[j]>key ;j--){
+			arr[j+1 ] = arr[j];
+		}
+		arr[j+1] = key;
+	}
+}
+
+
 //sessionStorage값 배열에 담기
 function saveSessionArr(){
 	//세션스토리지 길이
