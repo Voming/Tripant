@@ -2,6 +2,7 @@
  //편집
 function editHandler(){
 	//전체일정 선택 후 편집창 띄우기
+	console.log("///////////////////");
 	navHandler();
 	//취소 버튼 활성화
 	$(this).next().show(); 
@@ -9,6 +10,7 @@ function editHandler(){
 	$(this).parent().prevAll().find('.dayn').not(':first').hide(); 
 	//편집 숨김
 	$(this).hide();
+
 	//저장btn 활성화 css변경
 	$(this).siblings('.save').attr('disabled',false);
 	//일정 목록보여주기

@@ -63,7 +63,7 @@
 							<li th:text="${memList.memJoinDate}"></li>
 							<li th:text="${memList.memQuitDate}"></li>
 							<li th:text="${memList.memRole}"></li>
-							<li><button type="button" class="btn-ac">활성화</button></li>
+							<li th:text="${memList.memEnabled}"></li>
 							<li><button type="button" class="btn">편집</button></li>
 						</ul>
 						</th:block>
@@ -73,7 +73,7 @@
 			</div> 
 	</div>
 </div>
-<script th:line="javascript" th:src="@{/js/admin/member/member_role.js}"></script>
+<script th:line="javascript" th:src="@{/js/admin/member/member_info.js}"></script>
 <script th:line="javascript" th:src="@{/js/admin/member/member_search.js}"></script>
 </body>
 </html>

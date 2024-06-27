@@ -4,17 +4,20 @@
 
 	<!-- 회원관리 -->
 	<select id="selectMemList" resultType="AdminMemEntity" >
-	select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , b.MEM_QUIT_DATE
+	select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED, b.MEM_QUIT_DATE
 	from member a
 	left join quit_member b
 	on a.MEM_EMAIL=b.MEM_EMAIL
 	</select>
 	
-	<!-- 등급변경 -->
-	<update id="adminMemRole" parameterType="map">
-	update member set mem_role=#{memRole} where mem_email=#{memEmail}
+	<!-- 등급변경 , 활성화 여부-->
+	<update id="adminMemInfo" parameterType="map">
+	update member set mem_role=#{memRole} , mem_enabled=#{memEnabled} where mem_email=#{memEmail}
 	</update>
+	<!--  -->
+	<update id="adminMemActive" parameterType="map">
 	
+	</update>
 	<!--회원검색 -->
 	<select id="search" resultType="AdminMemEntity">
 	select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , b.MEM_QUIT_DATE 

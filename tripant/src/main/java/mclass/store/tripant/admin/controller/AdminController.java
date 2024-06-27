@@ -54,12 +54,15 @@ public class AdminController {
 	}
 	
 
-	// ajax
-	 //등급변경 
-	@PostMapping("/member/role") 
+	 //ajax
+	 //회원정보 수정(등급변경 , 활성화여부)
+	@PostMapping("/member/info") 
 	@ResponseBody
-	public Integer MemberRole(Integer selectRole, String memEmail) {
+	public Integer MemberInfo(Integer selectRole, String memEmail,Integer selectActive) {
 		
+		System.out.println("###########"+selectRole);
+		System.out.println("###########"+selectActive);
+		System.out.println("###########"+memEmail);
 		String memRole = "";
 		switch(selectRole) {
 		case 1: memRole = "ROLE_SLEEP"; 
@@ -75,12 +78,14 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("memRole", memRole);
 		map.put("memEmail", memEmail);
-		int result = adminservice.adminMemRole(map);
+		map.put("memEnabled", selectActive);
+		int result = adminservice.adminMemInfo(map);
 		
 		return result;
 	}
 	
-
+	
+	
 	//ajax  
 	//검색 
 	@PostMapping("/member/search") 
@@ -99,7 +104,7 @@ public class AdminController {
 	}
 	
 	//ajax
-	//게시글 검색(select)  //TODO
+	//게시글 검색(select)  
 	@PostMapping("/keyword")
 	@ResponseBody
 	public List<AdminBoardEntity> keywordSearch(Model model,@RequestParam String write, @RequestParam String pick) {
