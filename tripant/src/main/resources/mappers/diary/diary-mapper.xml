@@ -8,9 +8,14 @@
 
 	<!--전체글 리스트 목록 뿌리기 -->
 	<!--최신순 정렬 (diary_date_real 별칭사용)-->
-	<!-- 여행기는 공개글이기 때문에  diaryOpen == '0' -->
+	<!-- 여행기는 공개글이기 때문에  diaryOpen == '0 -->
 	<select id="selectDiaryList" resultType="DiaryBoardEntity"	parameterType="map">
-	select * from 
+	select 
+		<if test="memEmail != null and !memEmail.equals('') "> 
+	    (SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID  and t1.mem_email =#{memEmail}) is_my_likes,
+	    </if>  
+	    t2.* 
+	from 
 	(   select t1.*, rownum rn from 
 	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
 	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
@@ -20,17 +25,22 @@
 	                , diary_date diary_date_real
 	                FROM   VIEW_DIARY_MEMBER_PLAN 
 	                WHERE
-	                    DIARY_OPEN = 0
+	                    DIARY_OPEN = 0 
 	             		<if test="areaname != null and !areaname.equals('') "> 
 	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
 	            		</if>
 	                ORDER BY diary_date_real DESC NULLS LAST
 	    ) t1
-	) where rn  BETWEEN 1  AND  #{maxNum}
+	)t2 where rn between 1 and #{maxNum}  
 	</select>
 	<!--최신순 정렬 (diary_date_real 별칭사용)-->
 	<select id="selectLatest" resultType="DiaryBoardEntity"	parameterType="map">
-	select * from 
+	select 
+		<if test="memEmail != null and !memEmail.equals('') "> 
+	    (SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID  and t1.mem_email =#{memEmail}) is_my_likes,
+	    </if>  
+	    t2.* 
+	from 
 	(   select t1.*, rownum rn from 
 	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
 	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
@@ -40,17 +50,22 @@
 	                , diary_date diary_date_real
 	                FROM   VIEW_DIARY_MEMBER_PLAN 
 	                WHERE
-	                    DIARY_OPEN = 0
+	                    DIARY_OPEN = 0 
 	             		<if test="areaname != null and !areaname.equals('') "> 
 	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
 	            		</if>
 	                ORDER BY diary_date_real DESC NULLS LAST
 	    ) t1
-	) where rn  BETWEEN 1  AND  #{maxNum}
+	)t2 where rn between 1 and #{maxNum}  
 	</select>
 	<!-- 좋아요 정렬(likes ) -->
 	<select id="selectLikesPopular" resultType="DiaryBoardEntity"	parameterType="map">
-	select * from 
+	select 
+		<if test="memEmail != null and !memEmail.equals('') "> 
+	    (SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID  and t1.mem_email =#{memEmail}) is_my_likes,
+	    </if> 
+	    t2.* 
+	from 
 	(   select t1.*, rownum rn from 
 	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
 	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
@@ -62,17 +77,22 @@
 	                FROM   VIEW_DIARY_MEMBER_PLAN 
 	            LEFT OUTER JOIN (select	count (mem_email) likes, diary_id from diary_likes group by diary_id)  USING (diary_id)
 	                WHERE
-	                    DIARY_OPEN = 0
+	                    DIARY_OPEN = 0 
 	             		<if test="areaname != null and !areaname.equals('') "> 
 	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
 	            		</if>
 	                ORDER BY likes DESC NULLS LAST
 	    ) t1
-	) where rn  BETWEEN 1  AND  #{maxNum}
+	)t2 where rn between 1 and #{maxNum}  
 	</select>
 	<!--조회수 정렬 (diary_views)-->
 	<select id="selectViewsPopular" resultType="DiaryBoardEntity"	parameterType="map">
-	select * from 
+	select 
+		<if test="memEmail != null and !memEmail.equals('') "> 
+	    (SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID  and t1.mem_email =#{memEmail}) is_my_likes,
+	    </if> 
+	    t2.* 
+	from 
 	(   select t1.*, rownum rn from 
 	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
 	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
@@ -82,14 +102,15 @@
 	                , diary_date diary_date_real
 	                FROM   VIEW_DIARY_MEMBER_PLAN 
 	                WHERE
-	                    DIARY_OPEN = 0
+	                    DIARY_OPEN = 0 
 	             		<if test="areaname != null and !areaname.equals('') "> 
 	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
 	            		</if>
 	                ORDER BY DIARY_VIEWS DESC NULLS LAST
 	    ) t1
-	) where rn  BETWEEN 1  AND  #{maxNum}
+	)t2 where rn between 1 and #{maxNum}  
 	</select>
+	
 	<!-- 나의 글리스트 목록 뿌리기 -->
 	<select id="selectMyDiaryList" resultType="DiaryBoardEntity"	parameterType="map">
 	select * from 
@@ -104,7 +125,7 @@
 	            WHERE DIARY_MEM_EMAIL = #{email}
 	            ORDER BY diary_date_real DESC NULLS LAST
 	    ) t1
-	) where rn between #{maxNum-3} and #{maxNum}
+	) where rn between #{maxNum}-3 and #{maxNum}
 	</select>
 
 	<!-- 글 작성 등록 시키기 -->
@@ -143,6 +164,13 @@
 		<!-- view_diary_member의 nick_name  -->
 		SELECT * FROM view_diary_member WHERE DIARY_ID = #{diaryId}
 	</select>
+	<!-- 한개의 여행기에 여러명의 이메일 계정들이 누른 하트 개수 -->
+	<select id="selectDiaryLike" parameterType="int" resultType="_int">
+		SELECT COUNT(*) likes
+		FROM diary_likes
+		WHERE DIARY_ID = #{diaryId} 
+	</select>
+	
 	
 	<!-- 조회수 증가 -->
 	<update id="incrementDiaryViews" parameterType="int">
@@ -151,6 +179,8 @@
 		DIARY_VIEWS = COALESCE(DIARY_VIEWS, 0) + 1
 		WHERE DIARY_ID = #{diaryId}
 	</update>
+	
+	
 
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="int">
@@ -182,9 +212,5 @@
 		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}
 	</delete>
 
-	<select id="selectDiaryLike" parameterType="map" resultType="int">
-		SELECT COUNT(*)
-		FROM diary_likes
-		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}
-	</select>
+
 </mapper>

@@ -41,7 +41,7 @@ function tabMenuClickHandler() {
 		, context: this
 		, error: ajaxErrorHandler
 	}).done(function(wrap_content) {
-		$(".wrap-d-content").replaceWith(wrap_content);
+		$(".wrap-diary").replaceWith(wrap_content);
 		//TODO with voming
 		$.each($(".diary-preview"), function(idx, thisElement) {
 			var contentElement = $(thisElement).html();
@@ -53,15 +53,32 @@ function tabMenuClickHandler() {
 	return false;
 }
 
-function btnLikeClickHandler(thisElement) {
-	console.log("눌림");
+function btnLikeClickHandler(thisElement, diaryId) {
+	console.log("btnLikeClickHandler 눌림");
+	console.log(diaryId);
 	/*	console.log(thisElement);*/
-	// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
 	if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
-		$(thisElement).attr('src', '/images/diary/diary_like_icon.png');
+		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
+		// ajax 요청
+		$.ajax({
+			url: contextPath + "my/diary/like/" + diaryId
+			, method: "post"
+			, error: ajaxErrorHandler
+		}).done(function(result) {
+			if(result > 0)
+			$(thisElement).attr('src', '/images/diary/diary_like_icon.png');
+		})
 	} else {
 		// 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
-		$(thisElement).attr('src', '/images/diary/diary_like_none.png');
+		// ajax 요청
+		$.ajax({
+			url: contextPath + "my/diary/unlike/" + diaryId
+			, method: "post"
+			, error: ajaxErrorHandler
+		}).done(function(result) {
+			if(result>0)
+			$(thisElement).attr('src', '/images/diary/diary_like_none.png');
+		})
 	}
 }
 
@@ -79,14 +96,14 @@ function moreBtnClickHandler(thisElement) {
 		, context: this
 		, error: ajaxErrorHandler
 	}).done(function(wrap_content) {
-		$(".wrap-d-content").replaceWith(wrap_content);
+		$(".wrap-diary").replaceWith(wrap_content);
 		
 		$.each($(".diary-preview"), function(idx, thisElement) {
 			var contentElement = $(thisElement).html();
-			console.log($(thisElement).text());
-			console.log(contentElement);
+			//console.log($(thisElement).text());
+			//console.log(contentElement);
 		});
-	})
+	});
 
 }
 
@@ -105,7 +122,7 @@ function sortOptionChangeHandler(thisElement) {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_content) {
 		//$('.area-tab-nav a').filter(':eq(0)').click(); // 첫 번째 탭 활성화
-		$(".wrap-d-content").replaceWith(wrap_content);
+		$(".wrap-diary").replaceWith(wrap_content);
 	})
 
 }
