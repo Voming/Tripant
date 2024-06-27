@@ -60,6 +60,7 @@ function dividTime(timeStr){
 //시간 더하기
 function addTime(timeStr, stayTime){
 	//앞 장소의 떠나는 시각(또는 하루 일정 시작 시각) 11:00 을 :을 기준으로 시와 분으로 담기
+	console.log(timeStr);
 	let[hours,minutes] =dividTime(timeStr);
 	
 	// 분단위로 바꿔서 도착시간과 머무는 시간 합하기

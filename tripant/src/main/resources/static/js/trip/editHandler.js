@@ -19,8 +19,6 @@ function timeDoneBtnClickHandler(thisElement) {
 	console.log("timeVal");
 	console.log(timeVal);
 	
-	changeStayTime= JSON.parse(editStorage.getItem(idx));
-	changeStayTime.stayTime=timeVal;
 	
 	console.log(editStorage.setItem(idx,JSON.stringify(changeStayTime)));
 	
