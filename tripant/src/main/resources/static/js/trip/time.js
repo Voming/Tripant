@@ -1,11 +1,5 @@
-var detailList;
-//planId값 url에서 가져오기
-const url = window.location.href;
-const parts = url.split('/'); // Split the URL by '/'
-planId = parts.pop(); // Get the last element of the array
 
-//여행일자별 순서
-var tripIdx ;
+
 //ajax이용해서 장소간 이동시간 api값 가져오기
 function durationHandler(startLngStr,startLatStr,endLngStr,endLatStr){
 	var returndata;
@@ -26,6 +20,7 @@ function durationHandler(startLngStr,startLatStr,endLngStr,endLatStr){
 	});
 	return returndata;
 }
+
 function unescapeHtml(str) {
  if (str == null) {
   return "";
@@ -64,18 +59,25 @@ function addTime(time, stayTime){
 function displayInfo(){
 	//DB에서 받아온 original 정보
 	detailList=dayEntityList_org;
+	
 	//html에 뿌릴 정보 백틱에 담기
 	var navHtmlval =""; 		
 	var htmlval = "";
+	
 	//도착, 출발 시각 변수
 	let endTime="";
 	let startTime="";
+	
 	//이동시간 변수
 	var duration ="";
 	var prevDuration ="";
-	var sessionOrder=0;
-	editStorage.clear(); //세션스토리지 초기화
 	
+	//sessionStorage에 담을 때 key로 활용할 변수
+	var sessionOrder=0;
+
+	//세션스토리지 및 세선배열 초기화
+	editStorage.clear(); 
+	initializeSessionArr();
 	
 	for(var i=0; i<detailList.length; i++ ){
 		
@@ -98,11 +100,15 @@ function displayInfo(){
 			<div class="container flex wfull">
 			`;
 			
+			//일자별 방문장소 갯수 초기화
+			var infoCount = 0;
 			//DayDetailInfoEntity 값 list에 넣기
 			for(var j=0; j< details.dayDetailInfoEntity.length; j++ ){
+				
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 2차 반복문 변수에 정제된 값 넣기
 				var daylength = details.dayDetailInfoEntity.length;
 				info =  details.dayDetailInfoEntity[j];
-				var infoCount = j+1;
+				infoCount = j+1;
 				
 				//map에서 lng lat 값 넣기 KakaoMap Api
 				var  point = new kakao.maps.LatLng(info.lat*1, info.lng*1);
@@ -133,19 +139,20 @@ function displayInfo(){
 				//sessionStorage 에 담을 객체
 				spotInfo = {
 					'travelDate' : details.travelDate,
+					'tripIdx' : i,  /*여행 기간*/
+					'jdx': j,
+					'travelOrder' : info.travelOrder, /* 하루 내 장소 방문 순서*/
 					'stayTime' : info.stayTime,
-					'travelOrder' : info.travelOrder,
 					'title' : info.title,
 					'memo' : info.memo,
 					'lat' : info.lat,
 					'lng' : info.lng,
 					'startTime' : startTime,
-					'endTime':endTime,
-					'tripIdx' : i,
-					'idx' :sessionOrder 
+					'endTime':endTime
 				}
 				
-				editStorage.setItem(tripIdx,JSON.stringify(spotInfo));
+				//각 spot의 정보를 객체에 담아 번호순대로 key값을 지정하여 sessionStorage에 넣기
+				editStorage.setItem(sessionOrder,JSON.stringify(spotInfo));
 				sessionOrder += 1;
 				
 				
@@ -153,6 +160,9 @@ function displayInfo(){
 				//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
 				prevDuration = duration
 				
+
+				
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 백틱 				
 				//백틱에 값 넣기
 				htmlval += `
 					<div class="spot-block">
@@ -164,7 +174,7 @@ function displayInfo(){
 				 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>`;
 				 
 				 //이미지 링크 유무에 따른 src 설정		
-				 if(info.firstimage != null){ //이미지 값이 있을 때
+				 if(infoCount.firstimage != null){ //이미지 값이 있을 때
 					htmlval += `
 					<div class="spot-img wfull hfull"><img class=" wfull hfull" src="${info.firstimage}" ></div>
 					`;
@@ -189,13 +199,17 @@ function displayInfo(){
 				}
 
 			    htmlval +=`</div></div>`;
-		    }/* 이중 for문 중 내부 for문 종료*/
+		    }/* 반복문 종료(j)*/
+		    
+		    //배열에 일자병 장문장소 갯수 만큼의 배열 길이 선언
+		    sessionArr[i] = new Array(infoCount) ;
+		    
 		    dayPoints.push(points);
 		    points=[]; // 배열 초기화
 		htmlval += `
 		</div>	 </div>  
 		`;
-	}
+	}/*반복문 종료(i)*/
 	//장소정보 넣기
 	$(".tourlist .wrap-detaillist.flex").html(htmlval);
 	//nav버튼 일차 수 만큼 넣기
