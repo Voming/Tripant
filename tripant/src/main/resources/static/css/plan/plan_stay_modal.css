@@ -43,6 +43,7 @@
 	justify-content: space-evenly;
 	align-items: center;
 	flex-wrap: wrap;
+	font-family: 'Binggrae';
 }
 
 .stay-modal .stay-modal-popup .wrap-stay-tab {
