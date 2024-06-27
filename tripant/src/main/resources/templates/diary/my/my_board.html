@@ -17,7 +17,7 @@
 				<aside th:insert="~{diary/diary_aside :: wrap-diary-aside}"></aside>
 				<!-- 나만의 글 가져오기   -->
 				<div class="board-list">
-					<div class="wrap_content" th:replace="~{diary/my/board_more_fragment.html :: board_more}" ></div>
+					<div class="wrap_content" th:replace="~{diary/my/board_more_fragment :: board_more}" ></div>
 				</div>
 				<div class="btn-more">
 					<button type="button" onclick="moreBtnClickHandler(this);"
