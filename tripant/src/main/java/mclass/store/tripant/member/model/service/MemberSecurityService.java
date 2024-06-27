@@ -1,5 +1,6 @@
 package mclass.store.tripant.member.model.service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,10 @@ public class MemberSecurityService implements UserDetailsService {
 			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole())); break;
 			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole())); break;
 		}
-		return new User(memberEntity.getMemEmail(), memberEntity.getMemPassword(), authorities);
+		
+		boolean isEnabled = true;
+		if(memberEntity.getMemEnabled() == 0) isEnabled = false;
+		
+		return new User(memberEntity.getMemEmail(), memberEntity.getMemPassword(), isEnabled, true, true, true, authorities);
 	}
 }

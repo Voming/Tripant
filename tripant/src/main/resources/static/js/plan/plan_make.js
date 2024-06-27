@@ -10,7 +10,7 @@ class CalendarDate {
 	stay;      //숙소명
 }
 
-class spot {
+class Spot {
 	constructor(id, title, mapx, mapy) {
 		this.id = id;
 		this.title = title;
@@ -28,7 +28,7 @@ class CalendarPlan {
 
 let calendarPlan = new CalendarPlan();
 calendarPlan.dateArr = new Array(CalendarDate);
-calendarPlan.spotArr = new Array(spot);
+calendarPlan.spotArr = new Array(Spot);
 
 // 저장되기 전에만 방지 처리
 var beforeSave = true;

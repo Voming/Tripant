@@ -16,10 +16,22 @@
 }
 .wrap-main .sale-proportion{
 	font-size: var(--font4);
-	color: red;
+	color: green;
 }
 .wrap-main .sale-price{
 	color: orange;
+}
+/* 스크롤바 설정 */
+.list.flex::-webkit-scrollbar{
+     height: 10px;  /* 오른쪽 왼쪽 스크롤바 폭 너비 */
+     width: 10px;  /* 위 아래 스크롤바 폭 너비 */
+}
+.list.flex::-webkit-scrollbar-thumb{
+   border-radius: 10px;
+   border: 7px solid var(--color_gray);
+}
+.list.flex::-webkit-scrollbar-corner {
+   background: transparent;
 }
 </style>
 <script th:inline="javascript">
@@ -82,7 +94,7 @@ function fontSwalHandler(){
 					<div class="item price" th:text="${font.itemPrice}+'원'" th:if="${font.itemSale} == null"></div>
 					<div class="item price flex" th:if="${font.itemSale} != null">
 						<div class="origin-price" th:text="${font.itemPrice}+'원'"></div>
-						<div class="sale-proportion" th:text="${font.itemSale}+'% 할인!'"></div>
+						<div class="sale-proportion" th:text="${font.itemSale}+'%'"></div>
 						<div class="sale-price" th:text="${font.salePrice}+'원'"></div>
 					</div>
 				</div>

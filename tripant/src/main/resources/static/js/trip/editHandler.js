@@ -1,3 +1,5 @@
+
+
 // 시간 설정 모달 열림
 function timeRangeBtnClickHandler(thisElement) {
 	$(thisElement).children(".timerange").addClass('hide');
@@ -11,18 +13,34 @@ function timeDoneBtnClickHandler(thisElement) {
 
 	var hours = $(thisElement).parent().children('.spot-hours').val();
 	var mins = $(thisElement).parent().children('.spot-mins').val();
+	var idx =  $(thisElement).parents('.spot-block').data('idx');
 	
-	var timeVal = hours + "시간 " + mins + "분";
+	var timeVal = hours*3600 + mins*60;
+	console.log("timeVal");
 	console.log(timeVal);
 	
-	$(thisElement).parents('.spot-staytime').children('.timerange').text(timeVal);
-	//timeInfoUpdate(); // 총 시간 업데이트
+	changeStayTime= JSON.parse(editStorage.getItem(idx));
+	changeStayTime.stayTime=timeVal;
+	
+	console.log(editStorage.setItem(idx,JSON.stringify(changeStayTime)));
+	
+	$(thisElement).parents('.spot-block').find('.timerange').text(timeVal);
 }
 
-//초단위로 변경
-function changeInSecHandler(){
-	
-	var seconds;
-	
-	return seconds;
+let editArr = [];
+
+function displayEditInfo(){
+	sessionLength = editStorage.length;
+	for(var i = 0 ; i<sessionLength ; i++){
+		let obj = JSON.parse(editStorage.getItem(i));
+		let objKey = obj.travelOrder;
+		
+		let existArr = editArr.find(arr => arr[0].a ===objKey); 
+		if(!existArr){
+			editArr.push([obj]);
+		}else{
+			existArr.push(obj);
+		}
+	}
+	console.log(editArr);
 }

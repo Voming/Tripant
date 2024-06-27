@@ -43,6 +43,11 @@ public class MypageController {
 	@Value("${spring.security.oauth2.client.registration.naver.client-secret}")
 	private String naverClientSecret;
 	
+	@Value("${spring.security.oauth2.client.registration.google.client-secret}")
+	private String googleClientSecret;
+	@Value("${spring.security.oauth2.client.registration.google.client-id}")
+	private String googleClientId;
+	
 	// 마이페이지
 	@GetMapping("/home")
 	public String myHome(Model model, Principal principal) {
@@ -185,27 +190,27 @@ public class MypageController {
 		String memEmail = principal.getName();
 		Map<String, Object> map = memberService.tokenValue(memEmail);
 		
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create("https://kapi.kakao.com/v1/user/unlink"))
-				.header("Content-Type", "application/json")
-				.header("Authorization", "Bearer " + map.get("MEM_TOKEN_KAKAO"))
-				.method("POST", HttpRequest.BodyPublishers.ofString("{}"))
-				.build();
-		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		System.out.println(response.statusCode());
-		if(response.statusCode() == 200) {
-			Map<String, Object> myInfo = memberService.myInfo(memEmail);
-			Map<String, Object> updateToken = new HashMap<>();
-			updateToken.put("memEmail", memEmail);
-			int memType = Integer.parseInt(String.valueOf(myInfo.get("MEM_TYPE")));
-			memType -= 4;
-			updateToken.put("memType", memType);
-			result = memberService.updateType(updateToken);
-		}else if(response.statusCode() == 401) {
-			return result = -1;
-		}
+		googleRefreshToken(principal);
 		
 		return result;
+	}
+	
+	// 구글 갱신 토큰 받기
+	public String googleRefreshToken(Principal principal) throws IOException, InterruptedException {
+		String memEmail = principal.getName();
+		Map<String, Object> map = memberService.tokenValue(memEmail);
+		Map<String, Object> requestBody = new HashMap<>();
+		requestBody.put("token", "Bearer " + map.get("MEM_TOKEN_GOOGLE"));
+		requestBody.put("returnSecureToken", true);
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create("https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key="+googleClientId))
+				.header("Content-Type", "application/json")
+//				.header("Authorization", "Bearer " + map.get("MEM_TOKEN_GOOGLE"))
+				.method("POST", HttpRequest.BodyPublishers.ofString(gson.toJson(requestBody)))
+				.build();
+		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+		System.out.println("구글갱신토큰 = "+response.body());
+		return "";
 	}
 	
 	// 닉네임 변경 페이지

@@ -2,14 +2,14 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 	<!-- edit trip list -->
 	<div th:fragment="edit-tourlist" class="edit-tourlist hide scrollbar flex">
-		<div class="wrap-detaillist flex"> 
-			<div th:each="details,daylist:${detailList}" class="column flex" th:data-columns="${daylist.count}" th:id="'#tab'+${daylist.count}">
+		<div class="wrap-detaillist flex" th:with="idx=0"> 
+			<div th:each="details,daylist:${detailList}" class="column flex" th:data-columns="${daylist.count}" th:id="'#tab'+${daylist.count}" th:with="jdx=0">
 				<div class="sub-title flex ">
 					<h4 th:text="${daylist.count} + '일차'" class="nday"></h4>
 					<h6 th:text="${details.travelDate}" class="date"></h6>
 				</div>
 			 	<div  class="container flex wfull">
-			 		<div th:each="info,idxlist:${details.dayDetailInfoEntity}"  class="spot-block draggable"  draggable ="true">
+			 		<div th:each="info,idxlist:${details.dayDetailInfoEntity}"  class="spot-block draggable"  draggable ="true" th:attr="data-idx = ${idx}, data-jdx=${jdx} " th:with="idx=${idx+1}, jdx= ${jdx+1}">
 					 	
 					 	<!-- 머무는 시간 설정 -->
 					 	<div class="timerange-modal hide" >
@@ -24,9 +24,7 @@
 						</div>
 						
 						<!-- 장소정보 -->
-					 	<div class="spot grid wfull" th:data-spot-order="${idxlist.count}"  
-					 		th:data-stay-time="${info.stayTime}" th:data-info="${info}"
-					 		th:value = "${info}">
+					 	<div class="spot grid wfull" th:data-spot-order="${idxlist.count}" >
 					 		<div class="spot-number backimg"><p th:text="${idxlist.count}"></p></div>
 					 		<div class="spot-staytime" onclick="timeRangeBtnClickHandler(this);">
 					 			<p class="timerange">10:00-11:00</p>

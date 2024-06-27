@@ -34,15 +34,15 @@ $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
 
 // 달력 기간 입력
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-	$(".time_btn").show();
-
 	let diff = Math.abs(picker.endDate - picker.startDate);
 	diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-	console.log(diff);
+	
 	if (diff == 1) {
 		alert("기간이 너무 작습니다. 기간을 다시 입력해주세요.");
 		$('#daterange').focus();
 	} else {
+		$(".time_btn").show();
+		
 		var start = picker.startDate.format('YYYY.MM.DD');
 		var end = picker.endDate.format('YYYY.MM.DD');
 		//달력 모달 닫기

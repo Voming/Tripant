@@ -15,11 +15,9 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.member.domain.CustomOAuth2User;
-import mclass.store.tripant.member.domain.LoginEntity;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.domain.MemberRole;
 import mclass.store.tripant.member.model.repository.MemberRepository;
@@ -131,6 +129,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			Map<String, Object> updateToken = new HashMap<>();
 			updateToken.put("memEmail", email);
 			updateToken.put("googleToken", userRequest.getAccessToken().getTokenValue());
+			System.out.println("구글 토큰 >>>>>>>> "+userRequest.getAccessToken().getTokenValue());
 			memberRepository.updateToken(updateToken);
 			
 			// 로그인 정보
@@ -170,6 +169,9 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			throw new UsernameNotFoundException(map.toString());
 		}
 		MemberEntity memberEntity = memberEntityOp.get();
+		if(memberEntity.getMemEnabled() == 0) {
+			throw new OAuth2AuthenticationException("401");
+		}
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		switch(memberEntity.getMemRole()) {
 			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole()));
@@ -177,6 +179,9 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));
 		}
 		log.debug("[sjw] oAuth2User = "+oAuth2User.toString());
+		
+		
+		
 		return new CustomOAuth2User(email, memberEntity.getMemPassword(), authorities);
 	}
 }

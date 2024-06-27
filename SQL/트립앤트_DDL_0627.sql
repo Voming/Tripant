@@ -27,7 +27,6 @@ CREATE SEQUENCE "SEQ_PLAN_ID";
 DROP TABLE "DIARY_REPORTS";
 DROP TABLE "DIARY_LIKES";
 DROP TABLE "DIARY";
-DROP TABLE "DIARY_SAVE";
 
 DROP TABLE "BUY";
 DROP TABLE "CART";
@@ -59,7 +58,7 @@ CREATE TABLE "MEMBER" (
 	"MEM_JOIN_DATE"	DATE	DEFAULT SYSDATE	NOT NULL,
 	"MEM_BIRTH"	DATE		NOT NULL,
 	"MEM_TEL"	VARCHAR2(12)		NOT NULL,
-	"MEM_FONT_EXP"	NUMBER		NULL,
+	"MEM_FONT_DUR"	NUMBER		NULL,
 	"MEM_TOKEN_KAKAO"	VARCHAR2(200)		NULL,
 	"MEM_TOKEN_NAVER"	VARCHAR2(200)		NULL,
 	"MEM_TOKEN_RE_NAVER"	VARCHAR2(200)		NULL,
@@ -85,7 +84,7 @@ COMMENT ON COLUMN "MEMBER"."MEM_BIRTH" IS '생일';
 
 COMMENT ON COLUMN "MEMBER"."MEM_TEL" IS '휴대폰 번호';
 
-COMMENT ON COLUMN "MEMBER"."MEM_FONT_EXP" IS '글꼴 잔여 기간(일)';
+COMMENT ON COLUMN "MEMBER"."MEM_FONT_DUR" IS '글꼴 잔여 기간(일)';
 
 COMMENT ON COLUMN "MEMBER"."MEM_TOKEN_KAKAO" IS '카카오 토큰 값';
 
@@ -798,7 +797,8 @@ create or replace view view_plan_member
 as (select * from plan join plan_member using (plan_id) )
 ;
 -- TRIGGER
----- 회원 탈퇴 시 insert into quit_member-> delete from member
+---- 회원
+------ 회원 탈퇴 시 insert into quit_member-> delete from member
 create or replace NONEDITIONABLE TRIGGER trg_member_quit
     BEFORE delete ON member
     REFERENCING OLD AS OLD
@@ -818,14 +818,61 @@ BEGIN
    );
 END;
 /
----- 회원별 신고 누적 10개 시 정지
+------ 회원별 신고 누적 10개 시 정지
 create or replace NONEDITIONABLE TRIGGER trg_member_stop
     after insert ON diary_reports
     REFERENCING new AS new
     FOR EACH ROW
 DECLARE
+stop_email diary.diary_mem_email%type;
+report_num member.mem_report_num%type;
 BEGIN
-   update member set mem_enabled = 0 where (select count(*) from diary_reports join diary using (diary_id) where diary_id in (select diary_id from member where mem_email = (select diary_mem_email from diary join diary_reports using (diary_id) where diary_id = :new.diary_id))) >= 10;
-   commit;
+    -- 신고된 diary_id의 작성자(mem_email)
+    select diary_mem_email into stop_email from diary where diary_id = :new.diary_id;
+    -- mem_email의 mem_report_num 1 증가
+    update member set mem_report_num = mem_report_num + 1 where mem_email = stop_email;
+    -- mem_email의 mem_report_num 선택
+    select mem_report_num into report_num from member where mem_email = stop_email;
+    -- 그 수가 10 이상이면
+    if (report_num >= 10) then
+    -- 정지
+    update member set mem_enabled = 0 where mem_email = stop_email;
+    end if;
+END;
+/
+---- 스토어
+------ 글꼴 구매 시 글꼴 기간 연장
+create or replace NONEDITIONABLE TRIGGER trg_member_font
+    after insert ON buy
+    REFERENCING new AS new
+    FOR EACH ROW
+DECLARE
+font_dur item.item_dur%type;
+BEGIN
+select item_dur into font_dur from item where item_code = :new.item_code;
+if(substr(:new.item_code, 1, 1) = 'F') then
+update member set mem_font_dur = mem_font_dur + font_dur where mem_email = :new.mem_email;
+end if;
+END;
+/
+------ 글꼴 구매 취소 시 글꼴 기간 단축
+create or replace NONEDITIONABLE TRIGGER trg_member_font
+    after delete ON buy
+    REFERENCING new AS new
+    FOR EACH ROW
+DECLARE
+font_dur member.mem_font_dur%type;
+del_dur item.item_dur%type;
+BEGIN
+select mem_font_dur into font_dur from member where mem_email = :new.mem_email;
+select item_dur into del_dur from item where item_code = :new.item_code;
+if(substr(:new.item_code, 1, 1) = 'F') then
+    if(font_dur < del_dur) then
+    update member set mem_font_dur = 0 where mem_email = :new.mem_email;
+    end if;
+    if(font_dur >= del_dur) then
+    update member set mem_font_dur = mem_font_dur - del_dur where mem_email = :new.mem_email;
+    end if;
+end if;
 END;
 /
