@@ -6,7 +6,7 @@
 			<div class="spot-box flex">
 				<img class="spot-img" th:src="${spot.firstimage}" alt="장소이미지">
 				<div class="spot-txt">
-					<span class="spot-name" th:text="${spot.title}"  th:value="${spot.title}"></span> 
+					<span class="spot-name" th:text="${spot.title}"  th:value="${spot.title}" style ="padding-bottom:5px; font-weight: bold;"></span> 
 					<span class="spot-address" th:text="${spot.add1}" th:value="${spot.add1}"></span>
 					<span class="spot-x" th:value="${spot.mapx}" style ="display:none"></span> 
 					<span class="spot-y" th:value="${spot.mapy}" style ="display:none"></span> 
