@@ -20,6 +20,8 @@ function saveSessionArr(){
 function displayEditInfo(){
 	
 	saveSessionArr();//sessionStorage값 가져오기
+	console.log("sessionArr");
+	console.log(sessionArr);
 	var htmlval = "";
 	
 	//이동시간 변수
@@ -29,7 +31,7 @@ function displayEditInfo(){
 	for(var i=0; i<sessionArr.length; i++ ){
 		//값 정리해서 넣기
 		htmlval+=`
-				<div class="column flex" data-columns="${sessionArr[i].tripIdx+1}" th:id="'#tab'+${sessionArr[i].tripIdx+1}">
+				<div class="column flex" data-columns="${i+1}" th:id="'#tab'+${sessionArr[i].tripIdx+1}">
 					<div class="sub-title flex ">
 						<h4 th:text="${sessionArr[i].tripIdx} + '일차'" class="nday"></h4>
 						<h6 th:text="${details.travelDate}" class="date"></h6>
@@ -46,24 +48,23 @@ function displayEditInfo(){
 						
 						//다음 장소로 이동시간(sec), 분단위로 변환하여 변수에 담기 
 						var durationMin; //이동시간 추후 사용
-						if(infoCount < daylength){
-							duration = durationHandler(info.lng,info.lat,details.dayDetailInfoEntity[infoCount].lng,details.dayDetailInfoEntity[infoCount].lat);
+						if((spot.jdx+1) < sessionArr[i].length){
+							duration = durationHandler(spot.lng,spot.lat,sessionArr[i][j+1].lng,sessionArr[i][j+1].lat);
 							durationMin=Math.ceil(duration/60);
 						}	
-						
 						//머무는 시간 계산하기 ex) 10:00 - 11:00
 						//1번째 장소
 						if(j == 0){
-							startTime =sessionArr[i].travelStart;
+							startTime =sessionArr[i][j].travelStart;
 							endTime = addTime(startTime,spot.stayTime);
 						//2~n-1번째 장소	
-						}else if(0 < j && j < daylength-1){
+						}else if(0 < j && j < sessionArr[i]-1){
 							startTime =  addTime(endTime,prevDuration);
 							endTime = addTime(startTime,spot.stayTime);
 						//n번째 장소(숙소)	
 						}else{
 							startTime =  addTime(endTime,prevDuration);
-							endTime = 	sessionArr[i].travelEnd;
+							endTime = 	sessionArr[i][j].travelEnd;
 						}
 						
 				//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
@@ -71,7 +72,7 @@ function displayEditInfo(){
 						prevDuration = duration;
 						
 						htmlval+=`
-						<div class="spot-block draggable"  draggable ="true" >
+						<div class="spot-block draggable"  draggable ="true" data-idx="${i}" data_jdx="${j}">
 							<div class="timerange-modal hide" >
 								<div><p style="margin-left:30px; font-weight: bold; padding: 10px 0;">머무는 시간 설정</p></div>
 								<div class="flex ">
@@ -83,33 +84,39 @@ function displayEditInfo(){
 								</div>
 							</div>`;
 							
+							
 						//spot div 정제해서 넣기 //장소정보	
 						htmlval+=`
-							 	<div class="spot grid wfull" >
-							 		<div class="spot-number backimg"><p>${idxlist.count}</p></div>
-							 		<div class="spot-staytime" onclick="timeRangeBtnClickHandler(this);" data-startTime="${startTime}" data-endTime="${endTime}">
-							 			<p class="timerange">${startTime} - ${endTime}</p>
-							 		</div>
-							 		
-							 		<div class="spot-type">명소</div>
-							 		<div class="spot-title wfull" th:text="${info.title}"></div>
-							 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" th:src="@{/images/icons/memoIcon.png}" ><span th:text="${info.memo}" class="memo"></span></div>
-							 		
-							 		<!-- 이미지 유무에 따른 src 설정 주석처리-->
-							 		<!-- <div class="spot-img wfull hfull"> 
-								 		<img th:if="${info.firstimage}" class=" wfull hfull" th:src="${info.firstimage}">
-								 		<img th:unless="${info.firstimage}" class=" wfull hfull" th:src="@{/images/icons/spot_sample.png}"  >
-							 		</div>-->
-							 		
-							 		<div class="spot-caricon"><img style="width:20px;height: 20px;" th:src="@{/images/icons/carIcon.png}" /></div>
-							 		<div class="spot-move"> ${duration}분> </div>
-							 	<!-- x 버튼 -->
-									<button class="spot-setting" > 
-										<img class="wfull img trash-bin "  th:src="@{/images/icons/cancel.png}"/>
-									</button>
-							    </div><!-- spot  -->
+						 	<div class="spot grid wfull" >
+						 		<div class="spot-number backimg"><p>${j+1}</p></div>
+						 		<div class="spot-staytime" onclick="timeRangeBtnClickHandler(this);" data-startTime="${startTime}" data-endTime="${endTime}">
+						 			<p class="timerange">${startTime} - ${endTime}</p>
+						 		</div>
+						 		
+						 		<div class="spot-type">명소</div>
+						 		<div class="spot-title wfull"> ${spot.title}</div>
+						 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span th:text="${info.memo}" class="memo"></span></div>
+						 		
+						 		<!-- 이미지 X-->
+						 		
+						 		<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>`;
+						
+						//마지막  상소일 경우 이동시간 hide
+						if(j+1 < sessionArr[i].length){
+						
+						htmlval+=`<div class="spot-move"> ${durationMin}분> </div>`;
+						
+						}else{
+						
+						htmlval+=`<div class="spot-move hide"> ${durationMin}분> </div>`;
+						}
+						
+						htmlval+=`<!-- x 버튼 -->
+								<button class="spot-setting" > 
+									<img class="wfull img trash-bin "  src="/images/icons/cancel.png"/>
+								</button>
+						    </div><!-- spot  -->
 						`;	
-							
 							
 						//spot-block 닫기	
 						htmlval+=`</div> <!--spot-block  -->`;

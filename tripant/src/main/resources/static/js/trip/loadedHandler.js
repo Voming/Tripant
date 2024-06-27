@@ -39,12 +39,11 @@ function setEvent(){
 	//화면에 뿌릴 장소 정보 백틱으로 한번에 담아오기
 	displayInfo();
 
-	//장소별 머무는 시간 출력
-	//staytimeHandler();
-
 	//map 화면 출력
 	displayMap();
-	//setBounds();
+	
+	//편집페이지 정보 로드	
+	displayEditInfo();
 	
 	//일차별 동그라미 색 변경
 	circleColorHandler();
@@ -52,7 +51,7 @@ function setEvent(){
 	//좌측 탭 이벤트 설정
 	navHandler();
 
-	displayEditInfo();
+
 	
 
 	//드래그 앤 드랍
