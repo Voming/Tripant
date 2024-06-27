@@ -52,7 +52,7 @@
 				<!-- 작성자 이름: 닉네임으로 표기해야함 -->
 				<div class="diary-MemEmail-wrap">
 					<p>작성자</p>
-					<div th:text="${diary.diaryMemEmail}" class="diary-MemEmail">DiaryMemEmail</div>
+					<div th:text="${diary.MemNick}" class="diary-MemEmail">DiaryMemNick</div>
 				</div>
 				<div class="diary-content-wrap">
 					<!--글 작성 내용 표기  -->
@@ -77,7 +77,7 @@
                  onclick="btnLikeClickHandler(this);">
         </div>
         <!-- 좋아요 수 연결 -->
-        <div class="like-num">100</div>
+        <div class="like-num">like-num</div>
 		</div>
 
 	</div>

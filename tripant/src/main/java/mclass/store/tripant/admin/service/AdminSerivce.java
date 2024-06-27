@@ -38,8 +38,8 @@ public class AdminSerivce {
 	}
 	
 	//게시글 검색(select)
-	public List<AdminBoardEntity> keywordsearch(String memNick){
-		return admindao.keywordsearch(memNick);
+	public String keywordsearch(Map<String, Object> map){
+		return admindao.keywordsearch(map);
 	}
 
 	//좋아요 정렬

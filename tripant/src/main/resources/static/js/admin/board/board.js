@@ -7,8 +7,7 @@ function loadedHandler() {
 	$(".btn.view").on("click", ClickViewHandler);
 	//조건검색
 	$('.btn-search').on("click",searchHandler);
-	//옵션 선택 
-	//$("select[name=option]").on("change",pickHandler);
+	
 }
 
 //좋아요수 정렬
@@ -78,49 +77,23 @@ function ViewHandler(view){
 	}
 	return htmlVal;
 }
-//option 선택값  
-function pickHandler(){
-	/*//선택한 option text값 가져오기
-	var pick=$("select[name=option] option:selected").text();
-	//value로 가져오기
-	var pick=$(this).val(); 
-	var write=$('[name=search]').val().tirm();
-	console.log(write);*/
-	
-	/*$.ajax({
-		url:"/admin/keyword" ,
-		method:"post" ,
-		data:{pick:pick , write:write} ,
-		success:function(result){
-			memListHandler(result)
-			console.log(result);
-		}, 
-		 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
-			}
-	});*/
-}
-
 
 
 // 검색
 function searchHandler(){
-	var pick=$("select[name=option] option:selected").val(); 
-	var write = $("[name=search]").val().trim();
+	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
+	var write = $("[name=search]").val().trim();  //input 값
+	//var prevalue = null;
+	//var currentpage = 1;
 	console.log(write);
 	console.log(pick);
 	$.ajax({
 		url:"/admin/keyword",
-		 method:"post",
-		 data: {pick:pick, write:write},
-		 success : function(searchList) {
-			if(pick='nick'){
+		method:"post",
+		data: {pick:pick, write:write},
+		success : function(searchList) {
 				console.log(searchList);
 				 $('#list').html(memListHandler(searchList));
-				}
-			 
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"

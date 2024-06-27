@@ -1,7 +1,7 @@
 // This sample still does not showcase all CKEditor&nbsp;5 features (!)
 // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
 const makeTripAntCkeditor = (editorId) => {
-	const aaa =
+	const ckeditorInstance =
 		CKEDITOR.ClassicEditor.create(document.getElementById(editorId), {
 			// https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
 			toolbar: {
@@ -15,9 +15,10 @@ const makeTripAntCkeditor = (editorId) => {
 					'-',
 					'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
 					'alignment', '|',
-					'link', 'uploadImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+					'link','blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
 					'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-
+					'exportPDF','exportWord', '|',
+					'uploadImage'
 				],
 				shouldNotGroupWhenFull: true
 			},
@@ -44,14 +45,6 @@ const makeTripAntCkeditor = (editorId) => {
 			},
 			// https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
 			placeholder: '행복했던 나의 여행을 기록으로 남겨보세요.',
-			// Used by real-time collaboration
-			//--------이미지 업로드
-			cloudServices: {
-				// Be careful - do not use the development token endpoint on production systems!
-				tokenUrl: 'https://110380.cke-cs.com/token/dev/ALTCWJbpBbcPjffRdzRes4WagIzLqxcv7h9J?limit=10',
-				webSocketUrl: 'wss://110380.cke-cs.com/ws',
-				uploadUrl: 'https://110380.cke-cs.com/easyimage/upload/'
-			},
 			// https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
 			fontFamily: {
 				options: [
@@ -118,6 +111,28 @@ const makeTripAntCkeditor = (editorId) => {
 					}
 				]
 			},
+			//--------이미지 업로드
+			ckfinder : { uploadUrl: '/post/cloudinary'	},
+			
+			// Used by real-time collaboration
+			/*
+			cloudServices: {
+				// Be careful - do not use the development token endpoint on production systems!
+				tokenUrl: 'https://110380.cke-cs.com/token/dev/ALTCWJbpBbcPjffRdzRes4WagIzLqxcv7h9J?limit=10',
+				webSocketUrl: 'wss://110380.cke-cs.com/ws',
+				//uploadUrl: contextPath + '/post/cloudinary'
+			},
+			
+			collaboration: {
+	            // Modify the channelId to simulate editing different documents
+	            // https://ckeditor.com/docs/ckeditor5/latest/features/collaboration/real-time-collaboration/real-time-collaboration-integration.html#the-channelid-configuration-property
+	            channelId: 'document-id-8'
+	        },
+	        */
+	        // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/ckbox.html
+
+			// License key is required only by the Pagination plugin and non-realtime Comments/Track changes.
+        	licenseKey: 'NHBPRmY2NVd2Zld4dUpFK2Y5VkNSakYzdHBHZWg1bVRuUTJYc0s2U09iY2MxL1RmMjlvY3psWnNzTmJLSVE9PS1NakF5TkRBM01qWT0=',
 			// The "superbuild" contains more premium features that require additional configuration, disable them below.
 			// Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
 			removePlugins: [
@@ -126,8 +141,8 @@ const makeTripAntCkeditor = (editorId) => {
 				// 'ExportWord',
 				'AIAssistant',
 				'CKBox',
-				'CKFinder',
-				'EasyImage',
+				//'CKFinder',
+				//'EasyImage',
 				// This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
 				// https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
 				// Storing images as Base64 is usually a very bad idea.
@@ -158,5 +173,6 @@ const makeTripAntCkeditor = (editorId) => {
 				'CaseChange'
 			]
 		});
-	return aaa;
+	//CKFinder.setupCKEditor(ckeditorInstance);
+	return ckeditorInstance;
 } //makeTripAntCkeditor 

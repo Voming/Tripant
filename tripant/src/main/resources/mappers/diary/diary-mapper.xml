@@ -2,60 +2,111 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper	namespace="mclass.store.tripant.diary.model.repository.DiaryRepository">
 
-<resultMap type="DiaryBoardEntity" id="aaa">
+<resultMap type="DiaryBoardEntity" id="DiaryBoardEntityMap">
     <result property="diaryContent" column="DIARY_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
 </resultMap>
 
 	<!--전체글 리스트 목록 뿌리기 -->
-	<select id="selectDiaryList" resultType="DiaryBoardEntity"
-		parameterType="map">
-		SELECT D.DIARY_ID,
-		D.DIARY_MEM_EMAIL, D.MEM_NICK, D.DIARY_PLAN_ID,
-		D.DIARY_TITLE,
-		DBMS_LOB.SUBSTR(D.DIARY_CONTENT, 1000) DIARY_CONTENT,
-		D.DIARY_DATE, D.DIARY_OPEN,
-		D.DIARY_VIEWS, D.DIARY_THEME, D.PLAN_AREA_CODE
-		FROM
-		VIEW_DIARY_MEMBER_PLAN D
-		WHERE
-		<if test="areaname != null and !areaname.equals('') ">
-			PLAN_AREA_CODE =
-			(SELECT AREA_CODE FROM AREA
-			WHERE
-			AREA_SHORT_NAME = #{areaname}
-			) AND
-		</if>
-		ROWNUM <![CDATA[<=]]>
-		#{maxNum}
+	<!--최신순 정렬 (diary_date_real 별칭사용)-->
+	<select id="selectDiaryList" resultType="DiaryBoardEntity"	parameterType="map">
+	select * from 
+	(   select t1.*, rownum rn from 
+	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+	                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+	                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+	                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+	                , diary_date diary_date_real
+	                FROM   VIEW_DIARY_MEMBER_PLAN 
+	                WHERE
+	                    DIARY_OPEN = 0
+	             		<if test="areaname != null and !areaname.equals('') "> 
+	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
+	            		</if>
+	                ORDER BY diary_date_real DESC NULLS LAST
+	    ) t1
+	) where rn  BETWEEN 1  AND  #{maxNum}
 	</select>
+	<!--최신순 정렬 (diary_date_real 별칭사용)-->
+	<select id="selectLatest" resultType="DiaryBoardEntity"	parameterType="map">
+	select * from 
+	(   select t1.*, rownum rn from 
+	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+	                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+	                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+	                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+	                , diary_date diary_date_real
+	                FROM   VIEW_DIARY_MEMBER_PLAN 
+	                WHERE
+	                    DIARY_OPEN = 0
+	             		<if test="areaname != null and !areaname.equals('') "> 
+	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
+	            		</if>
+	                ORDER BY diary_date_real DESC NULLS LAST
+	    ) t1
+	) where rn  BETWEEN 1  AND  #{maxNum}
+	</select>
+	<!-- 좋아요 정렬(likes ) -->
+	<select id="selectLikesPopular" resultType="DiaryBoardEntity"	parameterType="map">
+	select * from 
+	(   select t1.*, rownum rn from 
+	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+	             NVL(likes,0) likes,
+	                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+	                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+	                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+	                , diary_date diary_date_real
+	                FROM   VIEW_DIARY_MEMBER_PLAN 
+	            LEFT OUTER JOIN (select	count (mem_email) likes, diary_id from diary_likes group by diary_id)  USING (diary_id)
+	                WHERE
+	                    DIARY_OPEN = 0
+	             		<if test="areaname != null and !areaname.equals('') "> 
+	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
+	            		</if>
+	                ORDER BY likes DESC NULLS LAST
+	    ) t1
+	) where rn  BETWEEN 1  AND  #{maxNum}
+	</select>
+	<!--조회수 정렬 (diary_views)-->
+	<select id="selectViewsPopular" resultType="DiaryBoardEntity"	parameterType="map">
+	select * from 
+	(   select t1.*, rownum rn from 
+	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+	                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+	                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+	                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+	                , diary_date diary_date_real
+	                FROM   VIEW_DIARY_MEMBER_PLAN 
+	                WHERE
+	                    DIARY_OPEN = 0
+	             		<if test="areaname != null and !areaname.equals('') "> 
+	            		AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
+	            		</if>
+	                ORDER BY DIARY_VIEWS DESC NULLS LAST
+	    ) t1
+	) where rn  BETWEEN 1  AND  #{maxNum}
+	</select>
+	
 	<!-- 나의 글리스트 목록 뿌리기 -->
-	<select id="selectMyDiaryList" resultType="DiaryBoardEntity"
-		parameterType="map">
-		select * from (
-			select t1.*, ROWNUM rn from (
-			SELECT
-			DIARY_ID,
-			DIARY_MEM_EMAIL,
-			MEM_NICK,
-			DIARY_PLAN_ID,
-			DIARY_TITLE,
-			DIARY_DATE,
-			DIARY_OPEN,
-			DIARY_VIEWS,
-			DIARY_THEME,
-			PLAN_AREA_CODE
-			FROM
-			VIEW_DIARY_MEMBER_PLAN D
-			WHERE
-			DIARY_MEM_EMAIL = #{email}
-			ORDER BY
-			DIARY_DATE DESC
-			) t1
-		)
-		where #{maxNum}-4 <![CDATA[<]]>
-		rn and rn <![CDATA[<=]]>
-		#{maxNum}
+	<select id="selectMyDiaryList" resultType="DiaryBoardEntity"	parameterType="map">
+	select * from 
+	(   select t1.*, rownum rn from 
+	        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+	                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+	                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+	                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+	                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+	                , diary_date diary_date_real
+	            FROM   VIEW_DIARY_MEMBER_PLAN 
+	            WHERE DIARY_MEM_EMAIL = #{email}
+	            ORDER BY diary_date_real DESC NULLS LAST
+	    ) t1
+	) where rn between #{maxNum-3} and #{maxNum}
 	</select>
+
 
 
 	<!-- 글 작성 등록 시키기 -->
@@ -74,29 +125,27 @@
 		<foreach collection="diaryContentArrList" item="content4000" separator="||" close=",">
 		to_clob(#{content4000})
 		</foreach>
+		NVL(#{diaryContent:CLOB}, EMPTY_CLOB()),  oracle
 		 -->
-		NVL(#{diaryContent:VARCHAR}, EMPTY_CLOB()), 
-		to_date(#{diaryDate}, 'yyyy-mm-dd'), #{diaryOpen},
+		#{diaryContent},
+		default, #{diaryOpen},
 		#{diaryViews},
 		#{diaryTheme})
 	</insert>
-	<!-- 특정 ID의 다이어리 조회 -->
-	<select id="findById" parameterType="long"
+
+<!-- 	<select id="findById" parameterType="long"
 		resultType="DiaryBoardEntity">
-		SELECT * FROM DIARY WHERE DIARY_ID = 
-	</select>
+		SELECT * FROM DIARY WHERE DIARY_ID = {}
+	</select> -->
 	<!-- 특정 ID의 PlAN 조회 -->
-	<select id="selectPlanById" parameterType="string"
-		resultType="WritePlanTitleEntity">
+	<select id="selectPlanById" parameterType="string" 	resultType="WritePlanTitleEntity">
 		SELECT plan_id AS planId, plan_title AS planTitle
 		FROM view_plan_member
         WHERE mem_email = #{MemEmail}
-        
 	</select>
 	<!-- 공개된 일기 선택 -->
 	<select id="selectPublicDiaries" resultType="DiaryBoardEntity">
-		SELECT * FROM diary
-		WHERE DIARY_OPEN = '0'
+		SELECT * FROM diary WHERE DIARY_OPEN = '0'
 	</select>
 
 	<!-- 비공개된 일기 선택 -->
@@ -104,48 +153,11 @@
 		SELECT * FROM diary
 		WHERE DIARY_OPEN = '1'
 	</select>
-	<!--최신순 -->
-	<select id="selectLatest" resultType="DiaryBoardEntity">
-		select diary_id,
-		diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date
-		diary_date,diary_views,
-		nvl(likes,0) likes, mem_nick from
-		((select a.diary_id, a.diary_title
-		diary_title, a.diary_date diary_date,
-		a.diary_views
-		diary_views,a.diary_mem_email, b.likes
-		from DIARY a
-		left join (select
-		count (mem_email) likes , diary_id from diary_likes
-		group by diary_id)
-		b on a.diary_id= b.diary_id))
-		join member on diary_mem_email=mem_email
-		order by diary_views desc nulls last
-	</select>
-
-	<!-- 인기순 -->
-	<select id="selectPopular" resultType="DiaryBoardEntity">
-		select diary_id,
-		diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,
-		diary_views,
-		nvl(likes,0) likes, mem_nick from
-		((select a.diary_id, a.diary_title
-		diary_title, a.diary_date diary_date,
-		a.diary_views
-		diary_views,a.diary_mem_email, b.likes
-		from DIARY a
-		left
-		join (select
-		count (mem_email) likes , diary_id from diary_likes group
-		by diary_id)
-		b on a.diary_id= b.diary_id))
-		join member on
-		diary_mem_email=mem_email
-		order by likes desc nulls last
-	</select>
-
-	<select id="selectDiaryById" parameterType="int" resultMap="aaa">
-		SELECT * FROM diary WHERE DIARY_ID = #{diaryId}
+	
+	<!-- 특정 ID의 다이어리 조회 -->
+	<select id="selectDiaryById" parameterType="int" resultMap="DiaryBoardEntityMap">
+		<!-- view_diary_member의 nick_name  -->
+		SELECT * FROM view_diary_member WHERE DIARY_ID = #{diaryId}
 	</select>
 	<!-- 조회수 증가 -->
 	<update id="incrementDiaryViews" parameterType="int">

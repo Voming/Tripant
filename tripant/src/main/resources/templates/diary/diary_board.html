@@ -25,8 +25,10 @@
 				<!-- 순서 옵션 -->
 				<div class="d-select">
 				<!-- onchange로 바꾸기!!!!!!!!! -->
-					<select id="sortOption" onchange="fetchDiaries()"><option value="latest">최신순</option>
-						<option value="popularity">인기순</option>
+					<select id="sortOption" onchange="sortOptionChangeHandler(this);">
+					<option value="latest">최신순</option>
+					<option value="likes">인기순</option>
+					<option value="views">조회수</option>
 					</select>
 				</div>
 				<!-- 지역 태그 -->
@@ -36,7 +38,7 @@
 					<th:block th:each="num : ${#numbers.sequence(1,18)}">
 						<div th:id="'tab'+${num}">
 							<div class="wrap-diary">
-								<div class="wrap-d-content" th:replace="~{diary/diary_area_fragment.html :: diaryitemlist}" ></div>
+								<div class="wrap-d-content" th:replace="~{diary/diary_area_fragment :: diaryitemlist}" ></div>
 							</div>
 						</div>
 					</th:block>

@@ -36,15 +36,36 @@ public class DiaryController {
 		mv.setViewName("diary/diary_board");
 		return mv;
 	}
-
-	// 전체 글보기(공개 글)
-	@PostMapping("")
-	public String diary2(Model model, String areaname, Integer clickNum) {
-		int maxNum = (clickNum + 1) * 8;
-		model.addAttribute("diaries", diaryService.selectDiaryList(areaname, maxNum));
-		return "diary/diary_area_fragment";
+	// 전체 글보기(공개 글) -- 
+//	@PostMapping("")
+//	public String diary2(Model model, String areaname, Integer clickNum) {
+//		int maxNum = (clickNum + 1) * 3;
+//		model.addAttribute("diaries", diaryService.selectDiaryList(areaname, maxNum));
+//		return "diary/diary_area_fragment";
+//	}
+	//최신순 정렬 // 전체 글보기(공개 글) 
+    @PostMapping("/popular/latest")
+    public String getLatestDiaries(Model model, String areaname, Integer clickNum) {
+		int maxNum = (clickNum + 1) * 3;
+        model.addAttribute("diaries", diaryService.getLatestDiaries(areaname, maxNum));
+        return "diary/diary_area_fragment";
+    }
+	// 좋아요 정렬
+    @PostMapping("/popular/likes")
+	public String selectLikesPopular(Model model, String areaname, Integer clickNum) {
+		int maxNum = (clickNum + 1) * 3;
+        model.addAttribute("diaries", diaryService.selectLikesPopular(areaname, maxNum));
+        return "diary/diary_area_fragment";
 	}
+	// 조회수 정렬
+    @PostMapping("/popular/views")
+    public String selectViewsPopular(Model model, String areaname, Integer clickNum) {
+		int maxNum = (clickNum + 1) * 3;
+        model.addAttribute("diaries", diaryService.selectViewsPopular(areaname, maxNum));
+        return "diary/diary_area_fragment";
+    }
 
+    
 	// 글 상세보기
 	@GetMapping("/read/{diaryId}")
 	public String diartRead(@PathVariable int diaryId, Model model) {
@@ -68,16 +89,6 @@ public class DiaryController {
     }
     
     
-	//최신순 정렬
-	@GetMapping("/latest")
-    public List<DiaryBoardEntity> getLatestDiaries() {
-        return diaryService.getLatestDiaries();
-    }
-// 좋아요순 정렬
-    @GetMapping("/popular")
-    public List<DiaryBoardEntity> getPopularDiaries() {
-        return diaryService.getPopularDiaries();
-    }
-	
-	}
+
+}
 

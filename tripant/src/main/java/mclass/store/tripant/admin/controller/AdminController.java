@@ -102,10 +102,13 @@ public class AdminController {
 	//게시글 검색(select)  //TODO
 	@PostMapping("/keyword")
 	@ResponseBody
-	public List<AdminBoardEntity> keywordSearch(String write, Model model) {
-		List<AdminBoardEntity> keywordList=adminservice.keywordsearch( write);
-		
-		return keywordList;
+	public String keywordSearch(Model model,@RequestParam String write, @RequestParam String pick) {
+		Map<String, Object> map=new HashMap<>();
+		map.put("write",write);
+		map.put("pick",pick);
+		System.out.println("###########"+write);
+		System.out.println("###########"+pick);
+		return adminservice.keywordsearch(map);
 	}
 	
 	//ajax
@@ -268,7 +271,7 @@ public class AdminController {
 	}
 	
 	//상품검색
-	//ajax + fragment  //TODO
+	//ajax + fragment
 	@PostMapping("/goods/search")
 	public String itemsearch(Model model, String itemCode){
 		List<AdminStoreEntity> itemsearchList=adminservice.itemsearch(itemCode);
