@@ -55,7 +55,7 @@ public class AdminController {
 	
 
 	 //ajax
-	 //등급변경 
+	 //회원정보 수정(등급변경 , 활성화여부)
 	@PostMapping("/member/info") 
 	@ResponseBody
 	public Integer MemberInfo(Integer selectRole, String memEmail,Integer selectActive) {
@@ -83,6 +83,8 @@ public class AdminController {
 		
 		return result;
 	}
+	
+	
 	
 	//ajax  
 	//검색 
