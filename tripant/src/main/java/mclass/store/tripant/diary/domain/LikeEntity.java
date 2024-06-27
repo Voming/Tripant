@@ -10,4 +10,5 @@ public class LikeEntity {
 //	MEM_EMAIL NOT NULL VARCHAR2(100)
 	private int diaryId;
 	private String memEmail; //좋아요 수
+	private int like;
 }

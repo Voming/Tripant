@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,4 +79,20 @@ public class MyDiaryController {
         int result = diaryService.deleteDiary(diaryId); // DiaryService에서 삭제 메서드 호출
         return result; // 삭제 성공 시 1, 실패 시 0을 반환합니다.
     }
+    
+	// 좋아요 기능
+	@PostMapping("/diary/like/{diaryId}")
+	@ResponseBody
+	public Integer likeDiary(@PathVariable int diaryId, Principal pricipal) {
+		int result = diaryService.likeDiary(diaryId, pricipal.getName());
+		return result;
+	}
+	// 좋아요해제 기능
+	@PostMapping("/diary/unlike/{diaryId}")
+	@ResponseBody
+	public Integer unlikeDiary(@PathVariable int diaryId, Principal pricipal) {
+		int result = diaryService.unlikeDiary(diaryId, pricipal.getName());
+		return result;
+	}
+
 }

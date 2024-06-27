@@ -12,7 +12,7 @@ function moreBtnClickHandler(thisElement){
 			, context: this
 			, error: ajaxErrorHandler
 		}).done(function(wrap_content) {
-			//$(".wrap-d-content").replaceWith(wrap_content);
+			//$(".wrap-diary").replaceWith(wrap_content);
 			$(".board-list").append(wrap_content);
 		})
 	}

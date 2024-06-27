@@ -52,13 +52,14 @@ function displayEditInfo(){
 							duration = durationHandler(spot.lng,spot.lat,sessionArr[i][j+1].lng,sessionArr[i][j+1].lat);
 							durationMin=Math.ceil(duration/60);
 						}	
+						
 						//머무는 시간 계산하기 ex) 10:00 - 11:00
 						//1번째 장소
 						if(j == 0){
 							startTime =sessionArr[i][j].travelStart;
 							endTime = addTime(startTime,spot.stayTime);
 						//2~n-1번째 장소	
-						}else if(0 < j && j < sessionArr[i]-1){
+						}else if(0 < j && j < sessionArr[i].length-1){
 							startTime =  addTime(endTime,prevDuration);
 							endTime = addTime(startTime,spot.stayTime);
 						//n번째 장소(숙소)	
@@ -67,12 +68,13 @@ function displayEditInfo(){
 							endTime = 	sessionArr[i][j].travelEnd;
 						}
 						
-				//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
-				//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
+						//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
+						//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
 						prevDuration = duration;
+
 						
 						htmlval+=`
-						<div class="spot-block draggable"  draggable ="true" data-idx="${i}" data_jdx="${j}">
+						<div class="spot-block draggable"  draggable ="true" data-idx="${i}" data-jdx="${j}" data-sessionKey="${spot.sessionOrder}">
 							<div class="timerange-modal hide" >
 								<div><p style="margin-left:30px; font-weight: bold; padding: 10px 0;">머무는 시간 설정</p></div>
 								<div class="flex ">

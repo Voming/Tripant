@@ -228,7 +228,7 @@ public class AdminController {
 	// 상품추가
 	@PostMapping("/goods/insert")
 	@ResponseBody
-	public int goodsInsert(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale, String itemColor) {
+	public int goodsInsert(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale, String itemColor, String itemSrc) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
@@ -236,6 +236,7 @@ public class AdminController {
 		map.put("itemDur", itemDur != null ? itemDur : null);
 		map.put("itemSale", itemSale != null ? itemSale : null);
 		map.put("itemColor", itemColor != null ? itemColor : null);
+		map.put("itemSrc", itemSrc != null ? itemSrc : null);
 		
 		int result = adminservice.itemInsert(map);
 		
@@ -252,7 +253,7 @@ public class AdminController {
 	// 상품수정
 	@PostMapping("/goods/update")
 	@ResponseBody
-	public int goodsUpdate(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale, String itemColor) {
+	public int goodsUpdate(String itemCode, String itemName, Integer itemPrice, Integer itemDur, Integer itemSale, String itemColor, String itemSrc) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("itemCode", itemCode);
 		map.put("itemName", itemName);
@@ -260,6 +261,7 @@ public class AdminController {
 		map.put("itemDur", itemDur != null ? itemDur : null);
 		map.put("itemSale", itemSale != null ? itemSale : null);
 		map.put("itemColor", itemColor != null ? itemColor : "");
+		map.put("itemSrc", itemSrc != null ? itemSrc : null);
 		
 		int result = adminservice.itemUpdate(map);
 		
