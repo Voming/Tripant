@@ -4,7 +4,7 @@ function initializeSessionArr() {
 }
 //insertion sort - 삽입정렬
 function insertionSort(arr ,leng){
-	var i, j ,key, temp;
+	var i, j ,key;
 	
 	for(var i = 1 ; i<leng ; i++){
 		key=arr[i];
@@ -31,7 +31,7 @@ function saveSessionArr(){
 	}
 }
 
-//sessionStorage값 display하기
+//sessionStorage값 display하기 - 편집 클릭했을 때 화면
 function displayEditInfo(){
 	
 	saveSessionArr();//sessionStorage값 가져오기
@@ -48,8 +48,8 @@ function displayEditInfo(){
 		htmlval+=`
 				<div class="column flex" data-columns="${i+1}" th:id="'#tab'+${sessionArr[i].tripIdx+1}">
 					<div class="sub-title flex ">
-						<h4 th:text="${sessionArr[i].tripIdx} + '일차'" class="nday"></h4>
-						<h6 th:text="${details.travelDate}" class="date"></h6>
+						<h4 th:text="${i+1} + '일차'" class="nday"></h4>
+						<h6 th:text="${sessionArr[i].travelDate}" class="date"></h6>
 					</div>
 				 	<div  class="container flex wfull">
 				 	`;

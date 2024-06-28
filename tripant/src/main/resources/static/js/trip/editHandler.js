@@ -27,4 +27,12 @@ function timeDoneBtnClickHandler(thisElement) {
 	circleColorHandler();
 }
 
-
+//spot -index
+function spotIndxHanlder(thisElement){
+	$('.spot-block').each(function (){
+		
+		
+		
+	});
+	
+}

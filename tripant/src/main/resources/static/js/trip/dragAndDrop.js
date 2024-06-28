@@ -7,27 +7,46 @@ function dragAndDrop(){
  * [x] dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
  */
 
- 
-    const $ = (select) => document.querySelectorAll(select);
-    const draggables = $('.draggable');
-    const containers = $('.container');
+ 	//$자체에 함수? 선언 $() 안의 선택자를 가진 모든 요소들을 선택함
+    //const $ = (select) => document.querySelectorAll(select);
+    const draggables = document.querySelectorAll('.draggable');
+    const containers = document.querySelectorAll('.container');
 
     draggables.forEach(el => {
         el.addEventListener('dragstart', () => {
+			console.log("dragstart");
             el.classList.add('dragging');
         });
 
         el.addEventListener('dragend', () => {
+			console.log("dragend");
             el.classList.remove('dragging')
+            //---------------------console.log
+            console.log("************el");
+            console.log($(el));
+            console.log("--------- prev");
+            console.log($(el).prev());
+            //일차별 동그라미 색 변경
+			//circleColorHandler();
+		
         });
     });
 
+    containers.forEach(container => {
+        container.addEventListener('dragover', e => {
+            console.log("dragover");
+            e.preventDefault()
+            const afterElement = getDragAfterElement(container, e.clientY);
+            const draggable = document.querySelector('.dragging')
+            // container.appendChild(draggable)
+            container.insertBefore(draggable, afterElement)
+        })
+    });
+    
     function getDragAfterElement(container, y) {
         const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
         
-        //일차별 동그라미 색 변경
-		circleColorHandler();
-		
+
         return draggableElements.reduce((closest, child) => {
           const box = child.getBoundingClientRect() //해당 엘리먼트에 top값, height값 담겨져 있는 메소드를 호출해 box변수에 할당
           const offset = y - box.top - box.height / 2 //수직 좌표 - top값 - height값 / 2의 연산을 통해서 offset변수에 할당
@@ -39,16 +58,4 @@ function dragAndDrop(){
 
         }, { offset: Number.NEGATIVE_INFINITY }).element
     };
-
-    containers.forEach(container => {
-        container.addEventListener('dragover', e => {
-            e.preventDefault()
-            const afterElement = getDragAfterElement(container, e.clientY);
-            const draggable = document.querySelector('.dragging')
-            // container.appendChild(draggable)
-            container.insertBefore(draggable, afterElement)
-        })
-    });
-
-
 }

@@ -1,6 +1,5 @@
 $(loadedHanlder);
-//세션스토리지값 저장
-let editStorage = window.sessionStorage;
+
 
 //장소 정보를 담을 객체 생성
 //constructor : 값이 null이어도 해당 key의 공간을 확보해둠

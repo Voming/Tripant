@@ -73,7 +73,7 @@ function addTime(timeStr, stayTime){
 	
 	return `${String(finalHours).padStart(2, '0')}:${String(finalMinutes).padStart(2, '0')}`;
 }
-
+//페이지 들어가자마자 있는 일정 -편집 전 화면
 function displayInfo(){
 	//DB에서 받아온 original 정보
 	detailList=dayEntityList_org;
@@ -160,7 +160,7 @@ function displayInfo(){
 					'travelDate' : details.travelDate,
 					'travelStart' : details.scheduleStart,
 					'travelEnd' : details.scheduleEnd,
-					'tripIdx' : i,  /*여행 기간*/
+					'tripIdx' : i,  /*여행 총 며칠*/
 					'jdx': j,
 					'travelOrder' : info.travelOrder, /* 하루 내 장소 방문 순서 //  숙소 : null*/
 					'stayTime' : info.stayTime,
@@ -168,13 +168,11 @@ function displayInfo(){
 					'memo' : info.memo,
 					'lat' : info.lat,
 					'lng' : info.lng,
-					'startTime' : startTime,
-					'endTime':endTime,
 					'sessionOrder':sessionOrder
 				}
 				
 				//각 spot의 정보를 객체에 담아 번호순대로 key값을 지정하여 sessionStorage에 넣기
-				editStorage.setItem(sessionOrder,JSON.stringify(spotInfo));
+				editStorage.setItem(sessionOrder, JSON.stringify(spotInfo));
 				sessionOrder += 1;
 				
 				
