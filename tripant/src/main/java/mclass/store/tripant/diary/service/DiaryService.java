@@ -1,5 +1,6 @@
 package mclass.store.tripant.diary.service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +57,8 @@ public class DiaryService {
 	    return diaryRepository.deleteDiaryById(diaryId,memEmail);
 	  } 
 	 // 여행기 글 신고하기
-	  public int reportSOne(int diaryId, String memEmail)  throws Exception{
-		  return diaryRepository.reportSOne(diaryId, memEmail);
+	  public int reportsOne(int diaryId, String memEmail)  throws SQLIntegrityConstraintViolationException{
+		  return diaryRepository.reportsOne(diaryId, memEmail);
 	  }
 	  
 

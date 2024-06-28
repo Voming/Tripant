@@ -18,7 +18,7 @@ function loaededHandler() {
 }
 
 function reportHandler() {
-	var diaryId = $(this).data('delete-id');
+	var diaryId = $(this).data('diary-id');
 	console.log(diaryId);
 	 console.log("report ID: ", diaryId);
 	Swal.fire({
@@ -44,10 +44,16 @@ function reportHandler() {
 						}).then(() => {
 							location.reload();
 						});
-					} else {
+					} else  if(result == -1) {
 						Swal.fire({
 							title: "오류",
 							text: "신고된 글입니다.",
+							confirmButtonText: 'Ok'
+						});
+					}else {
+						Swal.fire({
+							title: "오류",
+							text: "오류가 발생하여 신고하지 못했습니다.",
 							confirmButtonText: 'Ok'
 						});
 					}

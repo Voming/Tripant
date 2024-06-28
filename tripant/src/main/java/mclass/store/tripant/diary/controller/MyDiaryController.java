@@ -1,7 +1,7 @@
 package mclass.store.tripant.diary.controller;
 
 import java.security.Principal;
-
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +74,7 @@ public class MyDiaryController {
 	   // 여행글 삭제 처리
     @PostMapping("/diary/delete/{diaryId}")
     @ResponseBody
-    public int deleteDiaryById(@RequestParam("diaryId") int diaryId, Principal pricipal) {
+    public int deleteDiaryById(@PathVariable("diaryId") int diaryId, Principal pricipal) {
         // 여기서 diaryId를 사용하여 삭제 작업을 수행합니다.
         int result = 0;
 		try {
@@ -89,12 +89,11 @@ public class MyDiaryController {
  // 여행글 신고 처리
     @PostMapping("/diary/report/{diaryId}")
     @ResponseBody
-    public int reportSOne(@RequestParam("diaryId")int diaryId, Principal principal) {
+    public int reportsOne(@PathVariable("diaryId")int diaryId, Principal principal) {
     	int result = 0;
 		try {
-			result = diaryService.reportSOne(diaryId, principal.getName());
-		} catch (Exception e) {
-		
+			result = diaryService.reportsOne(diaryId, principal.getName());
+		} catch (SQLIntegrityConstraintViolationException e) {
 			e.printStackTrace();
 			result = -1;
 		}

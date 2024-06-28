@@ -1,5 +1,6 @@
 package mclass.store.tripant.diary.model.repository;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 
@@ -48,7 +49,7 @@ public interface DiaryRepository {
 
 	
 	// 여행기글 신고 
-	 int reportSOne(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail) throws Exception;
+	 int reportsOne(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail) throws SQLIntegrityConstraintViolationException;
 	// 여행기글 삭제
 	 int deleteDiaryById(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail) throws Exception;
 	 // 여행기 글 Previews text 꺼내기
