@@ -324,4 +324,18 @@ from
                 ORDER BY diary_date_real DESC NULLS LAST
     ) t1
 )t2 where rn between 1 and 100 ;
-commit;
+-- 글 신고하기
+INSERT INTO
+DIARY_REPORTS (DIARY_ID, MEM_EMAIL)
+		VALUES ('500','qothwls5@naver.com');
+
+
+select * from diary_reports;
+desc diary_reports
+
+------ON DELETE CASCADE 추가해서 변경
+ALTER TABLE DIARY_LIKES
+ADD CONSTRAINT FK_DIARY_TO_DIARY_LIKES_1
+FOREIGN KEY ("DIARY_ID")
+REFERENCES DIARY ("DIARY_ID")
+ON DELETE CASCADE;

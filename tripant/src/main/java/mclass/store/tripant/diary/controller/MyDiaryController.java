@@ -77,7 +77,9 @@ public class MyDiaryController {
     public int deleteDiaryById(@PathVariable("diaryId") int diaryId, Principal pricipal) {
         // 여기서 diaryId를 사용하여 삭제 작업을 수행합니다.
         int result = 0;
+      
 		try {
+			
 			result = diaryService.deleteDiaryById(diaryId, pricipal.getName());
 		} catch (Exception e) {
 			

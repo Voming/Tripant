@@ -19,8 +19,10 @@ function loaededHandler() {
 
 function reportHandler() {
 	var diaryId = $(this).data('diary-id');
+	
 	console.log(diaryId);
 	 console.log("report ID: ", diaryId);
+
 	Swal.fire({
 		title: "이 글을 신고하시겠습니까?",
 		text: "신고를 취소하고 싶으신 경우, 고객센터에 문의해주시길 바립니다.",
@@ -42,7 +44,7 @@ function reportHandler() {
 							text: "신고되었습니다",
 							confirmButtonText: 'Ok'
 						}).then(() => {
-							location.reload();
+							location.href = "/diary";
 						});
 					} else  if(result == -1) {
 						Swal.fire({
@@ -96,7 +98,7 @@ function deleteHandler() {
 							text: "삭제되었습니다",
 							confirmButtonText: 'Ok'
 						}).then(() => {
-							location.reload();
+							location.href = "/diary";
 						});
 					} else {
 						Swal.fire({
