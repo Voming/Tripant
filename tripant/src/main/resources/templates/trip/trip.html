@@ -57,7 +57,7 @@ var detailList;
 //planId값 url에서 가져오기
 const url = window.location.href;
 const parts = url.split('/'); // Split the URL by '/'
-planId = parts.pop(); // Get the last element of the array
+planId = parts.pop();  // Get the last element of the array
 
 //여행일자별 순서
 var tripIdx ;
@@ -70,20 +70,6 @@ let sessionArr= [];
 
 </script>
 <script th:inline="javascript" th:src="@{/js/trip/loadedHandler.js}"></script>
-<script th:inline="javascript">
- 
-/* memo장 표시 - 투명도 설정 */ 
-function memoHandler(){
-	$(this).siblings('.memo').css('opacity','1');
-	$(this).siblings('.memo').css('display','block');
-}
-function memoNoHandler(){
-	$(this).siblings('.memo').css('display','none');
-}
-
-
-</script>
-
 <script th:inline="javascript" th:src="@{/js/trip/time.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/editHandler.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/sessionStorage.js}"></script>

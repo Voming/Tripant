@@ -36,6 +36,7 @@ UPDATE plan_member SET plan_mem_role = 1 where mem_email='gyrua34@gmail.com' and
 UPDATE plan_member SET plan_mem_role = 0 where mem_email='qothwls5@naver.com' and plan_id = 13;
 
 
+
 --area_code = 1
 --plan_area_code = 1
 --plan전체 + 지역이름 + 사진명

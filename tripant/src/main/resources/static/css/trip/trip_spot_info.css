@@ -56,16 +56,8 @@
       height: 100%;
       white-space: nowrap;
 }
-.main-wrapper .spot .spot-memo{
- 	text-overflow: ellipsis; /* ...표시 */
- 	word-wrap:break-word;
-	display: -webkit-box;
-	-webkit-line-clamp:1; /* ...을 붙이는 row */
-	-webkit-box-orient:vertical;
-	overflow:hidden;
-}
+
 .main-wrapper .spot .spot-memo .img-memo+.memo{
-	display: block;
 	position: absolute;
 	opacity:0; /* 불투명도 설정 0 : 투명 */
  	transition: all ease 0.5s;
@@ -75,6 +67,7 @@
  	border-radius: 8px;
  	background-color:  #fafafa;
  	border:2px solid var(--color_gray);
+	z-index:4;
 }
 /* 드래그 스타일 설정 */
 .main-wrapper .draggable{
