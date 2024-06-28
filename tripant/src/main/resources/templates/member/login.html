@@ -1,35 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{common/header :: head('로그인')}"></head>
 <link th:href="@{/css/member/login.css}" rel="stylesheet" type="text/css">
 <script type="text/javascript" th:src="@{/js/member/login/loadedHandler.js}"></script>
-<!-- 
-<style>
-body { 
-  width: 250px;
-  height: 250px;
-  overflow-y: scroll;
-}
-
-/*스크롤바의 폭 너비*/
-body::-webkit-scrollbar {
-    width: 10px;  
-}
-
-body::-webkit-scrollbar-thumb {
-    background: rgba(220, 20, 60); /* 스크롤바 색상 */
-    border-radius: 10px; /* 스크롤바 둥근 테두리 */
-}
-
-body::-webkit-scrollbar-track {
-    background: transparent;  /*스크롤바 뒷 배경 색상*/
-}
-</style>
- -->
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
 		<form id="frm-login" action="/login" method="post">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 			<section class="flex login">
 				<div class="login title">로그인</div>
 				<div th:replace="~{member/fragment :: inputlbl(이메일, memEmail, text, 3, '이메일 주소')}"></div>

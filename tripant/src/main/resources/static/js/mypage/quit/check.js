@@ -16,7 +16,8 @@ function pwdCheckHandler(){
 				$("#memPassword-no").removeClass('hide');
 				quitActive();
 			}
-		} 
+		}, 
+		beforeSend: csrfHandler, 
 	});
 }
 //비밀번호 보기

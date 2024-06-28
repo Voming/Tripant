@@ -26,6 +26,7 @@ function nickCheckHandler(){
 				chNickActive();
 			}
 		}, 
+		beforeSend: csrfHandler, 
 		error: ajaxErrorHandler
 	});
 }

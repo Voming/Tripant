@@ -4,8 +4,8 @@ async function requestPayment() {
 	$('input:checked').each(function() {
 		items.push($(this).val());
 	});
-	console.log("items >>>>>>>>> " + items);
 	let memEmail = "[[${memEmail}]]";
+	console.log(memEmail);
 	let memNick = "[[${memNick}]]";
 	let memTel = "[[${memTel}]]";
 	let orderName;

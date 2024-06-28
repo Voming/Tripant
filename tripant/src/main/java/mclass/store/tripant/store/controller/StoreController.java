@@ -16,6 +16,7 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -94,36 +95,36 @@ public class StoreController {
 	
 	// 장바구니 페이지
 	@GetMapping("/cart")
-	public ModelAndView storeCart(ModelAndView mv, Principal principal) {
-		mv.setViewName("store/cart");
-		mv.addObject("storeId", storeId);
-		mv.addObject("channelKey", channelKey);
+	public String storeCart(/*ModelAndView mv*/Model model, Principal principal) {
+		model.addAttribute("storeId", storeId);
+		model.addAttribute("channelKey", channelKey);
 		if(principal != null) {
 		
 			// 사용자 이메일
 			String memEmail = principal.getName();
-			mv.addObject("memEmail", memEmail);
+			model.addAttribute("memEmail", memEmail);
 			
 			Map<String, Object> map = storeService.buyInfo(memEmail);
 			
 			// 사용자 닉네임
 			String memNick = (String) map.get("MEM_NICK");
-			mv.addObject("memNick", memNick);
+			model.addAttribute("memNick", memNick);
 			
 			// 사용자 휴대폰 번호
 			String memTel = (String) map.get("MEM_TEL");
-			mv.addObject("memTel", memTel);
+			model.addAttribute("memTel", memTel);
 			
 			// 주문번호
 			int buyId = Integer.parseInt(String.valueOf(map.get("BUY_ID")));
-			mv.addObject("buyId", buyId);
+			model.addAttribute("buyId", buyId);
 			
 			List<Map<String, Object>> list = storeService.cart(memEmail);
 			if(list.size() > 0) {
-				mv.addObject("cart", list);
+				model.addAttribute("cart", list);
 			}
 		}
-		return mv;
+//		mv.setViewName("store/cart");
+		return "store/cart";
 	}
 	
 	// 결제 검증

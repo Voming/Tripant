@@ -4,10 +4,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -50,7 +53,14 @@ public class SecurityConfig {
 						).permitAll()
 					)
 		.csrf((csrf) -> csrf
-				.disable()
+				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/login"))
+				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/store/**"))
+				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/home"))
+				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/nick"))
+				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/pwd"))
+				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/admin/goods"))
+//				.disable()
 //				.ignoringRequestMatchers(new AntPathRequestMatcher("/join"))
 				)
 		.headers((headers) -> headers
