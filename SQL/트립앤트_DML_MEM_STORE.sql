@@ -147,15 +147,18 @@ commit;
 --END;
 --/
 -- 상품 목록 추가
-    -- 테마
-begin
-    for i in 0..9 loop
-        insert into item values ('T'||i, '테마'||(i+1), 1000, null, null, '000000');
-    end loop;
-    commit;
-end;
-/
-    -- 폰트
+---- 테마
+insert into item values ('T0', '테마1', 1000, null, null, 'E54B4B');
+insert into item values ('T1', '테마2', 1000, null, null, 'C943CC');
+insert into item values ('T2', '테마3', 1000, null, null, 'FFA7C5');
+insert into item values ('T3', '테마4', 1000, null, null, 'E5794B');
+insert into item values ('T4', '테마5', 1000, null, null, '4BC9E5');
+insert into item values ('T5', '테마6', 1000, null, null, 'E5C34B');
+insert into item values ('T6', '테마7', 1000, null, null, 'CDF263');
+insert into item values ('T7', '테마8', 1000, null, null, '2EB67D');
+insert into item values ('T8', '테마9', 1000, null, null, '4B76E5');
+insert into item values ('T9', '테마10', 1000, null, null, '13358F');
+---- 폰트
 insert into item values('F0', '폰트 30일', 2000, 30, null, null);
 insert into item values('F1', '폰트 90일', 6000, 90, 10, null);
 commit;
