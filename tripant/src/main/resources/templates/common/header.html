@@ -3,6 +3,8 @@
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
 <meta charset="UTF-8">
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <title th:text="${title}"></title>
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -19,10 +21,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
 
-<script th:line="javascript" th:src="@{/js/common/error_handler.js}" ></script>
+<script th:line="javascript" th:src="@{/js/common/common_function.js}" ></script>
 <script th:line="javascript">
 	// 여기서 먼저 선언하고 그아래 script파일 추가하기.
 	const contextPath = "[[@{/}]]";
+	const token = $("meta[name='_csrf']").attr("content");
+	const header = $("meta[name='_csrf_header']").attr("content");
+	const name = $("#userName").val();
 </script>
 <style>
 input[type=password]{
