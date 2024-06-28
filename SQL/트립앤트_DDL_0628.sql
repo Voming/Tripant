@@ -58,7 +58,7 @@ CREATE TABLE "MEMBER" (
 	"MEM_JOIN_DATE"	DATE	DEFAULT SYSDATE	NOT NULL,
 	"MEM_BIRTH"	DATE		NOT NULL,
 	"MEM_TEL"	VARCHAR2(12)		NOT NULL,
-	"MEM_FONT_DUR"	NUMBER		NULL,
+	"MEM_FONT_DUR"	NUMBER	DEFAULT 0	NULL,
 	"MEM_TOKEN_KAKAO"	VARCHAR2(200)		NULL,
 	"MEM_TOKEN_NAVER"	VARCHAR2(200)		NULL,
 	"MEM_TOKEN_RE_NAVER"	VARCHAR2(200)		NULL,
@@ -869,7 +869,6 @@ DECLARE
 font_dur member.mem_font_dur%type;
 del_dur item.item_dur%type;
 BEGIN
-    -- 취소한 
     select mem_font_dur into font_dur from member where mem_email = :new.mem_email;
     select item_dur into del_dur from item where item_code = :new.item_code;
     if(substr(:new.item_code, 1, 1) = 'F') then
@@ -899,13 +898,13 @@ end;
 BEGIN
 DBMS_SCHEDULER.CREATE_JOB (
             job_name => 'mem_is_vip',
-            job_type => 'plsql_block',
+            job_type => 'stored_procedure',
             job_action => 'pro_mem_is_vip',
             number_of_arguments => 0,
-            start_date => TRUNC(SYSDATE+1),
+            start_date => TRUNC(SYSDATE),
             repeat_interval => 'FREQ=DAILY;INTERVAL=1',
             end_date => NULL,
-            enabled => FALSE,
+            enabled => TRUE,
             auto_drop => FALSE,
             comments => '글꼴 보유 여부');
 END;
@@ -926,13 +925,13 @@ end;
 BEGIN
 DBMS_SCHEDULER.CREATE_JOB (
             job_name => 'mem_sleep',
-            job_type => 'plsql_block',
+            job_type => 'stored_procedure',
             job_action => 'pro_mem_sleep',
             number_of_arguments => 0,
-            start_date => TRUNC(SYSDATE+1),
+            start_date => TRUNC(SYSDATE),
             repeat_interval => 'FREQ=DAILY;INTERVAL=1',
             end_date => NULL,
-            enabled => FALSE,
+            enabled => TRUE,
             auto_drop => FALSE,
             comments => '휴면 회원 여부');
 END;

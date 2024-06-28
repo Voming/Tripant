@@ -1,7 +1,7 @@
 package mclass.store.tripant.diary.controller;
 
 import java.security.Principal;
-
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,13 +71,33 @@ public class MyDiaryController {
 		// 저장된 DiaryPostEntity를 ResponseEntity로 반환
 		return ResponseEntity.ok().body(diaryForm);
 	}
-	   // 다이어리 삭제 처리
-    @PostMapping("/diary/delete")
+	   // 여행글 삭제 처리
+    @PostMapping("/diary/delete/{diaryId}")
     @ResponseBody
-    public int deleteDiary(@RequestParam("diaryId") int diaryId, Principal pricipal) {
+    public int deleteDiaryById(@PathVariable("diaryId") int diaryId, Principal pricipal) {
         // 여기서 diaryId를 사용하여 삭제 작업을 수행합니다.
-        int result = diaryService.deleteDiary(diaryId, pricipal.getName()); // DiaryService에서 삭제 메서드 호출
+        int result = 0;
+		try {
+			result = diaryService.deleteDiaryById(diaryId, pricipal.getName());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			result = -1;
+		} // DiaryService에서 삭제 메서드 호출
         return result; // 삭제 성공 시 1, 실패 시 0을 반환합니다.
+    }
+ // 여행글 신고 처리
+    @PostMapping("/diary/report/{diaryId}")
+    @ResponseBody
+    public int reportsOne(@PathVariable("diaryId")int diaryId, Principal principal) {
+    	int result = 0;
+		try {
+			result = diaryService.reportsOne(diaryId, principal.getName());
+		} catch (SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+			result = -1;
+		}
+        return result;
     }
     
 	// 좋아요 기능

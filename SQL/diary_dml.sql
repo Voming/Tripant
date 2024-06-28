@@ -296,7 +296,32 @@ from
 )t2 where rn between 1 and 100  
 --OK
 ;
-  
-  
-        
+  select*from diary;
+   select*from diary_save;
+   
+  ---글 미리보기 추출 쿼리문
+ 
+SELECT diary_id,
+       DBMS_LOB.SUBSTR(diary_content, 1000, 1) AS diary_preview
+FROM diary
+WHERE diary_id = '112';
+--- 신고하기
+select 
+    (SELECT COUNT(t1.DIARY_ID) FROM diary_reports t1 WHERE t1.DIARY_ID = t2.DIARY_ID  and t1.mem_email = 'seojw0730@gmail.com') is_my_reports, 
+    t2.* 
+from 
+(   select t1.*, rownum rn from 
+        (SELECT  DIARY_ID,   MEM_NICK, DIARY_TITLE,
+                to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+                DIARY_VIEWS,   DIARY_THEME,   PLAN_AREA_CODE,
+                DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+                , DIARY_OPEN        , DIARY_PLAN_ID        , DIARY_MEM_EMAIL
+                , diary_date diary_date_real
+                FROM   VIEW_DIARY_MEMBER_PLAN 
+                WHERE
+                    DIARY_OPEN = 0 
+            --AND PLAN_AREA_CODE = (SELECT AREA_CODE  FROM AREA WHERE AREA_SHORT_NAME = '서울')
+                ORDER BY diary_date_real DESC NULLS LAST
+    ) t1
+)t2 where rn between 1 and 100 ;
 commit;

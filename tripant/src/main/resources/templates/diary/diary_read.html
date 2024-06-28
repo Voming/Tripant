@@ -33,9 +33,9 @@
 						src="/images/icons/kebabIcon.png" style="width: 30px;" />
 						<ul class="submenu" style="width: 100px;">
 							<li class="share" th:data-share="${diary.diaryId}"><a>공유하기</a></li>
-							<li class="report" th:data-report="${diary.diaryId}"><a>신고하기</a></li>
+							<li class="report" th:data-diary-id="${diary.diaryId}"><a>신고하기</a></li>
 							<!-- 로그인시 활성화 -->
-							<li class="delete"th:data-delete="${diary.diaryId}" th:onclick="|deleteHandler(this,${diary.diaryId});|"
+							<li class="delete"th:data-diary-id="${diary.diaryId}" th:onclick="|deleteHandler(this,${diary.diaryId});|"
 							><a>삭제하기</a></li>
 						</ul></li>
 				</ul>
