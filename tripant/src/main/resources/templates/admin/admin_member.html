@@ -36,45 +36,15 @@
 			</div>
 		</form>
 			
-			<div class="ad-search">
-				<input class="search" type="text" name="search" placeholder="회원검색"> 
-				<button type="button" class="btn-search"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
-			</div>
+			<div class="ad-search"  th:replace="~{admin/page_fragment :: member}"></div>
 	
-			<div class="ad-content">
-				<ul class="memberlist">
-					<li>	
-						<ul class="col">
-							<li>닉네임</li>
-							<li>이메일</li>
-							<li>가입일자</li>
-							<li>탈퇴일자</li>
-							<li>등급</li>
-							<li>활성화</li>
-							<li></li>
-						</ul>
-					</li>
-					
-					<li id="list">
-						<th:block th:each="memList:${memList}">
-						<ul class="col list">
-							<li th:text="${memList.memNick}"></li>
-							<li th:text="${memList.memEmail}"></li>
-							<li th:text="${memList.memJoinDate}"></li>
-							<li th:text="${memList.memQuitDate}"></li>
-							<li th:text="${memList.memRole}"></li>
-							<li th:text="${memList.memEnabled}"></li>
-							<li><button type="button" class="btn">편집</button></li>
-						</ul>
-						</th:block>
-						
-					</li>
-				</ul>	
-			</div> 
-	</div>
+	</div>	
 </div>
 <script th:line="javascript" th:src="@{/js/admin/member/member_info.js}"></script>
 <script th:line="javascript" th:src="@{/js/admin/member/member_search.js}"></script>
+<script>
+
+</script>
 </body>
 </html>
 
