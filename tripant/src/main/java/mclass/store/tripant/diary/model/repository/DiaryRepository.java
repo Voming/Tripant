@@ -46,12 +46,13 @@ public interface DiaryRepository {
 	int insertDiaryLike(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
 	// 좋아요 해제
 	int deleteDiaryLike(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
+	// 여행기글 삭제
 
+	 int deleteDiaryById(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail) throws Exception;
 	
 	// 여행기글 신고 
 	 int reportsOne(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail) throws SQLIntegrityConstraintViolationException;
-	// 여행기글 삭제
-	 int deleteDiaryById(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail) throws Exception;
+
 	 // 여행기 글 Previews text 꺼내기
 	 void previewsText(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail);
 	 

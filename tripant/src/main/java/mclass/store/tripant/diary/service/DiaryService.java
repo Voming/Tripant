@@ -53,9 +53,10 @@ public class DiaryService {
 		return diary;
 	}
 	// 여행기 글 삭제
-	  public int deleteDiaryById(int diaryId, String memEmail) throws Exception {
+	  public int deleteDiaryById(int diaryId, String memEmail)throws Exception {
 	    return diaryRepository.deleteDiaryById(diaryId,memEmail);
 	  } 
+
 	 // 여행기 글 신고하기
 	  public int reportsOne(int diaryId, String memEmail)  throws SQLIntegrityConstraintViolationException{
 		  return diaryRepository.reportsOne(diaryId, memEmail);

@@ -241,7 +241,7 @@
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="DiaryPostEntity">
 		DELETE FROM DIARY
-		WHERE DIARY_ID = #{diaryId} AND DIARY_MEM_EMAIL = #{diaryMemEmail}
+		WHERE DIARY_ID = #{diaryId} AND DIARY_MEM_EMAIL = #{memEmail}
 	</delete>
 
 	<!-- 글 수정 -->
