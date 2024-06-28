@@ -41,20 +41,25 @@ public class DiaryService {
 		return diaryRepository.selectMyDiaryList(email, maxNum);
 	}
 
-	// 특정 ID의 다이어리 가져오기
+	// 특정 ID의 여행기 글 가져오기
 	public DiaryBoardEntity findById(Long id) {
 		return diaryRepository.findById(id);
 	}
 
-	// 다이어리 등록하기
+	// 여행기 글 등록하기
 	public DiaryBoardEntity save(DiaryBoardEntity diary) {
 		diaryRepository.insertDiary(diary);
 		return diary;
 	}
-	// 다이어리 삭제
+	// 여행기 글 삭제
 	  public int deleteDiary(int diaryId, String memEmail) {
 	    return diaryRepository.deleteDiaryById(diaryId,memEmail);
-	  }  
+	  } 
+	 // 여행기 글 신고하기
+	  public void reportSOne(int diaryId, String memEmail) {
+		  diaryRepository.reportSOne(diaryId, memEmail);
+	  }
+	  
 
 	// 조회수 증가
 	@Transactional
@@ -79,15 +84,16 @@ public class DiaryService {
 	 * public LikeEntity isDiaryLikedByUser(int diaryId, String memEmail) { return
 	 * diaryRepository.selectDiaryLike(diaryId); }
 	 */
-	// 다이어리 좋아요
+	// 여행기 글 좋아요
 	public int likeDiary(int diaryId, String memEmail) {
 		return diaryRepository.insertDiaryLike(diaryId, memEmail);
 	}
-	// 다이어리 좋아요해제
+	// 여행기 글 좋아요해제
 	public int unlikeDiary(int diaryId, String memEmail) {
 		return diaryRepository.deleteDiaryLike(diaryId, memEmail);
 	}
-   
+	// 여행기 글 Previews text 꺼내기
+	
 	    
 	// 이미지 url 담아오기
 }

@@ -8,18 +8,19 @@ function loaededHandler() {
 	$('.delete').on("click", deleteHandler);
 
 	//케밥 아이콘 이벤트
-	$('.info').on("click", miniModalBtnHandler);
+	$('.menu-menu').on("click", miniModalBtnHandler);
 	$(document).on('click', function(event) {
 		// 클릭한 요소가 '.info' 클래스의 버튼 내부 요소나 '.mini-modal' 클래스가 아닌 경우에만 실행
-		if (!$(event.target).closest('.info').length && !$(event.target).closest('.mini-modal').length) {
+		if (!$(event.target).closest('.menu-menu').length && !$(event.target).closest('.mini-modal').length) {
 			$('.mini-modal').addClass('hide');
 		}
 	});
 }
-
+//2024-06-28 현재 안되고 있음
 function reportHandler() {
-	var reportId = $(this).data('report');
-	console.log(reportId);
+	var diaryId = $(this).data('diary-id');
+	console.log(diaryId);
+	 console.log("report ID: ", diaryId);
 	Swal.fire({
 		title: "이 글을 신고하시겠습니까?",
 		text: "신고를 취소하고 싶으신 경우, 고객센터에 문의해주시길 바립니다.",
@@ -28,16 +29,13 @@ function reportHandler() {
 		cancelButtonColor: "#d33",
 		confirmButtonText: "확인",
 		cancelButtonText: "취소",
-		confirmButtonTextFont: "Binggrae",
 		animation: false
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/diary/report",
-				method: "post",
-				data: { reportId: reportId },
-				//success: 1이면 업데이트 완료 0이면 실패
-				success: function(result) {
+				url: "/diary/report/" + diaryId
+				, method: "post"
+				, success: function(result) {
 					if (result == 1) {
 						Swal.fire({
 							title: "성공",
@@ -45,6 +43,12 @@ function reportHandler() {
 							confirmButtonText: 'Ok'
 						}).then(() => {
 							location.reload();
+						});
+					} else {
+						Swal.fire({
+							title: "오류",
+							text: "신고 처리 중 문제가 생겼습니다.",
+							confirmButtonText: 'Ok'
 						});
 					}
 				},
@@ -88,8 +92,9 @@ function shareHandler() {
 		window.open(shareUrl, '_blank');
 	});
 }
-// 삭제하기
-function deleteHandler(thisElement,diaryId) {
+// 삭제하기 
+//2024-06-28 현재 안되고 있음
+function deleteHandler(thisElement, diaryId) {
 	// 현재 요소의 data 속석에서 'delete' 값을 가져옴
 	var diaryId = $(this).data('delete');
 	console.log(diaryId);
@@ -128,10 +133,10 @@ function deleteHandler(thisElement,diaryId) {
 							text: "삭제에 실패하였습니다.",
 							confirmButtonText: 'Ok'
 						});
-						}
-					},
-					error: ajaxErrorHandler
-				});
+					}
+				},
+				error: ajaxErrorHandler
+			});
 
 		}
 	});
@@ -139,10 +144,11 @@ function deleteHandler(thisElement,diaryId) {
 
 /*좋아요 누르기  */
 function btnLikeClickHandler(thisElement, diaryId) {
+
 	console.log("btnLikeClickHandler 눌림");
 	console.log(diaryId);
 	/*	console.log(thisElement);*/
-	if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
+	if ($(thisElement).attr('src') === '/images/diary/diary_like_icon.png') {
 		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
 		// ajax 요청
 		$.ajax({

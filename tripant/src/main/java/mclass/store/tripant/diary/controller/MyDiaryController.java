@@ -71,13 +71,20 @@ public class MyDiaryController {
 		// 저장된 DiaryPostEntity를 ResponseEntity로 반환
 		return ResponseEntity.ok().body(diaryForm);
 	}
-	   // 다이어리 삭제 처리
+	   // 여행글 삭제 처리
     @PostMapping("/diary/delete")
     @ResponseBody
     public int deleteDiary(@RequestParam("diaryId") int diaryId, Principal pricipal) {
         // 여기서 diaryId를 사용하여 삭제 작업을 수행합니다.
         int result = diaryService.deleteDiary(diaryId, pricipal.getName()); // DiaryService에서 삭제 메서드 호출
         return result; // 삭제 성공 시 1, 실패 시 0을 반환합니다.
+    }
+ // 여행글 신고 처리
+    @PostMapping("/diary/report/{diaryId}")
+    @ResponseBody
+    public void reportSOne(@PathVariable int diaryId, Principal principal) {
+         diaryService.reportSOne(diaryId, principal.getName());
+        
     }
     
 	// 좋아요 기능
