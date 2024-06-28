@@ -71,7 +71,7 @@
 			<div th:text="${diary.diaryViews}" class="diary-Views"></div>
 			<!-- 좋아요 아이콘 누르면 하트아이콘  -->
 			<div class="diary-like">
-				<th:block th:if="${diary.isMyLikes} == 0">
+				<th:block th:if="${diary.isMyLikes} != 0">
 					<img th:src="@{/images/diary/diary_like_none.png}"
 						class="like-icon"
 						th:onclick="|btnLikeClickHandler(this,${diary.diaryId});|">
