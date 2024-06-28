@@ -23,12 +23,16 @@ function dragAndDrop(){
             el.classList.remove('dragging')
             //---------------------console.log
             console.log("************el");
-            console.log($(el));
+            console.log(el);
+            //console.log($(el));
             console.log("--------- prev");
-            console.log($(el).prev());
+            //console.log($(el).prev());
             //일차별 동그라미 색 변경
 			//circleColorHandler();
-		
+			//displayEditInfo();
+/*			console.log(editStorage.getItem(0));
+			console.log(editStorage.getItem(1));
+			console.log(dayEntityList_org);*/
         });
     });
 
@@ -39,6 +43,8 @@ function dragAndDrop(){
             const afterElement = getDragAfterElement(container, e.clientY);
             const draggable = document.querySelector('.dragging')
             // container.appendChild(draggable)
+            console.log(draggable);
+            console.log(afterElement);
             container.insertBefore(draggable, afterElement)
         })
     });

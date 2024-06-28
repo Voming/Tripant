@@ -1,6 +1,15 @@
  /* 편집 취소 저장 */
  //편집
 function editHandler(){
+	//편집페이지 정보 로드	
+	displayEditInfo();
+	//드래그 앤 드랍
+	dragAndDrop();
+	//편집 취소
+	$(".cancel").click(cancelHandler);
+	//편집 저장
+	$(".save").click(saveHandler);
+	
 	//전체일정 선택 후 편집창 띄우기
 	navHandler();
 	//취소 버튼 활성화
@@ -15,6 +24,7 @@ function editHandler(){
 	//일정 목록보여주기
 	$(this).parents().find('.tourlist').addClass('hide');
 	$(this).parents().find('.edit-tourlist').removeClass('hide');
+	
 }
 //취소
 function cancelHandler(){

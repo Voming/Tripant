@@ -172,8 +172,8 @@ function displayInfo(){
 				}
 				
 				//각 spot의 정보를 객체에 담아 번호순대로 key값을 지정하여 sessionStorage에 넣기
-				editStorage.setItem(sessionOrder, JSON.stringify(spotInfo));
-				sessionOrder += 1;
+				editStorage.setItem(i+"-"+j, JSON.stringify(spotInfo));
+				//sessionOrder += 1;
 				
 				
 				//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 

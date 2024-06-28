@@ -89,7 +89,7 @@ function displayEditInfo(){
 
 						
 						htmlval+=`
-						<div class="spot-block draggable"  draggable ="true" data-idx="${i}" data-jdx="${j}" data-sessionKey="${spot.sessionOrder}">
+						<div class="spot-block draggable"  draggable ="true" data-idx="${i}" data-jdx="${j}" data-sessionKey="${i}-${j}">
 							<div class="timerange-modal hide" >
 								<div><p style="margin-left:30px; font-weight: bold; padding: 10px 0;">머무는 시간 설정</p></div>
 								<div class="flex ">

@@ -42,26 +42,24 @@ function setEvent(){
 	displayMap();
 	
 	//편집페이지 정보 로드	
-	displayEditInfo();
+	//displayEditInfo();
+	//드래그 앤 드랍
+	//dragAndDrop();
+	//편집 취소
+	//$(".cancel").click(cancelHandler);
+	//편집 저장
+	//$(".save").click(saveHandler);
+
 	
 	//일차별 동그라미 색 변경
 	circleColorHandler();
 	
 	//좌측 탭 이벤트 설정
 	navHandler();
-
-
 	
-
-	//드래그 앤 드랍
-	dragAndDrop();
 
 	//편집
 	$(".edit").click(editHandler);
-	//편집 취소
-	$(".cancel").click(cancelHandler);
-	//편집 저장
-	$(".save").click(saveHandler);
 	//hover 시 메모내용 표시
 	$(".img-memo").hover(memoHandler,memoNoHandler);
 
