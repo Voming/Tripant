@@ -15,6 +15,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.member.domain.CustomOAuth2User;
@@ -28,6 +30,7 @@ import mclass.store.tripant.member.model.repository.MemberRepository;
 public class OAuth2SecurityService extends DefaultOAuth2UserService {
 	
 	private final MemberRepository memberRepository;
+	private final Gson gson;
 	
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -56,13 +59,10 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			// 이미 가입된 경우
 			if(memberEntity != null) {
 				// sns 유형
-				int memType = memberEntity.getMemType();
-				
-				// 카카오 유형
-				String kakaoStr = "0100";
+				int memType = Integer.parseInt(String.valueOf(memberEntity.getMemType()));
 				
 				// 카카오 가입 여부
-				int isKakao = memType & Integer.parseInt(kakaoStr, 2);
+				int isKakao = memType & 4;
 				if(isKakao != 4) {
 					memType += 4;
 				}
@@ -76,7 +76,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			}
 			// 카카오로 가입하는 경우
 			else {
-				map.put("memType", "1100");
+				map.put("memType", "12");
 			}
 		}else if(snsType.equals("naver")) {
 			Map<String, Object> newMap = new HashMap<>();
@@ -97,13 +97,11 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			
 			// 이미 가입된 경우
 			if(memberEntity != null) {
-				int memType = memberEntity.getMemType();
-				
-				// 네이버 유형
-				String naverStr = "0010";
+				// sns 유형
+				int memType = Integer.parseInt(String.valueOf(memberEntity.getMemType()));
 				
 				// 네이버 가입 여부
-				int isNaver = memType & Integer.parseInt(naverStr, 2);
+				int isNaver = memType & 2;
 				if(isNaver != 2) {
 					memType += 2;
 				}
@@ -117,7 +115,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			}
 			// 네이버로 가입하는 경우
 			else {
-				map.put("memType", "1010");
+				map.put("memType", "10");
 			}
 		}else if(snsType.equals("google")){
 			Map<String, Object> newMap = new HashMap<>();
@@ -138,13 +136,10 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			// 이미 가입된 경우
 			if(memberEntity != null) {
 				// sns 유형
-				int memType = memberEntity.getMemType();
-				
-				// 구글 유형
-				String googleStr = "0001";
+				int memType = Integer.parseInt(String.valueOf(memberEntity.getMemType()));
 				
 				// 구글 가입 여부
-				int isGoogle = memType & Integer.parseInt(googleStr, 2);
+				int isGoogle = memType & 1;
 				if(isGoogle != 1) {
 					memType += 1;
 				}
@@ -158,7 +153,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			}
 			// 구글로 가입하는 경우
 			else {
-				map.put("memType", "1001");
+				map.put("memType", "9");
 			}
 		}
 		map.put("memEmail", email);
@@ -166,7 +161,7 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 		log.debug("[sjw] email = "+email);
 		Optional<MemberEntity> memberEntityOp = Optional.ofNullable(memberRepository.login(email));
 		if(memberEntityOp.isEmpty()) {
-			throw new UsernameNotFoundException(map.toString());
+			throw new UsernameNotFoundException(gson.toJson(map));
 		}
 		MemberEntity memberEntity = memberEntityOp.get();
 		if(memberEntity.getMemEnabled() == 0) {

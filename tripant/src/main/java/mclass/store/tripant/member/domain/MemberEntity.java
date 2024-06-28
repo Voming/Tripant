@@ -26,6 +26,7 @@ public class MemberEntity implements UserDetails, OAuth2User {
 	private Integer memType;
 	private String memJoinDate;
 	private String memBirth;
+	private String memTel;
 	private Map<String, Object> attributes;
 
 	@Override

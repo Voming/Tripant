@@ -1,8 +1,10 @@
 package mclass.store.tripant.member.controller;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,9 @@ public class JoinController {
 	private final KeysJaewon keysJaewon;
 	private final MemberService memberService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Value("${robot.secret}")
+	private String robotSecret;
 
 	//회원가입 페이지
 	@GetMapping("/join")
@@ -64,10 +69,11 @@ public class JoinController {
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
-		memberEntity.setMemType(4);
+		memberEntity.setMemType(Integer.parseInt(String.valueOf(8)));
+		memberEntity.setMemTel(memberEntity.getMemTel().replaceAll("-", ""));
 		log.debug("[sjw] mem = "+memberEntity);
 		
-		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
+		RecaptchaConfig.setSecretKey(robotSecret);
 		try {
 			if(RecaptchaConfig.verify(recaptcha)) {
 				memberService.join(memberEntity);
@@ -87,12 +93,13 @@ public class JoinController {
 	public int joinSnsP(MemberEntity memberEntity, String recaptcha, HttpSession session) {
 		
 		String memEmail = (String) session.getAttribute("memEmail");
-		int memType = (int) session.getAttribute("memType");
+		int memType = Integer.parseInt((String) session.getAttribute("memType"));
 		memberEntity.setMemEmail(memEmail);
 		memberEntity.setMemPassword(bCryptPasswordEncoder.encode(memberEntity.getMemPassword()));
 		memberEntity.setMemEnabled(1);
 		memberEntity.setMemRole("ROLE_MEM");
 		memberEntity.setMemType(memType);
+		memberEntity.setMemTel(memberEntity.getMemTel().replaceAll("-", ""));
 		
 		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
 		try {
