@@ -1,5 +1,6 @@
 package mclass.store.tripant.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +19,47 @@ public class AdminSerivce {
 	private AdminDao admindao;
 	
 	//회원리스트
-	public List<AdminMemEntity> selectMemList(){
-		return admindao.selectMemList();
+public Map<String, Object> selectMemList(String searchMem, String memNick,  int memNum, int memPageNum, int currentPageNum) {					
+		
+		//현재페이지: currentPage
+		//리뷰 하단에 표시할 페이지 수: reviewPageNum
+		//화면에 한번에 표시되는 리뷰부분 당 글 수 : reviewNum	
+		Map<String, Object> result = null;
+		
+		//총 게시글 개수
+		//DB가서 그때그때 알아와야함 - 호텔 한개 당 리뷰글이 몇개냐에 따라 달라질 수 있음
+		int totalCount = admindao.page(searchMem);
+		
+		int startRounum = memNum * (currentPageNum - 1) + 1;
+		int endRonum = memNum * currentPageNum;
+		
+//		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
+		int totalPageCount = (totalCount % memNum == 0) ? (totalCount / memNum) : (totalCount / memNum) + 1;
+		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
+		
+		//시작페이지
+		int startPageNum = (currentPageNum % memNum == 0) ? ((currentPageNum / memNum) - 1) * memNum + 1
+				: (currentPageNum / memNum) * memNum + 1;
+		
+		//끝페이지
+		int endPageNum = (startPageNum + memNum > totalPageCount) ? totalPageCount : startPageNum + memNum - 1;
+		
+		List<AdminMemEntity> memList = admindao.selectMemList( searchMem, startRounum, endRonum);
+		result = new HashMap<String, Object>();
+		result.put("memList", memList);
+		result.put("totalCount", totalCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("currentPage", currentPageNum);
+		
+		return result;
 	}
+	
+	
+	/*
+	 * public List<AdminMemEntity> selectMemList(){ return admindao.selectMemList(
+	 * memNick, startRounum,endRonum); }
+	 */
 	
 	//등급변경 활성화 여부
 	public Integer adminMemInfo(Map<String, Object> map) {
@@ -115,24 +154,6 @@ public class AdminSerivce {
 		return admindao.itemsearch(itemCode);
 	}
 	
-	//페이징처리
-	public List<Map<String,Object>> list(Map<String , Object> map){
-		int curPage=0;
-		int pageScale=0;
-		
-		if(map.isEmpty()) {
-			curPage=1;
-			pageScale=10;
-		}else {
-			curPage=Integer.parseInt(map.get("curPage").toString());
-			pageScale=Integer.parseInt(map.get("pageScale").toString());
-		}
-		int pageBegin=(curPage-1)*pageScale+1;
-		int pageEnd=pageBegin+pageScale-1;
-		
-		map.put("pageBegin", pageBegin);
-		map.put("pageEnd", pageEnd);
+	//해당 호텔 리뷰 작성된거 불러오기
 	
-		return admindao.page(map);
-	}
 }

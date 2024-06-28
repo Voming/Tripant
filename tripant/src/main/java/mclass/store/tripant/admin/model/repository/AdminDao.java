@@ -17,13 +17,16 @@ public interface AdminDao {
 	
 	//회원관리
 	//회원정보 한페이지에 나열
-	public List<AdminMemEntity> selectMemList();
+	public List<AdminMemEntity> selectMemList(String searchMem, int startRounum, int endRonum);
 	
 	//회원 등급 변경 활성화 여부 
 	public Integer adminMemInfo(Map<String, Object> map);
 	
 	//회원검색
 	public List<AdminMemEntity> search(String memNick);
+	
+	//페이징처리
+	public int page(String memNick);
 	
 	//게시글관리
 	//전체게시글

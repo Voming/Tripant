@@ -43,16 +43,44 @@ public class AdminController {
 	private String storeId;
 	
 	@GetMapping("/member")
-	public ModelAndView Member(ModelAndView mv) {
+	public ModelAndView Member(ModelAndView mv, String searchMem,String memNick,
+			String currentPage) {
 		
+		//정보를 받아올 때 어떤것을 참조해서 받아올지 --> 매개변수(java에서의 getParameter 역할을 대신해줌)
+		
+//		한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
+		int memNum = 1;
+		
+//		화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
+		int memPageNum = 2;
+		
+//		누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
+		int currentPageNum = 1;  // 기본1
+		
+		if(currentPage != null && !currentPage.equals("") ) {
+			try {
+				currentPageNum = Integer.parseInt(currentPage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		//model.addAttribute("memList",adminservice.selectMemList());
-		mv.addObject("memList",adminservice.selectMemList());
+		mv.addObject("memList",adminservice.selectMemList(searchMem, memNick, memNum, memPageNum, currentPageNum));
 		mv.setViewName("admin/admin_member");
 		
 		return mv;
 		//return "admin/admin_member";
 	}
 	
+		//ajax  
+		//검색 
+		@PostMapping("/member/search") 
+		@ResponseBody
+		public List<AdminMemEntity> memberSearch(Model model, String searchMem) {
+			List<AdminMemEntity> memList=adminservice.search(searchMem);
+			return memList ;
+		}
 
 	 //ajax
 	 //회원정보 수정(등급변경 , 활성화여부)
@@ -82,17 +110,6 @@ public class AdminController {
 		int result = adminservice.adminMemInfo(map);
 		
 		return result;
-	}
-	
-	
-	
-	//ajax  
-	//검색 
-	@PostMapping("/member/search") 
-	@ResponseBody
-	public List<AdminMemEntity> memberSearch(Model model, String searchMem) {
-		List<AdminMemEntity> memList=adminservice.search(searchMem);
-		return memList ;
 	}
 	
 	//게시글
