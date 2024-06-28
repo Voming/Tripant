@@ -72,19 +72,33 @@ public class MyDiaryController {
 		return ResponseEntity.ok().body(diaryForm);
 	}
 	   // 여행글 삭제 처리
-    @PostMapping("/diary/delete")
+    @PostMapping("/diary/delete/{diaryId}")
     @ResponseBody
-    public int deleteDiary(@RequestParam("diaryId") int diaryId, Principal pricipal) {
+    public int deleteDiaryById(@RequestParam("diaryId") int diaryId, Principal pricipal) {
         // 여기서 diaryId를 사용하여 삭제 작업을 수행합니다.
-        int result = diaryService.deleteDiary(diaryId, pricipal.getName()); // DiaryService에서 삭제 메서드 호출
+        int result = 0;
+		try {
+			result = diaryService.deleteDiaryById(diaryId, pricipal.getName());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			result = -1;
+		} // DiaryService에서 삭제 메서드 호출
         return result; // 삭제 성공 시 1, 실패 시 0을 반환합니다.
     }
  // 여행글 신고 처리
     @PostMapping("/diary/report/{diaryId}")
     @ResponseBody
-    public void reportSOne(@PathVariable int diaryId, Principal principal) {
-         diaryService.reportSOne(diaryId, principal.getName());
-        
+    public int reportSOne(@RequestParam("diaryId")int diaryId, Principal principal) {
+    	int result = 0;
+		try {
+			result = diaryService.reportSOne(diaryId, principal.getName());
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+			result = -1;
+		}
+        return result;
     }
     
 	// 좋아요 기능

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
-import mclass.store.tripant.diary.domain.LikeEntity;
+
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.model.repository.DiaryRepository;
 
@@ -52,12 +52,12 @@ public class DiaryService {
 		return diary;
 	}
 	// 여행기 글 삭제
-	  public int deleteDiary(int diaryId, String memEmail) {
+	  public int deleteDiaryById(int diaryId, String memEmail) throws Exception {
 	    return diaryRepository.deleteDiaryById(diaryId,memEmail);
 	  } 
 	 // 여행기 글 신고하기
-	  public void reportSOne(int diaryId, String memEmail) {
-		  diaryRepository.reportSOne(diaryId, memEmail);
+	  public int reportSOne(int diaryId, String memEmail)  throws Exception{
+		  return diaryRepository.reportSOne(diaryId, memEmail);
 	  }
 	  
 
@@ -66,7 +66,6 @@ public class DiaryService {
 	public DiaryBoardEntity getDiaryById(int diaryId) {
 		diaryRepository.incrementDiaryViews(diaryId);
 		return diaryRepository.selectDiaryById(diaryId);
-
 	}
 
 	// 회원의 모든 여행 계획 가져오기(Mycontroller)

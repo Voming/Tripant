@@ -239,8 +239,8 @@
 
 
 	<!-- 글 삭제 -->
-	<delete id="deleteDiaryById" parameterType="int">
-		DELETE FROM diary
+	<delete id="deleteDiaryById" parameterType="DiaryPostEntity">
+		DELETE FROM DIARY
 		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}
 	</delete>
 

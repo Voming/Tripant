@@ -8,17 +8,17 @@ function loaededHandler() {
 	$('.delete').on("click", deleteHandler);
 
 	//케밥 아이콘 이벤트
-	$('.menu-menu').on("click", miniModalBtnHandler);
+	/*$('.menu-menu').on("click", miniModalBtnHandler);
 	$(document).on('click', function(event) {
 		// 클릭한 요소가 '.info' 클래스의 버튼 내부 요소나 '.mini-modal' 클래스가 아닌 경우에만 실행
 		if (!$(event.target).closest('.menu-menu').length && !$(event.target).closest('.mini-modal').length) {
 			$('.mini-modal').addClass('hide');
 		}
-	});
+	});*/
 }
-//2024-06-28 현재 안되고 있음
+
 function reportHandler() {
-	var diaryId = $(this).data('diary-id');
+	var diaryId = $(this).data('delete-id');
 	console.log(diaryId);
 	 console.log("report ID: ", diaryId);
 	Swal.fire({
@@ -33,7 +33,7 @@ function reportHandler() {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/diary/report/" + diaryId
+				url: "/my/diary/report/" + diaryId
 				, method: "post"
 				, success: function(result) {
 					if (result == 1) {
@@ -47,7 +47,7 @@ function reportHandler() {
 					} else {
 						Swal.fire({
 							title: "오류",
-							text: "신고 처리 중 문제가 생겼습니다.",
+							text: "신고된 글입니다.",
 							confirmButtonText: 'Ok'
 						});
 					}
@@ -57,47 +57,13 @@ function reportHandler() {
 		}//if
 	});
 }
-// 공유하기
-function shareHandler() {
-	var shareId = $(this).data('share');
-	console.log(shareId);
-	// 공유하기 모달 표시
-	Swal.fire({
-		title: "나의 여행기 공유하기",
-		html: "<p>여행기를 공유하시겠습니까?</p><div class='share-links'><a href='#' class='facebook-link'>페이스북</a><a href='#' class='twitter-link'>트위터</a></div>",
-		showCancelButton: true,
-		confirmButtonColor: "#000000",
-		cancelButtonColor: "#d33",
-		confirmButtonText: "확인",
-		cancelButtonText: "취소",
-		confirmButtonTextFont: "Binggrae",
-		animation: false
-	}).then((result) => {
-		if (result.isConfirmed) {
-			// 여행기 공유 처리를 수행하는 코드 추가
-		}
-	});
-
-	// 페이스북으로 공유 링크 클릭 시
-	$('.facebook-link').click(function() {
-		// 여행기를 페이스북으로 공유하는 기능 추가
-		var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href);
-		window.open(shareUrl, '_blank');
-	});
-
-	// 트위터로 공유 링크 클릭 시
-	$('.twitter-link').click(function() {
-		// 여행기를 트위터로 공유하는 기능 추가
-		var shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href);
-		window.open(shareUrl, '_blank');
-	});
-}
 // 삭제하기 
 //2024-06-28 현재 안되고 있음
-function deleteHandler(thisElement, diaryId) {
+function deleteHandler() {
 	// 현재 요소의 data 속석에서 'delete' 값을 가져옴
-	var diaryId = $(this).data('delete');
+	var diaryId = $(this).data('diary-id');
 	console.log(diaryId);
+	console.log("delete ID: ", diaryId);
 
 	//sweetAlert2를 사용하여 확인 다이얼 로그를 표시
 	Swal.fire({
@@ -108,14 +74,13 @@ function deleteHandler(thisElement, diaryId) {
 		cancelButtonColor: "#d33",
 		confirmButtonText: "확인",
 		cancelButtonText: "취소",
-		confirmButtonTextFont: "Binggrae",
 		animation: false
 	}).then((result) => {
 		// '확인' 버튼이 클릭된 경우
 		if (result.isConfirmed) {
 			// ajax요청을 사용하여 서버에 삭제요청을 보냄
 			$.ajax({
-				url: "/diary/delete",
+				url: "/my/diary/delete/"+diaryId,
 				method: "post",
 				//success: 1이면 업데이트 완료 0이면 실패
 				success: function(result) {
@@ -141,6 +106,42 @@ function deleteHandler(thisElement, diaryId) {
 		}
 	});
 }
+// 공유하기
+function shareHandler() {
+	var shareId = $(this).data('share');
+	console.log(shareId);
+	// 공유하기 모달 표시
+	Swal.fire({
+		title: "나의 여행기 공유하기",
+		html: "<p>여행기를 공유하시겠습니까?</p><div class='share-links'><a href='#' class='facebook-link'>페이스북</a><a href='#' class='twitter-link'>트위터</a></div>",
+		showCancelButton: true,
+		confirmButtonColor: "#000000",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "확인",
+		cancelButtonText: "취소",
+	
+		animation: false
+	}).then((result) => {
+		if (result.isConfirmed) {
+			// 여행기 공유 처리를 수행하는 코드 추가
+		}
+	});
+
+	// 페이스북으로 공유 링크 클릭 시
+	$('.facebook-link').click(function() {
+		// 여행기를 페이스북으로 공유하는 기능 추가
+		var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href);
+		window.open(shareUrl, '_blank');
+	});
+
+	// 트위터로 공유 링크 클릭 시
+	$('.twitter-link').click(function() {
+		// 여행기를 트위터로 공유하는 기능 추가
+		var shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href);
+		window.open(shareUrl, '_blank');
+	});
+}
+
 
 /*좋아요 누르기  */
 function btnLikeClickHandler(thisElement, diaryId) {
@@ -148,7 +149,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 	console.log("btnLikeClickHandler 눌림");
 	console.log(diaryId);
 	/*	console.log(thisElement);*/
-	if ($(thisElement).attr('src') === '/images/diary/diary_like_icon.png') {
+	if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
 		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
 		// ajax 요청
 		$.ajax({

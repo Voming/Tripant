@@ -48,9 +48,9 @@ public interface DiaryRepository {
 
 	
 	// 여행기글 신고 
-	 int reportSOne(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
+	 int reportSOne(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail) throws Exception;
 	// 여행기글 삭제
-	 int deleteDiaryById(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail);
+	 int deleteDiaryById(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail) throws Exception;
 	 // 여행기 글 Previews text 꺼내기
 	 void previewsText(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail);
 	 
