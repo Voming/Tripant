@@ -44,7 +44,7 @@ function reportHandler() {
 							text: "신고되었습니다",
 							confirmButtonText: 'Ok'
 						}).then(() => {
-							location.reload();
+							location.href = "/diary";
 						});
 					} else  if(result == -1) {
 						Swal.fire({
@@ -98,7 +98,7 @@ function deleteHandler() {
 							text: "삭제되었습니다",
 							confirmButtonText: 'Ok'
 						}).then(() => {
-							location.reload();
+							location.href = "/diary";
 						});
 					} else {
 						Swal.fire({
