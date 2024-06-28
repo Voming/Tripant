@@ -46,7 +46,7 @@
 
 /* 추가한 일정들 객체화하여 좌표 넣기 , points 글로벌변수 선언*/
 let dayPoints = [];  // 일차별 지도 표시할 위치
-let points = [];//지도에 표시될 위치
+let points = []; //지도에 표시될 위치
 
 /*  일정관리를 위한 데이터를 담을 변수 선언 - 세부일정 목록*/
 let  dayEntityList_org ;
@@ -67,6 +67,11 @@ let editStorage = window.sessionStorage;
 
 //sessionStorage에서 받아온 정보를 담을 전역변수
 let sessionArr= [];
+
+let mapContainer , // 지도를 표시할 div 
+mapOption, //지도 설정
+map, //지도를 담을 전역변수
+bounds  ; // 지도를 재설정할 범위를 가질 전역변수
 
 </script>
 <script th:inline="javascript" th:src="@{/js/trip/loadedHandler.js}"></script>

@@ -78,6 +78,8 @@ function displayInfo(){
 	//DB에서 받아온 original 정보
 	detailList=dayEntityList_org;
 	
+	//지도 lat,lng담을 배열 초기화
+	dayPoints=[];
 	//html에 뿌릴 정보 백틱에 담기
 	var navHtmlval =""; 		
 	var htmlval = "";
@@ -227,7 +229,7 @@ function displayInfo(){
 		    sessionArr[i] = new Array(infoCount) ;
 		    
 		    dayPoints.push(points);
-		    points=[]; // 배열 초기화
+		    points=[]; // 배열 초기화  Could not find name 'points'. Did you mean 'point'?라고 뜨지만 없으면 오류발생
 		htmlval += `
 		</div>	 </div>  
 		`;

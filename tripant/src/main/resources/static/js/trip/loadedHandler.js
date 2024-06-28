@@ -20,6 +20,9 @@ function setEvent(){
 	//map 화면 출력
 	displayMap();
 	
+	//지도 범위 재설정 함수 실행
+	setBounds();
+	
 	//일차별 동그라미 색 변경
 	circleColorHandler();
 	
