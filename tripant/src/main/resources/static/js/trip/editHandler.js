@@ -29,10 +29,38 @@ function timeDoneBtnClickHandler(thisElement) {
 
 //spot -index
 function spotIndxHanlder(thisElement){
-	$('.spot-block').each(function (){
+/*	$('.spot-block').each(function (){
 		
 		
 		
-	});
+	});*/
 	
+}
+
+//memo 이미지에서 마우스가 벗어났을 때
+function memoNoHandler(){
+	$(this).siblings('.memo').addClass('hide');
+}
+
+//memo 내용을 추가할 모달창 생성 memo관련 함수 async필수
+async function memoClickHandler(el){
+    // 'memo' 요소의 텍스트를 가져옵니다.
+    memoText = $(el).siblings('.memo').text();
+    
+    // Swal.fire 다이얼로그를 표시하고 사용자의 입력을 기다린다
+    const { value: memo } = await Swal.fire({
+        input: "textarea",
+        inputLabel: "메모작성",
+        inputValue: memoText,
+        inputPlaceholder: "여행에 필요한 정보를 이곳에 작성해보세요. 최대 900자",
+        inputAttributes: {
+            maxlength: "900"
+        },
+        showCancelButton: true,
+        confirmButtonColor: "#000000", 
+        confirmButtonText: "확인"
+    });
+    if (memo && memo.trim().length > 0) {
+        Swal.fire("<h1>저장완료</h1>");
+    }
 }

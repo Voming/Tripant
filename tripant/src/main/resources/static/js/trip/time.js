@@ -154,7 +154,6 @@ function displayInfo(){
 					endTime = 	details.scheduleEnd;
 				}
 				
-				tripIdx = i;
 				//sessionStorage 에 담을 객체
 				spotInfo = {
 					'travelDate' : details.travelDate,
@@ -191,8 +190,8 @@ function displayInfo(){
 				 		<div class="spot-staytime">${startTime} - ${endTime}</div>
 				 		<div class="spot-type">명소</div>
 				 		<div class="spot-title wfull">${info.title}</div>
-				 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>`;
-				 
+				 		<div class="spot-memo"><img class="img-memo" onclick="memoClickHandler(this);" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span class="memo hide" >${info.memo}</span></div>`;
+				 //삭제필요
 				 //이미지 링크 유무에 따른 src 설정		
 				 if(info.firstimage != null){ //이미지 값이 있을 때
 					htmlval += `

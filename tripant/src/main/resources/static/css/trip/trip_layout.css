@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.main-wrapper *{
+*{
 	font-family: 'Binggrae';
 	line-height: 120%;}
 /* 모든 이미지에 radius적용 */
