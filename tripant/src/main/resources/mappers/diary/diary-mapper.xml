@@ -185,7 +185,7 @@
 	<!-- 글 삭제 -->
 	<delete id="deleteDiaryById" parameterType="int">
 		DELETE FROM diary
-		WHERE DIARY_ID = #{diaryId}
+		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}
 	</delete>
 	
 	<!-- 글 수정 -->
@@ -201,12 +201,12 @@
 		WHERE DIARY_ID = #{diaryId}
 	</update>
 	
-	<!-- 좋아요 누르기/ 해제하기 -->
+	<!-- 좋아요 누르기-->
 	<insert id="insertDiaryLike" parameterType="map">
 		INSERT INTO diary_likes (DIARY_ID, MEM_EMAIL)
 		VALUES (#{diaryId}, #{memEmail})
 	</insert>
-
+<!--좋아요 해제하기  -->
 	<delete id="deleteDiaryLike" parameterType="map">
 		DELETE FROM diary_likes
 		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}

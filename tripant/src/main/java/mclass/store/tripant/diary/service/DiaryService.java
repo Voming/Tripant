@@ -51,6 +51,10 @@ public class DiaryService {
 		diaryRepository.insertDiary(diary);
 		return diary;
 	}
+	// 다이어리 삭제
+	  public int deleteDiary(int diaryId, String memEmail) {
+	    return diaryRepository.deleteDiaryById(diaryId,memEmail);
+	  }  
 
 	// 조회수 증가
 	@Transactional
@@ -83,17 +87,7 @@ public class DiaryService {
 	public int unlikeDiary(int diaryId, String memEmail) {
 		return diaryRepository.deleteDiaryLike(diaryId, memEmail);
 	}
-	// 다이어리 삭제
-	public int deleteDiary(int diaryId) {
-		try {
-			// DiaryRepository를 통해 삭제 메서드 호출
-			diaryRepository.deleteDiaryById(diaryId);
-			return 1; // 삭제 성공
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0; // 삭제 실패
-		}
-
-	}
+   
+	    
 	// 이미지 url 담아오기
 }

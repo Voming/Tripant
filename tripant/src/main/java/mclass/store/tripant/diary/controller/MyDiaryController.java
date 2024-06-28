@@ -74,9 +74,9 @@ public class MyDiaryController {
 	   // 다이어리 삭제 처리
     @PostMapping("/diary/delete")
     @ResponseBody
-    public int deleteDiary(@RequestParam("diaryId") int diaryId) {
+    public int deleteDiary(@RequestParam("diaryId") int diaryId, Principal pricipal) {
         // 여기서 diaryId를 사용하여 삭제 작업을 수행합니다.
-        int result = diaryService.deleteDiary(diaryId); // DiaryService에서 삭제 메서드 호출
+        int result = diaryService.deleteDiary(diaryId, pricipal.getName()); // DiaryService에서 삭제 메서드 호출
         return result; // 삭제 성공 시 1, 실패 시 0을 반환합니다.
     }
     

@@ -1,7 +1,7 @@
 SELECT * FROM diary;
 SELECT * FROM diary_likes;
 SELECT * FROM diary_reports;
-
+SELECT  * FROM diary_save;
 -- planId, memberemail -> 닉네임
 SELECT * FROM plan;
 SELECT * FROM member;

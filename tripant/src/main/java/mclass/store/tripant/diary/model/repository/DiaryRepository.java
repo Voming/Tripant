@@ -51,7 +51,7 @@ public interface DiaryRepository {
 
 	
 	// 다이어리 삭제
-	  void deleteDiaryById(@Param("diaryId") int diaryId);
+	  int deleteDiaryById(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail);
 	
 
 	
