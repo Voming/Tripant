@@ -178,7 +178,10 @@ function displayInfo(){
 				//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
 				//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
 				prevDuration = duration;
-				
+				//방문 다음 방문 장소 이름 가져오기 - 카카오 길찾기 사용을 위해
+				if(infoCount < details.dayDetailInfoEntity.length){
+					nextSpot=details.dayDetailInfoEntity[j+1].title;
+				}
 
 				
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 백틱 				
@@ -208,7 +211,7 @@ function displayInfo(){
 		 		if(infoCount != daylength){
 					htmlval += `
 					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
-					<div class="spot-move">${durationMin} 분> </div>`
+					<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${nextSpot}"  target="_blank">${durationMin} 분> </a>`
 					;
 				}else{// 숙소에 도착했을 땐 이동시간 표시 X
 					htmlval += `

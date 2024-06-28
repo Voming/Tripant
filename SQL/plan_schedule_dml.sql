@@ -1,4 +1,17 @@
 select * from plan;
+
+select * from detailInfo where plan_id=13 
+order by travel_date asc
+;
+select  title from place where contentid = 1870779;
+
+SELECT SUBSTR((select  title from place where contentid = 133328), 1, 
+              LEAST(
+                NVL(NULLIF(INSTR((select  title from place where contentid = 133328), '('), 0), LENGTH((select  title from place where contentid = 133328)) + 1) - 1, 
+                NVL(NULLIF(INSTR((select  title from place where contentid = 133328), '['), 0), LENGTH((select  title from place where contentid = 133328)) + 1) - 1
+              )
+             ) 
+FROM place;
 ------------------------------------------------------------------
 --plan_schedule DML    plan_id = 13 서울여행2
 insert into plan_schedule values((select plan_start_day from plan where plan_id = 13) ,13,'10:00','22:00' );

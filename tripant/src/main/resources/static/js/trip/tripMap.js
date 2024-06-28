@@ -118,3 +118,9 @@ function panTo() {
 	$(".mapbtn").click(panTo);
 
 }
+
+//카카오 길찾기 페이지 열어주기
+function findLoad(){
+	
+	
+}
