@@ -7,3 +7,8 @@ function ajaxErrorHandler (){
 		confirmButtonText: "확인"
 	});
 }
+
+//csrf
+function csrfHandler (xhr) {
+	xhr.setRequestHeader(header, token);
+}

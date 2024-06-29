@@ -32,6 +32,7 @@ function saveClickHandler(){
 				});
 			}
 		}, 
+		beforeSend: csrfHandler, 
 		error: ajaxErrorHandler
 	});
 }
