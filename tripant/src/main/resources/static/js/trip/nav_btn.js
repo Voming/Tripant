@@ -1,8 +1,13 @@
  /* 편집 취소 저장 */
  //편집
 function editHandler(){
+	
 	//편집페이지 정보 로드	
-	displayEditInfo();
+	displayEditMode(); 
+	// ejkim
+
+	//일차별 동그라미 색 변경
+	circleColorHandler();
 	//드래그 앤 드랍
 	dragAndDrop();
 	//편집 취소
@@ -11,7 +16,7 @@ function editHandler(){
 	$(".save").click(saveHandler);
 	
 	//메모작성
-	memoHandler();
+	//memoHandler();
 	
 	//전체일정 선택 후 편집창 띄우기
 	navHandler();

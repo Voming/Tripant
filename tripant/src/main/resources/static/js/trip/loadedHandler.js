@@ -2,7 +2,7 @@ $(loadedHanlder);
 
 function loadedHanlder(){
 	var url = window.location.pathname;
-	var param = window.location.search;
+	//var param = window.location.search;
 	$.ajax({
 		url: url+"/info",
 		method:"post",

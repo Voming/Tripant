@@ -52,12 +52,9 @@ let points = []; //지도에 표시될 위치
 let  dayEntityList_org ;
 
 //DB에서 받아온 original 정보를 담을 전역변수
-var detailList;
-
-//planId값 url에서 가져오기
-const url = window.location.href;
-const parts = url.split('/'); // Split the URL by '/'
-planId = parts.pop();  // Get the last element of the array
+let detailList;
+let detailListEditMode;
+//let dayEntityList = [];
 
 //여행일자별 순서
 var tripIdx ;
@@ -73,11 +70,46 @@ mapOption, //지도 설정
 map, //지도를 담을 전역변수
 bounds  ; // 지도를 재설정할 범위를 가질 전역변수
 
+
+//planId값 url에서 가져오기
+const url = window.location.href;
+const parts = url.split('/'); // Split the URL by '/'
+planId = parts.pop(); // Get the last element of the array
+
+//아래 자료형 참고
+class DayEntity {
+	tripIdx;  /*여행 총 며칠*/
+	
+	travelDate;  // travelDate
+	scheduleStart; // travelStart;  // scheduleStart
+	scheduleEnd; // travelEnd;  // scheduleEnd
+	dayDetailInfoEntity; // Array<SpotEntity> // dayDetailInfoEntity == SpotEntityList
+	
+	//spot2spotTimeList; // Array<number> 이동시간 spotList.length-1만큼  durationMinList
+}
+class SpotEntity {
+	durationMin; // number 이동시간  // durationMin
+	startTime;
+	endTime;
+	
+	travelOrderOrg;
+	
+	travelOrder; /* 하루 내 장소 방문 순서 //  숙소 : null*/  // travelOrder
+	stayTime;  // stayTime
+	title;  // title
+	memo;  // memo
+	lat; // lat
+	lng; // lng
+	
+	address; // address
+	contentid; // contentid
+	firstimage; // firstimage
+}
+
 </script>
 <script th:inline="javascript" th:src="@{/js/trip/loadedHandler.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/time.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/editHandler.js}"></script>
-<script th:inline="javascript" th:src="@{/js/trip/sessionStorage.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/changeColor.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/tripMap.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/nav_btn.js}"></script>

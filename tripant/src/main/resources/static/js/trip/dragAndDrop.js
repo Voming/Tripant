@@ -6,7 +6,7 @@ function dragAndDrop(){
  * [x] dragstart, dragend 이벤트를 발생할때 .dragging라는 클래스를 토글시킨다.
  * [x] dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
  */
-
+ 
  	//$자체에 함수? 선언 $() 안의 선택자를 가진 모든 요소들을 선택함
     //const $ = (select) => document.querySelectorAll(select);
     const draggables = document.querySelectorAll('.draggable');
@@ -21,18 +21,49 @@ function dragAndDrop(){
         el.addEventListener('dragend', () => {
 			console.log("dragend");
             el.classList.remove('dragging')
-            //---------------------console.log
-            console.log("************el");
-            console.log(el);
-            //console.log($(el));
+			console.log("************el");
+			console.log(el);
+
             console.log("--------- prev");
-            //console.log($(el).prev());
-            //일차별 동그라미 색 변경
+            console.log($(el).prev().get(0));
+			
+			var el_i =$(el).data("i");
+			var el_j =$(el).data("j");
+			            
+			var prev_i =$(el).prev().data("i");
+			var prev_j =$(el).prev().data("j");
+			//for(var i=prev_i; i< detailListEditMode.length; i++ ){
+			console.log("detailListEditMode===1");
+			console.log(detailListEditMode);
+			
+			// prev 다음j 모든 객체를 +1 위치로 대입
+			details = detailListEditMode[prev_i];
+			var daylength = details.dayDetailInfoEntity.length
+			for(var j=daylength-1; j > prev_j; j-- ){
+				details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+			}
+
+			// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+			detailListEditMode[prev_i].dayDetailInfoEntity[prev_j+1] = 
+				detailListEditMode[el_i].dayDetailInfoEntity[el_j];
+
+			// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
+			details = detailListEditMode[el_i];
+			var daylength = details.dayDetailInfoEntity.length
+			for(var j=el_j+1; j < daylength; j++ ){
+				details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
+			}
+			details.dayDetailInfoEntity.pop();
+			
+			console.log("detailListEditMode===2");
+			console.log(detailListEditMode);						
+			//일차별 동그라미 색 변경
 			//circleColorHandler();
-			//displayEditInfo();
-/*			console.log(editStorage.getItem(0));
-			console.log(editStorage.getItem(1));
-			console.log(dayEntityList_org);*/
+			displayEditModeAfterDragEnd();
+			//일차별 동그라미 색 변경
+			circleColorHandler();
+			//드래그 앤 드랍
+			dragAndDrop();
         });
     });
 
@@ -43,8 +74,8 @@ function dragAndDrop(){
             const afterElement = getDragAfterElement(container, e.clientY);
             const draggable = document.querySelector('.dragging')
             // container.appendChild(draggable)
-            console.log(draggable);
-            console.log(afterElement);
+			console.log(draggable);
+			console.log(afterElement);
             container.insertBefore(draggable, afterElement)
         })
     });
