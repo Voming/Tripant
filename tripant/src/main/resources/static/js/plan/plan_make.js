@@ -26,6 +26,7 @@ class Stay {
 		this.title = title;
 		this.mapx = mapx;
 		this.mapy = mapy;
+		this.img = img;
 	}
 }
 
