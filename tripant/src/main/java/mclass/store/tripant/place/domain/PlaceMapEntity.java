@@ -1,14 +1,11 @@
 package mclass.store.tripant.place.domain;
 
-import org.springframework.stereotype.Component;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
-@Component
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
