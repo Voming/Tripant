@@ -28,8 +28,6 @@ public class DiaryController {
 	// modelAndView로 db두번 갔다오지 않게 하기
 	public ModelAndView diary(ModelAndView mv, String areaname, Model model) {
 //		mv.addObject("diaries", diaryService.selectDiaryList(areaname));
-	
-		
 		mv.setViewName("diary/diary_board");
 		return mv;
 	}
