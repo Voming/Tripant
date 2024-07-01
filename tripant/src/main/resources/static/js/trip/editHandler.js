@@ -1,5 +1,3 @@
-
-
 // 시간 설정 칸 열림
 function timeRangeBtnClickHandler(thisElement) {
 	$(thisElement).children(".timerange").addClass('hide');
@@ -39,10 +37,8 @@ function memoNoHandler(){
 async function memoClickHandler(el){
     // 'memo' 요소의 텍스트를 가져옵니다.
     memoText = $(el).siblings('.memo').text();
-    console.log("text");
-    console.log($(el));
-    console.log($(el).next('.memo'));
-    console.log(memoText);
+	var i =$(el).parents('.spot-block').data('i');
+	var j =$(el).parents('.spot-block').data('j');
     // Swal.fire 다이얼로그를 표시하고 사용자의 입력을 기다린다
     const { value: memo } = await Swal.fire({
         input: "textarea",
@@ -58,24 +54,41 @@ async function memoClickHandler(el){
     });
     if (memo && memo.trim().length > 0) {
         Swal.fire("<h1>저장완료</h1>");
+		//배열의 memo값에 변경된 memo값 넣기
+		detailListEditMode[i].dayDetailInfoEntity[j].memo=memo;
+        //display값 변경해주기
+        $(el).siblings('.memo').text(memo);
     }
 }
-
+//스팟 삭제하기
+function removeSpot(el){
+	title = $(el).parents('.spot-block').children('.spot-title').text();
+	console.log("title");
+	console.log(title);
+	Swal.fire({
+	  title: "<h2>"+title+"</h2>",
+	  text: "삭제하시겠습니까?",
+	  showCancelButton: true,
+	  confirmButtonColor: "#000000",
+	  cancelButtonColor: "#d33",
+	  confirmButtonText: "삭제",
+	  cancelButtonText: "취소"
+	}).then((result) => {
+	  if (result.isConfirmed) {
+	    Swal.fire({
+	      title: "Deleted!",
+	      text: "Your file has been deleted.",
+	      icon: "success"
+	    });
+	  }
+	});
+}
 
 //편집 화면 들어갈 때 첫 display 
 function displayEditMode(){
 	
-//	saveSessionArr(); //sessionStorage값 가져오기
-//	console.log("sessionArr");
-//	console.log(sessionArr);
 	var htmlval = "";
 	
-	//이동시간 변수
-//	var duration ="";
-//	var prevDuration ="";
-	
-	console.log("========1e");
-	console.log(detailList);
  	detailListEditMode= JSON.parse(JSON.stringify(detailList));
 	
 	for(var i=0; i<detailListEditMode.length; i++ ){
@@ -103,33 +116,6 @@ function displayEditMode(){
 			
 			//머무는 시간 바꾸기
 			let[hours, minutes] = secToHoursAndMin(info.stayTime);
-			/*
-			//다음 장소로 이동시간(sec), 분단위로 변환하여 변수에 담기 
-			var durationMin; //이동시간 추후 사용
-			if((spot.jdx+1) < sessionArr[i].length){
-				duration = durationHandler(spot.lng,spot.lat,sessionArr[i][j+1].lng,sessionArr[i][j+1].lat);
-				durationMin=Math.ceil(duration/60);
-			}	
-			
-			//머무는 시간 계산하기 ex) 10:00 - 11:00
-			//1번째 장소
-			if(j == 0){
-				startTime =sessionArr[i][j].travelStart;
-				endTime = addTime(startTime,spot.stayTime);
-			//2~n-1번째 장소	
-			}else if(0 < j && j < sessionArr[i].length-1){
-				startTime =  addTime(endTime,prevDuration);
-				endTime = addTime(startTime,spot.stayTime);
-			//n번째 장소(숙소)	
-			}else{
-				startTime =  addTime(endTime,prevDuration);
-				endTime = 	sessionArr[i][j].travelEnd;
-			}
-			
-			//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
-			//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
-			prevDuration = duration;
-*/
 			
 			// <<<<<<<<<<<<<<< 백틱
 			//백틱에 값 넣기
@@ -172,7 +158,7 @@ function displayEditMode(){
 			}
 			
 			htmlval+=`<!-- x 버튼 -->
-					<button class="spot-setting" > 
+					<button class="spot-remove"  onclick="removeSpot(this);"> 
 						<img class="wfull img trash-bin "  src="/images/icons/cancel.png"/>
 					</button>
 			    </div><!-- spot  -->
@@ -205,8 +191,6 @@ function displayEditModeAfterDragEnd(){
 	var duration ="";
 	var prevDuration ="";
 	
-	console.log("========1e");
-	console.log(detailListEditMode);
 	dayPoints = [];
 	dayPoints = new Array(detailListEditMode.length); // (전체일정)일정 날마다 장소들 지도에 표시될 위치 (points 담을 배열)// 초기화
 	for(var i=0; i<detailListEditMode.length; i++ ){
@@ -315,7 +299,7 @@ function displayEditModeAfterDragEnd(){
 			}
 			
 			htmlval+=`<!-- x 버튼 -->
-					<button class="spot-setting" > 
+					<button class="spot-remove" onclick="removeSpot(this);"> 
 						<img class="wfull img trash-bin "  src="/images/icons/cancel.png"/>
 					</button>
 			    </div><!-- spot  -->
@@ -334,5 +318,5 @@ function displayEditModeAfterDragEnd(){
 	}//반복문 종료(i)
 	
 	//장소정보 넣기
-	$(".edit-tourlist .wrap-detaillist.flex").html(htmlval);
+	$(".tourlist .wrap-detaillist.flex").html(htmlval);
 }

@@ -12,8 +12,7 @@ function deleteHandler() {
 		  cancelButtonColor: "#d33",
 		  confirmButtonText: "삭제",
 		  cancelButtonText: "취소",
-	   	  confirmButtonTextFont:"Binggrae",
-	   	  animation:false
+	   	  confirmButtonTextFont:"Binggrae"
 		}).then((result) => {
 		  if (result.isConfirmed) {
 	         $.ajax({

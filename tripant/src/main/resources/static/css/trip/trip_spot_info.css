@@ -13,7 +13,7 @@
 	margin-bottom: 30px;
 }
 /* tourlist part - grid */
-.main-wrapper .spot{/*  */
+.main-wrapper .tourlist .spot{/*  */
 	grid-template-columns :25px 150px 75px;
 	grid-template-rows :repeat(5,21px);  
 	gap:5px;
@@ -22,15 +22,14 @@
 	align-self: center;
 }	
 /* grid-items 규격설정 */	/*  */
-.main-wrapper .spot-number{grid-column:1; grid-row: 1 ; }
-.main-wrapper .spot-staytime{grid-column:2; grid-row: 1 ;}
-.main-wrapper .spot-type{grid-column:2; grid-row: 2 ;}
-.main-wrapper .spot-title{grid-column:2; grid-row: 3 ;}
-.main-wrapper .spot-memo{grid-column:2; grid-row: 4 ;}
-.main-wrapper .spot-img{grid-column:3; grid-row: 2 / 5; border-radius: 8px;}
-.main-wrapper .spot-caricon{grid-column:1; grid-row: 5 ;}
-.main-wrapper .spot-move{grid-column:2; grid-row: 5 ;}
-.main-wrapper .trash-bin{grid-column:5; grid-row: 1 ;}
+.main-wrapper .tourlist .spot-number{grid-column:1; grid-row: 1 ; }
+.main-wrapper .tourlist .spot-staytime{grid-column:2; grid-row: 1 ;}
+.main-wrapper .tourlist .spot-type{grid-column:2; grid-row: 2 ;}
+.main-wrapper .tourlist .spot-title{grid-column:2; grid-row: 3 ;}
+.main-wrapper .tourlist .spot-memo{grid-column:2; grid-row: 4 ;}
+.main-wrapper .tourlist .spot-img{grid-column:3; grid-row: 2 / 5; border-radius: 8px;}
+.main-wrapper .tourlist .spot-caricon{grid-column:1; grid-row: 5 ;}
+.main-wrapper .tourlist .spot-move{grid-column:2; grid-row: 5 ;}
 
 /* background 이미지 규격 설정 */
 .main-wrapper .spot-number.backimg{/*  */
