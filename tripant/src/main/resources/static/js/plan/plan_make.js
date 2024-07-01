@@ -84,7 +84,7 @@ function loadedHandler() {
 		$(this).css("color", "#4BC9E5");
 		if (cls_name == 'nav-1') {
 			$(".main-wrapper .tab-content").css("width", "25%");
-		} else  {
+		} else {
 			saveTimeInfo();
 			$(".main-wrapper .tab-content").css("width", "40%");
 		}
@@ -95,33 +95,48 @@ function loadedHandler() {
 	$(".next.btn").on("click", function() {
 		$(".tab-nav > li").each(function() {
 			cls_name = $(this).find('a').attr("class");
-			if (cls_name ==='nav-1 active') {
+			if (cls_name === 'nav-1 active') {
 				//2번으로 이동
 				$('.tab-nav a').css("color", "black");
 				$('.tab-nav a').removeClass('active');
 
 				$('.nav-2').addClass('active');
 				$('.nav-2').css("color", "#4BC9E5");
-				
+
 				$('.tab-content > #tab01').hide();
 				$('.tab-content > #tab02').show();
 				saveTimeInfo();
 				$(".main-wrapper .tab-content").css("width", "40%");
 				return false;
-			} else if (cls_name ==='nav-2 active') {
+			} else if (cls_name === 'nav-2 active') {
 				//3번으로 이동
 				$('.tab-nav a').css("color", "black");
 				$('.tab-nav a').removeClass('active');
 
 				$('.nav-3').addClass('active');
 				$('.nav-3').css("color", "#4BC9E5");
-				
+
 				$('.tab-content > #tab02').hide();
 				$('.tab-content > #tab03').show();
 				$(".main-wrapper .tab-content").css("width", "40%");
 				return false;
-			} else if (cls_name ==='nav-3 active') {
+			} else if (cls_name === 'nav-3 active') {
 				// 일정 만들기 알고리즘 돌리기
+				//calendarPlan.dateArr
+				//calendarPlan.spotArr
+				const jsonString = JSON.stringify(calendarPlan);
+				$.ajax({
+					url: contextPath + "planing",
+					method: "post",
+					contentType:"application/json",
+					data: jsonString,
+					traditional: true, //필수
+					//dataType: "json",
+					success: function(data) {
+						console.log(data);
+					},
+					error: ajaxErrorHandler
+				});
 			}
 		});
 	});

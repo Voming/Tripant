@@ -1,6 +1,7 @@
 package mclass.store.tripant.plan.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.plan.model.service.PlanService;
 
 @Controller
-@RequestMapping(value = "/plan")
+@RequestMapping(value = "plan")
 //@Slf4j  //private Logger log = LoggerFactory.getLogger(PlanController.class); 내용을 대신해줌
 public class PlanController {
 	// private Logger log = LoggerFactory.getLogger(PlanController.class);
@@ -32,11 +33,9 @@ public class PlanController {
 	@GetMapping("")
 	public String make(@SessionAttribute(name = "areaCode") Integer areaCode,
 			@SessionAttribute(name = "planTitle") String planTitle) {
-
 		return "plan/make";
 	}
 
-	// 전체 글보기(공개 글)
 	@PostMapping("")
 	@ResponseBody
 	public AreaPointEntity point(@RequestParam("areaCode") Integer areaCode) {
@@ -63,11 +62,17 @@ public class PlanController {
 		return "redirect:/plan";
 	}
 
+	@PostMapping("/planing")
+	 public String mapRequest(@RequestParam HashMap<String, Object> param){
+        System.out.println("param : " + param);
+        return param.toString();
+    }
+
 	// -------------------------------------spot-------------------------------------------
 
 	@PostMapping("/spot")
-	public String spot(Model model, @RequestParam("areaCode") Integer areaCode,
-			@RequestParam("spotType") Integer spotType, @RequestParam("clickSpotNum") Integer clickSpotNum)
+	public String spot(Model model, @RequestParam Integer areaCode,
+			@RequestParam Integer spotType, @RequestParam Integer clickSpotNum)
 			throws IOException {
 		// 20개씩 더 출력하기
 		int maxNum = (clickSpotNum + 1) * 10;
