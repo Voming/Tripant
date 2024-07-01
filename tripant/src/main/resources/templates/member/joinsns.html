@@ -35,9 +35,9 @@
 					<div>전체 동의</div>
 				</div>
 				<div th:replace="~{member/fragment :: agree(first, '동의')}"></div>
-				<div><textarea rows="10" disabled="disabled">약관입니다111111111</textarea></div>
+				<div><textarea rows="10" disabled="disabled" th:text="${agree1}"></textarea></div>
 				<div th:replace="~{member/fragment :: agree(second, '동의')}"></div>
-				<div><textarea rows="10" disabled="disabled">약관입니다222222222</textarea></div>
+				<div><textarea rows="10" disabled="disabled" th:text="${agree2}"></textarea></div>
 				<div class="g-recaptcha" data-sitekey="6LcOX-wpAAAAAH3Ov3DYEz5zhW7oIWjn5nEuaGET">
 				</div>
 				<div class="mem join"><button type="submit" class="btn join" disabled>회원가입</button></div>
