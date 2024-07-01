@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
-import mclass.store.tripant.diary.service.DiaryService;
+import mclass.store.tripant.diary.model.service.DiaryService;
 
 @Controller
 @RequestMapping("/my")

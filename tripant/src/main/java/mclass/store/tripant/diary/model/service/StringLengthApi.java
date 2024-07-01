@@ -1,4 +1,4 @@
-package mclass.store.tripant.diary.service;
+package mclass.store.tripant.diary.model.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
