@@ -80,7 +80,6 @@ function stayModalDoneBtnClickHandler() {
 
 		if (tabX != "") { //숙소가 등록된 상황
 			addMarkerStay(new kakao.maps.LatLng(tabY, tabX), tabName, tabId, markersStay.length); // 마커 추가
-			setMarkersStay(map); // 마커 지도에 표시하기
 			$.each(calendarPlan.dateArr, function(idx, element) {
 				// 숙소 정보 저장
 				if (element.smalldate == tabDay) {
@@ -95,23 +94,22 @@ function stayModalDoneBtnClickHandler() {
 		}
 	});
 
-	console.log(calendarPlan);
 	displayStayBoxList(); 	// 저장되어있는 숙소 박스 리스트에 넣기
 	displayStayTabList(); 	// 저장되어있는 숙소 탭 리스트에 넣기
 	displayStayCheckList(); // 저장되어있는 숙소 체크박스 다시 활성화
 
 	// 장소 설정 정보 부분 업데이트
 	$(".count-stay").text(markersStay.length);
-
 	$(".time-stay").text(markersStay.length + "일 / " + calendarPlan.dateArr.length - 1 + "일");
 }
+
 // 저장되어있는 숙소 체크박스 다시 활성화
 function displayStayCheckList() {
 	$.each(calendarPlan.dateArr, function(idx, element) {
 		// 숙소 정보 박스 넣기
 		$(".stay-box").each(function() {
 			var listId = $(this).children("input:checkbox").attr("id");
-			if (element.stay.id == listId) {
+			if (element.stay?.id == listId) {
 				$(this).find('input:checkbox').prop("checked", true);
 			}
 		});
@@ -155,7 +153,6 @@ function displayStayBoxList() {
 // 숙소 + 탭 클릭
 function stayTabBtnClickHandler(thisElement) {
 	addMarkerStay(new kakao.maps.LatLng(stayBefor.mapy, stayBefor.mapx), stayBefor.title, stayBefor.id, markersStay.length); // 마커 추가
-	setMarkersStay(map); // 마커 지도에 표시하기
 
 	//화면 변경
 	$(thisElement).attr("src", stayBefor.img);
@@ -168,7 +165,6 @@ function stayTabBtnClickHandler(thisElement) {
 //모달 전체 선택
 function stayModalAllBtnClickHandler(thisElement) {
 	addMarkerStay(new kakao.maps.LatLng(stayBefor.mapy, stayBefor.mapx), stayBefor.title, stayBefor.id, markersStay.length); // 마커 추가
-	//	setMarkersStay(map); // 마커 지도에 표시하기
 
 	// 숙소 탭 전체 반복문
 	$(".wrap-stay-tab").each(function() {
@@ -182,10 +178,7 @@ function stayModalAllBtnClickHandler(thisElement) {
 
 // 숙소 삭제 버튼
 function stayDeleteBtnClickHandler(thisElement) {
-	var boxId = $(thisElement).parent().next().attr("value");
 	var boxStart = $(thisElement).parent().prev().find(".box-start").attr("value");
-
-	console.log(boxStart);
 
 	// 장소 정보 삭제
 	$.each(calendarPlan.dateArr, function(idx, element) {
@@ -195,7 +188,16 @@ function stayDeleteBtnClickHandler(thisElement) {
 			return false;
 		}
 	});
-	console.log(calendarPlan);
+	
+	setMarkersStay(null);
+	markersStay.length = 0;
+	// 장소 정보 삭제
+	$.each(calendarPlan.dateArr, function(idx, element) {
+		if(element.stay.id != null){
+			addMarkerStay(new kakao.maps.LatLng(element.stay.mapy, element.stay.mapx), element.stay.title, element.stay.id, markersStay.length); // 마커 추가
+		}
+	});
+	
 	//숙소 화면 초기화
 	restStayBox();
 	restStaytab();

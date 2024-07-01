@@ -1,5 +1,7 @@
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 var markersSpot = [];  //아이디 , 마커 담김 
+
+// 장소 체크박스 클릭
 function spotCkBtnClickHandler(thisElement) {
 	var id = $(thisElement).attr("id");
 	var title = $(thisElement).parent().find(".spot-name").attr("value");
@@ -25,7 +27,6 @@ function spotCkBtnClickHandler(thisElement) {
 			var mapx = $(this).parent().find(".spot-x").attr("value");
 			var mapy = $(this).parent().find(".spot-y").attr("value");
 			addMarkerSpot(new kakao.maps.LatLng(mapy, mapx), title, $(this).attr("id"), index); // 마커 추가
-			setMarkersSpot(map); // 마커 지도에 표시하기
 		});
 
 		// 장소 정보 삭제
@@ -35,7 +36,6 @@ function spotCkBtnClickHandler(thisElement) {
 				return false;
 			}
 		});
-		//console.log(calendarPlan);
 		// 박스 리스트 삭제
 		$(".selected-spot-box." + id).remove();
 		$(".count-spot").html(markersSpot.length);
@@ -52,7 +52,6 @@ function spotCkBtnClickHandler(thisElement) {
 	} else { //=====================================체크박스 선택=========================================
 		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
-		setMarkersSpot(map); // 마커 지도에 표시하기
 
 		//화면 리스트 추가
 		var htmlVal = "";
@@ -126,6 +125,7 @@ function timeRangeBtnClickHandler(thisElement) {
 	$(thisElement).parents('.wrap-box').hide();
 	$(thisElement).parents('.wrap-box').next().show();
 }
+
 // 시간 설정 완료
 function timeDoneBtnClickHandler(thisElement) {
 	$(thisElement).parents('.timerange-modal').prev().show();
@@ -154,6 +154,7 @@ function spotResetBtnClickHandler() {
 	$(".count-spot").html(0);
 }
 
+//===================================================마커=====================================================
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarkerSpot(position, title, id, index) {
 	var imageSrc = "/images/loacation/location5.png";// 마커 이미지의 이미지 주소입니다
