@@ -34,6 +34,12 @@
 	<insert id="log" parameterType="map">
 		insert into log values(default, #{logIp}, #{memEmail}, #{logTf})
 	</insert>
+	<!-- 휴면 해제 -->
+	<update id="awake" parameterType="string">
+		update member set mem_role = 'ROLE_MEM' where mem_email = #{memEmail}
+	</update>
+	
+	<!-- 회원가입 -->
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="MemberEntity">
 		insert into member (mem_email, mem_nick, mem_password, mem_role, mem_enabled, mem_type, mem_join_date, mem_birth, mem_tel, mem_font_dur, mem_report_num) values 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -164,11 +165,17 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			throw new UsernameNotFoundException(gson.toJson(map));
 		}
 		MemberEntity memberEntity = memberEntityOp.get();
+		String memRole = memberEntity.getMemRole();
+		if(memRole.equals("ROLE_SLEEP")) {
+			throw new AuthenticationException("4021") {
+				private static final long serialVersionUID = 1L;
+			};
+		}
 		if(memberEntity.getMemEnabled() == 0) {
 			throw new OAuth2AuthenticationException("401");
 		}
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		switch(memberEntity.getMemRole()) {
+		switch(memRole) {
 			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole()));
 			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole()));
 			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));
