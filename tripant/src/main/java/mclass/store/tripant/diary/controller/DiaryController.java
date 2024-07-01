@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.model.service.DiaryService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +26,10 @@ public class DiaryController {
 	// 전체 글보기(공개 글)
 	@GetMapping("")
 	// modelAndView로 db두번 갔다오지 않게 하기
-	public ModelAndView diary(ModelAndView mv, String areaname) {
+	public ModelAndView diary(ModelAndView mv, String areaname, Model model) {
 //		mv.addObject("diaries", diaryService.selectDiaryList(areaname));
+	
+		
 		mv.setViewName("diary/diary_board");
 		return mv;
 	}
@@ -83,6 +86,7 @@ public class DiaryController {
 	public String diartRead(@PathVariable int diaryId, Model model) {
 		model.addAttribute("diary", diaryService.getDiaryById(diaryId));
 		model.addAttribute("likes", diaryService.selectDiaryLike(diaryId));
+		
 		return "diary/diary_read";
 	}
 

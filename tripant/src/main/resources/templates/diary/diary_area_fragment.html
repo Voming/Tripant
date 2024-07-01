@@ -7,7 +7,7 @@
 			<th:block th:each="diary :  ${diaries}">
 				<div class="wrap-d-content">
 					<div class="diary-img">
-						<img th:src="@{/images/diary/diary_empty_image.png}" alt="대표 이미지">
+						<img th:src="@{'/diary'}+${diary.diaryImage}" alt="대표 이미지">
 					</div>
 					<div class="wrap-content">
 						<div class="diary-content">
@@ -38,7 +38,7 @@
 						</div>
 						<div>
 							<p class="diary-preview" style="font-size: var(--font5);"
-								th:utext="${diary.diaryContent}"></p>
+								th:utext="${diary.diaryPreview}"></p>
 						</div>
 						<div class="diary-views">
 							<p style="font-size: var(--font6);" class="views-t">view</p>

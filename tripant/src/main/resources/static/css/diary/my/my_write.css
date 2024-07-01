@@ -82,6 +82,9 @@ input[type="text"] {
 	/* Editing area */
 	min-height: 500px; /* text area 높이 지정 */
 }
+.ck ck-editor__main{
+	/* TODO! textarea 스크롤 내리면 변경 되는 것 값 지정 하기  */
+}
 
 .diary-writes-main {
 	margin: 20px auto;
