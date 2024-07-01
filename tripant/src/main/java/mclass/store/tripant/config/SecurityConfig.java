@@ -41,6 +41,9 @@ public class SecurityConfig {
 						, new AntPathRequestMatcher("/join/sns")
 						).anonymous()
 				.requestMatchers(
+						new AntPathRequestMatcher("/awake")
+						).hasAuthority("SLEEP")
+				.requestMatchers(
 						new AntPathRequestMatcher("/my/**")
 						, new AntPathRequestMatcher("/trip/**")
 						, new AntPathRequestMatcher("/store/**")
@@ -59,7 +62,6 @@ public class SecurityConfig {
 				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/home"))
 				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/nick"))
 				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/pwd"))
-				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/admin/goods"))
 //				.disable()
 //				.ignoringRequestMatchers(new AntPathRequestMatcher("/join"))
 				)
