@@ -4,11 +4,7 @@ var staytype;
 //검색명
 var findArea;
 
-//체크박스 클릭
-function stayCkBtnClickHandler(thisElement){
-	console.log(thisElement);
-}
-
+// 더보기
 function stayMoreBtnClickHandler(thisElement) {
 	clickstaynum += 1;
 
@@ -24,6 +20,7 @@ function stayMoreBtnClickHandler(thisElement) {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_stay) {
 		$(".wrap-stayList").replaceWith(wrap_stay);
+		displayStayCheckList();
 	});
 }
 
@@ -74,6 +71,7 @@ $(document).ready(function() {
 				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
 				$(".resultStayCheck").html(htmlVal);
 			}
+			displayStayCheckList();
 		});
 
 		return false;
@@ -124,6 +122,8 @@ function btnStayFindClickHandler() {
 		} 
 		$(".resultStayCheck").html(htmlVal);
 		$(".stay_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+		
+		displayStayCheckList();
 	});
 }
 
@@ -153,5 +153,7 @@ function stayFindMoreBtnClickHandler(thisElement) {
 		} 
 		$(".resultStayCheck").html(htmlVal);
 		$(".stay_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+		
+		displayStayCheckList();
 	});
 }
