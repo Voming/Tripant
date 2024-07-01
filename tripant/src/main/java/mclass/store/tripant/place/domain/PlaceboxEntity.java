@@ -1,11 +1,9 @@
 package mclass.store.tripant.place.domain;
 
-import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 @Data
-@Component
 public class PlaceboxEntity {
 //	TYPE          NOT NULL NUMBER         
 //	CONTENTID     NOT NULL NUMBER         

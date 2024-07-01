@@ -15,7 +15,6 @@ function restStayBox() {
 		var htmlVal = "";
 		htmlVal += `
 			<div class="selected-stay-box">
-				<span class="box-id" value="" style ="display:none"></span> 
 				<div class="wrap-box flex">
 					<div class="selected-stay-number" style="background-color:var(--color_gray);">
 						<p>${i + 1}</p>
@@ -29,6 +28,7 @@ function restStayBox() {
 					<div>
 						<img class="delete btn" src="/images/icons/trashcan.png" onclick="stayDeleteBtnClickHandler(this);">
 					</div>
+					<span class="box-id" value="" style ="display:none"></span> 
 				</div>
 			</div>`;
 		$(".selected-stay-list").append(htmlVal);
@@ -38,7 +38,6 @@ function restStayBox() {
 //숙소 탭 초기화
 function restStaytab() {
 	$(".modal-stay-list").html(""); // 전체 삭제
-	console.log("탭 초기화");
 	for (var i = 0; i < calendarPlan.dateArr.length - 1; i++) {
 		var start = calendarPlan.dateArr[i].smalldate;
 		// 모달 날짜별 + 탭
@@ -67,7 +66,6 @@ function stayModalDoneBtnClickHandler() {
 	//저장 전 전체 초기화 체크박스 해제
 	$(".staycheck").prop("checked", false);
 	//마커 일단 전부 삭제
-	console.log("완료");
 	setMarkersStay(null);
 	markersStay.length = 0;
 
@@ -98,14 +96,27 @@ function stayModalDoneBtnClickHandler() {
 	});
 
 	console.log(calendarPlan);
-	displayStayBoxList(); // 저장되어있는 숙소 박스 리스트에 넣기
-	displayStayTabList(); // 저장되어있는 숙소 탭 리스트에 넣기
+	displayStayBoxList(); 	// 저장되어있는 숙소 박스 리스트에 넣기
+	displayStayTabList(); 	// 저장되어있는 숙소 탭 리스트에 넣기
+	displayStayCheckList(); // 저장되어있는 숙소 체크박스 다시 활성화
 
 	// 장소 설정 정보 부분 업데이트
 	$(".count-stay").text(markersStay.length);
+
+	$(".time-stay").text(markersStay.length + "일 / " + calendarPlan.dateArr.length - 1 + "일");
 }
 // 저장되어있는 숙소 체크박스 다시 활성화
-// TODO 코드 줄일 수 있는 방법 찾기
+function displayStayCheckList() {
+	$.each(calendarPlan.dateArr, function(idx, element) {
+		// 숙소 정보 박스 넣기
+		$(".stay-box").each(function() {
+			var listId = $(this).children("input:checkbox").attr("id");
+			if (element.stay.id == listId) {
+				$(this).find('input:checkbox').prop("checked", true);
+			}
+		});
+	});
+}
 
 // 저장되어있는 숙소 탭 리스트에 넣기
 function displayStayTabList() {
@@ -131,6 +142,7 @@ function displayStayBoxList() {
 		$(".wrap-box").each(function() {
 			var boxDay = $(this).find(".box-start").attr("value");
 			if (element.smalldate == boxDay) {
+				$(this).find(".box-id").attr("value", element.stay.id);
 				$(this).find(".box-stay-img").attr("src", element.stay.img);
 				$(this).find(".box-title").text(element.stay.title);
 				$(this).find(".box-stay-txt").children().css("color", "black"); //TODO 해당되는곳만 스타일 변경되게
@@ -156,7 +168,7 @@ function stayTabBtnClickHandler(thisElement) {
 //모달 전체 선택
 function stayModalAllBtnClickHandler(thisElement) {
 	addMarkerStay(new kakao.maps.LatLng(stayBefor.mapy, stayBefor.mapx), stayBefor.title, stayBefor.id, markersStay.length); // 마커 추가
-	setMarkersStay(map); // 마커 지도에 표시하기
+	//	setMarkersStay(map); // 마커 지도에 표시하기
 
 	// 숙소 탭 전체 반복문
 	$(".wrap-stay-tab").each(function() {
@@ -168,11 +180,31 @@ function stayModalAllBtnClickHandler(thisElement) {
 	});
 }
 
-// 숙소 삭제
+// 숙소 삭제 버튼
 function stayDeleteBtnClickHandler(thisElement) {
-	console.log("stayDeleteBtnClickHandler");
-}
+	var boxId = $(thisElement).parent().next().attr("value");
+	var boxStart = $(thisElement).parent().prev().find(".box-start").attr("value");
 
+	console.log(boxStart);
+
+	// 장소 정보 삭제
+	$.each(calendarPlan.dateArr, function(idx, element) {
+		console.log(element.smalldate);
+		if (element.smalldate == boxStart) {
+			element.stay = new Stay();
+			return false;
+		}
+	});
+	console.log(calendarPlan);
+	//숙소 화면 초기화
+	restStayBox();
+	restStaytab();
+	$(".staycheck").prop("checked", false);
+
+	displayStayBoxList();    // 저장되어있는 숙소 박스 리스트에 넣기 
+	displayStayTabList();    // 저장되어있는 숙소 탭 리스트에 넣기  
+	displayStayCheckList();  // 저장되어있는 숙소 체크박스 다시 활성화
+}
 
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 var markersStay = [];  //아이디 , 마커 담김 
@@ -191,10 +223,8 @@ function stayCkBtnClickHandler(thisElement) {
 	map.panTo(moveLatLon);
 
 	if ($(thisElement).is(":checked") == false) { // 체크박스 해제
-
-
+		//불가
 	} else { // 체크박스 선택
-		$(".stay-modal").addClass("show");
 		stayBefor = new Stay(id, title, latx, lngy, img);
 
 		//모달 숙소 이름 변경
@@ -203,13 +233,17 @@ function stayCkBtnClickHandler(thisElement) {
 		//숙소 화면 초기화
 		restStayBox();
 		restStaytab();
+		$(".staycheck").prop("checked", false); //체크박스 해제
 
-		//저장된 숙소 정보 복구
-		displayStayTabList(); // 저장되어있는 숙소 탭 리스트에 넣기
+		displayStayBoxList();   // 저장되어있는 숙소 박스 리스트에 넣기 
+		displayStayTabList();   // 저장되어있는 숙소 탭 리스트에 넣기  
+		displayStayCheckList(); // 저장되어있는 숙소 체크박스 다시 활성화
+
+		$(".stay-modal").addClass("show");
 	}
 }
 
-// 숙소 설정 초기화
+// 숙소 설정 초기화 버튼
 function stayResetBtnClickHandler() {
 	$(".selected-stay-box").remove();
 	//체크박스 해제
@@ -231,6 +265,7 @@ function stayResetStayList() {
 	});
 }
 
+//===================================================마커=====================================================
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarkerStay(position, title, id, index) {
 	var imageSrc = "/images/loacation/location3.png";// 마커 이미지의 이미지 주소입니다
@@ -253,7 +288,7 @@ function addMarkerStay(position, title, id, index) {
 
 // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 function setMarkersStay(map) {
-	for (var i = 0; i < markersSpot.length; i++) {
+	for (var i = 0; i < markersStay.length; i++) {
 		markersStay[i].marker.setMap(map);
 	}
 }
