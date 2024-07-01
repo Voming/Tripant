@@ -2,6 +2,8 @@ package mclass.store.tripant.diary.domain;
 
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -33,6 +35,9 @@ public class DiaryBoardEntity {
 	private String diaryTheme;
 	private String memNick;
 	private Integer isMyLikes;
+	private List<String> diaryImage; // 이미지 
+	private String diaryPreview;	// 미리보기 글 
+	
 
 //	public void setDiaryContent(String diaryContent) {
 //		this.diaryContent = diaryContent;

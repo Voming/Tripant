@@ -339,3 +339,10 @@ ADD CONSTRAINT FK_DIARY_TO_DIARY_LIKES_1
 FOREIGN KEY ("DIARY_ID")
 REFERENCES DIARY ("DIARY_ID")
 ON DELETE CASCADE;
+commit;
+select * from user_tables;
+desc DIARY_SAVE;
+select * from DIARY_SAVE;
+alter table diary_save rename column DLARY_IMAGE to DIARY_IMAGE;
+alter table diary_save rename column DLARY_PREVIEW to DIARY_PREVIEW;
+

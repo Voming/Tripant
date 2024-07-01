@@ -17,7 +17,9 @@ $(document).ready(function() {
 		var diaryTheme = $("select[name=diaryTheme]").val();
 		var diaryOpen = $("input[name=diaryOpen]:checked").val();
 		var diaryContent = editor1.getData(); // CKEditor 에서 내용 가져오기
-				
+		var diary_image = [];  // image 들
+		var diary_preview = "";  // 300 자 이내
+		
 		if (diaryPlanId === "") {
 			alert("일정을 선택해주세요.");
 			return;
@@ -30,6 +32,16 @@ $(document).ready(function() {
 		if (diaryContent.trim() == "") {
 			alert("내용을 입력해주세요.");
 			return;
+		} else {
+			var jImgElement = $(".ck.ck-editor__main").find("img");
+			$(jImgElement).each(function(idx, thisElement){
+				console.log(idx);
+				var imgSrc = $(thisElement).prop("src");
+				console.log(imgSrc);
+				diary_image[idx] = imgSrc;
+			});
+			var diary_preview = $(".ck.ck-editor__main").text();
+			console.log(tempText);
 		}
 		
 		var url = "/my/post";
@@ -44,7 +56,10 @@ $(document).ready(function() {
 				diaryDate: diaryDate,
 				diaryTheme: diaryTheme,
 				diaryOpen: diaryOpen,
-				diaryContent: diaryContent
+				diaryContent: diaryContent,
+				diary_image: diary_image,
+				diary_preview: diary_preview
+				
 			}),
 			success: function(response) {
 				//서버로 부터 응답을 받았을 때 처리 (예: 성공 메시지 출력 등)
