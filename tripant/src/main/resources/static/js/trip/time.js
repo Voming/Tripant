@@ -184,7 +184,7 @@ function displayInfo(){
 	 		if( (j+1) < daylength){
 				htmlval += `
 				<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
-				<div class="spot-move">${info.durationMin} 분> </div>
+				<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${nextSpot}"  target="_blank">${durationMin} 분> </a>
 				`;
 			}else{// 숙소에 도착했을 땐 이동시간 표시 X
 				htmlval += `
