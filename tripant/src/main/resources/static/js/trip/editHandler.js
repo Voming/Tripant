@@ -62,7 +62,7 @@ async function memoClickHandler(el){
 }
 
 
-
+//편집 화면 들어갈 때 첫 display 
 function displayEditMode(){
 	
 //	saveSessionArr(); //sessionStorage값 가져오기
@@ -91,6 +91,7 @@ function displayEditMode(){
 					</div>
 				 	<div  class="container flex wfull">
 				 	`;
+				 	
 		// >>>>>>>>>>>>>>>>>> 백틱
 		
 	 	//장소별 정보 넣기
@@ -193,17 +194,10 @@ function displayEditMode(){
 	$(".edit-tourlist .wrap-detaillist.flex").html(htmlval);
 }
 
-
+//드래그 앤 드롭 시 display
 function displayEditModeAfterDragEnd(){
 	
-//	saveSessionArr(); //sessionStorage값 가져오기
-//	console.log("sessionArr");
-//	console.log(sessionArr);
 	var htmlval = "";
-	
-	//이동시간 변수
-//	var duration ="";
-//	var prevDuration ="";
 	
 	console.log("========1e");
 	console.log(detailListEditMode);
@@ -235,9 +229,9 @@ function displayEditModeAfterDragEnd(){
 			/*
 			//다음 장소로 이동시간(sec), 분단위로 변환하여 변수에 담기 
 			var durationMin; //이동시간 추후 사용
-			if((spot.jdx+1) < sessionArr[i].length){
-				duration = durationHandler(spot.lng,spot.lat,sessionArr[i][j+1].lng,sessionArr[i][j+1].lat);
-				durationMin=Math.ceil(duration/60);
+			if((info.jdx+1) < daylength){
+				duration = durationHandler(info.lng,info.lat,details[j+1].lng,details[j+1].lat);
+				info.durationMin=Math.ceil(duration/60);
 			}	
 			
 			//머무는 시간 계산하기 ex) 10:00 - 11:00
