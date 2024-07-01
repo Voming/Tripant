@@ -14,7 +14,7 @@ import mclass.store.tripant.admin.domain.AdminStoreEntity;
 
 
 @Mapper
-public interface AdminDao {
+public interface AdminRepository {
 	
 	//회원관리
 	//회원정보 한페이지에 나열

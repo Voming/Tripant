@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.domain.AdminStoreEntity;
-import mclass.store.tripant.admin.model.repository.AdminDao;
+import mclass.store.tripant.admin.model.repository.AdminRepository;
 
 @Service
 public class AdminService {
 	
 	@Autowired
-	private AdminDao admindao;
+	private AdminRepository admindao;
 	
 	//회원리스트
 	public Map<String, Object> selectMemList( int memNum, int memPageNum, int currentPageNum, String searchMem) {					
