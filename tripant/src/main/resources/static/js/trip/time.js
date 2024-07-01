@@ -82,17 +82,13 @@ function displayInfo(){
 	var navHtmlval =""; 		
 	var htmlval = "";
 	
-	//도착, 출발 시각 변수
-//	let endTime="";
-//	let startTime="";
-	
-	//이동시간 변수
+	//도착, 출발 시각 변수 - 배열에 담음
+
+	//이동시간 변수  - 해당 function 안에서만 사용되고 durationMin은 배열에 담음
 	var duration ="";
 	var prevDuration ="";
 
-	//세션스토리지 및 세선배열 초기화
-/*	editStorage.clear(); 
-	initializeSessionArr();*/
+	//세션스토리지 및 세선배열 초기화 - 사용 X js의 얕은 복사를 활용하여 굳이 sessionStorage를 활용할 필요가 없음
 	
 	var detailListLength = detailList.length;
 	dayPoints = new Array(detailListLength);  // 일정 날마다 장소들 지도에 표시될 위치 (points 담을 배열)// 초기화
@@ -184,7 +180,7 @@ function displayInfo(){
 	 		if( (j+1) < daylength){
 				htmlval += `
 				<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
-				<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${nextSpot}"  target="_blank">${durationMin} 분> </a>
+				<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${details.dayDetailInfoEntity[j+1].title}"  target="_blank">${info.durationMin} 분> </a>
 				`;
 			}else{// 숙소에 도착했을 땐 이동시간 표시 X
 				htmlval += `
@@ -198,9 +194,6 @@ function displayInfo(){
 
 	    }/* 반복문 종료(j)*/
 		
-//		//배열에 일자병 장문장소 갯수 만큼의 배열 길이 선언
-//		sessionArr[i] = new Array(infoCount) ;
-
 		dayPoints[i] = points;
 		
 		htmlval += `
