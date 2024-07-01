@@ -1,17 +1,5 @@
-
-
-function displayMap( ){
-/* 1. 지도 생성*/
- mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-	center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표(필수 입력) : kakao본사
-        level: 9// 지도의 확대 레벨 큰 숫자 : 큰 범위
-    };
-//지도를 생성합니다
-map = new kakao.maps.Map(mapContainer, mapOption); 
-
-//지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
-bounds = new kakao.maps.LatLngBounds();   	
+//마커 지도에 표시
+function displayMarker(){
 /*마커 추가 및 생성*/
 var i
 //, marker
@@ -19,13 +7,11 @@ var i
 var imageSrc = '' ;// 마커이미지의 주소입니다    
 
 
-/*마커 커스터마이징*/
+/*마커 커스터마이징*/ //j i 순서 주의
 for(j = 0; j<dayPoints.length; j++){
 		dayPoint = dayPoints[j];
 		imageSrc=mapCircleHandler(j+1); // /images/loacation/location3.png 등 마커이미지 주소 변경
 	for (i = 0; i < dayPoint.length; i++) {
-
-	
 		
 	     // customOverlay 생성 - 마커위에 숫자 올리기 // 마커이미지의 크기 style로 지정
 	    var content = `       
@@ -52,13 +38,41 @@ for(j = 0; j<dayPoints.length; j++){
 	    });
 	 	// 지도에 선을 표시합니다 
 	    polyline.setMap(map);  
-	    
+	    polylines.push(polyline);
 	    // LatLngBounds 객체에 좌표를 추가합니다
 	    bounds.extend(dayPoint[i]);
 	} 
 }//마커 커스터마이징
-
+	
 }
+
+
+// 폴리라인을 초기화하는 함수
+function clearPolylines() {
+    while (polylines.length > 0) {
+        var polyline = polylines.pop();
+        polyline.setMap(null); // 지도에서 폴리라인 제거
+    }
+}
+// 지도 출력
+function displayMap( ){
+/* 1. 지도 생성*/
+ mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+	center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표(필수 입력) : kakao본사
+        level: 9// 지도의 확대 레벨 큰 숫자 : 큰 범위
+    };
+//지도를 생성합니다
+map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+bounds = new kakao.maps.LatLngBounds();   	
+
+//마커 지도에 표시
+displayMarker();
+}
+
+
 /* 지도 중심 이동하기*/
 //이동할 좌표 입력 - TODO 수정 필요
 function panTo() {
@@ -66,8 +80,6 @@ function panTo() {
 	var latx= $(this).parent().prev().prev().children(".mapx").val();
 	//y좌표 경도 33번대
 	var lngy= $(this).parent().prev().children(".mapy").val();
-	console.log("check!!!!!!!!!!!!!!!!!!!!");
-	console.log(latx);
     // 이동할 위도 경도 위치를 생성합니다 
     var moveLatLon = new kakao.maps.LatLng(lngy,latx);
     
@@ -81,5 +93,3 @@ function setBounds() {
     // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
     map.setBounds(bounds);
 }
-//카카오 길찾기 페이지 열어주기 - TODO
-//function findLoad(){}

@@ -91,7 +91,7 @@ function displayInfo(){
 	//세션스토리지 및 세선배열 초기화 - 사용 X js의 얕은 복사를 활용하여 굳이 sessionStorage를 활용할 필요가 없음
 	
 	var detailListLength = detailList.length;
-	dayPoints = new Array(detailListLength);  // 일정 날마다 장소들 지도에 표시될 위치 (points 담을 배열)// 초기화
+	dayPoints = new Array(detailListLength);  //(전체일정) 일정 날마다 장소들 지도에 표시될 위치 (points 담을 배열)// 초기화
 	
 	for(var i=0; i<detailListLength; i++ ){
 		//DayEntity를 list에 담기
