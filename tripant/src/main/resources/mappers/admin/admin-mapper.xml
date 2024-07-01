@@ -1,10 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mclass.store.tripant.admin.model.repository.AdminDao">
+<mapper namespace="mclass.store.tripant.admin.model.repository.AdminRepository">
 
 	<!-- 회원관리 -->
-	<select id="selectMemList" resultType="AdminMemEntity" parameterType="map">
-	SELECT T2.* FROM
+ 	<select id="selectMemList" resultType="AdminMemEntity" parameterType="map">
+	SELECT T2.*, (select T3.MEM_QUIT_DATE from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
+		FROM (SELECT T1.*, ROWNUM RN FROM
+			(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, 	
+                    to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED
+             FROM member a 
+ 			<if test='searchMem != null and searchMem !=""'>
+			<bind name="keyword" value="'%'+searchMem+'%'" />
+			where mem_nick like #{keyword}
+			</if>
+			 ORDER BY MEM_JOIN_DATE DESC ) T1 ) T2 
+		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
+	</select>
+	<!--회원검색 -->
+	<select id="selectMemListSearch" resultType="AdminMemEntity" parameterType="map">
+	SELECT T2.*, (select T3.MEM_QUIT_DATE from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
+		FROM (SELECT T1.*, ROWNUM RN FROM
+			(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, 	
+                    to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED
+             FROM member a 
+ 			<if test='searchMem != null and searchMem !=""'>
+			<bind name="keyword" value="'%'+searchMem+'%'" />
+			where mem_nick like #{keyword}
+			</if>
+			 ORDER BY MEM_JOIN_DATE DESC ) T1 ) T2 
+		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
+	</select>
+	
+	<select id="totalCount" resultType="_int" parameterType="map">
+		select count(*) from member
+		<if test='searchMem != null and searchMem !=""'>
+			<bind name="keyword" value="'%'+searchMem+'%'" />
+			where mem_nick like #{keyword}
+		</if> 
+	</select>
+	
+	<select id="totalCountSearch" resultType="_int" parameterType="string">
+		select count(*) from member 
+		<if test='searchMem != null and searchMem !=""'>
+			<bind name="keyword" value="'%'+searchMem+'%'" />
+			where mem_nick like #{keyword}
+		</if> 
+	</select>
+	
+	<!-- 
+		<select id="selectMemList" resultType="AdminMemEntity">
+		select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE,
+				a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED,  to_char(b.MEM_QUIT_DATE,'yyyy-MM-dd') MEM_QUIT_DATE
+        from member a
+        left join quit_member b
+        on a.MEM_EMAIL=b.MEM_EMAIL 
+		</select>
+	 -->
+	<!-- 페이지처리
+		<select id="selectPage" resultType="BoardListDto" parameterType="map">
+		SELECT T2.* FROM
 		(SELECT T1.*, ROWNUM RN FROM
 		(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED, b.MEM_QUIT_DATE
             from member a
@@ -12,22 +66,9 @@
             on a.MEM_EMAIL=b.MEM_EMAIL 
 		<if test='searchMem != null and searchMem !=""'>
         <bind name="keyword" value="'%'+searchMem+'%'" />
-		WHERE mem_nick = #{searchMem}
+		WHERE mem_nick like #{keyword}
 		</if>
 		 ORDER BY MEM_JOIN_DATE DESC) T1 ) T2
-		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
-	</select>
-	
-	<!-- 페이지처리
-		<select id="selectPage" resultType="BoardListDto" parameterType="map">
-		SELECT T2.* FROM
-		(SELECT T1.*, ROWNUM RN FROM
-		(SELECT BOARD_ID, TITLE, to_char(WRITE_TIME, 'yyyy-mm-dd hh24:mi') WRITE_TIME,
-		BOARD_WRITER, READ_COUNT FROM BOARD 
-		<if test="memId != null">
-		WHERE BOARD_WRITER = #{memId}
-		</if>
-		 ORDER BY BOARD_ID DESC) T1 ) T2
 		WHERE RN BETWEEN #{startRounum} AND #{endRounum}
 	</select> -->
 	
@@ -39,14 +80,7 @@
 	<update id="adminMemActive" parameterType="map">
 	
 	</update>
-	<!--회원검색 -->
-	<select id="search" resultType="AdminMemEntity">
-	select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , b.MEM_QUIT_DATE 
-	from member a
-	left join quit_member b
-	on a.MEM_EMAIL=b.MEM_EMAIL
-    where a.mem_nick like '%${memNick}%'
-	</select>
+	
 	
 	<!--게시글 조회 -->
 	<select id="boardList" resultType="AdminBoardEntity">

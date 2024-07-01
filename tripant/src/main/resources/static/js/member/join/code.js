@@ -33,7 +33,8 @@ function codeSendHandler() {
 					confirmButtonText: "확인"
 				});
 			}
-		},
+		}, 
+		beforeSend: csrfHandler(xhr), 
 		error: ajaxErrorHandler
 	});
 }
@@ -67,7 +68,8 @@ function codeCheckHandler() {
 					confirmButtonText: "확인"
 				});
 			}
-		},
+		}, 
+		beforeSend: csrfHandler(xhr), 
 		error: ajaxErrorHandler
 	});
 }

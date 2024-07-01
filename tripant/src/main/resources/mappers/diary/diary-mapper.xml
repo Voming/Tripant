@@ -201,6 +201,19 @@
 		default, #{diaryOpen},
 		#{diaryViews},
 		#{diaryTheme})
+
+		<selectKey keyProperty="diaryId" resultType="int"
+			order="AFTER">
+			SELECT diary_seq.CURRVAL FROM DUAL
+		</selectKey>
+
+	</insert>
+
+	<!-- 여행기 글 등록 시 이미지 url diary_save 테이블에 저장 시키기 -->
+	<insert id="insertDiaryImage" parameterType="map">
+		INSERT INTO
+		DIARY_SAVE(DIARY_ID,DIARY_MEM_EMAIL,DIARY_IMAGE,DIARY_PREVIEW)
+		VALUES (#{diaryId}, #{diaryMemEmail},#{diaryImage}, '더미더미')
 	</insert>
 
 	<!-- 특정 ID의 PlAN 조회 -->
@@ -269,6 +282,7 @@
 		DIARY_LIKES
 		WHERE DIARY_ID = #{diaryId} AND MEM_EMAIL = #{memEmail}
 	</delete>
+
 	<!-- 여행기 글 Previews text 꺼내기 -->
 	<select id="previewsText" parameterType="DiaryPostEntity">
 		SELECT DIARY_ID,
@@ -279,7 +293,8 @@
 	<!--글 신고하기 -->
 	<insert id="reportsOne" parameterType="ReportsEntity">
 		INSERT INTO
-		DIARY_REPORTS (DIARY_ID, MEM_EMAIL)
+		DIARY_REPORTS
+		(DIARY_ID, MEM_EMAIL)
 		VALUES (#{diaryId}, #{memEmail})
 	</insert>
 

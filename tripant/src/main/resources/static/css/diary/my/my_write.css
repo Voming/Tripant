@@ -26,7 +26,7 @@
 /*제목 입력 칸  */
 input[type="text"] {
 	border: 1.5px #000 solid;
-	width: 800px;
+	width: 826px;
 	height: 48px;
 	border-radius: 5px;
 	padding-left: 10px;
@@ -77,10 +77,22 @@ input[type="text"] {
 	justify-content: flex-end;
 }
 /* ckeditor */
-
 .ck-editor__editable[role="textbox"] {
 	/* Editing area */
 	min-height: 500px; /* text area 높이 지정 */
+}
+
+#container {
+	width: 850px;
+}
+
+.ck ck-editor__main {
+	/* TODO! textarea 스크롤 내리면 변경 되는 것 값 지정 하기  */
+	display: block;
+	height: auto;
+	margin: 0 auto;
+	max-width: 100%;
+	min-width: 100%;
 }
 
 .diary-writes-main {
@@ -107,7 +119,7 @@ input[type="text"] {
 
 .diary-write-table input[type="text"], .diary-write-table input[type="date"],
 	.diary-write-table select, .diary-write-table textarea {
-	width: 100%;
+	
 	padding: 10px;
 	margin-top: 5px;
 	border: 1px solid #ccc;
@@ -136,4 +148,11 @@ input[type="text"] {
 
 .btn_submit:hover {
 	background-color: #0056b3;
+}
+.diary-writer-select-plan{
+	width:100%; /* 옵션의 길이  */
+	
+}
+.diaryTitle{
+	width: 80%;
 }

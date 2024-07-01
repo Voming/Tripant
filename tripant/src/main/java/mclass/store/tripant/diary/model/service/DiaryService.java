@@ -46,12 +46,17 @@ public class DiaryService {
 	public DiaryBoardEntity findById(Long id) {
 		return diaryRepository.findById(id);
 	}
+	
 
-	// 여행기 글 등록하기
+	// 여행기 글 등록하기, 여행기 글 등록 시 이미지 url 및 text 저장 
 	public DiaryBoardEntity save(DiaryBoardEntity diary) {
 		diaryRepository.insertDiary(diary);
+		int diaryId = diary.getDiaryId();
+		diary.setDiaryId(diaryId);
+		diaryRepository.insertDiaryImage(diary);
 		return diary;
 	}
+
 	// 여행기 글 삭제
 	  public int deleteDiaryById(int diaryId, String memEmail)throws Exception {
 	    return diaryRepository.deleteDiaryById(diaryId,memEmail);

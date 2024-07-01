@@ -1,5 +1,6 @@
 package mclass.store.tripant.member.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mclass.store.tripant.apikeys.KeysJaewon;
+import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @RequiredArgsConstructor
@@ -59,7 +62,7 @@ public class LoginController {
 	//비밀번호 찾기 페이지
 	@GetMapping("/pwd")
 	public String pwd() {
-		return "/member/pwd";
+		return "member/pwd";
 	}
 	
 	//비밀번호 재설정
@@ -83,9 +86,13 @@ public class LoginController {
 	
 	// 오류 페이지
 	@GetMapping("/exception")
-	public String exception(Model model, @RequestParam String code) {
+	public String exception(Model model, HttpSession session, @RequestParam String code) {
 		model.addAttribute("code", code);
-		return "/common/exception";
+		String memEmail = (String) session.getAttribute("memEmail");
+		model.addAttribute("memEmail", memEmail);
+		MemberEntity memberEntity = memberService.login(memEmail);
+		model.addAttribute("memRole", memberEntity.getMemRole());
+		return "common/exception";
 	}
 }
 

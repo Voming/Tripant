@@ -4,23 +4,15 @@ async function requestPayment() {
 	$('input:checked').each(function() {
 		items.push($(this).val());
 	});
-	let memEmail = "[[${memEmail}]]";
-	console.log(memEmail);
-	let memNick = "[[${memNick}]]";
-	let memTel = "[[${memTel}]]";
 	let orderName;
 	let itemName = $('input:checked').first().parent().prev().prev().text();
 	let itemNum = $('input:checked').length;
 	const totalAmount = $('input[name=pay]').val();
-	const storeId = "[[${storeId}]]";
-	console.log(storeId);
-	const channelKey = "[[${channelKey}]]";
 	if (itemNum > 1) {
 		orderName = itemName + ' 외 ' + (itemNum - 1) + '건';
 	} else {
 		orderName = itemName;
 	}
-	let buyId = "[[${buyId}]]";
 
 	// 결제창 표시
 	const response = await PortOne.requestPayment({

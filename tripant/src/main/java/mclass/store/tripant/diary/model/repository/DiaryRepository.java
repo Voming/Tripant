@@ -29,6 +29,9 @@ public interface DiaryRepository {
 
 	// 여행기 글 등록
 	public void insertDiary(DiaryBoardEntity diary);
+	// 여행기 이미지URL 및 텍스트 저장
+	public void insertDiaryImage(DiaryBoardEntity diary);
+	
 	List<WritePlanTitleEntity> selectPlanById(String memberEmail);
 	
 	// 특정 ID의 다이어리 조회

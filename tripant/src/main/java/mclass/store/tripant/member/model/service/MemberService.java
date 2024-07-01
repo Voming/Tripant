@@ -15,7 +15,7 @@ public class MemberService {
 
 	private final MemberRepository memberRepository;
 	
-// 로그인/로그아웃
+	// 로그인/로그아웃
 	// 로그인
 	public MemberEntity login(String memEmail) {
 		return memberRepository.login(memEmail);
@@ -35,7 +35,13 @@ public class MemberService {
 	public int log(Map<String, Object> map) {
 		return memberRepository.log(map);
 	}
+	
+	// 휴면 해제
+	public int awake(String memEmail) {
+		return memberRepository.awake(memEmail);
+	}
 
+	// 회원가입
 	// 회원가입
 	public Integer join(MemberEntity memberEntity) {
 		return memberRepository.join(memberEntity);
@@ -56,7 +62,7 @@ public class MemberService {
 		return memberRepository.setPwd(map);
 	}
 
-// 마이페이지
+	// 마이페이지
 	// 내 정보
 	public Map<String, Object> myInfo(String memEmail){
 		return memberRepository.myInfo(memEmail);

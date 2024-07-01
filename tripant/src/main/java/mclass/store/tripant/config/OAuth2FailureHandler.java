@@ -37,5 +37,11 @@ public class OAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler 
 					+ "location.href = \"/exception?code=4012\";"
 					+ "</script>").close();
 		}
+		if(exception.getMessage().equals("4021")) {
+			response.setContentType("text/html; charset=utf-8");
+			response.getWriter().append("<script type=\"text/javascript\">"
+					+ "location.href = \"/exception?code=4021\";"
+					+ "</script>").close();
+		}
 	}
 }

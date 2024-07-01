@@ -8,7 +8,7 @@ import mclass.store.tripant.member.domain.MemberEntity;
 
 @Mapper
 public interface MemberRepository {
-// 로그인/로그아웃
+	// 로그인/로그아웃
 	// 로그인
 	public MemberEntity login(String memEmail);
 	
@@ -23,7 +23,11 @@ public interface MemberRepository {
 	
 	// 로그인 기록
 	public int log(Map<String, Object> map);
+	
+	// 휴면 해제
+	public int awake(String memEmail);
 
+	// 회원가입
 	// 회원가입
 	public Integer join(MemberEntity memberEntity);
 
@@ -35,8 +39,8 @@ public interface MemberRepository {
 
 	// 비밀번호 재설정
 	public int setPwd(Map<String, Object> map);
-
-// 마이페이지
+	
+	// 마이페이지
 	// 내 정보
 	public Map<String, Object> myInfo(String memEmail);
 	

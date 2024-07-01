@@ -41,7 +41,7 @@ $(document).ready(function() {
 				diary_image[idx] = imgSrc;
 			});
 			var diary_preview = $(".ck.ck-editor__main").text();
-			console.log(tempText);
+			console.log(diary_preview);
 		}
 		
 		var url = "/my/post";
