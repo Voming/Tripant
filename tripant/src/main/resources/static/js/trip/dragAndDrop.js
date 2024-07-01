@@ -56,12 +56,14 @@ function dragAndDrop(){
 			details.dayDetailInfoEntity.pop();
 			
 			console.log("detailListEditMode===2");
-			console.log(detailListEditMode);						
+			console.log(detailListEditMode);
 			//일차별 동그라미 색 변경
 			//circleColorHandler();
 			displayEditModeAfterDragEnd();
 			//일차별 동그라미 색 변경
 			circleColorHandler();
+			//maker display - TODO
+			displayMarker();
 			//드래그 앤 드랍
 			dragAndDrop();
         });

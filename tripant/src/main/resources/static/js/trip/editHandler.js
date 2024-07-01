@@ -196,15 +196,24 @@ function displayEditMode(){
 
 //드래그 앤 드롭 시 display
 function displayEditModeAfterDragEnd(){
-	
+	//
+	clearPolylines();
+	//html에 뿌릴 정보 백틱에 담기
 	var htmlval = "";
+	
+	//이동시간 변수  - 해당 function 안에서만 사용되고 durationMin은 배열에 담음
+	var duration ="";
+	var prevDuration ="";
 	
 	console.log("========1e");
 	console.log(detailListEditMode);
-	
+	dayPoints = [];
+	dayPoints = new Array(detailListEditMode.length); // (전체일정)일정 날마다 장소들 지도에 표시될 위치 (points 담을 배열)// 초기화
 	for(var i=0; i<detailListEditMode.length; i++ ){
+		
 		//DayEntity를 list에 담기
 		details =  detailListEditMode[i];
+		
 		// <<<<<<<<<<<<<<< 백틱
 		//좌측 탭 태그 넣기
 		htmlval+=`
@@ -226,33 +235,38 @@ function displayEditModeAfterDragEnd(){
 			
 			//머무는 시간 바꾸기
 			let[hours, minutes] = secToHoursAndMin(info.stayTime);
-			/*
+			
 			//다음 장소로 이동시간(sec), 분단위로 변환하여 변수에 담기 
-			var durationMin; //이동시간 추후 사용
-			if((info.jdx+1) < daylength){
-				duration = durationHandler(info.lng,info.lat,details[j+1].lng,details[j+1].lat);
-				info.durationMin=Math.ceil(duration/60);
+			if((j+1) < daylength){
+				duration = durationHandler(info.lng,info.lat,details.dayDetailInfoEntity[j+1].lng,details.dayDetailInfoEntity[j+1].lat);
+				info.durationMin=Math.ceil(duration/60); // ceil : 소수점 올림
 			}	
 			
 			//머무는 시간 계산하기 ex) 10:00 - 11:00
+			// *** info에 startTime , endTime 속성 추가
 			//1번째 장소
 			if(j == 0){
-				startTime =sessionArr[i][j].travelStart;
-				endTime = addTime(startTime,spot.stayTime);
+				info.startTime = details.scheduleStart;
+				info.endTime = addTime(details.scheduleStart,info.stayTime);
 			//2~n-1번째 장소	
-			}else if(0 < j && j < sessionArr[i].length-1){
-				startTime =  addTime(endTime,prevDuration);
-				endTime = addTime(startTime,spot.stayTime);
+			}else if(0 < j && j < daylength-1){
+				info.startTime =  addTime(details.dayDetailInfoEntity[j-1].endTime, prevDuration);
+				info.endTime = addTime(info.startTime,info.stayTime);
 			//n번째 장소(숙소)	
 			}else{
-				startTime =  addTime(endTime,prevDuration);
-				endTime = 	sessionArr[i][j].travelEnd;
+				info.startTime =  addTime(details.dayDetailInfoEntity[j-1].endTime, prevDuration);
+				info.endTime = 	details.scheduleEnd;
 			}
 			
 			//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
 			//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
 			prevDuration = duration;
-*/
+			
+			
+			
+			//map에서 lng lat 값 넣기 KakaoMap Api
+			var  point = new kakao.maps.LatLng(info.lat*1, info.lng*1);
+			points[j] = point;
 			
 			// <<<<<<<<<<<<<<< 백틱
 			//백틱에 값 넣기
@@ -288,10 +302,16 @@ function displayEditModeAfterDragEnd(){
 			
 			//이동시간 표시 및 자동차 아이콘 표시 
 			//마지막  상소일 경우 이동시간 hide
-			if( (j+1) < daylength){
-				htmlval+=`<div class="spot-move"> ${info.durationMin}분> </div>`;
-			}else{
-				htmlval+=`<div class="spot-move hide"> ${info.durationMin}분> </div>`;
+	 		if( (j+1) < daylength){
+				htmlval += `
+				<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+				<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${details.dayDetailInfoEntity[j+1].title}"  target="_blank">${info.durationMin} 분> </a>
+				`;
+			}else{// 숙소에 도착했을 땐 이동시간 표시 X
+				htmlval += `
+				<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+				<div class="spot-move hide"> </div>
+				`;
 			}
 			
 			htmlval+=`<!-- x 버튼 -->
@@ -305,7 +325,7 @@ function displayEditModeAfterDragEnd(){
 			htmlval+=`</div> <!--spot-block  -->`;
 			// >>>>>>>>>>>>>>>>> 백틱
 		} /* 반복문 종료(j)*/
-					
+		dayPoints[i] = points;			
 		htmlval+=`	
 					</div> <!-- container  -->
 				</div>	<!-- column -->
