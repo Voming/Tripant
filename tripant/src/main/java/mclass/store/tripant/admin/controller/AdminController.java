@@ -75,7 +75,7 @@ public class AdminController {
 //	}
 	
 	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
-	private int memNum = 3;
+	private int memNum = 9;
 	
 	//화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
 	private int memPageNum = 5;
