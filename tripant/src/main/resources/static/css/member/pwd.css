@@ -21,7 +21,11 @@
 
 .wrap-main .btn {
 	cursor: pointer;
-	font-size: var(--font5);
+	border-radius: 8px;
+	border: 0;
+	background-color: black;
+	color: white;
+	padding: 5px 10px;
 }
 
 .wrap-main .flex {

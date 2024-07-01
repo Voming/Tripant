@@ -10,6 +10,14 @@
 <script th:inline="javascript">
 $(loadedHandler);
 function loadedHandler(){
+	//버튼 호버 css
+	$('.btn').hover(function(){
+		$(this).css('background-color', 'lightgray');
+		$(this).css('color', 'black');
+	}, function(){
+		$(this).css('background-color', 'black');
+		$(this).css('color', 'white');
+	});
 	//인증코드 입력창 숨김
 	$("section.flex.pwd.set").addClass('hide');
 	//인증코드 입력창 숨김
