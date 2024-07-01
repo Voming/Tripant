@@ -13,44 +13,46 @@ import mclass.store.tripant.admin.domain.AdminStoreEntity;
 import mclass.store.tripant.admin.model.repository.AdminDao;
 
 @Service
-public class AdminSerivce {
+public class AdminService {
 	
 	@Autowired
 	private AdminDao admindao;
 	
 	//회원리스트
-public Map<String, Object> selectMemList(String searchMem, String memNick,  int memNum, int memPageNum, int currentPageNum) {					
+	public Map<String, Object> selectMemList( int memNum, int memPageNum, int currentPageNum, String searchMem) {					
 		
 		//현재페이지: currentPage
-		//리뷰 하단에 표시할 페이지 수: reviewPageNum
-		//화면에 한번에 표시되는 리뷰부분 당 글 수 : reviewNum	
+		// 하단에 표시할 페이지 수: memPageNum
+		//화면에 한번에 표시되는  글 수 : memNum	
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
 		//DB가서 그때그때 알아와야함 - 호텔 한개 당 리뷰글이 몇개냐에 따라 달라질 수 있음
-		int totalCount = admindao.page(searchMem);
+		int totalCount = admindao.totalCount();
 		
-		int startRounum = memNum * (currentPageNum - 1) + 1;
-		int endRonum = memNum * currentPageNum;
+		int startRownum = memNum * (currentPageNum - 1) + 1;
+		int endRownum = memNum * currentPageNum;
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % memNum == 0) ? (totalCount / memNum) : (totalCount / memNum) + 1;
 		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
-		int startPageNum = (currentPageNum % memNum == 0) ? ((currentPageNum / memNum) - 1) * memNum + 1
-				: (currentPageNum / memNum) * memNum + 1;
+		int startPageNum = (currentPageNum % memPageNum == 0) ? ((currentPageNum / memPageNum) - 1) * memPageNum + 1
+				: (currentPageNum / memPageNum) * memPageNum + 1;
 		
 		//끝페이지
-		int endPageNum = (startPageNum + memNum > totalPageCount) ? totalPageCount : startPageNum + memNum - 1;
+		int endPageNum = (startPageNum + memPageNum > totalPageCount) ? totalPageCount : startPageNum + memPageNum - 1;
 		
-		List<AdminMemEntity> memList = admindao.selectMemList( searchMem, startRounum, endRonum);
+		List<AdminMemEntity> memList = admindao.selectMemList(startRownum, endRownum, searchMem);
 		result = new HashMap<String, Object>();
 		result.put("memList", memList);
 		result.put("totalCount", totalCount);
+		result.put("totalPageCount", totalPageCount);
 		result.put("startPageNum", startPageNum);
 		result.put("endPageNum", endPageNum);
 		result.put("currentPage", currentPageNum);
+		result.put("searchMem", searchMem);
 		
 		return result;
 	}
@@ -61,14 +63,54 @@ public Map<String, Object> selectMemList(String searchMem, String memNick,  int 
 	 * memNick, startRounum,endRonum); }
 	 */
 	
+
+//회원리스트
+//	public List<AdminMemEntity> memList(){
+//		return admindao.selectMemList();
+//	}
+	
 	//등급변경 활성화 여부
 	public Integer adminMemInfo(Map<String, Object> map) {
 		return admindao.adminMemInfo(map);
 	}
 	
 	//회원검색
-	public List<AdminMemEntity> search(String memNick){
-		return admindao.search(memNick);
+	public Map<String, Object> search( int memNum, int memPageNum, int currentPageNum, String searchMem){
+		
+		//현재페이지: currentPage
+		// 하단에 표시할 페이지 수: memPageNum
+		//화면에 한번에 표시되는  글 수 : memNum	
+		Map<String, Object> result = null;
+		
+		//총 게시글 개수
+		//DB가서 그때그때 알아와야함 - 호텔 한개 당 리뷰글이 몇개냐에 따라 달라질 수 있음
+		int totalCount = admindao.totalCountSearch(searchMem);
+		
+		int startRownum = memNum * (currentPageNum - 1) + 1;
+		int endRownum = memNum * currentPageNum;
+		
+//				전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
+		int totalPageCount = (totalCount % memNum == 0) ? (totalCount / memNum) : (totalCount / memNum) + 1;
+		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
+		
+		//시작페이지
+		int startPageNum = (currentPageNum % memPageNum == 0) ? ((currentPageNum / memPageNum) - 1) * memPageNum + 1
+				: (currentPageNum / memNum) * memNum + 1;
+		
+		//끝페이지
+		int endPageNum = (startPageNum + memPageNum > totalPageCount) ? totalPageCount : startPageNum + memPageNum - 1;
+		
+		List<AdminMemEntity> memList = admindao.selectMemListSearch(startRownum, endRownum, searchMem);
+		result = new HashMap<String, Object>();
+		result.put("memList", memList);
+		result.put("totalCount", totalCount);
+		result.put("totalPageCount", totalPageCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("currentPage", currentPageNum);
+		result.put("searchMem", searchMem);
+
+		return result;
 	}
 	
 	//게시글리스트
