@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -25,14 +27,14 @@ import com.google.gson.Gson;
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.domain.AdminStoreEntity;
-import mclass.store.tripant.admin.service.AdminSerivce;
+import mclass.store.tripant.admin.service.AdminService;
 
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
 
 	@Autowired
-	private AdminSerivce adminservice;
+	private AdminService adminservice;
 	
 	@Autowired
 	private Gson gson;
@@ -42,45 +44,66 @@ public class AdminController {
 	@Value("${pay.storeId}")
 	private String storeId;
 	
+//	@GetMapping("/member")
+//	public ModelAndView Member(ModelAndView mv, String currentPage) {
+//		
+//		//정보를 받아올 때 어떤것을 참조해서 받아올지 --> 매개변수(java에서의 getParameter 역할을 대신해줌)
+//		
+////		한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
+//		int memNum = 1;
+//		
+////		화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
+//		int memPageNum = 2;
+//		
+////		누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
+//		int currentPageNum = 1;  // 기본1
+//		
+//		if(currentPage != null && !currentPage.equals("") ) {
+//			try {
+//				currentPageNum = Integer.parseInt(currentPage);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		//model.addAttribute("memList",adminservice.selectMemList());
+//		mv.addObject("memList",adminservice.selectMemList( memNum, memPageNum, currentPageNum));
+//		mv.setViewName("admin/admin_member");
+//		
+//		return mv;
+//		//return "admin/admin_member";
+//	}
+	
+	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
+	private int memNum = 3;
+	
+	//화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
+	private int memPageNum = 5;
+	
+	//누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
+//	private int currentPageNum = 1;  // 기본1  // @RequestParam(required = false, defaultValue = "1") 
+	
 	@GetMapping("/member")
-	public ModelAndView Member(ModelAndView mv, String searchMem,String memNick,
-			String currentPage) {
-		
-		//정보를 받아올 때 어떤것을 참조해서 받아올지 --> 매개변수(java에서의 getParameter 역할을 대신해줌)
-		
-//		한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
-		int memNum = 1;
-		
-//		화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
-		int memPageNum = 2;
-		
-//		누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
-		int currentPageNum = 1;  // 기본1
-		
-		if(currentPage != null && !currentPage.equals("") ) {
-			try {
-				currentPageNum = Integer.parseInt(currentPage);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		//model.addAttribute("memList",adminservice.selectMemList());
-		mv.addObject("memList",adminservice.selectMemList(searchMem, memNick, memNum, memPageNum, currentPageNum));
-		mv.setViewName("admin/admin_member");
-		
-		return mv;
-		//return "admin/admin_member";
+	public String member(Model model
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String searchMem
+			) 
+			throws MethodArgumentTypeMismatchException {
+		model.addAttribute("memMap",adminservice.selectMemList( memNum, memPageNum, currentPageNum, searchMem));
+		return "admin/admin_member";
 	}
 	
-		//ajax  
-		//검색 
-		@PostMapping("/member/search") 
-		@ResponseBody
-		public List<AdminMemEntity> memberSearch(Model model, String searchMem) {
-			List<AdminMemEntity> memList=adminservice.search(searchMem);
-			return memList ;
-		}
+	//ajax  
+	//검색 // paging
+	@PostMapping("/member/search") 
+//	@ResponseBody
+	public String  memberSearch(Model model 
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String searchMem
+			) {
+		model.addAttribute("memMap", adminservice.search( memNum, memPageNum, currentPageNum, searchMem));
+		return "admin/page_fragment";
+	}
 
 	 //ajax
 	 //회원정보 수정(등급변경 , 활성화여부)
@@ -318,5 +341,11 @@ public class AdminController {
 	
 		return "";
 	}
+	
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public String typeMissmatchExceptionHandler() {
+		return "redirect:/admin/member";
+	}
+	
 	
 }

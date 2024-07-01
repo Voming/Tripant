@@ -29,15 +29,12 @@
 	
 	<div class="wrap-body">
 	 	<form action ="/logout" method="post">
-			<div class="ad-header">
+		<div class="ad-header">
 				<div class="ad-text">회원관리</div>
 				<button type="submit" class="btn-logout">로그아웃</button>
-			
-			</div>
+		</div>	
 		</form>
-			
-			<div class="ad-search"  th:replace="~{admin/page_fragment :: member}"></div>
-	
+		<div class="wrap-list"  th:replace="~{admin/page_fragment :: wraplist}"></div>
 	</div>	
 </div>
 <script th:line="javascript" th:src="@{/js/admin/member/member_info.js}"></script>
