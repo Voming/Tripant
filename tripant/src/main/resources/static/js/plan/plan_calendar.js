@@ -68,15 +68,18 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 			let date = new Date(dateStr.setDate(dateStr.getDate() + i));
 
 			//월/일 형태로 변경
+			let yyyy = date.getFullYear();
 			let MM = ('0' + (date.getMonth() + 1)).slice(-2);
 			let dd = ('0' + date.getDate()).slice(-2);
 			let smalldate = MM + '/' + dd;
+			
+			let dateY = yyyy + MM + dd;
 
 			//요일 가져오기
 			const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 			let day = WEEKDAY[date.getDay()];
 
-			calendarPlan.dateArr[i] = new CalendarDate(date, smalldate, day);
+			calendarPlan.dateArr[i] = new PlanDate(dateY, smalldate, day);
 		}
 		//시간 테이블 생성
 		displayDayTable();
