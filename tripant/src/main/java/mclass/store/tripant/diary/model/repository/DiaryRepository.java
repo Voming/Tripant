@@ -25,7 +25,7 @@ public interface DiaryRepository {
 	List<DiaryBoardEntity> selectViewsPopular(@Param("areaname") String areaname, @Param("maxNum") int maxNum, @Param("memEmail") String memEmail);
 	
 	// 나의 모든 글 조회
-	public List<DiaryBoardEntity> selectMyDiaryList(@Param("email") String diaryMemEmail, @Param("maxNum") int maxNum);
+	public List<DiaryBoardEntity> selectMyDiaryList(@Param("memEmail") String diaryMemEmail, @Param("maxNum") int maxNum);
 
 	// 여행기 글 등록
 	public int insertDiary(DiaryBoardEntity diary);

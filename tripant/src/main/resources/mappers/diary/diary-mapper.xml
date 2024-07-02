@@ -36,7 +36,8 @@
 		where rn between 1 and	#{maxNum}
 	</select>
 	<!--최신순 정렬 (diary_date_real 별칭사용) -->
-	<select id="selectLatest" resultType="DiaryBoardEntity"		parameterType="map">
+	<select id="selectLatest" resultType="DiaryBoardEntity"
+		parameterType="map">
 		select
 		<if test="memEmail != null and !memEmail.equals('') ">
 			(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE
@@ -146,27 +147,36 @@
 		#{maxNum}
 	</select>
 
-	<!-- 나의 글리스트 목록 뿌리기 -->
+	<!-- 나의 글 리스트 목록 뿌리기 -->
 	<select id="selectMyDiaryList" resultType="DiaryBoardEntity"
 		parameterType="map">
-		select * from
-		( select t1.*, rownum rn from
-		(SELECT
-		DIARY_ID, MEM_NICK, DIARY_TITLE,
-		to_char(DIARY_DATE,'yyyy-MM-dd')
-		DIARY_DATE,
-		DIARY_VIEWS, DIARY_THEME, PLAN_AREA_CODE,
-		DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
-		, DIARY_OPEN ,	DIARY_PLAN_ID , DIARY_MEM_EMAIL
-		, diary_date diary_date_real
-		FROM
-		VIEW_DIARY_MEMBER_PLAN
-		WHERE DIARY_MEM_EMAIL = #{email}
-		ORDER BY
-		diary_date_real DESC NULLS LAST
-		) t1
-		) where rn between #{maxNum}-3 and
-		#{maxNum}
+			SELECT
+			<if test="memEmail != null and !memEmail.equals('') ">
+			(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email =#{memEmail})as is_my_likes,
+			</if>		
+			(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) as diary_Image,
+			(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) as diary_Preview,		
+			t2.*
+
+			FROM
+    			(SELECT t1.*, rownum rn 
+     			FROM
+         			(SELECT DIARY_ID, 
+                 	MEM_NICK,
+                 	DIARY_TITLE,
+                 	TO_CHAR(DIARY_DATE, 'yyyy-MM-dd') AS DIARY_DATE,
+                 	DIARY_VIEWS,
+                 	DIARY_THEME, 
+                 	PLAN_AREA_CODE,
+                 	DIARY_OPEN, 
+                 	DIARY_PLAN_ID, 
+                 	DIARY_MEM_EMAIL,
+                 	DIARY_DATE AS diary_date_real
+         		 FROM VIEW_DIARY_MEMBER_PLAN
+          		WHERE DIARY_MEM_EMAIL = #{memEmail}
+          		ORDER BY diary_date_real DESC NULLS LAST) t1) t2
+				WHERE rn BETWEEN #{maxNum}-3 and #{maxNum}
+		
 	</select>
 
 	<!-- 글 작성 등록 시키기 -->
