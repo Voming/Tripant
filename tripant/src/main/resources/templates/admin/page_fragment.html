@@ -2,7 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 
 <div class= "wrap-list" th:fragment="wraplist">
-	<div class="ad-search" th:fragment="member">
+	<div class="ad-search">
 		<th:block th:if="${memMap!=null and memMap.searchMem != null}">
 		<input class="search" type="text" name="search" placeholder="회원검색"  th:value="${memMap.searchMem}"> 
 		</th:block>
@@ -63,6 +63,5 @@
 			</div>
 		</div>
 	</div>
-</div>
 
 </html>
