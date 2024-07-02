@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/diary")
 public class DiaryController {
+
+
 	@Autowired
 	private DiaryService diaryService;
 
