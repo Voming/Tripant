@@ -39,7 +39,7 @@
 }
 
 /* 박스 */
-#tab03 .selected-stay-box .wrap-box{
+#tab03 .selected-stay-box .wrap-box {
 	width: 100%;
 	height: 70px;
 	border-radius: 8px;
@@ -50,13 +50,14 @@
 	margin: 10px 0;
 	margin-right: 5px;
 	width: 100%;
-	
+	/* 줄어듦 방지 */
+	flex-shrink: 0;
 }
 
-#tab03 .wrap-box .selected-stay-number{
+#tab03 .wrap-box .selected-stay-number {
 	font-size: var(--font5);
 	color: white;
-	background-color: var(--color_day5_skyblue); 
+	background-color: var(--color_day5_skyblue);
 	border-radius: 50%;
 	display: block;
 	width: 22px;
@@ -68,12 +69,12 @@
 	margin: 0 0 0 10px;
 }
 
-#tab03 .selected-stay-box .wrap-box img {
-	width: 60px;
-	height: 60px;
+#tab03 .selected-stay-box .wrap-box .box-stay-img {
 	object-fit: cover;
 	margin-left: 10px;
 	border-radius: 8px;
+	/* 줄어듦 방지 */
+	flex-shrink: 0;
 }
 
 #tab03 .selected-stay-box .wrap-box .box-stay-txt {
@@ -83,13 +84,12 @@
 	display: flex;
 	line-height: 120%;
 	white-space: nowrap;
-    overflow: hidden;
+	overflow: hidden;
 }
 
-#tab03 .selected-stay-box .wrap-box .delete.btn{
+#tab03 .selected-stay-box .wrap-box .delete.btn {
 	height: 20px;
 	width: 20px;
 	margin-left: auto;
 	padding-right: 15px;
 }
-

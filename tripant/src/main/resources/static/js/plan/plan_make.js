@@ -126,7 +126,7 @@ function loadedHandler() {
 				//calendarPlan.spotArr
 				const jsonString = JSON.stringify(calendarPlan);
 				$.ajax({
-					url: contextPath + "planing",
+					url: contextPath + "plan/planning",
 					method: "post",
 					contentType:"application/json",
 					data: jsonString,

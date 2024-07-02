@@ -44,7 +44,6 @@
 	margin: 10px 0;
 	margin-right: 5px;
 	width: 100%;
-	
 }
 
 #tab02 .wrap-box .selected-spot-number{
@@ -63,11 +62,11 @@
 }
 
 #tab02 .selected-spot-box .wrap-box img {
-	width: 60px;
-	height: 60px;
 	object-fit: cover;
 	margin-left: 10px;
 	border-radius: 8px;
+	/* 줄어듦 방지 */
+	flex-shrink: 0;
 }
 
 .selected-spot-box .wrap-box .selected-spot-txt {

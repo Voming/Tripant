@@ -83,14 +83,16 @@
 	justify-content: flex-start;
 	margin: 5px 0;
 	margin-right: 5px;
+	/* 줄어듦 방지 */
+	flex-shrink: 0;
 }
 
 .spot-tab-content div .spot-img {
-	width: 70px;
-	height: 70px;
 	object-fit: cover;
 	margin-left: 10px;
 	border-radius: 8px;
+	/* 줄어듦 방지 */
+	flex-shrink: 0;
 }
 
 .spot-tab-content div .spot-txt {
