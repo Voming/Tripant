@@ -2,7 +2,8 @@
 /* 일정 */
 .main-wrapper .schedule-wrapper{
 	flex-direction:column;
-	width: 30%;
+	width: 70%;
+/* 	TODO width: 30%; */
 	padding: 0 0 0 30px;
 }
 .main-wrapper .schedule-wrapper .plan-info{

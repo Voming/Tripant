@@ -11,6 +11,7 @@
 /* 블록처리를 위한 클래스 */
 .main-wrapper .spot-block{
 	margin-bottom: 30px;
+	z-index:99;
 }
 /* tourlist part - grid */
 .main-wrapper .tourlist .spot{

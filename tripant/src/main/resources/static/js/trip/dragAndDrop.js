@@ -1,4 +1,6 @@
 //드래그 앤 드랍
+let after_i;
+let after_j;
 function dragAndDrop(){
 /**
  * [x] 엘리먼트의 .draggable, .container의 배열로 선택자를 지정합니다.
@@ -9,94 +11,122 @@ function dragAndDrop(){
  
  	//$자체에 함수? 선언 $() 안의 선택자를 가진 모든 요소들을 선택함
     //const $ = (select) => document.querySelectorAll(select);
-    const draggables = document.querySelectorAll('.draggable');
-    const containers = document.querySelectorAll('.container');
-
+    const draggables = document.querySelectorAll('.edit-tourlist .draggable');
+    const containers = document.querySelectorAll('.edit-tourlist .container');
+    
     draggables.forEach(el => {
-        el.addEventListener('dragstart', () => {
+        el.addEventListener('dragstart', (e) => {
 			console.log("dragstart");
+            //e.target.classList.add('dragging');
             el.classList.add('dragging');
         });
 
-        el.addEventListener('dragend', () => {
+        el.addEventListener('dragend', (e)=>  {
 			console.log("dragend");
-            el.classList.remove('dragging')
+			console.log(e.target);
+			//var el = e.target;
+		    el.classList.remove('dragging')
 			console.log("************el");
 			console.log(el);
-
-            console.log("--------- prev");
-            console.log($(el).prev().get(0));
+		
+		    console.log("--------- prev");
+		    console.log($(el).prev().get(0));
 			
 			var el_i =$(el).data("i");
 			var el_j =$(el).data("j");
+			
+			// 같은 컬럼
+			// 아래 -> 위 (맨앞)
+			// 위-> 아래 (맨뒤)
+			
+			// 다른 컬럼
+			// (맨앞)
+			// (맨뒤)
 			            
 			var prev_i =$(el).prev().data("i");
 			var prev_j =$(el).prev().data("j");
 			
-			var prevEmpty =isEmpty(prev_j); //드랍할 위치에 앞 블록이 있는지 확인
-			console.log("detailListEditMode===1");
-			console.log(detailListEditMode);
-			console.log("prevEmpty===1");
-			console.log(prevEmpty);
-			
-			//drop 위치가 0번째인가
-/*			if(prevEmpty){
-				//drop 위치가 같은 column인가
-				if(){
-					
-				}else{
-					
+			console.log("======");
+			console.log("el_i: "+ el_i);
+			console.log("el_j: "+ el_j);
+			console.log("prev_i: "+ prev_i);
+			console.log("prev_j: "+ prev_j);
+			console.log("after_i: "+ after_i);
+			console.log("after_j: "+ after_j);
+			console.log("======");
+						
+						
+			var temp_i = ((prev_i) ? prev_i : after_i); 
+			//drop 위치가 같은 column인가
+			if( temp_i== el_i){
+				var details = detailListEditMode[el_i];
+				var daylength = details.dayDetailInfoEntity.length;  
+				// 같은 컬럼
+				var temp = JSON.parse(JSON.stringify( detailListEditMode[el_i].dayDetailInfoEntity[el_j]));
+				
+				if(prev_j >= 0){
+					//index 크기 비교
+					if(el_j > prev_j){
+						for(var j=el_j-1; j > prev_j; j-- ){
+							details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+						}
+					}else{
+						for(var j=el_j; j < prev_j; j++ ){
+							details.dayDetailInfoEntity[j] = details.dayDetailInfoEntity[j+1];
+						}
+					}
+					// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+					detailListEditMode[el_i].dayDetailInfoEntity[prev_j+1] = temp;
+				} else {
+					//drop 위치가 0번째인가 
+					// 맨앞
+					//index 크기 비교 불필요
+					for(var j=el_j-1; j >= 0; j-- ){
+						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+					}
+					detailListEditMode[el_i].dayDetailInfoEntity[0] = temp;
 				}
 			}else{
-				//drop 위치가 같은 column인가
-				// prev 다음j 모든 객체를 +1 위치로 대입
-				details = detailListEditMode[prev_i];
-				var daylength = details.dayDetailInfoEntity.length
-				if(prev_i == el_i){
-					
-				}else{ //컬럼이 다를 때 
+				//컬럼이 다를 때
+				if(prev_j >= 0){
+					var details = detailListEditMode[prev_i];
+					var daylength = details.dayDetailInfoEntity.length
+					// prev 다음j 모든 객체를 +1 위치로 대입
 					for(var j=daylength-1; j > prev_j; j-- ){
 						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
 					}
 		
 					// 옮겨진 객체 el --> prev 다음j 위치에 대입 
-					detailListEditMode[prev_i].dayDetailInfoEntity[prev_j+1] = 
-					detailListEditMode[el_i].dayDetailInfoEntity[el_j];
+					detailListEditMode[temp_i].dayDetailInfoEntity[prev_j+1] = 
+						detailListEditMode[el_i].dayDetailInfoEntity[el_j];
 		
 					// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
-					details = detailListEditMode[el_i];
+					var details = detailListEditMode[el_i];
+					var daylength = details.dayDetailInfoEntity.length
+					for(var j=el_j+1; j < daylength; j++ ){
+						details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
+					}
+					details.dayDetailInfoEntity.pop();
+				} else {
+					var details = detailListEditMode[temp_i];
+					var daylength = details.dayDetailInfoEntity.length
+					//drop 위치가 0번째인가 
+					// 맨앞
+					for(var j=daylength-1; j >= 0; j-- ){
+						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+					}
+					// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+					detailListEditMode[temp_i].dayDetailInfoEntity[0] = 
+						detailListEditMode[el_i].dayDetailInfoEntity[el_j];
+					// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
+					var details = detailListEditMode[el_i];
 					var daylength = details.dayDetailInfoEntity.length
 					for(var j=el_j+1; j < daylength; j++ ){
 						details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
 					}
 					details.dayDetailInfoEntity.pop();
 				}
-			}*/
-			
-			//prev O, col !=
-			// prev 다음j 모든 객체를 +1 위치로 대입
-			details = detailListEditMode[prev_i];
-			var daylength = details.dayDetailInfoEntity.length
-			
-			for(var j=daylength-1; j > prev_j; j-- ){
-				details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
 			}
-
-			// 옮겨진 객체 el --> prev 다음j 위치에 대입 
-			detailListEditMode[prev_i].dayDetailInfoEntity[prev_j+1] = 
-				detailListEditMode[el_i].dayDetailInfoEntity[el_j];
-
-			// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
-			details = detailListEditMode[el_i];
-			var daylength = details.dayDetailInfoEntity.length
-			for(var j=el_j+1; j < daylength; j++ ){
-				details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
-			}
-			details.dayDetailInfoEntity.pop();
-			//
-			
-			
-			//
 			console.log("detailListEditMode===2");
 			console.log(detailListEditMode);
 			//편집된 내용 다시 display
@@ -107,8 +137,7 @@ function dragAndDrop(){
 			displayMarker();
 			//드래그 앤 드랍
 			dragAndDrop();
-			
-        });
+		});
     });
 
     containers.forEach(container => {
@@ -120,6 +149,9 @@ function dragAndDrop(){
             // container.appendChild(draggable)
 			console.log(draggable);
 			console.log(afterElement);
+			console.log("========");
+			after_i = $(afterElement).data("i");
+			after_j = $(afterElement).data("j");
             container.insertBefore(draggable, afterElement)
         })
     });
@@ -139,13 +171,120 @@ function dragAndDrop(){
 
         }, { offset: Number.NEGATIVE_INFINITY }).element
     };
-}
+    
+}// dragAndDrop()
 
-//undefined, null, 공란 체크 : 0번째로 드롭할 경우
-function isEmpty(str){
+
+function dragendHandler(e)  {
+	console.log("dragend");
+	console.log(e.target);
+	var el = e.target;
+    el.classList.remove('dragging')
+	console.log("************el");
+	console.log(el);
+
+    console.log("--------- prev");
+    console.log($(el).prev().get(0));
 	
-	if(typeof str == "undefined" || str == null || str == "")
-		return true;
-	else
-		return false ;
-}
+	var el_i =$(el).data("i");
+	var el_j =$(el).data("j");
+	
+	// 같은 컬럼
+	// 아래 -> 위 (맨앞)
+	// 위-> 아래 (맨뒤)
+	
+	// 다른 컬럼
+	// (맨앞)
+	// (맨뒤)
+	            
+	var prev_i =$(el).prev().data("i");
+	var prev_j =$(el).prev().data("j");
+	
+	console.log("======");
+	console.log("el_i: "+ el_i);
+	console.log("el_j: "+ el_j);
+	console.log("prev_i: "+ prev_i);
+	console.log("prev_j: "+ prev_j);
+	console.log("after_i: "+ after_i);
+	console.log("after_j: "+ after_j);
+	console.log("======");
+				
+	var details = detailListEditMode[el_i];
+	var daylength = details.dayDetailInfoEntity.length;
+				
+	var temp_i = ((prev_i) ? prev_i : after_i); 
+	//drop 위치가 같은 column인가
+	if( temp_i== el_i){  
+		// 같은 컬럼
+		var temp = JSON.parse(JSON.stringify( detailListEditMode[el_i].dayDetailInfoEntity[el_j]));
+		
+		if(prev_j){
+			//index 크기 비교
+			if(el_j > prev_j){
+				for(var j=el_j-1; j > prev_j; j-- ){
+					details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+				}
+			}else{
+				for(var j=el_j; j < prev_j; j++ ){
+					details.dayDetailInfoEntity[j] = details.dayDetailInfoEntity[j+1];
+				}
+			}
+			// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+			detailListEditMode[el_i].dayDetailInfoEntity[prev_j+1] = temp;
+		} else {
+			//drop 위치가 0번째인가 
+			// 맨앞
+			//index 크기 비교 불필요
+			for(var j=el_j-1; j >= 0; j-- ){
+				details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+			}
+			detailListEditMode[el_i].dayDetailInfoEntity[0] = temp;
+		}
+	}else{
+		//컬럼이 다를 때
+		if(prev_j){
+			// prev 다음j 모든 객체를 +1 위치로 대입
+			for(var j=daylength-1; j > prev_j; j-- ){
+				details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+			}
+
+			// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+			detailListEditMode[temp_i].dayDetailInfoEntity[prev_j+1] = 
+				detailListEditMode[el_i].dayDetailInfoEntity[el_j];
+
+			// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
+			details = detailListEditMode[el_i];
+			var daylength = details.dayDetailInfoEntity.length
+			for(var j=el_j+1; j < daylength; j++ ){
+				details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
+			}
+			details.dayDetailInfoEntity.pop();
+		} else {
+			//drop 위치가 0번째인가 
+			// 맨앞
+			for(var j=daylength-1; j >= 0; j-- ){
+				details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+			}
+			// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+			detailListEditMode[temp_i].dayDetailInfoEntity[0] = 
+				detailListEditMode[el_i].dayDetailInfoEntity[el_j];
+			// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
+			details = detailListEditMode[el_i];
+			var daylength = details.dayDetailInfoEntity.length
+			for(var j=el_j+1; j < daylength; j++ ){
+				details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
+			}
+			details.dayDetailInfoEntity.pop();
+		}
+	}
+	console.log("detailListEditMode===2");
+	console.log(detailListEditMode);
+	//편집된 내용 다시 display
+	displayEditModeAfterDragEnd();
+	//일차별 동그라미 색 변경
+	circleColorHandler();
+	//maker display - TODO
+	displayMarker();
+	//드래그 앤 드랍
+	dragAndDrop();
+}// dragendHandler()

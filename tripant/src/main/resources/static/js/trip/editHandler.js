@@ -17,6 +17,7 @@ function timeDoneBtnClickHandler(thisElement) {
 	var key = $(thisElement).parents('.spot-block.draggable').data('sessionkey');
 	
 	var timeVal = hours*3600 + mins*60;
+	// *** TODO  storage 안 씀 변경
 	var temp = JSON.parse(editStorage.getItem(key));
 	
 	detailListEditMode[idx].dayDetailInfoEntity[jdx].stayTime = timeVal;
@@ -77,7 +78,7 @@ function removeSpot(el){
 	  if (result.isConfirmed) {
 	    Swal.fire({
 	      title: "Deleted!",
-	      text: "Your file has been deleted.",
+	      text: "해당 장소를 일정에서 삭제하였습니다.",
 	      icon: "success"
 	    });
 	  }
@@ -146,15 +147,18 @@ function displayEditMode(){
 			 		<div class="spot-memo"><img class="img-memo" onclick="memoClickHandler(this);" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span  class="memo">${info.memo}</span></div>
 			 		
 			 		<!-- 이미지 X-->
-			 		
-			 		<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>`;
+			 		`;
 			
 			//이동시간 표시 및 자동차 아이콘 표시 
 			//마지막  상소일 경우 이동시간 hide
 			if( (j+1) < daylength){
-				htmlval+=`<div class="spot-move"> ${info.durationMin}분> </div>`;
+				htmlval+=`
+					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					<div class="spot-move"> ${info.durationMin}분> </div>`;
 			}else{
-				htmlval+=`<div class="spot-move hide"> ${info.durationMin}분> </div>`;
+				htmlval+=`
+					<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					<div class="spot-move">  </div>`;
 			}
 			
 			htmlval+=`<!-- x 버튼 -->
@@ -318,5 +322,5 @@ function displayEditModeAfterDragEnd(){
 	}//반복문 종료(i)
 	
 	//장소정보 넣기
-	$(".tourlist .wrap-detaillist.flex").html(htmlval);
+	$(".edit-tourlist .wrap-detaillist.flex").html(htmlval);
 }
