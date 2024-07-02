@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import mclass.store.tripant.diary.domain.DiaryBoardEntity;
+
 import mclass.store.tripant.diary.model.service.DiaryService;
 
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,7 +42,7 @@ public class MyDiaryController {
 		model.addAttribute("diaries", diaryService.selectMyDiaryList(principal.getName(), maxNum));
 		return "diary/my/board_more_fragment";
 	}
-
+	// 기본 글 버전
 	@GetMapping("/post")
 	public ModelAndView showDiaryForm(Principal pricipal) {
 		ModelAndView mv = new ModelAndView();
@@ -71,6 +71,36 @@ public class MyDiaryController {
 		// 저장된 DiaryPostEntity를 ResponseEntity로 반환
 		return ResponseEntity.ok().body(diaryForm);
 	}
+	// 폰트 구매 후 글 버전
+	@GetMapping("/post/font")
+	public ModelAndView showFontDiaryForm(Principal pricipal) {
+		ModelAndView mv = new ModelAndView();
+		List<WritePlanTitleEntity> plans = diaryService.getAllPlans(pricipal.getName());
+		mv.addObject("plans", plans);
+		mv.addObject("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
+		mv.setViewName("diary/my/my_write_font");
+		return mv;
+	}
+	// 글쓰기 처리(폰트 구매버전)
+		@PostMapping("/post/font")
+		@ResponseBody
+		public ResponseEntity<?> createFontDiary(@RequestBody DiaryBoardEntity diaryForm, Principal pricipal) {
+
+			diaryForm.setDiaryMemEmail(pricipal.getName());
+			diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
+
+			// 공개 여부 설정
+			diaryForm.setDiaryOpen(diaryForm.getDiaryOpen() != null ? "0" : "1"); // true면 공개 ("0"), false면 비공개 ("1")
+
+			// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
+			// 채워짐)
+			diaryForm = diaryService.save(diaryForm);
+
+			// 저장된 DiaryPostEntity를 ResponseEntity로 반환
+			return ResponseEntity.ok().body(diaryForm);
+		}
+	
+	
 	   // 여행글 삭제 처리
     @PostMapping("/diary/delete/{diaryId}")
     @ResponseBody

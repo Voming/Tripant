@@ -16,9 +16,12 @@ function moreBtnClickHandler(thisElement){
 			$(".board-list").append(wrap_content);
 		})
 	}
-	/*
-11:53:29.018 [33;1m- WARN[m [36m.h.AbstractHandlerExceptionResolver[m:Resolved 
-[org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: 
-Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; 
-For input string: "NaN"]
-*/
+	// 이미지 꺼내기
+var jImgElement = $(".ck.ck-editor__main").find("img");
+			$(jImgElement).each(function(idx, thisElement){
+				if(idx>0){ 
+					return false;// each 더 이상 안돌게 return false 함
+				}// img 태그 1개만 꺼내서 넣고 2번째 each 더 이상 안돌게 return true 함
+				var imgSrc = $(thisElement).prop("src");
+				diaryImage = imgSrc;
+			});

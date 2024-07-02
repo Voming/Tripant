@@ -62,7 +62,7 @@ function spotCkBtnClickHandler(thisElement) {
 					<div class="selected-spot-number">
 						<p>${markersSpot.length}</p>
 					</div>
-					<img class="selected-spot-img" src="${img}">
+					<img class="selected-spot-img" src="${img}" alt="장소이미지" style="width: 60px; height: 60px;">
 					<div class="selected-spot-txt">
 						<span>${title}</span>
 						<span>${addr}</span>

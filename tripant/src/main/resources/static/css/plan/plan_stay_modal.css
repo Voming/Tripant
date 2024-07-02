@@ -62,11 +62,11 @@
 }
 
 .stay-modal .stay-modal-popup .stay-tab-img {
-	width: 60px;
-	height: 60px;
 	object-fit: cover;
 	border-radius: 8px;
 	margin-bottom: 5px;
+	/* 줄어듦 방지 */
+	flex-shrink: 0;
 }
 
 .stay-modal .stay-modal-popup .stay-tab-name {

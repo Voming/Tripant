@@ -19,7 +19,7 @@ function restStayBox() {
 					<div class="selected-stay-number" style="background-color:var(--color_gray);">
 						<p>${i + 1}</p>
 					</div>
-					<img class="box-stay-img" src="/images/plan/stay_plus.png">
+					<img class="box-stay-img" src="/images/plan/stay_plus.png" alt="숙소이미지" style="width: 60px; height: 60px;">
 					<div class="box-stay-txt">
 						<span style="font-size:var(--font5); color:var(--color_gray);">${start} ~ ${end}</span>
 						<span class="box-title" style="font-size:var(--font6); color:pink;">숙소를 추가해주세요</span>
@@ -45,7 +45,7 @@ function restStaytab() {
 		modalVal = `
 		<div class="wrap-stay-tab">
 			<p class="stay-tab-day">${start}</p>
-			<img class="stay-tab-img" src="/images/plan/stay_plus.png" onclick="stayTabBtnClickHandler(this);">
+			<img class="stay-tab-img" src="/images/plan/stay_plus.png" onclick="stayTabBtnClickHandler(this);" alt="숙소이미지" style="width: 70px; height: 70px;">
 			<p class="stay-tab-name">호텔 선택</p>
 			<p class="stay-tab-id" value="" style ="display:none"></p> 
 			<p class="stay-tab-x" value="" style ="display:none"></p> 
@@ -100,7 +100,8 @@ function stayModalDoneBtnClickHandler() {
 
 	// 장소 설정 정보 부분 업데이트
 	$(".count-stay").text(markersStay.length);
-	$(".time-stay").text(markersStay.length + "일 / " + calendarPlan.dateArr.length - 1 + "일");
+	var dayTxt = markersStay.length + "일 / " + calendarPlan.dateArr.length - 1 + "일";
+	$(".time-stay").text(dayTxt);
 }
 
 // 저장되어있는 숙소 체크박스 다시 활성화

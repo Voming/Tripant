@@ -1,7 +1,6 @@
 package mclass.store.tripant.plan.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +9,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import jakarta.servlet.http.HttpSession;
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
+import mclass.store.tripant.plan.domain.CalendarPlanEntity;
 import mclass.store.tripant.plan.model.service.PlanService;
+import mclass.store.tripant.plan.model.service.PlanningAlgorithm;
 
 @Controller
 @RequestMapping(value = "plan")
@@ -29,6 +34,9 @@ public class PlanController {
 
 	@Autowired
 	private PlanService planService;
+	
+	@Autowired
+	private PlanningAlgorithm planningAlgorithm; 
 
 	@GetMapping("")
 	public String make(@SessionAttribute(name = "areaCode") Integer areaCode,
@@ -62,18 +70,11 @@ public class PlanController {
 		return "redirect:/plan";
 	}
 
-	@PostMapping("/planing")
-	 public String mapRequest(@RequestParam HashMap<String, Object> param){
-        System.out.println("param : " + param);
-        return param.toString();
-    }
-
 	// -------------------------------------spot-------------------------------------------
 
 	@PostMapping("/spot")
-	public String spot(Model model, @RequestParam Integer areaCode,
-			@RequestParam Integer spotType, @RequestParam Integer clickSpotNum)
-			throws IOException {
+	public String spot(Model model, @RequestParam Integer areaCode, @RequestParam Integer spotType,
+			@RequestParam Integer clickSpotNum) throws IOException {
 		// 20개씩 더 출력하기
 		int maxNum = (clickSpotNum + 1) * 10;
 		List<PlaceboxEntity> spotList = planService.selectTypeList(areaCode, spotType, maxNum);
@@ -112,6 +113,14 @@ public class PlanController {
 		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode, maxNum);
 		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
+	}
+
+	// -------------------------------------stay-------------------------------------------
+	@PostMapping("/planning")
+	@ResponseBody
+	public String planning(@RequestBody String jsonString) {
+		planningAlgorithm.planJsonParse(jsonString);
+		return "aaa";
 	}
 
 	// ---------------------------------numberFormatException-------------------------------------------

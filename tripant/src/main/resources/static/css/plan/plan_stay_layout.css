@@ -87,11 +87,11 @@
 }
 
 .stay-tab-content div .stay-img {
-	width: 70px;
-	height: 70px;
 	object-fit: cover;
 	margin-left: 10px;
 	border-radius: 8px;
+	/* 줄어듦 방지 */
+	flex-shrink: 0;
 }
 
 .stay-tab-content div .stay-txt {

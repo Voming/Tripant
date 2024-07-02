@@ -1,5 +1,5 @@
 // 일정만들기에서 전체적으로 사용할 클래스
-class CalendarDate {
+class PlanDate {
 	constructor(date, smalldate, day) {
 		this.date = date; //2024.06.06
 		this.smalldate = smalldate; //06/06
@@ -37,7 +37,7 @@ class CalendarPlan {
 }
 
 let calendarPlan = new CalendarPlan();
-calendarPlan.dateArr = new Array(CalendarDate);
+calendarPlan.dateArr = new Array(PlanDate);
 calendarPlan.spotArr = new Array(Spot);
 
 // 저장되기 전에만 방지 처리
@@ -126,7 +126,7 @@ function loadedHandler() {
 				//calendarPlan.spotArr
 				const jsonString = JSON.stringify(calendarPlan);
 				$.ajax({
-					url: contextPath + "planing",
+					url: contextPath + "plan/planning",
 					method: "post",
 					contentType:"application/json",
 					data: jsonString,
