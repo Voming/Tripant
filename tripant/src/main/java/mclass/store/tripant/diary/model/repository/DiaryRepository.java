@@ -28,9 +28,9 @@ public interface DiaryRepository {
 	public List<DiaryBoardEntity> selectMyDiaryList(@Param("email") String diaryMemEmail, @Param("maxNum") int maxNum);
 
 	// 여행기 글 등록
-	public void insertDiary(DiaryBoardEntity diary);
+	public int insertDiary(DiaryBoardEntity diary);
 	// 여행기 이미지URL 및 텍스트 저장
-	public void insertDiaryImage(DiaryBoardEntity diary);
+	public int insertDiaryImage(DiaryBoardEntity diary);
 	
 	List<WritePlanTitleEntity> selectPlanById(String memberEmail);
 	

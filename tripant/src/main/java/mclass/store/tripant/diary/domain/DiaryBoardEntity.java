@@ -31,7 +31,7 @@ public class DiaryBoardEntity {
 	private String diaryTheme;
 	private String memNick;
 	private Integer isMyLikes;
-	private List<String> diaryImage; // 이미지 
+	private String diaryImage; // 대표 이미지 -  
 	private String diaryPreview;	// 미리보기 글 
 	
 

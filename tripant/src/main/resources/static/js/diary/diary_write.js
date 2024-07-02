@@ -17,8 +17,8 @@ $(document).ready(function() {
 		var diaryTheme = $("select[name=diaryTheme]").val();
 		var diaryOpen = $("input[name=diaryOpen]:checked").val();
 		var diaryContent = editor1.getData(); // CKEditor 에서 내용 가져오기
-		var diary_image = [];  // image 들
-		var diary_preview = "";  // 300 자 이내
+		var diaryImage = "";  // image - 대표
+		var diaryPreview = "";  // 300 자 이내
 		
 		if (diaryPlanId === "") {
 			alert("일정을 선택해주세요.");
@@ -35,15 +35,33 @@ $(document).ready(function() {
 		} else {
 			var jImgElement = $(".ck.ck-editor__main").find("img");
 			$(jImgElement).each(function(idx, thisElement){
-				console.log(idx);
+				if(idx>0){ 
+					return false;// each 더 이상 안돌게 return false 함
+				}// img 태그 1개만 꺼내서 넣고 2번째 each 더 이상 안돌게 return true 함
 				var imgSrc = $(thisElement).prop("src");
-				console.log(imgSrc);
-				diary_image[idx] = imgSrc;
+				diaryImage = imgSrc;
 			});
-			var diary_preview = $(".ck.ck-editor__main").text();
-			console.log(diary_preview);
+			
+			var diaryPreview = "";
+			var diaryPreviewMaxByteSize = 0;
+			$(".ck.ck-editor__main span, .ck.ck-editor__main p, .ck.ck-editor__main td, .ck.ck-editor__main h1").each(function(idx, thisElement) {
+				var temp = $(thisElement).text();
+				if(temp.length > 0){
+					var tempByteSize = getUTF8ByteSize(temp);
+					if(diaryPreviewMaxByteSize + tempByteSize >= 1400) {
+						diaryPreview += cutStringToMaxBytes(temp , 1400 - diaryPreviewMaxByteSize);
+						return false;  // each 더 이상 안돌게 return false 함
+					} else {
+						diaryPreviewMaxByteSize += tempByteSize;
+						diaryPreview += temp; 
+						diaryPreview += "\n"; 
+					}
+				}
+			});
 		}
 		
+		console.log(diaryImage);
+		console.log(diaryPreview);
 		var url = "/my/post";
 		$.ajax({
 			type: "post",
@@ -57,15 +75,14 @@ $(document).ready(function() {
 				diaryTheme: diaryTheme,
 				diaryOpen: diaryOpen,
 				diaryContent: diaryContent,
-				diary_image: diary_image,
-				diary_preview: diary_preview
-				
+				diaryImage: diaryImage,
+				diaryPreview: diaryPreview
 			}),
 			success: function(response) {
 				//서버로 부터 응답을 받았을 때 처리 (예: 성공 메시지 출력 등)
 				console.log("글 등록 성공:", response);
 				alert("글이 성공적으로 등록되었습니다.");
-				location.href = "/diary";  // TODO contextPath
+				//ejkim TEMP location.href = "/diary";  // TODO contextPath
 			},
 			error: function(xhr, status, error) {
 				//오류 발생 시 처리
@@ -75,4 +92,70 @@ $(document).ready(function() {
 		});
 	});
 });
+
+// AL32UTF8 방식(UTF-8 인코딩) 에 따라 String bytes 크기 구하기
+function cutStringToMaxBytes(input, maxBytes) {
+	console.log(input);
+	console.log(maxBytes);
+	
+    let byteCount = 0;
+    let result = '';
+
+    for (let i = 0; i < input.length; i++) {
+        let char = input.charAt(i);
+        let charCode = char.charCodeAt(0);
+
+		if (charCode <= 0x007F) {
+            // 1바이트 (ASCII 문자)
+            byteCount += 1;
+        } else if (charCode <= 0x07FF) {
+            // 2바이트
+            byteCount += 2;
+        } else if (charCode <= 0xFFFF) {
+            // 3바이트
+            byteCount += 3;
+        } else {
+            // 4바이트 (서로게이트 쌍으로 처리)
+            byteCount += 4;
+            i++; // 서로게이트 쌍을 하나로 처리하므로 인덱스를 하나 더 증가
+        }
+        
+        // 최대 바이트를 초과하면 중단
+        if (byteCount > maxBytes) {
+            break;
+        }
+
+        result += char;
+    }
+    console.log("cutStringToMaxBytes : result");
+	console.log(result);
+    return result;
+}
+
+// AL32UTF8 방식(UTF-8 인코딩) 에 따라 String bytes 크기 구하기
+function getUTF8ByteSize(str) {
+    let byteSize = 0;
+
+    for (let i = 0; i < str.length; i++) {
+        let charCode = str.charCodeAt(i);
+
+        if (charCode <= 0x007F) {
+            // 1바이트 (ASCII 문자)
+            byteSize += 1;
+        } else if (charCode <= 0x07FF) {
+            // 2바이트
+            byteSize += 2;
+        } else if (charCode <= 0xFFFF) {
+            // 3바이트
+            byteSize += 3;
+        } else {
+            // 4바이트 (서로게이트 쌍으로 처리)
+            byteSize += 4;
+            i++; // 서로게이트 쌍을 하나로 처리하므로 인덱스를 하나 더 증가
+        }
+    }
+
+    return byteSize;
+}
+
 

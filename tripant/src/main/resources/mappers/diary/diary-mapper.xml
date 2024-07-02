@@ -11,50 +11,42 @@
 	<!--전체글 리스트 목록 뿌리기 -->
 	<!--최신순 정렬 (diary_date_real 별칭사용) -->
 	<!-- 여행기는 공개글이기 때문에 diaryOpen == '0 -->
-	<select id="selectDiaryList" resultType="DiaryBoardEntity"
-		parameterType="map">
-		select
-		<if test="memEmail != null and !memEmail.equals('') ">
-			(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE
-			t1.DIARY_ID =
-			t2.DIARY_ID and t1.mem_email =#{memEmail}) is_my_likes,
-		</if>
-		t2.*
-		from
-		( select t1.*, rownum rn from
-		(SELECT DIARY_ID, MEM_NICK,
-		DIARY_TITLE,
-		to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
-		DIARY_VIEWS,
-		DIARY_THEME, PLAN_AREA_CODE,
-		DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000)
-		DIARY_CONTENT
-		, DIARY_OPEN , DIARY_PLAN_ID , DIARY_MEM_EMAIL
-		,
-		diary_date diary_date_real
-		FROM VIEW_DIARY_MEMBER_PLAN
-		WHERE
-		DIARY_OPEN =
-		0
-		<if test="areaname != null and !areaname.equals('') ">
-			AND PLAN_AREA_CODE = (SELECT AREA_CODE FROM AREA WHERE
-			AREA_SHORT_NAME =
-			#{areaname})
-		</if>
-		ORDER BY diary_date_real DESC NULLS LAST
-		) t1
-		)t2 where rn between 1 and
-		#{maxNum}
+	<!-- ejkim 소진님~~~~ 줄좀 보기 좋게 맞춰보세요. 쉼표랑 들여쓰기랑.. 자동줄맞춤 말고.. 스스로 맞춰봐요 -->
+	<select id="selectDiaryList" resultType="DiaryBoardEntity"	parameterType="map">
+		SELECT
+			<if test="memEmail != null and !memEmail.equals('') ">
+			(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email =#{memEmail}) is_my_likes,
+			</if>
+			(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Image,
+			(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Preview,		
+			t2.*
+		FROM
+			( select t1.*, rownum rn 
+			  from
+			  (SELECT DIARY_ID, MEM_NICK, DIARY_TITLE,	to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE, 
+			  			DIARY_VIEWS, DIARY_THEME, PLAN_AREA_CODE, DIARY_OPEN , DIARY_PLAN_ID ,
+			  			DIARY_MEM_EMAIL,  diary_date diary_date_real
+				FROM VIEW_DIARY_MEMBER_PLAN
+				WHERE	DIARY_OPEN = 0
+					<if test="areaname != null and !areaname.equals('') ">
+					AND PLAN_AREA_CODE = (SELECT AREA_CODE FROM AREA WHERE	AREA_SHORT_NAME = #{areaname})
+					</if>
+				ORDER BY diary_date_real DESC NULLS LAST) t1
+			)t2 
+		where rn between 1 and	#{maxNum}
 	</select>
 	<!--최신순 정렬 (diary_date_real 별칭사용) -->
-	<select id="selectLatest" resultType="DiaryBoardEntity"
-		parameterType="map">
+	<select id="selectLatest" resultType="DiaryBoardEntity"		parameterType="map">
 		select
 		<if test="memEmail != null and !memEmail.equals('') ">
 			(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE
 			t1.DIARY_ID =
 			t2.DIARY_ID and t1.mem_email =#{memEmail}) is_my_likes,
 		</if>
+		<!--  ejkim  scalar join -->
+		<!--  ejkim  아래 동일하게 수정 -->
+		(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Image,
+		(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Preview,
 		t2.*
 		from
 		( select t1.*, rownum rn from
@@ -62,9 +54,8 @@
 		DIARY_TITLE,
 		to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
 		DIARY_VIEWS,
-		DIARY_THEME, PLAN_AREA_CODE,
-		DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000)
-		DIARY_CONTENT
+		DIARY_THEME, PLAN_AREA_CODE
+		<!--이제 이거 안읽음 DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000)		DIARY_CONTENT -->
 		, DIARY_OPEN , DIARY_PLAN_ID , DIARY_MEM_EMAIL
 		,
 		diary_date diary_date_real
@@ -99,8 +90,8 @@
 		to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
 		NVL(likes,0)
 		likes,
-		DIARY_VIEWS, DIARY_THEME, PLAN_AREA_CODE,
-		DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
+		DIARY_VIEWS, DIARY_THEME, PLAN_AREA_CODE
+		<!--이제 이거 안읽음 DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000)		DIARY_CONTENT -->
 		, DIARY_OPEN ,
 		DIARY_PLAN_ID , DIARY_MEM_EMAIL
 		, diary_date diary_date_real
@@ -136,12 +127,10 @@
 		DIARY_TITLE,
 		to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
 		DIARY_VIEWS,
-		DIARY_THEME, PLAN_AREA_CODE,
-		DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000)
-		DIARY_CONTENT
+		DIARY_THEME, PLAN_AREA_CODE
+		<!--이제 이거 안읽음 DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000)		DIARY_CONTENT -->
 		, DIARY_OPEN , DIARY_PLAN_ID , DIARY_MEM_EMAIL
-		,
-		diary_date diary_date_real
+		, diary_date diary_date_real
 		FROM VIEW_DIARY_MEMBER_PLAN
 		WHERE
 		DIARY_OPEN =
@@ -168,8 +157,7 @@
 		DIARY_DATE,
 		DIARY_VIEWS, DIARY_THEME, PLAN_AREA_CODE,
 		DBMS_LOB.SUBSTR(DIARY_CONTENT, 1000) DIARY_CONTENT
-		, DIARY_OPEN ,
-		DIARY_PLAN_ID , DIARY_MEM_EMAIL
+		, DIARY_OPEN ,	DIARY_PLAN_ID , DIARY_MEM_EMAIL
 		, diary_date diary_date_real
 		FROM
 		VIEW_DIARY_MEMBER_PLAN
@@ -192,7 +180,7 @@
 		DIARY_VIEWS,
 		DIARY_THEME)
 		VALUES
-		(diary_seq.NEXTVAL, #{diaryMemEmail},
+		(#{diaryId}, #{diaryMemEmail},
 		#{diaryPlanId}, #{diaryTitle},
 		<!-- <foreach collection="diaryContentArrList" item="content4000" separator="||" 
 			close=","> to_clob(#{content4000}) </foreach> NVL(#{diaryContent:CLOB}, EMPTY_CLOB()), 
@@ -202,18 +190,16 @@
 		#{diaryViews},
 		#{diaryTheme})
 
-		<selectKey keyProperty="diaryId" resultType="int"
-			order="AFTER">
-			SELECT diary_seq.CURRVAL FROM DUAL
+		<selectKey keyProperty="diaryId" resultType="int" order="BEFORE">
+			SELECT diary_seq.NEXTVAL diaryId FROM DUAL
 		</selectKey>
 
 	</insert>
 
 	<!-- 여행기 글 등록 시 이미지 url diary_save 테이블에 저장 시키기 -->
-	<insert id="insertDiaryImage" parameterType="map">
-		INSERT INTO
-		DIARY_SAVE(DIARY_ID,DIARY_MEM_EMAIL,DIARY_IMAGE,DIARY_PREVIEW)
-		VALUES (#{diaryId}, #{diaryMemEmail},#{diaryImage}, '더미더미')
+	<insert id="insertDiaryImage" parameterType="DiaryBoardEntity">
+		INSERT INTO DIARY_SAVE(DIARY_ID,DIARY_MEM_EMAIL,DIARY_IMAGE,DIARY_PREVIEW)
+				VALUES (#{diaryId}, #{diaryMemEmail}, #{diaryImage}, #{diaryPreview})
 	</insert>
 
 	<!-- 특정 ID의 PlAN 조회 -->

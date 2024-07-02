@@ -49,10 +49,10 @@ public class DiaryService {
 	
 
 	// 여행기 글 등록하기, 여행기 글 등록 시 이미지 url 및 text 저장 
+	@Transactional
 	public DiaryBoardEntity save(DiaryBoardEntity diary) {
-		diaryRepository.insertDiary(diary);
-		int diaryId = diary.getDiaryId();
-		diary.setDiaryId(diaryId);
+		int result = diaryRepository.insertDiary(diary);
+		System.out.println("aaa"+diary.getDiaryId());		
 		diaryRepository.insertDiaryImage(diary);
 		return diary;
 	}
