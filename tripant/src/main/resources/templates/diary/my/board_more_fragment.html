@@ -6,10 +6,13 @@
 	<th:block th:each="diary :  ${diaries}">
 		<div class="wrap-diary">
 			<div class="diary-img">
-				<img
-					th:src="@{/images/diary/diary_empty_iamge_size_200x200.png}"
-					alt="대표 이미지">
-			</div>
+					<th:block th:if="${diary.diaryImage != null}">
+						<img th:src="${diary.diaryImage}" alt="대표 이미지" style="width: 200px; height: 200px;">
+					</th:block>
+					<th:block th:if="${diary.diaryImage == null}">
+						<img th:src="@{/images/diary/diary_empty_image.png}" alt="대표 이미지" style="width: 200px; height: 200px;">
+					</th:block>
+					</div>
 			<div class="wrap-content">
 				<div class="diary-content">
 					<!-- a 태그 대신 연결하는 방법 -->
