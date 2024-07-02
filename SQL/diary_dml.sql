@@ -367,3 +367,60 @@ ADD CONSTRAINT FK_DIARY_TO_DIARY_REPORTS_1
 FOREIGN KEY (DIARY_ID)
 REFERENCES DIARY (DIARY_ID)
 ON DELETE SET NULL;
+
+
+select diary_content
+,SUBSTR(diary_content,2)
+from diary;
+
+
+--나의 여행기 목록
+SELECT
+			
+			(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email ='qothwls5@naver.com') is_my_likes,
+			
+			(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Image,
+			(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Preview,		
+			t2.*
+		FROM
+			( select t1.*, rownum rn 
+			  from
+			  (SELECT DIARY_ID, MEM_NICK, DIARY_TITLE,	to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE, 
+			  			DIARY_VIEWS, DIARY_THEME, PLAN_AREA_CODE, DIARY_OPEN , DIARY_PLAN_ID ,
+			  			DIARY_MEM_EMAIL,  diary_date diary_date_real
+				FROM VIEW_DIARY_MEMBER_PLAN
+				WHERE DIARY_MEM_EMAIL = 'qothwls5@naver.com'
+					
+				ORDER BY diary_date_real DESC NULLS LAST) t1
+			)t2 
+		where rn between 1 and 3;
+        
+-----   나의 글 보기(이미지)
+	SELECT
+			
+			(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email ='qothwls5@naver.com')as is_my_likes,
+			
+			(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) as diary_Image,
+			(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) as diary_Preview,		
+			t2.*
+
+FROM
+    (SELECT t1.*, rownum rn 
+     FROM
+         (SELECT DIARY_ID, 
+                 MEM_NICK,
+                 DIARY_TITLE,
+                 TO_CHAR(DIARY_DATE, 'yyyy-MM-dd') AS DIARY_DATE,
+                 DIARY_VIEWS,
+                 DIARY_THEME, 
+                 PLAN_AREA_CODE,
+                 DIARY_OPEN, 
+                 DIARY_PLAN_ID, 
+                 DIARY_MEM_EMAIL,
+                 DIARY_DATE AS diary_date_real
+          FROM VIEW_DIARY_MEMBER_PLAN
+          WHERE DIARY_MEM_EMAIL = 'qothwls5@naver.com'
+          ORDER BY diary_date_real DESC NULLS LAST) t1
+    ) t2
+WHERE rn BETWEEN 1 AND 2;
+		
