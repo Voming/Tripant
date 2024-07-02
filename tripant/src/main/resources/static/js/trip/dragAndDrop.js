@@ -32,13 +32,52 @@ function dragAndDrop(){
 			            
 			var prev_i =$(el).prev().data("i");
 			var prev_j =$(el).prev().data("j");
-			//for(var i=prev_i; i< detailListEditMode.length; i++ ){
+			
+			var prevEmpty =isEmpty(prev_j); //드랍할 위치에 앞 블록이 있는지 확인
 			console.log("detailListEditMode===1");
 			console.log(detailListEditMode);
+			console.log("prevEmpty===1");
+			console.log(prevEmpty);
 			
+			//drop 위치가 0번째인가
+/*			if(prevEmpty){
+				//drop 위치가 같은 column인가
+				if(){
+					
+				}else{
+					
+				}
+			}else{
+				//drop 위치가 같은 column인가
+				// prev 다음j 모든 객체를 +1 위치로 대입
+				details = detailListEditMode[prev_i];
+				var daylength = details.dayDetailInfoEntity.length
+				if(prev_i == el_i){
+					
+				}else{ //컬럼이 다를 때 
+					for(var j=daylength-1; j > prev_j; j-- ){
+						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+					}
+		
+					// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+					detailListEditMode[prev_i].dayDetailInfoEntity[prev_j+1] = 
+					detailListEditMode[el_i].dayDetailInfoEntity[el_j];
+		
+					// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
+					details = detailListEditMode[el_i];
+					var daylength = details.dayDetailInfoEntity.length
+					for(var j=el_j+1; j < daylength; j++ ){
+						details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
+					}
+					details.dayDetailInfoEntity.pop();
+				}
+			}*/
+			
+			//prev O, col !=
 			// prev 다음j 모든 객체를 +1 위치로 대입
 			details = detailListEditMode[prev_i];
 			var daylength = details.dayDetailInfoEntity.length
+			
 			for(var j=daylength-1; j > prev_j; j-- ){
 				details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
 			}
@@ -54,11 +93,13 @@ function dragAndDrop(){
 				details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
 			}
 			details.dayDetailInfoEntity.pop();
+			//
 			
+			
+			//
 			console.log("detailListEditMode===2");
 			console.log(detailListEditMode);
-			//일차별 동그라미 색 변경
-			//circleColorHandler();
+			//편집된 내용 다시 display
 			displayEditModeAfterDragEnd();
 			//일차별 동그라미 색 변경
 			circleColorHandler();
@@ -66,6 +107,7 @@ function dragAndDrop(){
 			displayMarker();
 			//드래그 앤 드랍
 			dragAndDrop();
+			
         });
     });
 
@@ -97,4 +139,13 @@ function dragAndDrop(){
 
         }, { offset: Number.NEGATIVE_INFINITY }).element
     };
+}
+
+//undefined, null, 공란 체크 : 0번째로 드롭할 경우
+function isEmpty(str){
+	
+	if(typeof str == "undefined" || str == null || str == "")
+		return true;
+	else
+		return false ;
 }
