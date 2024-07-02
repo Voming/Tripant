@@ -12,20 +12,20 @@ import mclass.store.tripant.trip.domain.TripShareEntity;
 public interface TripListRepository {
 	//나의 일정
 	//목록 
-	public List<TripListEntity>  selectTripList(String memEmail);
+	List<TripListEntity>  selectTripList(String memEmail);
 	
 	//삭제
-	public Integer delete(Integer planId);
+	Integer delete(Integer planId);
 	
 	//유저검색
-	public List<TripShareEntity> find(Map<String, Object> map);
+	List<TripShareEntity> find(Map<String, Object> map);
 	
 	//일정 공유 중인 맴버
-	public List<TripShareEntity> share(Map<String, Object> map);
+	List<TripShareEntity> share(Map<String, Object> map);
 	
 	//유저 추가
-	public Integer add(Map<String, Object> map);
+	Integer add(Map<String, Object> map);
 	
 	//유저 추가
-	public Integer remove(Map<String, Object> map);
+	Integer remove(Map<String, Object> map);
 }

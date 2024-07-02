@@ -12,8 +12,8 @@ import mclass.store.tripant.trip.domain.DayEntity;
 public interface TripRepository {
 	
 	//여행 일정 불러오기
-	public List<DayEntity> detailList(Integer planId);
+	List<DayEntity> detailList(Integer planId);
 	
 	//여행 기본(포괄)정보 불러오기
-	public Map<String,Object> planInfo(Integer planId); 
+	Map<String,Object> planInfo(Integer planId); 
 }

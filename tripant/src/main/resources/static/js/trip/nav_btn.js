@@ -15,9 +15,6 @@ function editHandler(){
 	//편집 저장
 	$(".save").click(saveHandler);
 	
-	//메모작성
-	//memoHandler();
-	
 	//전체일정 선택 후 편집창 띄우기
 	navHandler();
 	//취소 버튼 활성화
