@@ -18,7 +18,6 @@
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	width: 100%;
-	max-width: 800px;
 	min-height: 500px;  /*내용 세로 길이 고정  */
 	margin-bottom: 20px;
 }
@@ -96,7 +95,6 @@
 	justify-content: flex-end;
 	align-items: center;
 	width: 100%;
-	max-width: 800px;
 	padding: 10px 20px;
 	background: #fff;
 	border-radius: 10px;
