@@ -4,6 +4,7 @@ var spottype;
 var spotboxCount;
 //검색명
 var findArea;
+var spotId = "";
 
 //더보기
 function spotMoreBtnClickHandler(thisElement) {
@@ -21,12 +22,14 @@ function spotMoreBtnClickHandler(thisElement) {
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
-		$(".wrap-spotList").replaceWith(wrap_spot);
+		$(spotId).replaceWith(wrap_spot);
 
 		//더보기 계속 붙일건지
 		spotboxCount = $(".spot-box").length;
-		if (spotboxCount.length - (20 * clickspotnum) < 20) { //20개 보다 적게 나온경우
-			$(".spot_more_btn").remove();
+		console.log("clickspotnum" + clickspotnum);
+		console.log("spotboxCount" + spotboxCount);
+		if (spotboxCount  < 20 * (clickspotnum + 1)) { //20개 보다 적게 나온경우
+			$(".spot_more_btn").css('display', 'none');
 		}
 
 		// 미리 클릭해 둔 리스트 다시 활성화
@@ -56,7 +59,7 @@ $(document).ready(function() {
 		areacode = $(".plan-areacode").attr("value");
 		var placeTypeS = $(this).text();
 
-		var spotId = "";
+
 		if (placeTypeS == '관광지') {
 			spottype = 1;
 		} else if (placeTypeS == '문화시설') {
@@ -89,7 +92,7 @@ $(document).ready(function() {
 				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
 				$(".resultSpotCheck").html(htmlVal);
 			} else if (spotboxCount.length < 20) { //20개 보다 적게 나온경우
-				$(".spot_more_btn").remove();
+				$(".spot_more_btn").css('display', 'none');
 			}
 
 			// 미리 클릭해 둔 리스트 다시 활성화
@@ -177,7 +180,7 @@ function spotFindMoreBtnClickHandler(thisElement) {
 				class="spot_find_more_btn">더보기</button>`;
 			$(".resultSpotCheck").html(htmlVal);
 		} else { //20개 보다 적게 나온경우
-			$(".spot_find_more_btn").remove();
+			$(".spot_find_more_btn").css('display', 'none');
 		}
 
 		$(".spot_more_btn").remove(); //검색아닌 더보기 지우기
