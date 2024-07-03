@@ -121,6 +121,7 @@
 	column-gap: 15px;
 }
 </style>
+<link th:href="@{/css/store/aside.css}" rel="stylesheet" type="text/css">
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
@@ -157,14 +158,8 @@ function btnActiveHandler(){
 </script>
 <body>
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
+	<aside th:insert="~{store/aside :: store-aside}"></aside>
 	<div class="wrap-main">
-		<aside class="sidebar flex">
-			<div class="sidebar flex">
-				<div class="sidebar title"><a th:href="@{/store}">스토어</a></div>
-				<div class="sidebar item flex"><img th:src="@{/images/store/cart.png}" width="20px" height="20px"><a th:href="@{/store/cart}">장바구니</a></div>
-				<div class="sidebar item flex"><img th:src="@{/images/store/buy.png}" width="20px" height="20px"><a th:href="@{/store/buy}">구매내역</a></div>
-			</div>
-		</aside>
 		<div class="buy flex">
 			<div class="title">구매내역</div>
 			<div class="item-info flex">
