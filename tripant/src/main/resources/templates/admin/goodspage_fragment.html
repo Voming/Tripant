@@ -3,8 +3,13 @@
 
 <div class= "wrap-list" th:fragment="goodsPage">
 	<div class="ad-search">
+				<th:block th:if="${goodsMap!=null and goodsMap.itemCode != null}">
+				<input class="search" type="text"  name="search" placeholder="상품명 검색" th:value="${goodsMap.itemCode}">
+				</th:block>
+				<th:block th:if="${goodsMap==null or  goodsMap.itemCode ==null}">
 				<input class="search" type="text"  name="search" placeholder="상품명 검색">
-				<button type="button" class="btn-search"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
+				</th:block>
+				<button type="button" class="btn-search" onclick="searchBtnHandler(this);"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
 			</div>
 			<div class="ad-content">
 				<ul class="memberlist">

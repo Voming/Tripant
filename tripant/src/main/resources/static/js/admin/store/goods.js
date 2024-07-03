@@ -281,6 +281,10 @@ function itemDeleteHandler(){
 	});
 }
 
+var currentPage = 1;
+var totalPageCount = null;
+var startPageNum = null;
+var endPageNum = null;
 
 /* 페이징 이동 함수 */
 function goPageHandler() {

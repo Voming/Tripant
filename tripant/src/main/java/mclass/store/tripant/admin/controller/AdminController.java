@@ -118,8 +118,6 @@ public class AdminController {
 		Map<String, Object> map=new HashMap<>();
 		map.put("write",write);
 		map.put("pick",pick);
-		System.out.println("###########"+write);
-		System.out.println("###########"+pick);
 		return adminservice.keywordsearch(map);
 	}
 	
@@ -248,7 +246,7 @@ public class AdminController {
 	public String itemsearch(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String itemCode){
 		model.addAttribute("goodsMap", adminservice.itemList(num, pageNum, currentPageNum,itemCode));
-		return "admin/goods_fragment";
+		return "admin/goodspage_fragment";
 	}
 	
 	// 상품추가
