@@ -242,10 +242,10 @@
 		(SELECT T1.*, ROWNUM RN FROM
 		(select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur,
 		 item_sale, item_color, item_src from item 
-		<!-- <if test='searchMem != null and searchMem !=""'>
-        <bind name="keyword" value="'%'+searchMem+'%'" />
-		WHERE mem_nick like #{keyword}
-		</if> -->
+		 <if test='itemCode != null and itemCode !=""'>
+        <bind name="keyword" value="'%'+itemCode+'%'" />
+		WHERE item_code like #{keyword}
+		</if> 
 		 ORDER BY item_code asc ) T1 ) T2
 		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
@@ -258,6 +258,19 @@
 		</if>  -->
 	</select>
 	
+	<!--상품검색 -->
+	<select id="itemsearch" parameterType="string" resultType="AdminStoreEntity">
+	SELECT T2.* FROM
+		(SELECT T1.*, ROWNUM RN FROM
+		(select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur,
+		 item_sale, item_color, item_src from item 
+		 <if test='itemCode != null and itemCode !=""'>
+        <bind name="keyword" value="'%'+itemCode+'%'" />
+		WHERE item_code like #{keyword}
+		</if> 
+		 ORDER BY item_code asc ) T1 ) T2
+		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
+	</select>
 		<!-- 페이지처리
 		<select id="selectPage" resultType="BoardListDto" parameterType="map">
 		SELECT T2.* FROM
@@ -289,13 +302,5 @@
 	<delete id="itemDelete" parameterType="string">
 	delete from item where item_code=#{itemCode}
 	</delete>
-	<!--상품검색 -->
-	<select id="itemsearch" parameterType="string" resultType="AdminStoreEntity">
-	select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur, item_sale, item_color 
-	from item 
-	where item_code like '%${itemCode}%'
-	order by item_code asc
-	</select>
 	
-
 </mapper>

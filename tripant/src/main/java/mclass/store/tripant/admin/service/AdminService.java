@@ -313,7 +313,7 @@ Map<String, Object> result = null;
 	
 	// 상품 관리 페이지
 	// 상품목록
-	public Map<String, Object> itemList(int num, int pageNum, int currentPageNum){
+	public Map<String, Object> itemList(int num, int pageNum, int currentPageNum,String itemCode){
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
@@ -334,7 +334,7 @@ Map<String, Object> result = null;
 		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
 		
 		
-		List<AdminStoreEntity> goodsList = admindao.itemList(startRownum, endRownum);
+		List<AdminStoreEntity> goodsList = admindao.itemList(startRownum, endRownum,itemCode);
 		result = new HashMap<String, Object>();
 		result.put("goodsList", goodsList);
 		result.put("totalCount", totalCount);
@@ -342,10 +342,46 @@ Map<String, Object> result = null;
 		result.put("startPageNum", startPageNum);
 		result.put("endPageNum", endPageNum);
 		result.put("currentPage", currentPageNum);
-		//result.put("searchMem", searchMem);
+		result.put("itemCode", itemCode);
 		
 		return result;
 	}
+	
+	//상품검색
+	public Map<String, Object> itemListSearch(int num, int pageNum, int currentPageNum,String itemCode){
+		Map<String, Object> result = null;
+		
+		//총 게시글 개수
+		int totalCount = admindao.itemCount();
+		
+		int startRownum = num * (currentPageNum - 1) + 1;
+		int endRownum = num * currentPageNum;
+		
+//		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
+		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
+		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
+		
+		//시작페이지
+		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
+				: (currentPageNum / pageNum) * pageNum + 1;
+		
+		//끝페이지
+		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
+		
+		
+		List<AdminStoreEntity> goodsList = admindao.itemList(startRownum, endRownum,itemCode);
+		result = new HashMap<String, Object>();
+		result.put("goodsList", goodsList);
+		result.put("totalCount", totalCount);
+		result.put("totalPageCount", totalPageCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("currentPage", currentPageNum);
+		result.put("itemCode", itemCode);
+		
+		return result;
+	}
+	
 	// 상품정보
 	public Map<String, Object> itemInfo(String itemCode){
 		return admindao.itemInfo(itemCode);
@@ -362,11 +398,5 @@ Map<String, Object> result = null;
 	public int itemDelete(String itemCode) {
 		return admindao.itemDelete(itemCode);
 	}
-	//상품검색
-	public List<AdminStoreEntity> itemsearch(String itemCode){
-		return admindao.itemsearch(itemCode);
-	}
-	
-	//해당 호텔 리뷰 작성된거 불러오기
 	
 }

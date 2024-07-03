@@ -70,8 +70,11 @@ public interface AdminRepository {
 	
 	// 상품 관리 페이지
 	// 상품목록
-	public List<AdminStoreEntity> itemList(int startRownum, int endRownum);
+	public List<AdminStoreEntity> itemList(int startRownum, int endRownum,String itemCode);
 	public int itemCount();
+	//상품검색
+	public List<AdminStoreEntity> itemsearch(int startRownum, int endRownum,String itemCode);
+		
 	// 상품정보
 	public Map<String, Object> itemInfo(String itemCode);
 	// 상품추가
@@ -80,7 +83,6 @@ public interface AdminRepository {
 	public int itemUpdate(Map<String, Object> map);
 	//상품삭제
 	public int  itemDelete(String itemCode);
-	//상품검색
-	public List<AdminStoreEntity> itemsearch(String itemCode);
+	
 	
 }

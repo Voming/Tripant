@@ -235,10 +235,20 @@ public class AdminController {
 	
 	// 상품관리 페이지
 	@GetMapping("/goods")
-	public String goods(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum)
+	public String goods(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String itemCode)
 			throws MethodArgumentTypeMismatchException  {
-		model.addAttribute("goodsMap", adminservice.itemList(num, pageNum, currentPageNum));
+		model.addAttribute("goodsMap", adminservice.itemList(num, pageNum, currentPageNum,itemCode));
 		return "admin/admin_goods";
+	}
+	
+	//상품검색
+	//ajax + fragment
+	@PostMapping("/goods/search")
+	public String itemsearch(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String itemCode){
+		model.addAttribute("goodsMap", adminservice.itemList(num, pageNum, currentPageNum,itemCode));
+		return "admin/goods_fragment";
 	}
 	
 	// 상품추가
@@ -293,15 +303,6 @@ public class AdminController {
 		return result;
 	}
 	
-	//상품검색
-	//ajax + fragment
-	@PostMapping("/goods/search")
-	public String itemsearch(Model model, String itemCode){
-		List<AdminStoreEntity> goodsList=adminservice.itemsearch(itemCode);
-		model.addAttribute("goodsMap", goodsList);
-		return "admin/goods_fragment";
-	}
-	
 	@GetMapping("/mchart")
 	public String mchart() {
 		return "admin/admin_mchart";
@@ -310,12 +311,6 @@ public class AdminController {
 	@GetMapping("/bchart")
 	public String bchart() {
 		return "admin/admin_bchart";
-	}
-	
-	@GetMapping()
-	public String page(Model model) {
-	
-		return "";
 	}
 	
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
