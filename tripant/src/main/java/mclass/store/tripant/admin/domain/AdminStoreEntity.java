@@ -9,6 +9,8 @@ import lombok.Data;
 public class AdminStoreEntity {
 
 	//상품관리
+		private String buyId;
+		private String buyDate;
 		private String itemCode;
 		private String itemName;
 		private String itemPriceChar;

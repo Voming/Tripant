@@ -74,14 +74,14 @@ function memListHandler(searchList){
 		var map = searchList[idx];
 		htmlVal+=`
 				<ul class="col list" th:each="map : ${list}">
-							<li>${map.BUY_ID}</li>
-							<li>${map.MEM_NICK}</li>
-							<li>${map.MEM_EMAIL}</li>
-							<li>${map.ITEM_NAME}</li>
-							<li>${map.BUY_DATE}</li>
+							<li>${map.buyId}</li>
+							<li>${map.memNick}</li>
+							<li>${map.memEmail}</li>
+							<li>${map.itemName}</li>
+							<li>${map.buyDate}</li>
 							<li>
 								<button type="button" class="btn cancel">결제취소</button>
-								<input type="hidden" value="${map.ITEM_CODE}">
+								<input type="hidden" value="${map.itemCode}">
 							</li>
 						</ul>
 			`;
