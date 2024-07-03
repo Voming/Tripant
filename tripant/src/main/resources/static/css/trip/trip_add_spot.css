@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* 장소추가 스타일 설정 */
 .main-wrapper .schedule-wrapper .spot-basket{
-	width:400px;
+	width:300px;
 	flex-direction : column;
 }
 .main-wrapper .schedule-wrapper .spot-basket > div:first-child{

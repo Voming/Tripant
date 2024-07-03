@@ -49,6 +49,11 @@ function cancelHandler(){
 	$(this).parents().find('.tourlist').removeClass('hide');
 	$(this).parents().find('.edit-tourlist').addClass('hide');
 	$(this).parents().find('.spot-basket').addClass('hide');
+	
+	//spot-check
+	if($('#tab02').hasClass('hide')===false){
+		$('#tab02').addClass('hide');
+	}
 }
 //저장
 function saveHandler(){
@@ -63,7 +68,14 @@ function saveHandler(){
 	$(this).parents().find('.tourlist').removeClass('hide');
 	$(this).parents().find('.edit-tourlist').addClass('hide');
 	$(this).parents().find('.spot-basket').addClass('hide');
+	
+	//spot-check
+	if($('#tab02').hasClass('hide')===false){
+		$('#tab02').addClass('hide');
+	}
 	//DB이동 ajax
+	
+	
 }
 //좌측 탭
 function navHandler(){
