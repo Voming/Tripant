@@ -13,8 +13,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						게시판</a></li>
 				<li class="diary-aside-myboard"><a th:href="@{/my/diary}" sec:authorize="isAuthenticated()"  class="myborad">나의
 						여행기</a></li>
+						<!-- 기본 글 작성 -->
 				<li class="diary-aside-write"><a th:href="@{/my/post}" class="write">여행기
 						작성하기</a></li>
+						<!-- 폰트 구매 후 글 작성 -->
+				<!-- <li class="diary-aside-write"><a th:href="@{/my/post/font}" class="write">여행기
+						작성하기</a></li> -->
 			</ul>
 		</div>
 	</div>

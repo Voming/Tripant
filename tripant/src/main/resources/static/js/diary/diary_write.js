@@ -82,7 +82,8 @@ $(document).ready(function() {
 				//서버로 부터 응답을 받았을 때 처리 (예: 성공 메시지 출력 등)
 				console.log("글 등록 성공:", response);
 				alert("글이 성공적으로 등록되었습니다.");
-				//ejkim TEMP location.href = "/diary";  // TODO contextPath
+				// 글 등록 성공시 이동
+				location.href = contextPath + "diary"; 
 			},
 			error: function(xhr, status, error) {
 				//오류 발생 시 처리
