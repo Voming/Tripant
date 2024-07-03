@@ -41,8 +41,7 @@
 			<if test="memEmail != null and !memEmail.equals('') ">
 				(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 	WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email =#{memEmail}) is_my_likes,
 			</if>
-		<!--  ejkim  scalar join -->
-		<!--  ejkim  아래 동일하게 수정 -->
+		
 			(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Image,
 			(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Preview,
 			t2.*
@@ -68,7 +67,7 @@
 			<if test="memEmail != null and !memEmail.equals('') ">
 				(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 	WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email =#{memEmail}) is_my_likes,
 			</if>
-		<!--  ejkim  scalar join -->
+	
 				(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Image,
 				(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Preview,
 				t2.*
@@ -81,7 +80,7 @@
 						DIARY_OPEN , DIARY_PLAN_ID , DIARY_MEM_EMAIL,
 						diary_date diary_date_real
 					FROM VIEW_DIARY_MEMBER_PLAN
-					LEFT OUTER JOIN (select count (mem_email) likes,diary_id from diary_likesgroup by diary_id) USING (diary_id)
+					LEFT OUTER JOIN (select count (mem_email) likes,diary_id from diary_likes group by diary_id) USING (diary_id)
 					WHERE DIARY_OPEN = 0
 		<if test="areaname != null and !areaname.equals('') ">
 			AND PLAN_AREA_CODE = (SELECT AREA_CODE FROM AREA WHERE AREA_SHORT_NAME = #{areaname})
@@ -96,13 +95,12 @@
 			<if test="memEmail != null and !memEmail.equals('') ">
 				(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 	WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email =#{memEmail}) is_my_likes,
 			</if>
-		<!--  ejkim  scalar join -->
+		
 				(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Image,
 				(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Preview,
 				t2.*
 			FROM
-				( SELECT t1.*, rownum rn 
-					FROM
+				( SELECT t1.*, rownum rn FROM
 					(SELECT DIARY_ID, MEM_NICK,DIARY_TITLE,
 						to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
 						DIARY_VIEWS,DIARY_THEME, PLAN_AREA_CODE,

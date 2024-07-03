@@ -133,8 +133,8 @@ select {
 .diary-preview {
 	font-size: var(--font5);
 	margin: 8px;
-    width: 610px;
-    height: 110px;
+	width: 610px;
+	height: 110px;
 }
 
 /*글 가운데로 넓이 줘서 고정시키기  */
@@ -184,9 +184,10 @@ select {
 .diary-diaryViews {
 	margin: 10px;
 }
-.diary-like{
+
+.diary-like {
 	/* 하트 가운데 정렬하기 */
-	display:flex;
+	display: flex;
 	justify-content: space-around;
 	align-items: center;
 }
