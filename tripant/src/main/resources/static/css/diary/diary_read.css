@@ -106,11 +106,13 @@
 /* 조회수  */
 .diary-view {
 	display: flex;
+	gap: 10px;/* 간격 여백  */
 }
 
 .diary-like {
 	display: flex;
 	align-items: center;
+	gap: 10px; /* 간격 여백  */
 }
 
 .like-icon {
