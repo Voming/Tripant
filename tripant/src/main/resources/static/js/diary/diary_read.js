@@ -66,7 +66,7 @@ function reportHandler() {
 	});
 }
 // 삭제하기 
-//2024-06-28 현재 안되고 있음
+
 function deleteHandler() {
 	// 현재 요소의 data 속석에서 'delete' 값을 가져옴
 	var diaryId = $(this).data('diary-id');
