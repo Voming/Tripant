@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
@@ -18,14 +17,12 @@ public interface AdminRepository {
 	
 	//회원관리
 	//회원정보 한페이지에 나열
-//	public List<AdminMemEntity> selectMemList();
 	public List<AdminMemEntity> selectMemList(int startRownum, int endRownum, String searchMem);
+	//회원검색
+	public List<AdminMemEntity> selectMemListSearch(int startRownum, int endRownum, String searchMem);
 	
 	//회원 등급 변경 활성화 여부 
 	public Integer adminMemInfo(Map<String, Object> map);
-	
-	//회원검색
-	public List<AdminMemEntity> selectMemListSearch(int startRownum, int endRownum, String searchMem);
 	
 	//개수
 	//public int page(String memNick);
@@ -46,8 +43,9 @@ public interface AdminRepository {
 	
 	//신고게시글 관리
 	//신고게시글
-	public List<AdminBoardEntity> complainList();
-	
+	public List<AdminBoardEntity> complainList(int startRownum, int endRownum,String searchMem);
+	public int boardCount();
+	public int boardCounttSearch(String searchMem);
 	//신고게시글 검색
 	public List<AdminBoardEntity> complainsearch(String memNick);
 	

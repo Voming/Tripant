@@ -46,6 +46,7 @@ select diary_id, diary_title,to_char(diary_date,'yyyy-MM-dd') diary_date,reports
 from DIARY a
 left join (select count (mem_email) reports , diary_id from diary_reports group by diary_id) b on a.diary_id= b.diary_id))
 join member on diary_mem_email=mem_email
+where reports is not null
 ;
 
 -----------신고수 초기화
@@ -112,14 +113,13 @@ select * from member;
 
 commit;
 
-	SELECT T2.*, T3.MEM_QUIT_DATE
+	SELECT T2.*, (select T3.MEM_QUIT_DATE from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
 		FROM (SELECT T1.*, ROWNUM RN FROM
 			(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, 	
                     to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED
              FROM member a 
 			 ORDER BY MEM_JOIN_DATE DESC ) T1 ) T2 
-		LEFT OUTER JOIN quit_member T3 ON T3.MEM_EMAIL = T2.MEM_EMAIL
-		WHERE RN BETWEEN 1 and 5
+		WHERE RN BETWEEN 6 and 10
         ;
         select * from quit_member;
 select * from user_tables;

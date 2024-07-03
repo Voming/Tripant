@@ -44,40 +44,10 @@ public class AdminController {
 	@Value("${pay.storeId}")
 	private String storeId;
 	
-//	@GetMapping("/member")
-//	public ModelAndView Member(ModelAndView mv, String currentPage) {
-//		
-//		//정보를 받아올 때 어떤것을 참조해서 받아올지 --> 매개변수(java에서의 getParameter 역할을 대신해줌)
-//		
-////		한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
-//		int memNum = 1;
-//		
-////		화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
-//		int memPageNum = 2;
-//		
-////		누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
-//		int currentPageNum = 1;  // 기본1
-//		
-//		if(currentPage != null && !currentPage.equals("") ) {
-//			try {
-//				currentPageNum = Integer.parseInt(currentPage);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		//model.addAttribute("memList",adminservice.selectMemList());
-//		mv.addObject("memList",adminservice.selectMemList( memNum, memPageNum, currentPageNum));
-//		mv.setViewName("admin/admin_member");
-//		
-//		return mv;
-//		//return "admin/admin_member";
-//	}
-	
-	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
+	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) 
 	private int memNum = 9;
 	
-	//화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
+	//화면 하단에 나타날 페이지수
 	private int memPageNum = 5;
 	
 	//누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
@@ -86,9 +56,8 @@ public class AdminController {
 	@GetMapping("/member")
 	public String member(Model model
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-			, @RequestParam(required = false )String searchMem
-			) 
-			throws MethodArgumentTypeMismatchException {
+			, @RequestParam(required = false )String searchMem) throws MethodArgumentTypeMismatchException 
+	{
 		model.addAttribute("memMap",adminservice.selectMemList( memNum, memPageNum, currentPageNum, searchMem));
 		return "admin/admin_member";
 	}
@@ -111,9 +80,6 @@ public class AdminController {
 	@ResponseBody
 	public Integer MemberInfo(Integer selectRole, String memEmail,Integer selectActive) {
 		
-		System.out.println("###########"+selectRole);
-		System.out.println("###########"+selectActive);
-		System.out.println("###########"+memEmail);
 		String memRole = "";
 		switch(selectRole) {
 		case 1: memRole = "ROLE_SLEEP"; 
@@ -175,8 +141,10 @@ public class AdminController {
 	
 	//신고게시글
 	@GetMapping("/complain")
-	public String complain(Model model) {
-		model.addAttribute("complainBoard",adminservice.complainList());
+	public String complain(Model model
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	 , @RequestParam(required = false )String searchMem )throws MethodArgumentTypeMismatchException {
+		model.addAttribute("complainMap",adminservice.complainList(memNum, memPageNum, currentPageNum,searchMem));
 		
 		return "admin/admin_complain";
 	}
@@ -191,10 +159,12 @@ public class AdminController {
 	
 	//신고게시글 검색
 	@PostMapping("/complain/search")
-	@ResponseBody
-	public List<AdminBoardEntity> complainsearch(Model model, String memNick){
-		List<AdminBoardEntity> boardList=adminservice.complainsearch(memNick);
-		return boardList;
+	//@ResponseBody
+	public String complainsearch(Model model
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	 , @RequestParam(required = false )String searchMem ){
+		model.addAttribute("complainMap",adminservice.complainsearch(memNum, memPageNum, currentPageNum,searchMem));
+		return "admin/complain_fragment";
 	}
 	
 	//신고수 정렬

@@ -6,7 +6,7 @@ function loadedHandler(){
 	//초기화버튼
 	$('.btn-reset').on('click',cickSetHandler);  
 	//검색
-	$('.btn-search').on("click",searchHandler);
+	//$('.btn-search').on("click",searchHandler);
 	//신고수 정렬
 	$('.btn-reports').on("click",clickReportHandler);
 	
@@ -43,17 +43,41 @@ function cickSetHandler(){
 			}
 	});
 } 
+var currentPage = 1;
+var totalPageCount = null;
+var startPageNum = null;
+var endPageNum = null;
+
+/* 페이징 이동 함수 */
+function goPageHandler() {
+			var currentpage = $(this).data("targetpage");
+			$.ajax({
+				url:"/admin/complain/search"
+				, method : "get"
+				, data : {
+						seachMem : seachMem,
+						currentpage : currentpage}
+				, dataType : "json"
+				, error : ajaxErrorHandler
+				, success : function(result){
+					if(result.seachMem){
+						$("[name=search]").val(result.seachMem);
+					}
+					memListHandler(result);
+				}
+			});
+	}
 
 //검색
-function searchHandler(){
+function searchBtnHandler(thisElement){
+	var targetPage = $(thisElement).data('targetpage');
 	var memNick = $("[name=search]").val().trim();
-
 	$.ajax({
 		url:"/admin/complain/search",
 		 method:"post",
-		 data: {memNick:memNick},
+		 data: {memNick:memNick,page: targetPage},
 		 success : function(complainList) {
-			 $('#list').html( memListHandler(complainList));
+			 $('.wrap-list').replaceWith(complainList);
 				},
 	 error : function(request, status, error) {
 				alert("code: " + request.status + "\n"

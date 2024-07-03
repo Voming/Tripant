@@ -30,39 +30,8 @@
 				<button type="submit" class="btn logout">로그아웃</button>
 			</div>
 		</form>
-			<div class="ad-search">
-				<input class="search" type="text" name="search" placeholder="신고글 검색">
-				<button type="button" class="btn-search"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
-			</div>
-			<div class="ad-content">
-				<ul class="boardlist">
-					<li>	
-						<ul class="col">
-							<li>선택</li>
-							<li>번호</li>
-							<li>제목</li>
-							<li>닉네임</li>
-							<li>날짜</li>
-							<li>신고수<button type="button" class="btn-reports">▼</button></li>
-						</ul>
-					</li>
-					<li id="list">
-						<th:block th:each="complainBoard:${complainBoard}" th:data-reports="${complainBoard.reports}">
-						<ul class="col list">
-							<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" ></li>
-							<li th:text="${complainBoard.diaryId}"></li>
-							<li th:text="${complainBoard.diaryTitle}"></li>
-							<li th:text="${complainBoard.memNick}"></li>
-							<li th:text="${complainBoard.diaryDate}"></li>
-							<li th:text="${complainBoard.reports}"></li>
-							<li></li>
-						</ul>
-						</th:block>
-					</li>
-				</ul>
-				
-			</div>
-			<div><button type="button" class="btn-reset" disabled>초기화</button></div>
+			
+				<div class="wrap-list"  th:replace="~{admin/complain_fragment :: complainlist}"></div>
 	</div>	
 </div>
 
