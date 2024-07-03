@@ -70,7 +70,8 @@ public interface AdminRepository {
 	
 	// 상품 관리 페이지
 	// 상품목록
-	public List<Map<String, Object>> itemList();
+	public List<AdminStoreEntity> itemList(int startRownum, int endRownum);
+	public int itemCount();
 	// 상품정보
 	public Map<String, Object> itemInfo(String itemCode);
 	// 상품추가

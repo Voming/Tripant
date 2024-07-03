@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
 <li id="list" th:fragment="goodsList" >
-	<ul  th:each="item : ${goodsList}"  class="col list" th:data-item-code="${item.itemCode}">
+	<ul th:each="item : ${goodsMap.goodsList}"  class="col list" th:data-item-code="${item.itemCode}">
 		<li th:text="${item.itemCode}" ></li>
 		<li th:text="${item.itemName}"></li>
 		<li th:text="${item.itemPriceChar}"></li>

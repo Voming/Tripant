@@ -104,7 +104,7 @@ public class AdminController {
 	//게시글
 	@GetMapping("/board")
 	public String board(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-			, @RequestParam(required = false )String searchMem) {
+			, @RequestParam(required = false )String searchMem) throws MethodArgumentTypeMismatchException {
 		model.addAttribute("memBoardMap",adminservice.boardList( num, pageNum, currentPageNum, searchMem));
 		
 		return "admin/admin_board";
@@ -235,10 +235,10 @@ public class AdminController {
 	
 	// 상품관리 페이지
 	@GetMapping("/goods")
-	public ModelAndView goods(ModelAndView mv) {
-		mv.addObject("goodsList", adminservice.itemList());
-		mv.setViewName("admin/admin_goods");
-		return mv;
+	public String goods(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum)
+			throws MethodArgumentTypeMismatchException  {
+		model.addAttribute("goodsMap", adminservice.itemList(num, pageNum, currentPageNum));
+		return "admin/admin_goods";
 	}
 	
 	// 상품추가
@@ -297,8 +297,8 @@ public class AdminController {
 	//ajax + fragment
 	@PostMapping("/goods/search")
 	public String itemsearch(Model model, String itemCode){
-		List<AdminStoreEntity> itemsearchList=adminservice.itemsearch(itemCode);
-		model.addAttribute("goodsList", itemsearchList);
+		List<AdminStoreEntity> goodsList=adminservice.itemsearch(itemCode);
+		model.addAttribute("goodsMap", goodsList);
 		return "admin/goods_fragment";
 	}
 	

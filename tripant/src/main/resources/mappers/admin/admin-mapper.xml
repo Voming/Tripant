@@ -83,22 +83,6 @@
 	join member on diary_mem_email=mem_email)
 	</select>
 	
-		<!-- 페이지처리
-		<select id="selectPage" resultType="BoardListDto" parameterType="map">
-		SELECT T2.* FROM
-		(SELECT T1.*, ROWNUM RN FROM
-		(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED, b.MEM_QUIT_DATE
-            from member a
-            left join quit_member b
-            on a.MEM_EMAIL=b.MEM_EMAIL 
-		<if test='searchMem != null and searchMem !=""'>
-        <bind name="keyword" value="'%'+searchMem+'%'" />
-		WHERE mem_nick like #{keyword}
-		</if>
-		 ORDER BY MEM_JOIN_DATE DESC) T1 ) T2
-		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
-	</select> -->
-	
 	<!--게시글 조건검색(select)  -->
 	<select id="keywordsearch"  parameterType="map" resultType="AdminBoardEntity">
 	select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
@@ -253,9 +237,42 @@
 	
 	<!-- 상품 관리 페이지 -->
 	<!-- 상품목록 -->
-	<select id="itemList" resultType="AdminStoreEntity">
-	select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur, item_sale, item_color, item_src from item order by item_code asc
+	<select id="itemList" resultType="AdminStoreEntity" parameterType="map">
+	SELECT T2.* FROM
+		(SELECT T1.*, ROWNUM RN FROM
+		(select item_code, item_name, item_price, to_char(item_price, '999,999') as item_price_char, item_dur,
+		 item_sale, item_color, item_src from item 
+		<!-- <if test='searchMem != null and searchMem !=""'>
+        <bind name="keyword" value="'%'+searchMem+'%'" />
+		WHERE mem_nick like #{keyword}
+		</if> -->
+		 ORDER BY item_code asc ) T1 ) T2
+		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
+	<!-- 총 상품 수 -->
+	<select id="itemCount" resultType="_int" parameterType="map">
+		select count(*) from item
+		<!-- <if test='searchMem != null and searchMem !=""'>
+			<bind name="keyword" value="'%'+searchMem+'%'" />
+			where mem_nick like #{keyword}
+		</if>  -->
+	</select>
+	
+		<!-- 페이지처리
+		<select id="selectPage" resultType="BoardListDto" parameterType="map">
+		SELECT T2.* FROM
+		(SELECT T1.*, ROWNUM RN FROM
+		(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED, b.MEM_QUIT_DATE
+            from member a
+            left join quit_member b
+            on a.MEM_EMAIL=b.MEM_EMAIL 
+		<if test='searchMem != null and searchMem !=""'>
+        <bind name="keyword" value="'%'+searchMem+'%'" />
+		WHERE mem_nick like #{keyword}
+		</if>
+		 ORDER BY MEM_JOIN_DATE DESC) T1 ) T2
+		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
+	</select> -->
 	<!-- 상품정보 -->
 	<select id="itemInfo" resultType="map" parameterType="string">
 	select item_name, item_price, item_dur, item_sale, item_color, item_src from item where item_code = #{itemCode} 
