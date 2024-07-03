@@ -11,5 +11,6 @@ public class PlacePointEntity {
 	private Integer index;
 	private String contentid;
     private String mapx;         
-    private String mapy;   
+    private String mapy;  
+    private Integer weight;
 }

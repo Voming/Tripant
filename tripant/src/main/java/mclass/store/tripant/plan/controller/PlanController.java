@@ -34,9 +34,9 @@ public class PlanController {
 
 	@Autowired
 	private PlanService planService;
-	
+
 	@Autowired
-	private PlanningAlgorithm planningAlgorithm; 
+	private PlanningAlgorithm planningAlgorithm;
 
 	@GetMapping("")
 	public String make(@SessionAttribute(name = "areaCode") Integer areaCode,
@@ -115,11 +115,11 @@ public class PlanController {
 		return "plan/stay_tab_content";
 	}
 
-	// -------------------------------------stay-------------------------------------------
+	// -------------------------------------planning-------------------------------------------
 	@PostMapping("/planning")
 	@ResponseBody
-	public String planning(@RequestBody String jsonString) {
-		planningAlgorithm.planJsonParse(jsonString);
+	public String planning(@RequestBody String jsonString, @SessionAttribute(name = "areaCode") Integer areaCode) {
+		planningAlgorithm.planJsonParse(jsonString, areaCode);
 		return "aaa";
 	}
 

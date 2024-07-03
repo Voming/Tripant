@@ -6,32 +6,42 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.plan.domain.CalendarPlanEntity;
 import mclass.store.tripant.plan.domain.PlacePointEntity;
 import mclass.store.tripant.plan.domain.PlanDate;
 import mclass.store.tripant.plan.domain.Spot;
 import mclass.store.tripant.plan.domain.Stay;
+import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 
 @Service
 public class PlanningAlgorithm {
-	// 그래프를 표현 할 List
-	static List<List<Node>> graph = new ArrayList<>();
+	@Autowired
+	private PlanRepository planRepository;
 	static int V;
 
-	static List<PlacePointEntity> stayPointArr = new ArrayList<>();
+	// 그래프를 표현 할 List
+	static List<List<Node>> graph = new ArrayList<>();
 
-	static List<PlacePointEntity> spotPointArr = new ArrayList<>();
+	static List<PlacePointEntity> stayPointList = new ArrayList<>();
+	static List<PlacePointEntity> spotPointList = new ArrayList<>();
+
+	static List<PlacePointEntity> errorPointList = new ArrayList<>();
+	static List<PlacePointEntity> resultPoinList = new ArrayList<>();
 
 	static class Node implements Comparable<Node> {
 		private int index;
@@ -48,39 +58,71 @@ public class PlanningAlgorithm {
 		}
 	}
 
-	public void planJsonParse(String jsonString) {
+	public void planJsonParse(String jsonString, int areaCode) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		CalendarPlanEntity calendarPlan = gson.fromJson(jsonString, CalendarPlanEntity.class);
 
 		List<PlanDate> dateArr = calendarPlan.getDateArr();
 		for (int i = 0; i < dateArr.size(); i++) {
 			Stay stay = dateArr.get(i).getStay();
-			stayPointArr.add(new PlacePointEntity(i, stay.getId(), stay.getMapx(), stay.getMapy()));
+			stayPointList.add(new PlacePointEntity(i, stay.getId(), stay.getMapx(), stay.getMapy(), 0));
 		}
-		System.out.println(stayPointArr);
+		System.out.println(stayPointList);
 
 		List<Spot> spotArr = calendarPlan.getSpotArr();
 		for (int i = 0; i < spotArr.size(); i++) {
-			spotPointArr.add(new PlacePointEntity(i, spotArr.get(i).getId(), spotArr.get(i).getMapx(),
-					spotArr.get(i).getMapy()));
+			spotPointList.add(new PlacePointEntity(i, spotArr.get(i).getId(), spotArr.get(i).getMapx(),
+					spotArr.get(i).getMapy(), 0));
 		}
-		System.out.println(spotPointArr);
+		System.out.println(spotPointList);
+
+		V = spotPointList.size(); // 정점 개수
+
+		// 출발지에서 가장 가까운 장소 구하기
+		int weight[] = new int[V];
+		int minIndex = 0;
+		int min = 0;
+		AreaPointEntity startPoint = planRepository.selectAreaPoint(areaCode);
+		for (int i = 0; i < V; i++) {
+
+			double startx = Double.parseDouble(startPoint.getAreaX());
+			double starty = Double.parseDouble(startPoint.getAreaY());
+			double endx = Double.parseDouble(spotPointList.get(i).getMapx());
+			double endy = Double.parseDouble(spotPointList.get(i).getMapy());
+
+			String durationStr = getduration(startx, starty, endx, endy);
+			if (durationStr.equals("길찾기 결과를 찾을 수 없음") || durationStr.equals("")) {
+				weight[i] = 10800; // 3시간 //TODO
+			} else {
+				System.out.println(durationStr);
+				weight[i] = Integer.parseInt(durationStr);
+			}
+		}
+
+		min = weight[0];
+		// 가장 가까운 곳이 몇번째에 있는지
+		for (int i = 0; i < V; i++) {
+			if (min > weight[i]) {
+				min = weight[i];
+				minIndex = i;
+			}
+		}
+		Collections.swap(spotPointList, 0, minIndex); // 위치 변경
+
+		System.out.println(spotPointList.get(0));
+
 		planning();
 	}
 
 	public void planning() { // 정점 세팅 및 알고리즘 실행
-		V = spotPointArr.size(); // 정점 개수
-		System.out.println("V " + V);
-		int E = V * (V - 1); // 간선 개수
-
 		for (int i = 0; i < V; i++) {
 			graph.add(new ArrayList<>());
 		}
 		for (int i = 0; i < V; i++) {
-			for (int j = 0; j < V - 1; j++) {
-				if(j != i) {
-					PlacePointEntity start = spotPointArr.get(i); // 출발 노드
-					PlacePointEntity end = spotPointArr.get(j);// 출발 노드
+			for (int j = 0; j < V; j++) {
+				if (j != i) {
+					PlacePointEntity start = spotPointList.get(i); // 출발 노드
+					PlacePointEntity end = spotPointList.get(j); // 도착 노드
 
 					double startx = Double.parseDouble(start.getMapx());
 					double starty = Double.parseDouble(start.getMapy());
@@ -90,19 +132,24 @@ public class PlanningAlgorithm {
 					System.out.println(startx + " : " + starty + " : " + endx + " : " + endy);
 
 					String durationStr = getduration(startx, starty, endx, endy);
-					System.out.println(durationStr);
-//					int weight = Integer.parseInt(durationStr);
-//					System.out.println("start" + weight);
 
-//					graph.get(i).add(new Node(end.getIndex(), weight));
-//					graph.get(j).add(new Node(start.getIndex(), weight));
+					if (durationStr.equals("길찾기 결과를 찾을 수 없음") || durationStr.equals("")) {
+						errorPointList.add(start);
+					} else {
+						System.out.println(durationStr);
+						int weight = Integer.parseInt(durationStr);
+
+						graph.get(i).add(new Node(end.getIndex(), weight));
+						graph.get(j).add(new Node(start.getIndex(), weight));
+					}
 				}
 			}
 		}
-		// Dijkstra(0);
+		Dijkstra(0);
 	}
 
 	private static void Dijkstra(int index) {
+		Map<Integer, Integer> result = new HashMap<>();
 		PriorityQueue<Node> pq = new PriorityQueue<>();
 		int[] distance = new int[V]; // 최단 거리를 저장할 변수
 
@@ -134,15 +181,52 @@ public class PlanningAlgorithm {
 					pq.offer(new Node(linkedNode.index, distance[linkedNode.index]));
 				}
 			}
+		
 			// 결과값 출력
 			for (int i = 0; i < V; ++i) {
 				if (distance[i] == Integer.MAX_VALUE)
 					System.out.print("∞ ");
-				else
+				else {
 					System.out.print(distance[i] + " ");
+				}
 			}
 			System.out.println();
+
 		}
+		
+//		
+//		int weight[] = new int[V];
+//		int minIndex = 0;
+//		int min = 0;
+//		min = weight[0];
+//		// 가장 가까운 곳이 몇번째에 있는지
+//		for (int i = 0; i < V; i++) {
+//			if (min < weight[i]) {
+//				min = weight[i];
+//				minIndex = i;
+//			}
+//		}
+//		
+//		
+//		for (int i = 0; i < V; i++) { // 시간 적은 순서대로 다시 저장
+//			int min =  distance[i];
+//			for(int j = i+1; j < V; j++) {
+//				if(min < distance[j]) {
+//					resultPoinList.add(i, new PlacePointEntity(i, spotPointList.get(i).getContentid(),
+//							spotPointList.get(i).getMapx(), spotPointList.get(i).getMapy(), distance[i]));
+//				}
+//				
+//			}
+//			
+//			
+//		}
+//		
+		
+		
+		// 그냥 넣고 swap, index 다시 붙여주기
+		
+		
+		System.out.println(spotPointList);
 	}
 
 	@Value("${kakao.map.rest.api}")
@@ -158,6 +242,7 @@ public class PlanningAlgorithm {
 				"https://apis-navi.kakaomobility.com/v1/directions?origin=%f,%f&destination=%f,%f&priority=TIME&summary=true",
 				startLng, startLat, endLng, endLat);
 		String duration = "";
+		String errorStr = "";
 		try {
 			URL url = new URL(aurlStr);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -173,12 +258,15 @@ public class PlanningAlgorithm {
 				while ((inputLine = br.readLine()) != null) {
 					response.append(inputLine);
 				}
-				br.close();
 
 				// JSON 파싱하여 duration 값만 추출
 				JSONObject jsonObject = new JSONObject(response.toString());
-				duration = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("summary")
-						.getString("duration");
+				errorStr = jsonObject.getJSONArray("routes").getJSONObject(0).getString("result_code");
+				if(errorStr.equals("0")) {
+					duration = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("summary")
+							.getString("duration");
+				}
+				br.close();
 			} else {
 				return ">>>> 에러났어요 : " + responseCode;
 			}
@@ -189,5 +277,4 @@ public class PlanningAlgorithm {
 		}
 		return duration;
 	}
-
 }

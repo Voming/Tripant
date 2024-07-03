@@ -183,8 +183,8 @@ function timeInputCheck() {
 
 	var start = $('#start-' + id_num).val();
 	var end = $('#end-' + id_num).val();
-
-	if (start > end) { // 시작 시간이 더 큼
+	
+	if (start >= end) { // 시작 시간이 더 큼
 		$(this).css('color', 'red');
 	}
 	else {
