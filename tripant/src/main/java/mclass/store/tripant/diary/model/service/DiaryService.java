@@ -2,13 +2,14 @@ package mclass.store.tripant.diary.model.service;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
-
+import mclass.store.tripant.diary.domain.LikeEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.model.repository.DiaryRepository;
 
@@ -70,9 +71,9 @@ public class DiaryService {
 
 	// 조회수 증가
 	@Transactional
-	public DiaryBoardEntity getDiaryById(int diaryId) {
+	public DiaryBoardEntity getDiaryById(int diaryId, String memEmail) {
 		diaryRepository.incrementDiaryViews(diaryId);
-		return diaryRepository.selectDiaryById(diaryId);
+		return diaryRepository.selectDiaryById(diaryId, memEmail);
 	}
 
 	// 회원의 모든 여행 계획 가져오기(Mycontroller)
@@ -80,9 +81,9 @@ public class DiaryService {
 		return diaryRepository.selectPlanById(memberEmail);
 	}
 
-	// 한개의 여행기에 여러명의 이메일 계정들이 누른 하트 개수
-	public int selectDiaryLike(int diaryId) {
-		return diaryRepository.selectDiaryLike(diaryId);
+	// 한개의 여행기에 여러명의 이메일 계정들이 누른 하트 개수 + 로그인한 계정이 눌렀는지 여부
+	public LikeEntity selectDiaryLike(int diaryId, String memEmail) {
+		return diaryRepository.selectDiaryLike(diaryId, memEmail);
 	}
 
 	// 다이어리 좋아요 수 증가하기

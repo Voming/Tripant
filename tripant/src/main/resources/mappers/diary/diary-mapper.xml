@@ -175,18 +175,31 @@
 			WHERE mem_email = #{MemEmail}
 	</select>
 
-	<!-- 특정 ID의 다이어리 조회 -->
-	<select id="selectDiaryById" parameterType="int" resultMap="DiaryBoardEntityMap">
+	<!-- 특정 ID의 다이어리 조회  + 로그인한 계정이 눌렀는지 여부 -->
+	<select id="selectDiaryById" parameterType="map" resultMap="DiaryBoardEntityMap">
 		<!-- view_diary_member의 nick_name -->
-		SELECT * 
-			FROM VIEW_DIARY_MEMBER 
+		SELECT t2.* 
+			<if test="memEmail != null and !memEmail.equals('') ">
+            ,(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 
+            WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email =#{memEmail})
+             is_my_likes
+             </if>
+			FROM VIEW_DIARY_MEMBER t2
 			WHERE DIARY_ID = #{diaryId}
 	</select>
-	<!-- 한개의 여행기에 여러명의 이메일 계정들이 누른 하트 개수 -->
-	<select id="selectDiaryLike" parameterType="int" resultType="_int">
-		SELECT COUNT(*) likes
-			FROM diary_likes
-			WHERE DIARY_ID = #{diaryId}
+	<!-- 한개의 여행기에 여러명의 이메일 계정들이 누른 하트 개수 + 로그인한 계정이 눌렀는지 여부
+		속도 저하되지만 분석함수(over)사용 경험.
+	 -->
+	<select id="selectDiaryLike" parameterType="map" resultType="LikeEntity">
+		select distinct 
+			DIARY_ID
+	        , count(*) over( PARTITION BY DIARY_ID ) like_Count
+			<if test="memEmail != null and !memEmail.equals('') ">
+	        ,(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 
+	        	WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email =#{memEmail}) is_Like_Mem_Email
+			</if>
+	    FROM diary_likes t2
+	    WHERE DIARY_ID = #{diaryId}
 	</select>
 
 
