@@ -57,8 +57,9 @@ public interface AdminRepository {
 
 	// 결제 취소 페이지
 	// 결제 목록
-	public List<Map<String, Object>> payList();
-
+	public List<AdminStoreEntity> payList(int startRownum, int endRownum,String searchMem);
+	public int payCount();
+	public int payCountSearch(String searchMem);
 	// 결제 취소
 	public int payCancel(Map<String, Object> map);
 	

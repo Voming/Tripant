@@ -45,10 +45,10 @@ public class AdminController {
 	private String storeId;
 	
 	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) 
-	private int memNum = 9;
+	private int num = 9;
 	
 	//화면 하단에 나타날 페이지수
-	private int memPageNum = 5;
+	private int pageNum = 5;
 	
 	//누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
 //	private int currentPageNum = 1;  // 기본1  // @RequestParam(required = false, defaultValue = "1") 
@@ -58,7 +58,7 @@ public class AdminController {
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String searchMem) throws MethodArgumentTypeMismatchException 
 	{
-		model.addAttribute("memMap",adminservice.selectMemList( memNum, memPageNum, currentPageNum, searchMem));
+		model.addAttribute("memMap",adminservice.selectMemList( num, pageNum, currentPageNum, searchMem));
 		return "admin/admin_member";
 	}
 	
@@ -70,7 +70,7 @@ public class AdminController {
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String searchMem
 			) {
-		model.addAttribute("memMap", adminservice.search( memNum, memPageNum, currentPageNum, searchMem));
+		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPageNum, searchMem));
 		return "admin/page_fragment";
 	}
 
@@ -144,7 +144,7 @@ public class AdminController {
 	public String complain(Model model
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 	 , @RequestParam(required = false )String searchMem )throws MethodArgumentTypeMismatchException {
-		model.addAttribute("complainMap",adminservice.complainList(memNum, memPageNum, currentPageNum,searchMem));
+		model.addAttribute("complainMap",adminservice.complainList(num, pageNum, currentPageNum,searchMem));
 		
 		return "admin/admin_complain";
 	}
@@ -163,7 +163,7 @@ public class AdminController {
 	public String complainsearch(Model model
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 	 , @RequestParam(required = false )String searchMem ){
-		model.addAttribute("complainMap",adminservice.complainsearch(memNum, memPageNum, currentPageNum,searchMem));
+		model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPageNum,searchMem));
 		return "admin/complain_fragment";
 	}
 	
@@ -173,15 +173,16 @@ public class AdminController {
 	public List<AdminBoardEntity> boardReport() {
 		return adminservice.boardReport();
 	}
+	
 	// 결제 취소 페이지
 	@GetMapping("/cancel")
-	public ModelAndView cancel(ModelAndView mv) {
-		mv.setViewName("admin/admin_cancel");
-		List<Map<String, Object>> list = adminservice.payList();
+	public String cancel(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			 , @RequestParam(required = false )String searchMem) {
+		Map<String, Object> list = adminservice.payList(num, pageNum, currentPageNum,searchMem);
 		if(list != null) {
-			mv.addObject("list", list);
+			model.addAttribute("list", list);
 		}
-		return mv;
+		return "admin/admin_cancel";
 	}
 	
 	// 결제 취소
