@@ -73,7 +73,7 @@
 	width:16.6%;
 }
 .memberlist > li> .col >li:first-child+li+li{
-	width:16.6%;
+	width:25%;
 }
 .memberlist > li> .col >li:first-child+li+li+li{
 	width:16.6%;
@@ -82,7 +82,7 @@
 	width:16.6%;
 }
 .memberlist > li> .col >li:first-child+li+li+li+li+li{
-	width:16.6%;
+	width:15%;
 }
 
 /* 취소완료 */
