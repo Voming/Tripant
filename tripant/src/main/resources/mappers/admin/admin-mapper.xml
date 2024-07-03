@@ -136,7 +136,7 @@
 			where mem_nick like #{keyword}
 		</if> 
 	</select>
-	<select id="boardCounttSearch" resultType="_int" parameterType="map">
+	<select id="boardCountSearch" resultType="_int" parameterType="map">
 	select count(*) 
 	from 
 	(select diary_id, diary_title,to_char(diary_date,'yyyy-MM-dd') diary_date,reports,mem_nick from 

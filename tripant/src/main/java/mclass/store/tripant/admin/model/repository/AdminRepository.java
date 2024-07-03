@@ -45,7 +45,7 @@ public interface AdminRepository {
 	//신고게시글
 	public List<AdminBoardEntity> complainList(int startRownum, int endRownum,String searchMem);
 	public int boardCount();
-	public int boardCounttSearch(String searchMem);
+	public int boardCountSearch(String searchMem);
 	//신고게시글 검색
 	public List<AdminBoardEntity> complainsearch(String memNick);
 	
