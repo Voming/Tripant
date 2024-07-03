@@ -44,41 +44,11 @@ public class AdminController {
 	@Value("${pay.storeId}")
 	private String storeId;
 	
-//	@GetMapping("/member")
-//	public ModelAndView Member(ModelAndView mv, String currentPage) {
-//		
-//		//정보를 받아올 때 어떤것을 참조해서 받아올지 --> 매개변수(java에서의 getParameter 역할을 대신해줌)
-//		
-////		한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
-//		int memNum = 1;
-//		
-////		화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
-//		int memPageNum = 2;
-//		
-////		누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
-//		int currentPageNum = 1;  // 기본1
-//		
-//		if(currentPage != null && !currentPage.equals("") ) {
-//			try {
-//				currentPageNum = Integer.parseInt(currentPage);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		//model.addAttribute("memList",adminservice.selectMemList());
-//		mv.addObject("memList",adminservice.selectMemList( memNum, memPageNum, currentPageNum));
-//		mv.setViewName("admin/admin_member");
-//		
-//		return mv;
-//		//return "admin/admin_member";
-//	}
+	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) 
+	private int num = 9;
 	
-	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) -> 3개
-	private int memNum = 9;
-	
-	//화면 하단에 나타날 페이지수는 5개(1, 2, 3, 4, 5)
-	private int memPageNum = 5;
+	//화면 하단에 나타날 페이지수
+	private int pageNum = 5;
 	
 	//누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
 //	private int currentPageNum = 1;  // 기본1  // @RequestParam(required = false, defaultValue = "1") 
@@ -86,10 +56,9 @@ public class AdminController {
 	@GetMapping("/member")
 	public String member(Model model
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-			, @RequestParam(required = false )String searchMem
-			) 
-			throws MethodArgumentTypeMismatchException {
-		model.addAttribute("memMap",adminservice.selectMemList( memNum, memPageNum, currentPageNum, searchMem));
+			, @RequestParam(required = false )String searchMem) throws MethodArgumentTypeMismatchException 
+	{
+		model.addAttribute("memMap",adminservice.selectMemList( num, pageNum, currentPageNum, searchMem));
 		return "admin/admin_member";
 	}
 	
@@ -101,7 +70,7 @@ public class AdminController {
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String searchMem
 			) {
-		model.addAttribute("memMap", adminservice.search( memNum, memPageNum, currentPageNum, searchMem));
+		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPageNum, searchMem));
 		return "admin/page_fragment";
 	}
 
@@ -111,9 +80,6 @@ public class AdminController {
 	@ResponseBody
 	public Integer MemberInfo(Integer selectRole, String memEmail,Integer selectActive) {
 		
-		System.out.println("###########"+selectRole);
-		System.out.println("###########"+selectActive);
-		System.out.println("###########"+memEmail);
 		String memRole = "";
 		switch(selectRole) {
 		case 1: memRole = "ROLE_SLEEP"; 
@@ -175,8 +141,10 @@ public class AdminController {
 	
 	//신고게시글
 	@GetMapping("/complain")
-	public String complain(Model model) {
-		model.addAttribute("complainBoard",adminservice.complainList());
+	public String complain(Model model
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	 , @RequestParam(required = false )String searchMem )throws MethodArgumentTypeMismatchException {
+		model.addAttribute("complainMap",adminservice.complainList(num, pageNum, currentPageNum,searchMem));
 		
 		return "admin/admin_complain";
 	}
@@ -191,10 +159,12 @@ public class AdminController {
 	
 	//신고게시글 검색
 	@PostMapping("/complain/search")
-	@ResponseBody
-	public List<AdminBoardEntity> complainsearch(Model model, String memNick){
-		List<AdminBoardEntity> boardList=adminservice.complainsearch(memNick);
-		return boardList;
+	//@ResponseBody
+	public String complainsearch(Model model
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	 , @RequestParam(required = false )String searchMem ){
+		model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPageNum,searchMem));
+		return "admin/complain_fragment";
 	}
 	
 	//신고수 정렬
@@ -203,15 +173,16 @@ public class AdminController {
 	public List<AdminBoardEntity> boardReport() {
 		return adminservice.boardReport();
 	}
+	
 	// 결제 취소 페이지
 	@GetMapping("/cancel")
-	public ModelAndView cancel(ModelAndView mv) {
-		mv.setViewName("admin/admin_cancel");
-		List<Map<String, Object>> list = adminservice.payList();
+	public String cancel(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			 , @RequestParam(required = false )String searchMem) {
+		Map<String, Object> list = adminservice.payList(num, pageNum, currentPageNum,searchMem);
 		if(list != null) {
-			mv.addObject("list", list);
+			model.addAttribute("list", list);
 		}
-		return mv;
+		return "admin/admin_cancel";
 	}
 	
 	// 결제 취소
