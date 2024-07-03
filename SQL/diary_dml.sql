@@ -423,4 +423,41 @@ FROM
           ORDER BY diary_date_real DESC NULLS LAST) t1
     ) t2
 WHERE rn BETWEEN 1 AND 2;
-		
+
+select distinct
+    (SELECT COUNT(*) likes FROM diary_likes t1 WHERE DIARY_ID = t2.DIARY_ID) a
+    , (SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID and mem_email ='qothwls5@naver.com') is_my_likes
+FROM diary_likes t2
+WHERE DIARY_ID = 144 and mem_email ='qothwls5@naver.com'
+;
+
+select count(a)
+from  (
+    select count(*) a, mem_email 
+        FROM diary_likes t2
+        WHERE DIARY_ID = 144 
+        group by mem_email
+) t1
+;
+
+select distinct 
+        count(*) over( PARTITION BY DIARY_ID ) likes
+        ,(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email ='qothwls5@naver.com') is_my_likes
+    FROM diary_likes t2
+    WHERE DIARY_ID = 144 
+;
+
+		SELECT * 
+			FROM VIEW_DIARY_MEMBER 
+			WHERE DIARY_ID = 144
+            ;
+            
+select count(*) from diary_likes
+WHERE DIARY_ID = 144
+and mem_email ='qothwls5@naver.com'
+;
+SELECT distinct diary_id FROM diary_likes
+minus
+SELECT diary_id FROM diary_likes
+    WHERE mem_email = 'qothwls5@naver.com'
+;
