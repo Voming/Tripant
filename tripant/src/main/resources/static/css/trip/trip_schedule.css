@@ -31,11 +31,7 @@
 	justify-content: space-between;
 	margin:10px 0;
 }
-.main-wrapper .sub-title .nday{
-	font-size: var(--font4);
-}
 .main-wrapper .sub-title .date{
-	font-size: var(--font6);
 	color: var(--color_gray);
 }
 /*  scrollbar와 div무너짐 해결:flex의 상위 하위 너비지정*/
