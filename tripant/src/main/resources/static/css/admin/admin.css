@@ -85,7 +85,7 @@ a{
 .wrap-body .ad-header{
 	display:flex;
 }
-.ad-header .btn-logout{
+.ad-header .btn.logout{
 	border-radius:8px;
 	border:solid black 1px;
 	height:30px;
