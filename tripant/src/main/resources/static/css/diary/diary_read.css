@@ -4,12 +4,14 @@
 .myread-wrap {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap; align-items : center;
+	flex-wrap: wrap;
+	align-items: center;
 	width: 960px;
 	margin: 80px auto 40px;
 	padding: 20px;
 	height: auto;
 	align-items: center;
+	font-family: 'Binggrae';
 }
 
 /* 글 배경 */

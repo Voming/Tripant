@@ -1,5 +1,7 @@
 @charset "UTF-8";
 /* 레이아웃 규격 정하기 */
+
+
 aside {
 	position: fixed; /* 글 스크롤시 따라다니게 하기 */
 	left: 90px; /* 사이드바 지역태그 부분이랑 사이간격 띄우기 */
@@ -40,7 +42,7 @@ aside {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	padding-top: 27px; 
+	padding-top: 27px;
 	padding-bottom: 10px;
 }
 
@@ -52,11 +54,11 @@ aside {
 	margin-left: 180px; /* 사이드바와의 여백 */
 	padding: 20px;
 } /* 콘텐츠와의 여백 */
-
 .store-aside .aside-store {
 	font-weight: bolder; /* 여행기 제목 글씨 두껍게 */
 	font-size: var(--font2);
 }
-.element:last-child{
+
+.element:last-child {
 	margin-bottom: 23px;
 }
