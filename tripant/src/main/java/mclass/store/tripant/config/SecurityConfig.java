@@ -91,7 +91,7 @@ public class SecurityConfig {
 				.invalidateHttpSession(true)
 				)
 		.exceptionHandling((exceptionHandling) -> exceptionHandling
-				.accessDeniedPage("/errors/access-denied")
+				.accessDeniedPage("/")
 				)
 			;
 		return http.build();

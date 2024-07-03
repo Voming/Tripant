@@ -1,6 +1,5 @@
 package mclass.store.tripant.member.controller;
 
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,12 +75,6 @@ public class LoginController {
 		map.put("memPassword", bCryptPasswordEncoder.encode(memPassword));
 		int result = memberService.setPwd(map);
 		return result;
-	}
-	
-	// 접근 불가 페이지
-	@GetMapping("/errors/access-denied")
-	public String errorsDenied() {
-		return "common/denied";
 	}
 	
 	// 오류 페이지
