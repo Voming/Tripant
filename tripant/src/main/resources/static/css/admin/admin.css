@@ -18,6 +18,11 @@ body{
 a{
 	color:white;
 }
+
+.btn{
+	cursor: pointer;
+}
+
 /* 사이드바 */
 .wrap-main .wrap-sidebar{
 	padding:15px;
