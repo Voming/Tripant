@@ -5,8 +5,6 @@ var spotboxCount;
 //검색명
 var findArea;
 
-
-
 //더보기
 function spotMoreBtnClickHandler(thisElement) {
 	// 클릭횟수 증가
@@ -24,7 +22,13 @@ function spotMoreBtnClickHandler(thisElement) {
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(".wrap-spotList").replaceWith(wrap_spot);
-		
+
+		//더보기 계속 붙일건지
+		spotboxCount = $(".spot-box").length;
+		if (spotboxCount.length - (20 * clickspotnum) < 20) { //20개 보다 적게 나온경우
+			$(".spot_more_btn").remove();
+		}
+
 		// 미리 클릭해 둔 리스트 다시 활성화
 		listCheckSpot();
 	});
@@ -79,10 +83,13 @@ $(document).ready(function() {
 
 			//결과값 null 체크
 			spotboxCount = $(".spot-box").length;
+
 			if (spotboxCount.length == 0) { //결과 없음
 				$(".spot_more_btn").remove();
 				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
 				$(".resultSpotCheck").html(htmlVal);
+			} else if (spotboxCount.length < 20) { //20개 보다 적게 나온경우
+				$(".spot_more_btn").remove();
 			}
 
 			// 미리 클릭해 둔 리스트 다시 활성화
@@ -122,14 +129,16 @@ function btnSpotFindClickHandler() {
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
-		$(".wrap-spotList").replaceWith(wrap_spot);
+		$("#spot-tab01 .wrap-spotList").replaceWith(wrap_spot);
 
 		//결과값 null(검색 결과 더보기) 체크
 		spotboxCount = $(".spot-box").length;
+		console.log(spotboxCount);
 		var htmlVal;
+
 		if (spotboxCount == 0) { //결과 없음
 			htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
-		} else if (spotboxCount >= 80) { //더보기 필요
+		} else if (spotboxCount >= 20) { //더보기 필요
 			htmlVal = `
 				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
 				class="spot_find_more_btn">더보기</button>`;
@@ -157,16 +166,20 @@ function spotFindMoreBtnClickHandler(thisElement) {
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
-		$(".wrap-spotList").replaceWith(wrap_spot);
+		$("#spot-tab01 .wrap-spotList").replaceWith(wrap_spot);
 
 		//결과값 null(검색 결과 더보기) 체크
 		spotboxCount = $(".spot-box").length;
-		if (spotboxCount >= 40 * clickspotfindnum) {
+
+		if (spotboxCount >= 20 * (clickspotfindnum + 1)) {
 			var htmlVal = `
 				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
 				class="spot_find_more_btn">더보기</button>`;
+			$(".resultSpotCheck").html(htmlVal);
+		} else { //20개 보다 적게 나온경우
+			$(".spot_find_more_btn").remove();
 		}
-		$(".resultSpotCheck").html(htmlVal);
+
 		$(".spot_more_btn").remove(); //검색아닌 더보기 지우기
 
 		// 미리 클릭해 둔 리스트 다시 활성화
@@ -176,7 +189,7 @@ function spotFindMoreBtnClickHandler(thisElement) {
 
 // 미리 클릭해 둔 리스트 다시 활성화
 function listCheckSpot() {
-	$.each(calendarPlan.spotArr, function(idx, element) { 
+	$.each(calendarPlan.spotArr, function(idx, element) {
 		var checkId = "#" + element.id;
 		$(checkId).attr("checked", true);
 	});
