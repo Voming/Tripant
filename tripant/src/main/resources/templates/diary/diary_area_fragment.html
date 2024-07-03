@@ -8,10 +8,10 @@
 				<div class="wrap-d-content">
 					<div class="diary-img">
 					<th:block th:if="${diary.diaryImage != null}">
-						<img th:src="${diary.diaryImage}" alt="대표 이미지" style="width: 330px; height: 220px;">
+						<img th:src="${diary.diaryImage}" alt="대표 이미지" class="title-img" >
 					</th:block>
 					<th:block th:if="${diary.diaryImage == null}">
-						<img th:src="@{/images/diary/diary_empty_image.png}" alt="대표 이미지" style="width: 330px; height: 220px;">
+						<img th:src="@{/images/diary/diary_empty_image.png}" alt="대표 이미지" class="title-img">
 					</th:block>
 					</div>
 					<div class="wrap-content">

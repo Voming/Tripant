@@ -195,3 +195,10 @@ select {
 .views-t {
 	margin: 10px;
 }
+/* 타이틀 글 이미지   */
+.title-img{
+	width: 330px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+}

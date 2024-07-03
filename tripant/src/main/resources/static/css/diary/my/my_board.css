@@ -88,3 +88,9 @@
 	width: 960px; /* 양옆 간격 유지 */
 	padding-bottom: 30px; /* 아래 간격 유지  */
 }
+.mytitle-img{
+	width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
