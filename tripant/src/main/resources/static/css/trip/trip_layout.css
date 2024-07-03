@@ -15,7 +15,7 @@
 	display: flex;
     flex-direction: row;
 }
-.main-wrapper .flex{display:flex;}
+.main-wrapper .flex{display:flex;border-radius: 8px;}
 .main-wrapper .hide{ display: none; }
 .main-wrapper .grid{display: grid;    align-content: center;}
 .main-wrapper .btn,
