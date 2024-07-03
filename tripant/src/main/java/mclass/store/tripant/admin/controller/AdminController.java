@@ -222,10 +222,14 @@ public class AdminController {
 	
 	//결제취소 회원 검색
 	@PostMapping("/cancel/search")
-	@ResponseBody
-	public List<AdminStoreEntity> cancelSearch(Model model, String memNick){
-		List<AdminStoreEntity> boardList=adminservice.cancelSearch(memNick);
-		return boardList;
+	//@ResponseBody
+	public String cancelSearch(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			 , @RequestParam(required = false )String searchMem){
+				 Map<String, Object> list = adminservice.payList(num, pageNum, currentPageNum,searchMem);
+					if(list != null) {
+						model.addAttribute("list", list);
+					}
+		return "admin/cancel_fragment";
 	}
 	
 	// 상품관리 페이지

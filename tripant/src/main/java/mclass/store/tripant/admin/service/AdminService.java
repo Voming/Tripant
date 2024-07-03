@@ -253,8 +253,38 @@ public class AdminService {
 	}
 	
 	//결제취소 회원 검색
-	public List<AdminStoreEntity> cancelSearch(String memNick){
-		return admindao.cancelSearch(memNick);
+	public Map<String, Object> cancelSearch(int num, int pageNum, int currentPageNum, String searchMem){
+Map<String, Object> result = null;
+		
+		//총 게시글 개수
+		int totalCount = admindao.totalCount();
+		
+		int startRownum = num * (currentPageNum - 1) + 1;
+		int endRownum = num * currentPageNum;
+		
+//		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
+		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
+		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
+		
+		//시작페이지
+		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
+				: (currentPageNum / pageNum) * pageNum + 1;
+		
+		//끝페이지
+		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
+		
+		
+		List<AdminStoreEntity> cancelList = admindao.payList(startRownum, endRownum, searchMem);
+		result = new HashMap<String, Object>();
+		result.put("map", cancelList);
+		result.put("totalCount", totalCount);
+		result.put("totalPageCount", totalPageCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("currentPage", currentPageNum);
+		result.put("searchMem", searchMem);
+		
+		return result;
 	}
 	
 	// 상품 관리 페이지

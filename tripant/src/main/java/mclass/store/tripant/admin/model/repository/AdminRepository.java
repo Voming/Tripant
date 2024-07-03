@@ -60,11 +60,12 @@ public interface AdminRepository {
 	public List<AdminStoreEntity> payList(int startRownum, int endRownum,String searchMem);
 	public int payCount();
 	public int payCountSearch(String searchMem);
-	// 결제 취소
-	public int payCancel(Map<String, Object> map);
 	
 	//결제 취소 회원 검색
 	public List<AdminStoreEntity> cancelSearch(String memNick);
+		
+	// 결제 취소
+	public int payCancel(Map<String, Object> map);
 	
 	// 상품 관리 페이지
 	// 상품목록
