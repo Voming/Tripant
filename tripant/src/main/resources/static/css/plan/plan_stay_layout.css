@@ -1,21 +1,18 @@
 @charset "UTF-8";
 
 .tab-content #tab03 {
-	display: flex;
+	display: grid;
 	width: auto;
-	justify-content: center;
+	justify-content: stretch;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px 20px;
 	align-items: center;
-	flex-direction: row;
 }
 
 .tab-content #tab03 .stay {
-	width: 50%;
+	display: grid;
+	width: 100%;
 	height: 100%;
-	padding: 30px 0 0 0;
-}
-
-.tab-content #tab03 .stay.first {
-	margin-right: 10px;
 }
 
 .tab-content #tab03 .plan-title {
@@ -25,13 +22,13 @@
 
 .tab-content #tab03 .plan-priod {
 	font-size: var(--font4);
-	margin: 10px 0 30px 0;
+	margin: 10px 0;
 	color: var(--color_gray);
 }
 
 /* 장소 찾기 */
 .tab-content #frm-find-stay {
-	margin: 15px 0;
+	margin: 5px 0;
 	position: relative;
 }
 
@@ -56,21 +53,24 @@
 
 /* 장소 탭 */
 .tab-content  #tab03 .stay-tab-nav {
-	display: flex;
-	float: left;
+	display: grid;
+	column-gap: 5px;
+	grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+	align-items: center;
 }
 
 .tab-content  #tab03 .stay-tab-nav li {
-	padding: 5px 10px;
+	padding: 6px;
 	border: 1px solid var(--color_gray);
 	border-radius: 8px;
 	margin-right: 5px;
 	font-size: var(--font5);
+	text-align: center;
 }
 
 .tab-content #tab03 .stay-tab-content {
-	margin-top: 30px;
-	height: 660px;
+	margin-top: 10px;
+	height: 650px;
 	overflow-y: auto;
 }
 
@@ -83,7 +83,6 @@
 	/* flex-wrap: wrap; */
 	justify-content: flex-start;
 	margin: 5px 0;
-	margin-right: 5px;
 }
 
 .stay-tab-content div .stay-img {
@@ -129,7 +128,7 @@
 	font-family: "Binggrae";
 	font-size: var(--font4);
 	font-weight: bold;
-	background:var(--color_light_gray);
+	background: var(--color_light_gray);
 	color: black;
 	border: 0;
 	border-radius: 8px;
@@ -150,7 +149,7 @@
 	font-family: "Binggrae";
 	font-size: var(--font4);
 	font-weight: bold;
-	background:var(--color_light_gray);
+	background: var(--color_light_gray);
 	color: black;
 	border: 0;
 	border-radius: 8px;
