@@ -22,8 +22,9 @@
 .board-list {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	flex-direction: row;
 	align-items: center;
+	gap: 53px;
 }
 /* 버튼 가운데 정렬 */
 .btn-more {
@@ -83,7 +84,13 @@
 .board-list>.board_more {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
-	width: 960px;/* 양옆 간격 유지 */
-	padding-bottom: 30px;/* 아래 간격 유지  */
+	gap: 53px;
+	width: 960px; /* 양옆 간격 유지 */
+	padding-bottom: 30px; /* 아래 간격 유지  */
+}
+.mytitle-img{
+	width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
 }

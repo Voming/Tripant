@@ -124,3 +124,9 @@ input[type=checkbox] {
 	top: 49%;
     right:5%;
 }
+
+.paging_wrap {
+	display: flex;
+	justify-content: center;
+}
+

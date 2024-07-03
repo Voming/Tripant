@@ -27,33 +27,10 @@
 		<form action ="/logout" method="post">
 			<div class="ad-header">
 				<div class="ad-text">상품관리</div>
-				<button type="submit" class="btn-logout">로그아웃</button>
+				<button type="submit" class="btn logout">로그아웃</button>
 			</div>
 		</form>		
-			<div class="ad-search">
-				<input class="search" type="text"  name="search" placeholder="상품명 검색">
-				<button type="button" class="btn-search"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
-			</div>
-			<div class="ad-content">
-				<ul class="memberlist">
-					<li>	
-						<ul class="col">
-							<li>코드</li>
-							<li>이름</li>
-							<li>가격(원)</li>
-							<li>기간(일)</li>
-							<li>할인율(%)</li>
-							<li>테마색상(헥사코드)</li>
-							<li>이미지경로</li>
-							<li><button type="button" class="btn insert">상품추가</button></li>
-						</ul>
-					</li>
-					
-					<li id="list" th:replace="~{admin/goods_fragment :: goodsList}">
-					</li>
-					
-				</ul>	
-			</div> 
+		<div class= "wrap-list" th:replace="~{admin/goodspage_fragment :: goodsPage}"></div>
 	</div>
 </div>
 <script th:line="javascript" th:src="@{/js/admin/store/goods.js}"></script>

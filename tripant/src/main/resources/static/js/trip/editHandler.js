@@ -63,11 +63,13 @@ async function memoClickHandler(el){
 }
 //스팟 삭제하기
 function removeSpot(el){
-	title = $(el).parents('.spot-block').children('.spot-title').text();
+	spotTitle = $(el).prevAll('.spot-title').text();
+	var idx = $(el).parents('.spot-block').data('i');
+	var jdx = $(el).parents('.spot-block').data('j');
 	console.log("title");
-	console.log(title);
+	console.log(spotTitle);
 	Swal.fire({
-	  title: "<h2>"+title+"</h2>",
+	  title: "<h2>"+spotTitle+"</h2>",
 	  text: "삭제하시겠습니까?",
 	  showCancelButton: true,
 	  confirmButtonColor: "#000000",
@@ -76,15 +78,54 @@ function removeSpot(el){
 	  cancelButtonText: "취소"
 	}).then((result) => {
 	  if (result.isConfirmed) {
+		//배열에서 삭제후 화면 리로드
+		var details =  detailListEditMode[idx];
+		var daylength = details.dayDetailInfoEntity.length;
+		
+		if(jdx == daylength-1){
+		//배열의 마지막 인덱스일 때	
+			details.dayDetailInfoEntity.pop();
+		}else{
+			for(var j = jdx; j < daylength - 1 ; j++){
+				details.dayDetailInfoEntity[j] = details.dayDetailInfoEntity[j+1];
+			}
+			details.dayDetailInfoEntity.pop();
+		}
+		//배열에서 장소 삭제 후 알람 띄우기
 	    Swal.fire({
 	      title: "Deleted!",
 	      text: "해당 장소를 일정에서 삭제하였습니다.",
 	      icon: "success"
 	    });
+	    
+
+		// *** 편집된 내용 다시 display
+		displayEditModeAfterDragEnd();
+		//일차별 동그라미 색 변경
+		circleColorHandler();
+		//maker display 
+		displayMarker();
+		//드래그 앤 드랍
+		dragAndDrop();
 	  }
 	});
 }
 
+//편집페이지에서 장소 삭제하기
+function deleteSpotEditMode(idx,jdx){
+	var details =  detailListEditMode[idx];
+	var daylength = details.dayDetailInfoEntity.length;
+	
+	if(jdx == daylength-1){
+	//배열의 마지막 인덱스일 때	
+		details.dayDetailInfoEntity.pop();
+	}else{
+		for(var j = jdx; j < daylength - 1 ; j++){
+			details.dayDetailInfoEntity[j] = details.dayDetailInfoEntity[j+1];
+		}
+		details.dayDetailInfoEntity.pop();
+	}
+}
 //편집 화면 들어갈 때 첫 display 
 function displayEditMode(){
 	

@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/* 장소추가 스타일 설정 */
+.main-wrapper .schedule-wrapper .spot-basket{
+	width:400px;
+	flex-direction : column;
+}
+.main-wrapper .schedule-wrapper .spot-basket > div:first-child{
+	justify-content: space-between;
+    padding-bottom: 15px;
+}
+.main-wrapper .schedule-wrapper #add{
+    border: var(--color_day9_blue) solid 2px;
+    padding: 3px;
+    border-radius: 8px;
+    font-size: var(--font6);
+    background-color: transparent;
+}
+
+.main-wrapper .schedule-wrapper .wrap-basket{
+	flex-direction: column;
+	min-height: 200px;
+	border-radius: 8px;
+	background-color: #F7F8F9;
+}
+
+
+
+

@@ -112,3 +112,8 @@
 	border: 0;
 	background-color: white;
 }
+
+.paging_wrap {
+	display: flex;
+	justify-content: center;
+}

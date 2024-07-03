@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/trip/trip_schedule.css}">
     <link rel="stylesheet" th:href="@{/css/trip/trip_spot_info.css}">
     <link rel="stylesheet" th:href="@{/css/trip/trip_edit_spot_info.css}">
+    <link rel="stylesheet" th:href="@{/css/trip/trip_add_spot.css}">
     <link rel="stylesheet" th:href="@{/css/trip/tripMap.css}">
 <head th:replace="~{common/header :: head('여행일정')}">
 </head>
@@ -32,7 +33,10 @@
 			</div>
 			<!-- 일자별 일정 리스트 -->
 			<div class="list-box flex">
+				<!-- 기존 일정목록 -->
 				<div th:replace="~{trip/trip_tourlist_fragment :: tourlist}"></div><!-- tourlist -->
+				<!-- 일정 편집부분 -->
+				<div th:replace="~{trip/trip_edit_fragment :: spot-basket}" > </div><!-- edit-tourlist -->
 				<div th:replace="~{trip/trip_edit_fragment :: edit-tourlist}" > </div><!-- edit-tourlist -->
 			</div>
 		</div><!-- schedule-wrapper -->

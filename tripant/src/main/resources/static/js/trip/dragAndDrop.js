@@ -129,7 +129,7 @@ function dragAndDrop(){
 			}
 			console.log("detailListEditMode===2");
 			console.log(detailListEditMode);
-			//편집된 내용 다시 display
+			// *** 편집된 내용 다시 display
 			displayEditModeAfterDragEnd();
 			//일차별 동그라미 색 변경
 			circleColorHandler();

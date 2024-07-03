@@ -11,7 +11,7 @@ function loadedHandler() {
 	$(".btn.delete").on("click", itemDeleteHandler);
 	
 	//상품검색
-	$(".btn-search").on("click",searchHandler);
+	//$(".btn-search").on("click",searchHandler);
 }
 
 // 상품 수정
@@ -281,18 +281,42 @@ function itemDeleteHandler(){
 	});
 }
 
+var currentPage = 1;
+var totalPageCount = null;
+var startPageNum = null;
+var endPageNum = null;
+
+/* 페이징 이동 함수 */
+function goPageHandler() {
+			var currentpage = $(this).data("targetpage");
+			$.ajax({
+				url:"/admin/cancel/search"
+				, method : "get"
+				, data : {
+						currentpage : currentpage,
+						itemCode:itemCode}
+				, dataType : "json"
+				, error : ajaxErrorHandler
+				, success : function(result){
+					if(result.seachMem){
+						$("[name=search]").val(result.seachMem);
+					}
+					memListHandler(result);
+				}
+			});
+	}
+
 //상품검색
-function searchHandler(){
+function searchBtnHandler(thisElement){
+	var targetPage = $(thisElement).data('targetpage');
 	var itemCode = $("[name=search]").val().trim();
 	$.ajax({
 		url:"/admin/goods/search",
 		method:"post",
 		context:this,
-		data: {itemCode:itemCode},
+		data: {itemCode:itemCode, page: targetPage},
 		error:ajaxErrorHandler
 		}).done( function(goodsList) {
-			console.log(itemCode)
-			console.log(goodsList);
-			 $('#list').replaceWith(goodsList);
+			 $('.wrap-list').replaceWith(goodsList);
 				});
 }

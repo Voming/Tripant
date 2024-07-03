@@ -83,9 +83,13 @@ public class DiaryController {
 
 	// 글 상세보기
 	@GetMapping("/read/{diaryId}")
-	public String diartRead(@PathVariable int diaryId, Model model) {
-		model.addAttribute("diary", diaryService.getDiaryById(diaryId));
-		model.addAttribute("likes", diaryService.selectDiaryLike(diaryId));
+	public String diartRead(@PathVariable int diaryId, Model model, Principal pricipal) {
+		String memEmail = null;
+		if (pricipal != null) {
+			memEmail = pricipal.getName();
+		}
+		model.addAttribute("diary", diaryService.getDiaryById(diaryId, memEmail));
+		model.addAttribute("likes", diaryService.selectDiaryLike(diaryId, memEmail));
 		
 		return "diary/diary_read";
 	}

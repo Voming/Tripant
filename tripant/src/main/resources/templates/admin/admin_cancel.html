@@ -26,42 +26,12 @@
 		<form action ="/logout" method="post">
 			<div class="ad-header">
 				<div class="ad-text">결제취소</div>
-				<button type="submit" class="btn-logout">로그아웃</button>
+				<button type="submit" class="btn logout">로그아웃</button>
 			</div>
 		</form>
+		
+			<div class="wrap-list"  th:replace="~{admin/cancel_fragment :: cancelist}"></div>
 			
-			<div class="ad-search">
-				<input class="search" type="text" name="search" placeholder="회원검색">
-				<button type="button" class="btn-search"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
-			</div>
-			
-			<div class="ad-content">
-				<ul class="memberlist">
-					<li>	
-						<ul class="col">
-							<li>주문번호</li>
-							<li>닉네임</li>
-							<li>이메일</li>
-							<li>상품명</li>
-							<li>구매일자</li>
-							<li>취소 여부</li>
-						</ul>
-					</li>
-					<li id="list">
-						<ul class="col list" th:each="map : ${list}" th:data-id="${map.BUY_ID}" th:data-email="${map.MEM_EMAIL}">
-							<li th:text="${map.BUY_ID}"></li>
-							<li th:text="${map.MEM_NICK}"></li>
-							<li th:text="${map.MEM_EMAIL}"></li>
-							<li th:text="${map.ITEM_NAME}"></li>
-							<li th:text="${map.BUY_DATE}"></li>
-							<li>
-								<button type="button" class="btn cancel">결제취소</button>
-								<input type="hidden" th:value="${map.ITEM_CODE}">
-							</li>
-						</ul>
-					</li>
-				</ul>	
-			</div> 
 	</div>
 </div>
 

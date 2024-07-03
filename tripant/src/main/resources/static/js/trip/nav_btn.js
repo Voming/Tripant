@@ -29,6 +29,7 @@ function editHandler(){
 	//일정 목록보여주기
 	$(this).parents().find('.tourlist').addClass('hide');
 	$(this).parents().find('.edit-tourlist').removeClass('hide');
+	$(this).parents().find('.spot-basket').removeClass('hide');
 	
 }
 //취소
@@ -47,6 +48,7 @@ function cancelHandler(){
 	//일정 목록보여주기
 	$(this).parents().find('.tourlist').removeClass('hide');
 	$(this).parents().find('.edit-tourlist').addClass('hide');
+	$(this).parents().find('.spot-basket').addClass('hide');
 }
 //저장
 function saveHandler(){
@@ -60,6 +62,7 @@ function saveHandler(){
 	//일정 목록보여주기
 	$(this).parents().find('.tourlist').removeClass('hide');
 	$(this).parents().find('.edit-tourlist').addClass('hide');
+	$(this).parents().find('.spot-basket').addClass('hide');
 	//DB이동 ajax
 }
 //좌측 탭

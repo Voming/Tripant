@@ -83,8 +83,6 @@ function ViewHandler(view){
 function searchHandler(){
 	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	var write = $("[name=search]").val().trim();  //input 값
-	//var prevalue = null;
-	//var currentpage = 1;
 	console.log(write);
 	console.log(pick);
 	$.ajax({
