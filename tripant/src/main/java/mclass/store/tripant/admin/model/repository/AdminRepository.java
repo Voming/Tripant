@@ -31,7 +31,8 @@ public interface AdminRepository {
 	
 	//게시글관리
 	//전체게시글
-	public List<AdminBoardEntity> boardList();
+	public List<AdminBoardEntity> boardList(int startRownum, int endRownum, String searchMem);
+	public int diaryCount();
 	
 	//게시글 검색(select)
 	public List<AdminBoardEntity> keywordsearch(Map<String, Object> map);

@@ -103,8 +103,9 @@ public class AdminController {
 	
 	//게시글
 	@GetMapping("/board")
-	public String board(Model model) {
-		model.addAttribute("memBoard",adminservice.boardList());
+	public String board(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String searchMem) {
+		model.addAttribute("memBoardMap",adminservice.boardList( num, pageNum, currentPageNum, searchMem));
 		
 		return "admin/admin_board";
 	}

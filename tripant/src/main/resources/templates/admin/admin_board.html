@@ -31,44 +31,7 @@
 			</div>
 		</form>
 			
-			<div class="ad-search">
-			<form name="search-form" method="get">
-				<select class="search-option" name="option" style='border:none'>
-					<option value="nick"  selected>닉네임</option>
-					<option value="title" >제목</option>
-				</select>
-				<input class="search" type="text" name="search" value="" placeholder="게시글검색">
-				<button type="button" class="btn-search"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
-			</form>
-			</div>
-			<div class="ad-content">
-				<ul class="boardlist">
-					<li>	
-						<ul class="col">
-							<li>번호</li>
-							<li>제목</li>
-							<li>닉네임</li>
-							<li>날짜</li>
-							<li>조회수<button type="button" class="btn view">▼</button></li>
-							<li>좋아요<button type="button" class="btn like">▼</button></li>
-						</ul>
-					</li>
-					<li id="list">
-						<th:block  th:each="memBoard:${memBoard}">
-						<ul class="col list">
-							<li th:text="${memBoard.diaryId}"></li>
-							<li th:text="${memBoard.diaryTitle}"></li>
-							<li th:text="${memBoard.memNick}"></li>
-							<li th:text="${memBoard.diaryDate}"></li>
-							<li th:text="${memBoard.diaryViews}"></li>
-							<li th:text="${memBoard.likes}"></li>
-							<li></li>
-						</ul>
-						</th:block>
-						
-					</li>
-				</ul>
-			</div>
+			<div class="wrap-list" th:replace="~{admin/board_fragment :: boardlist}"></div>
 	</div>
 </div>	
 <script th:line="javascript" th:src="@{/js/admin/board/board.js}"></script>
