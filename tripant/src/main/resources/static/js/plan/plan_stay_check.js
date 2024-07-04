@@ -101,7 +101,6 @@ function stayModalDoneBtnClickHandler() {
 	// 장소 설정 정보 부분 업데이트
 	$(".count-stay").text(markersStay.length);
 	var dayTxt = markersStay.length + "일 / " + (calendarPlan.dateArr.length - 1) + "일";
-	console.log(dayTxt);
 	$(".time-stay").text(dayTxt);
 }
 
@@ -190,16 +189,16 @@ function stayDeleteBtnClickHandler(thisElement) {
 			return false;
 		}
 	});
-	
+
 	setMarkersStay(null);
 	markersStay.length = 0;
 	// 장소 정보 삭제
 	$.each(calendarPlan.dateArr, function(idx, element) {
-		if(element.stay.id != null){
+		if (element.stay.id != null) {
 			addMarkerStay(new kakao.maps.LatLng(element.stay.mapy, element.stay.mapx), element.stay.title, element.stay.id, markersStay.length); // 마커 추가
 		}
 	});
-	
+
 	//숙소 화면 초기화
 	restStayBox();
 	restStaytab();
@@ -208,6 +207,20 @@ function stayDeleteBtnClickHandler(thisElement) {
 	displayStayBoxList();    // 저장되어있는 숙소 박스 리스트에 넣기 
 	displayStayTabList();    // 저장되어있는 숙소 탭 리스트에 넣기  
 	displayStayCheckList();  // 저장되어있는 숙소 체크박스 다시 활성화
+	
+	var ccc = 0;
+	
+	$(".wrap-box").each(function() {
+		var title = $(this).find(".box-title").text();
+		if(title != "숙소를 추가해주세요"){
+			ccc +=1;
+		}
+	});
+
+	// 장소 설정 정보 부분 업데이트
+	$(".count-stay").text(ccc);
+	var dayTxt = ccc + "일 / " + (calendarPlan.dateArr.length - 1) + "일";
+	$(".time-stay").text(dayTxt);
 }
 
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
