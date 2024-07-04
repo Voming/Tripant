@@ -28,8 +28,6 @@ public class MainController {
 
 	@GetMapping("/")
 	public ModelAndView home(Principal principal, Authentication authentication, ModelAndView mv) {
-		log.trace("principal = "+principal);
-		log.debug("auth = "+authentication);
 		mv.addObject("principal", principal);
 		mv.addObject("auth", authentication);
 		//model 대신 ModelAndView를 사용함
@@ -40,7 +38,7 @@ public class MainController {
 		mv.setViewName("main/home");
 		//System.out.println("insertPlace : " + placeService.insertPlace());
 		//System.out.println("selectPlaceMapList : " + timeService.selectPlaceMapList(1));
-		//timeService.makeTimeList(); //TODO
+		//timeService.makeTimeList(); 
 		return mv;
 	}
 	

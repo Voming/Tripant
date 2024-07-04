@@ -24,9 +24,9 @@ function stayMoreBtnClickHandler(thisElement) {
 		$(stayId).replaceWith(wrap_stay);
 
 		//더보기 계속 붙일건지
-		stayboxCount = $(".stay-box").length;
-		if (stayboxCount.length - (20 * clickstaynum) < 20) { //20개 보다 적게 나온경우
-			$(".stay_more_btn").remove();
+		stayboxCount = $(stayId).find(".stay-box").length;
+		if (stayboxCount < 20 * (clickstaynum + 1)) { //20개 보다 적게 나온경우
+			$(spotId).find(".stay_more_btn").remove();
 		}
 
 		displayStayCheckList();
@@ -78,13 +78,13 @@ $(document).ready(function() {
 			$(stayId).replaceWith(wrap_stay);
 
 			//결과값 null 체크
-			var stayboxCount = $(".stay-box").length;
-			if (stayboxCount.length == 0) { //결과 없음
-				$(".stay_more_btn").css('display', 'none');
+			var stayboxCount = $(stayId).find(".stay-box").length;
+			if (stayboxCount == 0) { //결과 없음
+				$(".stay_more_btn").remove();
 				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
 				$(".resultStayCheck").html(htmlVal);
-			} else if (stayboxCount.length < 20) { //20개 보다 적게 나온경우
-				$(".stay_more_btn").css('display', 'none');
+			} else if (stayboxCount < 20) { //20개 보다 적게 나온경우
+				$(".stay_more_btn").remove();
 			}
 
 			// 미리 클릭해 둔 리스트 다시 활성화
@@ -124,11 +124,10 @@ function btnStayFindClickHandler() {
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_stay) {
-		$("#stay-tab01 .wrap-stayList").replaceWith(wrap_stay);
+		$(stayId).replaceWith(wrap_stay);
 
 		//결과값 null(검색 결과 더보기) 체크
-		var stayboxCount = $(".stay-box").length;
-		console.log(stayboxCount);
+		var stayboxCount = $(stayId).find(".stay-box").length;
 		var htmlVal;
 		if (stayboxCount == 0) { //결과 없음
 			htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
@@ -138,7 +137,7 @@ function btnStayFindClickHandler() {
 				class="stay_find_more_btn">더보기</button>`;
 		}
 		$(".resultStayCheck").html(htmlVal);
-		$(".stay_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+		$(".stay_more_btn").remove(); //검색아닌 더보기 지우기
 
 		displayStayCheckList();
 	});
@@ -159,21 +158,21 @@ function stayFindMoreBtnClickHandler(thisElement) {
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_stay) {
-		$("#stay-tab01 .wrap-stayList").replaceWith(wrap_stay);
+		$(stayId).replaceWith(wrap_stay);
 
 		//결과값 null(검색 결과 더보기) 체크
-		var stayboxCount = $(".stay-box").length;
+		var stayboxCount = $(stayId).find(".stay-box").length;
 
-		if (stayboxCount >= 30 * clickstayfindnum) {
+		if (stayboxCount >= 20 * (clickstayfindnum + 1)) {
 			var htmlVal = `
 				<button type="button" onclick="stayFindMoreBtnClickHandler(this);"
 				class="stay_find_more_btn">더보기</button>`;
 			$(".resultStayCheck").html(htmlVal);
 		} else { //20개 보다 적게 나온경우
-			$(".stay_find_more_btn").css('display', 'none');
+			$(".stay_find_more_btn").remove();
 		}
 
-		$(".stay_more_btn").css('display', 'none'); //검색아닌 더보기 지우기
+		$(".stay_more_btn").remove(); //검색아닌 더보기 지우기
 
 		displayStayCheckList();
 	});
