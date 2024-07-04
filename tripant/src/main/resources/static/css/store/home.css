@@ -87,9 +87,16 @@
 	}
 }
 
-@media all and (max-width: 510px){
+@media all and (min-width: 351px) and (max-width: 510px){
 	.wrap-main {
 		width: 360px;
+		margin: 100px auto;
+	}
+}
+
+@media all and (max-width: 350px){
+	.wrap-main {
+		width: 210px;
 		margin: 100px auto;
 	}
 }
