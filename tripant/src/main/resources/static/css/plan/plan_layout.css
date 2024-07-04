@@ -73,9 +73,17 @@
 	text-align: center;
 	margin: 5px;
 }
+.main-wrapper .nav-wrapper .tab-nav a {
+	color:black;
+}
+.main-wrapper .nav-wrapper .tab-nav a.active {
+	color:#4BC9E5;
+}
+
 
 /* 다음 버튼 */
-.main-wrapper .plan_next, .main-wrapper .nav {
+.main-wrapper .plan_next,
+ .main-wrapper .nav {
 	align-items: center;
 	flex-direction: column;
 }

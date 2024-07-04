@@ -122,11 +122,10 @@ function displayDayTable() {
 		saveTimeInfo();
 		// 화면 이동
 		$('.tab-content > div').hide().filter(this.hash).fadeIn();
-		$('.tab-nav a').css('color', 'black');
+//		$('.tab-nav a').css('color', 'black');
 		$('.tab-nav a').removeClass('active');
 		$('.nav-2').addClass('active');
 
-		$('.nav-2').css('color', '#4BC9E5');
 		$('.tab-content > #tab02').show();
 		$(".main-wrapper .tab-content").css("width", "40%");
 	});

@@ -74,19 +74,59 @@ function loadedHandler() {
 	var cls_name;
 	//좌측 탭
 	$('.tab-nav a').click(function() {
-		$('.tab-content > div').hide().filter(this.hash).fadeIn();
-		$('.tab-nav a').css("color", "black");
-		$('.tab-nav a').removeClass('active');
-		$(this).addClass('active');
-
-		cls_name = $(this).attr("class");
-		cls_name = cls_name.replace(' active', '');
-		$(this).css("color", "#4BC9E5");
-		if (cls_name == 'nav-1') {
+		var clickElement = this;
+		function moveStep() {
+			$('.tab-nav a').removeClass('active');
+			$(clickElement).addClass('active');
+			$('.tab-content > div').hide().filter(clickElement.hash).fadeIn();
+		}
+		// click		
+		var click_cls_name = $(clickElement).attr("class");
+		// current
+		var currentActive = $('.tab-nav .active').attr("class");
+		if(click_cls_name == 'nav-1' && !currentActive ){
+			moveStep();
+			//saveTimeInfo(); //시간 정보 저장
 			$(".main-wrapper .tab-content").css("width", "25%");
+			
 		} else {
-			saveTimeInfo();
-			$(".main-wrapper .tab-content").css("width", "40%");
+		
+		cls_name = currentActive.replace(' active', '');
+		if (cls_name == 'nav-1') {
+			if(click_cls_name == 'nav-3'){
+				if(markersSpot.length < calendarPlan.dateArr.length){
+					alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+				} else {
+					moveStep();
+					$(".main-wrapper .tab-content").css("width", "40%");
+				}
+			}else {
+				moveStep();
+				saveTimeInfo(); //시간 정보 저장
+				$(".main-wrapper .tab-content").css("width", "40%");
+			}
+		} else if (cls_name == 'nav-2') {
+			if (click_cls_name == 'nav-3') {
+				if(markersSpot.length < calendarPlan.dateArr.length){
+					alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+				} else {
+					moveStep();
+					$(".main-wrapper .tab-content").css("width", "40%");
+				}
+			} else {
+				moveStep();
+				$(".main-wrapper .tab-content").css("width", "25%");
+			}
+		} else if (cls_name == 'nav-3') {
+			if (click_cls_name == 'nav-2') {
+				moveStep();
+				$(".main-wrapper .tab-content").css("width", "40%");
+			} else{
+				moveStep();
+				$(".main-wrapper .tab-content").css("width", "25%");
+			}
+		}
+		
 		}
 		return false;
 	}).filter(':eq(0)').click();
@@ -97,11 +137,8 @@ function loadedHandler() {
 			cls_name = $(this).find('a').attr("class");
 			if (cls_name === 'nav-1 active') {
 				//2번으로 이동
-				$('.tab-nav a').css("color", "black");
 				$('.tab-nav a').removeClass('active');
-
 				$('.nav-2').addClass('active');
-				$('.nav-2').css("color", "#4BC9E5");
 
 				$('.tab-content > #tab01').hide();
 				$('.tab-content > #tab02').show();
@@ -114,11 +151,8 @@ function loadedHandler() {
 					alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
 				} else {
 					//3번으로 이동
-					$('.tab-nav a').css("color", "black");
 					$('.tab-nav a').removeClass('active');
-
 					$('.nav-3').addClass('active');
-					$('.nav-3').css("color", "#4BC9E5");
 
 					$('.tab-content > #tab02').hide();
 					$('.tab-content > #tab03').show();
@@ -148,4 +182,3 @@ function loadedHandler() {
 		});
 	});
 }
-

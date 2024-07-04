@@ -181,7 +181,7 @@ public class PlanningAlgorithm {
 					pq.offer(new Node(linkedNode.index, distance[linkedNode.index]));
 				}
 			}
-		
+
 			// 결과값 출력
 			for (int i = 0; i < V; ++i) {
 				if (distance[i] == Integer.MAX_VALUE)
@@ -193,7 +193,7 @@ public class PlanningAlgorithm {
 			System.out.println();
 
 		}
-		
+
 //		
 //		int weight[] = new int[V];
 //		int minIndex = 0;
@@ -221,11 +221,9 @@ public class PlanningAlgorithm {
 //			
 //		}
 //		
-		
-		
+
 		// 그냥 넣고 swap, index 다시 붙여주기
-		
-		
+
 		System.out.println(spotPointList);
 	}
 
@@ -258,20 +256,20 @@ public class PlanningAlgorithm {
 				while ((inputLine = br.readLine()) != null) {
 					response.append(inputLine);
 				}
-
-				// JSON 파싱하여 duration 값만 추출
+				br.close();
+				
 				JSONObject jsonObject = new JSONObject(response.toString());
+				// JSON 파싱하여 응답 코드 확인
 				errorStr = jsonObject.getJSONArray("routes").getJSONObject(0).getString("result_code");
-				if(errorStr.equals("0")) {
+				if (errorStr.equals("0")) { //정상 호출
+					// JSON 파싱하여 duration 값만 추출
 					duration = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("summary")
 							.getString("duration");
 				}
-				br.close();
-			} else {
+			} else { //HTTP_OK 제외하고 오류 발생한 상황
 				return ">>>> 에러났어요 : " + responseCode;
 			}
 		} catch (Exception e) {
-//			e.printStackTrace();
 			System.out.println(" >>>>>>>>>>>>>>>>ERROR 길찾기 결과를 찾을 수 없음");
 			duration = "길찾기 결과를 찾을 수 없음";
 		}
