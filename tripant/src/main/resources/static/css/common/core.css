@@ -1,5 +1,32 @@
 @charset "UTF-8";
 
+:root {
+	--color_day1_red: #E54B4B;
+	--color_day2_purple: #C943CC;
+	--color_day3_pink: #FFA7C5;
+	--color_day4_orange: #E5794B;
+	--color_day5_skyblue: #4BC9E5;
+	--color_day6_yellow: #E5C34B;
+	--color_day7_lime: #CDF263;
+	--color_day8_green: #2EB67D;
+	--color_day9_blue: #4B76E5;
+	--color_day10_navy: #13358F;
+	
+	--color_light_gray: #F6F6F6;
+	--color_gray: #D4D4D4;
+	
+	--font1: 25px;
+	--font2: 20px;
+	--font3: 17px;
+	--font4: 15px;
+	--font5: 13px;
+	--font6: 11px;
+	
+	--img_spot_ck_af : url("/images/plan/spot_ck_af.png");
+	--img_spot_ck_bf : url("/images/plan/spot_ck_bf.png");
+	--img_stay_ck_af : url("/images/plan/stay_ck_af.png");
+}
+
 ul, ol, li {
 	/* 속성 리셋 */
 	padding: 0;
@@ -74,28 +101,6 @@ p {
 	font-style: normal;
 } */
 
-:root {
-	--color_day1_red: #E54B4B;
-	--color_day2_purple: #C943CC;
-	--color_day3_pink: #FFA7C5;
-	--color_day4_orange: #E5794B;
-	--color_day5_skyblue: #4BC9E5;
-	--color_day6_yellow: #E5C34B;
-	--color_day7_lime: #CDF263;
-	--color_day8_green: #2EB67D;
-	--color_day9_blue: #4B76E5;
-	--color_day10_navy: #13358F;
-	
-	--color_light_gray: #F6F6F6;
-	--color_gray: #D4D4D4;
-	
-	--font1: 25px;
-	--font2: 20px;
-	--font3: 17px;
-	--font4: 15px;
-	--font5: 13px;
-	--font6: 11px;
-}
 
 /* 구매폰트 */
 /*밑미 폰트*/

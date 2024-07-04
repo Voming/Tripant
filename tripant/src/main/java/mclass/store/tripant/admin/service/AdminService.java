@@ -59,9 +59,6 @@ public class AdminService {
 	//회원검색
 	public Map<String, Object> search(int num, int pageNum, int currentPageNum, String searchMem){
 		
-		//현재페이지: currentPage
-		// 하단에 표시할 페이지 수: memPageNum
-		//화면에 한번에 표시되는  글 수 : memNum	
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
@@ -111,7 +108,6 @@ public class AdminService {
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
 		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
@@ -134,7 +130,7 @@ public class AdminService {
 		return result;
 	}
 	
-	//게시글 검색(select)
+	//게시글 조건검색(select)
 	public Map<String, Object> keywordSearch(int num, int pageNum, int currentPageNum,String pick,String search){
 		Map<String, Object> result = null;
 		
@@ -146,7 +142,6 @@ public class AdminService {
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
 		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
@@ -196,7 +191,6 @@ public class AdminService {
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
 		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
@@ -231,7 +225,6 @@ public class AdminService {
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
 		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
@@ -277,7 +270,6 @@ public class AdminService {
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
 		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
@@ -313,7 +305,6 @@ public class AdminService {
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
 		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
@@ -354,7 +345,6 @@ public class AdminService {
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
 		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
