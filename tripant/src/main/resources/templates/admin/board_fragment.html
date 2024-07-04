@@ -7,10 +7,10 @@
 					<option value="nick"  selected>닉네임</option>
 					<option value="title" >제목</option>
 				</select>
-				<th:block th:if="${memBoardMap!=null and memBoardMap.write != null}">
-				<input class="search" type="text" name="search" placeholder="게시글검색" th:value="${memBoardMap.write}">
+				<th:block th:if="${memBoardMap!=null and memBoardMap.search != null}">
+				<input class="search" type="text" name="search" placeholder="게시글검색" th:value="${memBoardMap.search}">
 				</th:block>
-				<th:block th:if="${memBoardMap==null or memBoardMap.write==null}">
+				<th:block th:if="${memBoardMap==null or memBoardMap.search==null}">
 				<input class="search" type="text" name="search" placeholder="게시글검색">
 				</th:block>
 				<button type="button" class="btn-search" onclick="searchBtnHandler(this);"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
