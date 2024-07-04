@@ -40,8 +40,3 @@ footer {
     align-items: center;
     justify-content: center;
 }
-
-footer .inner {
-    width: 960px;
-    margin: 0 auto;
-}
