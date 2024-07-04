@@ -109,16 +109,12 @@ public class AdminController {
 	//ajax
 	//게시글 검색(select)  
 	@PostMapping("/keyword")
-	//@ResponseBody
 	public String keywordSearch(
 			Model model
 			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String search
 			,@RequestParam(required = false ) String pick) {
 		Map<String, Object> map=adminservice.keywordSearch(num, pageNum, currentPageNum, pick, search);
-		//map.put("write",write);
-		//map.put("pick",pick);
-		//adminservice.keywordsearch(map);
 		model.addAttribute("diaryMap",map);
 		return "admin/board_fragment";
 	}
@@ -160,7 +156,6 @@ public class AdminController {
 	
 	//신고게시글 검색
 	@PostMapping("/complain/search")
-	//@ResponseBody
 	public String complainsearch(Model model
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 	 , @RequestParam(required = false )String searchMem ){
@@ -223,7 +218,6 @@ public class AdminController {
 	
 	//결제취소 회원 검색
 	@PostMapping("/cancel/search")
-	//@ResponseBody
 	public String cancelSearch(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			 , @RequestParam(required = false )String searchMem){
 				 Map<String, Object> list = adminservice.cancelSearch(num, pageNum, currentPageNum,searchMem);

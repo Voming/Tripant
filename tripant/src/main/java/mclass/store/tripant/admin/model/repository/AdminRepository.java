@@ -25,7 +25,6 @@ public interface AdminRepository {
 	public Integer adminMemInfo(Map<String, Object> map);
 	
 	//개수
-	//public int page(String memNick);
 	public int totalCount();
 	public int totalCountSearch(String searchMem);
 	
