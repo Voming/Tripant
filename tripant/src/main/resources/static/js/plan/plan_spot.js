@@ -25,11 +25,9 @@ function spotMoreBtnClickHandler(thisElement) {
 		$(spotId).replaceWith(wrap_spot);
 
 		//더보기 계속 붙일건지
-		spotboxCount = $(".spot-box").length;
-		console.log("clickspotnum" + clickspotnum);
-		console.log("spotboxCount" + spotboxCount);
-		if (spotboxCount  < 20 * (clickspotnum + 1)) { //20개 보다 적게 나온경우
-			$(".spot_more_btn").css('display', 'none');
+		spotboxCount = $(spotId).find(".spot-box").length;
+		if (spotboxCount < 20 * (clickspotnum + 1)) { //20개 보다 적게 나온경우
+			$(".spot_more_btn").remove();
 		}
 
 		// 미리 클릭해 둔 리스트 다시 활성화
@@ -59,7 +57,6 @@ $(document).ready(function() {
 		areacode = $(".plan-areacode").attr("value");
 		var placeTypeS = $(this).text();
 
-
 		if (placeTypeS == '관광지') {
 			spottype = 1;
 		} else if (placeTypeS == '문화시설') {
@@ -85,14 +82,14 @@ $(document).ready(function() {
 			$(spotId).replaceWith(wrap_spot);
 
 			//결과값 null 체크
-			spotboxCount = $(".spot-box").length;
+			spotboxCount = $(spotId).find(".spot-box").length;
 
-			if (spotboxCount.length == 0) { //결과 없음
+			if (spotboxCount == 0) { //결과 없음
 				$(".spot_more_btn").remove();
 				var htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
 				$(".resultSpotCheck").html(htmlVal);
-			} else if (spotboxCount.length < 20) { //20개 보다 적게 나온경우
-				$(".spot_more_btn").css('display', 'none');
+			} else if (spotboxCount < 20) { //20개 보다 적게 나온경우
+				$(".spot_more_btn").remove();
 			}
 
 			// 미리 클릭해 둔 리스트 다시 활성화
@@ -132,13 +129,11 @@ function btnSpotFindClickHandler() {
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
-		$("#spot-tab01 .wrap-spotList").replaceWith(wrap_spot);
+		$(spotId).replaceWith(wrap_spot);
 
 		//결과값 null(검색 결과 더보기) 체크
-		spotboxCount = $(".spot-box").length;
-		console.log(spotboxCount);
+		spotboxCount = $(spotId).find(".spot-box").length;
 		var htmlVal;
-
 		if (spotboxCount == 0) { //결과 없음
 			htmlVal = '<p style="text-align: center;">결과가 없습니다.</p>';
 		} else if (spotboxCount >= 20) { //더보기 필요
@@ -169,18 +164,17 @@ function spotFindMoreBtnClickHandler(thisElement) {
 		}
 		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
-		$("#spot-tab01 .wrap-spotList").replaceWith(wrap_spot);
+		$(spotId).replaceWith(wrap_spot);
 
 		//결과값 null(검색 결과 더보기) 체크
-		spotboxCount = $(".spot-box").length;
-
+		spotboxCount = $(spotId).find(".spot-box").length;
 		if (spotboxCount >= 20 * (clickspotfindnum + 1)) {
 			var htmlVal = `
 				<button type="button" onclick="spotFindMoreBtnClickHandler(this);"
 				class="spot_find_more_btn">더보기</button>`;
 			$(".resultSpotCheck").html(htmlVal);
 		} else { //20개 보다 적게 나온경우
-			$(".spot_find_more_btn").css('display', 'none');
+			$(".spot_find_more_btn").remove();
 		}
 
 		$(".spot_more_btn").remove(); //검색아닌 더보기 지우기
