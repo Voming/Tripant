@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
 	<!-- 주가할 장소 -->
-	<div th:fragment="spot-check" id="tab02" class="hide flex">
+	<div th:fragment="spot-check" id="tab02" class="hide grid">
 		<div class="spot first grid">
 			<h3>장소 선택</h3>
 			<form id="frm-find-spot">
@@ -36,7 +36,7 @@
 				<div class="selected-spot-info">
 					<p class="count-spot">0</p>
 					<p class="time-spot"></p>
-					<p class="reset-spot" onclick="spotResetBtnClickHandler();">장소 추가 완료</p>
+					<p class="reset-spot" onclick="spotResetBtnClickHandler();">장소 선택 초기화</p>
 				</div>
 				<div class="selected-spot-list"></div>
 			</div>
