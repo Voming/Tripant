@@ -38,7 +38,7 @@
 			where mem_nick like #{keyword}
 		</if> 
 	</select>
-	
+	<!-- 검색 멤버 수 -->
 	<select id="totalCountSearch" resultType="_int" parameterType="string">
 		select count(*) from member 
 		<if test='searchMem != null and searchMem !=""'>
@@ -54,12 +54,6 @@
 	
 	<!--게시글 조회 -->
 	<select id="boardList" resultType="AdminBoardEntity"  parameterType="map">
-	<!-- select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views,nvl(likes,0) likes, mem_nick from 
-	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
-	from DIARY a
-	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
-	join member on diary_mem_email=mem_email
-	 -->
 	SELECT T2.* FROM
 		(SELECT T1.*, ROWNUM RN FROM
 		(select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views,nvl(likes,0) likes, mem_nick from 
@@ -67,13 +61,21 @@
 		from DIARY a
 		left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
 		join member on diary_mem_email=mem_email
-		<if test='searchMem != null and searchMem !=""'>
-        <bind name="keyword" value="'%'+searchMem+'%'" />
-		WHERE mem_nick like #{keyword}
+		<if test='write != null and write !=""'>
+		<bind name="keyword" value="'%'+write+'%'" />
+		<choose>
+			<when test="pick.equals('title')">
+				where diary_title like #{keyword}
+			</when>
+			<when test="pick.equals('nick')">
+				where mem_nick like #{keyword}
+			</when>
+		</choose>
 		</if>
 		 ORDER BY diary_date DESC) T1 ) T2
 		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
+	
 	<!-- 게시글 총개수 -->
 	<select id="diaryCount" resultType="_int" parameterType="map">
 	select count(*) from (select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views,nvl(likes,0) likes, mem_nick from 
@@ -81,11 +83,44 @@
 	from DIARY a
 	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
 	join member on diary_mem_email=mem_email)
+	<if test='write != null and write !=""'>
+		<bind name="keyword" value="'%'+write+'%'" />
+		<choose>
+			<when test="pick.equals('title')">
+				where diary_title like #{keyword}
+			</when>
+			<when test="pick.equals('nick')">
+				where mem_nick like #{keyword}
+			</when>
+		</choose>
+	</if>
+	</select>
+	
+	<!--검색 게시글 총개수  -->
+	<select id="diarySearchCount" resultType="_int" parameterType="string">
+	select count(*) from (select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views,nvl(likes,0) likes, mem_nick from 
+	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
+	from DIARY a
+	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
+	join member on diary_mem_email=mem_email)
+	<if test='write != null and write !=""'>
+		<bind name="keyword" value="'%'+write+'%'" />
+		<choose>
+			<when test="pick.equals('title')">
+				where diary_title like #{keyword}
+			</when>
+			<when test="pick.equals('nick')">
+				where mem_nick like #{keyword}
+			</when>
+		</choose>
+	</if>
 	</select>
 	
 	<!--게시글 조건검색(select)  -->
 	<select id="keywordsearch"  parameterType="map" resultType="AdminBoardEntity">
-	select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
+	SELECT T2.* FROM
+		(SELECT T1.*, ROWNUM RN FROM
+	(select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
 	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
 	from DIARY a
 	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
@@ -101,6 +136,8 @@
 			</when>
 		</choose>
 	</if>
+		ORDER BY diary_date DESC) T1 ) T2
+		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
 	
 	<!--좋아요 순으로 정렬 -->
@@ -142,7 +179,7 @@
 		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
 	
-		<!-- 총 신고게시글 수 -->
+	<!-- 총 신고게시글 수 -->
 	<select id="boardCount" resultType="_int" parameterType="map">
 	select count(*) 
 	from 
@@ -158,6 +195,7 @@
 			where mem_nick like #{keyword}
 		</if> 
 	</select>
+	<!-- 검색 신고게시글 수 -->
 	<select id="boardCountSearch" resultType="_int" parameterType="string">
 	select count(*) 
 	from 

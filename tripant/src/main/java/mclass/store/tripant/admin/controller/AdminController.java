@@ -101,8 +101,8 @@ public class AdminController {
 	//게시글
 	@GetMapping("/board")
 	public String board(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-			, @RequestParam(required = false )String searchMem) throws MethodArgumentTypeMismatchException {
-		model.addAttribute("memBoardMap",adminservice.boardList( num, pageNum, currentPageNum, searchMem));
+			, @RequestParam(required = false )String write,@RequestParam(required = false )String pick) throws MethodArgumentTypeMismatchException {
+		model.addAttribute("memBoardMap",adminservice.boardList( num, pageNum, currentPageNum, pick,write));
 		
 		return "admin/admin_board";
 	}
@@ -110,12 +110,15 @@ public class AdminController {
 	//ajax
 	//게시글 검색(select)  
 	@PostMapping("/keyword")
-	@ResponseBody
-	public List<AdminBoardEntity> keywordSearch(Model model,@RequestParam String write, @RequestParam String pick) {
-		Map<String, Object> map=new HashMap<>();
-		map.put("write",write);
-		map.put("pick",pick);
-		return adminservice.keywordsearch(map);
+	//@ResponseBody
+	public String keywordSearch(Model model,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String write,@RequestParam(required = false )String pick) {
+		Map<String, Object> map=adminservice.keywordsearch(num, pageNum, currentPageNum,write,pick);
+		//map.put("write",write);
+		//map.put("pick",pick);
+		//adminservice.keywordsearch(map);
+		model.addAttribute("memBoardMap",map);
+		return "admin/board_fragment";
 	}
 	
 	//ajax

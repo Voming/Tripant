@@ -100,8 +100,8 @@ public class AdminService {
 	}
 	
 	//게시글리스트
-	public Map<String, Object> boardList(int num, int pageNum, int currentPageNum, String searchMem){
-Map<String, Object> result = null;
+	public Map<String, Object> boardList(int num, int pageNum, int currentPageNum,String pick,String write){
+		Map<String, Object> result = null;
 		
 		//총 게시글 개수
 		int totalCount = admindao.diaryCount();
@@ -120,7 +120,7 @@ Map<String, Object> result = null;
 		//끝페이지
 		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
 		
-		List<AdminBoardEntity> boardList = admindao.boardList(startRownum, endRownum, searchMem);
+		List<AdminBoardEntity> boardList = admindao.boardList(startRownum, endRownum, pick,write);
 		result = new HashMap<String, Object>();
 		result.put("boardList", boardList);
 		result.put("totalCount", totalCount);
@@ -128,15 +128,45 @@ Map<String, Object> result = null;
 		result.put("startPageNum", startPageNum);
 		result.put("endPageNum", endPageNum);
 		result.put("currentPage", currentPageNum);
-		result.put("searchMem", searchMem);
-//		result.put("searchTitle", searchTitle);
+		result.put("pick", pick);
+		result.put("write", write);
 
 		return result;
 	}
 	
 	//게시글 검색(select)
-	public List<AdminBoardEntity> keywordsearch(Map<String, Object> map){
-		return admindao.keywordsearch(map);
+	public Map<String, Object> keywordsearch(int num, int pageNum, int currentPageNum,String pick,String write){
+		Map<String, Object> result = null;
+		
+		//총 게시글 개수
+		int totalCount = admindao.diarySearchCount(pick,write);
+		
+		int startRownum = num * (currentPageNum - 1) + 1;
+		int endRownum = num * currentPageNum;
+		
+//		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
+		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
+		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
+		
+		//시작페이지
+		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
+				: (currentPageNum / pageNum) * pageNum + 1;
+		
+		//끝페이지
+		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
+		
+		List<AdminBoardEntity> boardList = admindao.keywordsearch(startRownum, endRownum, pick,write);
+		result = new HashMap<String, Object>();
+		result.put("boardList", boardList);
+		result.put("totalCount", totalCount);
+		result.put("totalPageCount", totalPageCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("currentPage", currentPageNum);
+		result.put("pick", pick);
+		result.put("write", write);
+
+		return result;
 	}
 
 	//좋아요 정렬

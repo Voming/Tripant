@@ -3,14 +3,17 @@
 
 <div class="wrap-list" th:fragment="boardlist">
 <div class="ad-search">
-			<form name="search-form" method="get">
 				<select class="search-option" name="option" style='border:none'>
 					<option value="nick"  selected>닉네임</option>
 					<option value="title" >제목</option>
 				</select>
-				<input class="search" type="text" name="search" value="" placeholder="게시글검색">
-				<button type="button" class="btn-search"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
-			</form>
+				<th:block th:if="${memBoardMap!=null and memBoardMap.write != null}">
+				<input class="search" type="text" name="search" placeholder="게시글검색" th:value="${memBoardMap.write}">
+				</th:block>
+				<th:block th:if="${memBoardMap==null or memBoardMap.write!= null}">
+				<input class="search" type="text" name="search" placeholder="게시글검색">
+				</th:block>
+				<button type="button" class="btn-search" onclick="searchBtnHandler(this);"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
 			</div>
 			<div class="ad-content">
 				<ul class="boardlist">
