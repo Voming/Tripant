@@ -65,7 +65,7 @@ public class AdminService {
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
-		int totalCount = admindao.totalCount();
+		int totalCount = admindao.totalCountSearch(searchMem);
 		
 		int startRownum = num * (currentPageNum - 1) + 1;
 		int endRownum = num * currentPageNum;
@@ -194,7 +194,7 @@ Map<String, Object> result = null;
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
-		int totalCount = admindao.boardCount();
+		int totalCount = admindao.boardCountSearch(searchMem);
 		
 		int startRownum = num * (currentPageNum - 1) + 1;
 		int endRownum = num * currentPageNum;
@@ -276,7 +276,7 @@ Map<String, Object> result = null;
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
-		int totalCount = admindao.payCount();
+		int totalCount = admindao.payCountSearch(searchMem);
 		
 		int startRownum = num * (currentPageNum - 1) + 1;
 		int endRownum = num * currentPageNum;
@@ -352,7 +352,7 @@ Map<String, Object> result = null;
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
-		int totalCount = admindao.itemCount();
+		int totalCount = admindao.itemSearchCount(itemCode);
 		
 		int startRownum = num * (currentPageNum - 1) + 1;
 		int endRownum = num * currentPageNum;

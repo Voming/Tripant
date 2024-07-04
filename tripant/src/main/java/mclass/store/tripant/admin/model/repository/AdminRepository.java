@@ -72,6 +72,7 @@ public interface AdminRepository {
 	// 상품목록
 	public List<AdminStoreEntity> itemList(int startRownum, int endRownum,String itemCode);
 	public int itemCount();
+	public int itemSearchCount(String itemCode);
 	//상품검색
 	public List<AdminStoreEntity> itemsearch(int startRownum, int endRownum,String itemCode);
 		
