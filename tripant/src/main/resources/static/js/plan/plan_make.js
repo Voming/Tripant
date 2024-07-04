@@ -57,7 +57,7 @@ $(loadedHandler);
 function loadedHandler() {
 	//메인 화면 돌아가기
 	$(".logo").on("click", function() {
-		location.href = "/";
+		location.href = contextPath;
 	});
 
 	//달력 다시 열기
@@ -126,7 +126,7 @@ function loadedHandler() {
 				}
 				return false;
 			} else if (cls_name === 'nav-3 active') {
-				if (markersStay.length < calendarPlan.dateArr.length) {
+				if (markersStay.length < calendarPlan.dateArr.length - 1) {
 					alert("하루에 한 개 이상의 숙소에 방문해야해요. 숙소를 더 추가해주세요!");
 				} else {
 					// 일정 만들기 알고리즘 돌리기
