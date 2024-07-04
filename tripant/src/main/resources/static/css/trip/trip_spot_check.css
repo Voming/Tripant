@@ -76,8 +76,12 @@
 	line-height: 120%;
 	white-space: nowrap;
     overflow: hidden;
+    flex-direction: column;
 }
 
+.selected-spot-box .wrap-box .selected-spot-txt > span{
+	 overflow: hidden;
+}
 .selected-spot-box .wrap-box .time {
 	display: block;
 	width: 60px;

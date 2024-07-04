@@ -69,15 +69,15 @@ public class TripController {
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
-//
-//	@PostMapping("/spot/find")
-//	public String spotFindMore(Model model, @RequestParam("findArea") String findArea,
-//			@RequestParam("areaCode") Integer areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
-//		model.addAttribute("spotList", null);
-//		// 20개씩 더 출력하기
-//		int maxNum = (clickSpotFindNum + 1) * 20;
-//		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode, maxNum);
-//		model.addAttribute("spotList", spotList);
-//		return "plan/spot_tab_content";
-//	}
+
+	@PostMapping("/spot/find")
+	public String spotFindMore(Model model, @RequestParam("findArea") String findArea,
+			@RequestParam("areaCode") Integer areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
+		model.addAttribute("spotList", null);
+		// 20개씩 더 출력하기
+		int maxNum = (clickSpotFindNum + 1) * 20;
+		List<PlaceboxEntity> spotList = service.selectSpotFindList(findArea, areaCode, maxNum);
+		model.addAttribute("spotList", spotList);
+		return "plan/spot_tab_content";
+	}
 }

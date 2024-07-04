@@ -4,12 +4,8 @@
 }
 .wrap-main{
 	display:flex;
-/* 	flex-direction:row; */
-   /*  margin: 0 auto; */
-/*     width:1900px; */
 	min-width: 1024px;
 }
-
 
 body{
 	margin:0;
@@ -97,4 +93,5 @@ a{
 	width:70px;
 	background-color:white;
 	margin:15px 15px 0 auto;
+	/* font-size:11px; */
 }

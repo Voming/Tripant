@@ -44,12 +44,13 @@ function cancelHandler(){
 	$(this).siblings('.save').attr('disabled',true); 
 	//n일차 btn 보여줌
 	$(this).parent().prevAll().find('.dayn').show(); 
+	//담기 숨김
+	$('#add-btn').addClass('hide');
 	
 	//일정 목록보여주기
 	$(this).parents().find('.tourlist').removeClass('hide');
 	$(this).parents().find('.edit-tourlist').addClass('hide');
 	$(this).parents().find('.spot-basket').addClass('hide');
-	
 	//spot-check
 	if($('#tab02').hasClass('hide')===false){
 		$('#tab02').addClass('hide');
@@ -63,7 +64,7 @@ function saveHandler(){
 	$(this).siblings('.edit').show(); //편집 보여줌
 	$(this).attr('disabled',true); //저장 비활성화
 	$(this).parent().prevAll().find('.dayn').show(); //n일차 btn 보여줌
-
+	$('#add-btn').addClass('hide');//담기 숨김
 	//일정 목록보여주기
 	$(this).parents().find('.tourlist').removeClass('hide');
 	$(this).parents().find('.edit-tourlist').addClass('hide');
@@ -73,6 +74,8 @@ function saveHandler(){
 	if($('#tab02').hasClass('hide')===false){
 		$('#tab02').addClass('hide');
 	}
+	
+	
 	//DB이동 ajax
 	
 	

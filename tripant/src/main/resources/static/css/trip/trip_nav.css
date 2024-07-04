@@ -22,10 +22,13 @@
     border-radius: 10px;
 }
 .main-wrapper .nav-wrapper .cancel,
-.main-wrapper .nav-wrapper .edit{
+.main-wrapper .nav-wrapper .edit,
+.main-wrapper .nav-wrapper #add-btn{
 	height:30px;
 }
-.main-wrapper .nav-wrapper .plan_next .btn{
+
+.main-wrapper .nav-wrapper .btn:hover,
+.main-wrapper .nav-wrapper #add-btn{
 	background-color: black;
 	color: white;
 }
