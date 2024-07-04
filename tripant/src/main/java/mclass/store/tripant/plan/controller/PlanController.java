@@ -54,9 +54,9 @@ public class PlanController {
 	// 지역&제목 모달에서 선택한 지역 정보 가져오기
 	@PostMapping("/area")
 	@ResponseBody
-	public List<AreaEntity> area(@RequestParam("areaCode") Integer areaCode) {
-		List<AreaEntity> areaList = planService.selectAreaInfoList(areaCode);
-		return areaList;
+	public AreaEntity area(@RequestParam("areaCode") Integer areaCode) {
+		AreaEntity areaInfo= planService.selectAreaInfo(areaCode);
+		return areaInfo;
 	}
 
 	@PostMapping("/keep")
@@ -75,8 +75,9 @@ public class PlanController {
 	@PostMapping("/spot")
 	public String spot(Model model, @RequestParam Integer areaCode, @RequestParam Integer spotType,
 			@RequestParam Integer clickSpotNum) throws IOException {
+		model.addAttribute("spotList", null);
 		// 20개씩 더 출력하기
-		int maxNum = (clickSpotNum + 1) * 10;
+		int maxNum = (clickSpotNum + 1) * 20;
 		List<PlaceboxEntity> spotList = planService.selectTypeList(areaCode, spotType, maxNum);
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
@@ -85,6 +86,7 @@ public class PlanController {
 	@PostMapping("/spot/find")
 	public String spotFindMore(Model model, @RequestParam("findArea") String findArea,
 			@RequestParam("areaCode") Integer areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
+		model.addAttribute("spotList", null);
 		// 20개씩 더 출력하기
 		int maxNum = (clickSpotFindNum + 1) * 20;
 		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode, maxNum);
@@ -98,8 +100,9 @@ public class PlanController {
 	public String stayMore(Model model, @RequestParam("areaCode") Integer areaCode,
 			@RequestParam("stayType") Integer stayType, @RequestParam("clickStayNum") Integer clickStayNum)
 			throws IOException {
-		// 10개씩 더 출력하기
-		int maxNum = (clickStayNum + 1) * 10;
+		model.addAttribute("stayList", null);
+		// 20개씩 더 출력하기
+		int maxNum = (clickStayNum + 1) * 20;
 		List<PlaceboxEntity> stayList = planService.selectTypeList(areaCode, stayType, maxNum);
 		model.addAttribute("stayList", stayList);
 		return "plan/stay_tab_content";
@@ -108,6 +111,7 @@ public class PlanController {
 	@PostMapping("/stay/find")
 	public String stayFindMore(Model model, @RequestParam("findArea") String findArea,
 			@RequestParam("areaCode") Integer areaCode, @RequestParam("clickStayFindNum") Integer clickStayFindNum) {
+		model.addAttribute("stayList", null);
 		// 20개씩 더 출력하기
 		int maxNum = (clickStayFindNum + 1) * 20;
 		List<PlaceboxEntity> stayList = planService.selectStayFindList(findArea, areaCode, maxNum);

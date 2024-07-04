@@ -318,29 +318,26 @@ function displayEditModeAfterDragEnd(){
 			 	<div class="spot grid wfull" >
 			 		<div class="spot-number backimg"><p>${j+1}</p></div>
 			 		<div class="spot-staytime" onclick="timeRangeBtnClickHandler(this);" data-startTime="${info.startTime}" data-endTime="${info.endTime}">
-			 			<p class="timerange">${info.startTime} - ${info.endTime}</p>
+			 			<p class="timerange" style="cursor: pointer;">${info.startTime} - ${info.endTime}</p>
 			 		</div>
 			 		
 			 		<div class="spot-type">명소</div>
 			 		<div class="spot-title wfull"> ${info.title}</div>
-			 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>
+			 		<div class="spot-memo"><img class="img-memo"  onclick="memoClickHandler(this);" style="width: 20px;height:20px;cursor: pointer;" src="/images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>
 			 		
 			 		<!-- 이미지 X-->
-			 		
-			 		<div class="spot-caricon"><img onclick="memoClickHandler(this);"  style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>`;
+			 		`;
 			
 			//이동시간 표시 및 자동차 아이콘 표시 
 			//마지막  상소일 경우 이동시간 hide
-	 		if( (j+1) < daylength){
-				htmlval += `
-				<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
-				<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${details.dayDetailInfoEntity[j+1].title}"  target="_blank">${info.durationMin} 분> </a>
-				`;
-			}else{// 숙소에 도착했을 땐 이동시간 표시 X
-				htmlval += `
-				<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
-				<div class="spot-move hide"> </div>
-				`;
+			if( (j+1) < daylength){
+				htmlval+=`
+					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					<div class="spot-move"> ${info.durationMin}분> </div>`;
+			}else{
+				htmlval+=`
+					<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					<div class="spot-move">  </div>`;
 			}
 			
 			htmlval+=`<!-- x 버튼 -->

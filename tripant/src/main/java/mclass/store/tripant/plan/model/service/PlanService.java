@@ -32,8 +32,8 @@ public class PlanService {
 		return planRepository.selectAreaFindList(findArea);
 	}
 
-	public List<AreaEntity> selectAreaInfoList(int areaCode) {
-		return planRepository.selectAreaInfoList(areaCode);
+	public AreaEntity selectAreaInfo(int areaCode) {
+		return planRepository.selectAreaInfo(areaCode);
 	}
 
 	public String selectAreaShortName(int areaCode) {

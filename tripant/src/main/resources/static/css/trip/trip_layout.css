@@ -27,7 +27,7 @@
 .main-wrapper .w220{width:220px;}
 
 /* 스크롤바 설정 */
-.scrollbar::-webkit-scrollbar{
+.scrollbar:not(#tab02)::-webkit-scrollbar{
   	height: 10px;  /* 오른쪽 왼쪽 스크롤바 폭 너비 */
   	width: 10px;  /* 위 아래 스크롤바 폭 너비 */
 }

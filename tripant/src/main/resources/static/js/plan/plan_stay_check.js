@@ -100,7 +100,8 @@ function stayModalDoneBtnClickHandler() {
 
 	// 장소 설정 정보 부분 업데이트
 	$(".count-stay").text(markersStay.length);
-	var dayTxt = markersStay.length + "일 / " + calendarPlan.dateArr.length - 1 + "일";
+	var dayTxt = markersStay.length + "일 / " + (calendarPlan.dateArr.length - 1) + "일";
+	console.log(dayTxt);
 	$(".time-stay").text(dayTxt);
 }
 

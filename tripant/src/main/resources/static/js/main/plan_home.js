@@ -7,7 +7,7 @@ function loadedHandler() {
 	$("#selectbox").on("click", changeSelectAreaHandler);
 }
 
-//모달 열기 ========================
+//모달 열기-------------------------
 function btnMakeClickHandler() {
 	var auth = $(".auth").attr("value");
 
@@ -52,7 +52,6 @@ function changeSelectAreaHandler() {
 			, dataType: 'json'
 			, success: function(result) {
 				if (result != null) {
-					/*console.log(result);*/
 					displayAreaInfo(result);
 				}
 			}
@@ -60,32 +59,25 @@ function changeSelectAreaHandler() {
 	}
 }
 
-// 지역 선택시 값 넣기 TODO
-function displayAreaInfo(datalist) {
-	if (datalist[0] != null) {
-		var areaDto = datalist[0];
-		var aName = areaDto.areaEngName;
+// 지역 선택시 값 넣기
+function displayAreaInfo(data) {
+	if (data != null) {
+		var aName = data.areaEngName;
 		$("#planForm h2").text(aName);
-		var aExplain = areaDto.areaExplain;
+		var aExplain = data.areaExplain;
 		$("#planForm h4").text(aExplain);
-		$("#infoImg")[0].src = contextPath + "images/area/" + areaDto.areaFileName;
+		$("#infoImg")[0].src = contextPath + "images/area/" + data.areaFileName;
 	}
 }
 
 //일정 게속 만들기
 function btnKeepClickHandler(){
-	/*var area = $("#selectbox option:selected").text();
-	console.log(area);
-	var title =  $(this).parent().find("input[name=planTitle]").val();
-	console.log(title);*/
 	planForm.action= contextPath +"plan/keep";
 	planForm.method="post";
 	planForm.submit();
 }
 
-
-
-//지역 검색 ================================
+//지역 검색-------------------------
 function btnFindClickHandler() {
 	var findArea = $("[name=find]").val().trim();
 
