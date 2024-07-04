@@ -2,13 +2,13 @@
 $(loadedHandler);
 function loadedHandler(){
 	 //체크박스
-	$('input[name=check]').on('click',checkSetHandler);
+	//$('input[name=check]').on('click',checkSetHandler);
 	//초기화버튼
-	$('.btn-reset').on('click',cickSetHandler);  
+	//$('.btn-reset').on('click',cickSetHandler);  
 	//검색
 	//$('.btn-search').on("click",searchHandler);
 	//신고수 정렬
-	$('.btn-reports').on("click",clickReportHandler);
+	//$('.btn-reports').on("click",clickReportHandler);
 	
 }
 /* 체크표시가 되면 버튼 활성화 */

@@ -21,13 +21,13 @@
 							<li>제목</li>
 							<li>닉네임</li>
 							<li>날짜</li>
-							<li>신고수<button type="button" class="btn-reports">▼</button></li>
+							<li>신고수<button type="button" class="btn-reports" onclick="clickReportHandler();">▼</button></li>
 						</ul>
 					</li>
 					<li id="list">
-						<th:block th:each="complainBoard:${complainMap.complainBoard}" th:data-reports="${complainBoard.reports}">
+						<th:block th:each="complainBoard:${complainMap.complainBoard}" th:data-reports="${complainBoard.reports}" >
 						<ul class="col list">
-							<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" ></li>
+							<li><input type="checkbox" class="check" name="check"  th:data-diary-id="${complainBoard.diaryId}" onclick="checkSetHandler();"></li>
 							<li th:text="${complainBoard.diaryId}"></li>
 							<li th:text="${complainBoard.diaryTitle}"></li>
 							<li th:text="${complainBoard.memNick}"></li>
@@ -40,7 +40,7 @@
 				</ul>
 				
 			</div>
-			<div><button type="button" class="btn-reset" disabled>초기화</button></div>
+			<div><button type="button" class="btn-reset" disabled onclick="cickSetHandler();">초기화</button></div>
 			
 			<!-- paging --> 
 		<div style="text-align: center;">

@@ -2,9 +2,9 @@
 $(loadedHandler);
 function loadedHandler() {
 	//좋아요
-	$(".btn.like").on("click", ClickLikeHandler);
+	//$(".btn.like").on("click", ClickLikeHandler);
 	//조회수
-	$(".btn.view").on("click", ClickViewHandler);
+	//$(".btn.view").on("click", ClickViewHandler);
 	//조건검색
 	//$('.btn-search').on("click",searchHandler);
 	
