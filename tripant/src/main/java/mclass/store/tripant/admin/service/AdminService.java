@@ -359,7 +359,6 @@ Map<String, Object> result = null;
 		
 //		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
 		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		// 조건문 - 앞에가 0이 맞으면 : 앞에꺼, 0이 아니면 : 뒤에꺼
 		
 		//시작페이지
 		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1

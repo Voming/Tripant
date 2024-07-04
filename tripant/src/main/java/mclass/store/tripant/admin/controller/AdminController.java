@@ -20,13 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
-import mclass.store.tripant.admin.domain.AdminMemEntity;
-import mclass.store.tripant.admin.domain.AdminStoreEntity;
 import mclass.store.tripant.admin.service.AdminService;
 
 @Controller
@@ -45,7 +42,7 @@ public class AdminController {
 	private String storeId;
 	
 	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) 
-	private int num = 9;
+	private int num = 3;
 	
 	//화면 하단에 나타날 페이지수
 	private int pageNum = 5;
@@ -245,7 +242,7 @@ public class AdminController {
 	@PostMapping("/goods/search")
 	public String itemsearch(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String itemCode){
-		model.addAttribute("goodsMap", adminservice.itemList(num, pageNum, currentPageNum,itemCode));
+		model.addAttribute("goodsMap", adminservice.itemListSearch(num, pageNum, currentPageNum,itemCode));
 		return "admin/goodspage_fragment";
 	}
 	
