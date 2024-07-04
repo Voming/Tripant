@@ -1,22 +1,3 @@
-function openSpot(){
-	$('#tab02').removeClass('hide');
-	$('#edit-tourlist').addClass('hide');
-	$('#spot-basket').addClass('hide');
-	$('#add-btn').removeClass('hide');
-}
-
-// ***
-class Spot {
-	constructor(id, title, mapx, mapy,spotTime) {
-		this.id = id;
-		this.title = title;
-		this.mapx = mapx;
-		this.mapy = mapy;
-		this.spotTime = spotTime;
-	}
-}
-let spotArr = new Array(Spot);
-
 var clickspotnum = 0;
 var clickspotfindnum = 0;
 var spottype;
@@ -26,6 +7,30 @@ var spotboxCount;
 var findArea;
 var spotId = "";
 var areacode = $('.schedule-wrapper').data('area-code');
+
+//장소추가 버튼
+function openSpot(){
+	$('#tab02').removeClass('hide');
+	$('#edit-tourlist').addClass('hide');
+	$('#spot-basket').addClass('hide');
+	$('#add-btn').removeClass('hide');
+}
+
+// jjoggan TODO 담기버튼 이벤트
+function includeHandler(){
+	var htmlVal = "";
+	$.each(spotArr, function(idx, element) {
+		element.id;
+		htmlVal += `
+			<div class=" grid">
+		 		<div class="spot-title wfull"> ${info.title}</div>
+		 		<div class="spot-type">명소</div>
+			</div>
+		`; 
+		$(checkId).attr("checked", true);
+	});
+}
+
 
 //더보기
 function spotMoreBtnClickHandler(thisElement) {

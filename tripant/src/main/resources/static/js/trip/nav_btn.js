@@ -1,4 +1,4 @@
- /* 편집 취소 저장 */
+ /*담기 편집 취소 저장 */
  //편집
 function editHandler(){
 	

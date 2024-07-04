@@ -23,7 +23,7 @@
 				
 			</nav>
 			<div class="plan_update flex">
-				<button type="button" class="btn hide" id="add-btn">담기</button>
+				<button type="button" class="btn hide" id="add-btn" onclick="includeHandler();">담기</button>
 				<button type="button" class="edit btn">편집</button>
 				<button type="button" class="cancel btn" style="display: none;">취소</button>
 				<button type="button" class="save btn" disabled = 'disabled' >저장</button>
@@ -68,11 +68,18 @@ let detailListEditMode;
 //여행일자별 순서
 var tripIdx ;
 
-//세션스토리지값 저장
-let editStorage = window.sessionStorage;
-
-//sessionStorage에서 받아온 정보를 담을 전역변수
-let sessionArr= [];
+//*** 장소 추가에서 사용되는 객체
+class Spot {
+	constructor(id, title, mapx, mapy,spotTime) {
+		this.id = id;
+		this.title = title;
+		this.mapx = mapx;
+		this.mapy = mapy;
+		this.spotTime = spotTime;
+	}
+}
+//spot 객체를 담을 배열
+let spotArr = new Array(Spot);
 
 let mapContainer , // 지도를 표시할 div 
 mapOption, //지도 설정
