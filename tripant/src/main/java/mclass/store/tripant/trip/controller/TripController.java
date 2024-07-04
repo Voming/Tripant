@@ -1,5 +1,6 @@
 package mclass.store.tripant.trip.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.trip.domain.DayEntity;
 import mclass.store.tripant.trip.model.service.TripService;
 
@@ -57,4 +58,26 @@ public class TripController {
 		String duration = service.getduration(startLngStr,startLatStr,endLngStr,endLatStr);
 		return duration;
 	}
+	
+	@PostMapping("/spot")
+	public String spot(Model model, @RequestParam Integer areaCode, @RequestParam Integer spotType,
+			@RequestParam Integer clickSpotNum) throws IOException {
+		model.addAttribute("spotList", null);
+		// 20개씩 더 출력하기
+		int maxNum = (clickSpotNum + 1) * 20;
+		List<PlaceboxEntity> spotList = service.selectTypeList(areaCode, spotType, maxNum);
+		model.addAttribute("spotList", spotList);
+		return "plan/spot_tab_content";
+	}
+//
+//	@PostMapping("/spot/find")
+//	public String spotFindMore(Model model, @RequestParam("findArea") String findArea,
+//			@RequestParam("areaCode") Integer areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
+//		model.addAttribute("spotList", null);
+//		// 20개씩 더 출력하기
+//		int maxNum = (clickSpotFindNum + 1) * 20;
+//		List<PlaceboxEntity> spotList = planService.selectSpotFindList(findArea, areaCode, maxNum);
+//		model.addAttribute("spotList", spotList);
+//		return "plan/spot_tab_content";
+//	}
 }

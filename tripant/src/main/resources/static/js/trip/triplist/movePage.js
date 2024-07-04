@@ -11,7 +11,7 @@ $(document).ready(function() {
    
      $('.show-detail').on('click', function() {
 		var planId =$(this).parents('.trip-list').data('plan-id');
-         window.location.href = '/trip/detail/' + planId;
+        window.location.href = '/trip/detail/' + planId;
 	 });
 	 
 // 일행추가 모달의 부모 요소들에게 click 이벤트 전달 X

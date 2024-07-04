@@ -28,7 +28,7 @@
 				<button type="button" class="save btn" disabled = 'disabled' >저장</button>
 			</div>
 		</aside>
-		<div class="schedule-wrapper flex">
+		<div class="schedule-wrapper flex" th:data-area-code="${planInfo.AREACODE}">
 			<div class="plan-info flex">
 				<div class="plan-title" th:text="${planInfo.TITLE}"></div>
 				<span class="plan-location">[[${planInfo.AREANAME}]]</span><span class="plan-priod">[[${planInfo.STARTDAY}]] ~ [[${planInfo.ENDDAY}]]</span>
@@ -121,7 +121,8 @@ class SpotEntity {
 <script th:inline="javascript" th:src="@{/js/trip/changeColor.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/tripMap.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/nav_btn.js}"></script>
-<script th:inline="javascript" th:src="@{/js/trip/add_spot.js}"></script>
+<script th:inline="javascript" th:src="@{/js/trip/trip_spot.js}"></script>
+<script th:inline="javascript" th:src="@{/js/trip/trip_spot_check.js}"></script>
 <script th:inline="javascript" th:src="@{/js/trip/dragAndDrop.js}"></script>
 </body>
 </html>

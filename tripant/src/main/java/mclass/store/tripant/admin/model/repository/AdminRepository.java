@@ -31,11 +31,12 @@ public interface AdminRepository {
 	
 	//게시글관리
 	//전체게시글
-	public List<AdminBoardEntity> boardList(int startRownum, int endRownum, String searchMem);
+	public List<AdminBoardEntity> boardList(int startRownum, int endRownum, String pick,String write);
 	public int diaryCount();
+	public int diarySearchCount(String pick,String write);
 	
 	//게시글 검색(select)
-	public List<AdminBoardEntity> keywordsearch(Map<String, Object> map);
+	public List<AdminBoardEntity> keywordsearch(int startRownum, int endRownum, String pick,String write);
 	
 	//좋아요 많은 순으로 정렬
 	public List<AdminBoardEntity> boardLike();
@@ -72,6 +73,7 @@ public interface AdminRepository {
 	// 상품목록
 	public List<AdminStoreEntity> itemList(int startRownum, int endRownum,String itemCode);
 	public int itemCount();
+	public int itemSearchCount(String itemCode);
 	//상품검색
 	public List<AdminStoreEntity> itemsearch(int startRownum, int endRownum,String itemCode);
 		

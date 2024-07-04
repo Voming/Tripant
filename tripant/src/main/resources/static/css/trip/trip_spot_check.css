@@ -1,15 +1,15 @@
 @charset "UTF-8";
-.tab-content #tab02 .spot.second {
+.schedule-wrapper #tab02 .spot.second {
 	margin-left: 10px;
-	height: 870px;
+	height: 100%;
 }
 
-.tab-content #tab02 .spot.second .wrap-selected-spot {
+.schedule-wrapper #tab02 .spot.second .wrap-selected-spot {
 	overflow-y: auto;
 	height: 100%;
 }
 /* 위에 글자들 */
-.tab-content #tab02 .selected-spot-info {
+.schedule-wrapper #tab02 .selected-spot-info {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
