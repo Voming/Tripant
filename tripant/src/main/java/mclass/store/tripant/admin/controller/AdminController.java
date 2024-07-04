@@ -68,7 +68,7 @@ public class AdminController {
 			, @RequestParam(required = false )String searchMem
 			) {
 		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPageNum, searchMem));
-		return "admin/page_fragment";
+		return "admin/member_fragment";
 	}
 
 	 //ajax
