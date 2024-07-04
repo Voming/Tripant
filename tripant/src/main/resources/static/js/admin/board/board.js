@@ -108,6 +108,10 @@ function searchBtnHandler(thisElement){
 	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	var search = $("[name=search]").val();  //input 값
 	var targetPage = $(thisElement).data('targetpage');
+	console.log(pick);
+	console.log(search);
+	console.log(targetPage);
+	
 	$.ajax({
 		url:"/admin/keyword",
 		method:"post",
