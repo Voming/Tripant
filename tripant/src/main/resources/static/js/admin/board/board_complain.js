@@ -71,11 +71,11 @@ function goPageHandler() {
 //검색
 function searchBtnHandler(thisElement){
 	var targetPage = $(thisElement).data('targetpage');
-	var memNick = $("[name=search]").val().trim();
+	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
 		url:"/admin/complain/search",
 		 method:"post",
-		 data: {memNick:memNick,page: targetPage},
+		 data: {searchMem:searchMem,page: targetPage},
 		 success : function(complainList) {
 			 $('.wrap-list').replaceWith(complainList);
 				},
