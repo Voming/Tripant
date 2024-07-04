@@ -226,7 +226,7 @@ public class AdminController {
 	//@ResponseBody
 	public String cancelSearch(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			 , @RequestParam(required = false )String searchMem){
-				 Map<String, Object> list = adminservice.payList(num, pageNum, currentPageNum,searchMem);
+				 Map<String, Object> list = adminservice.cancelSearch(num, pageNum, currentPageNum,searchMem);
 					if(list != null) {
 						model.addAttribute("list", list);
 					}

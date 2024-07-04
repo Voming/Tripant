@@ -33,6 +33,7 @@
 <!-- paging --> 
 		<div style="text-align: center;">
 			<div class="paging_wrap">
+			<th:block th:if="${goodsMap.totalPageCount > 0}">
 				<div th:if="${goodsMap.startPageNum > 1}" class="goprepage">
 		            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${goodsMap.startPageNum - 1}">&lt;</button>
 		        </div>
@@ -47,7 +48,8 @@
 		        
 		        <div th:if="${goodsMap.endPageNum < goodsMap.totalPageCount}">
 		            <button type="button" onclick="searchBtnHandler(this);" th:data-targetpage="${goodsMap.endPageNum + 1}" class="btn gopage">&gt;</button>
-		        </div>			
+		        </div>	
+		        </th:block>		
 			</div>
 		</div>
 	</div>

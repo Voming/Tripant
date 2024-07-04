@@ -45,6 +45,7 @@
 	<!-- paging --> 
 		<div style="text-align: center;">
 			<div class="paging_wrap">
+			<th:block th:if="${memMap.totalPageCount > 0}">
 				<div th:if="${memMap.startPageNum > 1}" class="goprepage">
 		            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${memMap.startPageNum - 1}">&lt;</button>
 		        </div>
@@ -59,7 +60,8 @@
 		        
 		        <div th:if="${memMap.endPageNum < memMap.totalPageCount}">
 		            <button type="button" onclick="searchBtnHandler(this);" th:data-targetpage="${memMap.endPageNum + 1}" class="btn gopage">&gt;</button>
-		        </div>			
+		        </div>
+		        </th:block>			
 			</div>
 		</div>
 	</div>
