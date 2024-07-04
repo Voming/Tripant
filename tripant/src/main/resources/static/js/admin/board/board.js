@@ -106,14 +106,13 @@ function goPageHandler() {
 // 검색
 function searchBtnHandler(thisElement){
 	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
-	var write = $("[name=search]").val().trim();  //input 값
+	var write = $("[name=search]").val();  //input 값
 	var targetPage = $(thisElement).data('targetpage');
 	$.ajax({
 		url:"/admin/keyword",
 		method:"post",
 		data: {pick:pick, write:write , page: targetPage},
 		success : function(searchList) {
-				console.log(searchList);
 				$('.wrap-list').replaceWith(searchList);
 				},
 	 error : function(request, status, error) {
