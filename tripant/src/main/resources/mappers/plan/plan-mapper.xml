@@ -32,31 +32,41 @@
 	</select>
 
 	<select id="selectTypeList" parameterType="_int" resultType="PlaceboxEntity">
-		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
-		FROM PLACE 
-		WHERE AREACODE=#{areaCode} AND TYPE = #{placeType}  
-		AND ROWNUM <![CDATA[<=]]> #{maxNum}
-		ORDER BY CONTENTID
+		SELECT * FROM (
+		SELECT ROWNUM NUM, SPOT.*
+		FROM(
+			SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
+			FROM PLACE 
+			WHERE AREACODE=#{areaCode} AND TYPE = #{placeType}  
+			ORDER BY CONTENTID) SPOT
+		)
+		WHERE NUM <![CDATA[<=]]> #{maxNum}
 	</select>
 	
 	<select id="selectSpotFindList" parameterType="map" resultType="PlaceboxEntity">
-		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
-		FROM PLACE 
-		WHERE AREACODE=#{areaCode} 
-		AND TYPE IN (1,2,3,4)
-		AND TITLE LIKE '%'||#{findArea}||'%'
-		AND ROWNUM <![CDATA[<=]]> #{maxNum}
-		ORDER BY CONTENTID
+		SELECT * FROM (
+		SELECT ROWNUM NUM, SPOT.*
+		FROM(
+			SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
+			FROM PLACE 
+			WHERE AREACODE=#{areaCode} 
+			AND TYPE IN (1,2,3,4)
+			AND TITLE LIKE '%'||#{findArea}||'%' ORDER BY CONTENTID ) SPOT
+		)
+		WHERE NUM <![CDATA[<=]]> #{maxNum}
 	</select>
 	
 	<select id="selectStayFindList" parameterType="map" resultType="PlaceboxEntity">
-		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
-		FROM PLACE 
-		WHERE AREACODE=#{areaCode} 
-		AND TYPE IN (5,6)
-		AND TITLE LIKE '%'||#{findArea}||'%'
-		AND ROWNUM <![CDATA[<=]]> #{maxNum}
-		ORDER BY CONTENTID
+		SELECT * FROM (
+		SELECT ROWNUM NUM, STAY.*
+		FROM(
+			SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
+			FROM PLACE 
+			WHERE AREACODE=#{areaCode} 
+			AND TYPE IN (5,6)
+			AND TITLE LIKE '%'||#{findArea}||'%' ORDER BY CONTENTID ) STAY
+		)
+		WHERE NUM <![CDATA[<=]]> #{maxNum}
 	</select>
 	
 	<select id="selectAreaPoint" parameterType="_int" resultType="AreaPointEntity">
