@@ -9,17 +9,15 @@
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
-		<form id="frm-chNick" action="/chNick" method="post">
-			<section class="flex chNick">
-				<div class="chNick title">닉네임 변경</div>
-				<div th:replace="~{member/fragment :: inputchk('', '변경할 닉네임', memNick, text, '한글 2~8자', 4)}"></div>
-				<div id="exist-nick" class="hide"><p style="color:red;">중복된 닉네임입니다.</p></div>
-				<div class="flex choose">
-					<button type="button" class="btn back">돌아가기</button>
-					<button type="button" class="btn save" disabled>저장</button>
-				</div>
-			</section>
-		</form>
+		<section class="flex chNick">
+			<div class="chNick title">닉네임 변경</div>
+			<div th:replace="~{member/fragment :: inputchk('', '변경할 닉네임', memNick, text, '한글 2~8자', 4)}"></div>
+			<div id="exist-nick" class="hide"><p style="color:red;">중복된 닉네임입니다.</p></div>
+			<div class="flex choose">
+				<button type="button" class="btn back">돌아가기</button>
+				<button type="button" class="btn save" disabled>저장</button>
+			</div>
+		</section>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
 </body>
