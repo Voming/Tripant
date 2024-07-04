@@ -4,7 +4,7 @@
 
 	<!-- 회원관리 -->
  	<select id="selectMemList" resultType="AdminMemEntity" parameterType="map">
-	SELECT T2.*, (select T3.MEM_QUIT_DATE from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
+	SELECT T2.*, (select to_char(T3.MEM_QUIT_DATE,'yyyy-MM-dd') from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
 		FROM (SELECT T1.*, ROWNUM RN FROM
 			(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, 	
                     to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED
@@ -18,7 +18,7 @@
 	</select>
 	<!--회원검색 -->
 	<select id="selectMemListSearch" resultType="AdminMemEntity" parameterType="map">
-	SELECT T2.*, (select T3.MEM_QUIT_DATE from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
+	SELECT T2.*, (select to_char(T3.MEM_QUIT_DATE,'yyyy-MM-dd') from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
 		FROM (SELECT T1.*, ROWNUM RN FROM
 			(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, 	
                     to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED
@@ -61,8 +61,8 @@
 		from DIARY a
 		left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
 		join member on diary_mem_email=mem_email
-		<if test='write != null and write !=""'>
-		<bind name="keyword" value="'%'+write+'%'" />
+		<if test='search != null and search !=""'>
+		<bind name="keyword" value="'%'+search+'%'" />
 		<choose>
 			<when test="pick.equals('title')">
 				where diary_title like #{keyword}
@@ -75,7 +75,7 @@
 		 ORDER BY diary_date DESC) T1 ) T2
 		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
-	
+
 	<!-- 게시글 총개수 -->
 	<select id="diaryCount" resultType="_int" parameterType="map">
 	select count(*) from (select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views,nvl(likes,0) likes, mem_nick from 
@@ -83,8 +83,8 @@
 	from DIARY a
 	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
 	join member on diary_mem_email=mem_email)
-	<if test='write != null and write !=""'>
-		<bind name="keyword" value="'%'+write+'%'" />
+	<if test='search != null and search !=""'>
+		<bind name="keyword" value="'%'+search+'%'" />
 		<choose>
 			<when test="pick.equals('title')">
 				where diary_title like #{keyword}
@@ -97,14 +97,14 @@
 	</select>
 	
 	<!--검색 게시글 총개수  -->
-	<select id="diarySearchCount" resultType="_int" parameterType="string">
+	<select id="keywordSearchCount" resultType="_int" parameterType="string">
 	select count(*) from (select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views,nvl(likes,0) likes, mem_nick from 
 	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
 	from DIARY a
 	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
 	join member on diary_mem_email=mem_email)
-	<if test='write != null and write !=""'>
-		<bind name="keyword" value="'%'+write+'%'" />
+	<if test='search != null and search !=""'>
+		<bind name="keyword" value="'%'+search+'%'" />
 		<choose>
 			<when test="pick.equals('title')">
 				where diary_title like #{keyword}
@@ -117,16 +117,16 @@
 	</select>
 	
 	<!--게시글 조건검색(select)  -->
-	<select id="keywordsearch"  parameterType="map" resultType="AdminBoardEntity">
+	<select id="keywordSearch"  parameterType="map" resultType="AdminBoardEntity">
 	SELECT T2.* FROM
 		(SELECT T1.*, ROWNUM RN FROM
-	(select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
-	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
-	from DIARY a
-	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
-	join member on diary_mem_email=mem_email
-	<if test='write != null and write !=""'>
-		<bind name="keyword" value="'%'+write+'%'" />
+		(select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
+		((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
+		from DIARY a
+		left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
+		join member on diary_mem_email=mem_email
+	<if test='search != null and search !=""'>
+		<bind name="keyword" value="'%'+search+'%'" />
 		<choose>
 			<when test="pick.equals('title')">
 				where diary_title like #{keyword}

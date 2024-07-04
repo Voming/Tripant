@@ -15,13 +15,13 @@ function goPageHandler() {
 				url:"/admin/member/search"
 				, method : "get"
 				, data : {
-						seachMem : seachMem,
+						searchMem : searchMem,
 						currentpage : currentpage}
 				, dataType : "json"
 				, error : ajaxErrorHandler
 				, success : function(result){
-					if(result.seachMem){
-						$("[name=search]").val(result.seachMem);
+					if(result.searchMem){
+						$("[name=search]").val(result.searchMem);
 					}
 					memListHandler(result);
 				}

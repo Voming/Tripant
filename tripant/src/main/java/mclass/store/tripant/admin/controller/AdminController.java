@@ -42,7 +42,7 @@ public class AdminController {
 	private String storeId;
 	
 	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) 
-	private int num = 3;
+	private int num = 5;
 	
 	//화면 하단에 나타날 페이지수
 	private int pageNum = 5;
@@ -68,7 +68,7 @@ public class AdminController {
 			, @RequestParam(required = false )String searchMem
 			) {
 		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPageNum, searchMem));
-		return "admin/page_fragment";
+		return "admin/member_fragment";
 	}
 
 	 //ajax
@@ -101,9 +101,8 @@ public class AdminController {
 	//게시글
 	@GetMapping("/board")
 	public String board(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-			, @RequestParam(required = false )String write,@RequestParam(required = false )String pick) throws MethodArgumentTypeMismatchException {
-		model.addAttribute("memBoardMap",adminservice.boardList( num, pageNum, currentPageNum, pick,write));
-		
+			, @RequestParam(required = false )String search, @RequestParam(required = false) String pick) throws MethodArgumentTypeMismatchException {
+		model.addAttribute("diaryMap",adminservice.boardList( num, pageNum, currentPageNum, pick,search));
 		return "admin/admin_board";
 	}
 	
@@ -111,13 +110,16 @@ public class AdminController {
 	//게시글 검색(select)  
 	@PostMapping("/keyword")
 	//@ResponseBody
-	public String keywordSearch(Model model,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-			, @RequestParam(required = false )String write,@RequestParam(required = false )String pick) {
-		Map<String, Object> map=adminservice.keywordsearch(num, pageNum, currentPageNum,write,pick);
+	public String keywordSearch(
+			Model model
+			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String search
+			,@RequestParam(required = false ) String pick) {
+		Map<String, Object> map=adminservice.keywordSearch(num, pageNum, currentPageNum, pick, search);
 		//map.put("write",write);
 		//map.put("pick",pick);
 		//adminservice.keywordsearch(map);
-		model.addAttribute("memBoardMap",map);
+		model.addAttribute("diaryMap",map);
 		return "admin/board_fragment";
 	}
 	
@@ -224,7 +226,7 @@ public class AdminController {
 	//@ResponseBody
 	public String cancelSearch(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			 , @RequestParam(required = false )String searchMem){
-				 Map<String, Object> list = adminservice.payList(num, pageNum, currentPageNum,searchMem);
+				 Map<String, Object> list = adminservice.cancelSearch(num, pageNum, currentPageNum,searchMem);
 					if(list != null) {
 						model.addAttribute("list", list);
 					}

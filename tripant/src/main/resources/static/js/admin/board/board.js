@@ -2,9 +2,9 @@
 $(loadedHandler);
 function loadedHandler() {
 	//좋아요
-	$(".btn.like").on("click", ClickLikeHandler);
+	//$(".btn.like").on("click", ClickLikeHandler);
 	//조회수
-	$(".btn.view").on("click", ClickViewHandler);
+	//$(".btn.view").on("click", ClickViewHandler);
 	//조건검색
 	//$('.btn-search').on("click",searchHandler);
 	
@@ -90,13 +90,13 @@ function goPageHandler() {
 				url:"/admin/keyword"
 				, method : "get"
 				, data : {
-						pick:pick, write:write ,
+						pick:pick, search:search ,
 						currentpage : currentpage}
 				, dataType : "json"
 				, error : ajaxErrorHandler
 				, success : function(result){
-					if(result.write){
-						$("[name=search]").val(result.write);
+					if(result.search){
+						$("[name=search]").val(result.search);
 					}
 					memListHandler(result);
 				}
@@ -106,12 +106,16 @@ function goPageHandler() {
 // 검색
 function searchBtnHandler(thisElement){
 	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
-	var write = $("[name=search]").val();  //input 값
+	var search = $("[name=search]").val();  //input 값
 	var targetPage = $(thisElement).data('targetpage');
+	console.log(pick);
+	console.log(search);
+	console.log(targetPage);
+	
 	$.ajax({
 		url:"/admin/keyword",
 		method:"post",
-		data: {pick:pick, write:write , page: targetPage},
+		data: {pick:pick, search:search , page: targetPage},
 		success : function(searchList) {
 				$('.wrap-list').replaceWith(searchList);
 				},

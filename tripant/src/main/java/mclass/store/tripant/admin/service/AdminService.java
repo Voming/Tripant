@@ -100,7 +100,7 @@ public class AdminService {
 	}
 	
 	//게시글리스트
-	public Map<String, Object> boardList(int num, int pageNum, int currentPageNum,String pick,String write){
+	public Map<String, Object> boardList(int num, int pageNum, int currentPageNum,String pick,String search){
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
@@ -120,7 +120,7 @@ public class AdminService {
 		//끝페이지
 		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
 		
-		List<AdminBoardEntity> boardList = admindao.boardList(startRownum, endRownum, pick,write);
+		List<AdminBoardEntity> boardList = admindao.boardList(startRownum, endRownum, pick,search);
 		result = new HashMap<String, Object>();
 		result.put("boardList", boardList);
 		result.put("totalCount", totalCount);
@@ -129,17 +129,17 @@ public class AdminService {
 		result.put("endPageNum", endPageNum);
 		result.put("currentPage", currentPageNum);
 		result.put("pick", pick);
-		result.put("write", write);
+		result.put("search", search);
 
 		return result;
 	}
 	
 	//게시글 검색(select)
-	public Map<String, Object> keywordsearch(int num, int pageNum, int currentPageNum,String pick,String write){
+	public Map<String, Object> keywordSearch(int num, int pageNum, int currentPageNum,String pick,String search){
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
-		int totalCount = admindao.diarySearchCount(pick,write);
+		int totalCount = admindao.keywordSearchCount(pick,search);
 		
 		int startRownum = num * (currentPageNum - 1) + 1;
 		int endRownum = num * currentPageNum;
@@ -155,7 +155,7 @@ public class AdminService {
 		//끝페이지
 		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
 		
-		List<AdminBoardEntity> boardList = admindao.keywordsearch(startRownum, endRownum, pick,write);
+		List<AdminBoardEntity> boardList = admindao.keywordSearch(startRownum, endRownum, pick,search);
 		result = new HashMap<String, Object>();
 		result.put("boardList", boardList);
 		result.put("totalCount", totalCount);
@@ -164,7 +164,7 @@ public class AdminService {
 		result.put("endPageNum", endPageNum);
 		result.put("currentPage", currentPageNum);
 		result.put("pick", pick);
-		result.put("write", write);
+		result.put("search", search);
 
 		return result;
 	}
