@@ -89,9 +89,8 @@ a{
 .ad-header .btn.logout{
 	border-radius:8px;
 	border:solid black 1px;
-	height:30px;
-	width:70px;
+	height:35px;
+	width:80px;
 	background-color:white;
 	margin:15px 15px 0 auto;
-	/* font-size:11px; */
 }
