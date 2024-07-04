@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
+import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 import mclass.store.tripant.trip.domain.DayEntity;
 import mclass.store.tripant.trip.model.repository.TripRepository;
 
@@ -25,6 +26,8 @@ public class TripService {
 	private String apikey;
 	
 	private final TripRepository repository;
+	private final PlanRepository planRepository;
+	
 	
 	//여행 일정 목록 불러오기
 	public List<DayEntity> detailList(Integer planId){
@@ -38,12 +41,12 @@ public class TripService {
 	
 	//spot 정보 불러오기 
 	public List<PlaceboxEntity> selectTypeList(int areaCode, int placeType, int maxNum) {
-		return repository.selectTypeList(areaCode, placeType, maxNum);
+		return planRepository.selectTypeList(areaCode, placeType, maxNum);
 	}
 	
 	//spot 검색 정보 불러오기
 	public List<PlaceboxEntity> selectSpotFindList(String findArea, int areaCode,  int maxNum) {
-		return repository.selectSpotFindList(findArea, areaCode, maxNum);
+		return planRepository.selectSpotFindList(findArea, areaCode, maxNum);
 	}
 	
 	//장소간 이동시간 구하기

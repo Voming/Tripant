@@ -32,25 +32,6 @@
 		FROM PLAN JOIN AREA ON AREA_CODE = PLAN_AREA_CODE WHERE PLAN_ID = #{planId}
 	</select>
 	
-<!-- spot 정보 불러오기 -->
-	<select id="selectTypeList" parameterType="_int" resultType="PlaceboxEntity">
-		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE
-		FROM PLACE 
-		WHERE AREACODE=#{areaCode} AND TYPE = #{placeType}  
-		AND ROWNUM <![CDATA[<=]]> #{maxNum}
-		ORDER BY CONTENTID
-	</select>
-	
-<!-- spot 검색정보 불러오기 -->
-	<select id="selectSpotFindList" parameterType="map" resultType="PlaceboxEntity">
-		SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
-		FROM PLACE 
-		WHERE AREACODE=#{areaCode} 
-		AND TYPE IN (1,2,3,4)
-		AND TITLE LIKE '%'||#{findArea}||'%'
-		AND ROWNUM <![CDATA[<=]]> #{maxNum}
-		ORDER BY CONTENTID
-	</select>
 	
 <!-- <update id=""></update> -->
 	
