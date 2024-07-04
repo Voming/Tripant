@@ -43,7 +43,7 @@ function quitClickHandler(){
 						});
 					}
 				}, 
-				beforeSend: csrfHandler, 
+				
 				error: ajaxErrorHandler
 			});
 		}

@@ -30,6 +30,6 @@ function saveClickHandler(){
 			}
 		}, 
 		error: ajaxErrorHandler, 
-		beforeSend: csrfHandler, 
+		 
 	});
 }

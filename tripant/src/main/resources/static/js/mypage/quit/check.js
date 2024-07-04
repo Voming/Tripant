@@ -17,7 +17,7 @@ function pwdCheckHandler(){
 				quitActive();
 			}
 		}, 
-		beforeSend: csrfHandler, 
+		
 	});
 }
 //비밀번호 보기

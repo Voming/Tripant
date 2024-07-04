@@ -34,7 +34,7 @@ function codeSendHandler() {
 				});
 			}
 		}, 
-		beforeSend: csrfHandler(xhr), 
+		 
 		error: ajaxErrorHandler
 	});
 }
@@ -69,7 +69,7 @@ function codeCheckHandler() {
 				});
 			}
 		}, 
-		beforeSend: csrfHandler(xhr), 
+		 
 		error: ajaxErrorHandler
 	});
 }

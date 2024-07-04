@@ -35,7 +35,7 @@ function insertItemsHandler(){
 				});
 			}
 		}, 
-		beforeSend: csrfHandler, 
+		
 		error: ajaxErrorHandler 
 	});
 }

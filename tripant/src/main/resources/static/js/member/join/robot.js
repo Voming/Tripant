@@ -57,7 +57,7 @@ function robotHandler() {
 					break;
 			}
 		}, 
-		beforeSend: csrfHandler(xhr), 
+		 
 		error: ajaxErrorHandler
 	});
 	if (captcha != 1) {

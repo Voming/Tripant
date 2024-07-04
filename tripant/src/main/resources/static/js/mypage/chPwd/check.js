@@ -9,6 +9,8 @@ function pwdCheckHandler(){
 		url: contextPath+'pwd/use', 
 		type: 'post', 
 		data: {memPassword: pwdInput}, 
+		 
+		error: ajaxErrorHandler, 
 		success: function(result){
 			if(pwdExp1.test(pwdInput) == true && 
 			   pwdExp2.test(pwdInput) == true && 
@@ -32,7 +34,6 @@ function pwdCheckHandler(){
 				chPwdActive();
 			}
 		}, 
-		beforeSend: csrfHandler, 
 	});
 }
 //비밀번호 보기
