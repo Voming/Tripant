@@ -1,7 +1,7 @@
 $(loadedHandler);
 
 function loadedHandler() {
-	$(".btn.info").on("click", ClickHandler);
+	//$(".btn.info").on("click", ClickHandler);
 }
 
 //등급변경, 활성화여부 

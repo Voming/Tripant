@@ -57,7 +57,7 @@ $(loadedHandler);
 function loadedHandler() {
 	//메인 화면 돌아가기
 	$(".logo").on("click", function() {
-		location.href = "/";
+		location.href = contextPath;
 	});
 
 	//달력 다시 열기
@@ -109,32 +109,41 @@ function loadedHandler() {
 				$(".main-wrapper .tab-content").css("width", "40%");
 				return false;
 			} else if (cls_name === 'nav-2 active') {
-				//3번으로 이동
-				$('.tab-nav a').css("color", "black");
-				$('.tab-nav a').removeClass('active');
+				// 장소가 최소 날짜 수 만큼
+				if (markersSpot.length < calendarPlan.dateArr.length) {
+					alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+				} else {
+					//3번으로 이동
+					$('.tab-nav a').css("color", "black");
+					$('.tab-nav a').removeClass('active');
 
-				$('.nav-3').addClass('active');
-				$('.nav-3').css("color", "#4BC9E5");
+					$('.nav-3').addClass('active');
+					$('.nav-3').css("color", "#4BC9E5");
 
-				$('.tab-content > #tab02').hide();
-				$('.tab-content > #tab03').show();
-				$(".main-wrapper .tab-content").css("width", "40%");
+					$('.tab-content > #tab02').hide();
+					$('.tab-content > #tab03').show();
+					$(".main-wrapper .tab-content").css("width", "40%");
+				}
 				return false;
 			} else if (cls_name === 'nav-3 active') {
-				// 일정 만들기 알고리즘 돌리기
-				const jsonString = JSON.stringify(calendarPlan);
-				$.ajax({
-					url: contextPath + "plan/planning",
-					method: "post",
-					contentType:"application/json",
-					data: jsonString,
-					traditional: true, //필수
-					//dataType: "json",
-					success: function(data) {
-						console.log(data);
-					},
-					error: ajaxErrorHandler
-				});
+				if (markersStay.length < calendarPlan.dateArr.length - 1) {
+					alert("하루에 한 개 이상의 숙소에 방문해야해요. 숙소를 더 추가해주세요!");
+				} else {
+					// 일정 만들기 알고리즘 돌리기
+					const jsonString = JSON.stringify(calendarPlan);
+					$.ajax({
+						url: contextPath + "plan/planning",
+						method: "post",
+						contentType: "application/json",
+						data: jsonString,
+						traditional: true, //필수
+						//dataType: "json",
+						success: function(data) {
+							console.log(data);
+						},
+						error: ajaxErrorHandler
+					});
+				}
 			}
 		});
 	});

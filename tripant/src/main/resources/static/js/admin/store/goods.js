@@ -302,6 +302,14 @@ function goPageHandler() {
 						$("[name=search]").val(result.seachMem);
 					}
 					memListHandler(result);
+					// 상품 추가 버튼
+					$(".btn.insert").on("click", itemInsertHandler);
+	
+					// 상품 수정 버튼
+					$(".btn.update").on("click", itemUpdateHandler);
+	
+					//상품삭제버튼
+					$(".btn.delete").on("click", itemDeleteHandler);
 				}
 			});
 	}
@@ -318,5 +326,13 @@ function searchBtnHandler(thisElement){
 		error:ajaxErrorHandler
 		}).done( function(goodsList) {
 			 $('.wrap-list').replaceWith(goodsList);
+			 // 상품 추가 버튼
+			$(".btn.insert").on("click", itemInsertHandler);
+	
+			// 상품 수정 버튼
+			$(".btn.update").on("click", itemUpdateHandler);
+	
+			//상품삭제버튼
+			$(".btn.delete").on("click", itemDeleteHandler);
 				});
 }

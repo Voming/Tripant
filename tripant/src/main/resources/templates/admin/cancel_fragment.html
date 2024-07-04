@@ -38,6 +38,7 @@
 			<!-- paging --> 
 		<div style="text-align: center;">
 			<div class="paging_wrap">
+			<th:block th:if="${list.totalPageCount > 0}">
 				<div th:if="${list.startPageNum > 1}" class="goprepage">
 		            <button type="button" onclick="searchBtnHandler(this);" class="btn-gopage" th:data-targetpage="${list.startPageNum - 1}">&lt;</button>
 		        </div>
@@ -52,7 +53,8 @@
 		        
 		        <div th:if="${list.endPageNum < list.totalPageCount}">
 		            <button type="button" onclick="searchBtnHandler(this);" th:data-targetpage="${list.endPageNum + 1}" class="btn-gopage">&gt;</button>
-		        </div>			
+		        </div>	
+		        </th:block>		
 			</div>
 		</div>
 </div>

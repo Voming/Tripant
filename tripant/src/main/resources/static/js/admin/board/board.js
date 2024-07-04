@@ -2,9 +2,9 @@
 $(loadedHandler);
 function loadedHandler() {
 	//좋아요
-	$(".btn.like").on("click", ClickLikeHandler);
+	//$(".btn.like").on("click", ClickLikeHandler);
 	//조회수
-	$(".btn.view").on("click", ClickViewHandler);
+	//$(".btn.view").on("click", ClickViewHandler);
 	//조건검색
 	//$('.btn-search').on("click",searchHandler);
 	
@@ -108,6 +108,10 @@ function searchBtnHandler(thisElement){
 	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	var search = $("[name=search]").val();  //input 값
 	var targetPage = $(thisElement).data('targetpage');
+	console.log(pick);
+	console.log(search);
+	console.log(targetPage);
+	
 	$.ajax({
 		url:"/admin/keyword",
 		method:"post",

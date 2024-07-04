@@ -49,7 +49,7 @@
 	<div class="main-wrapper">
 		<aside class="nav-wrapper flex">
 			<nav class="nav flex">
-				<a><img class="logo" src="/images/tripant_logo_text.png"></a>
+				<a><img class="logo" th:src="@{/images/tripant_logo_text.png}"></a>
 				<ul class="tab-nav">
 					<li><a class="nav-1" href="#tab01"> step 01<br>날짜확인
 					</a></li>
@@ -116,13 +116,13 @@
 					</div>
 				</div>
 				<div class="spot second flex">
-					<div class="wrap-selected-spot scrollbar">
+					<div class="wrap-selected-spot">
 						<div class="selected-spot-info">
 							<p class="count-spot">0</p>
 							<p class="time-spot"></p>
 							<p class="reset-spot" onclick="spotResetBtnClickHandler();">장소 설정 초기화</p>
 						</div>
-						<div class="selected-spot-list"></div>
+						<div class="selected-spot-list scrollbar"></div>
 					</div>
 				</div>
 			</div>

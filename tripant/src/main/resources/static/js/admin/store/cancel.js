@@ -75,6 +75,7 @@ function goPageHandler() {
 						$("[name=search]").val(result.seachMem);
 					}
 					memListHandler(result);
+					$(".btn.cancel").on("click", payCancelHandler);
 				}
 			});
 	}
@@ -90,6 +91,7 @@ function searchBtnHandler(thisElement){
 		 , page: targetPage},
 		success : function(searchList) {
 			 $('.wrap-list').replaceWith(searchList);
+			 $(".btn.cancel").on("click", payCancelHandler);
 				},
 	 	error : ajaxErrorHandler
 	});

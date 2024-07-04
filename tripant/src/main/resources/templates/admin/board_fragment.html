@@ -4,13 +4,13 @@
 <div class="wrap-list" th:fragment="boardlist">
 <div class="ad-search">
 				<select class="search-option" name="option" style='border:none'>
-					<option value="nick"  selected>닉네임</option>
-					<option value="title" >제목</option>
+					<option value="nick"  th:selected="${diaryMap.pick}==nick">닉네임</option>
+					<option value="title" th:selected="${diaryMap.pick}==title">제목</option>
 				</select>
-				<th:block th:if="${memBoardMap!=null and memBoardMap.search != null}">
-				<input class="search" type="text" name="search" placeholder="게시글검색" th:value="${memBoardMap.search}">
+				<th:block th:if="${diaryMap!=null and diaryMap.search != null}">
+				<input class="search" type="text" name="search" placeholder="게시글검색" th:value="${diaryMap.search}">
 				</th:block>
-				<th:block th:if="${memBoardMap==null or memBoardMap.search==null}">
+				<th:block th:if="${diaryMap==null or diaryMap.search==null}">
 				<input class="search" type="text" name="search" placeholder="게시글검색">
 				</th:block>
 				<button type="button" class="btn-search" onclick="searchBtnHandler(this);"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
@@ -23,12 +23,12 @@
 							<li>제목</li>
 							<li>닉네임</li>
 							<li>날짜</li>
-							<li>조회수<button type="button" class="btn view">▼</button></li>
-							<li>좋아요<button type="button" class="btn like">▼</button></li>
+							<li>조회수<button type="button" class="btn view" onclick="ClickViewHandler();">▼</button></li>
+							<li>좋아요<button type="button" class="btn like" onclick="ClickLikeHandler();">▼</button></li>
 						</ul>
 					</li>
 					<li id="list">
-						<th:block  th:each="memBoard:${memBoardMap.boardList}">
+						<th:block  th:each="memBoard:${diaryMap.boardList}">
 						<ul class="col list">
 							<li th:text="${memBoard.diaryId}"></li>
 							<li th:text="${memBoard.diaryTitle}"></li>
@@ -46,21 +46,23 @@
 <!-- paging --> 
 		<div style="text-align: center;">
 			<div class="paging_wrap">
-				<div th:if="${memBoardMap.startPageNum > 1}" class="goprepage">
-		            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${memBoardMap.startPageNum - 1}">&lt;</button>
+			<th:block th:if="${diaryMap.totalPageCount > 0}">
+				<div th:if="${diaryMap.startPageNum > 1}" class="goprepage">
+		            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${diaryMap.startPageNum - 1}">&lt;</button>
 		        </div>
-		        <div th:each="page :  ${#numbers.sequence(memBoardMap.startPageNum, memBoardMap.endPageNum)}">
-			        <div th:if="${memBoardMap.currentPage == page}" class="current_page">
+		        <div th:each="page :  ${#numbers.sequence(diaryMap.startPageNum, diaryMap.endPageNum)}">
+			        <div th:if="${diaryMap.currentPage == page}" class="current_page">
 			            <button type="button" disabled class="btn gopage" th:data-targetpage="${page}" th:text="${page}"></button>
 			        </div>
-			        <div th:if="${memBoardMap.currentPage != page}" class="gopage">
+			        <div th:if="${diaryMap.currentPage != page}" class="gopage">
 			            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${page}" th:text="${page}"></button>
 			        </div>
 		        </div>
 		        
-		        <div th:if="${memBoardMap.endPageNum < memBoardMap.totalPageCount}">
-		            <button type="button" onclick="searchBtnHandler(this);" th:data-targetpage="${memBoardMap.endPageNum + 1}" class="btn gopage">&gt;</button>
+		        <div th:if="${diaryMap.endPageNum < diaryMap.totalPageCount}">
+		            <button type="button" onclick="searchBtnHandler(this);" th:data-targetpage="${diaryMap.endPageNum + 1}" class="btn gopage">&gt;</button>
 		        </div>			
+			</th:block>
 			</div>
 		</div>
 	</div>
