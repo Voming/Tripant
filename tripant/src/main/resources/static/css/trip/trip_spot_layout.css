@@ -1,8 +1,8 @@
 @charset "UTF-8";
 .schedule-wrapper #tab02 {
-    width: 65%;
+    width: 75%;
     justify-content: stretch;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:335px 335px;
     gap: 10px 20px;
     align-items: center;
 }
@@ -100,8 +100,12 @@
 	margin: 0 10px;
 	font-size: var(--font5);
 	display: flex;
+	flex-direction: column;
 	line-height: 120%;
 }
+.schedule-wrapper .wrap-spotList{
+	flex-direction: column;
+} 
 
 /* 체크박스 커스텀 */
 .spot-tab-content input[type="checkbox"]+label {
