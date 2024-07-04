@@ -122,8 +122,6 @@ function loadedHandler() {
 				return false;
 			} else if (cls_name === 'nav-3 active') {
 				// 일정 만들기 알고리즘 돌리기
-				//calendarPlan.dateArr
-				//calendarPlan.spotArr
 				const jsonString = JSON.stringify(calendarPlan);
 				$.ajax({
 					url: contextPath + "plan/planning",
