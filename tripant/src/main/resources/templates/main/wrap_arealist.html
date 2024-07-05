@@ -5,8 +5,8 @@
 			<th:block  th:if="${areaNameList} != null">
 				<th:block  th:each="area : ${areaNameList}">
 					<li>
-						<div class="area_btn">
-							<img th:src="@{|/images/area/${area.areaFileName}|}"alt="지역">
+						<div class="area_btn" onclick="areaBoxBtnClickHandler(this);"  th:value="${area.areaCode}" >
+							<img th:src="@{|/images/area/${area.areaFileName}|}" alt="지역">
 							<div class="description">
 								<h3 th:text="${area.areaName}"></h3>
 								<h5 th:text="${area.areaEngName}"></h5>
