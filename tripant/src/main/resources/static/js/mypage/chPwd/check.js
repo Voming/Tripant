@@ -8,7 +8,7 @@ function pwdCheckHandler(){
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
-		url: contextPath+'pwd/use', 
+		url: contextPath+'my/pwd/use', 
 		type: 'post', 
 		data: {memPassword: pwdInput}, 
 		success: function(result){
