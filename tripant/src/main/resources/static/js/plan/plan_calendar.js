@@ -1,6 +1,9 @@
 $(document).ready(function() {
 	$('#daterange').daterangepicker({
 		opens: "center",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		},
 		alwaysOpen: true,
 		"maxSpan": { "days": 10 },
 		"locale": {

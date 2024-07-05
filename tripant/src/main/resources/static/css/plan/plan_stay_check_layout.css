@@ -75,7 +75,7 @@
 
 #tab03 .selected-stay-box .wrap-box .box-stay-txt {
 	margin: 0 10px;
-	width: 170px;
+	width: 200px;
 	font-size: var(--font5);
 	display: flex;
 	line-height: 120%;
@@ -87,5 +87,5 @@
 	height: 20px;
 	width: 20px;
 	margin-left: auto;
-	padding-right: 15px;
+	padding-right: 5px;
 }

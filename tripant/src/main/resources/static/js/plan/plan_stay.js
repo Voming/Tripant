@@ -12,6 +12,9 @@ function stayMoreBtnClickHandler(thisElement) {
 
 	$.ajax({
 		url: contextPath + "plan/stay"
+		, beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -66,6 +69,9 @@ $(document).ready(function() {
 
 		$.ajax({
 			url: contextPath + "plan/stay"
+			, beforeSend: function(xhr) {
+				xhr.setRequestHeader(header, token);
+			}
 			, method: "post"
 			, context: this
 			, data: {
@@ -115,6 +121,9 @@ function btnStayFindClickHandler() {
 
 	$.ajax({
 		url: "/plan/stay/find"
+		, beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -149,6 +158,9 @@ function stayFindMoreBtnClickHandler(thisElement) {
 
 	$.ajax({
 		url: contextPath + "plan/stay/find"
+		, beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
 		, method: "post"
 		, context: this
 		, data: {

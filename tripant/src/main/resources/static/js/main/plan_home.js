@@ -1,4 +1,6 @@
 $(loadedHandler);
+const token = $("meta[name='_csrf']").attr("content");
+const header = $("meta[name='_csrf_header']").attr("content");
 
 function loadedHandler() {
 	$(".btn.find").on("click", btnFindClickHandler);
@@ -13,7 +15,7 @@ function btnMakeClickHandler() {
 
 	if (!auth) {
 		alert("로그인을 한 후에 이용해주세요.");
-	} else  {
+	} else {
 		$(".modal").addClass("show");
 
 		$(".keep_btn").attr("disabled", true);
@@ -40,11 +42,15 @@ $(document).mouseup(function(e) {
 
 // 지역 선택시 값 변경-------------------------
 function changeSelectAreaHandler() {
+
 	var area = $("#selectbox option:selected").attr('value');
 
 	if (area.length < 3) {
 		$.ajax({
 			url: contextPath + "plan/area"
+			, beforeSend: function(xhr) {
+				xhr.setRequestHeader(header, token);
+			}
 			, method: "post"
 			, data: {
 				areaCode: area
@@ -71,9 +77,9 @@ function displayAreaInfo(data) {
 }
 
 //일정 게속 만들기
-function btnKeepClickHandler(){
-	planForm.action= contextPath +"plan/keep";
-	planForm.method="post";
+function btnKeepClickHandler() {
+	planForm.action = contextPath + "plan/keep";
+	planForm.method = "post";
 	planForm.submit();
 }
 
@@ -88,12 +94,15 @@ function btnFindClickHandler() {
 
 	$.ajax({
 		url: "find/area"
+		, beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
 		, method: "post"
-		, context:this
+		, context: this
 		, data: { findArea: findArea }
 		//, dataType: 'json'
 		, error: ajaxErrorHandler
 	}).done(function(wrap_area) {
-		 $(this).parents(".wrap-area").find(".wrap-areaList").replaceWith(wrap_area);
+		$(this).parents(".wrap-area").find(".wrap-areaList").replaceWith(wrap_area);
 	});
 }

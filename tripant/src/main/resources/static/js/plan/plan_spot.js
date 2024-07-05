@@ -13,6 +13,9 @@ function spotMoreBtnClickHandler(thisElement) {
 
 	$.ajax({
 		url: contextPath + "plan/spot"
+		, beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -70,6 +73,9 @@ $(document).ready(function() {
 
 		$.ajax({
 			url: contextPath + "plan/spot"
+			, beforeSend: function(xhr) {
+				xhr.setRequestHeader(header, token);
+			}
 			, method: "post"
 			, context: this
 			, data: {
@@ -120,6 +126,9 @@ function btnSpotFindClickHandler() {
 
 	$.ajax({
 		url: "/plan/spot/find"
+		, beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -155,6 +164,9 @@ function spotFindMoreBtnClickHandler(thisElement) {
 
 	$.ajax({
 		url: contextPath + "plan/spot/find"
+		, beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
 		, method: "post"
 		, context: this
 		, data: {

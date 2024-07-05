@@ -1,4 +1,7 @@
 // 일정만들기에서 전체적으로 사용할 클래스
+const token = $("meta[name='_csrf']").attr("content");
+const header = $("meta[name='_csrf_header']").attr("content");
+
 class PlanDate {
 	constructor(date, smalldate, day) {
 		this.date = date; //2024.06.06
@@ -84,49 +87,49 @@ function loadedHandler() {
 		var click_cls_name = $(clickElement).attr("class");
 		// current
 		var currentActive = $('.tab-nav .active').attr("class");
-		if(click_cls_name == 'nav-1' && !currentActive ){
+		if (click_cls_name == 'nav-1' && !currentActive) {
 			moveStep();
 			//saveTimeInfo(); //시간 정보 저장
 			$(".main-wrapper .tab-content").css("width", "25%");
-			
+
 		} else {
-		
-		cls_name = currentActive.replace(' active', '');
-		if (cls_name == 'nav-1') {
-			if(click_cls_name == 'nav-3'){
-				if(markersSpot.length < calendarPlan.dateArr.length){
-					alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+
+			cls_name = currentActive.replace(' active', '');
+			if (cls_name == 'nav-1') {
+				if (click_cls_name == 'nav-3') {
+					if (markersSpot.length < calendarPlan.dateArr.length) {
+						alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+					} else {
+						moveStep();
+						$(".main-wrapper .tab-content").css("width", "40%");
+					}
 				} else {
 					moveStep();
+					saveTimeInfo(); //시간 정보 저장
 					$(".main-wrapper .tab-content").css("width", "40%");
 				}
-			}else {
-				moveStep();
-				saveTimeInfo(); //시간 정보 저장
-				$(".main-wrapper .tab-content").css("width", "40%");
-			}
-		} else if (cls_name == 'nav-2') {
-			if (click_cls_name == 'nav-3') {
-				if(markersSpot.length < calendarPlan.dateArr.length){
-					alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+			} else if (cls_name == 'nav-2') {
+				if (click_cls_name == 'nav-3') {
+					if (markersSpot.length < calendarPlan.dateArr.length) {
+						alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+					} else {
+						moveStep();
+						$(".main-wrapper .tab-content").css("width", "40%");
+					}
 				} else {
 					moveStep();
-					$(".main-wrapper .tab-content").css("width", "40%");
+					$(".main-wrapper .tab-content").css("width", "25%");
 				}
-			} else {
-				moveStep();
-				$(".main-wrapper .tab-content").css("width", "25%");
+			} else if (cls_name == 'nav-3') {
+				if (click_cls_name == 'nav-2') {
+					moveStep();
+					$(".main-wrapper .tab-content").css("width", "40%");
+				} else {
+					moveStep();
+					$(".main-wrapper .tab-content").css("width", "25%");
+				}
 			}
-		} else if (cls_name == 'nav-3') {
-			if (click_cls_name == 'nav-2') {
-				moveStep();
-				$(".main-wrapper .tab-content").css("width", "40%");
-			} else{
-				moveStep();
-				$(".main-wrapper .tab-content").css("width", "25%");
-			}
-		}
-		
+
 		}
 		return false;
 	}).filter(':eq(0)').click();
@@ -167,6 +170,9 @@ function loadedHandler() {
 					const jsonString = JSON.stringify(calendarPlan);
 					$.ajax({
 						url: contextPath + "plan/planning",
+						beforeSend: function(xhr) {
+							xhr.setRequestHeader(header, token);
+						},
 						method: "post",
 						contentType: "application/json",
 						data: jsonString,
