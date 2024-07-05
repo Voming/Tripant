@@ -23,7 +23,7 @@ $(document).mouseup(function(e) {
 
 //케밥창 하나만 열리게 설정
 function miniModalBtnHandler(){
-	var mbtn = $(this).children('.mini-modal');
+	//var mbtn = $(this).children('.mini-modal');
 	$('.mini-modal').addClass('hide');
 	$(this).children('.mini-modal').removeClass("hide");
 }
@@ -37,6 +37,9 @@ function shareModalHandler(){
 	var planId =$(this).parents(".trip-list.wfull").data('plan-id');
 	$.ajax({
 		url: "/trip/share/nick",
+		beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token);},
 		method:"post",
 		context:this,
     	data: {planId:planId}

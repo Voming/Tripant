@@ -22,7 +22,7 @@ function includeHandler(){
 	$.each(spotArr, function(idx, element) {
 		element.id;
 		htmlVal += `
-			<div class=" grid">
+			<div class="include-spot grid ">
 		 		<div class="spot-title wfull"> ${info.title}</div>
 		 		<div class="spot-type">명소</div>
 			</div>
@@ -39,6 +39,10 @@ function spotMoreBtnClickHandler(thisElement) {
 
 	$.ajax({
 		url: contextPath + "trip/spot"
+		,beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token);
+		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -97,6 +101,10 @@ $(document).ready(function() {
 
 		$.ajax({
 			url: contextPath + "trip/spot"
+			,beforeSend : function(xhr){
+				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+				xhr.setRequestHeader(header,token);
+			}
 			, method: "post"
 			, context: this
 			, data: {
@@ -147,6 +155,10 @@ function btnSpotFindClickHandler() {
 
 	$.ajax({
 		url:contextPath + "trip/spot/find"
+		,beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token);
+		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -183,6 +195,10 @@ function spotFindMoreBtnClickHandler(thisElement) {
 
 	$.ajax({
 		url: contextPath + "/spot/find"
+		,beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token);
+		}
 		, method: "post"
 		, context: this
 		, data: {

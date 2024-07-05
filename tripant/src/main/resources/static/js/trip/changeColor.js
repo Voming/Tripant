@@ -9,34 +9,34 @@ function circleColorHandler(){
 		
 		switch(circleCss){
 		case 1:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle1_red.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_01_red)");
 			break;
 		case 2:
-			$(this).children().find('.spot-number.backimg').attr('style', "background-image:url('/images/loacation/circle2_purple.png');")
+			$(this).children().find('.spot-number.backimg').attr('style', "background-image:var(--img_cir_02_purple);")
 			break;
 		case 3:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle3_pink.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_03_pink)");
 			break;
 		case 4:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle4_orange.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_04_orange)");
 			break;
 		case 5:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle5_skyblue.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_05_skyblue)");
 			break;
 		case 6:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle6_yellow.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_06_yellow)");
 			break;
 		case 7:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle7_lime.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_07_lime)");
 			break;
 		case 8:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle8_green.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_08_green)");
 			break;
 		case 9:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle9_blue.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_09_blue)");
 			break;
 		case 10:
-			$(this).children().find('.spot-number.backimg').css('background-image',"url('/images/loacation/circle10_navy.png')");
+			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_10_navy)");
 			break;
 		default:
 			console.log($(this).children().find('.spot-number.backimg'));

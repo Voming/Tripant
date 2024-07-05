@@ -17,6 +17,9 @@ function deleteHandler() {
 		  if (result.isConfirmed) {
 	         $.ajax({
         	 url:"/trip/list/delete",
+			 beforeSend : function(xhr){
+				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+				xhr.setRequestHeader(header,token);},
         	 method:"post",
         	 data: {planId:planId},
 			 //success: 1이면 업데이트 완료 0이면 실패

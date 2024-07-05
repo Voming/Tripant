@@ -10,6 +10,9 @@ function removeHandler(){
 	var planId =$(this).parents(".trip-list.wfull").data('plan-id');
 	$.ajax({
 		url: "/trip/remove/nick",
+		beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token);},
 		method:"post",
 		context:this,//.btn.add
     	data: {planId:planId,removeNick: removeNick},
@@ -28,6 +31,9 @@ function addHandler(){
 	var planId =$(this).parents(".trip-list.wfull").data('plan-id');
 	$.ajax({
 		url: "/trip/add/nick",
+		beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token);},
 		method:"post",
 		context:this,//.btn.add
     	data: {planId:planId,addNick: addNick},

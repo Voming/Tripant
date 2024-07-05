@@ -5,6 +5,9 @@ function findNickHandler(){
 		var planId =$(this).parents(".trip-list.wfull").data('plan-id');
 		$.ajax({
 			url: "/trip/share/nick",
+			beforeSend : function(xhr){
+				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+				xhr.setRequestHeader(header,token);},
 			method:"post",
 			context:this,
 	    	data: {planId:planId}
@@ -19,6 +22,9 @@ function findNickHandler(){
 		
 		$.ajax({
 			url: "/trip/search/nick",
+			beforeSend : function(xhr){
+				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+				xhr.setRequestHeader(header,token);},
 			method:"post",
 			context:this,
         	data: {planId:planId,findNick: findNick}
