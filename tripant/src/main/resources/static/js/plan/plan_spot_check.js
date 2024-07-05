@@ -58,16 +58,20 @@ function spotCkBtnClickHandler(thisElement) {
 		htmlVal += `
 			<div class="selected-spot-box ${id}">
 				<span class="box-id" value="${id}" style ="display:none"></span> 
-				<div class="wrap-box flex">
-					<div class="selected-spot-number">
-						<p>${markersSpot.length}</p>
+				<div class="wrap-box">
+					<div class="wrap-spot-first">
+						<div class="selected-spot-number">
+							<p>${markersSpot.length}</p>
+						</div>
+						<div>
+							<img class="selected-spot-img" src="${img}" alt="장소이미지" style="width: 60px; height: 60px;">
+						</div>
+						<div class="selected-spot-txt">
+							<span class="selected-spot-title">${title}</span>
+							<span>${addr}</span>
+						</div>
 					</div>
-					<img class="selected-spot-img" src="${img}" alt="장소이미지" style="width: 60px; height: 60px;">
-					<div class="selected-spot-txt">
-						<span>${title}</span>
-						<span>${addr}</span>
-					</div>
-					<div>
+					<div class="wrap-spot-second">
 						<p class="time ${markersSpot.length}" onclick="timeRangeBtnClickHandler(this);">2시간 0분</p>
 					</div>
 				</div>

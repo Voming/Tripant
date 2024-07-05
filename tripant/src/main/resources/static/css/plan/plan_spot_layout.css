@@ -1,19 +1,25 @@
 @charset "UTF-8";
 
 .tab-content #tab02 {
-	display: grid;
+	display: flex;
 	width: auto;
-	justify-content: stretch;
-	grid-template-columns: 1fr 1fr;
-	gap: 0 20px;
-	align-items: center;
+	flex-direction:row;
+	gap : 0 20px;
+	margin: 0 10px;
 }
 
 .tab-content #tab02 .spot {
-	display: grid;
+	display: flex;
+	min-width: 200px;
 	gap: 10px 0;
 	width: 100%;
 	height: 100%;
+}
+
+
+.tab-content #tab02 .spot.first, 
+.tab-content #tab02 .spot.second{
+	min-width: 200px;
 }
 
 .tab-content #tab02 .plan-title {
@@ -69,10 +75,9 @@
 	text-align: center;
 }
 /* 박스 */
-
 .tab-content #tab02 .spot-tab-content {
 	margin-top: 10px;
-	height: 760px;
+	max-height: 760px;
 	overflow-y: auto;
 }
 
@@ -82,7 +87,6 @@
 	border-radius: 8px;
 	align-items: center;
 	flex-direction: row;
-	/* flex-wrap: wrap; */
 	justify-content: flex-start;
 	margin: 5px 0;
 }
@@ -91,7 +95,6 @@
 	object-fit: cover;
 	margin-left: 10px;
 	border-radius: 8px;
-	/* 줄어듦 방지 */
 	flex-shrink: 0;
 }
 
