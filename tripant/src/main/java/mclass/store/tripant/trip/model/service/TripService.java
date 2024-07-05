@@ -88,7 +88,6 @@ public class TripService {
 				return ">>>> 에러났어요 : " + responseCode;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			duration = "1800";
 			System.out.println("\n\n >>>>>>>>>>>>>>>>ERROR 확인해주세요<<<<<<<<<<<<<<<<");
 		} 

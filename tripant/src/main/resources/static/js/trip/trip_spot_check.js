@@ -53,7 +53,8 @@ function spotCkBtnClickHandler(thisElement) {
 
 	} else { //=====================================체크박스 선택=========================================
 		var spotTime = 7200;
-		spotArr[markersSpot.length] = new Spot(id, title, latx, lngy,spotTime,img);  //전체 일정 만들기 장소 정보 저장
+		//var spotType = ; 장소다타입 넣을지 말지
+		spotArr[markersSpot.length] = new Spot(id, title, latx, lngy,img,spotTime);  //전체 일정 만들기 장소 정보 저장
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
 
 		//화면 리스트 추가

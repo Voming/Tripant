@@ -186,7 +186,7 @@ function displayInfo(){
 				`;
 			}else{// 숙소에 도착했을 땐 이동시간 표시 X
 				htmlval += `
-				<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+				<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 				<div class="spot-move hide"> </div>
 				`;
 			}

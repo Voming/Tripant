@@ -80,7 +80,7 @@ insert into plan_stay values((select plan_start_day from plan where plan_id = 14
 insert into plan_stay values((select plan_start_day+1 from plan where plan_id = 14),14,1870779,5);
 ------------------------------------------------------------------
 ----etc.
-select * from plan_stay;
+
 select * from plan_spot;
 
 --컬럼 데이터타입 변경 DATE -> VARCHAR2

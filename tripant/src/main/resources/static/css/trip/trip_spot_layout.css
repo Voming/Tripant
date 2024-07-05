@@ -1,6 +1,5 @@
 @charset "UTF-8";
 .schedule-wrapper #tab02 {
-    width: 75%;
     justify-content: stretch;
     grid-template-columns:335px 335px;
     gap: 10px 20px;

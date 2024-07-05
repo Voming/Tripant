@@ -20,8 +20,9 @@ function openSpot(){
 function includeHandler(){
 	var htmlVal = "";
 	$.each(spotArr, function(idx, element) {
-		
-		var spottype;
+		console.log("idx");
+		console.log(idx);
+/*		var spottype;
 		if (placeTypeS == '관광지') {
 			spottype = 1;
 		} else if (placeTypeS == '문화시설') {
@@ -30,22 +31,30 @@ function includeHandler(){
 			spottype = 3;
 		} else if (placeTypeS == '음식점') {
 			spottype = 4;
-		}
+		}*/
 		
 		//element.id;
 		htmlVal += `
-			<div class="include-spot grid " >
-		 		<div class="spot-img wfull"> ${element.img}</div>
-		 		<div class="spot-title wfull"> ${element.title}</div>
-		 		<div class="spot-type">명소</div>
-		 		<div class="spot-trashbin" onclick="#" scr></div>
+			<div class="include-spot flex wfull draggable"  draggable ="true" data-j="${idx}" data-j="99">
+		 		<div class="spot-img "><img src="${element.img}" width="70" height="70"/></div>
+		 		<div class="flex">
+		 			<div class="spot-title wfull"> ${element.title}</div>
+		 			<div class="spot-type" >명소</div>
+		 		</div>
+		 		<img class="spot-trashcan" onclick="#" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
 			</div>
 		`; 
-		$(checkId).attr("checked", true);
 	});
+	$('#spot-basket .wrap-basket').html(htmlVal);
+	$('#tab02').addClass('hide'); // 장소 검색 감추기
+	$('#add-btn').addClass('hide'); //담기버튼
+	$('#edit-tourlist').removeClass('hide');
+	$('#spot-basket').removeClass('hide');
+	// jjoggan
+	console.log("이거 가능하냐!!!");
 }
 
-
+//=================================================================
 //더보기
 function spotMoreBtnClickHandler(thisElement) {
 	// 클릭횟수 증가
