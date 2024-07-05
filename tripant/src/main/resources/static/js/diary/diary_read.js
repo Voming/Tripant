@@ -37,7 +37,7 @@ function reportHandler() {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/my/diary/report/" + diaryId
+				url: contextPath + "/my/diary/report/" + diaryId
 				,beforeSend : function(xhr){
 				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
 				xhr.setRequestHeader(header,token);
@@ -96,7 +96,7 @@ function deleteHandler() {
 		if (result.isConfirmed) {
 			// ajax요청을 사용하여 서버에 삭제요청을 보냄
 			$.ajax({
-				url: "/my/diary/delete/"+diaryId,
+				url:contextPath +  "/my/diary/delete/"+diaryId,
 				beforeSend : function(xhr){
 				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
 				xhr.setRequestHeader(header,token);
