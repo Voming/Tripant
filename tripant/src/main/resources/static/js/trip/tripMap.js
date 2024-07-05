@@ -10,13 +10,13 @@ var imageSrc = '' ;// 마커이미지의 주소입니다
 /*마커 커스터마이징*/ //j i 순서 주의
 for(j = 0; j<dayPoints.length; j++){
 		dayPoint = dayPoints[j];
-		imageSrc=mapCircleHandler(j+1); // /images/loacation/location3.png 등 마커이미지 주소 변경
+		imageSrc=mapCircleHandler(j+1); // /images/location/location3.png 등 마커이미지 주소 변경
 	for (i = 0; i < dayPoint.length; i++) {
 		
 	     // customOverlay 생성 - 마커위에 숫자 올리기 // 마커이미지의 크기 style로 지정
 	    var content = `       
 		    <div class="custom-marker" th:fragment="markernum(i)">
-		        <img src="${imageSrc}" style="width: 30px; height: 32px;"> 
+		        <img src="${contextPath}${imageSrc}" style="width: 30px; height: 32px;"> 
 		        <span>${i + 1}</span>
 		    </div>`;
 	    var customOverlay = new kakao.maps.CustomOverlay({

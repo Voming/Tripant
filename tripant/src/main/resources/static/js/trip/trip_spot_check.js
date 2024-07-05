@@ -53,7 +53,7 @@ function spotCkBtnClickHandler(thisElement) {
 
 	} else { //=====================================체크박스 선택=========================================
 		var spotTime = 7200;
-		spotArr[markersSpot.length] = new Spot(id, title, latx, lngy,spotTime);  //전체 일정 만들기 장소 정보 저장
+		spotArr[markersSpot.length] = new Spot(id, title, latx, lngy,spotTime,img);  //전체 일정 만들기 장소 정보 저장
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
 
 		//화면 리스트 추가
@@ -161,7 +161,7 @@ function spotResetBtnClickHandler() {
 //===================================================마커=====================================================
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarkerSpot(position, title, id, index) {
-	var imageSrc = "/images/loacation/location5.png";// 마커 이미지의 이미지 주소입니다
+	var imageSrc = "/images/location/location5.png";// 마커 이미지의 이미지 주소입니다
 	var content = `       
 		    <div class="custom-marker" th:fragment="markernum(i)">
 		        <img src="${imageSrc}" style="width: 30px; height: 32px;">

@@ -49,34 +49,34 @@ function mapCircleHandler(idx){
 
 		switch(idx){
 		case 1:
-			imageSrc = '/images/loacation/location1.png';
+			imageSrc = '/images/location/location1.png';
 			break;
 		case 2:
-			imageSrc = '/images/loacation/location2.png';
+			imageSrc = '/images/location/location2.png';
 			break;
 		case 3:
-			imageSrc = '/images/loacation/location3.png';
+			imageSrc = '/images/location/location3.png';
 			break;
 		case 4:
-			imageSrc = '/images/loacation/location4.png';
+			imageSrc = '/images/location/location4.png';
 			break;
 		case 5:
-			imageSrc = '/images/loacation/location5.png';
+			imageSrc = '/images/location/location5.png';
 			break;
 		case 6:
-			imageSrc = '/images/loacation/location6.png';
+			imageSrc = '/images/location/location6.png';
 			break;
 		case 7:
-			imageSrc = '/images/loacation/location7.png';
+			imageSrc = '/images/location/location7.png';
 			break;
 		case 8:
-			imageSrc = '/images/loacation/location8.png';
+			imageSrc = '/images/location/location8.png';
 			break;
 		case 9:
-			imageSrc = '/images/loacation/location9.png';
+			imageSrc = '/images/location/location9.png';
 			break;
 		case 10:
-			imageSrc = '/images/loacation/location10.png';
+			imageSrc = '/images/location/location10.png';
 			break;
 		default:
 			console.log('>>>>>map image 실패 확인해보세요');

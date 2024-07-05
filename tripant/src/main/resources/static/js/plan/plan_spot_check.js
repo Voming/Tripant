@@ -157,7 +157,7 @@ function spotResetBtnClickHandler() {
 //===================================================마커=====================================================
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarkerSpot(position, title, id, index) {
-	var imageSrc = "/images/loacation/location5.png";// 마커 이미지의 이미지 주소입니다
+	var imageSrc = "/images/location/location5.png";// 마커 이미지의 이미지 주소입니다
 	var content = `       
 		    <div class="custom-marker" th:fragment="markernum(i)">
 		        <img src="${imageSrc}" style="width: 30px; height: 32px;">

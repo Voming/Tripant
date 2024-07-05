@@ -34,9 +34,11 @@ function includeHandler(){
 		
 		//element.id;
 		htmlVal += `
-			<div class="include-spot grid ">
+			<div class="include-spot grid " >
+		 		<div class="spot-img wfull"> ${element.img}</div>
 		 		<div class="spot-title wfull"> ${element.title}</div>
 		 		<div class="spot-type">명소</div>
+		 		<div class="spot-trashbin" onclick="#" scr></div>
 			</div>
 		`; 
 		$(checkId).attr("checked", true);
