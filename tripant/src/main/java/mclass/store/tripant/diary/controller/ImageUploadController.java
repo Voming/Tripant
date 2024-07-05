@@ -2,16 +2,14 @@ package mclass.store.tripant.diary.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.nio.file.Files;
-import java.util.Enumeration;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.server.ServerHttpRequest;
-import org.springframework.http.server.ServerHttpResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,11 +20,9 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.cloudinary.utils.StringUtils;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import jakarta.servlet.http.HttpServletRequest;
+
+
 
 
 @Controller

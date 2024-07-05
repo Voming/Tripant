@@ -100,3 +100,10 @@ function btnFindClickHandler() {
 		$(this).parents(".wrap-area").find(".wrap-areaList").replaceWith(wrap_area);
 	});
 }
+
+function areaBoxBtnClickHandler(thisElement){
+	var areaCode = $(thisElement).attr("value");
+	console.log(areaCode);
+	location.href = contextPath + "diary?areacode="+areaCode;
+
+}

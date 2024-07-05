@@ -16,19 +16,21 @@ function restStayBox() {
 		htmlVal += `
 			<div class="selected-stay-box">
 				<div class="wrap-box flex">
-					<div class="selected-stay-number" style="background-color:var(--color_gray);">
-						<p>${i + 1}</p>
-					</div>
-					<img class="box-stay-img" src="${contextPath}images/plan/stay_plus.png" alt="숙소이미지" style="width: 60px; height: 60px;">
-					<div class="box-stay-txt">
-						<span style="font-size:var(--font5); color:var(--color_gray);">${start} ~ ${end}</span>
-						<span class="box-title" style="font-size:var(--font6); color:pink;">숙소를 추가해주세요</span>
-						<span class="box-start" value="${start}" style ="display:none"></span> 
-					</div>
-					<div>
+					<div class="wrap-stay-first">
+						<div class="selected-stay-number" style="background-color:var(--color_gray);">
+							<p>${i + 1}</p>
+						</div>
+						<img class="box-stay-img" src="${contextPath}images/plan/stay_plus.png" alt="숙소이미지" style="width: 60px; height: 60px;">
+						<div class="box-stay-txt">
+							<span style="font-size:var(--font5); color:var(--color_gray);">${start} ~ ${end}</span>
+							<span class="box-title" style="font-size:var(--font6); color:pink;">숙소를 추가해주세요</span>
+							<span class="box-start" value="${start}" style ="display:none"></span> 
+						</div>
+						<span class="box-id" value="" style ="display:none"></span> 
+					</div>	
+					<div class="wrap-stay-second">
 						<img class="delete btn" src="${contextPath}images/icons/trashcan.png" onclick="stayDeleteBtnClickHandler(this);">
 					</div>
-					<span class="box-id" value="" style ="display:none"></span> 
 				</div>
 			</div>`;
 		$(".selected-stay-list").append(htmlVal);
