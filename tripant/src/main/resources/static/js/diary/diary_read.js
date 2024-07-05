@@ -175,13 +175,10 @@ function btnLikeClickHandler(thisElement, diaryId) {
 		// 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
 		// ajax 요청
 		$.ajax({
-			url: contextPath + "my/diary/unlike/" + diaryId
-			,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-			}
-			, method: "post"
-			, error: ajaxErrorHandler
+			beforeSend : csrfHandler,
+			url: contextPath + "my/diary/unlike/" + diaryId, 
+			method: "post", 
+			error: ajaxErrorHandler
 		}).done(function(result) {
 			if (result > 0)
 				$(thisElement).attr('src', '/images/diary/diary_like_none.png');
