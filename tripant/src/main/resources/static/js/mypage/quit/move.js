@@ -19,6 +19,7 @@ function quitClickHandler(){
 				url: contextPath+'my/quit', 
 				type: 'post', 
 				data: {memPassword: memPassword}, 
+				beforeSend: csrfHandler(xhr), 
 				success: function(result){
 					if(result > 0){
 						Swal.fire({

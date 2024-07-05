@@ -9,6 +9,7 @@ function insertItemsHandler(){
 		url: contextPath+'store/insert', 
 		type: 'post', 
 		data: {items : items}, 
+		beforeSend: csrfHandler(xhr), 
 		success: function(result){
 			if(result == 1){
 				Swal.fire({

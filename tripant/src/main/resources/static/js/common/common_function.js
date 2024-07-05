@@ -13,7 +13,5 @@ function ajaxErrorHandler() {
 
 //csrf
 function csrfHandler(xhr) {
-	xhr.setRequestHeader("AJAX", true);
-	var csrfToken = $("input[name=_csrf]").val();
-	xhr.setRequestHeader("X-CSRF-TOKEN", csrfToken);
+	xhr.setRequestHeader(header, token);
 }

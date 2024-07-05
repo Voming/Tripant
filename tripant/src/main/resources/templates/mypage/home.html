@@ -33,7 +33,8 @@
 		function unlinkKakaoHandler(){
 			$.ajax({
 				url: contextPath + "my/unlink/kakao", 
-				type: "post",
+				type: "post", 
+				beforeSend: csrfHandler(xhr), 
 				error: ajaxErrorHandler, 
 				success: function(data){
 					if(data > 0){
@@ -82,7 +83,8 @@
 		function unlinkNaverHandler(){
 			$.ajax({
 				url: contextPath + "my/unlink/naver", 
-				type: "post",
+				type: "post", 
+				beforeSend: csrfHandler(xhr), 
 				error: function(){
 					Swal.fire({
 						title: "미구현 기능입니다.", 
@@ -138,7 +140,8 @@
 		function unlinkGoogleHandler(){
 			$.ajax({
 				url: contextPath + "my/unlink/google", 
-				type: "post",
+				type: "post", 
+				beforeSend: csrfHandler(xhr), 
 				error: () => {
 					Swal.fire({
 						title: "미구현 기능입니다.", 
