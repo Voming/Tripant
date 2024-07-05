@@ -116,7 +116,7 @@ const makeTripAntCkeditor = (editorId) => {
 				]
 			},
 			//--------이미지 업로드
-			ckfinder : { uploadUrl:contextPath + '/post/cloudinary'	},
+			ckfinder : { uploadUrl: contextPath + '/post/cloudinary'	},
 			
 			// Used by real-time collaboration
 			/*
@@ -136,7 +136,8 @@ const makeTripAntCkeditor = (editorId) => {
 	        // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/ckbox.html
 
 			// License key is required only by the Pagination plugin and non-realtime Comments/Track changes.
-        	licenseKey: 'NHBPRmY2NVd2Zld4dUpFK2Y5VkNSakYzdHBHZWg1bVRuUTJYc0s2U09iY2MxL1RmMjlvY3psWnNzTmJLSVE9PS1NakF5TkRBM01qWT0=',
+        	licenseKey: 'Z0Q2YVprNWNBZXNiYWIrYUN4eDQ2L0VsYjdReUpCRnJLRkw3VjhhKzI1aCt5NDlmSngraXVYQmo3dnoyRUE9PS1NakF5TkRBNE1EUT0=',
+        	//licenseKey: 'NHBPRmY2NVd2Zld4dUpFK2Y5VkNSakYzdHBHZWg1bVRuUTJYc0s2U09iY2MxL1RmMjlvY3psWnNzTmJLSVE9PS1NakF5TkRBM01qWT0=',
 			// The "superbuild" contains more premium features that require additional configuration, disable them below.
 			// Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
 			removePlugins: [
