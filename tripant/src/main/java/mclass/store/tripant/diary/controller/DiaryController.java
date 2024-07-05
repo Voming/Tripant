@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import jakarta.servlet.http.HttpServletRequest;
 import mclass.store.tripant.diary.model.service.DiaryService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +28,14 @@ public class DiaryController {
 	// 전체 글보기(공개 글)
 	@GetMapping("")
 	// modelAndView로 db두번 갔다오지 않게 하기
-	public ModelAndView diary(ModelAndView mv, String areaname, Model model) {
-//		mv.addObject("diaries", diaryService.selectDiaryList(areaname));
-		mv.setViewName("diary/diary_board");
-		return mv;
+	public String diary( String areacode, Model model, HttpServletRequest req) {
+//		String url=req.getRequestURI();	//원래 가려던 URL 정보 읽어오기
+//		String query=req.getQueryString();  // Get query 문자열로 읽어오기 ( a=xxx&b=xxx&c=xxx )
+//		System.out.println("Req url  : "+ url);
+//		System.out.println("Req query: "+ query);
+		req.getQueryString().replace("areacode="+areacode, "");
+		model.addAttribute("tabcode", areacode);
+		return "diary/diary_board";
 	}
 
 	// 전체 글보기(공개 글) --
