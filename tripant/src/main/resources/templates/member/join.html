@@ -15,7 +15,8 @@
 <body>
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
-		<form id="frm-join" action="/join" method="post">
+		<form id="frm-join">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 			<section class="flex join">
 				<div class="join title">회원가입</div>
 				<div class="join explain">회원가입을 위한 정보를 입력해주세요</div>
@@ -51,10 +52,5 @@
 		</form>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
-<!-- 
-<script>
-
-</script>
- -->
 </body>
 </html>

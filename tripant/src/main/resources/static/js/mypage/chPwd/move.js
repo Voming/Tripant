@@ -8,6 +8,7 @@ function saveClickHandler(){
 		url: '/save/pwd', 
 		type: 'post', 
 		data: $('#memPassword'), 
+		beforeSend: csrfHandler(xhr), 
 		success: function(result){
 			if(result == 1){
 				Swal.fire({

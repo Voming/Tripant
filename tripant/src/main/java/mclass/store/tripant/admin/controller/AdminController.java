@@ -24,7 +24,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import com.google.gson.Gson;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
-import mclass.store.tripant.admin.service.AdminService;
+import mclass.store.tripant.admin.model.service.AdminService;
 
 @Controller
 @RequestMapping(value="/admin")

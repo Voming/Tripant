@@ -44,6 +44,11 @@
 		<!-- 여행일정없음 -->
 		<h1 th:if="${#lists.isEmpty(planlist)}" class="nothing" >작성된 여행 일정이 없습니다</h1>
 	</div>
+<script th:inline="javascript">
+//csrf 설정을 위한 값 받기
+const token = $("meta[name='_csrf']").attr("content");
+const header= $("meta[name='_csrf_header']").attr("content");
+</script>
 <script th:src="@{/js/trip/triplist/movePage.js}"></script>
 <script th:src="@{/js/trip/triplist/loadedHandler.js}"></script>
 <script th:src="@{/js/trip/triplist/addAndRemove.js}"></script>

@@ -5,6 +5,7 @@ function pwdCheckHandler(){
 		url: contextPath+'my/pwd/use', 
 		type: 'post', 
 		data: {memPassword: pwdInput}, 
+		beforeSend: csrfHandler(xhr), 
 		success: function(result){
 			console.log(result);
 			if(result == 1){

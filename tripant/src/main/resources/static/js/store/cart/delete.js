@@ -11,7 +11,7 @@ function cartDelHandler() {
 		data : {
 			items : items
 		}, 
-		
+		beforeSend: csrfHandler(xhr), 
 		success : async function(result) {
 			if (result == 1) {
 				Swal.fire({

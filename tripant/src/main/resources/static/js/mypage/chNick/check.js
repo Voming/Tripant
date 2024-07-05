@@ -6,6 +6,7 @@ function nickCheckHandler(){
 		url: contextPath+'join/nick/check', 
 		type: 'post', 
 		data: {memNick: nickInput}, 
+		beforeSend: csrfHandler(xhr), 
 		success: function(result){
 			if(nickExp.test(nickInput) == true){
 				if(result == 0){

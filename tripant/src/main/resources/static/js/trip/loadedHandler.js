@@ -5,6 +5,9 @@ function loadedHanlder(){
 	//var param = window.location.search;
 	$.ajax({
 		url: url+"/info",
+		beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token); },
 		method:"post",
 		dataType:"json",
 		success : function(dayEntityList) {

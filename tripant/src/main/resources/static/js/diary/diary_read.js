@@ -22,6 +22,8 @@ function reportHandler() {
 	
 	console.log(diaryId);
 	 console.log("report ID: ", diaryId);
+	 	const token = $("meta[name='_csrf']").attr("content");
+		const header= $("meta[name='_csrf_header']").attr("content");
 
 	Swal.fire({
 		title: "이 글을 신고하시겠습니까?",
@@ -35,7 +37,11 @@ function reportHandler() {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/my/diary/report/" + diaryId
+				url: contextPath + "/my/diary/report/" + diaryId
+				,beforeSend : function(xhr){
+				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+				xhr.setRequestHeader(header,token);
+				}
 				, method: "post"
 				, success: function(result) {
 					if (result == 1) {
@@ -72,6 +78,8 @@ function deleteHandler() {
 	var diaryId = $(this).data('diary-id');
 	console.log(diaryId);
 	console.log("delete ID: ", diaryId);
+		const token = $("meta[name='_csrf']").attr("content");
+		const header= $("meta[name='_csrf_header']").attr("content");
 
 	//sweetAlert2를 사용하여 확인 다이얼 로그를 표시
 	Swal.fire({
@@ -88,7 +96,11 @@ function deleteHandler() {
 		if (result.isConfirmed) {
 			// ajax요청을 사용하여 서버에 삭제요청을 보냄
 			$.ajax({
-				url: "/my/diary/delete/"+diaryId,
+				url:contextPath +  "/my/diary/delete/"+diaryId,
+				beforeSend : function(xhr){
+				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+				xhr.setRequestHeader(header,token);
+				},
 				method: "post",
 				//success: 1이면 업데이트 완료 0이면 실패
 				success: function(result) {
@@ -118,6 +130,8 @@ function deleteHandler() {
 function shareHandler() {
 	var shareId = $(this).data('share');
 	console.log(shareId);
+		const token = $("meta[name='_csrf']").attr("content");
+		const header= $("meta[name='_csrf_header']").attr("content");
 	// 공유하기 모달 표시
 	Swal.fire({
 		title: "나의 여행기 공유하기",
@@ -156,12 +170,18 @@ function btnLikeClickHandler(thisElement, diaryId) {
 
 	console.log("btnLikeClickHandler 눌림");
 	console.log(diaryId);
+		const token = $("meta[name='_csrf']").attr("content");
+		const header= $("meta[name='_csrf_header']").attr("content");
 	/*	console.log(thisElement);*/
 	if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
 		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
 		// ajax 요청
 		$.ajax({
 			url: contextPath + "my/diary/like/" + diaryId
+			,beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token);
+			}
 			, method: "post"
 			, error: ajaxErrorHandler
 		}).done(function(result) {
@@ -173,6 +193,10 @@ function btnLikeClickHandler(thisElement, diaryId) {
 		// ajax 요청
 		$.ajax({
 			url: contextPath + "my/diary/unlike/" + diaryId
+			,beforeSend : function(xhr){
+			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+			xhr.setRequestHeader(header,token);
+			}
 			, method: "post"
 			, error: ajaxErrorHandler
 		}).done(function(result) {
