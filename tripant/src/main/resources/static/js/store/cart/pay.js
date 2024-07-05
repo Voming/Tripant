@@ -42,6 +42,8 @@ async function requestPayment() {
 	} else {
 		// 결제 검증
 		$.ajax({
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
 			url : contextPath + "store/payment",
 			type : "post",
 			data : {
@@ -50,8 +52,6 @@ async function requestPayment() {
 				items : items,
 				buyId : buyId
 			}, 
-			beforeSend: csrfHandler(xhr), 
-			error : ajaxErrorHandler,
 			success : async function(data) {
 				if (data == 1) {
 					Swal.fire({

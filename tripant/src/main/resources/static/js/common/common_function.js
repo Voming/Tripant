@@ -10,7 +10,8 @@ function ajaxErrorHandler(request, status, error) {
 		confirmButtonText: "확인"
 	});
 }
-
+const token = $("meta[name='_csrf']").attr("content");
+const header = $("meta[name='_csrf_header']").attr("content");
 //csrf
 function csrfHandler(xhr) {
 	xhr.setRequestHeader(header, token);

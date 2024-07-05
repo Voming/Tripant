@@ -5,10 +5,11 @@ function backClickHandler(){
 //비밀번호 변경
 function saveClickHandler(){
 	$.ajax({
-		url: '/save/pwd', 
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url:contextPath+'save/pwd', 
 		type: 'post', 
 		data: $('#memPassword'), 
-		beforeSend: csrfHandler(xhr), 
 		success: function(result){
 			if(result == 1){
 				Swal.fire({
@@ -32,8 +33,6 @@ function saveClickHandler(){
 					confirmButtonText: "확인"
 				});
 			}
-		}, 
-		 
-		error: ajaxErrorHandler
+		}
 	});
 }

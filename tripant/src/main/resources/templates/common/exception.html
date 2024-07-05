@@ -50,13 +50,14 @@ if(code == "4021" && memRole == "ROLE_SLEEP"){
 	}).then((swal) => {
 		if(swal.isConfirmed){
 			$.ajax({
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
 				url: contextPath + "code/send/awake", 
 				type: "post", 
 				async: false, 
 				data: {
 					memEmail: memEmail
 				}, 
-				error: ajaxErrorHandler, 
 				success: inputCode()
 			});
 		}else{
@@ -83,12 +84,13 @@ async function inputCode(){
 	});
 	if(code[0].trim().length > 0){
 		$.ajax({
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
 			url: contextPath + "code/check/awake", 
 			type: "post", 
 			data: {
 				inputCode: `${code}`
 			}, 
-			error: ajaxErrorHandler, 
 			success: function(data){
 				if(data > 0){
 					Swal.fire({

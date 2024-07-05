@@ -1,7 +1,4 @@
 $(loadedHandler);
-const token = $("meta[name='_csrf']").attr("content");
-const header = $("meta[name='_csrf_header']").attr("content");
-
 function loadedHandler() {
 	$(".btn.find").on("click", btnFindClickHandler);
 
@@ -47,10 +44,9 @@ function changeSelectAreaHandler() {
 
 	if (area.length < 3) {
 		$.ajax({
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
 			url: contextPath + "plan/area"
-			, beforeSend: function(xhr) {
-				xhr.setRequestHeader(header, token);
-			}
 			, method: "post"
 			, data: {
 				areaCode: area
@@ -93,15 +89,13 @@ function btnFindClickHandler() {
 	}
 
 	$.ajax({
-		url: "find/area"
-		, beforeSend: function(xhr) {
-			xhr.setRequestHeader(header, token);
-		}
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+"find/area"
 		, method: "post"
 		, context: this
 		, data: { findArea: findArea }
 		//, dataType: 'json'
-		, error: ajaxErrorHandler
 	}).done(function(wrap_area) {
 		$(this).parents(".wrap-area").find(".wrap-areaList").replaceWith(wrap_area);
 	});

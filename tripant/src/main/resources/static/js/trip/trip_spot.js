@@ -38,11 +38,9 @@ function spotMoreBtnClickHandler(thisElement) {
 	clickspotnum += 1;
 
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath + "trip/spot"
-		,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -50,7 +48,6 @@ function spotMoreBtnClickHandler(thisElement) {
 			spotType: spottype,
 			clickSpotNum: clickspotnum
 		}
-		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(spotId).replaceWith(wrap_spot);
 
@@ -100,11 +97,9 @@ $(document).ready(function() {
 		spotId = "#spot-tab0" + spottype + " .wrap-spotList" //필요한 탭 content만 값 넣기
 
 		$.ajax({
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,	
 			url: contextPath + "trip/spot"
-			,beforeSend : function(xhr){
-				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-				xhr.setRequestHeader(header,token);
-			}
 			, method: "post"
 			, context: this
 			, data: {
@@ -112,7 +107,6 @@ $(document).ready(function() {
 				spotType: spottype,
 				clickSpotNum: clickspotnum
 			}
-			, error: ajaxErrorHandler
 		}).done(function(wrap_spot) {
 			$(spotId).replaceWith(wrap_spot);
 
@@ -154,11 +148,9 @@ function btnSpotFindClickHandler() {
 	}
 
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url:contextPath + "trip/spot/find"
-		,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -166,7 +158,6 @@ function btnSpotFindClickHandler() {
 			areaCode: areacode,
 			clickSpotFindNum: clickspotfindnum
 		}
-		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(spotId).replaceWith(wrap_spot);
 
@@ -194,11 +185,9 @@ function spotFindMoreBtnClickHandler(thisElement) {
 	clickspotfindnum += 1;
 
 	$.ajax({
-		url: contextPath + "/spot/find"
-		,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-		}
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath + "spot/find"
 		, method: "post"
 		, context: this
 		, data: {
@@ -206,7 +195,6 @@ function spotFindMoreBtnClickHandler(thisElement) {
 			findArea: findArea,
 			clickSpotFindNum: clickspotfindnum
 		}
-		, error: ajaxErrorHandler
 	}).done(function(wrap_spot) {
 		$(spotId).replaceWith(wrap_spot);
 

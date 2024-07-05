@@ -4,10 +4,9 @@ function loadedHanlder(){
 	var url = window.location.pathname;
 	//var param = window.location.search;
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: url+"/info",
-		beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token); },
 		method:"post",
 		dataType:"json",
 		success : function(dayEntityList) {

@@ -1,6 +1,8 @@
 //비밀번호 재설정
 function setPwdHandler(){
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath+'pwd', 
 		method: 'post', 
 		data: $('#frm-pwd').serialize(), 
@@ -24,7 +26,6 @@ function setPwdHandler(){
 					confirmButtonText: "확인"
 				});
 			}
-		}, 
-		error: ajaxErrorHandler
+		}
 	});
 }

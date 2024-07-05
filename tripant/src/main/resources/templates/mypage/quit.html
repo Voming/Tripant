@@ -34,6 +34,7 @@ function loadedHandler(){
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
 	<div class="wrap-main">
 		<form id="frm-quit">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 			<section class="flex quit">
 				<div class="quit title">회원 탈퇴</div>
 				<div class="quit explain">회원 탈퇴 안내 사항</div>

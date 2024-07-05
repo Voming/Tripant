@@ -1,7 +1,4 @@
 // 일정만들기에서 전체적으로 사용할 클래스
-const token = $("meta[name='_csrf']").attr("content");
-const header = $("meta[name='_csrf_header']").attr("content");
-
 class PlanDate {
 	constructor(date, smalldate, day) {
 		this.date = date; //2024.06.06
@@ -169,10 +166,9 @@ function loadedHandler() {
 					// 일정 만들기 알고리즘 돌리기
 					const jsonString = JSON.stringify(calendarPlan);
 					$.ajax({
+						beforeSend : csrfHandler,
+						error : ajaxErrorHandler,
 						url: contextPath + "plan/planning",
-						beforeSend: function(xhr) {
-							xhr.setRequestHeader(header, token);
-						},
 						method: "post",
 						contentType: "application/json",
 						data: jsonString,
@@ -180,8 +176,7 @@ function loadedHandler() {
 						//dataType: "json",
 						success: function(data) {
 							console.log(data);
-						},
-						error: ajaxErrorHandler
+						}
 					});
 				}
 			}

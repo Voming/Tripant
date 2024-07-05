@@ -6,12 +6,13 @@ function cartDelHandler() {
 	});
 	console.log(items);
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url : contextPath + 'store/cart/del',
 		type : 'post',
 		data : {
 			items : items
 		}, 
-		beforeSend: csrfHandler(xhr), 
 		success : async function(result) {
 			if (result == 1) {
 				Swal.fire({
@@ -32,7 +33,6 @@ function cartDelHandler() {
 					confirmButtonColor: "#000000", 
 				});
 			}
-		},
-		error : ajaxErrorHandler
+		}
 	});
 }

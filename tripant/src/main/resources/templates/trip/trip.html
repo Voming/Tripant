@@ -53,10 +53,6 @@
 <script th:inline="javascript">
 //전역변수 선언
 
-//csrf 설정을 위한 값 받기
-const token = $("meta[name='_csrf']").attr("content");
-const header= $("meta[name='_csrf_header']").attr("content");
-
 /* 추가한 일정들 객체화하여 좌표 넣기 , points 글로벌변수 선언*/
 let dayPoints = [];  // 일차별 지도 표시할 위치
 let polylines = []; // 폴리라인을 저장할 배열

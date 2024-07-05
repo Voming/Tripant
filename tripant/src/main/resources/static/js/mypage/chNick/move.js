@@ -5,10 +5,11 @@ function backClickHandler(){
 //닉네임 저장
 function saveClickHandler(){
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath+'my/nick', 
 		type: 'post', 
 		data: $('#memNick'), 
-		beforeSend: csrfHandler(xhr), 
 		success: function(result){
 			if(result == 1){
 				Swal.fire({
@@ -29,8 +30,6 @@ function saveClickHandler(){
 					confirmButtonText: "확인"
 				});
 			}
-		}, 
-		error: ajaxErrorHandler, 
-		 
+		}
 	});
 }

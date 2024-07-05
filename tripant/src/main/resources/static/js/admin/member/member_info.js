@@ -31,7 +31,9 @@ function ClickHandler() {
              const selectActive = document.getElementById('selectActive').value;
              const memEmail=$(this).parent().prev().prev().prev().prev().prev().text(); //button에서 부모요소인 li로 올라가서 prev() 달기
              $.ajax({
-            	 url:"/admin/member/info",
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+            	 url:contextPath+"admin/member/info",
             	 method:"post",
             	 data: {selectRole:selectRole, memEmail:memEmail,selectActive:selectActive},
 				 //success: 1이면 업데이트 완료 0이면 실패
@@ -43,12 +45,7 @@ function ClickHandler() {
 							} else {
 								alert("실패");
 							}
-				 },
-				 error : function(request, status, error) {
-							alert("code: " + request.status + "\n"
-									+ "message: " + request.responseText + "\n"
-									+ "error: " + error);
-						}
+				 }
              });
              return { selectRole: selectRole , selectActive: selectActive};
          }

@@ -4,10 +4,9 @@ function findNickHandler(){
 	if($(this).siblings("[name=find]").val().trim().length==0){
 		var planId =$(this).parents(".trip-list.wfull").data('plan-id');
 		$.ajax({
-			url: "/trip/share/nick",
-			beforeSend : function(xhr){
-				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-				xhr.setRequestHeader(header,token);},
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
+			url: contextPath+"trip/share/nick",
 			method:"post",
 			context:this,
 	    	data: {planId:planId}
@@ -21,10 +20,9 @@ function findNickHandler(){
 		var findNick=$(this).siblings('.wirte-nick').val()
 		
 		$.ajax({
-			url: "/trip/search/nick",
-			beforeSend : function(xhr){
-				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-				xhr.setRequestHeader(header,token);},
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
+			url: contextPath+"trip/search/nick",
 			method:"post",
 			context:this,
         	data: {planId:planId,findNick: findNick}

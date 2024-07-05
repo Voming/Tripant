@@ -16,10 +16,11 @@ function quitClickHandler(){
 	}).then((swal) => {
 		if(swal.isConfirmed){
 			$.ajax({
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
 				url: contextPath+'my/quit', 
 				type: 'post', 
 				data: {memPassword: memPassword}, 
-				beforeSend: csrfHandler(xhr), 
 				success: function(result){
 					if(result > 0){
 						Swal.fire({
@@ -43,9 +44,7 @@ function quitClickHandler(){
 							confirmButtonText: "확인"
 						});
 					}
-				}, 
-				
-				error: ajaxErrorHandler
+				}
 			});
 		}
 	});

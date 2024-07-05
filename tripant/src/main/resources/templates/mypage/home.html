@@ -21,6 +21,7 @@
 			<div class="ch nick"><button type="button" class="btn chNick">닉네임 변경</button></div>
 			<div class="ch pwd"><button type="button" class="btn chPwd">비밀번호 변경</button></div>
 			<form id="frm-unlink">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 				<div class="unlink kakao flex" th:if="${isKakao} == 4"><img th:src="@{/images/member/login_kakao.png}" style="width: 34px; height: 34px;"><button type="button" class="button unlink-kakao">연동 해제</button></div>
 				<div class="unlink naver flex" th:if="${isNaver} == 2"><img th:src="@{/images/member/login_naver.png}" style="width: 34px; height: 34px;"><button type="button" class="button unlink-naver">연동 해제</button></div>
 				<div class="unlink google flex" th:if="${isGoogle} == 1"><img th:src="@{/images/member/login_google.png}" style="width: 34px; height: 34px; background-color: white;"><button type="button" class="button unlink-google">연동 해제</button></div>
@@ -32,10 +33,10 @@
 	<script>
 		function unlinkKakaoHandler(){
 			$.ajax({
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
 				url: contextPath + "my/unlink/kakao", 
 				type: "post", 
-				beforeSend: csrfHandler(xhr), 
-				error: ajaxErrorHandler, 
 				success: function(data){
 					if(data > 0){
 						Swal.fire({
@@ -82,9 +83,9 @@
 		
 		function unlinkNaverHandler(){
 			$.ajax({
+				beforeSend : csrfHandler,
 				url: contextPath + "my/unlink/naver", 
 				type: "post", 
-				beforeSend: csrfHandler(xhr), 
 				error: function(){
 					Swal.fire({
 						title: "미구현 기능입니다.", 
@@ -139,9 +140,9 @@
 		
 		function unlinkGoogleHandler(){
 			$.ajax({
+				beforeSend : csrfHandler,
 				url: contextPath + "my/unlink/google", 
 				type: "post", 
-				beforeSend: csrfHandler(xhr), 
 				error: () => {
 					Swal.fire({
 						title: "미구현 기능입니다.", 

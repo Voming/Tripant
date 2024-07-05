@@ -6,11 +6,11 @@ function pwdCheckHandler(){
 	const pwdExp4 = /^.*[a-z].*$/;
 	const pwdInput = $("input#memPassword").val();
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath+'pwd/use', 
 		type: 'post', 
 		data: {memPassword: pwdInput}, 
-		beforeSend: csrfHandler(xhr), 
-		error: ajaxErrorHandler, 
 		success: function(result){
 			if(pwdExp1.test(pwdInput) == true && 
 			   pwdExp2.test(pwdInput) == true && 

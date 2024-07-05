@@ -21,13 +21,14 @@ function payCancelHandler(){
 	}).then((swal) => {
 		if(swal.isConfirmed){
 			$.ajax({
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
 				url: contextPath + "admin/cancel", 
 				type: "post", 
 				data: {
 					buyId: buyId, 
 					memEmail: memEmail 
 				}, 
-				error: ajaxErrorHandler, 
 				success: function(data){
 					if(data > 0){
 						Swal.fire({
@@ -63,13 +64,14 @@ var endPageNum = null;
 function goPageHandler() {
 			var currentpage = $(this).data("targetpage");
 			$.ajax({
-				url:"/admin/member/search"
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+				url:contextPath+"admin/member/search"
 				, method : "get"
 				, data : {
 						seachMem : seachMem,
 						currentpage : currentpage}
 				, dataType : "json"
-				, error : ajaxErrorHandler
 				, success : function(result){
 					if(result.seachMem){
 						$("[name=search]").val(result.seachMem);
@@ -85,15 +87,16 @@ function searchBtnHandler(thisElement){
 	var targetPage = $(thisElement).data('targetpage');
 	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
-		url:"/admin/cancel/search",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url:contextPath+"admin/cancel/search",
 		method:"post",
 		data: {searchMem:searchMem
 		 , page: targetPage},
 		success : function(searchList) {
 			 $('.wrap-list').replaceWith(searchList);
 			 $(".btn.cancel").on("click", payCancelHandler);
-				},
-	 	error : ajaxErrorHandler
+			}
 	});
 }
 

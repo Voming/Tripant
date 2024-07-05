@@ -10,10 +10,9 @@ function durationHandler(startLngStr,startLatStr,endLngStr,endLatStr){
 		endLatStr : endLatStr
 	};
 	$.ajax({
-		url:contextPath+'/trip/duration',
-		beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token); },
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+'trip/duration',
 		data:dataset,
 	 	async: false,  
 		method:"post",

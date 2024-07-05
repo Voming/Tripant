@@ -16,32 +16,30 @@ function deleteHandler() {
 		}).then((result) => {
 		  if (result.isConfirmed) {
 	         $.ajax({
-        	 url:"/trip/list/delete",
-			 beforeSend : function(xhr){
-				/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-				xhr.setRequestHeader(header,token);},
-        	 method:"post",
-        	 data: {planId:planId},
-			 //success: 1이면 업데이트 완료 0이면 실패
-			 success : function(result) {
-				if(result == 1){
-						Swal.fire({
-				     	title: "성공",
-				      	text: "삭제되었습니다",
-  		     		    confirmButtonColor: "#000000",
-		                animation:false		      	
-				    }).then(() => {
-						location.reload();
-					});
-				}else if(result == 0){
-						Swal.fire({
-				     	title: "실패",
-				      	text: "삭제에 실패했습니다. 다시 한 번 확인해주세요",
-		                confirmButtonText: 'Ok'		      	
-				    })
-				}
-			 },
-			 error : ajaxErrorHandler
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+	        	 url:contextPath+"trip/list/delete",
+	        	 method:"post",
+	        	 data: {planId:planId},
+				 //success: 1이면 업데이트 완료 0이면 실패
+				 success : function(result) {
+					if(result == 1){
+							Swal.fire({
+					     	title: "성공",
+					      	text: "삭제되었습니다",
+	  		     		    confirmButtonColor: "#000000",
+			                animation:false		      	
+					    }).then(() => {
+							location.reload();
+						});
+					}else if(result == 0){
+							Swal.fire({
+					     	title: "실패",
+					      	text: "삭제에 실패했습니다. 다시 한 번 확인해주세요",
+			                confirmButtonText: 'Ok'		      	
+					    })
+					}
+				 }
          	});//ajax
 		  }//if
 		});

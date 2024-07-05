@@ -13,15 +13,12 @@ function loadedHandler() {
 //좋아요수 정렬
 function ClickLikeHandler(){
 	$.ajax({
-		url:"/admin/like",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+"admin/like",
 		 method:"post",
 		 success : function(like) {
 			 $('#list').html(LikeHandler(like));
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
 			}
 	});
 } 
@@ -47,15 +44,12 @@ function LikeHandler(like){
 //조회수 정렬
 function ClickViewHandler(){
 	$.ajax({
-		url:"/admin/view",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url:contextPath+"admin/view",
 		 method:"post",
 		 success : function(view) {
 			 $('#list').html(ViewHandler(view));
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
 			}
 	});
 } 
@@ -87,13 +81,14 @@ var endPageNum = null;
 function goPageHandler() {
 			var currentpage = $(this).data("targetpage");
 			$.ajax({
-				url:"/admin/keyword"
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+				url:contextPath+"admin/keyword"
 				, method : "get"
 				, data : {
 						pick:pick, search:search ,
 						currentpage : currentpage}
 				, dataType : "json"
-				, error : ajaxErrorHandler
 				, success : function(result){
 					if(result.search){
 						$("[name=search]").val(result.search);
@@ -113,18 +108,14 @@ function searchBtnHandler(thisElement){
 	console.log(targetPage);
 	
 	$.ajax({
-		url:"/admin/keyword",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url:contextPath+"admin/keyword",
 		method:"post",
 		data: {pick:pick, search:search , page: targetPage},
 		success : function(searchList) {
 				$('.wrap-list').replaceWith(searchList);
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
 			}
-		
 	});
 }
 

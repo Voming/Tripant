@@ -2,6 +2,8 @@
 function codeSendHandler(){
 	var memEmail = $("#memEmail").val();
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath+'code/send/pwd', 
 		type: "post", 
 		async: false, 
@@ -33,14 +35,15 @@ function codeSendHandler(){
 					confirmButtonText: "확인"
 				});
 			}
-		},  
-		error: ajaxErrorHandler
+		}
 	});
 }
 //인증코드 확인
 function codeCheckHandler(){
 	var inputCode = $("#code").val();
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath+'code/check', 
 		type: "post", 
 		async: false, 
@@ -70,7 +73,6 @@ function codeCheckHandler(){
 					confirmButtonText: "확인"
 				});
 			}
-		}, 
-		error: ajaxErrorHandler
+		}
 	});
 }

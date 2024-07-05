@@ -6,10 +6,11 @@ function insertItemsHandler(){
 	});
 	console.log(items);
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath+'store/insert', 
 		type: 'post', 
 		data: {items : items}, 
-		beforeSend: csrfHandler(xhr), 
 		success: function(result){
 			if(result == 1){
 				Swal.fire({
@@ -35,8 +36,6 @@ function insertItemsHandler(){
 					confirmButtonText: "확인"
 				});
 			}
-		}, 
-		
-		error: ajaxErrorHandler 
+		}
 	});
 }

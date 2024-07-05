@@ -12,13 +12,14 @@ var endPageNum = null;
 function goPageHandler() {
 			var currentpage = $(this).data("targetpage");
 			$.ajax({
-				url:"/admin/member/search"
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+				url:contextPath+"admin/member/search"
 				, method : "get"
 				, data : {
 						searchMem : searchMem,
 						currentpage : currentpage}
 				, dataType : "json"
-				, error : ajaxErrorHandler
 				, success : function(result){
 					if(result.searchMem){
 						$("[name=search]").val(result.searchMem);
@@ -33,7 +34,9 @@ function searchBtnHandler(thisElement){
 	var targetPage = $(thisElement).data('targetpage');
 	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
-		url:"/admin/member/search",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url:contextPath+"admin/member/search",
 		 method:"post",
 		 data: {
 			searchMem:searchMem
@@ -41,11 +44,6 @@ function searchBtnHandler(thisElement){
 		 },
 		 success : function(searchList) {
 			$('.wrap-list').replaceWith(searchList);
-		},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
 		}
 	});
 }

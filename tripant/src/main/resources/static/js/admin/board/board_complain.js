@@ -30,17 +30,14 @@ function cickSetHandler(){
 		diaryId.push($(this).data('diary-id'));
 	})
 	$.ajax({
-		url:"/admin/reset",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+"admin/reset",
 		 method:"post",
 		 data: {diaryId:diaryId},
 		 success : function(result) {
 			 	location.reload();
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
-			}
+				}
 	});
 } 
 var currentPage = 1;
@@ -52,13 +49,14 @@ var endPageNum = null;
 function goPageHandler() {
 			var currentpage = $(this).data("targetpage");
 			$.ajax({
-				url:"/admin/complain/search"
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+				url:contextPath+"admin/complain/search"
 				, method : "get"
 				, data : {
 						seachMem : seachMem,
 						currentpage : currentpage}
 				, dataType : "json"
-				, error : ajaxErrorHandler
 				, success : function(result){
 					if(result.seachMem){
 						$("[name=search]").val(result.seachMem);
@@ -73,18 +71,14 @@ function searchBtnHandler(thisElement){
 	var targetPage = $(thisElement).data('targetpage');
 	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
-		url:"/admin/complain/search",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+"admin/complain/search",
 		 method:"post",
 		 data: {searchMem:searchMem,page: targetPage},
 		 success : function(complainList) {
 			 $('.wrap-list').replaceWith(complainList);
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
 			}
-		
 	});
 }
 
@@ -112,15 +106,12 @@ function memListHandler(complainList){
 //신고수 정렬
 function clickReportHandler(){
 	$.ajax({
-		url:"/admin/report",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+"admin/report",
 		 method:"post",
 		 success : function(report) {
 			 $('#list').html(ReportHandler(report));
-				},
-	 error : function(request, status, error) {
-				alert("code: " + request.status + "\n"
-						+ "message: " + request.responseText + "\n"
-						+ "error: " + error);
 			}
 	});
 }

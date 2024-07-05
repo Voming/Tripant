@@ -6,10 +6,9 @@ $(document).ready(function() {
 	var areaPointX;
 	var areaPointY;
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath + "plan"
-		, beforeSend: function(xhr) {
-			xhr.setRequestHeader(header, token);
-		}
 		, method: "post"
 		, data: {
 			areaCode: areacode

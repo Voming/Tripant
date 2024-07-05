@@ -20,6 +20,8 @@ function robotHandler() {
 	}
 	var captcha = 0;
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath+'join',
 		type: 'post',
 		data: memberEntity,
@@ -56,9 +58,7 @@ function robotHandler() {
 					});
 					break;
 			}
-		}, 
-		 
-		error: ajaxErrorHandler
+		}
 	});
 	if (captcha != 1) {
 		return false;

@@ -27,22 +27,17 @@ function tabMenuClickHandler() {
 	console.log(contextPath + "diary");
 	areaname = $(this).text().trim();
 	areaname = (areaname == "전체" ? "" : areaname);
-	const token = $("meta[name='_csrf']").attr("content");
-	const header= $("meta[name='_csrf_header']").attr("content");
 	// ajax 요청
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath + "diary" + "/popular/" + $("#sortOption").val()
-		,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-			}
 		, method: "post"
 		, data: {
 			areaname: areaname,
 			clickNum: clicknum
 		}
 		, context: this
-		, error: ajaxErrorHandler
 	}).done(function(wrap_content) {
 		$(".wrap-diary").replaceWith(wrap_content);
 		//TODO with voming
@@ -59,21 +54,16 @@ function tabMenuClickHandler() {
 function btnLikeClickHandler(thisElement, diaryId) {
 	console.log("btnLikeClickHandler 눌림");
 	console.log(diaryId);
-	const token = $("meta[name='_csrf']").attr("content");
-	const header= $("meta[name='_csrf_header']").attr("content");
 	/*	console.log(thisElement);*/
 	if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
 		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
 		
 		// ajax 요청
 		$.ajax({
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
 			url: contextPath + "my/diary/like/" + diaryId
-			,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-			}
 			, method: "post"
-			, error: ajaxErrorHandler
 		}).done(function(result) {
 			if(result > 0)
 			$(thisElement).attr('src', '/images/diary/diary_like_icon.png');
@@ -83,13 +73,10 @@ function btnLikeClickHandler(thisElement, diaryId) {
 		// 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
 		// ajax 요청
 		$.ajax({
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
 			url: contextPath + "my/diary/unlike/" + diaryId
-			,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-			}
 			, method: "post"
-			, error: ajaxErrorHandler
 		}).done(function(result) {
 			if(result>0)
 			$(thisElement).attr('src', '/images/diary/diary_like_none.png');
@@ -100,22 +87,17 @@ function btnLikeClickHandler(thisElement, diaryId) {
 
 function moreBtnClickHandler(thisElement) {
 	clicknum += 1;
-	const token = $("meta[name='_csrf']").attr("content");
-	const header= $("meta[name='_csrf_header']").attr("content");
 	// ajax 요청
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath + "diary" + "/popular/" + $("#sortOption").val()
-		,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-			}
 		, method: "post"
 		, data: {
 			areaname: areaname,
 			clickNum: clicknum
 		}
 		, context: this
-		, error: ajaxErrorHandler
 	}).done(function(wrap_content) {
 		$(".wrap-diary").replaceWith(wrap_content);
 		
@@ -131,21 +113,16 @@ function moreBtnClickHandler(thisElement) {
 function sortOptionChangeHandler(thisElement) {
 	//console.log(thisElement.value);
 	clicknum = 0; // 페이지 초기화
-	const token = $("meta[name='_csrf']").attr("content");
-	const header= $("meta[name='_csrf_header']").attr("content");
 	// ajax 요청
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath + "diary" + "/popular/" + thisElement.value
-		,beforeSend : function(xhr){
-			/* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-			xhr.setRequestHeader(header,token);
-			}
 		, method: "post"
 		, data : {
 			areaname: areaname,
 			clickNum: clicknum
 		}
-		, error: ajaxErrorHandler
 	}).done(function(wrap_content) {
 		//$('.area-tab-nav a').filter(':eq(0)').click(); // 첫 번째 탭 활성화
 		$(".wrap-diary").replaceWith(wrap_content);

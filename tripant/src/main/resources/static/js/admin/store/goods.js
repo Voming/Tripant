@@ -24,6 +24,7 @@ async function itemUpdateHandler(){
 	let itemColor = "";
 	let itemSrc = "";
 	const itemInfo = await $.ajax({
+		beforeSend : csrfHandler,
 		url: contextPath + "admin/goods/info", 
 		type: "post", 
 		data: {
@@ -102,6 +103,7 @@ async function itemUpdateHandler(){
 				&& formValues[1].trim().length > 0
 				&& formValues[2].trim().length > 0) {
 			$.ajax({
+				beforeSend : csrfHandler,
 				url: contextPath + "admin/goods/update", 
 				type: "post", 
 				data: {
@@ -206,6 +208,7 @@ async function itemInsertHandler(){
 			&& formValues[1].trim().length > 0
 			&& formValues[2].trim().length > 0) {
 		$.ajax({
+			beforeSend : csrfHandler,
 			url: contextPath + "admin/goods/insert", 
 			type: "post", 
 			data: {
@@ -256,7 +259,8 @@ function itemDeleteHandler(){
 	var itemCode=$(this).parents('.col.list').data('item-code');
 	console.log(itemCode);
 	$.ajax({
-		url:"/admin/goods/delete",
+		beforeSend : csrfHandler,
+		url:contextPath+"admin/goods/delete",
 		method:"post",
 		data: {itemCode:itemCode},
 		success : function(result) {
@@ -290,13 +294,14 @@ var endPageNum = null;
 function goPageHandler() {
 			var currentpage = $(this).data("targetpage");
 			$.ajax({
-				url:"/admin/cancel/search"
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+				url:contextPath+"admin/cancel/search"
 				, method : "get"
 				, data : {
 						currentpage : currentpage,
 						itemCode:itemCode}
 				, dataType : "json"
-				, error : ajaxErrorHandler
 				, success : function(result){
 					if(result.seachMem){
 						$("[name=search]").val(result.seachMem);
@@ -319,11 +324,12 @@ function searchBtnHandler(thisElement){
 	var targetPage = $(thisElement).data('targetpage');
 	var itemCode = $("[name=search]").val().trim();
 	$.ajax({
-		url:"/admin/goods/search",
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url:contextPath+"admin/goods/search",
 		method:"post",
 		context:this,
-		data: {itemCode:itemCode, page: targetPage},
-		error:ajaxErrorHandler
+		data: {itemCode:itemCode, page: targetPage}
 		}).done( function(goodsList) {
 			 $('.wrap-list').replaceWith(goodsList);
 			 // 상품 추가 버튼

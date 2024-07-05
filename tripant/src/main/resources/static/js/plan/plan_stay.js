@@ -11,10 +11,9 @@ function stayMoreBtnClickHandler(thisElement) {
 	clickstaynum += 1;
 
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath + "plan/stay"
-		, beforeSend: function(xhr) {
-			xhr.setRequestHeader(header, token);
-		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -22,7 +21,6 @@ function stayMoreBtnClickHandler(thisElement) {
 			stayType: staytype,
 			clickStayNum: clickstaynum
 		}
-		, error: ajaxErrorHandler
 	}).done(function(wrap_stay) {
 		$(stayId).replaceWith(wrap_stay);
 
@@ -68,10 +66,9 @@ $(document).ready(function() {
 		stayId = "#stay-tab0" + tabtype + " .wrap-stayList" //필요한 탭 content만 값 넣기
 
 		$.ajax({
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
 			url: contextPath + "plan/stay"
-			, beforeSend: function(xhr) {
-				xhr.setRequestHeader(header, token);
-			}
 			, method: "post"
 			, context: this
 			, data: {
@@ -79,7 +76,6 @@ $(document).ready(function() {
 				stayType: staytype,
 				clickStayNum: clickstaynum
 			}
-			, error: ajaxErrorHandler
 		}).done(function(wrap_stay) {
 			$(stayId).replaceWith(wrap_stay);
 
@@ -120,10 +116,9 @@ function btnStayFindClickHandler() {
 	}
 
 	$.ajax({
-		url: "/plan/stay/find"
-		, beforeSend: function(xhr) {
-			xhr.setRequestHeader(header, token);
-		}
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+"plan/stay/find"
 		, method: "post"
 		, context: this
 		, data: {
@@ -131,7 +126,6 @@ function btnStayFindClickHandler() {
 			areaCode: areacode,
 			clickStayFindNum: clickstayfindnum
 		}
-		, error: ajaxErrorHandler
 	}).done(function(wrap_stay) {
 		$(stayId).replaceWith(wrap_stay);
 
@@ -157,10 +151,9 @@ function stayFindMoreBtnClickHandler(thisElement) {
 	clickstayfindnum += 1;
 
 	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
 		url: contextPath + "plan/stay/find"
-		, beforeSend: function(xhr) {
-			xhr.setRequestHeader(header, token);
-		}
 		, method: "post"
 		, context: this
 		, data: {
@@ -168,7 +161,6 @@ function stayFindMoreBtnClickHandler(thisElement) {
 			findArea: findArea,
 			clickStayFindNum: clickstayfindnum
 		}
-		, error: ajaxErrorHandler
 	}).done(function(wrap_stay) {
 		$(stayId).replaceWith(wrap_stay);
 

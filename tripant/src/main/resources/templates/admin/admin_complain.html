@@ -25,6 +25,7 @@
 	
 	<div class="wrap-body">
 		<form action ="/logout" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 			<div class="ad-header">
 				<div class="ad-text">신고게시글 관리</div>
 				<button type="submit" class="btn logout"><h5>로그아웃</h5></button>
