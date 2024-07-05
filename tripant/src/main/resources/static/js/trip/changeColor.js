@@ -9,16 +9,16 @@ function circleColorHandler(){
 		
 		switch(circleCss){
 		case 1:
-			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_01_red)");
+			$(this).children().find('.spot-number.backimg').css('background-image','var(--img_cir_01_red)');
 			break;
 		case 2:
-			$(this).children().find('.spot-number.backimg').attr('style', "background-image:var(--img_cir_02_purple);")
+			$(this).children().find('.spot-number.backimg').attr('style', 'background-image:var(--img_cir_02_purple);')
 			break;
 		case 3:
-			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_03_pink)");
+			$(this).children().find('.spot-number.backimg').css('background-image','var(--img_cir_03_pink)');
 			break;
 		case 4:
-			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_04_orange)");
+			$(this).children().find('.spot-number.backimg').css('background-image','var(--img_cir_04_orange)');
 			break;
 		case 5:
 			$(this).children().find('.spot-number.backimg').css('background-image',"var(--img_cir_05_skyblue)");

@@ -20,10 +20,22 @@ function openSpot(){
 function includeHandler(){
 	var htmlVal = "";
 	$.each(spotArr, function(idx, element) {
-		element.id;
+		
+		var spottype;
+		if (placeTypeS == '관광지') {
+			spottype = 1;
+		} else if (placeTypeS == '문화시설') {
+			spottype = 2;
+		} else if (placeTypeS == '쇼핑') {
+			spottype = 3;
+		} else if (placeTypeS == '음식점') {
+			spottype = 4;
+		}
+		
+		//element.id;
 		htmlVal += `
 			<div class="include-spot grid ">
-		 		<div class="spot-title wfull"> ${info.title}</div>
+		 		<div class="spot-title wfull"> ${element.title}</div>
 		 		<div class="spot-type">명소</div>
 			</div>
 		`; 
