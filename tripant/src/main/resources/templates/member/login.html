@@ -7,7 +7,7 @@
 	<header class="header" th:replace="~{common/header :: wrap-header}"></header>
 	<div class="wrap-main">
 		<form id="frm-login" action="/login" method="post">
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+ 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> 
 			<section class="flex login">
 				<div class="login title">로그인</div>
 				<div th:replace="~{member/fragment :: inputlbl(이메일, memEmail, text, 3, '이메일 주소')}"></div>

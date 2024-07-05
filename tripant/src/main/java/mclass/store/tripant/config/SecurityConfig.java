@@ -56,7 +56,7 @@ public class SecurityConfig {
 						).permitAll()
 					)
 		.csrf((csrf) -> csrf
-//				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//			.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/login"))
 //				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/home"))
 //				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/store/**"))
