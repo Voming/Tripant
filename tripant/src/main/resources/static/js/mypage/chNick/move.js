@@ -8,6 +8,7 @@ function saveClickHandler(){
 		url: contextPath+'my/nick', 
 		type: 'post', 
 		data: $('#memNick'), 
+		beforeSend: csrfHandler(xhr), 
 		success: function(result){
 			if(result == 1){
 				Swal.fire({

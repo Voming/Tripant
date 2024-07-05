@@ -50,7 +50,7 @@ async function requestPayment() {
 				items : items,
 				buyId : buyId
 			}, 
-			
+			beforeSend: csrfHandler(xhr), 
 			error : ajaxErrorHandler,
 			success : async function(data) {
 				if (data == 1) {

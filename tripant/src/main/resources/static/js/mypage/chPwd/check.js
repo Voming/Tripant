@@ -9,7 +9,7 @@ function pwdCheckHandler(){
 		url: contextPath+'pwd/use', 
 		type: 'post', 
 		data: {memPassword: pwdInput}, 
-		 
+		beforeSend: csrfHandler(xhr), 
 		error: ajaxErrorHandler, 
 		success: function(result){
 			if(pwdExp1.test(pwdInput) == true && 
