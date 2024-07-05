@@ -62,7 +62,7 @@ $(document).ready(function() {
 		
 		console.log(diaryImage);
 		console.log(diaryPreview);
-		var url = "/my/post";
+		var url = contextPath +  "/my/post";
 		const token = $("meta[name='_csrf']").attr("content");
 		const header= $("meta[name='_csrf_header']").attr("content");
 		$.ajax({
