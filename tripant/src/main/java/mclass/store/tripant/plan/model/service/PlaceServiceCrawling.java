@@ -10,6 +10,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -48,7 +50,7 @@ public class PlaceServiceCrawling {
 	private String tourServiceKey;
 
 	// api 호출
-	// @Async
+	@Async
 	private int getApi(int cId, int aCode , boolean isModifiedData) { // 관광타입, 지역 코드
 		int result = 0;
 		// api 받아온 시간
@@ -175,7 +177,6 @@ public class PlaceServiceCrawling {
 					dtolist.add(dto);
 				}
 
-///////// 			System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(dtolist));
 				System.out.println("dtolist size : " + dtolist.size());
 				if (dtolist.size() > 0) {
 				
@@ -205,7 +206,7 @@ public class PlaceServiceCrawling {
 		return result;
 	}
 
-	// @Scheduled(cron = "* * 20 * * *") // 매일 20시에 실행
+	@Scheduled(cron = "* * 20 * * *") // 매일 20시에 실행
 	// 첫 번째 * 부터 초(0-59) 분(0-59) 시간(0-23) 일(1-31) 월(1-12) 요일(0-6) (0: 일, 1: 월, 2:화, 3:수, 4:목, 5:금, 6:토)
 	public int insertPlace() {
 		boolean isModifiedData = false;
