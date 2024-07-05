@@ -56,14 +56,14 @@ public class SecurityConfig {
 						).permitAll()
 					)
 		.csrf((csrf) -> csrf
-//			.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/login"))
 //				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/home"))
 //				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/store/**"))
 //				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/pwd"))
 //				.requireCsrfProtectionMatcher(new AntPathRequestMatcher("/my/nick"))
-				.disable()
-//				.ignoringRequestMatchers(new AntPathRequestMatcher("/join"))
+//				.disable()
+				.ignoringRequestMatchers(new AntPathRequestMatcher("/join"))
 				)
 		.headers((headers) -> headers
 				.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
