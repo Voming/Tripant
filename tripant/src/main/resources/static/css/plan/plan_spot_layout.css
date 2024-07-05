@@ -5,12 +5,13 @@
 	width: auto;
 	justify-content: stretch;
 	grid-template-columns: 1fr 1fr;
-	gap: 10px 20px;
+	gap: 0 20px;
 	align-items: center;
 }
 
 .tab-content #tab02 .spot {
 	display: grid;
+	gap: 10px 0;
 	width: 100%;
 	height: 100%;
 }
@@ -68,9 +69,10 @@
 	text-align: center;
 }
 /* 박스 */
+
 .tab-content #tab02 .spot-tab-content {
 	margin-top: 10px;
-	height: 650px;
+	height: 760px;
 	overflow-y: auto;
 }
 

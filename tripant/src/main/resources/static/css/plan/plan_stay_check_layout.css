@@ -1,13 +1,5 @@
 @charset "UTF-8";
 
-.tab-content #tab03 .stay.second {
-	height: 870px;
-}
-
-.tab-content #tab03 .stay.second .wrap-selected-stay {
-	overflow-y: auto;
-	height: 100%;
-}
 /* 위에 글자들 */
 .tab-content #tab03 .selected-stay-info {
 	display: flex;
@@ -38,6 +30,11 @@
 }
 
 /* 박스 */
+#tab02 .selected-stay-list{
+	overflow-y: auto;
+	height: 920px;
+}
+
 #tab03 .selected-stay-box .wrap-box {
 	width: 100%;
 	height: 70px;
@@ -78,7 +75,7 @@
 
 #tab03 .selected-stay-box .wrap-box .box-stay-txt {
 	margin: 0 10px;
-	width: 100%;
+	width: 170px;
 	font-size: var(--font5);
 	display: flex;
 	line-height: 120%;

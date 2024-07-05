@@ -45,7 +45,7 @@ function restStaytab() {
 		modalVal = `
 		<div class="wrap-stay-tab">
 			<p class="stay-tab-day">${start}</p>
-			<img class="stay-tab-img" th:src="@{/images/plan/stay_plus.png}" onclick="stayTabBtnClickHandler(this);" alt="숙소이미지" style="width: 70px; height: 70px;">
+			<img class="stay-tab-img" src="${contextPath}images/plan/stay_plus.png" onclick="stayTabBtnClickHandler(this);" alt="숙소이미지" style="width: 70px; height: 70px;">
 			<p class="stay-tab-name">호텔 선택</p>
 			<p class="stay-tab-id" value="" style ="display:none"></p> 
 			<p class="stay-tab-x" value="" style ="display:none"></p> 
