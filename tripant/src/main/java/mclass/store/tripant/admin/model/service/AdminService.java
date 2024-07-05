@@ -1,4 +1,4 @@
-package mclass.store.tripant.admin.service;
+package mclass.store.tripant.admin.model.service;
 
 import java.util.HashMap;
 import java.util.List;
