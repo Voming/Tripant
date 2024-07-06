@@ -2,8 +2,6 @@ var clicknum;
 var areaname;
 $(document).ready(function() {
 	clicknum = 0;
-
-
 	// 초기화: 탭 전환
 	$('.area-tab-nav a').click(tabMenuClickHandler).filter(':eq(0)').click(); // 첫 번째 탭 활성화
 });

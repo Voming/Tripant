@@ -155,7 +155,7 @@ function shareHandler() {
 
 /*좋아요 누르기  */
 function btnLikeClickHandler(thisElement, diaryId) {
-
+	clicknum = 0;
 	console.log("btnLikeClickHandler 눌림");
 	console.log(diaryId);
 	/*	console.log(thisElement);*/
