@@ -3,7 +3,7 @@ select * from plan;
 select * from plan_member;
 select * from member;
 --(삭제기록 없애기)
-UPDATE plan SET plan_delete_day = null  where plan_delete_day is not null;
+--UPDATE plan SET plan_delete_day = null  where plan_delete_day is not null;
 
 
 --여행 삭제
