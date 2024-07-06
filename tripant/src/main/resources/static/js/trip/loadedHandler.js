@@ -34,8 +34,8 @@ function setEvent(){
 
 	//편집
 	$(".edit").click(editHandler);
-	//hover 시 메모내용 표시
 
+	//hover 시 메모내용 표시
 	$(".img-memo").hover(  function(e){      
 			$(this).siblings('.memo').removeClass('hide');
 			//사용자의 화면을 기준으로 X좌표 표시

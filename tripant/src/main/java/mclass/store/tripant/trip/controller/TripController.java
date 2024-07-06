@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,6 +60,7 @@ public class TripController {
 		return duration;
 	}
 	
+	//장소 추가 - list 출력
 	@PostMapping("/spot")
 	public String spot(Model model, @RequestParam Integer areaCode, @RequestParam Integer spotType,
 			@RequestParam Integer clickSpotNum) throws IOException {
@@ -69,7 +71,8 @@ public class TripController {
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
-
+	
+	//장소 추가 - 찾기
 	@PostMapping("/spot/find")
 	public String spotFindMore(Model model, @RequestParam("findArea") String findArea,
 			@RequestParam("areaCode") Integer areaCode, @RequestParam("clickSpotFindNum") Integer clickSpotFindNum) {
@@ -79,5 +82,17 @@ public class TripController {
 		List<PlaceboxEntity> spotList = service.selectSpotFindList(findArea, areaCode, maxNum);
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
+	}
+	
+	//일정 저장 
+	//jjoggan TODO
+	@PostMapping("/save/changes")
+	@ResponseBody
+	public int saveChanges(
+			@RequestBody List<DayEntity> saveData
+			) {
+		
+		int result = 0;
+		return result;
 	}
 }

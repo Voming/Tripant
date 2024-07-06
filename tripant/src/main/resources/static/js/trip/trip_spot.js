@@ -50,8 +50,6 @@ function includeHandler(){
 	$('#add-btn').addClass('hide'); //담기버튼
 	$('#edit-tourlist').removeClass('hide');
 	$('#spot-basket').removeClass('hide');
-	// jjoggan
-	console.log("이거 가능하냐!!!");
 }
 
 //=================================================================

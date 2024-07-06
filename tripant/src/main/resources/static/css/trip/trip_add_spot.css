@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /* 장소추가 스타일 설정 */
 .main-wrapper .schedule-wrapper .spot-basket{
-	min-width: 200px;
-    max-width: 210px;
+	min-width: 220px;
+    max-width: 230px;
     /* width:210px; */
 	flex-direction : column;
 }

@@ -30,7 +30,6 @@ function editHandler(){
 	$(this).parents().find('.tourlist').addClass('hide');
 	$(this).parents().find('.edit-tourlist').removeClass('hide');
 	$(this).parents().find('.spot-basket').removeClass('hide');
-	
 }
 //취소
 function cancelHandler(){
@@ -75,10 +74,9 @@ function saveHandler(){
 		$('#tab02').addClass('hide');
 	}
 	
-	
+
 	//DB이동 ajax
-	
-	
+	saveChanges();
 }
 //좌측 탭
 function navHandler(){
@@ -100,4 +98,35 @@ function navHandler(){
 
 		return false;
 	}).filter(':eq(0)').click();
+}
+
+function saveChanges(){
+		//안 쓰는 데이터 빼내기
+		//삭제할 key : durationMin, endTime, startTime
+		for(var i = 0 ; i < detailListEditMode.length;i++){
+			editmode = detailListEditMode[i];
+			
+			for(var j = 0 ;j < editmode.dayDetailInfoEntity.length; j++){
+				item = editmode.dayDetailInfoEntity[j];
+				
+				delete item.durationMin;
+				delete item.endTime;
+				delete item.startTime;
+				//변경된 방문순서 key에 넣어주기
+				item.travelOrder = j + 1; 
+			}
+		}
+		saveData = JSON.stringify(detailListEditMode);
+		//jjoggan TODO
+		$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+"trip/save/changes",
+		method:"post",
+		contentType: "application/json", //보낼 데이터 타입 //; charset=utf-8 //필요??불필요??/
+		data:{saveData : saveData},
+		success : function(result) {
+			
+        }
+	});
 }
