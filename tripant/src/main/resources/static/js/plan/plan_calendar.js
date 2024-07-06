@@ -5,7 +5,6 @@ $(document).ready(function() {
 			xhr.setRequestHeader(header, token);
 		},
 		alwaysOpen: true,
-		"maxSpan": { "days": 10 },
 		"locale": {
 			"format": "YYYY.MM.DD",
 			"separator": " ~ ",
@@ -39,9 +38,13 @@ $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 	let diff = Math.abs(picker.endDate - picker.startDate);
 	diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+	console.log(diff);
 	
 	if (diff == 1) {
-		alert("기간이 너무 작습니다. 기간을 다시 입력해주세요.");
+		alert("기간이 너무 작습니다. 기간을 다시 입력해주세요. \n (최소 2일 최대 10일)");
+		$('#daterange').focus();
+	} else if (diff > 10) {
+		alert("기간이 너무 큽니다. 기간을 다시 입력해주세요. \n (최소 2일 최대 10일)");
 		$('#daterange').focus();
 	} else {
 		$(".time_btn").show();
