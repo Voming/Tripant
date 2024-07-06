@@ -127,7 +127,7 @@
 
 .diary-content-wrap {
 	display: flex;
-	overflow: auto;
+	overflow: hidden;/* 글 스크롤바 안보이게 */
 }
 
 .writer {
