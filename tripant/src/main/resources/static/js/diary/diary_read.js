@@ -118,40 +118,49 @@ function deleteHandler() {
 }
 // 공유하기
 function shareHandler() {
-	var shareId = $(this).data('share');
-	console.log(shareId);
-	// 공유하기 모달 표시
-	Swal.fire({
-		title: "나의 여행기 공유하기",
-		html: "<p>여행기를 공유하시겠습니까?</p><div class='share-links'><a href='#' class='facebook-link'>페이스북</a><a href='#' class='twitter-link'>트위터</a></div>",
-		showCancelButton: true,
-		confirmButtonColor: "#000000",
-		cancelButtonColor: "#d33",
-		confirmButtonText: "확인",
-		cancelButtonText: "취소",
-	
-		animation: false
-	}).then((result) => {
-		if (result.isConfirmed) {
-			// 여행기 공유 처리를 수행하는 코드 추가
-		}
-	});
+    var shareId = $(this).data('share');
+    console.log(shareId);
+    // 공유하기 모달 표시
+    Swal.fire({
+        title: "나의 여행기 공유하기",
+        html: `
+            <p>해당 아이콘을 클릭하여 공유하세요</p>
+            <br>
+            <div class='share-links'>
+                <a href='#' class='facebook-link'>
+                    <img src='/images/icons/facebook.png' alt='Facebook' width='20px;'> 페이스북으로 공유하기
+                </a>
+                <a href='#' class='twitter-link'>
+                    <img src='/images/icons/x.png' alt='X' width='18px;'> 공유하기
+                </a>
+            </div>
+        `,
+        showCancelButton: true,
+        confirmButtonColor: "#000000",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "확인",
+        cancelButtonText: "취소",
+        animation: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // 여행기 공유 처리를 수행하는 코드 추가
+        }
+    });
 
-	// 페이스북으로 공유 링크 클릭 시
-	$('.facebook-link').click(function() {
-		// 여행기를 페이스북으로 공유하는 기능 추가
-		var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href);
-		window.open(shareUrl, '_blank');
-	});
+    // 페이스북으로 공유 링크 클릭 시
+    $('.facebook-link').click(function(event) {
+        event.preventDefault(); // 기본 동작 방지
+        var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href);
+        window.open(shareUrl, '_blank');
+    });
 
-	// 트위터로 공유 링크 클릭 시
-	$('.twitter-link').click(function() {
-		// 여행기를 트위터로 공유하는 기능 추가
-		var shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href);
-		window.open(shareUrl, '_blank');
-	});
+    // 트위터로 공유 링크 클릭 시
+    $('.twitter-link').click(function(event) {
+        event.preventDefault(); // 기본 동작 방지
+        var shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href);
+        window.open(shareUrl, '_blank');
+    });
 }
-
 
 /*좋아요 누르기  */
 function btnLikeClickHandler(thisElement, diaryId) {
