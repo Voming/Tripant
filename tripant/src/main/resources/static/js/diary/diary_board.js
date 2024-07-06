@@ -2,15 +2,8 @@ var clicknum;
 var areaname;
 $(document).ready(function() {
 	clicknum = 0;
-	
 	// 초기화: 탭 전환
-	if(tabcode){
-		var tabnum = areacode2tabnum(tabcode);
-		$('.area-tab-nav a').click(tabMenuClickHandler).filter(':eq('+tabnum+')').click(); // 탭 활성화
-	} else{
-		$('.area-tab-nav a').click(tabMenuClickHandler).filter(':eq(0)').click(); // 첫 번째 탭 활성화
-	}
-	
+	$('.area-tab-nav a').click(tabMenuClickHandler).filter(':eq(0)').click(); // 첫 번째 탭 활성화
 });
 
 function tabMenuClickHandler() {

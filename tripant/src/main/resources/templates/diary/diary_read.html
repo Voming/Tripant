@@ -6,16 +6,13 @@
 <!-- 테마 css  -->
 <!-- <link th:href="@{/css/diary/theme.css}" rel="stylesheet"> -->
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
 <head th:replace="~{common/header :: head('diaryboard')}">
 <meta charset="UTF-8">
 </head>
 <!--자바 스크립트   -->
 <script type="text/javascript" th:src="@{/js/diary/diary_read.js}"></script>
 <!-- modal CDN -->
-
-</script>
 <body>
 	<!--헤더영역  -->
 	<div class="header" th:insert="~{common/header :: wrap-header}"></div>
@@ -86,8 +83,10 @@
 						class="like-icon"
 						th:onclick="|btnLikeClickHandler(this,${diary.diaryId});|">
 				</th:block>
+		
 			<!-- 좋아요 수 연결 -->
-			<div th:text="${likes.likeCount}" class="like-num">like-num</div>
+				<div th:if="${likes != null}" th:text="${likes.likeCount}" class="like-num">like-num</div>
+				<div th:if="${likes == null}" class="like-num">0</div>
 			</div>
 		</div>
 
