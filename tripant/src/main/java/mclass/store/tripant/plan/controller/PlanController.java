@@ -119,7 +119,7 @@ public class PlanController {
 	@PostMapping("/planning")
 	@ResponseBody
 	public String planning(@RequestBody String jsonString, @SessionAttribute(name = "areaCode") Integer areaCode) {
-		planningAlgorithm.planJsonParse(jsonString, areaCode);
+		planningAlgorithm.planningJson(jsonString, areaCode);
 		return "aaa";
 	}
 

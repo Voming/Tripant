@@ -58,10 +58,23 @@ public class PlanningAlgorithm {
 		}
 	}
 
-	public void planJsonParse(String jsonString, int areaCode) {
+//	0. 날짜 수 만큼 저장될 리스트 생성
+//
+//	1. 총 날짜 수로 장소 개수 나누기
+//	1-1. 만약 날짜 수  = 나눈 장소 수(1) -> 그냥 출-장-도 로 모든 날짜 배치
+//	1-2. 만약 날짜 수  < 나눈 장소 수(2) -> 출과 가까운걸 먼저 배치
+//	1-3. 만약 날짜 수  < 나눈 장소 수(3) 
+//	      => 출과 가까운거 빼냄 , 도와 가까운 거 빼냄 -> 그대로 배치
+//	1-4. 만약 날짜 수  < 나눈 장소 수(3보다 큼) 
+//	      => 출과 가까운거 빼냄 , 도와 가까운 거 빼냄  --> 나머지로 다익스트라
+//
+//	2. 날짜별 리스트에 각각 결정된 리스트 저장
+
+	public void planningJson(String jsonString, int areaCode) { // planJsonParse
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		CalendarPlanEntity calendarPlan = gson.fromJson(jsonString, CalendarPlanEntity.class);
 
+		// 날짜 별 정보(하루, 숙소)
 		List<PlanDate> dateArr = calendarPlan.getDateArr();
 		for (int i = 0; i < dateArr.size(); i++) {
 			Stay stay = dateArr.get(i).getStay();
@@ -69,6 +82,7 @@ public class PlanningAlgorithm {
 		}
 		System.out.println(stayPointList);
 
+		// 선택 한 장소
 		List<Spot> spotArr = calendarPlan.getSpotArr();
 		for (int i = 0; i < spotArr.size(); i++) {
 			spotPointList.add(new PlacePointEntity(i, spotArr.get(i).getId(), spotArr.get(i).getMapx(),
@@ -76,7 +90,42 @@ public class PlanningAlgorithm {
 		}
 		System.out.println(spotPointList);
 
-		V = spotPointList.size(); // 정점 개수
+		V = spotPointList.size();   // 정점 개수 -> 선택한 장소 수
+		int dayN = dateArr.size();  // 여행할 날짜 수
+		
+//		0. 날짜 수 만큼 저장될 리스트 생성		
+		for(int i = 0; i < dayN ; i++) {
+			
+		}
+
+//		1. 총 날짜 수로 장소 개수 나누기
+		int distribute = (int) Math.ceil(V / dayN);
+		System.out.println(distribute);
+		
+//		1-1. 만약 날짜 수  = 나눈 장소 수(1) -> 그냥 출-장-도 로 모든 날짜 배치
+//		1-2. 만약 날짜 수  < 나눈 장소 수(2) -> 출과 가까운걸 먼저 배치
+//		1-3. 만약 날짜 수  < 나눈 장소 수(3) 
+//		      => 출과 가까운거 빼냄 , 도와 가까운 거 빼냄 -> 그대로 배치
+//		1-4. 만약 날짜 수  < 나눈 장소 수(3보다 큼) 
+//		      => 출과 가까운거 빼냄 , 도와 가까운 거 빼냄  --> 나머지로 다익스트라
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		// 출발지에서 가장 가까운 장소 구하기
 		int weight[] = new int[V];
@@ -257,16 +306,16 @@ public class PlanningAlgorithm {
 					response.append(inputLine);
 				}
 				br.close();
-				
+
 				JSONObject jsonObject = new JSONObject(response.toString());
 				// JSON 파싱하여 응답 코드 확인
 				errorStr = jsonObject.getJSONArray("routes").getJSONObject(0).getString("result_code");
-				if (errorStr.equals("0")) { //정상 호출
+				if (errorStr.equals("0")) { // 정상 호출
 					// JSON 파싱하여 duration 값만 추출
 					duration = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("summary")
 							.getString("duration");
 				}
-			} else { //HTTP_OK 제외하고 오류 발생한 상황
+			} else { // HTTP_OK 제외하고 오류 발생한 상황
 				return ">>>> 에러났어요 : " + responseCode;
 			}
 		} catch (Exception e) {
