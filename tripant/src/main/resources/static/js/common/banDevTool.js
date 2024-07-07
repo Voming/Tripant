@@ -6,7 +6,7 @@
 	    var end = +new Date(); // Validates too.
 	    if(isNaN(start) || isNaN(end) || end - start > allow) {
 			Swal.fire({
-					title: "개발자 도구가 감지되었습니다.\n메인 페이지로 이동합니다.", 
+					text: "개발자 도구가 감지되었습니다.\n메인 페이지로 이동합니다.", 
 					icon: "warning",
 					showConfirmButton: false, 
 					timer: 2000,

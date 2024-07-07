@@ -32,7 +32,7 @@ function payCancelHandler(){
 				success: function(data){
 					if(data > 0){
 						Swal.fire({
-							title: "결제 취소가 완료되었습니다.", 
+							text: "결제 취소가 완료되었습니다.", 
 							icon: "success", 
 							confirmButtonColor: "#000000", 
 							confirmButtonText: "확인"
@@ -43,7 +43,7 @@ function payCancelHandler(){
 						});
 					}else{
 						Swal.fire({
-							title: "결제 취소 중 오류가 발생했습니다.", 
+							text: "결제 취소 중 오류가 발생했습니다.", 
 							icon: "error", 
 							confirmButtonColor: "#000000", 
 							confirmButtonText: "확인"

@@ -16,7 +16,7 @@ function cartDelHandler() {
 		success : async function(result) {
 			if (result == 1) {
 				Swal.fire({
-					title: "선택하신 상품이 삭제되었습니다.", 
+					text: "선택하신 상품이 삭제되었습니다.", 
 					icon: "success", 
 					confirmButtonText: "확인", 
 					confirmButtonColor: "#000000", 
@@ -27,7 +27,7 @@ function cartDelHandler() {
 				});
 			} else {
 				Swal.fire({
-					title: "상품 삭제 중 오류가 발생했습니다.", 
+					text: "상품 삭제 중 오류가 발생했습니다.", 
 					icon: "error", 
 					confirmButtonText: "확인", 
 					confirmButtonColor: "#000000", 

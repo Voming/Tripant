@@ -14,7 +14,7 @@ function insertItemsHandler(){
 		success: function(result){
 			if(result == 1){
 				Swal.fire({
-					title: "선택하신 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?", 
+					text: "선택하신 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?", 
 					icon: "question", 
 					showCancelButton: true, 
 					confirmButtonText: "이동하기", 
@@ -30,7 +30,7 @@ function insertItemsHandler(){
 				});
 			}else{
 				Swal.fire({
-					title: "장바구니에 상품을 담는 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
+					text: "장바구니에 상품을 담는 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
 					icon: "error", 
 					confirmButtonColor: "#000000", 
 					confirmButtonText: "확인"

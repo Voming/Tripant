@@ -117,17 +117,14 @@ async function itemUpdateHandler(){
 				}, 
 				error: function(request, status, error){
 					Swal.fire({
-						title: "상품 수정 중 오류가 발생했습니다.", 
-						text: "code: "+request.status + "\n" + "message: " 
-						+ request.responseText + "\n"
-						+ "error: "+error, 
+						text: "상품 수정 중 오류가 발생했습니다.", 
 						icon: "warning", 
 					});
 				}, 
 				success: function(data){
 					if(data > 0){
 						Swal.fire({
-							title: "상품 수정이 완료되었습니다.", 
+							text: "상품 수정이 완료되었습니다.", 
 							icon: "success", 
 						}).then((swal) => {
 							if(swal.isConfirmed){
@@ -136,7 +133,7 @@ async function itemUpdateHandler(){
 						});
 					}else{
 						Swal.fire({
-							title: "알 수 없는 이유로 상품 수정이 완료되지 않았습니다.", 
+							text: "알 수 없는 이유로 상품 수정이 완료되지 않았습니다.", 
 							icon: "question", 
 						});
 					}
@@ -144,7 +141,7 @@ async function itemUpdateHandler(){
 			});
 		}else{
 			Swal.fire({
-				title: "상품코드, 상품명, 상품가격은 필수 입력 사항입니다.", 
+				text: "상품코드, 상품명, 상품가격은 필수 입력 사항입니다.", 
 				icon: "error"
 			});
 		}
@@ -222,7 +219,7 @@ async function itemInsertHandler(){
 			success: function(data){
 				if(data > 0){
 					Swal.fire({
-						title: "상품 추가가 완료되었습니다.", 
+						text: "상품 추가가 완료되었습니다.", 
 						icon: "success"
 					}).then((swal) => {
 						if(swal.isConfirmed){
@@ -231,24 +228,21 @@ async function itemInsertHandler(){
 					});
 				}else{
 					Swal.fire({
-						title: "알 수 없는 이유로 상품 추가가 완료되지 않았습니다.", 
+						text: "알 수 없는 이유로 상품 추가가 완료되지 않았습니다.", 
 						icon: "question"
 					});
 				}
 			}, 
 			error: function(request, status, error){
 				Swal.fire({
-					title: "상품 추가 중 오류가 발생했습니다.", 
-					text: "code: "+request.status + "\n" + "message: " 
-					+ request.responseText + "\n"
-					+ "error: "+error, 
+					text: "상품 추가 중 오류가 발생했습니다.", 
 					icon: "warning"
 				});
 			}
 		});
 	}else{
 		Swal.fire({
-			title: "상품코드, 상품명, 상품가격은 필수 입력 사항입니다.", 
+			text: "상품코드, 상품명, 상품가격은 필수 입력 사항입니다.", 
 			icon: "error"
 		});
 	}
@@ -269,14 +263,14 @@ function itemDeleteHandler(){
 	 	error : function(request, status, error) {
 		 	if(request.responseText.indexOf('ORA-02292')){
 		 		Swal.fire({
-					title: "장바구니 혹은 구매내역에 존재하는 상품은 삭제할 수 없습니다.\n운영팀에 문의해주시기 바랍니다.", 
+					text: "장바구니 혹은 구매내역에 존재하는 상품은 삭제할 수 없습니다.\n운영팀에 문의해주시기 바랍니다.", 
 					icon: "error", 
 					confirmButtonColor: "#000000", 
 					confirmButtonText: "확인"
 				});
 		 	}else{
 		 		Swal.fire({
-		 			title: "알 수 없는 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
+		 			text: "알 수 없는 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
 		 			confirmButtonColor: "#000000", 
 		 			confirmButtonText: "확인"
 		 		});
