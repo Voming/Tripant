@@ -25,7 +25,7 @@ function reportHandler() {
 
 	Swal.fire({
 		title: "이 글을 신고하시겠습니까?",
-		text: "신고를 취소하고 싶으신 경우, 고객센터에 문의해주시길 바립니다.",
+		text: "신고한 후 취소을 원하는 경우, 고객센터로 문의해주세요.",
 		showCancelButton: true,
 		confirmButtonColor: "#000000",
 		cancelButtonColor: "#d33",
@@ -48,10 +48,10 @@ function reportHandler() {
 						}).then(() => {
 							location.href = "/diary";
 						});
-					} else  if(result == -1) {
+					} else  if(result == 1) {
 						Swal.fire({
 							title: "오류",
-							text: "신고된 글입니다.",
+							text: "이미 신고한 글입니다.",
 							confirmButtonText: 'Ok'
 						});
 					}else {
