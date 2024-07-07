@@ -12,7 +12,7 @@ function codeSendHandler() {
 		success: async function(result) {
 			if (result === "1") {
 				const a = await Swal.fire({
-					title: "인증번호가 발송되었습니다.",
+					text: "인증번호가 발송되었습니다.",
 					icon: "success",
 					confirmButtonColor: "#000000",
 					confirmButtonText: "확인"
@@ -22,14 +22,14 @@ function codeSendHandler() {
 				}
 			} else if (result === "0") {
 				Swal.fire({
-					title: "인증번호 발송 중 오류가 발생했습니다.",
+					text: "인증번호 발송 중 오류가 발생했습니다.",
 					icon: "error",
 					confirmButtonColor: "#000000",
 					confirmButtonText: "확인"
 				});
 			} else if (result === "-1") {
 				Swal.fire({
-					title: "이미 가입된 회원입니다.",
+					text: "이미 가입된 회원입니다.",
 					icon: "info",
 					confirmButtonColor: "#000000",
 					confirmButtonText: "확인"
@@ -51,7 +51,7 @@ function codeCheckHandler() {
 		success: async function(result) {
 			if (result == 1) {
 				const a = await Swal.fire({
-					title: "이메일 인증에 성공하였습니다.",
+					text: "이메일 인증에 성공하였습니다.",
 					icon: "success",
 					confirmButtonColor: "#000000",
 					confirmButtonText: "확인"
@@ -64,7 +64,7 @@ function codeCheckHandler() {
 				}
 			} else {
 				Swal.fire({
-					title: "인증번호가 일치하지 않습니다.",
+					text: "인증번호가 일치하지 않습니다.",
 					icon: "warning",
 					confirmButtonColor: "#000000",
 					confirmButtonText: "확인"

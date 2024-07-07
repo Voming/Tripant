@@ -13,7 +13,7 @@ function saveClickHandler(){
 		success: function(result){
 			if(result == 1){
 				Swal.fire({
-					title: "닉네임이 변경되었습니다.", 
+					text: "닉네임이 변경되었습니다.", 
 					icon: "success", 
 					confirmButtonColor: "#000000", 
 					confirmButtonText: "확인"
@@ -24,7 +24,7 @@ function saveClickHandler(){
 				});
 			}else{
 				Swal.fire({
-					title: "닉네임 변경 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
+					text: "닉네임 변경 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
 					icon: "error", 
 					confirmButtonColor: "#000000", 
 					confirmButtonText: "확인"

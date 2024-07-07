@@ -11,7 +11,7 @@ function robotHandler() {
 				+((todayVal.getDate())<9?'0'+(todayVal.getDate()):(todayVal.getDate()));
 	if(memBirth > today){
 		Swal.fire({
-			title: "생일은 미래일 수 없습니다.",  
+			text: "생일은 미래일 수 없습니다.",  
 			icon: "warning",  
 			confirmButtonColor: "#000000",  
 			confirmButtonText: "확인"
@@ -29,7 +29,7 @@ function robotHandler() {
 			switch (data) {
 				case 1:
 					Swal.fire({
-						title: '회원가입이 완료되었습니다.\n로그인 창으로 이동합니다.', 
+						text: '회원가입이 완료되었습니다.\n로그인 창으로 이동합니다.', 
 						icon: "success", 
 						confirmButtonColor: "#000000", 
 						confirmButtonText: "확인"
@@ -43,7 +43,7 @@ function robotHandler() {
 					break;
 				case 0:
 					Swal.fire({
-						title: "자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.", 
+						text: "자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.", 
 						icon: "warning", 
 						confirmButtonColor: "#000000", 
 						confirmButtonText: "확인"
@@ -51,7 +51,7 @@ function robotHandler() {
 					break;
 				default:
 					Swal.fire({
-						title: "자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다.\n[Error Code : " + Number(data) + "]", 
+						text: "자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다.\n[Error Code : " + Number(data) + "]", 
 						icon: "error", 
 						confirmButtonColor: "#000000", 
 						confirmButtonText: "확인"

@@ -6,7 +6,7 @@ function backClickHandler(){
 function quitClickHandler(){
 	const memPassword = $('#memPassword').val();
 	Swal.fire({
-		title: "정말 탈퇴하시겠습니까?", 
+		text: "정말 탈퇴하시겠습니까?", 
 		icon: "question", 
 		showCancelButton: true, 
 		confirmButtonText: "탈퇴하기", 
@@ -24,7 +24,7 @@ function quitClickHandler(){
 				success: function(result){
 					if(result > 0){
 						Swal.fire({
-							title: "탈퇴 처리되었습니다.\n메인 페이지로 이동합니다.", 
+							text: "탈퇴 처리되었습니다.\n메인 페이지로 이동합니다.", 
 							icon: "success", 
 							confirmButtonColor: "#000000", 
 							confirmButtonText: "확인"
@@ -38,7 +38,7 @@ function quitClickHandler(){
 						});
 					}else{
 						Swal.fire({
-							title: "회원 탈퇴 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
+							text: "회원 탈퇴 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
 							icon: "error", 
 							confirmButtonColor: "#000000", 
 							confirmButtonText: "확인"

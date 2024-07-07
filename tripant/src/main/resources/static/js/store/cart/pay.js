@@ -33,8 +33,7 @@ async function requestPayment() {
 	if (response.code) {
 		// 오류 발생
 		return Swal.fire({
-			title: "결제 중 오류가 발생했습니다.",
-			text: response.message, 
+			text: "결제 중 오류가 발생했습니다.",
 			icon: "error", 
 			confirmButtonColor: "#000000", 
 			confirmButtonText: "확인"
@@ -55,7 +54,7 @@ async function requestPayment() {
 			success : async function(data) {
 				if (data == 1) {
 					Swal.fire({
-						title: "결제가 완료되었습니다.\n구매내역으로 이동하시겠습니까?", 
+						text: "결제가 완료되었습니다.\n구매내역으로 이동하시겠습니까?", 
 						icon: "success", 
 						showCancelButton: true, 
 						confirmButtonText: "이동하기", 
@@ -70,7 +69,7 @@ async function requestPayment() {
 					return;
 				} else {
 					Swal.fire({
-						title: "결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.", 
+						text: "결제 금액과 지불 금액이 일치하지 않거나 알 수 없는 오류가 발생했습니다.", 
 						icon: "error", 
 						confirmButtonText: "확인", 
 						confirmButtonColor: "#000000", 
