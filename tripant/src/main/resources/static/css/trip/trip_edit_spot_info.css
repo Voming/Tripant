@@ -20,7 +20,9 @@
 .main-wrapper .edit-tourlist .spot-caricon{grid-column:2; grid-row: 3 ;}
 .main-wrapper .edit-tourlist .spot-move{grid-column:3; grid-row: 3 ; font-size: var(--font5);}
 .main-wrapper .edit-tourlist .spot-remove{grid-column:4; grid-row: 1 ;}
-
+.main-wrapper .edit-tourlist .spot-staytime:hover{
+	cursor: pointer;
+}
 .main-wrapper .edit-tourlist .spot-remove{
 	/* 모든 설정 초기화 */
     border: none;

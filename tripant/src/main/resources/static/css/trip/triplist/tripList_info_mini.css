@@ -50,8 +50,7 @@
 	border-radius: 8px;
 }
 .main-wrapper .trip-list .mini-modal>div {
-	display: flex;
-	flex-direction: column;
+	padding:5px 0;
 }
 .main-wrapper .trip-list .mini-modal>div > div{
 	padding : 5px 0px;
