@@ -28,8 +28,7 @@
 			<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
 			<div class="menubar">
 				<ul class="menu">
-					<li class="kebab-menu"><img class="wfull img"
-						src="/images/icons/kebabIcon.png" style="width: 30px;" />
+					<li class="kebab-menu"><img th:src="@{/images/icons/kebabIcon.png}" style="width: 30px;" />
 						<ul class="submenu" style="width: 100px;">
 							<li class="share" th:data-share="${diary.diaryId}"><a> 공유하기 </a></li>
 							<li class="report" th:data-diary-id="${diary.diaryId}"><a> 신고하기 </a></li>

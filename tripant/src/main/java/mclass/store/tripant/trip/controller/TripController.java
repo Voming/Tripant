@@ -1,10 +1,15 @@
 package mclass.store.tripant.trip.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.trip.domain.DayEntity;
 import mclass.store.tripant.trip.model.service.TripService;
@@ -25,6 +32,9 @@ import mclass.store.tripant.trip.model.service.TripService;
 public class TripController {
 	@Autowired
 	private TripService service;
+	
+	@Autowired
+	private Gson gson;
 	
 	//map 위치간 이동시간
 	@Value("${kakao.map.rest.api}")
@@ -89,9 +99,12 @@ public class TripController {
 	@PostMapping("/save/changes")
 	@ResponseBody
 	public int saveChanges(
-			@RequestBody List<DayEntity> saveData
-			) {
-		
+			@RequestBody String saveData 
+			) throws Exception {
+		System.out.println("-------------------------------");
+		System.out.println(gson.toJson(URLEncoder.encode(saveData, "utf-8")));
+		Map<String, Object> save1 =  gson.fromJson(gson.toJson(saveData), Map.class); //
+//		System.out.println(save1);
 		int result = 0;
 		return result;
 	}

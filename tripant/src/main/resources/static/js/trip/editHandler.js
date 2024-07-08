@@ -185,7 +185,7 @@ function displayEditMode(){
 			 		
 			 		<div class="spot-type">명소</div>
 			 		<div class="spot-title wfull"> ${info.title}</div>
-			 		<div class="spot-memo"><img class="img-memo" onclick="memoClickHandler(this);" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span  class="memo">${info.memo}</span></div>
+			 		<div class="spot-memo"><img class="img-memo" onclick="memoClickHandler(this);" style="width: 20px;height:20px;" src="${contextPath}images/icons/memoIcon.png" ><span  class="memo">${info.memo}</span></div>
 			 		
 			 		<!-- 이미지 X-->
 			 		`;
@@ -194,17 +194,17 @@ function displayEditMode(){
 			//마지막  상소일 경우 이동시간 hide
 			if( (j+1) < daylength){
 				htmlval+=`
-					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 					<div class="spot-move"> ${info.durationMin}분> </div>`;
 			}else{
 				htmlval+=`
-					<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 					<div class="spot-move">  </div>`;
 			}
 			
 			htmlval+=`<!-- x 버튼 -->
 					<button class="spot-remove"  onclick="removeSpot(this);"> 
-						<img class="wfull img trash-bin "  src="/images/icons/cancel.png"/>
+						<img class="wfull img trash-bin "  src="${contextPath}images/icons/cancel.png"/>
 					</button>
 			    </div><!-- spot  -->
 			`;	
@@ -323,7 +323,7 @@ function displayEditModeAfterDragEnd(){
 			 		
 			 		<div class="spot-type">명소</div>
 			 		<div class="spot-title wfull"> ${info.title}</div>
-			 		<div class="spot-memo"><img class="img-memo"  onclick="memoClickHandler(this);" style="width: 20px;height:20px;cursor: pointer;" src="/images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>
+			 		<div class="spot-memo"><img class="img-memo"  onclick="memoClickHandler(this);" style="width: 20px;height:20px;cursor: pointer;" src="${contextPath}images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>
 			 		
 			 		<!-- 이미지 X-->
 			 		`;
@@ -332,17 +332,17 @@ function displayEditModeAfterDragEnd(){
 			//마지막  상소일 경우 이동시간 hide
 			if( (j+1) < daylength){
 				htmlval+=`
-					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 					<div class="spot-move"> ${info.durationMin}분> </div>`;
 			}else{
 				htmlval+=`
-					<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+					<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 					<div class="spot-move">  </div>`;
 			}
 			
 			htmlval+=`<!-- x 버튼 -->
 					<button class="spot-remove" onclick="removeSpot(this);"> 
-						<img class="wfull img trash-bin "  src="/images/icons/cancel.png"/>
+						<img class="wfull img trash-bin "  src="${contextPath}images/icons/cancel.png"/>
 					</button>
 			    </div><!-- spot  -->
 			`;	

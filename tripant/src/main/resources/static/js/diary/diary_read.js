@@ -6,7 +6,7 @@ function loaededHandler() {
 	$('.report').on("click", reportHandler);
 	// 삭제하기
 	$('.delete').on("click", deleteHandler);
-
+	
 	//케밥 아이콘 이벤트
 	/*$('.menu-menu').on("click", miniModalBtnHandler);
 	$(document).on('click', function(event) {
@@ -168,7 +168,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 	console.log("btnLikeClickHandler 눌림");
 	console.log(diaryId);
 	/*	console.log(thisElement);*/
-	if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
+	if ($(thisElement).attr('src').includes( 'diary_like_none.png')) {
 		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
 		// ajax 요청
 		$.ajax({
@@ -178,7 +178,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 			, method: "post"
 		}).done(function(result) {
 			if (result > 0)
-				$(thisElement).attr('src', '/images/diary/diary_like_icon.png');
+				$(thisElement).attr('src',  contextPath+'images/diary/diary_like_icon.png');
 		})
 	} else {
 		// 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
@@ -190,7 +190,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 			error: ajaxErrorHandler
 		}).done(function(result) {
 			if (result > 0)
-				$(thisElement).attr('src', '/images/diary/diary_like_none.png');
+				$(thisElement).attr('src',  contextPath+'images/diary/diary_like_none.png');
 		})
 	}
 }

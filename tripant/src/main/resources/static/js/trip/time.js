@@ -164,13 +164,13 @@ function displayInfo(){
 			 		<div class="spot-staytime">${info.startTime} - ${info.endTime}</div>
 			 		<div class="spot-type">명소</div>
 			 		<div class="spot-title wfull">${info.title}</div>
-			 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="/images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>
+			 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="${contextPath}images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>
 				`;
 			 
 			 //이미지 링크 유무에 따른 src 설정		
 			 if(info.firstimage != null){ //이미지 값이 있을 때
 				htmlval += `
-				<div class="spot-img wfull hfull"><img class=" wfull hfull" src="${contextPath}${info.firstimage}" ></div>
+				<div class="spot-img wfull hfull"><img class=" wfull hfull" src="${info.firstimage}" ></div>
 				`;
 			 }else{//이미지 값이 없을 때
 				htmlval += `
@@ -181,7 +181,7 @@ function displayInfo(){
 			//이동시간 표시 및 자동차 아이콘 표시 		
 	 		if( (j+1) < daylength){
 				htmlval += `
-				<div class="spot-caricon"><img style="width:20px;height: 20px;" src="/images/icons/carIcon.png" /></div>
+				<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 				<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${details.dayDetailInfoEntity[j+1].title}"  target="_blank">${info.durationMin} 분> </a>
 				`;
 			}else{// 숙소에 도착했을 땐 이동시간 표시 X

@@ -77,7 +77,7 @@ async function itemUpdateHandler(){
 					<div><input type="number" min="0" id="item-sale" name="item-sale" value="${itemSale}"></div>
 				</div>
 				<div class="item-info flex">
-					<div>테마색상(헥사코드)</div>
+					<div style="font-size: var(--font5);">테마색상(헥사코드)</div>
 					<div><input type="text" id="item-color" name="item-color" value="${itemColor}"></div>
 				</div>
 				<div class="item-info flex">
@@ -119,6 +119,8 @@ async function itemUpdateHandler(){
 					Swal.fire({
 						text: "상품 수정 중 오류가 발생했습니다.", 
 						icon: "warning", 
+						confirmButtonColor: "#000000", 
+						confirmButtonText: "확인"
 					});
 				}, 
 				success: function(data){
@@ -126,6 +128,8 @@ async function itemUpdateHandler(){
 						Swal.fire({
 							text: "상품 수정이 완료되었습니다.", 
 							icon: "success", 
+							confirmButtonColor: "#000000", 
+							confirmButtonText: "확인"
 						}).then((swal) => {
 							if(swal.isConfirmed){
 								location.reload();
@@ -135,6 +139,8 @@ async function itemUpdateHandler(){
 						Swal.fire({
 							text: "알 수 없는 이유로 상품 수정이 완료되지 않았습니다.", 
 							icon: "question", 
+							confirmButtonColor: "#000000", 
+							confirmButtonText: "확인"
 						});
 					}
 				}
@@ -142,7 +148,9 @@ async function itemUpdateHandler(){
 		}else{
 			Swal.fire({
 				text: "상품코드, 상품명, 상품가격은 필수 입력 사항입니다.", 
-				icon: "error"
+				icon: "error", 
+				confirmButtonColor: "#000000", 
+				confirmButtonText: "확인"
 			});
 		}
 	}
@@ -179,7 +187,7 @@ async function itemInsertHandler(){
 				<div><input type="number" min="0" id="item-sale" name="item-sale"></div>
 			</div>
 			<div class="item-info flex">
-				<div>테마색상(헥사코드)</div>
+				<div style="font-size: var(--font5);">테마색상(헥사코드)</div>
 				<div><input type="text" id="item-color" name="item-color"></div>
 			</div>
 			<div class="item-info flex">
@@ -214,13 +222,16 @@ async function itemInsertHandler(){
 				itemPrice: formValues[2], 
 				itemDur: formValues[3], 
 				itemSale: formValues[4], 
-				itemSrc: formValues[5], 
+				itemColor: formValues[5], 
+				itemSrc: formValues[6], 
 			}, 
 			success: function(data){
 				if(data > 0){
 					Swal.fire({
 						text: "상품 추가가 완료되었습니다.", 
-						icon: "success"
+						icon: "success", 
+						confirmButtonColor: "#000000", 
+						confirmButtonText: "확인"
 					}).then((swal) => {
 						if(swal.isConfirmed){
 							location.reload();
@@ -229,21 +240,27 @@ async function itemInsertHandler(){
 				}else{
 					Swal.fire({
 						text: "알 수 없는 이유로 상품 추가가 완료되지 않았습니다.", 
-						icon: "question"
+						icon: "question", 
+						confirmButtonColor: "#000000", 
+						confirmButtonText: "확인"
 					});
 				}
 			}, 
 			error: function(request, status, error){
 				Swal.fire({
 					text: "상품 추가 중 오류가 발생했습니다.", 
-					icon: "warning"
+					icon: "warning", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
 				});
 			}
 		});
 	}else{
 		Swal.fire({
 			text: "상품코드, 상품명, 상품가격은 필수 입력 사항입니다.", 
-			icon: "error"
+			icon: "error", 
+			confirmButtonColor: "#000000", 
+			confirmButtonText: "확인"
 		});
 	}
 }

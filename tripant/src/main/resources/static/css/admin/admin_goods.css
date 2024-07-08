@@ -110,6 +110,9 @@
 	width: 100%;
 	font-size: var(--font4);
 }
+.item-info > div:first-child{
+	align-content: center;
+}
 .item-info input{
 	box-sizing: border-box;
 	border-radius: 8px;

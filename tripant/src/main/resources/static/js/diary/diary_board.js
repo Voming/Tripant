@@ -59,7 +59,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 	console.log("btnLikeClickHandler 눌림");
 	console.log(diaryId);
 	/*	console.log(thisElement);*/
-	if ($(thisElement).attr('src') === '/images/diary/diary_like_none.png') {
+	if ($(thisElement).attr('src').includes('diary_like_none.png')) {
 		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
 		
 		// ajax 요청
@@ -70,7 +70,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 			, method: "post"
 		}).done(function(result) {
 			if(result > 0)
-			$(thisElement).attr('src', '/images/diary/diary_like_icon.png');
+			$(thisElement).attr('src', contextPath+'images/diary/diary_like_icon.png');
 			window.location.herf='/diary/read'+diaryId;	
 		})
 	} else {
@@ -83,7 +83,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 			, method: "post"
 		}).done(function(result) {
 			if(result>0)
-			$(thisElement).attr('src', '/images/diary/diary_like_none.png');
+			$(thisElement).attr('src',  contextPath+'images/diary/diary_like_none.png');
 			window.location.herf='/diary/read'+diaryId;	
 		})
 	}
