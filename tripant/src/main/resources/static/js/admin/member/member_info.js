@@ -5,7 +5,7 @@ function loadedHandler() {
 }
 
 //등급변경, 활성화여부 
-function ClickHandler() {
+function ClickHandler(e) {
 	console.log("++");
 	Swal.fire({
          title: " <p style='font-size:17px'>" + "정보수정" + "</p>",
@@ -28,14 +28,15 @@ function ClickHandler() {
          focusConfirm: false,
          preConfirm: () => {  //확인 버튼 누르면 실행되는 콜백함수
              const selectRole = document.getElementById('selectRole').value;
-             const selectActive = document.getElementById('selectActive').value;
-             const memEmail=$(this).parent().prev().prev().prev().prev().prev().text(); //button에서 부모요소인 li로 올라가서 prev() 달기
+             const memEnabled = document.getElementById('selectActive').value;
+             //const memEmail=$(".btn.info").each(function(){$(this).parent().prev().prev().prev().prev().prev().text();}) //button에서 부모요소인 li로 올라가서 prev() 달기
+             const memEmail=$(e).parent().prev().prev().prev().prev().prev().text(); //button에서 부모요소인 li로 올라가서 prev() 달기
              $.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
             	 url:contextPath+"admin/member/info",
             	 method:"post",
-            	 data: {selectRole:selectRole, memEmail:memEmail,selectActive:selectActive},
+            	 data: {selectRole:selectRole, memEmail:memEmail,memEnabled:memEnabled},
 				 //success: 1이면 업데이트 완료 0이면 실패
 				 success : function(result) {
 							console.log(result);
@@ -47,12 +48,13 @@ function ClickHandler() {
 							}
 				 }
              });
-             return { selectRole: selectRole , selectActive: selectActive};
+             return { selectRole: selectRole , memEnabled: memEnabled};
          }
      }).then((result) => {  
          if (result.isConfirmed) { //모달창에서 confirm 버튼을 눌렀다면
              console.log('Selected Role:', result.value.selectRole);
-             console.log('selectActive:', result.value.selectActive);
+             console.log('memEnabled:', result.value.memEnabled);
+             console.log('memEmail:', result.value.memEmail);
          }
      });
 	 
