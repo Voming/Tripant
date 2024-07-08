@@ -511,3 +511,32 @@ SELECT
 		
 			ORDER BY likes DESC NULLS LAST) t1)t2 
 			WHERE rn between 1 and 3;
+-----조회수 정렬
+SELECT
+			
+				(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 	WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email ='qothwls5@naver.com') is_my_likes,
+			
+				(SELECT diary_Image FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Image,
+				(SELECT diary_Preview FROM diary_save t1 WHERE	t1.DIARY_ID = t2.DIARY_ID) diary_Preview,
+				t2.*
+			FROM
+				( SELECT t1.*, rownum rn FROM
+					(SELECT DIARY_ID, MEM_NICK,DIARY_TITLE,
+						to_char(DIARY_DATE,'yyyy-MM-dd') DIARY_DATE,
+						DIARY_VIEWS,DIARY_THEME, PLAN_AREA_CODE,
+						DIARY_OPEN , DIARY_PLAN_ID , DIARY_MEM_EMAIL,
+						diary_date diary_date_real
+					FROM VIEW_DIARY_MEMBER_PLAN
+					
+					WHERE DIARY_OPEN = 0
+	
+			AND PLAN_AREA_CODE = (SELECT AREA_CODE FROM AREA WHERE AREA_SHORT_NAME = '서울')
+		
+			ORDER BY DIARY_VIEWS DESC NULLS LAST) t1)t2 
+			WHERE rn between 1 and 3;
+            
+      select * from diary;
+      select * from diary_save;
+      
+      
+      

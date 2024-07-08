@@ -24,7 +24,7 @@
 	flex-wrap: wrap;
 	flex-direction: row;
 	align-items: center;
-    justify-content: space-between;
+	justify-content: space-between;
 }
 /* 버튼 가운데 정렬 */
 .btn-more {
@@ -87,7 +87,7 @@
 .board-list>.board_more {
 	display: flex;
 	flex-direction: row;
-    justify-content: space-between;
+	gap: 28px; /* 나란히 세우기 위함 */
 	width: 960px; /* 양옆 간격 유지 */
 	padding-bottom: 30px; /* 아래 간격 유지  */
 }
@@ -106,26 +106,26 @@
 }
 
 #diary-introduction h1 {
-  font-weight: normal;
-  text-transform: uppercase;
-  margin: 0.3125em 0;
-
-  position: relative;
-  display: inline-block;
-  padding: 0 10px;
+	font-weight: normal;
+	text-transform: uppercase;
+	margin: 0.3125em 0;
+	position: relative;
+	display: inline-block;
+	padding: 0 10px;
 }
 
 .style-1 {
-    margin: 10px;
+	margin: 10px;
 }
+
 .style-1:before {
-  content: "";
-  height: 3px;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  position: absolute;
-  width: 300%;
-  top: 50%;
-  left: -100%;
-  z-index: -999;
+	content: "";
+	height: 3px;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	position: absolute;
+	width: 300%;
+	top: 50%;
+	left: -100%;
+	z-index: -999;
 }

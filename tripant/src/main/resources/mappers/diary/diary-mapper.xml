@@ -221,13 +221,25 @@
 	<!-- 글 수정 -->
 	<update id="updateDiary" parameterType="DiaryPostEntity">
 		UPDATE DIARY
-		SET
-			DIARY_TITLE = #{diaryTitle},
-			DIARY_CONTENT = to_clob(#{diaryContent}),
-			DIARY_DATE = #{diaryDate},
-			DIARY_OPEN = #{diaryOpen},
-			DIARY_THEME =#{diaryTheme}
-		WHERE DIARY_ID = #{diaryId}
+			<set>
+				<if test="diaryTitle != null and !diaryTitle.equals('')">
+   					 DIARY_TITLE = #{diaryTitle},
+   				 </if>
+   				   <if test="diaryContent != null and !diaryContent.equals('')">
+   					DIARY_CONTENT = TO_CLOB(#{diaryContent}),
+   				</if>
+   				  <if test="diaryDate != null">
+    				DIARY_DATE = TO_DATE(#{diaryDate}, 'YYYY-MM-DD') AS DIARY_DATE,
+    			</if>
+    			 <if test="diaryOpen != null">
+    				DIARY_OPEN = #{diaryOpen},
+    			</if>
+    			 <if test="diaryTheme != null">
+    				DIARY_THEME =#{diaryTheme}
+    			</if>
+    		</set>	
+			WHERE DIARY_ID = #{diaryId}
+			ND DIARY_MEM_EMAIL = #{memEmail};
 	</update>
 
 	<!-- 좋아요 누르기 -->

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -99,6 +100,28 @@ public class MyDiaryController {
 			return ResponseEntity.ok().body(diaryForm);
 		}
 	
+		 // 글 수정 폼을 제공하는 메서드
+	    @GetMapping("/diary/update/{diaryId}")
+	    public String showUpdateDiaryForm(@PathVariable DiaryBoardEntity diaryId, Model model,Principal pricipal){
+	        // diaryId에 해당하는 글을 조회하여 폼에 전달합니다.
+	        DiaryBoardEntity diary = diaryService.updateDiary(diaryId,pricipal); // DiaryService에서 해당 글 조회 로직 구현 필요
+
+	        // 조회된 글 정보를 모델에 추가하여 폼에 전달
+	        model.addAttribute("diary", diary);
+
+	        // 수정 폼을 나타내는 HTML 파일 이름을 반환합니다. 예: "updateDiaryForm"
+	        return "diary/my/diary_modify.html";
+	    }
+
+	    // 글 수정 처리 메서드 (POST 방식)
+	    @PostMapping("/diary/update")
+	    public String updateDiary(@ModelAttribute("diary") DiaryBoardEntity updatedDiary,Principal pricipal) {
+	        // 수정된 글 데이터를 데이터베이스에 업데이트합니다.
+	        diaryService.updateDiary(updatedDiary, pricipal); // DiaryService에서 글 업데이트 로직 구현 필요
+
+	        // 수정 완료 후, 이동할 페이지를 반환합니다. 예: 수정된 글의 상세 페이지로 redirect
+	        return "redirect:/diary/detail/" + updatedDiary.getDiaryId(); // 수정된 글의 상세 페이지 URL로 리다이렉트
+	    }
 	
 	   // 여행글 삭제 처리
     @PostMapping("/diary/delete/{diaryId}")

@@ -1,5 +1,6 @@
 package mclass.store.tripant.diary.model.service;
 
+import java.security.Principal;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,10 @@ public class DiaryService {
 		diaryRepository.insertDiaryImage(diary);
 		return diary;
 	}
+	// 여행기 글 수정하기
+	public DiaryBoardEntity updateDiary(DiaryBoardEntity updatedDiary, Principal pricipal) {
+		return diaryRepository.updateDiary(updatedDiary, pricipal);
+	}
 
 	// 여행기 글 삭제
 	  public int deleteDiaryById(int diaryId, String memEmail)throws Exception {
@@ -99,8 +104,4 @@ public class DiaryService {
 	public int unlikeDiary(int diaryId, String memEmail) {
 		return diaryRepository.deleteDiaryLike(diaryId, memEmail);
 	}
-	// 여행기 글 Previews text 꺼내기
-	
-	    
-	// 이미지 url 담아오기
 }

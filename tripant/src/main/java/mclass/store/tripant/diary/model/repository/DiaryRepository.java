@@ -1,5 +1,6 @@
 package mclass.store.tripant.diary.model.repository;
 
+import java.security.Principal;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
@@ -57,7 +58,9 @@ public interface DiaryRepository {
 	 // 여행기 글 Previews text 꺼내기
 	 void previewsText(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail);
 	 
+	// 글 수정하기
+	 DiaryBoardEntity updateDiary(@Param("diaryId") DiaryBoardEntity updatedDiary,@Param("memEmail") Principal pricipal);
 	
-	// 이미지 url 받아오기
+
 
 }
