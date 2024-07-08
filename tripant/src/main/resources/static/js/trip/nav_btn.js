@@ -112,6 +112,7 @@ function saveChanges(){
 				delete item.durationMin;
 				delete item.endTime;
 				delete item.startTime;
+				delete item.placeCat;
 				//변경된 방문순서 key에 넣어주기
 				item.travelOrder = j + 1; 
 			}

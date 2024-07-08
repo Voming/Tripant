@@ -1,8 +1,11 @@
 package mclass.store.tripant.trip.domain;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Data
+@Component
 public class DayDetailInfoEntity {
 	private String placeType;
 	private Integer contentid;

@@ -1,29 +1,28 @@
 package mclass.store.tripant.trip.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import mclass.store.tripant.place.domain.PlaceboxEntity;
+import mclass.store.tripant.trip.domain.DayDetailInfoEntity;
 import mclass.store.tripant.trip.domain.DayEntity;
 import mclass.store.tripant.trip.model.service.TripService;
 
@@ -69,7 +68,7 @@ public class TripController {
 		String duration = service.getduration(startLngStr,startLatStr,endLngStr,endLatStr);
 		return duration;
 	}
-	
+
 	//장소 추가 - list 출력
 	@PostMapping("/spot")
 	public String spot(Model model, @RequestParam Integer areaCode, @RequestParam Integer spotType,
@@ -93,19 +92,39 @@ public class TripController {
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
-	
+	ObjectMapper mapper = new ObjectMapper();
 	//일정 저장 
 	//jjoggan TODO
 	@PostMapping("/save/changes")
 	@ResponseBody
-	public int saveChanges(
-			@RequestBody String saveData 
+	public Integer saveChanges(
+			@RequestParam String saveData, @RequestParam Integer planId 
 			) throws Exception {
 		System.out.println("-------------------------------");
-		System.out.println(gson.toJson(URLEncoder.encode(saveData, "utf-8")));
-		Map<String, Object> save1 =  gson.fromJson(gson.toJson(saveData), Map.class); //
-//		System.out.println(save1);
-		int result = 0;
+		//System.out.println(gson.toJson(URLEncoder.encode(saveData, "utf-8")));
+		//List<String> save1 =  gson.fromJson(gson.toJson(saveData), List.class); //
+		
+		List<DayEntity> dtos = Arrays.asList(mapper.readValue(saveData, DayEntity[].class));
+		
+		Map<String, Object> paramMap = new HashMap();
+        paramMap.put("planId", planId);
+        paramMap.put("dtos", dtos);
+        
+        Integer result = -1;
+        
+        result = service.saveChange(paramMap);
+        
+        System.out.println(">>>>>>>>>>>>>>>>> result");
+        System.out.println(result);
+        
+		System.out.println(dtos.size() + " : " +dtos);
+		for(int i = 0 ; i < dtos.size() ;  i++) {
+			List<DayDetailInfoEntity> dtoss = dtos.get(i).getDayDetailInfoEntity();
+			for(int j = 0 ; j<dtoss.size();j++) {
+				System.out.println("++++++++ "+i);
+				System.out.println(dtoss.get(j));
+			}
+		}
 		return result;
 	}
 }

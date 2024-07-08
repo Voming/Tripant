@@ -48,6 +48,10 @@ public class TripService {
 	public List<PlaceboxEntity> selectSpotFindList(String findArea, int areaCode,  int maxNum) {
 		return planRepository.selectSpotFindList(findArea, areaCode, maxNum);
 	}
+	//
+	public Integer saveChange(Map<String, Object> paramMap) {
+		return repository.saveChange(paramMap);
+	}
 	
 	//장소간 이동시간 구하기
 	public String getduration(

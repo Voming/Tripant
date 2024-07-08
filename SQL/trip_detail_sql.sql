@@ -14,6 +14,19 @@ SELECT TRAVEL_DATE , SCHEDULE_START ,SCHEDULE_END ,CONTENTID ,PLACE_TYPE , STAY_
 TRAVEL_ORDER ,MEMO ,TITLE ,ADDRESS ,FIRSTIMAGE ,LNG ,LAT  FROM V_DETAILINFO  ORDER BY TRAVEL_DATE ASC ,TRAVEL_ORDER ASC
 ;
 
+--delete from plan_spot where spot_plan_id = 100;
+--편집된 일정 저장하기
+
+--trigger 생성
+create or replace NONEDITIONABLE TRIGGER trg_plan_change
+    BEFORE insert ON plan_spot
+    REFERENCING OLD AS OLD
+    FOR EACH ROW
+DECLARE
+BEGIN
+    delete from plan_spot where spot_plan_id = :OLD.spot_plan_id;
+END;
+
 ------------------
 
 

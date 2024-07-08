@@ -1,0 +1,193 @@
+[
+	{
+		"travelDate": "2024-07-16(화)",
+		"scheduleStart": "10:00",
+		"scheduleEnd": "22:00",
+		"dayDetailInfoEntity": [
+			{
+				"placeType": "4",
+				"contentid": 133328,
+				"travelOrder": 1,
+				"stayTime": "7200",
+				"memo": null,
+				"title": "에도긴",
+				"address": "서울특별시 강남구 테헤란로8길 30",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/39/1807239_image2_1.jpg",
+				"lng": "127.0318125811",
+				"lat": "37.4968855167",
+			},
+			{
+				"placeType": "4",
+				"contentid": 134686,
+				"travelOrder": 2,
+				"stayTime": "7200",
+				"memo": "모든 국민은 법률이 정하는 바에 의하여 국방의 의무를 진다. 법관은 헌법과 법률에 의하여 그 양심에 따라 독립하여 심판한다.",
+				"title": "사조참치",
+				"address": "서울특별시 서대문구 통일로 107-39",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/12/1900512_image2_1.jpg",
+				"lng": "126.9660944402",
+				"lat": "37.5641931854",
+				"placeCat": "음식점"
+			},
+			{
+				"placeType": "4",
+				"contentid": 134691,
+				"travelOrder": 3,
+				"stayTime": "7200",
+				"memo": "법관은 탄핵 또는 금고 이상의 형의 선고에 의하지 아니하고는 파면되지 아니하며, 징계처분에 의하지 아니하고는 정직·감봉 기타 불리한 처분을 받지 아니한다.",
+				"title": "스시겐",
+				"address": "서울특별시 마포구 양화로7길 6-12",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/01/1288501_image2_1.jpg",
+				"lng": "126.9156105083",
+				"lat": "37.5516159646",
+				"placeCat": "음식점"
+			},
+			{
+				"placeType": "5",
+				"contentid": 3303810,
+				"travelOrder": 4,
+				"stayTime": "3600",
+				"memo": null,
+				"title": "나무호텔",
+				"address": "서울특별시 광진구 아차산로76가길 9 (광장동)",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/94/3303794_image2_1.jpg",
+				"lng": "127.1074153861",
+				"lat": "37.5471171546",
+				"placeCat": "숙소"
+			},
+			{
+				"placeType": "5",
+				"contentid": 1870779,
+				"travelOrder": 5,
+				"stayTime": "3600",
+				"memo": null,
+				"title": "담소정[한국관광 품질인증/Korea Quality]",
+				"address": "서울특별시 종로구 북촌로9길 16-2",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/20/2684320_image2_1.jpeg",
+				"lng": "126.9842978496",
+				"lat": "37.5813970676",
+				"placeCat": "숙소"
+			}
+		]
+	},
+	{
+		"travelDate": "2024-07-17(수)",
+		"scheduleStart": "10:00",
+		"scheduleEnd": "22:00",
+		"dayDetailInfoEntity": [
+			{
+				"placeType": "4",
+				"contentid": 135423,
+				"travelOrder": 1,
+				"stayTime": "7200",
+				"memo": null,
+				"title": "니와",
+				"address": "서울특별시 용산구 이촌로75길 22",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/48/1805348_image2_1.jpg",
+				"lng": "126.9744949024",
+				"lat": "37.5207650483",
+				"placeCat": "음식점"
+			},
+			{
+				"placeType": "4",
+				"contentid": 135445,
+				"travelOrder": 2,
+				"stayTime": "7200",
+				"memo": null,
+				"title": "히라메키",
+				"address": "서울특별시 강남구 테헤란로81길 32",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/31/1838531_image2_1.jpg",
+				"lng": "127.0566488638",
+				"lat": "37.5090984336",
+				"placeCat": "음식점"
+			},
+			{
+				"placeType": "4",
+				"contentid": 398339,
+				"travelOrder": 3,
+				"stayTime": "7200",
+				"memo": "대통령은 헌법과 법률이 정하는 바에 의하여 국군을 통수한다.",
+				"title": "명동돈가스",
+				"address": "서울특별시 중구 명동3길 8",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/34/1717734_image2_1.jpg",
+				"lng": "126.9835761856",
+				"lat": "37.5640101870",
+				"placeCat": "음식점"
+			},
+			{
+				"placeType": "4",
+				"contentid": 838949,
+				"travelOrder": 4,
+				"stayTime": "7200",
+				"memo": null,
+				"title": "배정철어도",
+				"address": "서울특별시 강남구 언주로148길 14",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/03/1838703_image2_1.jpg",
+				"lng": "127.0361670686",
+				"lat": "37.5206189497",
+				"placeCat": "음식점"
+			},
+			{
+				"placeType": "5",
+				"contentid": 1870779,
+				"travelOrder": 5,
+				"stayTime": "10800",
+				"memo": null,
+				"title": "담소정[한국관광 품질인증/Korea Quality]",
+				"address": "서울특별시 종로구 북촌로9길 16-2",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/20/2684320_image2_1.jpeg",
+				"lng": "126.9842978496",
+				"lat": "37.5813970676",
+				"placeCat": "숙소"
+			}
+		]
+	},
+	{
+		"travelDate": "2024-07-18(목)",
+		"scheduleStart": "10:00",
+		"scheduleEnd": "22:00",
+		"dayDetailInfoEntity": [
+			{
+				"placeType": "4",
+				"contentid": 1062825,
+				"travelOrder": 1,
+				"stayTime": "7200",
+				"memo": null,
+				"title": "하나유키",
+				"address": "서울특별시 마포구 마포대로 25",
+				"firstimage": null,
+				"lng": "126.9448193026",
+				"lat": "37.5393734659",
+				"placeCat": "음식점"
+			},
+			{
+				"placeType": "4",
+				"contentid": 1393694,
+				"travelOrder": 2,
+				"stayTime": "7200",
+				"memo": null,
+				"title": "모모야마",
+				"address": "서울특별시 중구 을지로 30",
+				"firstimage": null,
+				"lng": "126.9809819395",
+				"lat": "37.5653516507",
+				"placeCat": "음식점"
+			},
+			{
+				"placeType": "4",
+				"contentid": 1515926,
+				"travelOrder": 3,
+				"stayTime": "7200",
+				"memo": null,
+				"title": "스시 초희",
+				"address": "서울특별시 강남구 도산대로45길 18-6",
+				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/30/1514430_image2_1.jpg",
+				"lng": "127.0359669980",
+				"lat": "37.5237602478",
+				"placeCat": "음식점"
+			}
+		]
+	}
+]
+
+[DayEntity(travelDate=2024-07-16(화), scheduleStart=10: 00, scheduleEnd=22: 00, dayDetailInfoEntity=[DayDetailInfoEntity(placeType=4, contentid=133328, travelOrder=1, stayTime=7200, memo=null, title=에도긴, address=서울특별시 강남구 테헤란로8길 30, firstimage=http: //tong.visitkorea.or.kr/cms/resource/39/1807239_image2_1.jpg, lng=127.0318125811, lat=37.4968855167), DayDetailInfoEntity(placeType=4, contentid=134686, travelOrder=2, stayTime=7200, memo=모든 국민은 법률이 정하는 바에 의하여 국방의 의무를 진다. 법관은 헌법과 법률에 의하여 그 양심에 따라 독립하여 심판한다., title=사조참치, address=서울특별시 서대문구 통일로 107-39, firstimage=http://tong.visitkorea.or.kr/cms/resource/12/1900512_image2_1.jpg, lng=126.9660944402, lat=37.5641931854), DayDetailInfoEntity(placeType=4, contentid=134691, travelOrder=3, stayTime=7200, memo=법관은 탄핵 또는 금고 이상의 형의 선고에 의하지 아니하고는 파면되지 아니하며, 징계처분에 의하지 아니하고는 정직·감봉 기타 불리한 처분을 받지 아니한다., title=스시겐, address=서울특별시 마포구 양화로7길 6-12, firstimage=http://tong.visitkorea.or.kr/cms/resource/01/1288501_image2_1.jpg, lng=126.9156105083, lat=37.5516159646), DayDetailInfoEntity(placeType=5, contentid=3303810, travelOrder=4, stayTime=3600, memo=null, title=나무호텔, address=서울특별시 광진구 아차산로76가길 9 (광장동), firstimage=http://tong.visitkorea.or.kr/cms/resource/94/3303794_image2_1.jpg, lng=127.1074153861, lat=37.5471171546), DayDetailInfoEntity(placeType=5, contentid=1870779, travelOrder=5, stayTime=3600, memo=null, title=담소정[한국관광 품질인증/Korea Quality], address=서울특별시 종로구 북촌로9길 16-2, firstimage=http://tong.visitkorea.or.kr/cms/resource/20/2684320_image2_1.jpeg, lng=126.9842978496, lat=37.5813970676)]), DayEntity(travelDate=2024-07-17(수), scheduleStart=10:00, scheduleEnd=22:00, dayDetailInfoEntity=[DayDetailInfoEntity(placeType=4, contentid=135423, travelOrder=1, stayTime=7200, memo=null, title=니와, address=서울특별시 용산구 이촌로75길 22, firstimage=http://tong.visitkorea.or.kr/cms/resource/48/1805348_image2_1.jpg, lng=126.9744949024, lat=37.5207650483), DayDetailInfoEntity(placeType=4, contentid=135445, travelOrder=2, stayTime=7200, memo=null, title=히라메키, address=서울특별시 강남구 테헤란로81길 32, firstimage=http://tong.visitkorea.or.kr/cms/resource/31/1838531_image2_1.jpg, lng=127.0566488638, lat=37.5090984336), DayDetailInfoEntity(placeType=4, contentid=398339, travelOrder=3, stayTime=7200, memo=대통령은 헌법과 법률이 정하는 바에 의하여 국군을 통수한다., title=명동돈가스, address=서울특별시 중구 명동3길 8, firstimage=http://tong.visitkorea.or.kr/cms/resource/34/1717734_image2_1.jpg, lng=126.9835761856, lat=37.5640101870), DayDetailInfoEntity(placeType=4, contentid=838949, travelOrder=4, stayTime=7200, memo=null, title=배정철어도, address=서울특별시 강남구 언주로148길 14, firstimage=http://tong.visitkorea.or.kr/cms/resource/03/1838703_image2_1.jpg, lng=127.0361670686, lat=37.5206189497), DayDetailInfoEntity(placeType=5, contentid=1870779, travelOrder=5, stayTime=10800, memo=null, title=담소정[한국관광 품질인증/Korea Quality], address=서울특별시 종로구 북촌로9길 16-2, firstimage=http://tong.visitkorea.or.kr/cms/resource/20/2684320_image2_1.jpeg, lng=126.9842978496, lat=37.5813970676)]), DayEntity(travelDate=2024-07-18(목), scheduleStart=10:00, scheduleEnd=22:00, dayDetailInfoEntity=[DayDetailInfoEntity(placeType=4, contentid=1062825, travelOrder=1, stayTime=7200, memo=null, title=하나유키, address=서울특별시 마포구 마포대로 25, firstimage=null, lng=126.9448193026, lat=37.5393734659), DayDetailInfoEntity(placeType=4, contentid=1393694, travelOrder=2, stayTime=7200, memo=null, title=모모야마, address=서울특별시 중구 을지로 30, firstimage=null, lng=126.9809819395, lat=37.5653516507), DayDetailInfoEntity(placeType=4, contentid=1515926, travelOrder=3, stayTime=7200, memo=null, title=스시 초희, address=서울특별시 강남구 도산대로45길 18-6, firstimage=http://tong.visitkorea.or.kr/cms/resource/30/1514430_image2_1.jpg, lng=127.0359669980, lat=37.5237602478)])]

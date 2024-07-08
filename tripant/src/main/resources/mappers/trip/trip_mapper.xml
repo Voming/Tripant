@@ -31,13 +31,24 @@
 		FROM PLAN JOIN AREA ON AREA_CODE = PLAN_AREA_CODE WHERE PLAN_ID = #{planId}
 	</select>
 <!-- 편집된 일정 저장 -->
-<!-- 	<insert id="saveEdit" parameterType="dayEntityMap">
-		insert all
-			<foreach collection="list" item="item">
-				 into plan_spot values (#{item}, #{memEmail})
-			</foreach>
-		select * from dual
-	</insert> -->
+	<insert id="saveChange" parameterType="java.util.HashMap">
+		INSERT ALL 
+        <foreach collection="dtos" item="dtos" >
+            <foreach collection="dtos.dayDetailInfoEntity" item="dto">
+		        INTO PLAN_SPOT VALUES 
+                (
+                TO_DATE(#{dtos.travelDate,'yyyy-MM-dd(dy)'}), 
+                #{planId}, 
+                TO_NUMBER(#{dto.placeType}), 
+                #{dto.contentid},
+                #{dto.travelOrder},
+                #{dto.stayTime},
+                #{dto.memo}
+                    )
+            </foreach>
+        </foreach>
+        SELECT * FROM DUAL
+	</insert>
 	
 <!-- <update id=""></update> -->
 	
