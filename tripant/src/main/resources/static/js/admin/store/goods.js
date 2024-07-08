@@ -263,14 +263,14 @@ function itemDeleteHandler(){
 	 	error : function(request, status, error) {
 		 	if(request.responseText.indexOf('ORA-02292')){
 		 		Swal.fire({
-					text: "장바구니 혹은 구매내역에 존재하는 상품은 삭제할 수 없습니다.\n운영팀에 문의해주시기 바랍니다.", 
+					html: "장바구니 혹은 구매내역에 존재하는 상품은 삭제할 수 없습니다.<br>운영팀에 문의해주시기 바랍니다.", 
 					icon: "error", 
 					confirmButtonColor: "#000000", 
 					confirmButtonText: "확인"
 				});
 		 	}else{
 		 		Swal.fire({
-		 			text: "알 수 없는 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
+		 			html: "알 수 없는 오류가 발생했습니다.<br>관리자에게 문의해주시기 바랍니다.", 
 		 			confirmButtonColor: "#000000", 
 		 			confirmButtonText: "확인"
 		 		});

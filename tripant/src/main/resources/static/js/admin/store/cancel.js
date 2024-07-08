@@ -11,7 +11,7 @@ function payCancelHandler(){
 	const buyId = $(this).parents(".col.list").data("id").toString();
 	const memEmail = $(this).parents(".col.list").data("email");
 	Swal.fire({
-		title: "해당 주문번호의 모든 건이 취소됩니다.\n진행하시겠습니까?", 
+		html: "해당 주문번호의 모든 건이 취소됩니다.<br>진행하시겠습니까?", 
 		icon: "warning", 
 		showCancelButton: true, 
 		confirmButtonText: "결제취소", 
