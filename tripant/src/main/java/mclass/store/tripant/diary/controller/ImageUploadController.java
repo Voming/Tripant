@@ -38,8 +38,10 @@ public class ImageUploadController {
 	@ResponseBody
 	public String postCloudinary(MultipartHttpServletRequest multiFile) throws IOException {
 		
+		
 		System.out.println("들어옴");
 		// 내 클라우드 정보로 cloudinary 객체 생성 
+		// Cloudinary 설정
 		Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
 				"cloud_name", cloudName,
 				"api_key", apiKey,
@@ -47,9 +49,7 @@ public class ImageUploadController {
 				"secure", true)
 		);
 		
-		String result =null;
-		String savedfolder = "/resources/uploadfile";
-//		String uploadPath = request.getServletContext().getRealPath("/resources/uploadfile");
+		//		String uploadPath = request.getServletContext().getRealPath("/resources/uploadfile");
 		String uploadPath = cloudinary.uploader().getUploadUrl(ObjectUtils.emptyMap());
 		System.out.println("uploadPath : " + uploadPath);
 		
@@ -58,26 +58,28 @@ public class ImageUploadController {
 			uploadPathFile.mkdirs();
 		}
 
-		int uploadFileLimit = 50 * 1024 * 1024; // 50MB
+		// 업로드된 파일 가져오기
 		MultipartFile file = multiFile.getFile("upload");
 		if(file != null) {
 			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
 				if(file.getContentType().toLowerCase().startsWith("image/")) { //이미지 파일만 검색
 					try {
 						String originalFileName = file.getOriginalFilename();
+						// 임시 파일 생성 및 전송
 						File f = Files.createTempFile("temp",file.getOriginalFilename()).toFile();
 						file.transferTo(f);
+					     // Cloudinary에 이미지 업로드
 						
 						Map<String, String> config = new HashMap<String, String>();
 						config.put("cloud_name", cloudName);
 						config.put("api_key", apiKey);
 						config.put("api_secret", apiSecret);
 //						"http://res.cloudinary.com/dnhmep72p/image/upload/v1719391588/a4rpapbglkqd1g7lxipk.png
-						Map uploadResult = cloudinary.uploader().upload(f, ObjectUtils.emptyMap());
+						Map<String, String> uploadResult = cloudinary.uploader().upload(f, ObjectUtils.emptyMap());
 						
 						System.out.println("==============================================");
 						System.out.println(uploadResult.get("url"));
-						
+						 // 업로드 성공 시 JSON 응답 생성
 						HashMap<String, String> map = new HashMap<String, String>();
 						
 						map.put("uploaded", "1");

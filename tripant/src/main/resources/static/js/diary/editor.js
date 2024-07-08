@@ -1,6 +1,10 @@
 // This sample still does not showcase all CKEditor&nbsp;5 features (!)
 // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
 const makeTripAntCkeditor = (editorId) => {
+	console.log("==========");
+	console.log(token);
+	console.log(header);
+	
 	const ckeditorInstance =
 		CKEDITOR.ClassicEditor.create(document.getElementById(editorId), {
 			// https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
@@ -112,7 +116,10 @@ const makeTripAntCkeditor = (editorId) => {
 				]
 			},
 			//--------이미지 업로드
-			ckfinder : { uploadUrl: contextPath + 'post/cloudinary'  },
+			ckfinder : {
+				// https://offbyone.tistory.com/216 참고
+			 	uploadUrl: contextPath + 'post/cloudinary?'+ "_csrf"+"="+token
+            },
 			
 			// Used by real-time collaboration
 			/*
@@ -122,7 +129,6 @@ const makeTripAntCkeditor = (editorId) => {
 				webSocketUrl: 'wss://110380.cke-cs.com/ws',
 				//uploadUrl: contextPath + '/post/cloudinary'
 			},
-			
 			collaboration: {
 	            // Modify the channelId to simulate editing different documents
 	            // https://ckeditor.com/docs/ckeditor5/latest/features/collaboration/real-time-collaboration/real-time-collaboration-integration.html#the-channelid-configuration-property
@@ -132,8 +138,11 @@ const makeTripAntCkeditor = (editorId) => {
 	        // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/ckbox.html
 
 			// License key is required only by the Pagination plugin and non-realtime Comments/Track changes.
-       			 licenseKey: 'Z0Q2YVprNWNBZXNiYWIrYUN4eDQ2L0VsYjdReUpCRnJLRkw3VjhhKzI1aCt5NDlmSngraXVYQmo3dnoyRUE9PS1NakF5TkRBNE1EUT0=',
-        	//licenseKey: 'NHBPRmY2NVd2Zld4dUpFK2Y5VkNSakYzdHBHZWg1bVRuUTJYc0s2U09iY2MxL1RmMjlvY3psWnNzTmJLSVE9PS1NakF5TkRBM01qWT0=',-> 배소진
+			// vomin
+//   			 licenseKey: 'Z0Q2YVprNWNBZXNiYWIrYUN4eDQ2L0VsYjdReUpCRnJLRkw3VjhhKzI1aCt5NDlmSngraXVYQmo3dnoyRUE9PS1NakF5TkRBNE1EUT0=',
+   			 
+   			 //-> 배소진
+        	licenseKey: 'NHBPRmY2NVd2Zld4dUpFK2Y5VkNSakYzdHBHZWg1bVRuUTJYc0s2U09iY2MxL1RmMjlvY3psWnNzTmJLSVE9PS1NakF5TkRBM01qWT0=',
 			// The "superbuild" contains more premium features that require additional configuration, disable them below.
 			// Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
 			removePlugins: [
