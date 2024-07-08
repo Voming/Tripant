@@ -92,11 +92,12 @@ function spotCkBtnClickHandler(thisElement) {
 	}
 }
 
+var secSum = 0;
 // 장소 설정 정보 부분 업데이트
 function timeInfoUpdate() {
 	var calcHouers = 0;
 	var calcMins = 0;
-	var secSum = 0;
+	secSum = 0;
 	$(".timerange-modal").each(function() {
 		var hours =$(this).children('.spot-hours').val();
 		var mins = $(this).children('.spot-mins').val();
