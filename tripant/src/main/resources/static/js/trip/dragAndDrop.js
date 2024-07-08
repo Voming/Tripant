@@ -11,8 +11,8 @@ function dragAndDrop(){
  
  	//$자체에 함수? 선언 $() 안의 선택자를 가진 모든 요소들을 선택함
     //const $ = (select) => document.querySelectorAll(select);
-    const draggables = document.querySelectorAll('.edit-tourlist .draggable');
-    const containers = document.querySelectorAll('.edit-tourlist .container');
+    const draggables = document.querySelectorAll('.packing .draggable');
+    const containers = document.querySelectorAll('.packing .container');
     
     draggables.forEach(el => {
         el.addEventListener('dragstart', (e) => {
