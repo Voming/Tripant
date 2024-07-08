@@ -50,7 +50,7 @@ function spotCkBtnClickHandler(thisElement) {
 		timeInfoUpdate();// 총 시간 업데이트
 
 	} else { //=====================================체크박스 선택=========================================
-		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
+		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy, spottype);  //전체 일정 만들기 장소 정보 저장
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
 
 		//화면 리스트 추가

@@ -9,4 +9,5 @@ public class Stay {
 	private String mapx;
 	private String mapy;
 	private String img;
+	private Integer type;
 }

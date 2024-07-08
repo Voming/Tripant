@@ -9,4 +9,5 @@ public class Spot {
 	private String mapx;
 	private String mapy;
 	private String spotTime;
+	private Integer type;
 }
