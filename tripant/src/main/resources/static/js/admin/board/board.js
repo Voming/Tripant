@@ -1,45 +1,56 @@
 
-var currentPage = 1;
-var totalPageCount = null;
-var startPageNum = null;
-var endPageNum = null;
+let currentPage = 1;
+let pick = null;
+let search = null;
+let sort = null;
 
 /* 페이징 이동 함수 */
-function goPageHandler() {
-			var currentpage = $(this).data("targetpage");
+function goPageHandler(thisElement) {
+			currentPage = $(thisElement).data("targetpage");
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
-				url:contextPath+"admin/like"
-				, method : "get"
+				url:contextPath+"admin/keyword"
+				, method : "post"
 				, data : {
-						pick:pick, search:search ,
-						currentpage : currentpage}
-				, dataType : "json"
+					currentPage: currentPage, 
+					pick: pick, 
+					search: search, 
+					sort: sort
+				}
+				// , dataType : "json"
+				/*
 				, success : function(result){
-					if(result.search){
-						$("[name=search]").val(result.search);
-					}
 					LikeHandler(like);
+				}
+				*/
+			}).done(function(a){
+				if(a){
+					$(".wrap-list").replaceWith(a);
 				}
 			});
 	}
 
 
 //좋아요수 정렬
-function ClickLikeHandler(thisElement){
-	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
-	var search = $("[name=search]").val();  //input 값
-	var targetPage = $(thisElement).data('targetpage');
+function ClickLikeHandler(){
+	// currentPage = $(thisElement).data('targetpage');
+	sort = 'likes';
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
-		url: contextPath+"admin/like",
-		data:{pick:pick, search:search ,page: targetPage},
+		url: contextPath+"admin/keyword",
+		data:{
+			currentPage: currentPage, 
+			pick: pick, 
+			search: search, 
+			sort: sort
+		},
 		 method:"post",
-		 success : function(like) {
-			 $('.wrap-list').replaceWith(like);
-			}
+	}).done(function(data){
+		if(data){
+			$('.wrap-list').replaceWith(data);
+		}
 	});
 } 
 function LikeHandler(like){
@@ -62,19 +73,24 @@ function LikeHandler(like){
 }
 
 //조회수 정렬
-function ClickViewHandler(thisElement){
-	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
-	var search = $("[name=search]").val();  //input 값
-	var targetPage = $(thisElement).data('targetpage');
+function ClickViewHandler(){
+	// currentPage = $(thisElement).data('targetpage');
+	sort = 'view';
 	$.ajax({
 		beforeSend : csrfHandler,
-		data:{pick:pick, search:search ,page: targetPage},
+		data:{
+			currentPage: currentPage, 
+			pick: pick, 
+			search: search, 
+			sort: sort
+		},
 		error : ajaxErrorHandler,
-		url:contextPath+"admin/view",
+		url:contextPath+"admin/keyword",
 		 method:"post",
-		 success : function(view) {
-			 $('.wrap-list').replaceWith(view);
-			}
+	}).done(function(data){
+		if(data){
+			$('.wrap-list').replaceWith(data);
+		}
 	});
 } 
 function ViewHandler(view){
@@ -97,6 +113,7 @@ function ViewHandler(view){
 }
 
 /* 페이징 이동 함수 */
+/*
 function goPageHandler() {
 			var currentpage = $(this).data("targetpage");
 			$.ajax({
@@ -105,8 +122,11 @@ function goPageHandler() {
 				url:contextPath+"admin/keyword"
 				, method : "get"
 				, data : {
-						pick:pick, search:search ,
-						currentpage : currentpage}
+					currentPage: currentPage, 
+					pick: pick, 
+					search: search, 
+					sort: sort
+				}
 				, dataType : "json"
 				, success : function(result){
 					if(result.search){
@@ -116,22 +136,24 @@ function goPageHandler() {
 				}
 			});
 	}
+*/
 
 // 검색
 function searchBtnHandler(thisElement){
-	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
-	var search = $("[name=search]").val();  //input 값
-	var targetPage = $(thisElement).data('targetpage');
-	console.log(pick);
-	console.log(search);
-	console.log(targetPage);
+	pick=$("select[name=option] option:selected").val(); //선택한 option val값 
+	search = $("[name=search]").val();  //input 값
 	
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
 		url:contextPath+"admin/keyword",
 		method:"post",
-		data: {pick:pick, search:search , page: targetPage},
+		data: {
+			currentPage: currentPage, 
+			pick: pick, 
+			search: search, 
+			sort: sort
+		},
 		success : function(searchList) {
 				$('.wrap-list').replaceWith(searchList);
 			}
