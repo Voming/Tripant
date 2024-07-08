@@ -358,4 +358,21 @@ function displayEditModeAfterDragEnd(){
 	
 	//장소정보 넣기
 	$(".edit-tourlist .wrap-detaillist.flex").html(htmlval);
+	
+	var htmlVal = "";
+	$.each(spotArr, function(idx, element) {
+		
+		//element.id;
+		htmlVal += `
+			<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" >
+		 		<div class="spot-img "><img src="${element.img}" width="70" height="70"/></div>
+		 		<div class="flex">
+		 			<div class="spot-title wfull"> ${element.title}</div>
+		 			<div class="spot-type" >${element.placeCat}</div>
+		 		</div>
+		 		<img class="spot-trashcan" onclick="#" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
+			</div>
+		`; 
+	});
+	$('#spot-basket .wrap-basket').html(htmlVal);
 }

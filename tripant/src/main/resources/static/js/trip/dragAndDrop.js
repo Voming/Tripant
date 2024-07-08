@@ -140,6 +140,7 @@ function dragAndDrop(){
 					
 					console.log(details);
 				}
+				spotArr.splice(el_j,1);
 			}else{
 				//컬럼이 다를 때
 				if(prev_j >= 0){
