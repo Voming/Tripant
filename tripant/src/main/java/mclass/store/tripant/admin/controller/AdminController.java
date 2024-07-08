@@ -106,7 +106,7 @@ public class AdminController {
 	}
 	
 	//ajax
-	//게시글 검색(select)  
+	//게시글 조건검색(select)  
 	@PostMapping("/keyword")
 	public String keywordSearch(
 			Model model
@@ -119,34 +119,6 @@ public class AdminController {
 		model.addAttribute("diaryMap",map);
 		return "admin/board_fragment";
 	}
-	
-	//ajax
-	//좋아요 정렬   
-//	@PostMapping("/like")
-//	public String boardLike(Model model
-//			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-//			, @RequestParam(required = false )String search
-//			,@RequestParam(required = false ) String pick
-//			) {
-//		Map<String, Object> map=adminservice.boardLikes(num, pageNum, currentPageNum, pick, search);
-//		model.addAttribute("diaryMap",map);
-//		
-//		return "admin/board_fragment";
-//	}
-	
-	//ajax
-	//조회수 정렬   
-//	@PostMapping("/view")
-//	public String boardView(Model model
-//			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-//			, @RequestParam(required = false )String search
-//			,@RequestParam(required = false ) String pick
-//			) {
-//		Map<String, Object> map=adminservice.boardView(num, pageNum, currentPageNum, pick, search);
-//		model.addAttribute("diaryMap",map);
-//		return "admin/board_fragment";
-//	}
-		
 	
 	//신고게시글
 	@GetMapping("/complain")

@@ -18,12 +18,6 @@ function goPageHandler(thisElement) {
 					search: search, 
 					sort: sort
 				}
-				// , dataType : "json"
-				/*
-				, success : function(result){
-					LikeHandler(like);
-				}
-				*/
 			}).done(function(a){
 				if(a){
 					$(".wrap-list").replaceWith(a);
@@ -34,7 +28,6 @@ function goPageHandler(thisElement) {
 
 //좋아요수 정렬
 function ClickLikeHandler(){
-	// currentPage = $(thisElement).data('targetpage');
 	sort = 'likes';
 	$.ajax({
 		beforeSend : csrfHandler,
@@ -74,7 +67,6 @@ function LikeHandler(like){
 
 //조회수 정렬
 function ClickViewHandler(){
-	// currentPage = $(thisElement).data('targetpage');
 	sort = 'view';
 	$.ajax({
 		beforeSend : csrfHandler,
@@ -112,37 +104,10 @@ function ViewHandler(view){
 	return htmlVal;
 }
 
-/* 페이징 이동 함수 */
-/*
-function goPageHandler() {
-			var currentpage = $(this).data("targetpage");
-			$.ajax({
-				beforeSend : csrfHandler,
-				error : ajaxErrorHandler,
-				url:contextPath+"admin/keyword"
-				, method : "get"
-				, data : {
-					currentPage: currentPage, 
-					pick: pick, 
-					search: search, 
-					sort: sort
-				}
-				, dataType : "json"
-				, success : function(result){
-					if(result.search){
-						$("[name=search]").val(result.search);
-					}
-					memListHandler(result);
-				}
-			});
-	}
-*/
-
 // 검색
-function searchBtnHandler(thisElement){
+function searchBtnHandler(){
 	pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	search = $("[name=search]").val();  //input 값
-	
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,

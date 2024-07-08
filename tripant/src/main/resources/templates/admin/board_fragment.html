@@ -15,7 +15,7 @@
 			<input class="search" type="text" name="search" placeholder="게시글검색">
 		</th:block>
 		<button type="button" class="btn-search"
-			onclick="searchBtnHandler(this);">
+			onclick="searchBtnHandler();">
 			<img th:src="@{/images/icons/search.png}" alt="검색" />
 		</button>
 	</div>
@@ -53,7 +53,7 @@
 		<div class="paging_wrap">
 			<th:block th:if="${diaryMap.totalPageCount > 0}">
 				<div th:if="${diaryMap.startPageNum > 1}" class="goprepage">
-					<button type="button" onclick="searchBtnHandler(this);"
+					<button type="button" onclick="goPageHandler(this);"
 						class="btn gopage"
 						th:data-targetpage="${diaryMap.startPageNum - 1}">&lt;</button>
 				</div>
@@ -70,7 +70,7 @@
 				</div>
 
 				<div th:if="${diaryMap.endPageNum < diaryMap.totalPageCount}">
-					<button type="button" onclick="searchBtnHandler(this);"
+					<button type="button" onclick="goPageHandler(this);"
 						th:data-targetpage="${diaryMap.endPageNum + 1}" class="btn gopage">&gt;</button>
 				</div>
 			</th:block>
