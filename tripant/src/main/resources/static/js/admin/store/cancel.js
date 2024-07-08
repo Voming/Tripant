@@ -16,8 +16,8 @@ function payCancelHandler(){
 		showCancelButton: true, 
 		confirmButtonText: "결제취소", 
 		confirmButtonColor: "#000000", 
-		cancelButtonText: "돌아가기", 
-		cancelButtonColor: "#ff0000"
+		cancelButtonText: `<p style="color: black;">돌아가기</p>`, 
+		cancelButtonColor: "#fff"
 	}).then((swal) => {
 		if(swal.isConfirmed){
 			$.ajax({
@@ -33,6 +33,17 @@ function payCancelHandler(){
 					if(data > 0){
 						Swal.fire({
 							text: "결제 취소가 완료되었습니다.", 
+							icon: "success", 
+							confirmButtonColor: "#000000", 
+							confirmButtonText: "확인"
+						}).then((swal) => {
+							if(swal.isConfirmed){
+								location.reload();
+							}
+						});
+					}else if(data == -1){
+						Swal.fire({
+							html: "이미 취소된 건입니다.<br>삭제 되었습니다.", 
 							icon: "success", 
 							confirmButtonColor: "#000000", 
 							confirmButtonText: "확인"

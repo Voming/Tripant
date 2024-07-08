@@ -210,22 +210,30 @@ public class AdminController {
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
-		Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
-		String status = (String) cancellation.get("status");
-		int result;
-		// 결제 취소 완료 상태면 결제 내역 테이블에서 삭제
-		if(status != null) {
-			if(status.equals("SUCCEEDED")) {
-				Map<String, Object> map = new HashMap<>();
-				map.put("buyId", Integer.parseInt(buyId));
-				map.put("memEmail", memEmail);
-				result = adminservice.payCancel(map);
-				return result;
+		if(responseMap.get("pgCode").equals("2015")) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("buyId", Integer.parseInt(buyId));
+			map.put("memEmail", memEmail);
+			adminservice.payCancel(map);
+			return -1;
+		}else {
+			Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
+			String status = (String) cancellation.get("status");
+			int result;
+			// 결제 취소 완료 상태면 결제 내역 테이블에서 삭제
+			if(status != null) {
+				if(status.equals("SUCCEEDED")) {
+					Map<String, Object> map = new HashMap<>();
+					map.put("buyId", Integer.parseInt(buyId));
+					map.put("memEmail", memEmail);
+					result = adminservice.payCancel(map);
+					return result;
+				}else {
+					return 0;
+				}
 			}else {
 				return 0;
 			}
-		}else {
-			return 0;
 		}
 	}
 	
