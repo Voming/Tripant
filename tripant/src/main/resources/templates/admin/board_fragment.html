@@ -4,8 +4,8 @@
 <div class="wrap-list" th:fragment="boardlist">
 <div class="ad-search">
 				<select class="search-option" name="option" style='border:none'>
-					<option value="nick"  th:selected="${diaryMap.pick}==nick">닉네임</option>
-					<option value="title" th:selected="${diaryMap.pick}==title">제목</option>
+					<option value="nick"  th:selected="${diaryMap.pick}=='nick'">닉네임</option>
+					<option value="title" th:selected="${diaryMap.pick}=='title'">제목</option>
 				</select>
 				<th:block th:if="${diaryMap!=null and diaryMap.search != null}">
 				<input class="search" type="text" name="search" placeholder="게시글검색" th:value="${diaryMap.search}">

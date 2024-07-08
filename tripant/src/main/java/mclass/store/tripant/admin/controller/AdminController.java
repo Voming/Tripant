@@ -122,17 +122,30 @@ public class AdminController {
 	//ajax
 	//좋아요 정렬   
 	@PostMapping("/like")
-	@ResponseBody
-	public List<AdminBoardEntity> boardLike() {
-		return adminservice.boardLikes();
+	//@ResponseBody
+	public String boardLike(Model model
+			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String search
+			,@RequestParam(required = false ) String pick
+			) {
+		Map<String, Object> map=adminservice.boardLikes(num, pageNum, currentPageNum, pick, search);
+		model.addAttribute("diaryMap",map);
+		
+		return "admin/board_fragment";
 	}
 	
 	//ajax
 	//조회수 정렬   
 	@PostMapping("/view")
-	@ResponseBody
-	public List<AdminBoardEntity> boardView() {
-		return adminservice.boardView();
+	//@ResponseBody
+	public String boardView(Model model
+			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String search
+			,@RequestParam(required = false ) String pick
+			) {
+		Map<String, Object> map=adminservice.boardView(num, pageNum, currentPageNum, pick, search);
+		model.addAttribute("diaryMap",map);
+		return "admin/board_fragment";
 	}
 		
 	
