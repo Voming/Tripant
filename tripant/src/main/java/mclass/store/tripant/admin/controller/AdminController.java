@@ -75,7 +75,7 @@ public class AdminController {
 	 //회원정보 수정(등급변경 , 활성화여부)
 	@PostMapping("/member/info") 
 	@ResponseBody
-	public Integer MemberInfo(Integer selectRole, String memEmail,Integer selectActive) {
+	public Integer MemberInfo(Integer selectRole, String memEmail,Integer memEnabled) {
 		
 		String memRole = "";
 		switch(selectRole) {
@@ -92,7 +92,7 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("memRole", memRole);
 		map.put("memEmail", memEmail);
-		map.put("memEnabled", selectActive);
+		map.put("memEnabled", memEnabled);
 		int result = adminservice.adminMemInfo(map);
 		
 		return result;
