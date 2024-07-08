@@ -3,6 +3,7 @@ package mclass.store.tripant.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mclass.store.tripant.apikeys.KeysJaewon;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.model.service.MemberService;
 
@@ -23,9 +23,11 @@ import mclass.store.tripant.member.model.service.MemberService;
 @Slf4j
 public class LoginController {
 	
-	private final KeysJaewon keysJaewon;
 	private final MemberService memberService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Value("${robot.key}")
+	private String robotKey;
 	
 	//로그인 페이지
 	@GetMapping("/login")
@@ -52,7 +54,7 @@ public class LoginController {
 				break;
 			}
 		}
-		model.addAttribute("robotKey", keysJaewon.getRobotKey());
+		model.addAttribute("robotKey", robotKey);
 		model.addAttribute("error", error);
 		model.addAttribute("exception", msg);
 		return "member/login";

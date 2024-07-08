@@ -12,6 +12,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import mclass.store.tripant.apikeys.KeysJaewon;
 import mclass.store.tripant.member.model.service.MemberService;
 
 @Controller
@@ -29,9 +29,13 @@ import mclass.store.tripant.member.model.service.MemberService;
 @RequiredArgsConstructor
 public class CodeController {
 	
-	private final KeysJaewon keysJaewon;
 	private final Gmail gmail;
 	private final MemberService memberService;
+	
+	@Value("${email.username}")
+	private String email;
+	@Value("${email.password}")
+	private String password;
 	
 	//인증번호 발송
 	@PostMapping("/send")
@@ -54,7 +58,7 @@ public class CodeController {
 		String code = sb.toString();
 		
 		// 사용자 인증 이메일 발송 내용
-		String from = keysJaewon.getGmail();
+		String from = email;
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
 		String content = "인증번호: "+code; 
@@ -126,7 +130,7 @@ public class CodeController {
 		String code = sb.toString();
 		
 		// 사용자 인증 이메일 발송 내용
-		String from = keysJaewon.getGmail();
+		String from = email;
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
 		String content = "인증번호: "+code; 
@@ -186,7 +190,7 @@ public class CodeController {
 		String code = sb.toString();
 		
 		// 사용자 인증 이메일 발송 내용
-		String from = keysJaewon.getGmail();
+		String from = email;
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
 		String content = "인증번호: "+code; 

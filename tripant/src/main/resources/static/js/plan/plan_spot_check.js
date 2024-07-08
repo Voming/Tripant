@@ -50,7 +50,7 @@ function spotCkBtnClickHandler(thisElement) {
 		timeInfoUpdate();// 총 시간 업데이트
 
 	} else { //=====================================체크박스 선택=========================================
-		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy);  //전체 일정 만들기 장소 정보 저장
+		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy, spottype);  //전체 일정 만들기 장소 정보 저장
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
 
 		//화면 리스트 추가
@@ -92,11 +92,12 @@ function spotCkBtnClickHandler(thisElement) {
 	}
 }
 
+var secSum = 0;
 // 장소 설정 정보 부분 업데이트
 function timeInfoUpdate() {
 	var calcHouers = 0;
 	var calcMins = 0;
-	var secSum = 0;
+	secSum = 0;
 	$(".timerange-modal").each(function() {
 		var hours =$(this).children('.spot-hours').val();
 		var mins = $(this).children('.spot-mins').val();
