@@ -11,14 +11,18 @@ function loadedHandler() {
 }
 
 //좋아요수 정렬
-function ClickLikeHandler(){
+function ClickLikeHandler(thisElement){
+	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
+	var search = $("[name=search]").val();  //input 값
+	var targetPage = $(thisElement).data('targetpage');
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
 		url: contextPath+"admin/like",
+		data:{pick:pick, search:search ,page: targetPage},
 		 method:"post",
 		 success : function(like) {
-			 $('#list').html(LikeHandler(like));
+			 $('.wrap-list').replaceWith(like);
 			}
 	});
 } 
@@ -42,14 +46,18 @@ function LikeHandler(like){
 }
 
 //조회수 정렬
-function ClickViewHandler(){
+function ClickViewHandler(thisElement){
+	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
+	var search = $("[name=search]").val();  //input 값
+	var targetPage = $(thisElement).data('targetpage');
 	$.ajax({
 		beforeSend : csrfHandler,
+		data:{pick:pick, search:search ,page: targetPage},
 		error : ajaxErrorHandler,
 		url:contextPath+"admin/view",
 		 method:"post",
 		 success : function(view) {
-			 $('#list').html(ViewHandler(view));
+			 $('.wrap-list').replaceWith(view);
 			}
 	});
 } 
