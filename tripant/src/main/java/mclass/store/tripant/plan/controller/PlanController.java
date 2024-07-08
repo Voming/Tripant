@@ -51,14 +51,6 @@ public class PlanController {
 		return point;
 	}
 
-	// 지역&제목 모달에서 선택한 지역 정보 가져오기
-	@PostMapping("/area")
-	@ResponseBody
-	public AreaEntity area(@RequestParam("areaCode") Integer areaCode) {
-		AreaEntity areaInfo = planService.selectAreaInfo(areaCode);
-		return areaInfo;
-	}
-
 	@PostMapping("/keep")
 	public String keep(@RequestParam("areaCode") Integer areaCode, @RequestParam("planTitle") String planTitle,
 			HttpSession session) throws IOException {

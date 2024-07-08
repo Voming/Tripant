@@ -22,4 +22,6 @@ public class AreaEntity {
 	private String areaX;
 	private String areaY;
 	private String areaExplain;
+	private String areaFileServer;
+	private String areaAdress;
 }

@@ -9,5 +9,5 @@ public class AreaNameEntity {
 	private String areaName;
 	private String areaShortName;
 	private String areaEngName;
-	private String areaFileName;
+	private String areaFileServer;
 }

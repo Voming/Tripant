@@ -68,7 +68,7 @@ function displayAreaInfo(data) {
 		$("#planForm h2").text(aName);
 		var aExplain = data.areaExplain;
 		$("#planForm h4").text(aExplain);
-		$("#infoImg")[0].src = contextPath + "images/area/" + data.areaFileName;
+		$("#infoImg")[0].src = data.areaFileServer;
 	}
 }
 

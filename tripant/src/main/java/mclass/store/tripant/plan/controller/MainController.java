@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
+import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
 import mclass.store.tripant.plan.model.service.PlanService;
 
@@ -41,7 +43,15 @@ public class MainController {
 		//timeService.makeTimeList(); 
 		return mv;
 	}
-	
+
+	// 지역&제목 모달에서 선택한 지역 정보 가져오기
+	@PostMapping("/plan/area")
+	@ResponseBody
+	public AreaEntity area(@RequestParam("areaCode") Integer areaCode) {
+		AreaEntity areaInfo = planService.selectAreaInfo(areaCode);
+		return areaInfo;
+	}
+
 	//지역 리스트 검색
 	@PostMapping("/find/area")
 	//@ResponseBody
