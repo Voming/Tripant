@@ -1,5 +1,5 @@
 // 시간 설정 칸 열림
-function timeRangeBtnClickHandler(thisElement) {
+function stayTimeRangeBtnClickHandler(thisElement) {
 	$(thisElement).children(".timerange").addClass('hide');
 	$(thisElement).parents('.spot-block').children(".timerange-modal").removeClass('hide');
 }
@@ -179,7 +179,7 @@ function displayEditMode(){
 			htmlval+=`
 			 	<div class="spot grid wfull" >
 			 		<div class="spot-number backimg"><p>${j+1}</p></div>
-			 		<div class="spot-staytime" onclick="timeRangeBtnClickHandler(this);" data-startTime="${info.startTime}" data-endTime="${info.endTime}">
+			 		<div class="spot-staytime" onclick="stayTimeRangeBtnClickHandler(this);" data-startTime="${info.startTime}" data-endTime="${info.endTime}">
 			 			<p class="timerange">${info.startTime} - ${info.endTime}</p>
 			 		</div>
 			 		
@@ -317,7 +317,7 @@ function displayEditModeAfterDragEnd(){
 			htmlval+=`
 			 	<div class="spot grid wfull" >
 			 		<div class="spot-number backimg"><p>${j+1}</p></div>
-			 		<div class="spot-staytime" onclick="timeRangeBtnClickHandler(this);" data-startTime="${info.startTime}" data-endTime="${info.endTime}">
+			 		<div class="spot-staytime" onclick="stayTimeRangeBtnClickHandler(this);" data-startTime="${info.startTime}" data-endTime="${info.endTime}">
 			 			<p class="timerange" style="cursor: pointer;">${info.startTime} - ${info.endTime}</p>
 			 		</div>
 			 		
