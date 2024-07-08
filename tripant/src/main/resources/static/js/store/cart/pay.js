@@ -54,7 +54,7 @@ async function requestPayment() {
 			success : async function(data) {
 				if (data == 1) {
 					Swal.fire({
-						text: "결제가 완료되었습니다.\n구매내역으로 이동하시겠습니까?", 
+						html: "결제가 완료되었습니다.<br>구매내역으로 이동하시겠습니까?", 
 						icon: "success", 
 						showCancelButton: true, 
 						confirmButtonText: "이동하기", 

@@ -24,7 +24,7 @@ function saveClickHandler(){
 				});
 			}else{
 				Swal.fire({
-					text: "닉네임 변경 중 오류가 발생했습니다.\n관리자에게 문의해주시기 바랍니다.", 
+					html: "닉네임 변경 중 오류가 발생했습니다.<br>관리자에게 문의해주시기 바랍니다.", 
 					icon: "error", 
 					confirmButtonColor: "#000000", 
 					confirmButtonText: "확인"

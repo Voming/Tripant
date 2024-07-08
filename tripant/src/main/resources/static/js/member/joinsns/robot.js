@@ -29,7 +29,7 @@ function robotHandler() {
 			switch (data) {
 				case 1:
 					Swal.fire({
-						text: '회원가입이 완료되었습니다.\n로그인 창으로 이동합니다.', 
+						html: '회원가입이 완료되었습니다.<br>로그인 창으로 이동합니다.', 
 						icon: "success", 
 						confirmButtonColor: "#000000", 
 						confirmButtonText: "확인"
@@ -51,7 +51,7 @@ function robotHandler() {
 					break;
 				default:
 					Swal.fire({
-						text: "자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다.\n[Error Code : " + Number(data) + "]", 
+						html: "자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다.<br>[Error Code : " + Number(data) + "]", 
 						icon: "error", 
 						confirmButtonColor: "#000000", 
 						confirmButtonText: "확인"
