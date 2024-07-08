@@ -11,22 +11,24 @@ class PlanDate {
 }
 
 class Spot {
-	constructor(id, title, mapx, mapy) {
+	constructor(id, title, mapx, mapy, type) {
 		this.id = id;
 		this.title = title;
 		this.mapx = mapx;
 		this.mapy = mapy;
+		this.type = type;
 	}
 	spotTime;
 }
 
 class Stay {
-	constructor(id, title, mapx, mapy, img) {
+	constructor(id, title, mapx, mapy, img, type) {
 		this.id = id;
 		this.title = title;
 		this.mapx = mapx;
 		this.mapy = mapy;
 		this.img = img;
+		this.type = type;
 	}
 }
 
@@ -109,7 +111,10 @@ function loadedHandler() {
 				if (click_cls_name == 'nav-3') {
 					if (markersSpot.length < calendarPlan.dateArr.length) {
 						alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
-					} else {
+					} else if (calendarPlan.timeRange < secSum) {
+						alert("장소별 방문시간의 합이 총 이용가능 시간 보다 많을 수 없습니다. 다시 설정해주세요.");
+					}
+					else {
 						moveStep();
 						$(".main-wrapper .tab-content").css("width", "40%");
 					}
@@ -149,6 +154,8 @@ function loadedHandler() {
 				// 장소가 최소 날짜 수 만큼
 				if (markersSpot.length < calendarPlan.dateArr.length) {
 					alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+				} else if (calendarPlan.timeRange < secSum) {
+					alert("장소별 방문시간의 합이 총 이용가능 시간 보다 많을 수 없습니다. 다시 설정해주세요.");
 				} else {
 					//3번으로 이동
 					$('.tab-nav a').removeClass('active');
@@ -166,8 +173,8 @@ function loadedHandler() {
 					// 일정 만들기 알고리즘 돌리기
 					const jsonString = JSON.stringify(calendarPlan);
 					$.ajax({
-						beforeSend : csrfHandler,
-						error : ajaxErrorHandler,
+						beforeSend: csrfHandler,
+						error: ajaxErrorHandler,
 						url: contextPath + "plan/planning",
 						method: "post",
 						contentType: "application/json",
