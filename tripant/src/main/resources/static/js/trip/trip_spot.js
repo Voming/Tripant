@@ -35,7 +35,7 @@ function includeHandler(){
 		
 		//element.id;
 		htmlVal += `
-			<div class="include-spot flex wfull draggable"  draggable ="true" data-j="${idx}" data-j="99">
+			<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" >
 		 		<div class="spot-img "><img src="${element.img}" width="70" height="70"/></div>
 		 		<div class="flex">
 		 			<div class="spot-title wfull"> ${element.title}</div>
@@ -46,6 +46,7 @@ function includeHandler(){
 		`; 
 	});
 	$('#spot-basket .wrap-basket').html(htmlVal);
+	dragAndDrop();//백틱을 html에 넣은 후 dragAndDrop을 실행해야 node인식이 가능
 	$('#tab02').addClass('hide'); // 장소 검색 감추기
 	$('#add-btn').addClass('hide'); //담기버튼
 	$('#edit-tourlist').removeClass('hide');
