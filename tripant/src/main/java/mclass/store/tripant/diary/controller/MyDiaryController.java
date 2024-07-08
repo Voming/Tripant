@@ -61,9 +61,6 @@ public class MyDiaryController {
 		diaryForm.setDiaryMemEmail(pricipal.getName());
 		diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
 
-		// 공개 여부 설정
-		diaryForm.setDiaryOpen(diaryForm.getDiaryOpen() != null ? "0" : "1"); // true면 공개 ("0"), false면 비공개 ("1")
-
 		// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
 		// 채워짐)
 		diaryForm = diaryService.save(diaryForm);

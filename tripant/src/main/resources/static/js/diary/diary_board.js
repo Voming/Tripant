@@ -45,7 +45,7 @@ function tabMenuClickHandler() {
 	}).done(function(wrap_content) {
 		$(".wrap-diary").replaceWith(wrap_content);
 		//TODO with voming
-		$.each($(".diary-preview"), function(idx, thisElement) {
+		$.each($(""), function(idx, thisElement) {
 			var contentElement = $(thisElement).html();
 			console.log(thisElement);
 			console.log(idx);
