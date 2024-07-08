@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mclass.store.tripant.apikeys.KeysJaewon;
 import mclass.store.tripant.config.RecaptchaConfig;
 import mclass.store.tripant.member.domain.MemberEntity;
 import mclass.store.tripant.member.model.service.MemberService;
@@ -27,7 +26,6 @@ import mclass.store.tripant.member.model.service.MemberService;
 @Slf4j
 public class JoinController {
 	
-	private final KeysJaewon keysJaewon;
 	private final MemberService memberService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -121,7 +119,7 @@ public class JoinController {
 		memberEntity.setMemType(memType);
 		memberEntity.setMemTel(memberEntity.getMemTel().replaceAll("-", ""));
 		
-		RecaptchaConfig.setSecretKey(keysJaewon.getRobotSecret());
+		RecaptchaConfig.setSecretKey(robotSecret);
 		try {
 			if(RecaptchaConfig.verify(recaptcha)) {
 				memberService.join(memberEntity);

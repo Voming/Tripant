@@ -42,7 +42,7 @@ public class AdminController {
 	private String storeId;
 	
 	//한 페이지 몇개씩 나올지 정하기(한페이지당글수) 
-	private int num =3;
+	private int num =7;
 	
 	//화면 하단에 나타날 페이지수
 	private int pageNum = 5;

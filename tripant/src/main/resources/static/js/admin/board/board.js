@@ -1,15 +1,4 @@
 
-$(loadedHandler);
-function loadedHandler() {
-	//좋아요
-	//$(".btn.like").on("click", ClickLikeHandler);
-	//조회수
-	//$(".btn.view").on("click", ClickViewHandler);
-	//조건검색
-	//$('.btn-search').on("click",searchHandler);
-	
-}
-
 var currentPage = 1;
 var totalPageCount = null;
 var startPageNum = null;
