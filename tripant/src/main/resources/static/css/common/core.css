@@ -22,32 +22,32 @@
 	--font5: 13px;
 	--font6: 11px;
 	
-	--img_spot_ck_af : url("/images/plan/spot_ck_af.png");
-	--img_spot_ck_bf : url("/images/plan/spot_ck_bf.png");
-	--img_stay_ck_af : url("/images/plan/stay_ck_af.png");
+	--img_spot_ck_af : url("../../images/plan/spot_ck_af.png");
+	--img_spot_ck_bf : url("../../images/plan/spot_ck_bf.png");
+	--img_stay_ck_af : url("../../images/plan/stay_ck_af.png");
 	
 	/* location */
-	--img_cir_01_red : url("/images/location/circle1_red.png");
-	--img_cir_02_purple : url("/images/location/circle2_purple.png");
-	--img_cir_03_pink : url("/images/location/circle3_pink.png");
-	--img_cir_04_orange : url("/images/location/circle4_orange.png");
-	--img_cir_05_skyblue : url("/images/location/circle5_skyblue.png");
-	--img_cir_06_yellow : url("/images/location/circle6_yellow.png");
-	--img_cir_07_lime : url("/images/location/circle7_lime.png");
-	--img_cir_08_green : url("/images/location/circle8_green.png");
-	--img_cir_09_blue : url("/images/location/circle9_blue.png");
-	--img_cir_10_navy : url("/images/location/circle10_navy.png");
+	--img_cir_01_red : url("../../images/location/circle1_red.png");
+	--img_cir_02_purple : url("../../images/location/circle2_purple.png");
+	--img_cir_03_pink : url("../../images/location/circle3_pink.png");
+	--img_cir_04_orange : url("../../images/location/circle4_orange.png");
+	--img_cir_05_skyblue : url("../../images/location/circle5_skyblue.png");
+	--img_cir_06_yellow : url("../../images/location/circle6_yellow.png");
+	--img_cir_07_lime : url("../../images/location/circle7_lime.png");
+	--img_cir_08_green : url("../../images/location/circle8_green.png");
+	--img_cir_09_blue : url("../../images/location/circle9_blue.png");
+	--img_cir_10_navy : url("../../images/location/circle10_navy.png");
 	
-	--img_loc_01 : url("/images/location/location1.png");
-	--img_loc_02 : url("/images/location/location2.png");
-	--img_loc_03 : url("/images/location/location3.png");
-	--img_loc_04 : url("/images/location/location4.png");
-	--img_loc_05 : url("/images/location/location5.png");
-	--img_loc_06 : url("/images/location/location6.png");
-	--img_loc_07 : url("/images/location/location7.png");
-	--img_loc_08 : url("/images/location/location8.png");
-	--img_loc_09 : url("/images/location/location9.png");
-	--img_loc_10 : url("/images/location/location10.png");
+	--img_loc_01 : url("../../images/location/location1.png");
+	--img_loc_02 : url("../../images/location/location2.png");
+	--img_loc_03 : url("../../images/location/location3.png");
+	--img_loc_04 : url("../../images/location/location4.png");
+	--img_loc_05 : url("../../images/location/location5.png");
+	--img_loc_06 : url("../../images/location/location6.png");
+	--img_loc_07 : url("../../images/location/location7.png");
+	--img_loc_08 : url("../../images/location/location8.png");
+	--img_loc_09 : url("../../images/location/location9.png");
+	--img_loc_10 : url("../../images/location/location10.png");
 	
 	/* icons */
 }

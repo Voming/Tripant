@@ -287,7 +287,7 @@ function stayResetStayList() {
 //===================================================마커=====================================================
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarkerStay(position, title, id, index) {
-	var imageSrc = "/images/location/location3.png";// 마커 이미지의 이미지 주소입니다
+	var imageSrc = contextPath+"images/location/location3.png";// 마커 이미지의 이미지 주소입니다
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(24, 26);
 	// 마커 이미지를 생성합니다    

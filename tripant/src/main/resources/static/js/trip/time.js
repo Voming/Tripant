@@ -170,11 +170,11 @@ function displayInfo(){
 			 //이미지 링크 유무에 따른 src 설정		
 			 if(info.firstimage != null){ //이미지 값이 있을 때
 				htmlval += `
-				<div class="spot-img wfull hfull"><img class=" wfull hfull" src="${info.firstimage}" ></div>
+				<div class="spot-img wfull hfull"><img class=" wfull hfull" src="${contextPath}${info.firstimage}" ></div>
 				`;
 			 }else{//이미지 값이 없을 때
 				htmlval += `
-				<div class="spot-img wfull hfull"><img class=" wfull hfull" src='/images/icons/spot_sample.png' ></div>
+				<div class="spot-img wfull hfull"><img class=" wfull hfull" src="${contextPath}images/icons/spot_sample.png" ></div>
 				`;
 			 }
 			 		
