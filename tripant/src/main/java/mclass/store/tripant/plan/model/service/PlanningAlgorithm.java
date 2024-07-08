@@ -22,7 +22,8 @@ import com.google.gson.GsonBuilder;
 
 import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.plan.domain.CalendarPlanEntity;
-import mclass.store.tripant.plan.domain.PlacesSpotDto;
+import mclass.store.tripant.plan.domain.AfterDto;
+import mclass.store.tripant.plan.domain.BeforDto;
 import mclass.store.tripant.plan.domain.PlanDate;
 import mclass.store.tripant.plan.domain.Spot;
 import mclass.store.tripant.plan.domain.Stay;
@@ -39,8 +40,8 @@ public class PlanningAlgorithm {
 	// 그래프를 표현 할 List
 	static List<List<Node>> graph = new ArrayList<>();
 
-	static List<PlacesSpotDto> stayPointList = new ArrayList<>();
-	static List<PlacesSpotDto> spotPointList = new ArrayList<>();
+	static List<BeforDto> stayPointList = new ArrayList<>();
+	static List<BeforDto> spotPointList = new ArrayList<>();
 
 //	static List<PlacePointEntity> errorPointList = new ArrayList<>();
 //	static List<PlacePointEntity> resultPoinList = new ArrayList<>();
@@ -87,44 +88,64 @@ public class PlanningAlgorithm {
 		List<PlanDate> dateArr = calendarPlan.getDateArr();
 		for (int i = 0; i < dateArr.size(); i++) {
 			Stay stay = dateArr.get(i).getStay();
-			stayPointList.add(new PlacesSpotDto(i, 
-					stay.getId(), 
+			
+			//id만 잘라내기
+			String idLongStr = stay.getId();
+			int id = Integer.parseInt(idLongStr.substring(0, 9));
+			System.out.println("idLongStr -> id : " + id);
+			
+			stayPointList.add(new BeforDto( 
+					id, 
+					stay.getType(),
+					"", //숙소는 머무는 시간 없음
 					stay.getMapx(), 
 					stay.getMapy(),
-					stay.getType(), 
-					"", 0));
+					dateArr.get(i).getDate()
+					)
+				);
 		}
 		System.out.println(stayPointList);
 
 		// 선택 한 장소
 		List<Spot> spotArr = calendarPlan.getSpotArr();
 		for (int i = 0; i < spotArr.size(); i++) {
-			spotPointList.add(new PlacesSpotDto(i, 
-					spotArr.get(i).getId(), 
-					spotArr.get(i).getMapx(),
-					spotArr.get(i).getMapy(), 
-					spotArr.get(i).getType(),  
-					spotArr.get(i).getSpotTime(), 
-					0));
+			Spot spot = spotArr.get(i);
+			
+			//id만 잘라내기
+			String idLongStr = spot.getId();
+			int id = Integer.parseInt(idLongStr.substring(0, 9));
+			System.out.println("idLongStr -> id : " + id);
+			
+			spotPointList.add(new BeforDto(
+					id, 
+					spot.getType(),
+					spot.getSpotTime(), 
+					spot.getMapx(), 
+					spot.getMapy(),
+					"" //장소는 아직 방문 날짜 정해지지 않음
+					));
 		}
-		System.out.println(spotPointList);
+		System.out.println(spotPointList); //기본 spot, stay 설정 완료---------------------------------
 
 		V = spotPointList.size(); // 정점 개수 -> 선택한 장소 수
 		System.out.println("V : " + V);
 		dayN = dateArr.size(); // 여행할 날짜 수
 		System.out.println("dayN : " + dayN);
 
-//		0. 날짜 수 만큼 저장될 리스트 생성		
-//		for(int i = 0; i < dayN ; i++) {
-//		}
-
 //		1. 총 날짜 수로 장소 개수 나누기
 		distribute = (int) Math.ceil(((double) V / dayN)); // 하루에 방문할 장소 수
 		System.out.println("distribute : " + distribute);
+		
+		//방문 날짜, 리스트 Map => 전체 일정 정보 담김
+		Map<String, List<AfterDto>> planMap = new HashMap<>(); 
 
 //		1-1. 만약 날짜 수  = 나눈 장소 수(1) -> 그냥 출-장-도 로 모든 날짜 배치
 		if (distribute == 1) { // 1인 경우 : 선택한 장소 수 == 날짜 수
-			for (int i = 0; i < dayN; i++) {
+			for (int i = 1; i <= dayN; i++) {
+				List<AfterDto> listForDay = new ArrayList<>();
+				if(i == 1) {
+					
+				}
 				
 			}
 
@@ -183,19 +204,19 @@ public class PlanningAlgorithm {
 
 		System.out.println(spotPointList.get(0));
 
-		planning();
+		//planning();
 
 	}
 
-	public void planning() { // 정점 세팅 및 알고리즘 실행
+	/*public void planning() { // 정점 세팅 및 알고리즘 실행
 		for (int i = 0; i < V; i++) {
 			graph.add(new ArrayList<>());
 		}
 		for (int i = 0; i < V; i++) {
 			for (int j = 0; j < V; j++) {
 				if (j != i) {
-					PlacesSpotDto start = spotPointList.get(i); // 출발 노드
-					PlacesSpotDto end = spotPointList.get(j); // 도착 노드
+					BeforDto start = spotPointList.get(i); // 출발 노드
+					BeforDto end = spotPointList.get(j); // 도착 노드
 
 					double startx = Double.parseDouble(start.getMapx());
 					double starty = Double.parseDouble(start.getMapy());
@@ -219,7 +240,7 @@ public class PlanningAlgorithm {
 			}
 		}
 		Dijkstra(0);
-	}
+	}*/
 
 	private static void Dijkstra(int index) {
 		Map<Integer, Integer> result = new HashMap<>();

@@ -198,7 +198,7 @@ function stayDeleteBtnClickHandler(thisElement) {
 	// 장소 정보 삭제
 	$.each(calendarPlan.dateArr, function(idx, element) {
 		if (element.stay.id != null) {
-			addMarkerStay(new kakao.maps.LatLng(element.stay.mapy, element.stay.mapx), element.stay.title, element.stay.id, markersStay.length, staytype); // 마커 추가
+			addMarkerStay(new kakao.maps.LatLng(element.stay.mapy, element.stay.mapx), element.stay.title, element.stay.id, markersStay.length); // 마커 추가
 		}
 	});
 

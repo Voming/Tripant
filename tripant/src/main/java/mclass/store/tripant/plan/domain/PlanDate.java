@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PlanDate {
-	private String date; // 2024.06.06
+	private String date; // 20240606
 	private String smalldate; // 06/06
 	private String day; // 목요일
 	private String startTime; // 10:00
