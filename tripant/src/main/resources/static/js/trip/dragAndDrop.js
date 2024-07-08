@@ -86,6 +86,60 @@ function dragAndDrop(){
 					}
 					detailListEditMode[el_i].dayDetailInfoEntity[0] = temp;
 				}
+			}else if (el_i == 99){
+				//장소 추가
+				var details = detailListEditMode[temp_i];
+				var daylength = details.dayDetailInfoEntity.length;  
+				if(prev_j >= 0){
+					// prev 다음j 모든 객체를 +1 위치로 대입
+					for(var j=daylength-1; j > prev_j; j-- ){
+						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+					}
+					var temp = JSON.parse(JSON.stringify( details.dayDetailInfoEntity[prev_j+1]));
+					//					var temp = {};
+					temp.contentid = spotArr[el_j].id;
+					temp.title = spotArr[el_j].title;
+					temp.stayTime = spotArr[el_j].stayTime;
+					temp.placeType = spotArr[el_j].spottype;
+					temp.placeCat = spotArr[el_j].placeCat;
+					temp.lat = spotArr[el_j].mapy;
+					temp.lng = spotArr[el_j].mapx;
+					temp.firstimage = spotArr[el_j].img;
+					temp.address = spotArr[el_j].addr;
+					temp.memo = null;
+					
+					details.dayDetailInfoEntity[prev_j+1]=temp;
+					
+//					details.dayDetailInfoEntity.unshift(temp);
+					
+					console.log(details);
+					
+				}else{
+					//details.dayDetailInfoEntity.unshift(spotArr[el_j]);
+					
+					//0번째에 drop 하는가
+					for(var j=daylength-1; j >= 0; j-- ){
+						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+					}
+					console.log(spotArr[el_j]);
+					var temp = JSON.parse(JSON.stringify( details.dayDetailInfoEntity[0]));
+//					var temp = {};
+					temp.contentid = spotArr[el_j].id;
+					temp.title = spotArr[el_j].title;
+					temp.stayTime = spotArr[el_j].stayTime;
+					temp.placeType = spotArr[el_j].spottype;
+					temp.placeCat = spotArr[el_j].placeCat;
+					temp.lat = spotArr[el_j].mapy;
+					temp.lng = spotArr[el_j].mapx;
+					temp.firstimage = spotArr[el_j].img;
+					temp.address = spotArr[el_j].addr;
+					temp.memo = null;
+					details.dayDetailInfoEntity[0]=temp;
+					
+//					details.dayDetailInfoEntity.unshift(temp);
+					
+					console.log(details);
+				}
 			}else{
 				//컬럼이 다를 때
 				if(prev_j >= 0){

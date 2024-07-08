@@ -9,6 +9,7 @@ function durationHandler(startLngStr,startLatStr,endLngStr,endLatStr){
 		endLngStr : endLngStr,
 		endLatStr : endLatStr
 	};
+	console.log(dataset);
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -153,6 +154,27 @@ function displayInfo(){
 			//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
 			//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
 			prevDuration = duration;
+			var textColor;
+			
+			info.placeType
+			//장소 타입 설정하기
+			if (info.placeType == 1) {
+				info.placeCat = '관광지';
+				textColor=typeColor(info.placeType);
+			} else if (info.placeType == 2) {
+				info.placeCat = '문화시설';
+				textColor=typeColor(info.placeType);
+			} else if (info.placeType == 3) {
+				info.placeCat ='쇼핑';
+				textColor=typeColor(info.placeType);
+			} else if (info.placeType == 4) {
+				info.placeCat = '음식점';
+				textColor=typeColor(info.placeType);
+			} else {
+				info.placeCat = '숙소';
+				textColor=typeColor(info.placeType);
+			}
+		
 			
 			// <<<<<<<<<<<<<<< 백틱
 			//백틱에 값 넣기
@@ -162,7 +184,7 @@ function displayInfo(){
 			 	<div class=" spot grid wfull" data-spot-order="${j+1}"  data-stay-time="${info.stayTime}">
 			 		<div class="spot-number backimg"><p>${j+1}</p></div>
 			 		<div class="spot-staytime">${info.startTime} - ${info.endTime}</div>
-			 		<div class="spot-type">명소</div>
+			 		<div class="spot-type" style="color:var(${textColor});" >${info.placeCat}</div>
 			 		<div class="spot-title wfull">${info.title}</div>
 			 		<div class="spot-memo"><img class="img-memo" style="width: 20px;height:20px;" src="${contextPath}images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>
 				`;

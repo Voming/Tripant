@@ -4,7 +4,7 @@
 }
 /* tourlist part - grid */
 .main-wrapper .edit-tourlist .spot{/*  */
-	grid-template-columns :25px 35px 165px 25px;
+	grid-template-columns :25px 55px 145px 25px;
 	grid-template-rows :repeat(3,21px);  
 	gap:7px;
 	}
