@@ -74,8 +74,8 @@ function saveHandler(){
 		$('#tab02').addClass('hide');
 	}
 	
-
-	//DB이동 ajax
+	console.log(detailListEditMode);
+	//DB이동 ajax TODO
 	saveChanges();
 }
 //좌측 탭
@@ -124,9 +124,10 @@ function saveChanges(){
 		url: contextPath+"trip/save/changes",
 		method:"post",
 		contentType: "application/json", //보낼 데이터 타입 //; charset=utf-8 //필요??불필요??/
-		data:{saveData : saveData},
+		data:{saveData : saveData ,planId:planId},
 		success : function(result) {
-			
+			console.log("result");
+			console.log(result);
         }
 	});
 }

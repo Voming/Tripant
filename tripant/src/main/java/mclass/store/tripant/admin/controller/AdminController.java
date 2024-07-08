@@ -62,7 +62,6 @@ public class AdminController {
 	//ajax  
 	//검색 // paging
 	@PostMapping("/member/search") 
-//	@ResponseBody
 	public String  memberSearch(Model model 
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String searchMem
@@ -122,17 +121,28 @@ public class AdminController {
 	//ajax
 	//좋아요 정렬   
 	@PostMapping("/like")
-	@ResponseBody
-	public List<AdminBoardEntity> boardLike() {
-		return adminservice.boardLikes();
+	public String boardLike(Model model
+			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String search
+			,@RequestParam(required = false ) String pick
+			) {
+		Map<String, Object> map=adminservice.boardLikes(num, pageNum, currentPageNum, pick, search);
+		model.addAttribute("diaryMap",map);
+		
+		return "admin/board_fragment";
 	}
 	
 	//ajax
 	//조회수 정렬   
 	@PostMapping("/view")
-	@ResponseBody
-	public List<AdminBoardEntity> boardView() {
-		return adminservice.boardView();
+	public String boardView(Model model
+			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(required = false )String search
+			,@RequestParam(required = false ) String pick
+			) {
+		Map<String, Object> map=adminservice.boardView(num, pageNum, currentPageNum, pick, search);
+		model.addAttribute("diaryMap",map);
+		return "admin/board_fragment";
 	}
 		
 	
@@ -197,22 +207,30 @@ public class AdminController {
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
-		Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
-		String status = (String) cancellation.get("status");
-		int result;
-		// 결제 취소 완료 상태면 결제 내역 테이블에서 삭제
-		if(status != null) {
-			if(status.equals("SUCCEEDED")) {
-				Map<String, Object> map = new HashMap<>();
-				map.put("buyId", Integer.parseInt(buyId));
-				map.put("memEmail", memEmail);
-				result = adminservice.payCancel(map);
-				return result;
+		if(responseMap.get("pgCode").equals("2015")) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("buyId", Integer.parseInt(buyId));
+			map.put("memEmail", memEmail);
+			adminservice.payCancel(map);
+			return -1;
+		}else {
+			Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
+			String status = (String) cancellation.get("status");
+			int result;
+			// 결제 취소 완료 상태면 결제 내역 테이블에서 삭제
+			if(status != null) {
+				if(status.equals("SUCCEEDED")) {
+					Map<String, Object> map = new HashMap<>();
+					map.put("buyId", Integer.parseInt(buyId));
+					map.put("memEmail", memEmail);
+					result = adminservice.payCancel(map);
+					return result;
+				}else {
+					return 0;
+				}
 			}else {
 				return 0;
 			}
-		}else {
-			return 0;
 		}
 	}
 	

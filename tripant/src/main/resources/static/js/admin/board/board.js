@@ -10,15 +10,46 @@ function loadedHandler() {
 	
 }
 
+var currentPage = 1;
+var totalPageCount = null;
+var startPageNum = null;
+var endPageNum = null;
+
+/* 페이징 이동 함수 */
+function goPageHandler() {
+			var currentpage = $(this).data("targetpage");
+			$.ajax({
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+				url:contextPath+"admin/like"
+				, method : "get"
+				, data : {
+						pick:pick, search:search ,
+						currentpage : currentpage}
+				, dataType : "json"
+				, success : function(result){
+					if(result.search){
+						$("[name=search]").val(result.search);
+					}
+					LikeHandler(like);
+				}
+			});
+	}
+
+
 //좋아요수 정렬
-function ClickLikeHandler(){
+function ClickLikeHandler(thisElement){
+	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
+	var search = $("[name=search]").val();  //input 값
+	var targetPage = $(thisElement).data('targetpage');
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
 		url: contextPath+"admin/like",
+		data:{pick:pick, search:search ,page: targetPage},
 		 method:"post",
 		 success : function(like) {
-			 $('#list').html(LikeHandler(like));
+			 $('.wrap-list').replaceWith(like);
 			}
 	});
 } 
@@ -42,14 +73,18 @@ function LikeHandler(like){
 }
 
 //조회수 정렬
-function ClickViewHandler(){
+function ClickViewHandler(thisElement){
+	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
+	var search = $("[name=search]").val();  //input 값
+	var targetPage = $(thisElement).data('targetpage');
 	$.ajax({
 		beforeSend : csrfHandler,
+		data:{pick:pick, search:search ,page: targetPage},
 		error : ajaxErrorHandler,
 		url:contextPath+"admin/view",
 		 method:"post",
 		 success : function(view) {
-			 $('#list').html(ViewHandler(view));
+			 $('.wrap-list').replaceWith(view);
 			}
 	});
 } 
@@ -71,11 +106,6 @@ function ViewHandler(view){
 	}
 	return htmlVal;
 }
-
-var currentPage = 1;
-var totalPageCount = null;
-var startPageNum = null;
-var endPageNum = null;
 
 /* 페이징 이동 함수 */
 function goPageHandler() {

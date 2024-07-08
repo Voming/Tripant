@@ -141,23 +141,71 @@
 	</select>
 	
 	<!--좋아요 순으로 정렬 -->
-	<select id="boardLike" resultType="AdminBoardEntity">
-	select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
+	<select id="boardLike" parameterType="map" resultType="AdminBoardEntity">
+	SELECT T2.* FROM
+		(SELECT T1.*, ROWNUM RN FROM
+	(select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
 	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
 	from DIARY a
 	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
 	join member on diary_mem_email=mem_email
-    order by likes desc nulls last
+	 <if test='search != null and search !=""'>
+		<bind name="keyword" value="'%'+search+'%'" />
+		<choose>
+			<when test="pick.equals('title')">
+				where diary_title like #{keyword}
+			</when>
+			<when test="pick.equals('nick')">
+				where mem_nick like #{keyword}
+			</when>
+		</choose>
+	</if> 
+    ORDER BY likes desc nulls last ) T1 ) T2 
+		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
     </select>
     
 	<!-- 조회수 순으로 정렬 -->
-	<select id="boardView" resultType="AdminBoardEntity">
-	select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
+	<select id="boardView" resultType="AdminBoardEntity"  parameterType="map">
+	SELECT T2.* FROM
+		(SELECT T1.*, ROWNUM RN FROM
+	(select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
 	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
 	from DIARY a
 	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
 	join member on diary_mem_email=mem_email
-    order by diary_views desc nulls last
+	 <if test='search != null and search !=""'>
+		<bind name="keyword" value="'%'+search+'%'" />
+		<choose>
+			<when test="pick.equals('title')">
+				where diary_title like #{keyword}
+			</when>
+			<when test="pick.equals('nick')">
+				where mem_nick like #{keyword}
+			</when>
+		</choose>
+	</if> 
+    ORDER BY diary_views desc nulls last ) T1 ) T2 
+		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
+	</select>
+	<!-- 검색+좋아요 정렬 게시글 수 -->
+	<select id="boardLikeSearchCount" resultType="_int" parameterType="string">
+	select count(*) from 
+	(select diary_id, diary_title ,to_char(diary_date,'yyyy-MM-dd') diary_date,diary_views, nvl(likes,0) likes, mem_nick from 
+	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date, a.diary_views diary_views,a.diary_mem_email, b.likes
+	from DIARY a
+	left join (select count (mem_email) likes , diary_id from diary_likes group by diary_id) b on a.diary_id= b.diary_id))
+	join member on diary_mem_email=mem_email)
+	 <if test='search != null and search !=""'>
+		<bind name="keyword" value="'%'+search+'%'" />
+		<choose>
+			<when test="pick.equals('title')">
+				where diary_title like #{keyword}
+			</when>
+			<when test="pick.equals('nick')">
+				where mem_nick like #{keyword}
+			</when>
+		</choose>
+	</if> 
 	</select>
 	
 	<!-- 신고게시글 -->
