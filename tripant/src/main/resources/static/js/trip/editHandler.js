@@ -5,7 +5,7 @@ function stayTimeRangeBtnClickHandler(thisElement) {
 }
 
 // 시간 설정 완료
-function timeDoneBtnClickHandler(thisElement) {
+function stayTimeDoneBtnClickHandler(thisElement) {
 	$(thisElement).parents('.spot-block').children(".timerange").removeClass('hide');
 	$(thisElement).parents(".timerange-modal").addClass('hide');
 	var idx=$(thisElement).parents('.spot-block').data('i');
@@ -14,17 +14,14 @@ function timeDoneBtnClickHandler(thisElement) {
 	
 	var hours = $(thisElement).parent().children('.spot-hours').val();
 	var mins = $(thisElement).parent().children('.spot-mins').val();
-	var key = $(thisElement).parents('.spot-block.draggable').data('sessionkey');
 	
 	var timeVal = hours*3600 + mins*60;
-	// *** TODO  storage 안 씀 변경
-	var temp = JSON.parse(editStorage.getItem(key));
+	$(thisElement).parents('.spot-block').children(".timerange").text(timeVal);
 	
 	detailListEditMode[idx].dayDetailInfoEntity[jdx].stayTime = timeVal;
 	
-	// 수정된 객체를 다시 JSON 문자열로 변환하여 sessionStorage에 저장
-	editStorage.setItem(key, JSON.stringify(temp));
-	
+
+	//화면 재출력
 	displayEditModeAfterDragEnd();
 	circleColorHandler();
 }
@@ -170,7 +167,7 @@ function displayEditMode(){
 						<p>시간</p>
 						<input class="spot-mins" type='number' value=${minutes} min="0" max="55" step="5"></input>
 						<p>분</p>
-						<p class="timerange-done" onclick="timeDoneBtnClickHandler(this);">완료</p>
+						<p class="timerange-done" onclick="stayTimeDoneBtnClickHandler(this);">완료</p>
 					</div>
 				</div>`;
 				
@@ -183,7 +180,7 @@ function displayEditMode(){
 			 			<p class="timerange">${info.startTime} - ${info.endTime}</p>
 			 		</div>
 			 		
-			 		<div class="spot-type">명소</div>
+			 		<div class="spot-type" style="color: var(${typeColor(info.placeType)})">${info.placeCat}</div>
 			 		<div class="spot-title wfull"> ${info.title}</div>
 			 		<div class="spot-memo"><img class="img-memo" onclick="memoClickHandler(this);" style="width: 20px;height:20px;" src="${contextPath}images/icons/memoIcon.png" ><span  class="memo">${info.memo}</span></div>
 			 		
@@ -308,7 +305,7 @@ function displayEditModeAfterDragEnd(){
 						<p>시간</p>
 						<input class="spot-mins" type='number' value=${minutes} min="0" max="55" step="5"></input>
 						<p>분</p>
-						<p class="timerange-done" onclick="timeDoneBtnClickHandler(this);">완료</p>
+						<p class="timerange-done" onclick="stayTimeDoneBtnClickHandler(this);">완료</p>
 					</div>
 				</div>`;
 				
@@ -321,7 +318,7 @@ function displayEditModeAfterDragEnd(){
 			 			<p class="timerange" style="cursor: pointer;">${info.startTime} - ${info.endTime}</p>
 			 		</div>
 			 		
-			 		<div class="spot-type">명소</div>
+			 		<div class="spot-type" style="color: var(${typeColor(info.placeType)})">${info.placeCat}</div>
 			 		<div class="spot-title wfull"> ${info.title}</div>
 			 		<div class="spot-memo"><img class="img-memo"  onclick="memoClickHandler(this);" style="width: 20px;height:20px;cursor: pointer;" src="${contextPath}images/icons/memoIcon.png" ><span class="memo">${info.memo}</span></div>
 			 		

@@ -122,3 +122,22 @@ function mapLineHandler(idx){
 		}
 		return lineColor;
 }
+function typeColor(placeType){
+	switch(placeType*1){
+		case 1:
+			thisColor = '--bs-blue';
+			break;
+		case 2:
+			thisColor = '--bs-teal';
+			break;
+		case 3:
+			thisColor = '--bs-pink';
+			break;
+		case 4:
+			thisColor = '--bs-orange';
+			break;
+		default:
+			thisColor = '--bs-purple';
+		}
+		return thisColor;
+}

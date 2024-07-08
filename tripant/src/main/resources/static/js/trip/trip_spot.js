@@ -2,7 +2,7 @@ var clickspotnum = 0;
 var clickspotfindnum = 0;
 var spottype;
 var spotboxCount;
-
+var placeTypeS;
 //검색명
 var findArea;
 var spotId = "";
@@ -16,22 +16,12 @@ function openSpot(){
 	$('#add-btn').removeClass('hide');
 }
 
-// jjoggan TODO 담기버튼 이벤트
+// jjoggan 담기버튼 이벤트
 function includeHandler(){
 	var htmlVal = "";
 	$.each(spotArr, function(idx, element) {
 		console.log("idx");
 		console.log(idx);
-/*		var spottype;
-		if (placeTypeS == '관광지') {
-			spottype = 1;
-		} else if (placeTypeS == '문화시설') {
-			spottype = 2;
-		} else if (placeTypeS == '쇼핑') {
-			spottype = 3;
-		} else if (placeTypeS == '음식점') {
-			spottype = 4;
-		}*/
 		
 		//element.id;
 		htmlVal += `
@@ -39,7 +29,7 @@ function includeHandler(){
 		 		<div class="spot-img "><img src="${element.img}" width="70" height="70"/></div>
 		 		<div class="flex">
 		 			<div class="spot-title wfull"> ${element.title}</div>
-		 			<div class="spot-type" >명소</div>
+		 			<div class="spot-type" >${element.placeCat}</div>
 		 		</div>
 		 		<img class="spot-trashcan" onclick="#" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
 			</div>
@@ -104,7 +94,8 @@ $(document).ready(function() {
 		clickspotnum = 0;
 
 		areacode = $(".schedule-wrapper").data("area-code");
-		var placeTypeS = $(this).text();
+		//var 
+		placeTypeS = $(this).text();
 
 
 		if (placeTypeS == '관광지') {
