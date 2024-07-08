@@ -4,10 +4,10 @@ $(document).ready(function() {
 	clicknum = 0;
 	// 초기화: 탭 전환
 	//---- 여기 오류 아니에요. 메인에서 여행기 오려면 필요한 코드입니다.
-	if(tabcode){
+	if (tabcode) {
 		var tabnum = areacode2tabnum(tabcode);
-		$('.area-tab-nav a').click(tabMenuClickHandler).filter(':eq('+tabnum+')').click(); // 탭 활성화
-	} else{
+		$('.area-tab-nav a').click(tabMenuClickHandler).filter(':eq(' + tabnum + ')').click(); // 탭 활성화
+	} else {
 		$('.area-tab-nav a').click(tabMenuClickHandler).filter(':eq(0)').click(); // 첫 번째 탭 활성화
 	}
 });
@@ -33,8 +33,8 @@ function tabMenuClickHandler() {
 	areaname = (areaname == "전체" ? "" : areaname);
 	// ajax 요청
 	$.ajax({
-		beforeSend : csrfHandler,
-		error : ajaxErrorHandler,
+		beforeSend: csrfHandler,
+		error: ajaxErrorHandler,
 		url: contextPath + "diary" + "/popular/" + $("#sortOption").val()
 		, method: "post"
 		, data: {
@@ -54,6 +54,7 @@ function tabMenuClickHandler() {
 
 	return false;
 }
+
 // 좋아요 아이콘 설정 및 해제
 function btnLikeClickHandler(thisElement, diaryId) {
 	console.log("btnLikeClickHandler 눌림");
@@ -61,30 +62,30 @@ function btnLikeClickHandler(thisElement, diaryId) {
 	/*	console.log(thisElement);*/
 	if ($(thisElement).attr('src').includes('diary_like_none.png')) {
 		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
-		
+
 		// ajax 요청
 		$.ajax({
-			beforeSend : csrfHandler,
-			error : ajaxErrorHandler,
+			beforeSend: csrfHandler,
+			error: ajaxErrorHandler,
 			url: contextPath + "my/diary/like/" + diaryId
 			, method: "post"
 		}).done(function(result) {
-			if(result > 0)
-			$(thisElement).attr('src', contextPath+'images/diary/diary_like_icon.png');
-			window.location.herf='/diary/read'+diaryId;	
+			if (result > 0)
+				$(thisElement).attr('src', contextPath + 'images/diary/diary_like_icon.png');
+			window.location.herf = contextPath +'diary/read' + diaryId;
 		})
 	} else {
 		// 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
 		// ajax 요청
 		$.ajax({
-			beforeSend : csrfHandler,
-			error : ajaxErrorHandler,
+			beforeSend: csrfHandler,
+			error: ajaxErrorHandler,
 			url: contextPath + "my/diary/unlike/" + diaryId
 			, method: "post"
 		}).done(function(result) {
-			if(result>0)
-			$(thisElement).attr('src',  contextPath+'images/diary/diary_like_none.png');
-			window.location.herf='/diary/read'+diaryId;	
+			if (result > 0)
+				$(thisElement).attr('src', contextPath + 'images/diary/diary_like_none.png');
+			window.location.herf = contextPath +'diary/read' + diaryId;
 		})
 	}
 }
@@ -93,8 +94,8 @@ function moreBtnClickHandler(thisElement) {
 	clicknum += 1;
 	// ajax 요청
 	$.ajax({
-		beforeSend : csrfHandler,
-		error : ajaxErrorHandler,
+		beforeSend: csrfHandler,
+		error: ajaxErrorHandler,
 		url: contextPath + "diary" + "/popular/" + $("#sortOption").val()
 		, method: "post"
 		, data: {
@@ -104,7 +105,7 @@ function moreBtnClickHandler(thisElement) {
 		, context: this
 	}).done(function(wrap_content) {
 		$(".wrap-diary").replaceWith(wrap_content);
-		
+
 		$.each($(".diary-preview"), function(idx, thisElement) {
 			var contentElement = $(thisElement).html();
 			//console.log($(thisElement).text());
@@ -119,11 +120,11 @@ function sortOptionChangeHandler(thisElement) {
 	clicknum = 0; // 페이지 초기화
 	// ajax 요청
 	$.ajax({
-		beforeSend : csrfHandler,
-		error : ajaxErrorHandler,
+		beforeSend: csrfHandler,
+		error: ajaxErrorHandler,
 		url: contextPath + "diary" + "/popular/" + thisElement.value
 		, method: "post"
-		, data : {
+		, data: {
 			areaname: areaname,
 			clickNum: clicknum
 		}
