@@ -10,7 +10,7 @@ $(document).ready(function() {
 	} else {
 		$('.area-tab-nav a').click(tabMenuClickHandler).filter(':eq(0)').click(); // 첫 번째 탭 활성화
 	}
-
+});
 
 function tabMenuClickHandler() {
 	clicknum = 0; // 페이지 초기화
@@ -54,6 +54,7 @@ function tabMenuClickHandler() {
 
 	return false;
 }
+
 // 좋아요 아이콘 설정 및 해제
 function btnLikeClickHandler(thisElement, diaryId) {
 	console.log("btnLikeClickHandler 눌림");
