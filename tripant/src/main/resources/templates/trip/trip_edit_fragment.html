@@ -45,16 +45,16 @@
 	</div>
 	
 	<!-- 장소바구니 -->
-	<div th:fragment="spot-basket" class="spot-basket hide scrollbar flex " id="spot-basket">
+	<div th:fragment="spot-basket" class="spot-basket hide scrollbar flex  packing" id="spot-basket">
 		<div class="flex a" >
 			<h4>추가할 장소</h4>
 			<button id="add" class="btn" onclick="openSpot();">장소추가</button>
 		</div>
-		<div class="wrap-basket " > 
+		<div class="wrap-basket container" > 
 		</div> <!-- wrap-basket -->
 	</div>	
 	<!-- edit trip list -->
-	<div th:fragment="edit-tourlist" class="edit-tourlist hide scrollbar flex" id="edit-tourlist">
+	<div th:fragment="edit-tourlist" class="edit-tourlist hide scrollbar flex packing" id="edit-tourlist">
 		<div class="wrap-detaillist flex" > </div> <!-- wrap-detaillist -->
 	</div>
 </html>
