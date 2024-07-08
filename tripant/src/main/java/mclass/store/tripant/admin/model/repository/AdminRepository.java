@@ -39,8 +39,10 @@ public interface AdminRepository {
 	
 	//좋아요 많은 순으로 정렬
 	public List<AdminBoardEntity> boardLike(int startRownum, int endRownum,String pick,String search);
+	public int boardLikeSearchCount(String pick,String search);
 	//조회수 정렬
 	public List<AdminBoardEntity> boardView(int startRownum, int endRownum,String pick,String search);
+	public int boardViewSearchCount(String pick,String search);
 	
 	//신고게시글 관리
 	//신고게시글

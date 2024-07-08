@@ -10,6 +10,33 @@ function loadedHandler() {
 	
 }
 
+var currentPage = 1;
+var totalPageCount = null;
+var startPageNum = null;
+var endPageNum = null;
+
+/* 페이징 이동 함수 */
+function goPageHandler() {
+			var currentpage = $(this).data("targetpage");
+			$.ajax({
+				beforeSend : csrfHandler,
+				error : ajaxErrorHandler,
+				url:contextPath+"admin/like"
+				, method : "get"
+				, data : {
+						pick:pick, search:search ,
+						currentpage : currentpage}
+				, dataType : "json"
+				, success : function(result){
+					if(result.search){
+						$("[name=search]").val(result.search);
+					}
+					LikeHandler(like);
+				}
+			});
+	}
+
+
 //좋아요수 정렬
 function ClickLikeHandler(thisElement){
 	var pick=$("select[name=option] option:selected").val(); //선택한 option val값 
@@ -79,11 +106,6 @@ function ViewHandler(view){
 	}
 	return htmlVal;
 }
-
-var currentPage = 1;
-var totalPageCount = null;
-var startPageNum = null;
-var endPageNum = null;
 
 /* 페이징 이동 함수 */
 function goPageHandler() {

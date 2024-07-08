@@ -62,7 +62,6 @@ public class AdminController {
 	//ajax  
 	//검색 // paging
 	@PostMapping("/member/search") 
-//	@ResponseBody
 	public String  memberSearch(Model model 
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String searchMem
@@ -122,7 +121,6 @@ public class AdminController {
 	//ajax
 	//좋아요 정렬   
 	@PostMapping("/like")
-	//@ResponseBody
 	public String boardLike(Model model
 			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String search
@@ -137,7 +135,6 @@ public class AdminController {
 	//ajax
 	//조회수 정렬   
 	@PostMapping("/view")
-	//@ResponseBody
 	public String boardView(Model model
 			,@RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
 			, @RequestParam(required = false )String search
