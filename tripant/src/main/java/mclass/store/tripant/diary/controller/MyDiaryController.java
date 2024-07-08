@@ -44,13 +44,18 @@ public class MyDiaryController {
 	}
 	// 기본 글 버전
 	@GetMapping("/post")
-	public ModelAndView showDiaryForm(Principal pricipal) {
-		ModelAndView mv = new ModelAndView();
-		List<WritePlanTitleEntity> plans = diaryService.getAllPlans(pricipal.getName());
-		mv.addObject("plans", plans);
-		mv.addObject("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
-		mv.setViewName("diary/my/my_write");
-		return mv;
+	public String showDiaryForm(Model model, Principal principal) {
+		List<WritePlanTitleEntity> plans = diaryService.getAllPlans(principal.getName());
+		model.addAttribute("plans", plans);
+		model.addAttribute("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
+		System.out.println(principal.toString());
+		if(principal.toString().contains("MEM")) {
+			return "diary/my/my_write";
+		}else if(principal.toString().contains("VIP")) {
+			return "diary/my/my_write_font";
+		}else {
+			return "redirect:/";
+		}
 	}
 
 	// 글쓰기 처리
@@ -85,9 +90,6 @@ public class MyDiaryController {
 
 			diaryForm.setDiaryMemEmail(pricipal.getName());
 			diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
-
-			// 공개 여부 설정
-			diaryForm.setDiaryOpen(diaryForm.getDiaryOpen() != null ? "0" : "1"); // true면 공개 ("0"), false면 비공개 ("1")
 
 			// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
 			// 채워짐)
