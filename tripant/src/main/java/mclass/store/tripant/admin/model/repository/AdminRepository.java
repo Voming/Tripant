@@ -35,7 +35,7 @@ public interface AdminRepository {
 	public int keywordSearchCount(String pick,String search);
 	
 	//게시글 검색(select)
-	public List<AdminBoardEntity> keywordSearch(int startRownum, int endRownum, String pick,String search);
+	public List<AdminBoardEntity> keywordSearch(int startRownum, int endRownum, String pick, String search, String sort);
 	
 	//좋아요 많은 순으로 정렬
 	public List<AdminBoardEntity> boardLike(int startRownum, int endRownum,String pick,String search);

@@ -131,7 +131,7 @@ public class AdminService {
 	}
 	
 	//게시글 조건검색(select)
-	public Map<String, Object> keywordSearch(int num, int pageNum, int currentPageNum,String pick,String search){
+	public Map<String, Object> keywordSearch(int num, int pageNum, int currentPageNum,String pick,String search, String sort){
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
@@ -150,7 +150,7 @@ public class AdminService {
 		//끝페이지
 		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
 		
-		List<AdminBoardEntity> boardList = admindao.keywordSearch(startRownum, endRownum, pick,search);
+		List<AdminBoardEntity> boardList = admindao.keywordSearch(startRownum, endRownum, pick,search, sort);
 		result = new HashMap<String, Object>();
 		result.put("boardList", boardList);
 		result.put("totalCount", totalCount);
@@ -160,6 +160,7 @@ public class AdminService {
 		result.put("currentPage", currentPageNum);
 		result.put("pick", pick);
 		result.put("search", search);
+		result.put("sort", sort);
 
 		return result;
 	}

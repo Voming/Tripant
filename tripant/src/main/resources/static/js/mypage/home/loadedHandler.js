@@ -10,11 +10,11 @@ function loadedHandler(){
 	});
 	//닉네임 변경 페이지로 이동
 	$('.btn.chNick').on('click', function(){
-		location.href = '/my/nick';
+		location.href = contextPath+'my/nick';
 	});
 	//비밀번호 변경 페이지로 이동
 	$('.btn.chPwd').on('click', function(){
-		location.href = '/my/pwd';
+		location.href = contextPath+'my/pwd';
 	});
 	
 	// 카카오 연동 해제

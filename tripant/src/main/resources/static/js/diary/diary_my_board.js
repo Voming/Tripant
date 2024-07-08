@@ -1,6 +1,8 @@
 var clicknum = 0; // 값초기화
+// 클라이언트 측 변수 설정
 
 function moreBtnClickHandler(thisElement){
+
 	clicknum += 1;
 	$.ajax({
 		beforeSend : csrfHandler,
@@ -12,9 +14,17 @@ function moreBtnClickHandler(thisElement){
 			}
 		, context: this
 		}).done(function(wrap_content) {
-			//$(".wrap-diary").replaceWith(wrap_content);
-			$(".board-list").append(wrap_content);
-		})
+			// 서버에서 받아온 wrap_content가 비어 있지 않은 경우에만 추가합니다.
+        if (wrap_content.trim() !== "") {
+            $(".board-list").append(wrap_content);
+             console.log("board-list");
+        } else {
+            // 추가할 내용이 없으면 아무 작업도 하지 않습니다.
+            
+            console.log("No more content to add.");
+          
+        }
+    });
 	}
 	// 이미지 꺼내기
 var jImgElement = $(".ck.ck-editor__main").find("img");

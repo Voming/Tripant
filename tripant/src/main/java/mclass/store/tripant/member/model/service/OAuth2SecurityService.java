@@ -176,9 +176,9 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 		}
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		switch(memRole) {
-			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole()));
-			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole()));
-			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole()));
+			case "ROLE_ADMIN": authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getRole())); break;
+			case "ROLE_VIP": authorities.add(new SimpleGrantedAuthority(MemberRole.VIP.getRole())); break;
+			case "ROLE_MEM": authorities.add(new SimpleGrantedAuthority(MemberRole.MEM.getRole())); break;
 		}
 		log.debug("[sjw] oAuth2User = "+oAuth2User.toString());
 		

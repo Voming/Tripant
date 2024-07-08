@@ -123,7 +123,7 @@ function saveChanges(){
 		error : ajaxErrorHandler,
 		url: contextPath+"trip/save/changes",
 		method:"post",
-		contentType: "application/json", //보낼 데이터 타입 //; charset=utf-8 //필요??불필요??/
+		//contentType: "application/json", //보낼 데이터 타입 //; charset=utf-8 //필요??불필요??/
 		data:{saveData : saveData ,planId:planId},
 		success : function(result) {
 			console.log("result");

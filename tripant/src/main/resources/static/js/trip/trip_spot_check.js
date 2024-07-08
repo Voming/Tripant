@@ -11,6 +11,7 @@ function spotCkBtnClickHandler(thisElement) {
 	var lngy = $(thisElement).parent().find(".spot-y").attr("value");
 	var img = $(thisElement).parent().find(".spot-img").attr("src");
 	var addr = $(thisElement).parent().find(".spot-address").attr("value");
+	var contentid = $(thisElement).parent().find(".spotcheck").data("spotid");
 
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx); // 맵 위치로 변환
 	// 확대 크기 변경
@@ -52,9 +53,11 @@ function spotCkBtnClickHandler(thisElement) {
 		timeInfoUpdate();// 총 시간 업데이트
 
 	} else { //=====================================체크박스 선택=========================================
-		var spotTime = 7200;
-		//var spotType = ; 장소다타입 넣을지 말지
-		spotArr[markersSpot.length] = new Spot(id, title, latx, lngy,img,spotTime);  //전체 일정 만들기 장소 정보 저장
+		var stayTime = 7200;
+		spotArr[markersSpot.length] = new Spot(contentid, title, latx, lngy,spottype,img,stayTime,placeTypeS);  //전체 일정 만들기 장소 정보 저장
+		spotArr[markersSpot.length].title = title;
+		spotArr[markersSpot.length].addr = addr;
+		
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
 
 		//화면 리스트 추가
@@ -140,7 +143,7 @@ function timeDoneBtnClickHandler(thisElement) {
 	var hours = $(thisElement).parent().children('.spot-hours').val();
 	var mins = $(thisElement).parent().children('.spot-mins').val();
 	var timeVal = hours + "시간 " + mins + "분";
-	spotArr[length-1].spotTime = hours * 3600 + mins * 60;
+	spotArr[length-1].stayTime = hours * 3600 + mins * 60;
 	$(thisElement).parents('.timerange-modal').prev().find('.time').text(timeVal);
 	//timeInfoUpdate(); // 총 시간 업데이트
 }
