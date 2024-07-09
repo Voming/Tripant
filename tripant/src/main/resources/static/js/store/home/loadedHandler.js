@@ -1,6 +1,5 @@
 $(loadedHandler);
 function loadedHandler(){
-	AOS.init();
 	// 버튼 호버 css
 	$('.btn').hover(function(){
 		$(this).css('background-color', 'var(--color_light_gray)');

@@ -33,6 +33,7 @@ public class SecurityConfig {
 		.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
 				.requestMatchers(
 						new AntPathRequestMatcher("/store")
+						, new AntPathRequestMatcher("/store/insert")
 						, new AntPathRequestMatcher("/diary")
 						).permitAll()
 				.requestMatchers(

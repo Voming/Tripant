@@ -204,3 +204,28 @@
 	padding: 5px;
 	font-size: var(--font3);
 }
+
+.wrap-main .origin-price{
+	font-size: var(--font6);
+	color: lightgray;
+	text-decoration: line-through;
+}
+.wrap-main .sale-proportion{
+	font-size: var(--font4);
+	color: green;
+}
+.wrap-main .sale-price{
+	color: orange;
+}
+/* 스크롤바 설정 */
+.list.flex::-webkit-scrollbar{
+     height: 10px;  /* 오른쪽 왼쪽 스크롤바 폭 너비 */
+     width: 10px;  /* 위 아래 스크롤바 폭 너비 */
+}
+.list.flex::-webkit-scrollbar-thumb{
+   border-radius: 10px;
+   border: 7px solid var(--color_gray);
+}
+.list.flex::-webkit-scrollbar-corner {
+   background: transparent;
+}

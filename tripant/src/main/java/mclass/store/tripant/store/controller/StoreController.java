@@ -54,6 +54,7 @@ public class StoreController {
 	// 스토어 페이지
 	@GetMapping("")
 	public ModelAndView store(ModelAndView mv, Principal principal) {
+		System.out.println(principal);
 		mv.setViewName("store/home");
 		String memEmail;
 		if(principal != null) {
@@ -73,7 +74,11 @@ public class StoreController {
 	// 장바구니에 담기
 	@PostMapping("/insert")
 	@ResponseBody
-	public int storeInsert(@RequestParam List<String> items, Principal principal) {
+	public String storeInsert(@RequestParam List<String> items, Principal principal) {
+		String result;
+		if(principal == null) {
+			return "-1";
+		}
 		int size = items.size();
 		Map<String, Object> map = new HashMap<>();
 		List<String> list = new ArrayList<>();
@@ -84,11 +89,10 @@ public class StoreController {
 		}
 		map.put("list", list);
 		int insertNum = storeService.insertItems(memEmail, map);
-		int result;
 		if(size == insertNum) {
-			result = 1;
+			result = "1";
 		}else {
-			result = 0;
+			result = "0";
 		}
 		return result;
 	}
