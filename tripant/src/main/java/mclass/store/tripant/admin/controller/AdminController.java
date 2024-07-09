@@ -291,9 +291,8 @@ public class AdminController {
 	
 	@GetMapping("/mchart")
 	public String mchart(Model model) {
-
-		
-		model.addAttribute("memList", adminservice.mChart());
+		model.addAttribute("chart", adminservice.chart());
+		model.addAttribute("chart2", adminservice.chart2());
 		return "admin/admin_mchart";
 	}
 	

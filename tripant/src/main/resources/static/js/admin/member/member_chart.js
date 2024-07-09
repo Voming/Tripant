@@ -9,14 +9,13 @@ var ctx2 = document.getElementById('myChart2').getContext('2d');
 
 console.log(count + "==========================");
 
-//let labels = Utils.months({count: 6});
 var myChart2 = new Chart(ctx2, {
 	type: 'line',
  	data: {
-  		labels:["1월", "2월", "3월", "4월", "5월", "6월"],
+  		labels:["5달전", "4달전", "3달전", "2달전", "1달전", "이번달"],
 	  	datasets: [{
 			 label: '회원수',
-			 data: [65, 59, 80, 81, 56, count],
+			 data: [10, 30, 27, 11, count2, count],
 			 fill: false,
 			 borderColor: 'rgb(255, 99, 132)',
 			 borderWidth:1,

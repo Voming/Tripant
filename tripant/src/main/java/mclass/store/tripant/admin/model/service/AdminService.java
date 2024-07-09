@@ -477,8 +477,12 @@ public class AdminService {
 		return admindao.itemDelete(itemCode);
 	}
 	
-	public Map<String, Object> mChart() {
-		return admindao.mchart();
+	//회원통계
+	public Map<String, Object> chart() {
+		return admindao.chart();
+	}
+	public Map<String, Object> chart2() {
+		return admindao.chart2();
 	}
 	
 }

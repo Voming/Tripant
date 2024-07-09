@@ -60,7 +60,7 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 		
 		memberService.log(map);
 		if(authentication.getAuthorities().iterator().next().toString().equals("ADMIN")) {
-			response.sendRedirect("/admin/member");
+			response.sendRedirect(request.getContextPath() + "admin/member");
 		}else {
 			super.onAuthenticationSuccess(request, response, authentication);
 		}
