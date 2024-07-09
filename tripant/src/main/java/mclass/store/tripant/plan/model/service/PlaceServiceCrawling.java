@@ -198,9 +198,8 @@ public class PlaceServiceCrawling {
 					} while(i < dtolist.size());
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				System.out.println("!!!!!!!!!!!!!!!!!!!!!! ERROR 1 ??????");
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		} // while
 		return result;

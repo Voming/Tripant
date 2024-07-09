@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.plan.domain.CalendarPlanEntity;
 import mclass.store.tripant.plan.domain.AfterDto;
@@ -35,8 +36,9 @@ public class PlanningAlgorithm {
 	private PlanRepository planRepository;
 	
 	static int V;
-
-
+	int dayN = 0;
+	int distribute = 0;
+	
 	// 그래프를 표현 할 List
 	static List<List<Node>> graph = new ArrayList<>();
 
@@ -61,25 +63,13 @@ public class PlanningAlgorithm {
 		}
 	}
 
-//	0. 날짜 수 만큼 저장될 리스트 생성
-//
-//	1. 총 날짜 수로 장소 개수 나누기
-//	1-1. 만약 날짜 수  = 나눈 장소 수(1) -> 그냥 출-장-도 로 모든 날짜 배치
-//	1-2. 만약 날짜 수  < 나눈 장소 수(2) -> 출과 가까운걸 먼저 배치
-//	1-3. 만약 날짜 수  < 나눈 장소 수(3) 
-//	      => 출과 가까운거 빼냄 , 도와 가까운 거 빼냄 -> 그대로 배치
-//	1-4. 만약 날짜 수  < 나눈 장소 수(3보다 큼) 
-//	      => 출과 가까운거 빼냄 , 도와 가까운 거 빼냄  --> 나머지로 다익스트라
-//
-//	2. 날짜별 리스트에 각각 결정된 리스트 저장
-
 	public void planningJson(String jsonString, int areaCode) { // planJsonParse
 		V = 0;
-		int dayN = 0;
-		int distribute = 0;
+		dayN = 0;
+		distribute = 0;
 		
 		// 출발 장소 좌표
-		AreaPointEntity startPoint = planRepository.selectAreaPoint(areaCode); 
+		AreaEntity startPoint = planRepository.selectAreaInfo(areaCode); 
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		CalendarPlanEntity calendarPlan = gson.fromJson(jsonString, CalendarPlanEntity.class);
@@ -94,15 +84,9 @@ public class PlanningAlgorithm {
 			int id = Integer.parseInt(idLongStr.substring(0, 9));
 			System.out.println("idLongStr -> id : " + id);
 			
-			stayPointList.add(new BeforDto( 
-					id, 
-					stay.getType(),
-					"", //숙소는 머무는 시간 없음
-					stay.getMapx(), 
-					stay.getMapy(),
-					dateArr.get(i).getDate()
-					)
-				);
+			stayPointList.add(new BeforDto( dateArr.get(i).getDate(), id, 
+					stay.getType(), "", //숙소는 머무는 시간 없음
+					stay.getMapx(), stay.getMapy()));
 		}
 		System.out.println(stayPointList);
 
@@ -116,14 +100,10 @@ public class PlanningAlgorithm {
 			int id = Integer.parseInt(idLongStr.substring(0, 9));
 			System.out.println("idLongStr -> id : " + id);
 			
-			spotPointList.add(new BeforDto(
-					id, 
-					spot.getType(),
+			spotPointList.add(new BeforDto( "", //장소는 아직 방문 날짜 정해지지 않음
+					id, spot.getType(),
 					spot.getSpotTime(), 
-					spot.getMapx(), 
-					spot.getMapy(),
-					"" //장소는 아직 방문 날짜 정해지지 않음
-					));
+					spot.getMapx(), spot.getMapy()));
 		}
 		System.out.println(spotPointList); //기본 spot, stay 설정 완료---------------------------------
 
@@ -136,40 +116,63 @@ public class PlanningAlgorithm {
 		distribute = (int) Math.ceil(((double) V / dayN)); // 하루에 방문할 장소 수
 		System.out.println("distribute : " + distribute);
 		
-		//방문 날짜, 리스트 Map => 전체 일정 정보 담김
-		Map<String, List<AfterDto>> planMap = new HashMap<>(); 
+		/*
+		 * //방문 날짜, 리스트 Map => 전체 일정 정보 담김
+		Map<Integer, List<AfterDto>> planMap = new HashMap<>(); 
 
-//		1-1. 만약 날짜 수  = 나눈 장소 수(1) -> 그냥 출-장-도 로 모든 날짜 배치
-		if (distribute == 1) { // 1인 경우 : 선택한 장소 수 == 날짜 수
-			for (int i = 1; i <= dayN; i++) {
+//		1-1. 만약 날짜 수  = 나눈 장소 수(1) -> 그냥 출-장-도 로 모든 날짜 배치 ====================================
+		if (distribute == 1) { // 1인 경우 : 선택한 장소 수 == 날짜 수 
+			for (int i = 0; i < dateArr.size(); i++) { // 날짜별 반복문
 				List<AfterDto> listForDay = new ArrayList<>();
-				if(i == 1) {
-					
+				//먼저 일마다 장소 추가해놓기
+				for(int j = 1; j <3; j++) {  // 출-장-도
+					if(i == 1) {
+						listForDay.add(new AfterDto(dateArr.get(i).getDate(), 100, startPoint.getAreaCode(),
+								j, "", startPoint.getAreaX(), startPoint.getAreaY(), "" ));
+					} else if(i == 1) { 
+						listForDay.add(new AfterDto(
+								dateArr.get(i).getDate(), 
+								spotPointList.get(i).getType(),
+								spotPointList.get(i).getContentId(),
+								j,
+								"",
+								spotPointList.get(i).getMapx(),
+								spotPointList.get(i).getMapy(),
+								""));
+					} else {
+						listForDay.add(new AfterDto(
+								dateArr.get(i).getDate(), 
+								stayPointList.get(i).getType(),
+								stayPointList.get(i).getContentId(),
+								j,
+								"",
+								stayPointList.get(i).getMapx(),
+								stayPointList.get(i).getMapy(),
+								""));
+					}
 				}
-				
+				planMap.put(i, listForDay);
+				//각각 이동시간 구하기
 			}
-
 		}
 //		1-2. 만약 날짜 수  < 나눈 장소 수(2) -> 출과 가까운걸 먼저 배치
 		else if (distribute == 2) { // 2인 경우
 			// 1. 선택한 장소 수 == 날짜 수
 			// 2. 선택한 장소 수 < 날짜 수 * distribute => 마지막 날에는 나머지로 들어감
-
 		}
 //		1-3. 만약 날짜 수  < 나눈 장소 수(3) 
 //		      => 출과 가까운거 빼냄 , 도와 가까운 거 빼냄 -> 그대로 배치
 		else if (distribute == 3) {
 			// 1. 선택한 장소 수 == 날짜 수
 			// 2. 선택한 장소 수 < 날짜 수 * distribute => 마지막 날에는 나머지로 들어감
-
 		}
 //		1-4. 만약 날짜 수  < 나눈 장소 수(3보다 큼) 
 //		      => 출과 가까운거 빼냄 , 도와 가까운 거 빼냄  --> 나머지로 다익스트라
 		else {
 			// 1. 선택한 장소 수 == 날짜 수
 			// 2. 선택한 장소 수 < 날짜 수 * distribute => 마지막 날에는 나머지로 들어감
-
 		}
+		*/
 
 		// 출발지에서 가장 가까운 장소 구하기
 		int weight[] = new int[V];
@@ -204,11 +207,11 @@ public class PlanningAlgorithm {
 
 		System.out.println(spotPointList.get(0));
 
-		//planning();
+		planning();
 
 	}
 
-	/*public void planning() { // 정점 세팅 및 알고리즘 실행
+	public void planning() { // 정점 세팅 및 알고리즘 실행
 		for (int i = 0; i < V; i++) {
 			graph.add(new ArrayList<>());
 		}
@@ -233,14 +236,14 @@ public class PlanningAlgorithm {
 						System.out.println(durationStr);
 						int weight = Integer.parseInt(durationStr);
 
-						graph.get(i).add(new Node(end.getIndex(), weight));
-						graph.get(j).add(new Node(start.getIndex(), weight));
+						graph.get(i).add(new Node(end.getContentId(), weight));
+						graph.get(j).add(new Node(start.getContentId(), weight));
 					}
 				}
 			}
 		}
 		Dijkstra(0);
-	}*/
+	}
 
 	private static void Dijkstra(int index) {
 		Map<Integer, Integer> result = new HashMap<>();
