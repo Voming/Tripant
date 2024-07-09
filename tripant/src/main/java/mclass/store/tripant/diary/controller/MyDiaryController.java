@@ -49,7 +49,9 @@ public class MyDiaryController {
 	@GetMapping("/post")
 	public String showDiaryForm(Model model, Principal principal) {
 		List<WritePlanTitleEntity> plans = diaryService.getAllPlans(principal.getName());
+	
 		model.addAttribute("plans", plans);
+		
 		 
 		model.addAttribute("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
 		System.out.println(principal.toString());
