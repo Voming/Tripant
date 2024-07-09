@@ -59,8 +59,8 @@ public class DiaryService {
 		return diary;
 	}
 	// 여행기 글 수정하기
-	public DiaryBoardEntity updateDiary(DiaryBoardEntity updatedDiary, Principal pricipal) {
-		return diaryRepository.updateDiary(updatedDiary, pricipal);
+	public DiaryBoardEntity updateDiary(DiaryBoardEntity updatedDiary, String memEmail) {
+		return diaryRepository.updateDiary(updatedDiary, memEmail);
 	}
 
 	// 여행기 글 삭제

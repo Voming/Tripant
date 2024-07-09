@@ -14,7 +14,7 @@
 
     <section class="diary-writes-main">
         <div class="diary-write-wrap">
-            <form id="diaryForm" th:action="@{/diary/update}" method="post">
+            <form id="diaryUpdateForm" th:action="@{/diary/update}" method="post">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <table class="diary-write-table">
                     <tr>
@@ -85,6 +85,34 @@
     <footer>
         <div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
     </footer>
+
+    <!-- jQuery 라이브러리 추가 -->
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#diaryUpdateForm').submit(function(event) {
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '[[@{/my/diary/update}]]',
+                    data: formData,
+                    success: function(response) {
+                        if (response === 'success') {
+                            window.location.href = '/my/diary';
+                        } else {
+                            alert('Error updating diary.');
+                        }
+                    },
+                    error: function() {
+                        alert('Error updating diary.');
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- ckeditor5 스크립트 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
