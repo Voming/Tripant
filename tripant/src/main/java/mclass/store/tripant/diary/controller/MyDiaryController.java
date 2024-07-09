@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.model.service.DiaryService;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -49,7 +49,10 @@ public class MyDiaryController {
 	@GetMapping("/post")
 	public String showDiaryForm(Model model, Principal principal) {
 		List<WritePlanTitleEntity> plans = diaryService.getAllPlans(principal.getName());
+	
 		model.addAttribute("plans", plans);
+		
+		 
 		model.addAttribute("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
 		System.out.println(principal.toString());
 		if(principal.toString().contains("MEM")) {
@@ -64,9 +67,9 @@ public class MyDiaryController {
 	// 글쓰기 처리
 	@PostMapping("/post")
 	@ResponseBody
-	public ResponseEntity<?> createDiary(@RequestBody DiaryBoardEntity diaryForm, Principal pricipal) {
+	public ResponseEntity<?> createDiary(@RequestBody DiaryBoardEntity diaryForm, Principal principal) {
 
-		diaryForm.setDiaryMemEmail(pricipal.getName());
+		diaryForm.setDiaryMemEmail(principal.getName());
 		diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
 
 		// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
@@ -80,9 +83,9 @@ public class MyDiaryController {
 	// 글쓰기 처리(폰트 구매버전)
 		@PostMapping("/post/font")
 		@ResponseBody
-		public ResponseEntity<?> createFontDiary(@RequestBody DiaryBoardEntity diaryForm, Principal pricipal) {
+		public ResponseEntity<?> createFontDiary(@RequestBody DiaryBoardEntity diaryForm, Principal principal) {
 
-			diaryForm.setDiaryMemEmail(pricipal.getName());
+			diaryForm.setDiaryMemEmail(principal.getName());
 			diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
 
 			// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
@@ -96,13 +99,13 @@ public class MyDiaryController {
 	   // 여행글 삭제 처리
     @PostMapping("/diary/delete/{diaryId}")
     @ResponseBody
-    public int deleteDiaryById(@PathVariable("diaryId") int diaryId, Principal pricipal) {
+    public int deleteDiaryById(@PathVariable("diaryId") int diaryId, Principal principal) {
         // 여기서 diaryId를 사용하여 삭제 작업을 수행합니다.
         int result = 0;
       
 		try {
 			
-			result = diaryService.deleteDiaryById(diaryId, pricipal.getName());
+			result = diaryService.deleteDiaryById(diaryId, principal.getName());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -127,15 +130,15 @@ public class MyDiaryController {
 	// 좋아요 기능
 	@PostMapping("/diary/like/{diaryId}")
 	@ResponseBody
-	public Integer likeDiary(@PathVariable int diaryId, Principal pricipal) {
-		int result = diaryService.likeDiary(diaryId, pricipal.getName());
+	public Integer likeDiary(@PathVariable int diaryId, Principal principal) {
+		int result = diaryService.likeDiary(diaryId, principal.getName());
 		return result;
 	}
 	// 좋아요해제 기능
 	@PostMapping("/diary/unlike/{diaryId}")
 	@ResponseBody
-	public Integer unlikeDiary(@PathVariable int diaryId, Principal pricipal) {
-		int result = diaryService.unlikeDiary(diaryId, pricipal.getName());
+	public Integer unlikeDiary(@PathVariable int diaryId, Principal principal) {
+		int result = diaryService.unlikeDiary(diaryId, principal.getName());
 		return result;
 	}
 	// 수정하기
@@ -157,6 +160,17 @@ public class MyDiaryController {
 	    // 수정 폼을 나타내는 HTML 파일 이름을 반환합니다.
 	    return "diary/my/diary_modify";
 	}
-	
-	
+	@PostMapping("/diary/update")
+	public ResponseEntity<DiaryBoardEntity> updateDiary(@ModelAttribute DiaryBoardEntity diaryForm, Principal principal) {
+		diaryForm.setDiaryMemEmail(principal.getName());
+		diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
+
+		// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
+		// 채워짐)
+		diaryForm = diaryService.save(diaryForm);
+
+		// 저장된 DiaryPostEntity를 ResponseEntity로 반환
+		return ResponseEntity.ok().body(diaryForm);
+	}
+
 }

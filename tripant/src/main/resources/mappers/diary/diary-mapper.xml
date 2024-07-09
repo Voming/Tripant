@@ -237,6 +237,9 @@
     			 <if test="diaryTheme != null">
     				DIARY_THEME =#{diaryTheme}
     			</if>
+    			<if test="diaryPlanId != null">
+                DIARY_PLAN_ID = #{diaryPlanId}
+            	</if>
     		</set>	
 			WHERE DIARY_ID = #{diaryId}
 			ND DIARY_MEM_EMAIL = #{memEmail};

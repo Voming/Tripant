@@ -75,8 +75,8 @@
 							</div>
 							<div class="inline-element2">
 								<label>
-								<input  th:checked="${diary.diaryOpen == 1}" type="radio" name="diaryOpen" value="1"> 비공개</label> 
-								<label><input th:checked="${diary.diaryOpen == 0}"  type="radio" name="diaryOpen"  value="0" > 공개</label>
+								<input th:value="${1}" type="radio" name="diaryOpen"> 비공개</label> 
+								<label><input th:value="${0}"   type="radio" name="diaryOpen"  > 공개</label>
 							</div>
 						</td>
 					</tr>

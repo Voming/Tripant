@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
+import mclass.store.tripant.admin.domain.AdminChartEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.domain.AdminStoreEntity;
 
@@ -88,6 +89,5 @@ public interface AdminRepository {
 	public int  itemDelete(String itemCode);
 	
 	//회원통계
-	public Map<String, Object> chart();
-	public Map<String, Object> chart2();
+	public List<AdminChartEntity> chart();
 }

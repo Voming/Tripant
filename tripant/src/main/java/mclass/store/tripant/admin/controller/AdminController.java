@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import com.google.gson.Gson;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
+import mclass.store.tripant.admin.domain.AdminChartEntity;
 import mclass.store.tripant.admin.model.service.AdminService;
 
 @Controller
@@ -291,8 +293,14 @@ public class AdminController {
 	
 	@GetMapping("/mchart")
 	public String mchart(Model model) {
-		model.addAttribute("chart", adminservice.chart());
-		model.addAttribute("chart2", adminservice.chart2());
+		List<AdminChartEntity> list = adminservice.chart();
+		int[] arr = new int[6];
+		for(int i = 0; i < list.size(); i++) {
+			arr[list.get(i).getBefore()] = list.get(i).getNum();
+		}
+		for(int i = 0; i < 6; i++) {
+			model.addAttribute("chart"+i, arr[i]);
+		}
 		return "admin/admin_mchart";
 	}
 	
