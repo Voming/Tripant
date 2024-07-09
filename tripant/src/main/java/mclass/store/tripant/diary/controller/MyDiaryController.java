@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.model.service.DiaryService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/my")
@@ -74,16 +76,7 @@ public class MyDiaryController {
 		// 저장된 DiaryPostEntity를 ResponseEntity로 반환
 		return ResponseEntity.ok().body(diaryForm);
 	}
-	// 폰트 구매 후 글 버전
-	@GetMapping("/post/font")
-	public ModelAndView showFontDiaryForm(Principal pricipal) {
-		ModelAndView mv = new ModelAndView();
-		List<WritePlanTitleEntity> plans = diaryService.getAllPlans(pricipal.getName());
-		mv.addObject("plans", plans);
-		mv.addObject("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
-		mv.setViewName("diary/my/my_write_font");
-		return mv;
-	}
+
 	// 글쓰기 처리(폰트 구매버전)
 		@PostMapping("/post/font")
 		@ResponseBody
@@ -99,29 +92,6 @@ public class MyDiaryController {
 			// 저장된 DiaryPostEntity를 ResponseEntity로 반환
 			return ResponseEntity.ok().body(diaryForm);
 		}
-	
-		 // 글 수정 폼을 제공하는 메서드
-	    @GetMapping("/diary/update/{diaryId}")
-	    public String showUpdateDiaryForm(@PathVariable DiaryBoardEntity diaryId, Model model,Principal pricipal){
-	        // diaryId에 해당하는 글을 조회하여 폼에 전달합니다.
-	        DiaryBoardEntity diary = diaryService.updateDiary(diaryId,pricipal); // DiaryService에서 해당 글 조회 로직 구현 필요
-
-	        // 조회된 글 정보를 모델에 추가하여 폼에 전달
-	        model.addAttribute("diary", diary);
-
-	        // 수정 폼을 나타내는 HTML 파일 이름을 반환합니다. 예: "updateDiaryForm"
-	        return "diary/my/diary_modify.html";
-	    }
-
-	    // 글 수정 처리 메서드 (POST 방식)
-	    @PostMapping("/diary/update")
-	    public String updateDiary(@ModelAttribute("diary") DiaryBoardEntity updatedDiary,Principal pricipal) {
-	        // 수정된 글 데이터를 데이터베이스에 업데이트합니다.
-	        diaryService.updateDiary(updatedDiary, pricipal); // DiaryService에서 글 업데이트 로직 구현 필요
-
-	        // 수정 완료 후, 이동할 페이지를 반환합니다. 예: 수정된 글의 상세 페이지로 redirect
-	        return "redirect:/diary/detail/" + updatedDiary.getDiaryId(); // 수정된 글의 상세 페이지 URL로 리다이렉트
-	    }
 	
 	   // 여행글 삭제 처리
     @PostMapping("/diary/delete/{diaryId}")
@@ -168,5 +138,25 @@ public class MyDiaryController {
 		int result = diaryService.unlikeDiary(diaryId, pricipal.getName());
 		return result;
 	}
+	// 수정하기
+	@GetMapping("/diary/update/{diaryId}")
+	public String showUpdateDiaryForm(@PathVariable int diaryId, Model model, Principal principal) {
+	    String memEmail = null;
+	    if (principal != null) {
+	        memEmail = principal.getName();
+	    }
+	    List<WritePlanTitleEntity> plans = diaryService.getAllPlans(memEmail);
+	    // diaryId에 해당하는 글을 조회하여 폼에 전달합니다.
+	    DiaryBoardEntity diary = diaryService.getDiaryById(diaryId, memEmail); 
 
+	    // 조회된 글 정보를 모델에 추가하여 폼에 전달
+	    model.addAttribute("diary", diary);
+	    model.addAttribute("plans", plans);
+	    model.addAttribute("loggedInUserEmail", memEmail);
+
+	    // 수정 폼을 나타내는 HTML 파일 이름을 반환합니다.
+	    return "diary/my/diary_modify";
+	}
+	
+	
 }

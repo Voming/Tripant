@@ -87,5 +87,5 @@ public interface AdminRepository {
 	//상품삭제
 	public int  itemDelete(String itemCode);
 	
-	
+	public Map<String, Object> mchart();
 }

@@ -87,7 +87,8 @@ public class DiaryController {
 		}
 		model.addAttribute("diary", diaryService.getDiaryById(diaryId, memEmail));
 		model.addAttribute("likes", diaryService.selectDiaryLike(diaryId, memEmail));
-
+		 // 로그인한 사용자의 이메일을 모델에 추가
+        model.addAttribute("loggedInUserEmail", memEmail);
 		return "diary/diary_read";
 	}
 

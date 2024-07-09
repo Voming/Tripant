@@ -34,9 +34,11 @@
 							<li class="report" th:data-diary-id="${diary.diaryId}"><a> 신고하기 </a></li>
 							<!-- 로그인시 활성화 -->
 							<!-- 내가쓴 글에만 보이기 -->
-							<li class="delete"th:data-diary-id="${diary.diaryId}" sec:authorize="isAuthenticated()"><a> 삭제하기 </a></li>
+							
+							<li class="delete"th:data-diary-id="${diary.diaryId}"  th:if="${diary.diaryMemEmail == loggedInUserEmail} "><a> 삭제하기 </a></li>
 							<!-- 글 수정하기 -->
-							<li class="update" th:data-diary-id="${diary.diaryId}" sec:authorize="isAuthenticated()"><a> 수정하기 </a></li>
+							<li class="update" th:data-diary-id="${diary.diaryId}" th:if="${diary.diaryMemEmail == loggedInUserEmail}" >
+							<a th:href="@{/my/diary/update/{diaryId}(diaryId=${diary.diaryId})}"> 수정하기 </a></li>
 						</ul></li>
 				</ul>
 			</div>

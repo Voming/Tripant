@@ -433,4 +433,10 @@
 	delete from item where item_code=#{itemCode}
 	</delete>
 	
+	<select id="mchart" resultType="map">
+	select to_char(mem_join_date,'yyyy-MM') , count(mem_email) as count
+	from member
+	where mem_join_date between to_date('2024-06-01','yyyy-MM-dd') and to_date('2024-06-30','yyyy-MM-dd')
+	group by to_char(mem_join_date,'yyyy-MM')
+	</select>
 </mapper>

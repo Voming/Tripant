@@ -18,16 +18,18 @@ TRAVEL_ORDER ,MEMO ,TITLE ,ADDRESS ,FIRSTIMAGE ,LNG ,LAT  FROM V_DETAILINFO  ORD
 --편집된 일정 저장하기
 
 --trigger 생성
-create or replace NONEDITIONABLE TRIGGER trg_plan_change
-    BEFORE insert ON plan_spot
-    REFERENCING OLD AS OLD
+CREATE OR REPLACE NONEDITIONABLE TRIGGER trg_plan_change
+    BEFORE INSERT ON plan_spot
+    REFERENCING OLD AS OLD NEW AS NEW
     FOR EACH ROW
 DECLARE
 BEGIN
-    delete from plan_spot where spot_plan_id = :OLD.spot_plan_id;
+    -- 새로운 레코드의 spot_plan_id와 동일한 레코드를 삭제합니다.
+    DELETE FROM plan_spot WHERE spot_plan_id = :NEW.spot_plan_id;
 END;
-
+/
 ------------------
+drop TRIGGER trg_plan_change;
 
 
 --세부 일정에서 띄울 여행일정의 기본 정보값 <여행 기본 정보 불러오기>

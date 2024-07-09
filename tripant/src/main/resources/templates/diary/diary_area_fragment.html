@@ -51,19 +51,12 @@
 						</div>
 					</div>
 				</div>
-				
+				 <div th:if="${diary == null}">
+					<p>일기를 찾을 수 없습니다.</p>
+				</div>
 			</th:block>
 		 </th:block>
-			<!-- <div id="emptyMessage" style="display: none;">
-            <div class="empty_diary">
-                <div class="empty_img">
-                    <img th:src="@{/images/icons/tripant_logo_color.png}" style="width: 300px;">
-                </div>
-                <div class="empty_text">
-                    <h3 style="display: flex; justify-content: center;">작성된 글이 없습니다.</h3>
-                </div>
-            </div>
-        </div> -->
+			
 	</div>
 
 </body>

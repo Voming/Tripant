@@ -25,6 +25,9 @@ public interface TripRepository {
 	//spot 검색 정보 불러오기
 	List<PlaceboxEntity> selectSpotFindList(String findArea, @Param("areaCode") int areaCode, @Param("maxNum") int  maxNum); //장소명 검색 더보기
 	
+	//변경 전 삭제
+	Integer saveDelete(Integer planId);
+	
 	//변경정보 저장하기
 	Integer saveChange(Map<String, Object> paramMap);
 	

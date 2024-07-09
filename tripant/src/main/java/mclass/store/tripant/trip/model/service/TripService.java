@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
@@ -48,8 +49,12 @@ public class TripService {
 	public List<PlaceboxEntity> selectSpotFindList(String findArea, int areaCode,  int maxNum) {
 		return planRepository.selectSpotFindList(findArea, areaCode, maxNum);
 	}
+
 	//
+	@Transactional //repositoy 두 개를 한 몸처럼 다룸
 	public Integer saveChange(Map<String, Object> paramMap) {
+		Integer planId = (Integer) paramMap.get("planId");
+		repository.saveDelete(planId);
 		return repository.saveChange(paramMap);
 	}
 	

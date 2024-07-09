@@ -124,5 +124,30 @@ commit;
         select * from quit_member;
 select * from user_tables;
 
+-----------회원 통계
 
+select sum(decode(to_char(mem_join_date, 'MM'), '06' , mem_email)) as "6월"
+from member
+where mem_join_date  between to_date('2024-06-01','yyyy-MM-dd') and to_date('2024-06-30','yyyy-MM-dd')
+;
 
+select to_char(mem_join_date,'yyyy-MM-dd') , count(mem_email)
+from member
+where mem_join_date between to_date('2024-06-01','yyyy-MM-dd') and to_date('2024-06-30','yyyy-MM-dd')
+group by to_char(mem_join_date,'yyyy-MM-dd');
+
+select to_char(mem_join_date,'MM') , count(mem_email)
+from member
+where mem_join_date between to_date('06','MM') and to_date('07','MM')
+group by to_char(mem_join_date,'MM');
+
+select to_char(mem_join_date,'yyyy-MM') , count(mem_email)
+from member
+where mem_join_date between to_date('2024-06-01','yyyy-MM-dd') and to_date('2024-06-30','yyyy-MM-dd')
+group by to_char(mem_join_date,'yyyy-MM');
+
+select mem_join_date from member;
+--가입날짜부터 오늘까지 달 수
+select trunc(MONTHS_BETWEEN(SYSDATE,mem_join_date))
+from member
+;
