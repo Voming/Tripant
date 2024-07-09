@@ -46,9 +46,9 @@ select * from place where areacode = 1 and CONTENTTYPEID='32' and cat3='B0201160
 
 ----plan_stay
 --1일차
-insert into plan_stay values((select plan_start_day from plan where plan_id = 13),13,1868919,5);
+--insert into plan_stay values((select plan_start_day from plan where plan_id = 13),13,1868919,5);
 --2일차
-insert into plan_stay values((select plan_start_day+1 from plan where plan_id = 13),13,1870779,5);
+--insert into plan_stay values((select plan_start_day+1 from plan where plan_id = 13),13,1870779,5);
 
 --memo 추가하기
 update plan_spot set SPOT_MEMO = '모든 국민은 법률이 정하는 바에 의하여 국방의 의무를 진다. 법관은 헌법과 법률에 의하여 그 양심에 따라 독립하여 심판한다.' where spot_contentid=134686;

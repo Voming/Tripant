@@ -114,17 +114,17 @@ public class TripController {
         
         result = service.saveChange(paramMap);
         
-        System.out.println(">>>>>>>>>>>>>>>>> result");
-        System.out.println(result);
-        
-		System.out.println(dtos.size() + " : " +dtos);
-		for(int i = 0 ; i < dtos.size() ;  i++) {
-			List<DayDetailInfoEntity> dtoss = dtos.get(i).getDayDetailInfoEntity();
-			for(int j = 0 ; j<dtoss.size();j++) {
-				System.out.println("++++++++ "+i);
-				System.out.println(dtoss.get(j));
-			}
-		}
+//        System.out.println(">>>>>>>>>>>>>>>>> result");
+//        System.out.println(result);
+//		System.out.println(dtos.size() + " : " +dtos);
+		
+//        for(int i = 0 ; i < dtos.size() ;  i++) {
+//			List<DayDetailInfoEntity> dtoss = dtos.get(i).getDayDetailInfoEntity();
+//			for(int j = 0 ; j<dtoss.size();j++) {
+//				//System.out.println("++++++++ "+i);
+//				//System.out.println(dtoss.get(j));
+//			}
+//		}
 		return result;
 	}
 }
