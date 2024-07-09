@@ -76,12 +76,13 @@ public class PlanningAlgorithm {
 
 		// 날짜 별 정보(하루, 숙소)
 		List<PlanDate> dateArr = calendarPlan.getDateArr();
-		for (int i = 0; i < dateArr.size(); i++) {
+		for (int i = 0; i < dateArr.size()-1; i++) {  // 1-2
 			Stay stay = dateArr.get(i).getStay();
-			
+			System.out.println("====1");
+			System.out.println(stay);
 			//id만 잘라내기
 			String idLongStr = stay.getId();
-			int id = Integer.parseInt(idLongStr.substring(0, 9));
+			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length()-1));
 			System.out.println("idLongStr -> id : " + id);
 			
 			stayPointList.add(new BeforDto( dateArr.get(i).getDate(), id, 
@@ -97,7 +98,7 @@ public class PlanningAlgorithm {
 			
 			//id만 잘라내기
 			String idLongStr = spot.getId();
-			int id = Integer.parseInt(idLongStr.substring(0, 9));
+			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length()-1));
 			System.out.println("idLongStr -> id : " + id);
 			
 			spotPointList.add(new BeforDto( "", //장소는 아직 방문 날짜 정해지지 않음
@@ -216,16 +217,14 @@ public class PlanningAlgorithm {
 			graph.add(new ArrayList<>());
 		}
 		for (int i = 0; i < V; i++) {
+			BeforDto start = spotPointList.get(i); // 출발 노드
+			double startx = Double.parseDouble(start.getMapx());
+			double starty = Double.parseDouble(start.getMapy());
 			for (int j = 0; j < V; j++) {
 				if (j != i) {
-					BeforDto start = spotPointList.get(i); // 출발 노드
 					BeforDto end = spotPointList.get(j); // 도착 노드
-
-					double startx = Double.parseDouble(start.getMapx());
-					double starty = Double.parseDouble(start.getMapy());
 					double endx = Double.parseDouble(end.getMapx());
 					double endy = Double.parseDouble(end.getMapy());
-
 					System.out.println(startx + " : " + starty + " : " + endx + " : " + endy);
 
 					String durationStr = getduration(startx, starty, endx, endy);
@@ -269,7 +268,7 @@ public class PlanningAlgorithm {
 			if (weight > distance[nodeIndex]) {
 				continue;
 			}
-
+			int idx = 0;
 			for (Node linkedNode : graph.get(nodeIndex)) {
 				if (weight + linkedNode.weight < distance[linkedNode.index]) {
 					// 최단 테이블 갱신
@@ -277,6 +276,7 @@ public class PlanningAlgorithm {
 					// 갱신 된 노드를 우선순위 큐에 넣어
 					pq.offer(new Node(linkedNode.index, distance[linkedNode.index]));
 				}
+				idx++;
 			}
 
 			// 결과값 출력
