@@ -148,6 +148,28 @@ group by to_char(mem_join_date,'yyyy-MM');
 
 select mem_join_date from member;
 --가입날짜부터 오늘까지 달 수
-select trunc(MONTHS_BETWEEN(SYSDATE,mem_join_date))
+select  mem_email, trunc(MONTHS_BETWEEN(SYSDATE,mem_join_date))
 from member
 ;
+select  mem_email, round(MONTHS_BETWEEN(SYSDATE,mem_join_date))
+from member
+;
+select mem_email,
+(select count(*) from member where mem_join_date >= to_char(trunc(sysdate,'iw'),'yyyy-MM-dd'))
+from member;
+select
+(select count(*) from member where mem_join_date > to_char(trunc(sysdate),'yyyy-MM-dd'))
+from member;
+
+select add_months(sysdate,-1) from member
+;
+select mem_email, mem_join_date, add_months(sysdate,-1) from member
+;
+select count(mem_email), add_months(mem_join_date,0) from member
+group by add_months(mem_join_date,0)
+;
+select count(*) as count from member where to_char(mem_join_date,'yyyy-MM')= to_char(add_months(sysdate,0),'yyyy-MM') ;
+select count(*) from member where to_char(mem_join_date,'yyyy-MM')= to_char(add_months(sysdate,-1),'yyyy-MM');
+select count(*) from member where to_char(mem_join_date,'yyyy-MM')= to_char(add_months(sysdate,-2),'yyyy-MM');
+
+select * from member;
