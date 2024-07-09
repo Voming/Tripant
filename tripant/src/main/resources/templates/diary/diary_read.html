@@ -37,7 +37,8 @@
 							
 							<li class="delete"th:data-diary-id="${diary.diaryId}"  th:if="${diary.diaryMemEmail == loggedInUserEmail} "><a> 삭제하기 </a></li>
 							<!-- 글 수정하기 -->
-							<li class="update" th:data-diary-id="${diary.diaryId}" th:if="${diary.diaryMemEmail == loggedInUserEmail}" ><a> 수정하기 </a></li>
+							<li class="update" th:data-diary-id="${diary.diaryId}" th:if="${diary.diaryMemEmail == loggedInUserEmail}" >
+							<a th:href="@{/my/diary/update/{diaryId}(diaryId=${diary.diaryId})}"> 수정하기 </a></li>
 						</ul></li>
 				</ul>
 			</div>
