@@ -439,11 +439,16 @@
 	where mem_join_date between to_date('2024-06-01','yyyy-MM-dd') and to_date('2024-06-30','yyyy-MM-dd')
 	group by to_char(mem_join_date,'yyyy-MM')
 	</select> -->
+	<!-- 
 	<select id="chart" resultType="map">
 	select count(*) as count from member where to_char(mem_join_date,'yyyy-MM')= to_char(add_months(sysdate,0),'yyyy-MM')
 	</select>
 	<select id="chart2" resultType="map">
 	select count(*) as count2 from member where to_char(mem_join_date,'yyyy-MM')= to_char(add_months(sysdate,-1),'yyyy-MM')
 	</select>
+	 -->
+	 <select id="chart" resultType="AdminChartEntity">
+	 select trunc(months_between(sysdate, to_date(to_char(mem_join_date, 'yyyy-MM'), 'yyyy-MM'))) as before, count(*) as num from member where to_char(mem_join_date, 'yyyy-MM') in (to_char(sysdate,'yyyy-MM'), to_char(add_months(sysdate, -1),'yyyy-MM'), to_char(add_months(sysdate, -2),'yyyy-MM'), to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM')) group by to_char(mem_join_date, 'yyyy-MM')
+	 </select>
 	
 </mapper>

@@ -7,15 +7,21 @@ function memebrChart(){
 	
 var ctx2 = document.getElementById('myChart2').getContext('2d');
 
-console.log(count + "==========================");
 
+/*
+var array = JSON.parse(JSON.stringify(count));
+array.forEach(function(element){
+	console.log(element.before);
+	console.log(element.num);
+});
+*/
 var myChart2 = new Chart(ctx2, {
 	type: 'line',
  	data: {
   		labels:["5달전", "4달전", "3달전", "2달전", "1달전", "이번달"],
 	  	datasets: [{
 			 label: '회원수',
-			 data: [10, 30, 27, 11, count2, count],
+			 data: [count5, count4, count3, count2, count1, count0],
 			 fill: false,
 			 borderColor: 'rgb(255, 99, 132)',
 			 borderWidth:1,

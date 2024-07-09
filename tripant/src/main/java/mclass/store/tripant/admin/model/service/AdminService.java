@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
+import mclass.store.tripant.admin.domain.AdminChartEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
 import mclass.store.tripant.admin.domain.AdminStoreEntity;
 import mclass.store.tripant.admin.model.repository.AdminRepository;
@@ -478,11 +479,8 @@ public class AdminService {
 	}
 	
 	//회원통계
-	public Map<String, Object> chart() {
+	public List<AdminChartEntity> chart() {
 		return admindao.chart();
-	}
-	public Map<String, Object> chart2() {
-		return admindao.chart2();
 	}
 	
 }
