@@ -477,4 +477,8 @@ public class AdminService {
 		return admindao.itemDelete(itemCode);
 	}
 	
+	public Map<String, Object> mChart() {
+		return admindao.mchart();
+	}
+	
 }

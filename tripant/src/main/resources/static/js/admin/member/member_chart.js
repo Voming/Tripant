@@ -2,16 +2,23 @@
 $(document).ready(function(){
 	memebrChart();
 })
+
+
+
 function memebrChart(){
+	
 var ctx2 = document.getElementById('myChart2').getContext('2d');
+
+console.log(count + "==========================");
+
+var labels = Utils.months({count: 6});
 var myChart2 = new Chart(ctx2, {
-		  type: 'bubble',
+		  /*type: 'bubble',
 		  data: {        
 				labels: ["1월", "2월", "3월", "4월", "5월", "6월"],        
 				datasets: [{           
 					label: '회원수',       
-					 data: [{x:3,y:5,r:7},{x:5,y:7,r:7},{x:4,y:4,r:8}
-					 ,{x:6,y:3,r:5},{x:8,y:3,r:6},{x:9,y:9,r:9}],            
+					 data: {x:1,y:5,r:7},            
 					backgroundColor: [                
 						'rgba(255, 99, 132, 0.2)',               
 						'rgba(54, 162, 235, 0.2)',                
@@ -46,5 +53,29 @@ var myChart2 = new Chart(ctx2, {
 		      }
 		    }
 		  },
-		});
+		});*/
+		type: 'line',
+  data: {
+  labels: labels,
+  datasets: [{
+    label: '회원수',
+    data: [65, 59, 80, 81, 56, 55, count],
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+  }]
+},
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: '회원통계'
+      }
+    }
+  },
+  });
 }
