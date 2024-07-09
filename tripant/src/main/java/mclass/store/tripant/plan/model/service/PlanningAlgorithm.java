@@ -63,7 +63,7 @@ public class PlanningAlgorithm {
 		}
 	}
 
-	public void planningJson(String jsonString, int areaCode) { // planJsonParse
+	public void planningJson(CalendarPlanEntity calendarPlan, int areaCode) { // planJsonParse
 		V = 0;
 		dayN = 0;
 		distribute = 0;
@@ -71,8 +71,8 @@ public class PlanningAlgorithm {
 		// 출발 장소 좌표
 		AreaEntity startPoint = planRepository.selectAreaInfo(areaCode); 
 		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		CalendarPlanEntity calendarPlan = gson.fromJson(jsonString, CalendarPlanEntity.class);
+//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//		CalendarPlanEntity calendarPlan = gson.fromJson(jsonString, CalendarPlanEntity.class);
 
 		// 날짜 별 정보(하루, 숙소)
 		List<PlanDate> dateArr = calendarPlan.getDateArr();
@@ -82,10 +82,10 @@ public class PlanningAlgorithm {
 			System.out.println(stay);
 			//id만 잘라내기
 			String idLongStr = stay.getId();
-			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length()-1));
+			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length()));
 			System.out.println("idLongStr -> id : " + id);
 			
-			stayPointList.add(new BeforDto( dateArr.get(i).getDate(), id, 
+			stayPointList.add(new BeforDto( i, dateArr.get(i).getDate(), id, 
 					stay.getType(), "", //숙소는 머무는 시간 없음
 					stay.getMapx(), stay.getMapy()));
 		}
@@ -98,10 +98,10 @@ public class PlanningAlgorithm {
 			
 			//id만 잘라내기
 			String idLongStr = spot.getId();
-			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length()-1));
+			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length()));
 			System.out.println("idLongStr -> id : " + id);
 			
-			spotPointList.add(new BeforDto( "", //장소는 아직 방문 날짜 정해지지 않음
+			spotPointList.add(new BeforDto( i, "", //장소는 아직 방문 날짜 정해지지 않음
 					id, spot.getType(),
 					spot.getSpotTime(), 
 					spot.getMapx(), spot.getMapy()));
@@ -190,6 +190,7 @@ public class PlanningAlgorithm {
 			String durationStr = getduration(startx, starty, endx, endy);
 			if (durationStr.equals("길찾기 결과를 찾을 수 없음") || durationStr.equals("")) {
 				weight[i] = 10800; // 3시간 //TODO
+				System.out.println("!!!!!!!!!!!!!!!!!!");
 			} else {
 				System.out.println(durationStr);
 				weight[i] = Integer.parseInt(durationStr);
@@ -203,7 +204,11 @@ public class PlanningAlgorithm {
 				minIndex = i;
 			}
 		}
-
+		
+		int tempIdx = spotPointList.get(minIndex).getOrder();
+		spotPointList.get(minIndex).setOrder( spotPointList.get(0).getOrder() );
+		spotPointList.get(0).setOrder(tempIdx);
+		
 		Collections.swap(spotPointList, 0, minIndex); // 위치 변경
 
 		System.out.println(spotPointList.get(0));
@@ -228,16 +233,17 @@ public class PlanningAlgorithm {
 					System.out.println(startx + " : " + starty + " : " + endx + " : " + endy);
 
 					String durationStr = getduration(startx, starty, endx, endy);
-
+					int weight = 0;
 					if (durationStr.equals("길찾기 결과를 찾을 수 없음") || durationStr.equals("")) {
 //						errorPointList.add(start);
+						weight = 10800; // 3시간 //TODO
+						System.out.println("!!!!!!!!!!!!!!!!!!");
 					} else {
 						System.out.println(durationStr);
-						int weight = Integer.parseInt(durationStr);
-
-						graph.get(i).add(new Node(end.getContentId(), weight));
-						graph.get(j).add(new Node(start.getContentId(), weight));
+						weight = Integer.parseInt(durationStr);
 					}
+					graph.get(i).add(new Node(end.getOrder(), weight));
+					graph.get(j).add(new Node(start.getOrder(), weight));
 				}
 			}
 		}
@@ -268,15 +274,19 @@ public class PlanningAlgorithm {
 			if (weight > distance[nodeIndex]) {
 				continue;
 			}
-			int idx = 0;
 			for (Node linkedNode : graph.get(nodeIndex)) {
+				System.out.println("=====1");
 				if (weight + linkedNode.weight < distance[linkedNode.index]) {
+					System.out.println("=====2");
+					System.out.println(weight + linkedNode.weight);
+					System.out.println(linkedNode.index);
+					System.out.println(distance[linkedNode.index]);
 					// 최단 테이블 갱신
 					distance[linkedNode.index] = weight + linkedNode.weight;
+					
 					// 갱신 된 노드를 우선순위 큐에 넣어
 					pq.offer(new Node(linkedNode.index, distance[linkedNode.index]));
 				}
-				idx++;
 			}
 
 			// 결과값 출력
@@ -321,7 +331,7 @@ public class PlanningAlgorithm {
 
 		// 그냥 넣고 swap, index 다시 붙여주기
 
-		System.out.println(spotPointList);
+		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(spotPointList));
 	}
 
 	@Value("${kakao.map.rest.api}")
