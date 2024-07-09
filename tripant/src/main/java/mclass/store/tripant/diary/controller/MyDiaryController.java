@@ -110,7 +110,7 @@ public class MyDiaryController {
 	        model.addAttribute("diary", diary);
 
 	        // 수정 폼을 나타내는 HTML 파일 이름을 반환합니다. 예: "updateDiaryForm"
-	        return "diary/my/diary_modify.html";
+	        return "diary/my/diary_modify";
 	    }
 
 	    // 글 수정 처리 메서드 (POST 방식)
