@@ -205,7 +205,7 @@ public class PlaceServiceCrawling {
 		return result;
 	}
 
-	@Scheduled(cron = "* * 20 * * *") // 매일 20시에 실행
+	@Scheduled(cron = "0 0 20 * * *") // 매일 20시에 실행
 	// 첫 번째 * 부터 초(0-59) 분(0-59) 시간(0-23) 일(1-31) 월(1-12) 요일(0-6) (0: 일, 1: 월, 2:화, 3:수, 4:목, 5:금, 6:토)
 	public int insertPlace() {
 		boolean isModifiedData = false;
