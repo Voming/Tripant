@@ -106,7 +106,7 @@ function deleteHandler() {
 					} else {
 						Swal.fire({
 							title: "실패",
-							text: "삭제에 실패하였습니다.",
+							text: "신고된 글이라 삭제할 수 없습니다. 관리자에게 문의바랍니다.",
 							confirmButtonText: 'Ok'
 						});
 					}
