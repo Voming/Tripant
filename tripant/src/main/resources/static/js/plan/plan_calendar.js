@@ -38,8 +38,7 @@ $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
 $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 	let diff = Math.abs(picker.endDate - picker.startDate);
 	diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-	console.log(diff);
-	
+
 	if (diff == 1) {
 		alert("기간이 너무 작습니다. 기간을 다시 입력해주세요. \n (최소 2일 최대 10일)");
 		$('#daterange').focus();
@@ -48,7 +47,7 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 		$('#daterange').focus();
 	} else {
 		$(".time_btn").show();
-		
+
 		var start = picker.startDate.format('YYYY.MM.DD');
 		var end = picker.endDate.format('YYYY.MM.DD');
 		//달력 모달 닫기
@@ -78,7 +77,7 @@ $('#daterange').on('apply.daterangepicker', function(ev, picker) {
 			let MM = ('0' + (date.getMonth() + 1)).slice(-2);
 			let dd = ('0' + date.getDate()).slice(-2);
 			let smalldate = MM + '/' + dd;
-			
+
 			let dateY = yyyy + MM + dd;
 
 			//요일 가져오기
@@ -126,14 +125,21 @@ function displayDayTable() {
 	$(".time_btn").on("click", function() {
 		// 시간 정보 저장
 		saveTimeInfo();
-		// 화면 이동
-		$('.tab-content > div').hide().filter(this.hash).fadeIn();
-//		$('.tab-nav a').css('color', 'black');
-		$('.tab-nav a').removeClass('active');
-		$('.nav-2').addClass('active');
+		
+		checkLess = false;   //시간 테이블 범위 체크
+		timePerDateCheck();
+		if (checkLess) {
+			alert(alertTtableStr);
+		} else {
+			// 화면 이동
+			$('.tab-content > div').hide().filter(this.hash).fadeIn();
+			$('.tab-nav a').removeClass('active');
+			$('.nav-2').addClass('active');
 
-		$('.tab-content > #tab02').show();
-		$(".main-wrapper .tab-content").css("width", "40%");
+			$('.tab-content > #tab02').show();
+			$(".main-wrapper .tab-content").css("width", "40%");
+		}
+
 	});
 }
 // 시간 정보 변수에 저장
@@ -155,11 +161,14 @@ function saveTimeInfo() {
 		var endSumSec = (endH * 60 * 60) + (endM * 60); //초로 변환하기
 		//console.log(endSumSec);
 
-		rangeSecSum += (endSumSec - startSumSec);  // 하루치 활동 시간 초
+		rangeSecSum += (endSumSec - startSumSec);  // 전체(하루씩 누적합) 활동 시간 초
+
+		var datesecSum = endSumSec - startSumSec;
 
 		// 시간 정보 저장
 		calendarPlan.dateArr[idx].startTime = startstr;
 		calendarPlan.dateArr[idx].endTime = endstr;
+		calendarPlan.dateArr[idx].dateTimeRange = datesecSum;
 	}
 	//전체 시간 범위 넣어주기
 	calendarPlan.timeRange = rangeSecSum;
@@ -175,10 +184,8 @@ function saveTimeInfo() {
 	$(".time-spot").html(timeVal);
 }
 
-// 시간 입력 체크
+// 시간 범위 입력 체크
 function timeInputCheck() {
-	console.log(calendarPlan);
-	//입력 범위 체크
 	let id = $(this).attr('id');
 	let id_num;
 	if (id.includes("end-"))
@@ -188,7 +195,7 @@ function timeInputCheck() {
 
 	var start = $('#start-' + id_num).val();
 	var end = $('#end-' + id_num).val();
-	
+
 	if (start >= end) { // 시작 시간이 더 큼
 		$(this).css('color', 'red');
 	}

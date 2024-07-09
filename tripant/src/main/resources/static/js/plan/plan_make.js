@@ -7,6 +7,7 @@ class PlanDate {
 	}
 	startTime; //10:00
 	endTime;   //22:00
+	dateTimeRange; // 하루 사용 가능한 초
 	stay = new Stay();  //숙소
 }
 
@@ -45,6 +46,16 @@ calendarPlan.spotArr = new Array(Spot);
 // 저장되기 전에만 방지 처리
 var beforeSave = true;
 
+// 시간테이블 최소값 체크
+var checkLess = false;
+// 시간테이블 부족 경고 str
+let alertTtableStr = "하루에 2시간 이상으로 설정해주세요.";
+
+// 장소 부족 경고 str
+let alertSpotStr = "하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!";
+// 장소 이용 시간 합 초과 경고 str
+let alertSpotSumStr = "장소별 방문시간의 합이 총 이용가능 시간 보다 많을 수 없습니다. 다시 설정해주세요.";
+
 //창닫기, 새로고침 시 확인 이벤트
 $(window).bind("beforeunload", function(e) {
 	if (beforeSave) {
@@ -77,7 +88,7 @@ function loadedHandler() {
 	//좌측 탭
 	$('.tab-nav a').click(function() {
 		var clickElement = this;
-		function moveStep() {
+		function moveStep() {  // 클릭된 클래스에 active 설정
 			$('.tab-nav a').removeClass('active');
 			$(clickElement).addClass('active');
 			$('.tab-content > div').hide().filter(clickElement.hash).fadeIn();
@@ -86,47 +97,52 @@ function loadedHandler() {
 		var click_cls_name = $(clickElement).attr("class");
 		// current
 		var currentActive = $('.tab-nav .active').attr("class");
-		if (click_cls_name == 'nav-1' && !currentActive) {
+		if (click_cls_name == 'nav-1' && !currentActive) {  //1번으로 이동
 			moveStep();
-			//saveTimeInfo(); //시간 정보 저장
 			$(".main-wrapper .tab-content").css("width", "25%");
-
-		} else {
-
+		} else { //2 or 3으로 이동
 			cls_name = currentActive.replace(' active', '');
-			if (cls_name == 'nav-1') {
-				if (click_cls_name == 'nav-3') {
-					if (markersSpot.length < calendarPlan.dateArr.length) {
-						alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
-					} else {
+			if (cls_name == 'nav-1') {  //현재 1=========
+				saveTimeInfo(); //시간 정보 저장
+			
+				checkLess = false;   //시간 테이블 범위 체크
+				timePerDateCheck();
+				if (checkLess) {
+					alert(alertTtableStr);
+				} else {
+					if (click_cls_name == 'nav-3') {  // 1 -> 3
+						if (markersSpot.length < calendarPlan.dateArr.length) {
+							alert(alertSpotStr);
+						} else {
+							moveStep();
+							$(".main-wrapper .tab-content").css("width", "40%");
+						}
+					} else { // 1 -> 2
 						moveStep();
 						$(".main-wrapper .tab-content").css("width", "40%");
 					}
-				} else {
-					moveStep();
-					saveTimeInfo(); //시간 정보 저장
-					$(".main-wrapper .tab-content").css("width", "40%");
 				}
-			} else if (cls_name == 'nav-2') {
-				if (click_cls_name == 'nav-3') {
+			} else if (cls_name == 'nav-2') { //현재 2=========
+				saveSpotSecSum();
+				if (click_cls_name == 'nav-3') { // 2 -> 3
 					if (markersSpot.length < calendarPlan.dateArr.length) {
-						alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+						alert(alertSpotStr);
 					} else if (calendarPlan.timeRange < secSum) {
-						alert("장소별 방문시간의 합이 총 이용가능 시간 보다 많을 수 없습니다. 다시 설정해주세요.");
+						alert(alertSpotSumStr);
 					}
 					else {
 						moveStep();
 						$(".main-wrapper .tab-content").css("width", "40%");
 					}
-				} else {
+				} else { // 2 -> 1
 					moveStep();
 					$(".main-wrapper .tab-content").css("width", "25%");
 				}
-			} else if (cls_name == 'nav-3') {
-				if (click_cls_name == 'nav-2') {
+			} else if (cls_name == 'nav-3') {  //현재 3=========
+				if (click_cls_name == 'nav-2') { // 3 -> 2
 					moveStep();
 					$(".main-wrapper .tab-content").css("width", "40%");
-				} else {
+				} else { // 3 -> 1 
 					moveStep();
 					$(".main-wrapper .tab-content").css("width", "25%");
 				}
@@ -140,22 +156,29 @@ function loadedHandler() {
 	$(".next.btn").on("click", function() {
 		$(".tab-nav > li").each(function() {
 			cls_name = $(this).find('a').attr("class");
-			if (cls_name === 'nav-1 active') {
-				//2번으로 이동
-				$('.tab-nav a').removeClass('active');
-				$('.nav-2').addClass('active');
+			if (cls_name === 'nav-1 active') { //현재 1=========
+				saveTimeInfo(); //시간 정보 저장
+				
+				checkLess = false;  //시간 테이블 범위 체크
+				timePerDateCheck();
+				if (checkLess) {
+					alert(alertTtableStr);
+				} else {
+					//2번으로 이동
+					$('.tab-nav a').removeClass('active');
+					$('.nav-2').addClass('active');
 
-				$('.tab-content > #tab01').hide();
-				$('.tab-content > #tab02').show();
-				saveTimeInfo();
-				$(".main-wrapper .tab-content").css("width", "40%");
-				return false;
-			} else if (cls_name === 'nav-2 active') {
+					$('.tab-content > #tab01').hide();
+					$('.tab-content > #tab02').show();
+					$(".main-wrapper .tab-content").css("width", "40%");
+				};
+			} else if (cls_name === 'nav-2 active') { //현재 2=========
+				saveSpotSecSum();
 				// 장소가 최소 날짜 수 만큼
 				if (markersSpot.length < calendarPlan.dateArr.length) {
-					alert("하루에 한 개 이상의 장소에 방문해야해요. 장소를 더 추가해주세요!");
+					alert(alertSpotStr);
 				} else if (calendarPlan.timeRange < secSum) {
-					alert("장소별 방문시간의 합이 총 이용가능 시간 보다 많을 수 없습니다. 다시 설정해주세요.");
+					alert(alertSpotSumStr);
 				} else {
 					//3번으로 이동
 					$('.tab-nav a').removeClass('active');
@@ -166,7 +189,7 @@ function loadedHandler() {
 					$(".main-wrapper .tab-content").css("width", "40%");
 				}
 				return false;
-			} else if (cls_name === 'nav-3 active') {
+			} else if (cls_name === 'nav-3 active') { //현재 3=========
 				if (markersStay.length < calendarPlan.dateArr.length - 1) {
 					alert("하루에 한 개 이상의 숙소에 방문해야해요. 숙소를 더 추가해주세요!");
 				} else {
@@ -180,7 +203,6 @@ function loadedHandler() {
 						contentType: "application/json",
 						data: jsonString,
 						traditional: true, //필수
-						//dataType: "json",
 						success: function(data) {
 							console.log(data);
 						}
@@ -188,5 +210,33 @@ function loadedHandler() {
 				}
 			}
 		});
+	});
+}
+
+//장소별 시간 저장
+function saveSpotSecSum() {
+	$(".selected-spot-box").each(function(index) {
+		var id = $(this).find(".box-id").attr("value");
+		var hours = $(this).find(".spot-hours").val();
+		var mins = $(this).find(".spot-mins").val();
+
+		var secSum = (hours * 60 * 60) + (mins * 60); //초로 변환하기
+
+		$.each(calendarPlan.spotArr, function(idx, element) {
+			if (element.id == id) {
+				element.spotTime = secSum;
+				return false;
+			}
+		});
+	});
+}
+
+//시간 테이블 범위 체크
+function timePerDateCheck() {
+	$.each(calendarPlan.dateArr, function(idx, element) {
+		if (Number(element.dateTimeRange) < 7200) {
+			checkLess = true;
+			return false;
+		}
 	});
 }
