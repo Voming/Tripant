@@ -24,7 +24,7 @@ var myChart = new Chart(ctx, {
 						'#CCCCFF59' ,
 						'#4B76E559' ,
 						'#4B76E599' ,
-						'#6699CCCC',
+						'#6699CCB3',
 						'#E5C34B80',
 						'#FF990073',
 						'#0066FF59'
