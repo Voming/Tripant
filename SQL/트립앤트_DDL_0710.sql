@@ -735,6 +735,7 @@ BEGIN
     if(substr(:new.item_code, 1, 1) = 'F') then
         if(font_dur < del_dur) then
         update member set mem_font_dur = 0 where mem_email = :new.mem_email;
+        update member set mem_role = 'ROLE_MEM' where mem_email = :new.mem_email;
         end if;
         if(font_dur >= del_dur) then
         update member set mem_font_dur = mem_font_dur - del_dur where mem_email = :new.mem_email;

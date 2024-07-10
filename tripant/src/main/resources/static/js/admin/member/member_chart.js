@@ -7,14 +7,6 @@ function memebrChart(){
 	
 var ctx2 = document.getElementById('myChart2').getContext('2d');
 
-
-/*
-var array = JSON.parse(JSON.stringify(count));
-array.forEach(function(element){
-	console.log(element.before);
-	console.log(element.num);
-});
-*/
 var myChart2 = new Chart(ctx2, {
 	type: 'line',
  	data: {
@@ -26,7 +18,15 @@ var myChart2 = new Chart(ctx2, {
 			 borderColor: 'rgb(255, 99, 132)',
 			 borderWidth:1,
 			 tension: 0.1
-	  }]
+	  },{
+			 label: '일정생성수',
+			 data: [plan5, plan4, plan3, plan2, plan1, plan0],
+			 fill: false,
+			 borderColor: '#4B76E5',
+			 borderWidth:1,
+			 tension: 0.1
+	  }
+	  ],
 	},
  	options: {
 	    responsive: true,

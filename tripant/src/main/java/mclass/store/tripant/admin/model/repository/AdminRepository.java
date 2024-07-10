@@ -90,4 +90,8 @@ public interface AdminRepository {
 	
 	//회원통계
 	public List<AdminChartEntity> chart();
+	//일정생성수 통계
+	public List<AdminChartEntity> plan();
+	//게시글 통계
+	public Map<String, Object> area();
 }

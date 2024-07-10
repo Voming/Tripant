@@ -482,5 +482,12 @@ public class AdminService {
 	public List<AdminChartEntity> chart() {
 		return admindao.chart();
 	}
-	
+	//일정생성수 통계
+	public List<AdminChartEntity> plan() {
+		return admindao.plan();
+	}
+	//게시글 통계
+	public Map<String, Object> area(){
+		return admindao.area();
+	}
 }

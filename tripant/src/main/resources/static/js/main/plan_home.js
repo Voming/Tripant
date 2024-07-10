@@ -34,6 +34,10 @@ $(document).mouseup(function(e) {
 	var LayerModal = $(".modal");
 	if (LayerModal.has(e.target).length === 0) {
 		LayerModal.removeClass("show");
+		//제목 입력했던게 있으면 지우기
+		if ($("input[name=planTitle]").val().trim().length != 0) {
+			$("input[name=planTitle]").val("");
+		}
 	}
 });
 

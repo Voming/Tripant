@@ -52,9 +52,9 @@ public class MypageController {
 		
 		int memType =  Integer.parseInt(String.valueOf(map.get("MEM_TYPE")));
 		
-		int isKakao = memType & Integer.parseInt("0100", 2);
-		int isNaver = memType & Integer.parseInt("0010", 2);
-		int isGoogle = memType & Integer.parseInt("0001", 2);
+		int isKakao = memType & (1<<2);
+		int isNaver = memType & (1<<1);
+		int isGoogle = memType & (1<<0);
 		
 		model.addAttribute("isKakao", isKakao);
 		model.addAttribute("isNaver", isNaver);
