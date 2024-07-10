@@ -8,7 +8,7 @@ var myChart = new Chart(ctx, {
 		  data: {        
 				datasets: [{           
 					label: 'polarArea',            
-					 data:[100,25,50,80],            
+					 data:[100,25,50,80,30,20,10],            
 					backgroundColor: [                
 						'rgba(255, 99, 132, 0.2)',                
 						'rgba(54, 162, 235, 0.2)',                
@@ -36,16 +36,16 @@ var myChart = new Chart(ctx, {
 		      },
 		      title: {
 		        display: true,
-		        text: '게시글 태그별 통계'
+		        text: '게시글 지역 통계'
 		      }
 		    }
 		  },
 		});
 
- const DATA_COUNT = 5;
+/*const DATA_COUNT = 6;
 const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
 
-const labels = ['Red', 'Orange', 'Yellow', 'Green', 'Blue'];
+const labels = ['Red', 'Orange', 'Yellow', 'Green', 'Blue','grey'];
 const data = {
   labels: labels,
   datasets: [
@@ -58,8 +58,9 @@ const data = {
         Utils.transparentize(Utils.CHART_COLORS.yellow, 0.5),
         Utils.transparentize(Utils.CHART_COLORS.green, 0.5),
         Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
+        Utils.transparentize(Utils.CHART_COLORS.grey, 0.5),
       ]
     }
   ]
-};
+};*/
 }

@@ -90,4 +90,6 @@ public interface AdminRepository {
 	
 	//회원통계
 	public List<AdminChartEntity> chart();
+	//일정생성수 통계
+	public List<AdminChartEntity> plan();
 }
