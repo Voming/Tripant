@@ -3,7 +3,7 @@
 
 <div class="wrap-list" th:fragment="cancelist">
 	<div class="ad-search">
-			<th:block th:if="${list!=null and list.search != null}">
+			<th:block th:if="${list!=null and list.searchMem != null}">
 			<input class="search" type="text" name="search" onkeyup="enterkey()" placeholder="회원검색" th:value="${list.searchMem}">
 			</th:block>
 			<th:block th:if="${list==null or list.searchMem == null}">
