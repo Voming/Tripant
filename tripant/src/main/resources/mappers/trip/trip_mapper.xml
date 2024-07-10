@@ -30,10 +30,12 @@
 		SELECT TO_CHAR(PLAN_AREA_CODE) CODE,PLAN_TITLE TITLE,PLAN_AREA_CODE AREACODE,TO_CHAR(PLAN_START_DAY,'YYYY.MM.DD') STARTDAY,TO_CHAR(PLAN_END_DAY,'YYYY.MM.DD') ENDDAY, AREA_SHORT_NAME AREANAME, AREA_X LNG, AREA_Y LAT  
 		FROM PLAN JOIN AREA ON AREA_CODE = PLAN_AREA_CODE WHERE PLAN_ID = #{planId}
 	</select>
+	
 <!-- 기존 일정 삭제 -->
 	<delete id="saveDelete" parameterType="int">
 		DELETE FROM PLAN_SPOT WHERE SPOT_PLAN_ID=#{planId}
 	</delete>
+	
 <!-- 편집된 일정 저장 -->
 	<insert id="saveChange" parameterType="java.util.HashMap">
 		INSERT ALL 
@@ -53,7 +55,5 @@
         </foreach>
         SELECT * FROM DUAL
 	</insert>
-	
-<!-- <update id=""></update> -->
 	
 </mapper>
