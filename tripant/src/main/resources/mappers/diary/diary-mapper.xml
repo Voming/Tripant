@@ -161,7 +161,6 @@
 		<selectKey keyProperty="diaryId" resultType="int" order="BEFORE">
 			SELECT diary_seq.NEXTVAL diaryId FROM DUAL
 		</selectKey>
-
 	</insert>
 
 	<!-- 여행기 글 등록 시 이미지 url diary_save 테이블에 저장 시키기 -->
@@ -224,19 +223,16 @@
 	</delete>
 
 	<!-- 글 수정 -->
-	<update id="updateDiary" parameterType="DiaryPostEntity">
+	<update id="updateDiary" parameterType="DiaryPostEntity" >
 		UPDATE DIARY
-			<set> 
+			SET
 				DIARY_TITLE = #{diaryTitle},
    				DIARY_CONTENT = TO_CLOB(#{diaryContent}),		
-   				DIARY_PLAN_ID = #{diaryPlanId},
-   		    	DIARY_DATE = TO_DATE(#{diaryDate}, 'YYYY-MM-DD') AS DIARY_DATE,
   				DIARY_OPEN = #{diaryOpen},
-    			DIARY_THEME =#{diaryTheme}
+    			DIARY_THEME =#{diaryTheme},
     			DIARY_PLAN_ID = #{diaryPlanId}
-    		</set>	
 			WHERE DIARY_ID = #{diaryId}
-			ND DIARY_MEM_EMAIL = #{memEmail};
+			AND DIARY_MEM_EMAIL = #{diaryMemEmail}
 	</update>
 
 	<!-- 좋아요 누르기 -->
@@ -259,6 +255,7 @@
 		(DIARY_ID, MEM_EMAIL)
 		VALUES (#{diaryId}, #{memEmail})
 	</insert>
+	
 	<select id="selectBuyTheme" parameterType="string" resultType="BuyThemeEntity">
 		     SELECT ITEM.ITEM_CODE, ITEM.ITEM_NAME, ITEM.ITEM_COLOR
     			FROM BUY
@@ -266,6 +263,5 @@
    				WHERE BUY.MEM_EMAIL = #{memEmail}
       			AND ITEM.ITEM_CODE NOT IN ('F0', 'F1')
       			AND ROWNUM <![CDATA[<=]]> 10
-
 	</select>
 </mapper>

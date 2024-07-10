@@ -50,7 +50,6 @@ public class DiaryService {
 	public DiaryBoardEntity findById(Long id) {
 		return diaryRepository.findById(id);
 	}
-	
 
 	// 여행기 글 등록하기, 여행기 글 등록 시 이미지 url 및 text 저장 
 	@Transactional
@@ -60,9 +59,14 @@ public class DiaryService {
 		diaryRepository.insertDiaryImage(diary);
 		return diary;
 	}
+	
 	// 여행기 글 수정하기
-	public DiaryBoardEntity updateDiary(DiaryBoardEntity updatedDiary, String memEmail) {
-		return diaryRepository.updateDiary(updatedDiary, memEmail);
+	@Transactional
+	public DiaryBoardEntity updateDiary(DiaryBoardEntity updatedDiary) {
+		int result = diaryRepository.updateDiary(updatedDiary);
+		System.out.println("bbb"+updatedDiary.getDiaryId());		
+		//diaryRepository.insertDiaryImage(updatedDiary); TODO
+		return updatedDiary;
 	}
 
 	// 여행기 글 삭제

@@ -16,6 +16,7 @@
         <div class="diary-write-wrap">
             <form id="diaryUpdateForm">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <p class="diaryIdInfo" type="hidden" th:value="${diary.diaryId}" ></p>
                 <table class="diary-write-table">
                     <tr>
                         <td colspan="2"><h1>나의 여행일기 남기기</h1></td>
@@ -79,21 +80,13 @@
         <div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
     </footer>
 
-   <script type="text/javascript">
-   
-  //  수정하기 ajax
-$(document).ready(function() {
-$('#diaryForm .btn_submit').click(function(event) {
-	
-}
-  
-   </script>
+ 
 
     <!-- ckeditor5 스크립트 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
     <script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
     <script type="text/javascript" th:src="@{/js/diary/editor.js}"></script>
-    <script type="text/javascript" th:src="@{/js/diary/diary_write.js}"></script>
+    <script type="text/javascript" th:src="@{/js/diary/diary_modify.js}"></script>
 
 </body>
 </html>

@@ -59,7 +59,7 @@ public interface DiaryRepository {
 	 void previewsText(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail);
 	 
 	// 글 수정하기
-	 DiaryBoardEntity updateDiary(@Param("diaryId") DiaryBoardEntity updatedDiary,@Param("memEmail") String memEmail);
+	 int updateDiary(DiaryBoardEntity updatedDiary);
 	
 	 // 내가 구매한 theme 꺼내기 
 	 List<BuyThemeEntity> selectBuyTheme(@Param("diaryId") int diaryId ,@Param("memEmail") String memEmail);
