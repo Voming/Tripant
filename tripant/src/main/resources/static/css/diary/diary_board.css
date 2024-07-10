@@ -132,6 +132,7 @@ select {
 .diary-title {
 	font-size: var(--font3);
 	margin: 10px;
+	font-weight: bold; /* 글씨 굵기 해결 */
 }
 
 .diary-date_nickname {

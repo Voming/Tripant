@@ -35,3 +35,11 @@ var jImgElement = $(".ck.ck-editor__main").find("img");
 				var imgSrc = $(thisElement).prop("src");
 				diaryImage = imgSrc;
 			});
+			
+   /* 클릭 범위 넓혀서 글 들어가기*/
+    $(document).ready(function() {
+        $(".wrap-diary").click(function() {
+            var diaryId = $(this).data("diaryid");
+            window.location.href = contextPath + 'diary/read/' + diaryId;
+        });
+    });

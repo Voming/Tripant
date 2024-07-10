@@ -72,7 +72,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 		}).done(function(result) {
 			if (result > 0)
 				$(thisElement).attr('src', contextPath + 'images/diary/diary_like_icon.png');
-			window.location.herf = contextPath +'diary/read' + diaryId;
+				window.location.href = contextPath + 'diary';
 		})
 	} else {
 		// 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
@@ -85,7 +85,7 @@ function btnLikeClickHandler(thisElement, diaryId) {
 		}).done(function(result) {
 			if (result > 0)
 				$(thisElement).attr('src', contextPath + 'images/diary/diary_like_none.png');
-			window.location.herf = contextPath +'diary/read' + diaryId;
+				window.location.href = contextPath + 'diary';
 		})
 	}
 }
@@ -134,4 +134,6 @@ function sortOptionChangeHandler(thisElement) {
 	})
 
 }
+
+
 

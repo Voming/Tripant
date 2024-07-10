@@ -4,7 +4,7 @@
 <div class="board_more"  th:fragment="board_more"> 
 <th:block th:if="${diaries} != null">
 	<th:block th:each="diary :  ${diaries}">
-		<div class="wrap-diary">
+		<div class="wrap-diary" th:data-diaryid="${diary.diaryId}">
 			<div class="diary-img">
 					<th:block th:if="${diary.diaryImage != null}">
 						<img th:src="${diary.diaryImage}" alt="대표 이미지" class="mytitle-img">

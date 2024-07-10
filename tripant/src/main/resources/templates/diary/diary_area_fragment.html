@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+ <script type="text/javascript">
+    /* 클릭 범위 넓혀서 글 들어가기*/
+    $(document).ready(function() {
+        $(".wrap-d-content").click(function() {
+            var diaryId = $(this).data("diaryid");
+            window.location.href = contextPath + 'diary/read/' + diaryId;
+        });
+    });
+    </script>
 <body>
 	<div class="wrap-diary"  th:fragment="diaryitemlist"> 
 		<!-- 공개글 데이터 가져오기  -->
 		<th:block th:if="${diaries != null}">
 			<th:block th:each="diary :  ${diaries}">
-				<div class="wrap-d-content">
+				<div class="wrap-d-content" id="click-diary" th:data-diaryid="${diary.diaryId}">
 					<div class="diary-img">
 					<th:block th:if="${diary.diaryImage != null}">
 						<img th:src="${diary.diaryImage}" alt="대표 이미지" class="title-img" >
