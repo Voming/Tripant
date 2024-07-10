@@ -65,7 +65,7 @@ public class DiaryService {
 	public DiaryBoardEntity updateDiary(DiaryBoardEntity updatedDiary) {
 		int result = diaryRepository.updateDiary(updatedDiary);
 		System.out.println("bbb"+updatedDiary.getDiaryId());		
-		//diaryRepository.insertDiaryImage(updatedDiary); TODO
+		diaryRepository.updateDiaryImage(updatedDiary); 
 		return updatedDiary;
 	}
 

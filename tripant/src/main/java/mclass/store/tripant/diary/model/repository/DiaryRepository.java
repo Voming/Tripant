@@ -60,7 +60,11 @@ public interface DiaryRepository {
 	 
 	// 글 수정하기
 	 int updateDiary(DiaryBoardEntity updatedDiary);
-	
+	// 글 미리보기 & 대표이미지 url 수정하기
+	 public int updateDiaryImage(DiaryBoardEntity diary);
+	 
+	 
+
 	 // 내가 구매한 theme 꺼내기 
 	 List<BuyThemeEntity> selectBuyTheme(@Param("diaryId") int diaryId ,@Param("memEmail") String memEmail);
 	// 글작성 시theme 꺼내기 

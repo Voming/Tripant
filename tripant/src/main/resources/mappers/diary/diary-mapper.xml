@@ -222,7 +222,7 @@
 		 WHERE	DIARY_ID = #{diaryId} AND DIARY_MEM_EMAIL = #{memEmail}
 	</delete>
 
-	<!-- 글 수정 -->
+	<!-- 하나의 글 수정 -->
 	<update id="updateDiary" parameterType="DiaryPostEntity" >
 		UPDATE DIARY
 			SET
@@ -234,7 +234,16 @@
 			WHERE DIARY_ID = #{diaryId}
 			AND DIARY_MEM_EMAIL = #{diaryMemEmail}
 	</update>
-
+	<!-- 여행기 글 등록 시 이미지 url diary_save 테이블에 저장 시키기 -->
+	<update id="updateDiaryImage" parameterType="DiaryBoardEntity">
+		UPDATE DIARY_SAVE
+			SET 
+				DIARY_ID = #{diaryId},
+				DIARY_MEM_EMAIL	= #{diaryMemEmail}, 
+				DIARY_IMAGE = #{diaryImage}, 
+				DIARY_PREVIEW =	 #{diaryPreview}
+			WHERE DIARY_ID = #{diaryId}
+	</update>
 	<!-- 좋아요 누르기 -->
 	<insert id="insertDiaryLike" parameterType="map">
 		INSERT INTO
@@ -255,7 +264,7 @@
 		(DIARY_ID, MEM_EMAIL)
 		VALUES (#{diaryId}, #{memEmail})
 	</insert>
-	
+	<!--테마 변경 적용하기  -->
 	<select id="selectBuyTheme" parameterType="string" resultType="BuyThemeEntity">
 		     SELECT ITEM.ITEM_CODE, ITEM.ITEM_NAME, ITEM.ITEM_COLOR
     			FROM BUY
