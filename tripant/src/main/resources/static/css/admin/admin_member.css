@@ -59,14 +59,14 @@
 
 
 .memberlist > li> .col >li:first-child{
-	width:13%;
+	width:15%;
 }
 
 .memberlist > li> .col >li:first-child+li{
-	width:22%;
+	width:25%;
 }
 .memberlist > li> .col >li:first-child+li+li{
-	width:17%;
+	width:20%;
 }
 .memberlist > li> .col >li:first-child+li+li+li{
 	width:17%;
