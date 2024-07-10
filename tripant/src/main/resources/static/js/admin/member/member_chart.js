@@ -12,7 +12,7 @@ var myChart2 = new Chart(ctx2, {
  	data: {
   		labels:["5달전", "4달전", "3달전", "2달전", "1달전", "이번달"],
 	  	datasets: [{
-			 label: '회원수',
+			 label: '신규가입회원수',
 			 data: [count5, count4, count3, count2, count1, count0],
 			 fill: false,
 			 borderColor: 'rgb(255, 99, 132)',

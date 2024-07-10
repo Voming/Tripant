@@ -4,10 +4,10 @@
 <div class= "wrap-list" th:fragment="wraplist">
 	<div class="ad-search">
 		<th:block th:if="${memMap!=null and memMap.searchMem != null}">
-		<input class="search" type="text" name="search" placeholder="회원검색"  onkeyup="enterkey()" th:value="${memMap.searchMem}"> 
+		<input class="search" type="text" name="search" placeholder="닉네임검색"  onkeyup="enterkey()" th:value="${memMap.searchMem}"> 
 		</th:block>
 		<th:block th:if="${memMap==null or memMap.searchMem == null}">
-		<input class="search" type="text" name="search" placeholder="회원검색" onkeyup="enterkey()"> 
+		<input class="search" type="text" name="search" placeholder="닉네임검색" onkeyup="enterkey()"> 
 		</th:block>
 		<button type="button" class="btn-search" onclick="searchBtnHandler(this);"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
 	</div>

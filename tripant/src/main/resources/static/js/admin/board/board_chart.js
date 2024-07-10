@@ -9,7 +9,7 @@ var myChart = new Chart(ctx, {
 		  labels: ['서울','부산','대구','인천','광주','대전','울산','세종','경기','충북','충남','전북','전남','경북','경남','제주','강원'],      
 				datasets: [{           
 					           
-					 data:[seoul,busan,daegu,incheon,gwangju,daejeon,ulsan,sejong,gyeonggi,Chungbuk,Chungnam,Jeonbuk,Jeonam,Gyeongbuk,Gyeongnam,jeju,gangwon],            
+					 data:[seoul,busan ,daegu,incheon,gwangju,daejeon,ulsan,sejong,gyeonggi,Chungbuk,Chungnam,Jeonbuk,Jeonam,Gyeongbuk,Gyeongnam,jeju,gangwon],            
 					backgroundColor: [                
 						'rgba(255, 99, 132, 0.2)',                
 						'rgba(54, 162, 235, 0.2)',                
@@ -32,7 +32,7 @@ var myChart = new Chart(ctx, {
 							}]    
 						}
 		 ,
-		  		backgroundColor: [                
+		  		/*backgroundColor: [                
 						'rgba(255, 99, 132, 0.2)',                
 						'rgba(54, 162, 235, 0.2)',                
 						'rgba(255, 206, 86, 0.2)',                
@@ -50,7 +50,7 @@ var myChart = new Chart(ctx, {
 						'#E5C34B80',
 						'#FF990073',
 						'#0066FF59'         
-				],    
+				],   */ 
 		  options: {
 		    responsive: false,
 		    plugins: {

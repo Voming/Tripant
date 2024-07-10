@@ -77,7 +77,6 @@ public class AdminController {
 	@PostMapping("/member/info") 
 	@ResponseBody
 	public Integer MemberInfo(Integer selectRole, String memEmail,Integer memEnabled) {
-		
 		String memRole = "";
 		switch(selectRole) {
 		case 1: memRole = "ROLE_SLEEP"; 
