@@ -6,7 +6,8 @@ function loaededHandler() {
 	$('.report').on("click", reportHandler);
 	// 삭제하기
 	$('.delete').on("click", deleteHandler);
-	
+
+
 	//케밥 아이콘 이벤트
 	/*$('.menu-menu').on("click", miniModalBtnHandler);
 	$(document).on('click', function(event) {
@@ -19,7 +20,7 @@ function loaededHandler() {
 
 function reportHandler() {
 	var diaryId = $(this).data('diary-id');
-	
+
 	console.log(diaryId);
 	console.log("report ID: ", diaryId);
 
@@ -35,8 +36,8 @@ function reportHandler() {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				beforeSend : csrfHandler,
-				error : ajaxErrorHandler,
+				beforeSend: csrfHandler,
+				error: ajaxErrorHandler,
 				url: contextPath + "my/diary/report/" + diaryId
 				, method: "post"
 				, success: function(result) {
@@ -46,15 +47,15 @@ function reportHandler() {
 							text: "신고되었습니다",
 							confirmButtonText: 'Ok'
 						}).then(() => {
-							location.href = contextPath+"diary";
+							location.href = contextPath + "diary";
 						});
-					} else  if(result == 1) {
+					} else if (result == 1) {
 						Swal.fire({
 							title: "오류",
 							text: "이미 신고한 글입니다.",
 							confirmButtonText: 'Ok'
 						});
-					}else {
+					} else {
 						Swal.fire({
 							title: "오류",
 							text: "오류가 발생하여 신고하지 못했습니다.",
@@ -89,9 +90,9 @@ function deleteHandler() {
 		if (result.isConfirmed) {
 			// ajax요청을 사용하여 서버에 삭제요청을 보냄
 			$.ajax({
-				beforeSend : csrfHandler,
-				error : ajaxErrorHandler,
-				url:contextPath +  "my/diary/delete/"+diaryId,
+				beforeSend: csrfHandler,
+				error: ajaxErrorHandler,
+				url: contextPath + "my/diary/delete/" + diaryId,
 				method: "post",
 				//success: 1이면 업데이트 완료 0이면 실패
 				success: function(result) {
@@ -101,7 +102,7 @@ function deleteHandler() {
 							text: "삭제되었습니다",
 							confirmButtonText: 'Ok'
 						}).then(() => {
-							location.href = contextPath+"diary";
+							location.href = contextPath + "diary";
 						});
 					} else {
 						Swal.fire({
@@ -118,12 +119,12 @@ function deleteHandler() {
 }
 // 공유하기
 function shareHandler() {
-    var shareId = $(this).data('share');
-    console.log(shareId);
-    // 공유하기 모달 표시
-    Swal.fire({
-        title: "나의 여행기 공유하기",
-        html: `
+	var shareId = $(this).data('share');
+	console.log(shareId);
+	// 공유하기 모달 표시
+	Swal.fire({
+		title: "나의 여행기 공유하기",
+		html: `
             <p>해당 아이콘을 클릭하여 공유하세요</p>
             <br>
             <div class='share-links'>
@@ -135,31 +136,29 @@ function shareHandler() {
                 </a>
             </div>
         `,
-        showCancelButton: true,
-        confirmButtonColor: "#000000",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "확인",
-        cancelButtonText: "취소",
-        animation: false
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // 여행기 공유 처리를 수행하는 코드 추가
-        }
-    });
 
-    // 페이스북으로 공유 링크 클릭 시
-    $('.facebook-link').click(function(event) {
-        event.preventDefault(); // 기본 동작 방지
-        var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href);
-        window.open(shareUrl, '_blank');
-    });
+		confirmButtonColor: "#d33",
+		confirmButtonText: "취소",
+		animation: false
+	}).then((result) => {
+		if (result.isConfirmed) {
+			// 여행기 공유 처리를 수행하는 코드 추가
+		}
+	});
 
-    // 트위터로 공유 링크 클릭 시
-    $('.twitter-link').click(function(event) {
-        event.preventDefault(); // 기본 동작 방지
-        var shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href);
-        window.open(shareUrl, '_blank');
-    });
+	// 페이스북으로 공유 링크 클릭 시
+	$('.facebook-link').click(function(event) {
+		event.preventDefault(); // 기본 동작 방지
+		var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href);
+		window.open(shareUrl, '_blank');
+	});
+
+	// 트위터로 공유 링크 클릭 시
+	$('.twitter-link').click(function(event) {
+		event.preventDefault(); // 기본 동작 방지
+		var shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href);
+		window.open(shareUrl, '_blank');
+	});
 }
 
 /*좋아요 누르기  */
@@ -168,29 +167,37 @@ function btnLikeClickHandler(thisElement, diaryId) {
 	console.log("btnLikeClickHandler 눌림");
 	console.log(diaryId);
 	/*	console.log(thisElement);*/
-	if ($(thisElement).attr('src').includes( 'diary_like_none.png')) {
+	if ($(thisElement).attr('src').includes('diary_like_none.png')) {
 		// 현재 이미지가 '좋아요 없음' 이미지라면 '좋아요 있음' 이미지로 변경
+
+
 		// ajax 요청
 		$.ajax({
-			beforeSend : csrfHandler,
-			error : ajaxErrorHandler,
+			beforeSend: csrfHandler,
+			error: ajaxErrorHandler,
 			url: contextPath + "my/diary/like/" + diaryId
 			, method: "post"
 		}).done(function(result) {
-			if (result > 0)
-				$(thisElement).attr('src',  contextPath+'images/diary/diary_like_icon.png');
+			if (result > 0) {
+				$(thisElement).attr('src', contextPath + 'images/diary/diary_like_icon.png');
+				var likeCnt = $('.like-num').text() + 1;
+				$('.like-num').html(Number(likeCnt));
+			}
 		})
 	} else {
 		// 현재 이미지가 '좋아요 있음' 이미지라면 '좋아요 없음' 이미지로 변경
 		// ajax 요청
 		$.ajax({
-			beforeSend : csrfHandler,
-			url: contextPath + "my/diary/unlike/" + diaryId, 
-			method: "post", 
+			beforeSend: csrfHandler,
+			url: contextPath + "my/diary/unlike/" + diaryId,
+			method: "post",
 			error: ajaxErrorHandler
 		}).done(function(result) {
-			if (result > 0)
-				$(thisElement).attr('src',  contextPath+'images/diary/diary_like_none.png');
+			if (result > 0) {
+				$(thisElement).attr('src', contextPath + 'images/diary/diary_like_none.png');
+				var likeCnt = $('.like-num').text() - 1;
+				$('.like-num').html(likeCnt);
+			}
 		})
 	}
 }

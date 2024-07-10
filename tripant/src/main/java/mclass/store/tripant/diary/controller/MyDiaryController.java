@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.service.annotation.PostExchange;
 import org.springframework.web.servlet.ModelAndView;
 
 import mclass.store.tripant.diary.domain.BuyThemeEntity;
@@ -147,29 +149,27 @@ public class MyDiaryController {
 	    if (principal != null) {
 	        memEmail = principal.getName();
 	    }
-	    List<WritePlanTitleEntity> plans = diaryService.getAllPlans(memEmail);
-	    // diaryId에 해당하는 글을 조회하여 폼에 전달합니다.
-	    DiaryBoardEntity diary = diaryService.getDiaryById(diaryId, memEmail); 
-	    List<BuyThemeEntity> themes = diaryService.selectBuyTheme(principal.getName());
-		model.addAttribute("themes", themes);
+	  
+		model.addAttribute("themes", diaryService.selectBuyTheme(memEmail));
 	    // 조회된 글 정보를 모델에 추가하여 폼에 전달
-	    model.addAttribute("diary", diary);
-	    model.addAttribute("plans", plans);
+	    model.addAttribute("diary", diaryService.getDiaryById(diaryId, memEmail));
+	    model.addAttribute("plans", diaryService.getAllPlans(memEmail));
 	    model.addAttribute("loggedInUserEmail", memEmail);
 
 	    // 수정 폼을 나타내는 HTML 파일 이름을 반환합니다.
 	    return "diary/my/diary_modify";
 	}
-	@PostMapping("/diary/update")
-	public ResponseEntity<DiaryBoardEntity> updateDiary(@ModelAttribute DiaryBoardEntity diaryForm, Principal principal) {
-		diaryForm.setDiaryMemEmail(principal.getName());
-		diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
-
-		
-		diaryForm = diaryService.save(diaryForm);
-
-		// 저장된 DiaryPostEntity를 ResponseEntity로 반환
-		return ResponseEntity.ok().body(diaryForm);
-	}
-
 }
+/*
+ * @Update("/diary/update/{diaryId}") public updateDiary( , Principal principal)
+ * { diaryForm.setDiaryMemEmail(principal.getName());
+ * diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 :
+ * diaryForm.getDiaryViews()); // 기본값 설정
+ * 
+ * 
+ * diaryForm = diaryService.save(diaryForm);
+ * 
+ * // 저장된 DiaryPostEntity를 ResponseEntity로 반환 return "redirect:/diary"; }
+ * 
+ * }
+ */
