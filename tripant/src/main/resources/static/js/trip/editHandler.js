@@ -58,7 +58,7 @@ async function memoClickHandler(el){
         $(el).siblings('.memo').text(memo);
     }
 }
-//스팟 삭제하기
+//장소 삭제하기(일정에 포함되어 있는 장소)
 function removeSpot(el){
 	spotTitle = $(el).prevAll('.spot-title').text();
 	var idx = $(el).parents('.spot-block').data('i');
@@ -106,6 +106,16 @@ function removeSpot(el){
 		dragAndDrop();
 	  }
 	});
+}
+//장소 삭제 (장소 추가 박스에 포함되어 있는 장소)
+function deleteSpotHandler(element){
+	var idx = $(element).parent().data('j');
+	spotArr.splice(idx, 1);
+	$(element).parent().remove();
+	// jjoggan*** 
+	spotCkBtnClickHandler(element);
+	console.log("spotArr");
+	console.log(spotArr);
 }
 
 //편집페이지에서 장소 삭제하기
