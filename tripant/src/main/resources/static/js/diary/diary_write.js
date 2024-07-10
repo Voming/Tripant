@@ -159,30 +159,97 @@ function getUTF8ByteSize(str) {
     return byteSize;
 }
 
-//  수정하기 ajax
+/*//  수정하기 ajax
 $(document).ready(function() {
-            $('#diaryUpdateForm').submit(function(event) {
-                event.preventDefault();
+    // CKEditor 초기화 - param div/textarea id
+    let ckInstance1 = makeTripAntCkeditor("editor");
+    // CKEditor 입력값을 넣어 줄 변수 지정 
+	let editor1;
+    ckInstance1.then( b => {editor1 = b; } );*/
 
-                var formData = $(this).serialize();
+/* $('#diaryUpdateForm .btn_submit').click(function(event) {
+              	//필수 입력값 검사
+		var diaryPlanId = $("select[name=diaryPlanId]").val();
+		var diaryId = $("select[name=diaryId]").val();
+		var diaryTitle = $("input[name=diaryTitle]").val().trim();
+		var diaryDate = $("input[name=diaryDate]").val();
+		var diaryTheme = $("select[name=diaryTheme]").val();
+		var diaryOpen = $("input[name=diaryOpen]:checked").val();
+		var diaryContent = editor1.getData(); // CKEditor 에서 내용 가져오기
+		var diaryImage = "";  // image - 대표
+		var diaryPreview = "";  // 300 자 이내
+		
+		if (diaryPlanId === "") {
+			alert("일정을 선택해주세요.");
+			return;
+		}
+		if (diaryTitle == "") {
+			alert("제목을 입력해주세요.");
+			return;
+		}
+		
+		if (diaryContent.trim() == "") {
+			alert("내용을 입력해주세요.");
+			return;
+		} else {
+			var jImgElement = $(".ck.ck-editor__main").find("img");
+			$(jImgElement).each(function(idx, thisElement){
+				if(idx>0){ 
+					return false;// each 더 이상 안돌게 return false 함
+				}// img 태그 1개만 꺼내서 넣고 2번째 each 더 이상 안돌게 return true 함
+				var imgSrc = $(thisElement).prop("src");
+				diaryImage = imgSrc;
+			});
+			
+			var diaryPreview = "";
+			var diaryPreviewMaxByteSize = 0;
+			$(".ck.ck-editor__main span, .ck.ck-editor__main p, .ck.ck-editor__main td, .ck.ck-editor__main h1").each(function(idx, thisElement) {
+				var temp = $(thisElement).text();
+				if(temp.length > 0){
+					var tempByteSize = getUTF8ByteSize(temp);
+					if(diaryPreviewMaxByteSize + tempByteSize >= 1400) {
+						diaryPreview += cutStringToMaxBytes(temp , 1400 - diaryPreviewMaxByteSize);
+						return false;  // each 더 이상 안돌게 return false 함
+					} else {
+						diaryPreviewMaxByteSize += tempByteSize;
+						diaryPreview += temp; 
+						diaryPreview += "\n"; 
+					}
+				}
+			});
+		}
 
                 $.ajax({
                 	beforeSend : csrfHandler,
                 	error : ajaxErrorHandler,
                     type: 'POST',
                     url: contextPath + 'my/diary/update',
-                    data: formData,
-                    success: function(response) {
-                        if (response == 'success') {
-                            window.location.href = contextPath +'/diary';
-                        } else {
-                            alert('수정하기가 안됐습니다.');
-                        }
-                    },
-                    error: function() {
-                        alert('수정하기 error ');
-                    }
-                });
+                   	contentType: "application/json",
+					data: JSON.stringify({
+							diaryPlanId: diaryPlanId,
+							diaryDiaryId: diaryId,
+							diaryTitle: diaryTitle,
+							diaryDate: diaryDate,
+							diaryTheme: diaryTheme,
+							diaryOpen: diaryOpen,
+							diaryContent: diaryContent,
+							diaryImage: diaryImage,
+							diaryPreview: diaryPreview
+			}),
+			success: function(response) {
+				//서버로 부터 응답을 받았을 때 처리 (예: 성공 메시지 출력 등)
+				console.log("글 등록 성공:", response);
+				alert("글이 성공적으로 등록되었습니다.");
+				// 글 등록 성공시 이동
+				location.href = contextPath + "diary"; 
+			},
+			error: function(xhr, status, error) {
+				//오류 발생 시 처리
+				console.error("글 등록 오류:", status, error);
+				alert("글 등록 중 오류가 발생했습니다. 다시 시도해 주세요");
+			}
+		});
             });
         });
 
+*/

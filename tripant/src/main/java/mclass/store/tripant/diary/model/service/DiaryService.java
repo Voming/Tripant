@@ -108,8 +108,13 @@ public class DiaryService {
 	}
 	
 	// 내가 산 theme 가져와서 적용 시키기
-	public List<BuyThemeEntity> selectBuyTheme(String memEmail) {
-		return diaryRepository.selectBuyTheme(memEmail);
+	public List<BuyThemeEntity> selectBuyTheme(int diaryId, String memEmail) {
+		return diaryRepository.selectBuyTheme(diaryId,memEmail);
 		
+	}
+	// 내가 산 theme 가져와서 적용 시키기(글쓸때)
+	public List<BuyThemeEntity> selectBuyTheme(String memEmail) {
+		// TODO Auto-generated method stub
+		return diaryRepository.selectBuyTheme(memEmail);
 	}
 }
