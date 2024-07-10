@@ -538,5 +538,23 @@ SELECT
       select * from diary;
       select * from diary_save;
       
+-------------수정하기
+UPDATE DIARY
+SET
+    DIARY_TITLE = '비공개글 업데이트해서 공개글로 전환',
+    diary_plan_id='3',
+    DIARY_CONTENT = TO_CLOB('국가는 농·어민과 중소기업의 자조조직을 육성하여야 하며, 그 자율적 활동과 발전을 보장한다. 원장은 국회의 동의를 얻어 대통령이 임명하고, 그 임기는 4년으로 하며, 1차에 한하여 중임할 수 있다. 국회의원의 수는 법률로 정하되, 200인 이상으로 한다. 모든 국민은 언론·출판의 자유와 집회·결사의 자유를 가진다. 비상계엄하의 군사재판은 군인·군무원의 범죄나 군사에 관한 간첩죄의 경우와 초병·초소·유독음식물공급·포로에 관한 죄중 법률이 정한 경우에 한하여 단심으로 할 수 있다. 다만, 사형을 선고한 경우에는 그러하지 아니하다.'),
+    DIARY_DATE = TO_DATE('24/07/08', 'YY/MM/DD'),
+    DIARY_OPEN = '1',
+    DIARY_THEME = 'theme2'
+WHERE DIARY_ID = 138
+AND DIARY_MEM_EMAIL = 'qothwls5@naver.com';
+ 
+-------theme 적용
+select item_code,item_name,item_color from 
+    (select * from buy where buy.mem_email = 'ej.kh.kim@gmail.com')t1
+    join item
+    USING (item_code); 
       
+      commit;
       
