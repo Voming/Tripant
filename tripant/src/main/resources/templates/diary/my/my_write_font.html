@@ -64,7 +64,7 @@
 								<select name="diaryTheme" class="diary-writer-select-theme">
 									<option value="">테마를 적용하고 싶다면?</option>
 									<!-- Thymeleaf 반복문을 사용하여 계획 목록을 옵션으로 표시 -->
-									<option th:each="theme : ${themes}" th:value="${theme.itemName}" th:text="${theme.itemName}">THEME</option>
+									<option th:each="theme : ${themes}" th:value="${theme.itemColor}" th:text="${theme.itemName}">THEME</option>
 								</select>
 							</div>
 							<div class="inline-element2">

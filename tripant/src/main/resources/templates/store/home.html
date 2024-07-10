@@ -28,7 +28,7 @@ function fontSwalHandler(){
 			<div class="explain">공개 여행기를 나만의 색으로 개성을 나타낼 수 있어요!</div>
 			<div class="list flex" th:if="${themeList} != null">
 				<div class="item flex" th:each="theme : ${themeList}">
-					<div class="item pre" th:style="'width: 150px; height: 150px; background: #' + ${theme.itemColor} + '; opacity: 0.2;'"></div>
+					<div class="item pre" th:style="'width: 150px; height: 150px; background: #' + ${theme.itemColor} + ';'"></div>
 					<div class="item explain flex">
 						<div th:text="${theme.itemName}"></div>
 						<div><input type="checkbox" name="theme" th:value="${theme.itemCode}"></div>
@@ -44,7 +44,7 @@ function fontSwalHandler(){
 			</div>
 			<div class="list flex" th:if="${fontList} != null">
 				<div class="item flex" th:each="font : ${fontList}">
-					<div class="item pre" th:style="'width: 150px; height: 150px; border-radius: 0; background-size: contain; background-repeat: no-repeat; background-image: url(/'+${font.itemSrc}+');'"></div>
+					<div class="item pre" th:style="'width: 150px; height: 150px; border-radius: 0; background-size: contain; background-repeat: no-repeat; background-image: url('+@{/}+${font.itemSrc}+');'"></div>
 					<div class="item explain flex">
 						<div th:text="${font.itemName}"></div>
 						<div><input type="radio" name="font" th:value="${font.itemCode}"></div>

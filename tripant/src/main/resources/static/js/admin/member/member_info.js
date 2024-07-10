@@ -1,12 +1,6 @@
-$(loadedHandler);
-
-function loadedHandler() {
-	//$(".btn.info").on("click", ClickHandler);
-}
 
 //등급변경, 활성화여부 
 function ClickHandler(e) {
-	console.log("++");
 	Swal.fire({
          title: " <p style='font-size:17px'>" + "정보수정" + "</p>",
          confirmButtonText:"수정완료",
@@ -16,13 +10,13 @@ function ClickHandler(e) {
          html: `
              <select name="selectRole" id="selectRole" style='font-family:Binggrae; font-size:13px; height:25px'>
                  <option value="1">휴면회원</option>
-                 <option value="2">일반회원</option>
+                 <option value="2" selected>일반회원</option>
                  <option value="3">폰튼적용회원</option>
                  <option value="4">관리자</option>
              </select>
              <select name="selectRole" id="selectActive" style='font-family:Binggrae; font-size:13px; height:25px'>
                  <option value="0">비활성화</option>
-                 <option value="1">활성화</option>
+                 <option value="1" selected>활성화</option>
              </select>
          `,
          focusConfirm: false,
@@ -57,6 +51,5 @@ function ClickHandler(e) {
              console.log('memEmail:', result.value.memEmail);
          }
      });
-	 
 }
 

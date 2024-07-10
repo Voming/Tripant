@@ -16,7 +16,7 @@ function openSpot(){
 	$('#add-btn').removeClass('hide');
 }
 
-// jjoggan 담기버튼 이벤트
+// jjoggan 담기 이벤트
 function includeHandler(){
 	var htmlVal = "";
 	if(spotArr.length != 0){
@@ -43,6 +43,7 @@ function includeHandler(){
 	$('#add-btn').addClass('hide'); //담기버튼
 	$('#edit-tourlist').removeClass('hide');
 	$('#spot-basket').removeClass('hide');
+	setBounds();//지도 범위 재설정
 }
 
 //=================================================================

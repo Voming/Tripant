@@ -3,10 +3,8 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <link th:href="@{/css/diary/diary_aside.css}" rel="stylesheet">
 <link th:href="@{/css/diary/diary_read.css}" rel="stylesheet">
-<!-- 테마 css  -->
-<!-- <link th:href="@{/css/diary/theme.css}" rel="stylesheet"> -->
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
 <head th:replace="~{common/header :: head('diaryboard')}">
 <meta charset="UTF-8">
 </head>
@@ -24,21 +22,29 @@
 
 	<div class="myread-wrap">
 
-		<div class="diary-list" th:style="' background: #' + ${diary.diaryTheme} + '; opacity: 0.2;'">
+		<div class="diary-list"
+			th:style="' background: #' + ${diary.diaryTheme} + '; '">
 			<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
 			<div class="menubar">
 				<ul class="menu">
-					<li class="kebab-menu"><img th:src="@{/images/icons/kebabIcon.png}" style="width: 30px;" />
+					<li class="kebab-menu"><img
+						th:src="@{/images/icons/kebabIcon.png}" style="width: 30px;" />
 						<ul class="submenu" style="width: 100px;">
-							<li class="share" th:data-share="${diary.diaryId}"><a> 공유하기 </a></li>
-							<li class="report" th:data-diary-id="${diary.diaryId}"><a> 신고하기 </a></li>
+							<li class="share" th:data-share="${diary.diaryId}"><a>
+									공유하기 </a></li>
+							<li class="report" th:data-diary-id="${diary.diaryId}"><a>
+									신고하기 </a></li>
 							<!-- 로그인시 활성화 -->
 							<!-- 내가쓴 글에만 보이기 -->
-							
-							<li class="delete"th:data-diary-id="${diary.diaryId}"  th:if="${diary.diaryMemEmail == loggedInUserEmail} "><a> 삭제하기 </a></li>
+
+							<li class="delete" th:data-diary-id="${diary.diaryId}"
+								th:if="${diary.diaryMemEmail == loggedInUserEmail} "><a>
+									삭제하기 </a></li>
 							<!-- 글 수정하기 -->
-							<li class="update" th:data-diary-id="${diary.diaryId}" th:if="${diary.diaryMemEmail == loggedInUserEmail}" >
-							<a th:href="@{/my/diary/update/{diaryId}(diaryId=${diary.diaryId})}"> 수정하기 </a></li>
+							<li class="update" th:data-diary-id="${diary.diaryId}"
+								th:if="${diary.diaryMemEmail == loggedInUserEmail}"><a
+								th:href="@{/my/diary/update/{diaryId}(diaryId=${diary.diaryId})}">
+									수정하기 </a></li>
 						</ul></li>
 				</ul>
 			</div>
@@ -67,11 +73,12 @@
 			</div>
 		</div>
 		<!--  TODO 데이터 연결 -->
-		<div class="actions" th:style="' background: #' + ${diary.diaryTheme} + ';'" >
+		<div class="actions"
+			th:style="' background: #' + ${diary.diaryTheme} + ';'">
 			<!-- 조회수 표시 -->
 			<div class="diary-view">
-			<div class="views-count">view</div>
-			<div th:text="${diary.diaryViews}" class="diary-Views"></div>
+				<div class="views-count">view</div>
+				<div th:text="${diary.diaryViews}" class="diary-Views"></div>
 			</div>
 			<!-- 좋아요 아이콘 누르면 하트아이콘  -->
 			<div class="diary-like">
@@ -85,9 +92,10 @@
 						class="like-icon"
 						th:onclick="|btnLikeClickHandler(this,${diary.diaryId});|">
 				</th:block>
-		
-			<!-- 좋아요 수 연결 -->
-				<div th:if="${likes != null}" th:text="${likes.likeCount}" class="like-num">like-num</div>
+
+				<!-- 좋아요 수 연결 -->
+				<div th:if="${likes != null}" th:text="${likes.likeCount}"
+					class="like-num">like-num</div>
 				<div th:if="${likes == null}" class="like-num">0</div>
 			</div>
 		</div>
