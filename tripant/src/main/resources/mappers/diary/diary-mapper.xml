@@ -265,5 +265,16 @@
 		(DIARY_ID, MEM_EMAIL)
 		VALUES (#{diaryId}, #{memEmail})
 	</insert>
-
+	<select id="selectBuyTheme" parameterType="string" resultType="BuyThemeEntity">
+		   SELECT ITEM_CODE, ITEM_NAME, ITEM_COLOR
+   				 FROM (
+     	 			  SELECT ITEM.ITEM_CODE, ITEM.ITEM_NAME, ITEM.ITEM_COLOR
+        				FROM BUY
+        				JOIN ITEM ON BUY.ITEM_CODE = ITEM.ITEM_CODE
+        				WHERE BUY.MEM_EMAIL = #{memEmail}
+        				AND ROWNUM <![CDATA[<=]]> 10
+    					)
+    	 
+      
+	</select>
 </mapper>

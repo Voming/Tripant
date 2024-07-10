@@ -60,17 +60,10 @@
 						<td class="inline-wrapper">
 							<div class="inline-element">
 								<select name="diaryTheme" class="diary-writer-select-theme">
-									<option value="theme">테마를 적용하고 싶다면?</option>
-									<option value="theme1">테마1</option>
-									<option value="theme2">테마2</option>
-									<option value="theme3">테마3</option>
-									<option value="theme4">테마4</option>
-									<option value="theme5">테마5</option>
-									<option value="theme6">테마6</option>
-									<option value="theme7">테마7</option>
-									<option value="theme8">테마8</option>
-									<option value="theme9">테마9</option>
-									<option value="theme10">테마10</option>
+									<option value="">테마를 적용하고 싶다면?</option>
+									<!-- Thymeleaf 반복문을 사용하여 계획 목록을 옵션으로 표시 -->
+									<option th:each="theme : ${themes}" th:value="${theme.itemName}" th:text="${theme.itemName}">THEME</option>
+									
 								</select>
 							</div>
 							<div class="inline-element2">

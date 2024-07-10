@@ -1,6 +1,6 @@
 package mclass.store.tripant.diary.model.repository;
 
-import java.security.Principal;
+
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-
+import mclass.store.tripant.diary.domain.BuyThemeEntity;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.LikeEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
@@ -60,7 +60,8 @@ public interface DiaryRepository {
 	 
 	// 글 수정하기
 	 DiaryBoardEntity updateDiary(@Param("diaryId") DiaryBoardEntity updatedDiary,@Param("memEmail") String memEmail);
-	
-
+	 
+	 // 내가 구매한 theme 꺼내기 
+	 List<BuyThemeEntity> selectBuyTheme(@Param("memEmail") String memEmail);
 
 }

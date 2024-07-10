@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import mclass.store.tripant.diary.domain.BuyThemeEntity;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.model.service.DiaryService;
@@ -48,12 +49,10 @@ public class MyDiaryController {
 	// 기본 글 버전
 	@GetMapping("/post")
 	public String showDiaryForm(Model model, Principal principal) {
-		List<WritePlanTitleEntity> plans = diaryService.getAllPlans(principal.getName());
-	
-		model.addAttribute("plans", plans);
+		List<BuyThemeEntity> themes = diaryService.selectBuyTheme(principal.getName());
+		model.addAttribute("plans", diaryService.getAllPlans(principal.getName()));
+		model.addAttribute("themes", themes);
 		
-		 
-		model.addAttribute("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
 		System.out.println(principal.toString());
 		if(principal.toString().contains("MEM")) {
 			return "diary/my/my_write";

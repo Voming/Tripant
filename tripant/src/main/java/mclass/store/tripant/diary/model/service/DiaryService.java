@@ -1,14 +1,16 @@
 package mclass.store.tripant.diary.model.service;
 
-import java.security.Principal;
+
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
-import java.util.Map;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import mclass.store.tripant.diary.domain.BuyThemeEntity;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.LikeEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
@@ -103,5 +105,11 @@ public class DiaryService {
 	// 여행기 글 좋아요해제
 	public int unlikeDiary(int diaryId, String memEmail) {
 		return diaryRepository.deleteDiaryLike(diaryId, memEmail);
+	}
+	
+	// 내가 산 theme 가져와서 적용 시키기
+	public List<BuyThemeEntity> selectBuyTheme(String memEmail) {
+		return diaryRepository.selectBuyTheme(memEmail);
+		
 	}
 }
