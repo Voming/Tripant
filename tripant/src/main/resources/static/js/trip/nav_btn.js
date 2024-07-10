@@ -57,26 +57,24 @@ function cancelHandler(){
 }
 //저장
 function saveHandler(){
-	//전체일정 클릭
-	navHandler();
-	$(this).siblings('.cancel').hide(); //취소 숨김
-	$(this).siblings('.edit').show(); //편집 보여줌
-	$(this).attr('disabled',true); //저장 비활성화
-	$(this).parent().prevAll().find('.dayn').show(); //n일차 btn 보여줌
-	$('#add-btn').addClass('hide');//담기 숨김
-	//일정 목록보여주기
-	$(this).parents().find('.tourlist').removeClass('hide');
-	$(this).parents().find('.edit-tourlist').addClass('hide');
-	$(this).parents().find('.spot-basket').addClass('hide');
 	
-	//spot-check
-	if($('#tab02').hasClass('hide')===false){
-		$('#tab02').addClass('hide');
-	}
+	var planTitle=$('.plan-title').text();
+	Swal.fire({
+	  title: "<h2>"+planTitle+"</h2>",
+	  text: "저장하시겠습니까?",
+	  showCancelButton: true,
+	  confirmButtonColor: "#000000",
+	  cancelButtonColor: "#d33",
+	  confirmButtonText: "저장",
+	  cancelButtonText: "취소",
+   	  confirmButtonTextFont:"Binggrae"
+	}).then((result) => {
+	  if (result.isConfirmed) {
+			//DB이동
+			saveChanges();
+	  }//if
+	});
 	
-	console.log(detailListEditMode);
-	//DB이동 ajax TODO
-	saveChanges();
 }
 //좌측 탭
 function navHandler(){
@@ -100,6 +98,7 @@ function navHandler(){
 	}).filter(':eq(0)').click();
 }
 
+// 수정된 일정 DB에 저장하기
 function saveChanges(){
 		//안 쓰는 데이터 빼내기
 		//삭제할 key : durationMin, endTime, startTime
@@ -118,17 +117,23 @@ function saveChanges(){
 			}
 		}
 		saveData = JSON.stringify(detailListEditMode);
-		//jjoggan TODO
+		//jjoggan ***
 		$.ajax({
-		beforeSend : csrfHandler,
-		error : ajaxErrorHandler,
-		url: contextPath+"trip/save/changes",
-		method:"post",
-		//contentType: "application/json", //보낼 데이터 타입 //; charset=utf-8 //필요??불필요??/
-		data:{saveData : saveData ,planId:planId},
-		success : function(result) {
-			console.log("result");
-			console.log(result);
-        }
+			beforeSend : csrfHandler,
+			error : ajaxErrorHandler,
+			url: contextPath+"trip/save/changes",
+			method:"post",
+			data:{saveData : saveData ,planId:planId},
+			success : function(result) {
+				Swal.fire({
+				  icon: "success",
+				  title: "저장되었습니다.",
+				  showConfirmButton: false,
+				  timer: 1500
+				}).then(() => {
+					location.reload();
+				});
+	        }
 	});
+
 }
