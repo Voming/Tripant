@@ -9,9 +9,12 @@ function loadedHandler() {
 	
 	//상품삭제버튼
 	$(".btn.delete").on("click", itemDeleteHandler);
-	
-	//상품검색
-	//$(".btn-search").on("click",searchHandler);
+}
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	// 엔터키가 눌렸을 때
+    	searchBtnHandler();
+    }
 }
 
 // 상품 수정

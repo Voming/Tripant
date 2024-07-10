@@ -1,8 +1,10 @@
-$(loaededHandler);
-function loaededHandler(){
-	//$('.btn-search').on("click",searchBtnHandler);
-}
 
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	// 엔터키가 눌렸을 때
+    	searchBtnHandler();
+    }
+}
 var currentPage = 1;
 var totalPageCount = null;
 var startPageNum = null;
