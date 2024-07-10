@@ -549,6 +549,14 @@ SET
     DIARY_THEME = 'theme2'
 WHERE DIARY_ID = 138
 AND DIARY_MEM_EMAIL = 'qothwls5@naver.com';
+----------미리보기&이미지 url 수정하기 
+UPDATE DIARY_SAVE
+			SET 
+				DIARY_ID = '160',
+				DIARY_MEM_EMAIL	= 'qothwls5@naver.com', 
+				DIARY_IMAGE =' ', 
+				DIARY_PREVIEW =	' '
+			WHERE DIARY_ID = '160';
  
 -------theme 적용
     SELECT ITEM_CODE, ITEM_NAME, ITEM_COLOR
