@@ -1,15 +1,8 @@
-
-$(loadedHandler);
-function loadedHandler(){
-	 //체크박스
-	//$('input[name=check]').on('click',checkSetHandler);
-	//초기화버튼
-	//$('.btn-reset').on('click',cickSetHandler);  
-	//검색
-	//$('.btn-search').on("click",searchHandler);
-	//신고수 정렬
-	//$('.btn-reports').on("click",clickReportHandler);
-	
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	// 엔터키가 눌렸을 때
+    	searchBtnHandler();
+    }
 }
 /* 체크표시가 되면 버튼 활성화 */
 function checkSetHandler(){

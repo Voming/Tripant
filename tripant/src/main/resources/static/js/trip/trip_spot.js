@@ -19,22 +19,24 @@ function openSpot(){
 // jjoggan 담기버튼 이벤트
 function includeHandler(){
 	var htmlVal = "";
-	$.each(spotArr, function(idx, element) {
-		console.log("idx");
-		console.log(idx);
-		
-		//element.id;
-		htmlVal += `
-			<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" >
-		 		<div class="spot-img "><img src="${element.img}" width="70" height="70"/></div>
-		 		<div class="flex">
-		 			<div class="spot-title wfull"> ${element.title}</div>
-		 			<div class="spot-type" >${element.placeCat}</div>
-		 		</div>
-		 		<img class="spot-trashcan" onclick="#" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
-			</div>
-		`; 
-	});
+	if(spotArr.length != 0){
+		$.each(spotArr, function(idx, element) {
+			console.log("idx");
+			console.log(idx);
+			
+			//element.id;
+			htmlVal += `
+				<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" data-id="${element.id}">
+			 		<div class="spot-img "><img src="${element.img}" style="width:70px ; height:70px;"/></div>
+			 		<div class="flex">
+			 			<div class="spot-title wfull"> ${element.title}</div>
+			 			<div class="spot-type" >${element.placeCat}</div>
+			 		</div>
+			 		<img class="spot-trashcan" onclick="deleteSpotHandler(this);" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;" data-id="${element.id}">
+				</div>
+			`; 
+		});
+	}
 	$('#spot-basket .wrap-basket').html(htmlVal);
 	dragAndDrop();//백틱을 html에 넣은 후 dragAndDrop을 실행해야 node인식이 가능
 	$('#tab02').addClass('hide'); // 장소 검색 감추기
@@ -134,7 +136,7 @@ $(document).ready(function() {
 				$(".spot_more_btn").remove();
 			}
 
-			// jjoggan TODO 미리 클릭해 둔 리스트 다시 활성화
+			// jjoggan 미리 클릭해 둔 리스트 다시 활성화
 			listCheckSpot();
 		});
 

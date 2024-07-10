@@ -13,11 +13,11 @@
     <link rel="stylesheet" th:href="@{/css/trip/tripMap.css}">
 <head th:replace="~{common/header :: head('여행일정')}">
 </head>
-<body>
+<body style="overflow : hidden;">
 	<div class="main-wrapper" th:value="planInfo"><!-- 일정 데이터 가져오기 -->
 		<aside class="nav-wrapper flex">
 			<nav class="nav flex" >
-				<a th:href="@{/}"><img class="logo" src="/images/tripant_logo_text.png"></a>
+				<a th:href="@{/}"><img class="logo" th:src="@{/images/tripant_logo_text.png}"></a>
 				<div class="dayn whole"><a href="#tab0">전체일정</a></div>
 				<!-- 일정 수 만큼 div만들기 -->
 				
@@ -70,8 +70,9 @@ var tripIdx ;
 
 //*** 장소 추가에서 사용되는 객체
 class Spot {
-	constructor(id, title, mapx, mapy,spottype,img, stayTime,placeCat) {
+	constructor(id,contentid, title, mapx, mapy,spottype,img, stayTime,placeCat) {
 		this.id = id;
+		this.contentid = contentid;
 		this.title = title;
 		this.mapx = mapx;
 		this.mapy = mapy;

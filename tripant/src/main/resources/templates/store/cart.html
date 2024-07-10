@@ -31,10 +31,12 @@ let buyId = "[[${buyId}]]";
 			<div class="cart-list" th:if="${cart} != null">
 				<div class="cart-info flex" th:each="item : ${cart}">
 					<div class="cart-name" th:text="${item.ITEM_NAME}"></div>
-					<div class="cart-price" th:text="${item.ITEM_PRICE_CHAR}+'원'"></div>
+					<div class="cart-price" th:text="${item.ITEM_PRICE_CHAR}+'원'" th:if="${item.ITEM_SALE} == null"></div>
+					<div class="cart-price" th:text="${item.SALE_PRICE_CHAR}+'원'" th:if="${item.ITEM_SALE} != null"></div>
 					<div class="cart-check flex">
 						<input type="checkbox" name="cart-pick" th:value="${item.ITEM_CODE}" style="width: 20px; height: 20px;">
-						<input type="hidden" th:value="${item.ITEM_PRICE}">
+						<input type="hidden" th:value="${item.ITEM_PRICE}" th:if="${item.ITEM_SALE} == null">
+						<input type="hidden" th:value="${item.SALE_PRICE}" th:if="${item.ITEM_SALE} != null">
 					</div>
 				</div>
 			</div>

@@ -182,3 +182,21 @@ select trunc(months_between(sysdate, to_date(to_char(PLAN_MAKE_DAY, 'yyyy-MM'), 
      
 select * from plan;
 select PLAN_MAKE_DAY from plan;
+
+------게시글 통계
+
+select * from plan;
+select * from diary;
+select * from area;
+
+select count(plan_id), plan_area_code from plan a 
+left join (select diary_plan_id from diary )b on a.plan_id=b.diary_plan_id
+group by plan_area_code
+;
+select * from (
+select plan_area_code, count(diary_id) as count from diary right outer join plan on diary.diary_plan_id=plan.plan_id group by plan.plan_area_code)
+pivot(sum(count) for plan_area_code in
+(1 as seoul, 6 as busan, 4 as daegu, 2  as incheon, 5 as gwangju , 3 as	daejeon, 
+7 as ulsan, 8 as sejong, 31 as gyeonggi , 33 as Chungbuk, 34 as Chungnam, 37 as Jeonbuk, 
+38 as Jeonam, 35 as Gyeongbuk, 36 as Gyeongnam, 39 as jeju, 32 as gangwon))
+;

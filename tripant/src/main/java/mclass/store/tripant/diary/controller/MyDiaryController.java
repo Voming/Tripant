@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import mclass.store.tripant.diary.domain.BuyThemeEntity;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
 import mclass.store.tripant.diary.domain.WritePlanTitleEntity;
 import mclass.store.tripant.diary.model.service.DiaryService;
@@ -48,12 +49,10 @@ public class MyDiaryController {
 	// 기본 글 버전
 	@GetMapping("/post")
 	public String showDiaryForm(Model model, Principal principal) {
-		List<WritePlanTitleEntity> plans = diaryService.getAllPlans(principal.getName());
-	
-		model.addAttribute("plans", plans);
+		List<BuyThemeEntity> themes = diaryService.selectBuyTheme(principal.getName());
+		model.addAttribute("themes", themes);
+		model.addAttribute("plans", diaryService.getAllPlans(principal.getName()));
 		
-		 
-		model.addAttribute("diaryEntry", new WritePlanTitleEntity()); // 폼 데이터를 위한 빈 객체 추가
 		System.out.println(principal.toString());
 		if(principal.toString().contains("MEM")) {
 			return "diary/my/my_write";
@@ -151,7 +150,8 @@ public class MyDiaryController {
 	    List<WritePlanTitleEntity> plans = diaryService.getAllPlans(memEmail);
 	    // diaryId에 해당하는 글을 조회하여 폼에 전달합니다.
 	    DiaryBoardEntity diary = diaryService.getDiaryById(diaryId, memEmail); 
-
+	    List<BuyThemeEntity> themes = diaryService.selectBuyTheme(principal.getName());
+		model.addAttribute("themes", themes);
 	    // 조회된 글 정보를 모델에 추가하여 폼에 전달
 	    model.addAttribute("diary", diary);
 	    model.addAttribute("plans", plans);
@@ -165,8 +165,7 @@ public class MyDiaryController {
 		diaryForm.setDiaryMemEmail(principal.getName());
 		diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
 
-		// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
-		// 채워짐)
+		
 		diaryForm = diaryService.save(diaryForm);
 
 		// 저장된 DiaryPostEntity를 ResponseEntity로 반환

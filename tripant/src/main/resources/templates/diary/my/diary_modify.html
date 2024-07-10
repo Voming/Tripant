@@ -14,7 +14,7 @@
 
     <section class="diary-writes-main">
         <div class="diary-write-wrap">
-            <form id="diaryUpdateForm" th:action="@{/diary/update}" method="post">
+            <form id="diaryUpdateForm">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <table class="diary-write-table">
                     <tr>
@@ -55,27 +55,20 @@
                         <td class="inline-wrapper">
                             <div class="inline-element">
                                 <select name="diaryTheme" class="diary-writer-select-theme">
-                                    <option value="theme">테마를 적용하고 싶다면?</option>
-                                    <option value="theme1" th:selected="${diary.diaryTheme == 'theme1'}">테마1</option>
-                                    <option value="theme2" th:selected="${diary.diaryTheme == 'theme2'}">테마2</option>
-                                    <option value="theme3" th:selected="${diary.diaryTheme == 'theme3'}">테마3</option>
-                                    <option value="theme4" th:selected="${diary.diaryTheme == 'theme4'}">테마4</option>
-                                    <option value="theme5" th:selected="${diary.diaryTheme == 'theme5'}">테마5</option>
-                                    <option value="theme6" th:selected="${diary.diaryTheme == 'theme6'}">테마6</option>
-                                    <option value="theme7" th:selected="${diary.diaryTheme == 'theme7'}">테마7</option>
-                                    <option value="theme8" th:selected="${diary.diaryTheme == 'theme8'}">테마8</option>
-                                    <option value="theme9" th:selected="${diary.diaryTheme == 'theme9'}">테마9</option>
-                                    <option value="theme10" th:selected="${diary.diaryTheme == 'theme10'}">테마10</option>
+                                    <option value="">테마를 적용하고 싶다면?</option>
+									<!-- Thymeleaf 반복문을 사용하여 계획 목록을 옵션으로 표시 -->
+									<option th:each="theme : ${themes}" th:value="${theme.itemName}" th:text="${theme.itemName}">THEME</option>
                                 </select>
                             </div>
                             <div class="inline-element2">
-                                <label><input th:checked="${diary.diaryOpen == 1}" type="radio" name="diaryOpen" value="1"> 비공개</label>
-                                <label><input th:checked="${diary.diaryOpen == 0}" type="radio" name="diaryOpen" value="0"> 공개</label>
-                            </div>
+								<label>
+								<input th:value="${1}" type="radio" name="diaryOpen"  > 비공개</label> 
+								<label><input th:value="${0}"   type="radio" name="diaryOpen" checked > 공개</label>
+							</div>
                         </td>
                     </tr>
                     <tr class="diary_btn_submit">
-                        <td><button type="submit" value="수정" class="btn_submit">수정</button></td>
+                        <td><button type="button" value="수정" class="btn_submit">수정</button></td>
                     </tr>
                 </table>
             </form>
@@ -86,33 +79,7 @@
         <div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
     </footer>
 
-    <!-- jQuery 라이브러리 추가 -->
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#diaryUpdateForm').submit(function(event) {
-                event.preventDefault();
-
-                var formData = $(this).serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: '[[@{/my/diary/update}]]',
-                    data: formData,
-                    success: function(response) {
-                        if (response === 'success') {
-                            window.location.href = '/my/diary';
-                        } else {
-                            alert('Error updating diary.');
-                        }
-                    },
-                    error: function() {
-                        alert('Error updating diary.');
-                    }
-                });
-            });
-        });
-    </script>
+   
 
     <!-- ckeditor5 스크립트 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>

@@ -4,10 +4,10 @@
 <div class="wrap-list" th:fragment="complainlist">
 	<div class="ad-search">
 				<th:block th:if="${complainMap!=null and complainMap.searchMem != null}">
-				<input class="search" type="text" name="search" placeholder="신고글 검색"    th:value="${complainMap.searchMem}">
+				<input class="search" type="text" name="search" placeholder="신고글 검색"   onkeyup="enterkey()" th:value="${complainMap.searchMem}">
 				</th:block>
 				<th:block th:if="${complainMap==null or complainMap.searchMem == null}">
-				<input class="search" type="text" name="search" placeholder="신고글 검색" >
+				<input class="search" type="text" name="search" onkeyup="enterkey()" placeholder="신고글 검색" >
 				</th:block>
 				<button type="button" class="btn-search" onclick="searchBtnHandler();"><img th:src="@{/images/icons/search.png}" alt="검색"/></button>
 			</div>
@@ -47,19 +47,19 @@
 			<div class="paging_wrap">
 			<th:block th:if="${complainMap.totalPageCount > 0}">
 				<div th:if="${complainMap.startPageNum > 1}" class="goprepage">
-		            <button type="button" onclick="searchBtnHandler(this);" class="btn-gopage" th:data-targetpage="${complainMap.startPageNum - 1}">&lt;</button>
+		            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${complainMap.startPageNum - 1}">&lt;</button>
 		        </div>
 		        <div th:each="page :  ${#numbers.sequence(complainMap.startPageNum, complainMap.endPageNum)}">
 			        <div th:if="${complainMap.currentPage == page}" class="current_page">
-			            <button type="button" disabled class="btn-gopage" th:data-targetpage="${page}" th:text="${page}"></button>
+			            <button type="button" disabled class="btn gopage" th:data-targetpage="${page}" th:text="${page}"></button>
 			        </div>
 			        <div th:if="${complainMap.currentPage != page}" class="gopage">
-			            <button type="button" onclick="searchBtnHandler(this);" class="btn-gopage" th:data-targetpage="${page}" th:text="${page}"></button>
+			            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${page}" th:text="${page}"></button>
 			        </div>
 		        </div>
 		        
 		        <div th:if="${complainMap.endPageNum < complainMap.totalPageCount}">
-		            <button type="button" onclick="searchBtnHandler(this);" th:data-targetpage="${complainMap.endPageNum + 1}" class="btn-gopage">&gt;</button>
+		            <button type="button" onclick="searchBtnHandler(this);" th:data-targetpage="${complainMap.endPageNum + 1}" class="btn gopage">&gt;</button>
 		        </div>	
 		        </th:block>		
 			</div>

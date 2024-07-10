@@ -5,29 +5,52 @@ function boardChart(){
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
 		  type: 'polarArea',
-		  data: {        
+		  data: {   
+		  labels: ['서울','부산','대구','인천','광주','대전','울산','세종','경기','충북','충남','전북','전남','경북','경남','제주','강원'],      
 				datasets: [{           
-					label: 'polarArea',            
-					 data:[100,25,50,80,30,20,10],            
+					           
+					 data:[seoul,busan,daegu,incheon,gwangju,daejeon,ulsan,sejong,gyeonggi,Chungbuk,Chungnam,Jeonbuk,Jeonam,Gyeongbuk,Gyeongnam,jeju,gangwon],            
 					backgroundColor: [                
 						'rgba(255, 99, 132, 0.2)',                
 						'rgba(54, 162, 235, 0.2)',                
 						'rgba(255, 206, 86, 0.2)',                
 						'rgba(75, 192, 192, 0.2)',                
 						'rgba(153, 102, 255, 0.2)',               
-						'rgba(255, 159, 64, 0.2)'            
+						'rgba(255, 159, 64, 0.3)',            
+						'#CC333359', 
+						'#C943CC33' ,          
+						'#CCCCCC73' ,     
+						'#CCCCFF' ,
+						'#CCCCFF59' ,
+						'#4B76E559' ,
+						'#4B76E599' ,
+						'#6699CCB3',
+						'#E5C34B80',
+						'#FF990073',
+						'#0066FF59'
 						],            
 							}]    
 						}
 		 ,
-		  backgroundColor: [                
-				'rgba(255, 99, 132, 0.2)',                
-				'rgba(54, 162, 235, 0.2)',                
-				'rgba(255, 206, 86, 0.2)',                
-				'rgba(75, 192, 192, 0.2)',                
-				'rgba(153, 102, 255, 0.2)',               
-				'rgba(255, 159, 64, 0.2)'            
-				],     
+		  		backgroundColor: [                
+						'rgba(255, 99, 132, 0.2)',                
+						'rgba(54, 162, 235, 0.2)',                
+						'rgba(255, 206, 86, 0.2)',                
+						'rgba(75, 192, 192, 0.2)',                
+						'rgba(153, 102, 255, 0.2)',               
+						'rgba(255, 159, 64, 0.3)',            
+						'#CC333359', 
+						'#C943CC33' ,          
+						'#CCCCCC73' ,     
+						'#CCCCFF' ,
+						'#CCCCFF59' ,
+						'#4B76E559' ,
+						'#4B76E599' ,
+						'#6699CCB3',
+						'#E5C34B80',
+						'#FF990073',
+						'#0066FF59'         
+				],    
 		  options: {
 		    responsive: false,
 		    plugins: {

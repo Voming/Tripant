@@ -31,7 +31,7 @@
 	<!-- 장바구니 -->
 	<!-- 장바구니 목록 -->
 	<select id="cart" resultType="map" parameterType="string">
-		select item_code, item_name, to_char(item_price, '999,999') as item_price_char, item_price from cart join item using (item_code) where mem_email = #{memEmail}
+		select item_code, item_name, to_char(item_price, '999,999') as item_price_char, item_sale, item_price*(1-0.01*item_sale) as sale_price, to_char(item_price*(1-0.01*item_sale), '999,999') as sale_price_char, item_price from cart join item using (item_code) where mem_email = #{memEmail}
 	</select>
 	<!-- 장바구니 삭제 -->
 	<delete id="cartDel" parameterType="map">
@@ -44,7 +44,7 @@
 	<!-- 구매내역 -->
 	<!-- 구매내역 목록 -->
 	<select id="buy" resultType="map" parameterType="string">
-		select buy_id, item_name, to_char(item_price, '999,999') as item_price_char, item_price, to_char(buy_date, 'YYYY-MM-DD') as buy_date from buy b join item i on b.item_code = i.item_code where mem_email = #{mem_email} order by buy_id desc
+		select buy_id, item_name, to_char(item_price, '999,999') as item_price_char, item_price, item_sale, to_char(item_price*(1-0.01*item_sale), '999,999') as sale_price, to_char(buy_date, 'YYYY-MM-DD') as buy_date from buy b join item i on b.item_code = i.item_code where mem_email = #{mem_email} order by buy_id desc
 	</select>
 	<!-- 주문정보 -->
 	<select id="buyInfo" resultType="map">

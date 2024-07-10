@@ -91,6 +91,9 @@ public class TripService {
 				
 				 // JSON 파싱하여 duration 값만 추출
                 JSONObject jsonObject = new JSONObject(response.toString());
+                String resultCode = jsonObject.getJSONArray("routes").getJSONObject(0).getString("result_code");
+                if(resultCode.equals("106")) return "trafficJam"; //106 : 유고 정보 (도로 사고)
+                System.out.println(jsonObject);
                 duration = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("summary").getString("duration");
 				
 			}else {
