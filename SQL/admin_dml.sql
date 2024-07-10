@@ -173,3 +173,12 @@ select count(*) from member where to_char(mem_join_date,'yyyy-MM')= to_char(add_
 select count(*) from member where to_char(mem_join_date,'yyyy-MM')= to_char(add_months(sysdate,-2),'yyyy-MM');
 
 select * from member;
+
+select trunc(months_between(sysdate, to_date(to_char(PLAN_MAKE_DAY, 'yyyy-MM'), 'yyyy-MM'))) as before, count(*) as num 
+	 from plan 
+	 where to_char(PLAN_MAKE_DAY, 'yyyy-MM') in (to_char(sysdate,'yyyy-MM'), to_char(add_months(sysdate, -1),'yyyy-MM'), to_char(add_months(sysdate, -2),'yyyy-MM')
+	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM')) 
+	 group by to_char(PLAN_MAKE_DAY, 'yyyy-MM');
+     
+select * from plan;
+select PLAN_MAKE_DAY from plan;

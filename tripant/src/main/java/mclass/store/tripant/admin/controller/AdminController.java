@@ -294,12 +294,20 @@ public class AdminController {
 	@GetMapping("/mchart")
 	public String mchart(Model model) {
 		List<AdminChartEntity> list = adminservice.chart();
+		List<AdminChartEntity> list2 = adminservice.plan();
 		int[] arr = new int[6];
+		int[] arr2 = new int[6];
 		for(int i = 0; i < list.size(); i++) {
 			arr[list.get(i).getBefore()] = list.get(i).getNum();
 		}
 		for(int i = 0; i < 6; i++) {
 			model.addAttribute("chart"+i, arr[i]);
+		}
+		for(int i = 0; i < list2.size(); i++) {
+			arr2[list2.get(i).getBefore()] = list2.get(i).getNum();
+		}
+		for(int i = 0; i < 6; i++) {
+			model.addAttribute("plan"+i, arr2[i]);
 		}
 		return "admin/admin_mchart";
 	}
