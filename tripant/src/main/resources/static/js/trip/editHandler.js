@@ -58,6 +58,7 @@ async function memoClickHandler(el){
         $(el).siblings('.memo').text(memo);
     }
 }
+
 //장소 삭제하기(일정에 포함되어 있는 장소)
 function removeSpot(el){
 	spotTitle = $(el).prevAll('.spot-title').text();
@@ -107,6 +108,7 @@ function removeSpot(el){
 	  }
 	});
 }
+
 //장소 삭제 (장소 추가 박스에 포함되어 있는 장소)
 function deleteSpotHandler(element){
 	var idx = $(element).parent().data('j');
@@ -269,8 +271,9 @@ function displayEditMode(){
 
 //드래그 앤 드롭 시 display
 function displayEditModeAfterDragEnd(){
-	//
-	clearPolylines();
+	// jjoggan TODO 
+	clearAll();
+	//clearPolylines();
 	//html에 뿌릴 정보 백틱에 담기
 	var htmlval = "";
 	
@@ -442,5 +445,5 @@ function displayEditModeAfterDragEnd(){
 			`; 
 		});
 	$('#spot-basket .wrap-basket').html(htmlVal);}
-
+	setBounds();//지도 범위 재설정
 }
