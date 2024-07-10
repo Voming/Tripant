@@ -39,8 +39,10 @@ function setEvent(){
 	$(".img-memo").hover(  function(e){      
 			$(this).siblings('.memo').removeClass('hide');
 			//사용자의 화면을 기준으로 X좌표 표시
-			//$(this).siblings('.memo').css('top',e.screenY-100+'px');
-			$(this).siblings('.memo').css('left',e.screenX+'px');
+
+			$(this).siblings('.memo').css('left',e.pageX);
+			$(this).siblings('.memo').css('top',e.pageY);
+
 			$(this).siblings('.memo').css('opacity','1')
 		},memoNoHandler);
 
