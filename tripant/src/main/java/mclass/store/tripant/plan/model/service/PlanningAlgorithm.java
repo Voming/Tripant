@@ -19,6 +19,7 @@ import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.plan.domain.CalendarPlanEntity;
 import mclass.store.tripant.plan.domain.BeforDto;
 import mclass.store.tripant.plan.domain.PlanDate;
+import mclass.store.tripant.plan.domain.PlanSpotEntity;
 import mclass.store.tripant.plan.domain.Spot;
 import mclass.store.tripant.plan.domain.Stay;
 import mclass.store.tripant.plan.model.repostiory.PlanRepository;
@@ -33,6 +34,8 @@ public class PlanningAlgorithm {
 	int distribute = 0;
 
 	List<BeforDto> stayPointList = new ArrayList<>();
+	
+	List<PlanSpotEntity> result = new ArrayList<>();
 
 	public void planning(CalendarPlanEntity calendarPlan, int areaCode) { 
 		spotN = 0;
@@ -172,9 +175,7 @@ public class PlanningAlgorithm {
 		System.out.println("stayPointList===");
 		System.out.println(stayPointList);
 		
-		for (int i = 0; i < dateArr.size(); i++) {
-			
-			if(i <= dateArr.size()-1)
+		for (int i = 0; i < spotArr.size(); i++) {
 			
 			
 		}
