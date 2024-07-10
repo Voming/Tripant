@@ -48,8 +48,8 @@ $(document).ready(function() {
 				var temp = $(thisElement).text();
 				if(temp.length > 0){
 					var tempByteSize = getUTF8ByteSize(temp);
-					if(diaryPreviewMaxByteSize + tempByteSize >= 1400) {
-						diaryPreview += cutStringToMaxBytes(temp , 1400 - diaryPreviewMaxByteSize);
+					if(diaryPreviewMaxByteSize + tempByteSize >= 1200) {
+						diaryPreview += cutStringToMaxBytes(temp , 1200 - diaryPreviewMaxByteSize);
 						return false;  // each 더 이상 안돌게 return false 함
 					} else {
 						diaryPreviewMaxByteSize += tempByteSize;

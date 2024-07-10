@@ -117,7 +117,7 @@ const makeTripAntCkeditor = (editorId) => {
 			},
 			//--------이미지 업로드
 			ckfinder : { 
-			 	uploadUrl: contextPath + 'post/cloudinary?'+ header+"="+token
+			 	uploadUrl: contextPath + 'post/cloudinary?'+ "_csrf"+"="+token
 			},
 			
 			// Used by real-time collaboration
