@@ -110,7 +110,7 @@ function dragAndDrop(){
 					
 					details.dayDetailInfoEntity[prev_j+1]=temp;
 					// jjoggan*** 
-					spotCkBtnClickHandler(element);
+
 //					details.dayDetailInfoEntity.unshift(temp);
 					
 					
@@ -136,7 +136,7 @@ function dragAndDrop(){
 					temp.memo = null;
 					details.dayDetailInfoEntity[0]=temp;
 					// jjoggan *** 
-					spotCkBtnClickHandler(element);
+					
 //					details.dayDetailInfoEntity.unshift(temp);
 					
 				}

@@ -32,7 +32,7 @@ function includeHandler(){
 			 			<div class="spot-title wfull"> ${element.title}</div>
 			 			<div class="spot-type" >${element.placeCat}</div>
 			 		</div>
-			 		<img class="spot-trashcan" onclick="deleteSpotHandler(this);" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
+			 		<img class="spot-trashcan" onclick="deleteSpotHandler(this);" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;" data-id="${element.id}">
 				</div>
 			`; 
 		});
@@ -136,7 +136,7 @@ $(document).ready(function() {
 				$(".spot_more_btn").remove();
 			}
 
-			// jjoggan TODO 미리 클릭해 둔 리스트 다시 활성화
+			// jjoggan 미리 클릭해 둔 리스트 다시 활성화
 			listCheckSpot();
 		});
 
