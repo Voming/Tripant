@@ -165,8 +165,7 @@ public class MyDiaryController {
 		diaryForm.setDiaryMemEmail(principal.getName());
 		diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
 
-		// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
-		// 채워짐)
+		
 		diaryForm = diaryService.save(diaryForm);
 
 		// 저장된 DiaryPostEntity를 ResponseEntity로 반환

@@ -2,33 +2,55 @@ $(document).ready(function(){
 	boardChart();
 })
 function boardChart(){
-	console.log(area+"!!!!!!!!!!!!!");
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
 		  type: 'polarArea',
-		  data: {        
+		  data: {   
+		  labels: ['서울','부산','대구','인천','광주','대전','울산','세종','경기','충북','충남','전북','전남','경북','경남','제주','강원'],      
 				datasets: [{           
-					label: 'polarArea',            
-					 data:[100,25,50,80,30,20,area],            
+					           
+					 data:[seoul,busan,daegu,incheon,gwangju,daejeon,ulsan,sejong,gyeonggi,Chungbuk,Chungnam,Jeonbuk,Jeonam,Gyeongbuk,Gyeongnam,jeju,gangwon],            
 					backgroundColor: [                
 						'rgba(255, 99, 132, 0.2)',                
 						'rgba(54, 162, 235, 0.2)',                
 						'rgba(255, 206, 86, 0.2)',                
 						'rgba(75, 192, 192, 0.2)',                
 						'rgba(153, 102, 255, 0.2)',               
-						'rgba(255, 159, 64, 0.2)'            
+						'rgba(255, 159, 64, 0.3)',            
+						'#E54B4B80', 
+						'#C943CC33' ,          
+						'#F0FCD180' ,     
+						'#FFA7C5' ,
+						'#E5794B99' ,
+						'#C9EFF7' ,
+						'#4B76E599' ,
+						'#2EB67D80',
+						'#E5C34B80',
+						'#E5C34B',
+						'#13358F99'
 						],            
 							}]    
 						}
 		 ,
-		  backgroundColor: [                
+		 /* backgroundColor: [                
 				'rgba(255, 99, 132, 0.2)',                
-				'rgba(54, 162, 235, 0.2)',                
-				'rgba(255, 206, 86, 0.2)',                
-				'rgba(75, 192, 192, 0.2)',                
-				'rgba(153, 102, 255, 0.2)',               
-				'rgba(255, 159, 64, 0.2)'            
-				],     
+						'rgba(54, 162, 235, 0.2)',                
+						'rgba(255, 206, 86, 0.2)',                
+						'rgba(75, 192, 192, 0.2)',                
+						'rgba(153, 102, 255, 0.2)',               
+						'rgba(255, 159, 64, 0.3)',            
+						'#E54B4B80', 
+						'#C943CC33' ,          
+						'#F0FCD180' ,     
+						'#FFA7C5' ,
+						'#E5794B99' ,
+						'#C9EFF7' ,
+						'#4B76E599' ,
+						'#2EB67D80',
+						'#E5C34B80',
+						'#E5C34B',
+						'#13358F99'         
+				],   */  
 		  options: {
 		    responsive: false,
 		    plugins: {

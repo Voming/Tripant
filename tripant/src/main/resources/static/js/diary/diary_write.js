@@ -159,4 +159,30 @@ function getUTF8ByteSize(str) {
     return byteSize;
 }
 
+//  수정하기 ajax
+$(document).ready(function() {
+            $('#diaryUpdateForm').submit(function(event) {
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                	beforeSend : csrfHandler,
+                	error : ajaxErrorHandler,
+                    type: 'POST',
+                    url: contextPath + 'my/diary/update',
+                    data: formData,
+                    success: function(response) {
+                        if (response == 'success') {
+                            window.location.href = contextPath +'/diary';
+                        } else {
+                            alert('수정하기가 안됐습니다.');
+                        }
+                    },
+                    error: function() {
+                        alert('수정하기 error ');
+                    }
+                });
+            });
+        });
 

@@ -551,10 +551,14 @@ WHERE DIARY_ID = 138
 AND DIARY_MEM_EMAIL = 'qothwls5@naver.com';
  
 -------theme 적용
-select item_code,item_name,item_color from 
-    (select * from buy where buy.mem_email = 'ej.kh.kim@gmail.com')t1
-    join item
-    USING (item_code); 
+    SELECT ITEM_CODE, ITEM_NAME, ITEM_COLOR
+    FROM (
+        SELECT ITEM.ITEM_CODE, ITEM.ITEM_NAME, ITEM.ITEM_COLOR
+        FROM BUY
+        JOIN ITEM ON BUY.ITEM_CODE = ITEM.ITEM_CODE
+        WHERE BUY.MEM_EMAIL ='gyrua34@gmail.com'
+        AND ROWNUM <= 10
+    );
       
       commit;
       
