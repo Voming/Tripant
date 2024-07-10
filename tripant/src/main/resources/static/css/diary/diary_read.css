@@ -16,7 +16,7 @@
 
 /* 글 배경 */
 .diary-list {
-	background: #f9f9f9;
+	background: #f9f9f9; 
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -24,7 +24,9 @@
 	min-height: 500px; /*내용 세로 길이 고정  */
 	margin-bottom: 20px;
 }
-
+.diary-list > *{
+	opacity: 1.0 !important;
+}
 .diary-list .co {
 	display: flex;
 	flex-direction: column;

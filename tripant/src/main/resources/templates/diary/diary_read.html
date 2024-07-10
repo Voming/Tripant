@@ -24,7 +24,7 @@
 
 	<div class="myread-wrap">
 
-		<div class="diary-list" >
+		<div class="diary-list" th:style="' background: #' + ${diary.diaryTheme} + '; opacity: 0.2;'">
 			<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
 			<div class="menubar">
 				<ul class="menu">
@@ -67,7 +67,7 @@
 			</div>
 		</div>
 		<!--  TODO 데이터 연결 -->
-		<div class="actions">
+		<div class="actions" th:style="' background: #' + ${diary.diaryTheme} + ';'" >
 			<!-- 조회수 표시 -->
 			<div class="diary-view">
 			<div class="views-count">view</div>
