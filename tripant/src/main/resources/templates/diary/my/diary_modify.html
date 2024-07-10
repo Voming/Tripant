@@ -61,9 +61,10 @@
                                 </select>
                             </div>
                             <div class="inline-element2">
-                                <label><input th:checked="${diary.diaryOpen == 1}" type="radio" name="diaryOpen" value="1"> 비공개</label>
-                                <label><input th:checked="${diary.diaryOpen == 0}" type="radio" name="diaryOpen" value="0"> 공개</label>
-                            </div>
+								<label>
+								<input th:value="${1}" type="radio" name="diaryOpen"  > 비공개</label> 
+								<label><input th:value="${0}"   type="radio" name="diaryOpen" checked > 공개</label>
+							</div>
                         </td>
                     </tr>
                     <tr class="diary_btn_submit">
@@ -78,33 +79,7 @@
         <div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
     </footer>
 
-    <!-- jQuery 라이브러리 추가 -->
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#diaryUpdateForm').submit(function(event) {
-                event.preventDefault();
-
-                var formData = $(this).serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: '[[@{/my/diary/update}]]',
-                    data: formData,
-                    success: function(response) {
-                        if (response === 'success') {
-                            window.location.href = '/my/diary';
-                        } else {
-                            alert('Error updating diary.');
-                        }
-                    },
-                    error: function() {
-                        alert('Error updating diary.');
-                    }
-                });
-            });
-        });
-    </script>
+   
 
     <!-- ckeditor5 스크립트 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>

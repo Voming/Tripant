@@ -68,9 +68,9 @@
 								</select>
 							</div>
 							<div class="inline-element2">
-								<label><input type="radio" name="diaryOpen"
-									value="private"> 비공개</label> <label><input type="radio"
-									name="diaryOpen" value="public" checked="checked"> 공개</label>
+								<label>
+								<input th:value="${1}" type="radio" name="diaryOpen"  > 비공개</label> 
+								<label><input th:value="${0}"   type="radio" name="diaryOpen" checked > 공개</label>
 							</div>
 						</td>
 					</tr>
