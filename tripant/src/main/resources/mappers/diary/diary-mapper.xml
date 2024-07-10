@@ -228,6 +228,10 @@
    				   <if test="diaryContent != null and !diaryContent.equals('')">
    					DIARY_CONTENT = TO_CLOB(#{diaryContent}),
    				</if>
+   		
+   				   <if test="diaryPlanId != null and !diaryPlanId.equals('')">
+   					DIARY_PLAN_ID = #{diaryPlanId},
+   				</if>
    				  <if test="diaryDate != null">
     				DIARY_DATE = TO_DATE(#{diaryDate}, 'YYYY-MM-DD') AS DIARY_DATE,
     			</if>

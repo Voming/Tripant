@@ -50,8 +50,8 @@ public class MyDiaryController {
 	@GetMapping("/post")
 	public String showDiaryForm(Model model, Principal principal) {
 		List<BuyThemeEntity> themes = diaryService.selectBuyTheme(principal.getName());
-		model.addAttribute("plans", diaryService.getAllPlans(principal.getName()));
 		model.addAttribute("themes", themes);
+		model.addAttribute("plans", diaryService.getAllPlans(principal.getName()));
 		
 		System.out.println(principal.toString());
 		if(principal.toString().contains("MEM")) {
@@ -150,7 +150,8 @@ public class MyDiaryController {
 	    List<WritePlanTitleEntity> plans = diaryService.getAllPlans(memEmail);
 	    // diaryId에 해당하는 글을 조회하여 폼에 전달합니다.
 	    DiaryBoardEntity diary = diaryService.getDiaryById(diaryId, memEmail); 
-
+	    List<BuyThemeEntity> themes = diaryService.selectBuyTheme(principal.getName());
+		model.addAttribute("themes", themes);
 	    // 조회된 글 정보를 모델에 추가하여 폼에 전달
 	    model.addAttribute("diary", diary);
 	    model.addAttribute("plans", plans);
