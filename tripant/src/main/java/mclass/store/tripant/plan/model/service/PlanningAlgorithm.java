@@ -17,7 +17,6 @@ import com.google.gson.GsonBuilder;
 
 import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.plan.domain.CalendarPlanEntity;
-import mclass.store.tripant.plan.domain.AfterDto;
 import mclass.store.tripant.plan.domain.BeforDto;
 import mclass.store.tripant.plan.domain.PlanDate;
 import mclass.store.tripant.plan.domain.Spot;
@@ -34,7 +33,7 @@ public class PlanningAlgorithm {
 	int distribute = 0;
 
 	List<BeforDto> stayPointList = new ArrayList<>();
-	List<AfterDto> spotPointList = new ArrayList<>();
+//	List<AfterDto> spotPointList = new ArrayList<>();
 
 	public void planning(CalendarPlanEntity calendarPlan, int areaCode) { 
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
@@ -89,19 +88,17 @@ public class PlanningAlgorithm {
 		spotArr.get(0).setWeight(min);  // 출발지 - 첫번째 장소 이동시간을 첫번째 장소에 저장 
 		System.out.println(spotArr.get(0)); // 출발지 가장 가까운 장소
 
-		ArrayList<Spot> tour = nearestNeighbor(spotArr);
-		spotArr = tour;
-		System.out.println(spotArr);
+		ArrayList<Spot> tour = nearestNeighbor(spotArr); //장소 한 줄 긋기===========================
+		spotArr = tour;  // 얕은 복사
 		calendarPlan.setSpotArr(spotArr);
-		// 1. 총 날짜 수로 장소 개수 나누기
-		distribute = (int) Math.ceil(((double) spotN / dayN)); // 하루에 방문할 장소 수
-		System.out.println("distribute : " + distribute);
+		
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
+		
 		int idxDate = 0;  // 입력을 못한 날. 멈춘날idx
 		int idxSpot = 0;  // 입력을 못한 장소. 멈춘장소idx
-		int weightSum = 0;
-		int spanTimeSum = 0;
-		int spotOrder = 0;
+		int weightSum = 0;   // (하루)이동거리 합
+		int spanTimeSum = 0; // (하루)머물시간 합
+		int spotOrder = 0;    // 출발지:1, 장소는 2 부터 시작
 		for( int i = 0; i < dateArr.size(); i++, idxDate++) {
 			int dateTimeRange = dateArr.get(i).getDateTimeRange();
 			String spotDay = dateArr.get(i).getDate();
@@ -134,10 +131,11 @@ public class PlanningAlgorithm {
 				spotArr.get(j).setSpotDay(spotDay);
 				spotArr.get(j).setSpotOrder(++spotOrder); // 출발지:1, 장소는 2 부터로 전위증감
 			}
-			dateArr.get(i).setSpotCnt(spotOrder-1);  // 출발지1+장소 2부터
+			dateArr.get(i).setSpotCnt(spotOrder-1);  // 하루 방문 장소는 장소만 cnt 하므로 spotOrder보다 1 작음
 		}
 		
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(spotArr));
+		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(dateArr));
 		
 		int spotShiftCntPlus = 0;
 		// 장소는 꽉, 장소가 텅빈 날짜 idxDate 를 저장
@@ -150,26 +148,30 @@ public class PlanningAlgorithm {
 
 				System.out.println("a~~~~~ i: "+ i);
 				System.out.println("a~~~~~"+ spotShiftIdx);
-
-				System.out.println("idxDate: "+ idxDate);
-				System.out.println("spotShiftCntPlus: "+ spotShiftCntPlus);
 				
-				spotArr.get(spotShiftIdx).setSpotDay(dateArr.get(i).getDate());
-				spotArr.get(spotShiftIdx).setSpotDayIdx(i);  // 옮겨진 장소의 dayIdx
-				spotArr.get(spotShiftIdx).setSpotOrder(2);  // 옮겨진 장소는 spotorder 는 초기값인 2(출발지1)
-				dateArr.get(i).setSpotCnt(dateArr.get(i).getSpotCnt()+1);  // 추가한 날의 장소를 1개 더하기
-				// 옮겨진 날 spotShiftIdx 의 장소는 1개 빼기
+				// spotShiftIdx 번째 장소를 갖고 있던 날짜 index
 				Integer dayIdxSpotShift = spotArr.get(spotShiftIdx).getSpotDayIdx();
-				System.out.println("dayIdxSpotShift:"+dayIdxSpotShift);
-				if(dayIdxSpotShift != null) {
-					int spotCnt = dateArr.get(dayIdxSpotShift).getSpotCnt();
-					System.out.println("a===== spotCnt : " + spotCnt);
-					if(spotCnt < 1) {  // 출발:1, 하루의 장소 개수가 1개도 남지 않았다면 추가 shift 해야함
-						System.out.println("======== 추가 shift !!!!");
-						spotShiftCntPlus++;
-					}
-					dateArr.get(dayIdxSpotShift).setSpotCnt(--spotCnt);  // 장소를 1개 빼기
+				System.out.println("dayIdxSpotShift:"+dayIdxSpotShift);  // 절대 null 일수 없음.
+				// spotShiftIdx 번째 장소를 갖고 있던 날짜 의 spotCnt 방문장소 -1
+				int spotCnt = dateArr.get(dayIdxSpotShift).getSpotCnt();
+				dateArr.get(dayIdxSpotShift).setSpotCnt(--spotCnt);  // 장소를 1개 빼기
+				
+				System.out.println("a===== spotCnt : " + spotCnt);
+				if(spotCnt < 1) {  // 출발:1, 하루의 장소 개수가 1개도 남지 않았다면 추가 shift 해야함
+					System.out.println("======== 추가 shift !!!!");
+					spotShiftCntPlus++;
 				}
+				
+				// spotShiftIdx 번째 장소를 i번째 날짜로 바꾸기 
+				spotArr.get(spotShiftIdx).setSpotDay(dateArr.get(i).getDate());
+				spotArr.get(spotShiftIdx).setSpotDayIdx(i);  // i번째 날짜 index 바꾸기
+				// spotShiftIdx 번째 장소는 i번째 날짜에 첫장소이므로 spotOrder는 2
+				spotArr.get(spotShiftIdx).setSpotOrder(2);  // i번째 날짜에는 1개의 장소만 있을 것이므로 spotorder 는 초기값인 2(출발지1)
+				
+				// i번째 날에 장소가 생겼으므로 spotCnt 1
+				dateArr.get(i).setSpotCnt(1);  
+				
+				
 			}
 		}
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));

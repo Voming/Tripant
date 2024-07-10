@@ -12,6 +12,7 @@ function btnMakeClickHandler() {
 
 	if (!auth) {
 		alert("로그인을 한 후에 이용해주세요.");
+		location.href = contextPath + "login";
 	} else {
 		$(".modal").addClass("show");
 
@@ -48,8 +49,8 @@ function changeSelectAreaHandler() {
 
 	if (area.length < 3) {
 		$.ajax({
-			beforeSend : csrfHandler,
-			error : ajaxErrorHandler,
+			beforeSend: csrfHandler,
+			error: ajaxErrorHandler,
 			url: contextPath + "plan/area"
 			, method: "post"
 			, data: {
@@ -93,9 +94,9 @@ function btnFindClickHandler() {
 	}
 
 	$.ajax({
-		beforeSend : csrfHandler,
-		error : ajaxErrorHandler,
-		url: contextPath+"find/area"
+		beforeSend: csrfHandler,
+		error: ajaxErrorHandler,
+		url: contextPath + "find/area"
 		, method: "post"
 		, context: this
 		, data: { findArea: findArea }
@@ -105,9 +106,9 @@ function btnFindClickHandler() {
 	});
 }
 
-function areaBoxBtnClickHandler(thisElement){
+function areaBoxBtnClickHandler(thisElement) {
 	var areaCode = $(thisElement).attr("value");
 	console.log(areaCode);
-	location.href = contextPath + "diary?areacode="+areaCode;
+	location.href = contextPath + "diary?areacode=" + areaCode;
 
 }
