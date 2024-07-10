@@ -2,13 +2,14 @@ $(document).ready(function(){
 	boardChart();
 })
 function boardChart(){
+	console.log(area+"!!!!!!!!!!!!!");
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
 		  type: 'polarArea',
 		  data: {        
 				datasets: [{           
 					label: 'polarArea',            
-					 data:[100,25,50,80,30,20,10],            
+					 data:[100,25,50,80,30,20,area],            
 					backgroundColor: [                
 						'rgba(255, 99, 132, 0.2)',                
 						'rgba(54, 162, 235, 0.2)',                

@@ -486,4 +486,8 @@ public class AdminService {
 	public List<AdminChartEntity> plan() {
 		return admindao.plan();
 	}
+	//게시글 통계
+	public Map<String, Object> area(){
+		return admindao.area();
+	}
 }

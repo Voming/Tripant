@@ -463,5 +463,11 @@
 	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM')) 
 	 group by to_char(PLAN_MAKE_DAY, 'yyyy-MM')
 	 </select>
-	
+	<!-- 게시글 지역 통계 -->
+	<select id="area" resultType="map">
+	select count(plan_id) count, plan_area_code from plan a 
+	left join (select diary_plan_id from diary )b on a.plan_id=b.diary_plan_id
+	where plan_area_code=1
+	group by plan_area_code
+	</select>
 </mapper>
