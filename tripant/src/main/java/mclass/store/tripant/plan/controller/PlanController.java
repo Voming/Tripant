@@ -111,7 +111,7 @@ public class PlanController {
 	@PostMapping("/planning")
 	@ResponseBody
 	public String planning(@RequestBody CalendarPlanEntity calendarPlan, @SessionAttribute(name = "areaCode") Integer areaCode) {
-		planningAlgorithm.planningJson(calendarPlan, areaCode);
+		planningAlgorithm.planning(calendarPlan, areaCode);
 		return "aaa";
 	}
 

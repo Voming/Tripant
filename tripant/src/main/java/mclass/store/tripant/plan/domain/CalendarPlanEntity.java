@@ -9,5 +9,5 @@ import lombok.Data;
 public class CalendarPlanEntity {
 	private List<PlanDate> dateArr;
 	private List<Spot> spotArr;
-	private String timeRange;
+	private Integer timeRange;
 }
