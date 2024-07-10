@@ -8,44 +8,50 @@ var imageSrc = '' ;// 마커이미지의 주소입니다
 
 
 /*마커 커스터마이징*/ //j i 순서 주의
-for(j = 0; j<dayPoints.length; j++){
-		dayPoint = dayPoints[j];
-		imageSrc=mapCircleHandler(j+1); // /images/location/location3.png 등 마커이미지 주소 변경
-	for (i = 0; i < dayPoint.length; i++) {
-		
-	     // customOverlay 생성 - 마커위에 숫자 올리기 // 마커이미지의 크기 style로 지정
-	    var content = `       
-		    <div class="custom-marker" th:fragment="markernum(i)">
-		        <img src="${contextPath}${imageSrc}" style="width: 30px; height: 32px;"> 
-		        <span>${i + 1}</span>
-		    </div>`;
-	    var customOverlay = new kakao.maps.CustomOverlay({
-	        position: dayPoint[i],
-	        content: content,
-	        yAnchor: 1
-	    });
+	for(j = 0; j<dayPoints.length; j++){
+			dayPoint = dayPoints[j];
+			imageSrc=mapCircleHandler(j+1); // /images/location/location3.png 등 마커이미지 주소 변경
+		for (i = 0; i < dayPoint.length; i++) {
+			
+		     // customOverlay 생성 - 마커위에 숫자 올리기 // 마커이미지의 크기 style로 지정
+		    var content = `       
+			    <div class="custom-marker" th:fragment="markernum(i)">
+			        <img src="${contextPath}${imageSrc}" style="width: 30px; height: 32px;"> 
+			        <span>${i + 1}</span>
+			    </div>`;
+		    var customOverlay = new kakao.maps.CustomOverlay({
+		        position: dayPoint[i],
+		        content: content,
+		        yAnchor: 1
+		    });
+			    
+		    //marker.setMap(map); //지도 위에 마커 표시
+		    customOverlay.setMap(map); //지도 위에 마커 표시
+		    customOverlays.push(customOverlay);
 		    
-	    //marker.setMap(map); //지도 위에 마커 표시
-	    customOverlay.setMap(map); //지도 위에 마커 표시
-	    
-	 	/*지도에 표시할 선을 생성합니다*/ 
-	    var polyline = new kakao.maps.Polyline({
-	        path: dayPoint, // 선을 구성하는 좌표배열 입니다
-	        strokeWeight: 2, // 선의 두께 입니다
-	        strokeColor: mapLineHandler(j+1), // 선의 색깔입니다
-	        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	        strokeStyle: 'shortdash' // 선의 스타일입니다
-	    });
-	 	// 지도에 선을 표시합니다 
-	    polyline.setMap(map);  
-	    polylines.push(polyline);
-	    // LatLngBounds 객체에 좌표를 추가합니다
-	    bounds.extend(dayPoint[i]);
-	} 
-}//마커 커스터마이징
+		 	/*지도에 표시할 선을 생성합니다*/ 
+		    var polyline = new kakao.maps.Polyline({
+		        path: dayPoint, // 선을 구성하는 좌표배열 입니다
+		        strokeWeight: 2, // 선의 두께 입니다
+		        strokeColor: mapLineHandler(j+1), // 선의 색깔입니다
+		        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		        strokeStyle: 'shortdash' // 선의 스타일입니다
+		    });
+		 	// 지도에 선을 표시합니다 
+		    polyline.setMap(map);  
+		    polylines.push(polyline);
+		    // LatLngBounds 객체에 좌표를 추가합니다
+		    bounds.extend(dayPoint[i]);
+		} 
+	}//마커 커스터마이징
 	
 }
 
+//마커 폴리라인 둘 다 초기화
+function clearAll(){
+	clearPolylines();
+	clearCustomOverlays();
+}
 
 // 폴리라인을 초기화하는 함수
 function clearPolylines() {
@@ -53,7 +59,17 @@ function clearPolylines() {
         var polyline = polylines.pop();
         polyline.setMap(null); // 지도에서 폴리라인 제거
     }
+    polylines=[];
 }
+//커스텀한 마커를 초기화하는 함수
+function clearCustomOverlays() {
+    while (customOverlays.length > 0) {
+        var customOverlay = customOverlays.pop();
+        customOverlay.setMap(null); // 지도에서 폴리라인 제거
+    }
+    customOverlays=[];
+}
+
 // 지도 출력
 function displayMap( ){
 /* 1. 지도 생성*/
@@ -74,7 +90,7 @@ displayMarker();
 
 
 /* 지도 중심 이동하기*/
-//이동할 좌표 입력 - TODO 수정 필요
+//이동할 좌표 입력 
 function panTo() {
 	//x좌표 위도 100번대
 	var latx= $(this).parent().prev().prev().children(".mapx").val();

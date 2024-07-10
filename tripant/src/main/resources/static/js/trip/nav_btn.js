@@ -30,6 +30,7 @@ function editHandler(){
 	$(this).parents().find('.tourlist').addClass('hide');
 	$(this).parents().find('.edit-tourlist').removeClass('hide');
 	$(this).parents().find('.spot-basket').removeClass('hide');
+	setBounds();//지도 범위 재설정
 }
 //취소
 function cancelHandler(){
@@ -54,6 +55,7 @@ function cancelHandler(){
 	if($('#tab02').hasClass('hide')===false){
 		$('#tab02').addClass('hide');
 	}
+	setBounds();//지도 범위 재설정
 }
 //저장
 function saveHandler(){
