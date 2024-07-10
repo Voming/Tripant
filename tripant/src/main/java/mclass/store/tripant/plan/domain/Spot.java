@@ -14,6 +14,6 @@ public class Spot {
 	private Integer weight;
 	
 	private Integer spotDayIdx;  // 일차 -> 0부터 시작
-	private String spotDay;      // 날짜
+	private String spotDay;      // 방문일
 	private Integer spotOrder;   // 날짜별 방문순서
 }

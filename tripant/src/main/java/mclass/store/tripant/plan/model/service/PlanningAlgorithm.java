@@ -33,35 +33,17 @@ public class PlanningAlgorithm {
 	int distribute = 0;
 
 	List<BeforDto> stayPointList = new ArrayList<>();
-//	List<AfterDto> spotPointList = new ArrayList<>();
 
 	public void planning(CalendarPlanEntity calendarPlan, int areaCode) { 
-		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
-		
 		spotN = 0;
 		dayN = 0;
 		distribute = 0;
-
-		// 출발 장소 좌표
-		AreaEntity startPoint = planRepository.selectAreaInfo(areaCode);
+		AreaEntity startPoint = planRepository.selectAreaInfo(areaCode); // 출발 장소 좌표
 
 		// 날짜 별 정보(하루, 숙소)
 		List<PlanDate> dateArr = calendarPlan.getDateArr();
 		dayN = dateArr.size(); // 여행할 날짜 수
 		System.out.println("dayN : " + dayN);
-
-		for (int i = 0; i < dayN - 1; i++) { // 여행날 -1 = 숙박장소 개수 , 여행 마지막날에는 숙박장소가 없음.
-			Stay stay = dateArr.get(i).getStay();
-
-			// id만 잘라내기
-			String idLongStr = stay.getId();
-			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length() - 1));
-
-			stayPointList.add(new BeforDto(dateArr.get(i).getDate(), id, stay.getType(), "", // 숙소는 머무는 시간 없음
-					stay.getMapx(), stay.getMapy()));
-		}
-		System.out.println("stayPointList===");
-		System.out.println(stayPointList);
 
 		// 선택 한 장소
 		List<Spot> spotArr = calendarPlan.getSpotArr();
@@ -93,9 +75,9 @@ public class PlanningAlgorithm {
 		calendarPlan.setSpotArr(spotArr);
 		
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
-		
-		int idxDate = 0;  // 입력을 못한 날. 멈춘날idx
-		int idxSpot = 0;  // 입력을 못한 장소. 멈춘장소idx
+		// 장소 분배하기=============================================================================
+		int idxDate = 0;  // 입력을 못한 날. 멈춘날 idx
+		int idxSpot = 0;  // 입력을 못한 장소. 멈춘장소 idx
 		int weightSum = 0;   // (하루)이동거리 합
 		int spanTimeSum = 0; // (하루)머물시간 합
 		int spotOrder = 0;    // 출발지:1, 장소는 2 부터 시작
@@ -106,7 +88,7 @@ public class PlanningAlgorithm {
 			
 			// 장소가 모두 채워짐. 날짜에 채울 장소가 없어 반복문 빠져나감. 멈춘날 idxDate
 			if(idxSpot == spotArr.size()) {
-				System.out.println("=== 멈춘날 idxDate:"+idxDate);
+				System.out.println("=== 멈춘날 idxDate:"+idxDate);  // 총 날짜 수 - idxDate = 텅빈 날짜 수
 				break;
 			}
 			
@@ -127,21 +109,20 @@ public class PlanningAlgorithm {
 					break;
 				} 
 				System.out.println("====3 : "+ j);
-				spotArr.get(j).setSpotDayIdx(i);
-				spotArr.get(j).setSpotDay(spotDay);
+				spotArr.get(j).setSpotDayIdx(i);          // 몇일차 -> 0부터 시작
+				spotArr.get(j).setSpotDay(spotDay);       // 방문일
 				spotArr.get(j).setSpotOrder(++spotOrder); // 출발지:1, 장소는 2 부터로 전위증감
 			}
 			dateArr.get(i).setSpotCnt(spotOrder-1);  // 하루 방문 장소는 장소만 cnt 하므로 spotOrder보다 1 작음
 		}
 		
-		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(spotArr));
-		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(dateArr));
+//		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(spotArr));
+//		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(dateArr));
 		
 		int spotShiftCntPlus = 0;
 		// 장소는 꽉, 장소가 텅빈 날짜 idxDate 를 저장
-		if(idxDate != 0 && idxDate < dateArr.size() ) {
-			int spotShiftCnt = dateArr.size() - idxDate;  // 여행날수 - 멈춘날인덱스
-			System.out.println("a~~~~~spotShiftCnt: "+ spotShiftCnt);
+		if(idxDate != 0 && idxDate < dateArr.size() ) {  //텅빈 날짜 수가 정상일때 
+			int spotShiftCnt = dateArr.size() - idxDate;  // 총 날짜 수 - idxDate(멈춘날) = 텅빈 날짜 수 -> 바꿔야하는 수
 			
 			for(int i=dateArr.size()-1 ; i >= idxDate - spotShiftCntPlus; i--) {  // 9 ~ 4-0
 				int spotShiftIdx = spotArr.size() + i - idxDate - spotShiftCnt;  // 13+9-4-6-0
@@ -170,18 +151,35 @@ public class PlanningAlgorithm {
 				
 				// i번째 날에 장소가 생겼으므로 spotCnt 1
 				dateArr.get(i).setSpotCnt(1);  
-				
-				
 			}
 		}
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
-	}
+		// 장소 분배하기 완료=============================================================================
+		
+		
+		//앞뒤로 출발지, 숙소 채우기
+		// spotOrder가 1번, spotCnt+2만큼 들어감
+		for (int i = 0; i < dayN - 1; i++) { // 여행날 -1 = 숙박장소 개수 , 여행 마지막날에는 숙박장소가 없음.
+			Stay stay = dateArr.get(i).getStay();
 
-	/*
-	 * // 두 장소 간의 유클리드 거리를 계산하는 메서드입니다. private double distance(int[] city1, int[]
-	 * city2) { return Math.sqrt(Math.pow(city1[0] - city2[0], 2) +
-	 * Math.pow(city1[1] - city2[1], 2)); }
-	 */
+			// id만 잘라내기
+			String idLongStr = stay.getId();
+			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length() - 1));
+
+			stayPointList.add(new BeforDto(dateArr.get(i).getDate(), id, stay.getType(), "", // 숙소는 머무는 시간 없음
+					stay.getMapx(), stay.getMapy()));
+		}
+		System.out.println("stayPointList===");
+		System.out.println(stayPointList);
+		
+		for (int i = 0; i < dateArr.size(); i++) {
+			
+			if(i <= dateArr.size()-1)
+			
+			
+		}
+		
+	}
 
 	// Nearest Neighbor 알고리즘을 구현하는 메서드입니다.
 	private ArrayList<Spot> nearestNeighbor(List<Spot> spots) {
@@ -204,15 +202,13 @@ public class PlanningAlgorithm {
 					nearestDist = currWeight;
 				}
 			}
-//			System.out.println("nearest"+nearest); 
-//			System.out.println("nearestDist"+nearestDist);
 			// A-B 일때 B에 weight 저장됨.
 			spots.get(nearest).setWeight(nearestDist);
 			tour.add(spots.get(nearest)); // 가장 가까운 장소를 경로에 추가합니다. -> 가까운 장소의 순서대로 배치됨
 			visited[nearest] = true; // 해당 장소를 방문했다고 표시합니다.
 		}
-		System.out.println("tour!!!!!!!!!");
-		System.out.println(tour);
+//		System.out.println("tour!!!!!!!!!");
+//		System.out.println(tour);
 		return tour; // 최종 순회 경로를 반환합니다.
 	}
 
@@ -262,47 +258,20 @@ public class PlanningAlgorithm {
 							.getString("duration");
 				}else { 
 					durationStr = "길찾기 결과를 찾을 수 없음";
-					duration = 10800;
 				}
 			} else { // HTTP_OK 제외하고 오류 발생한 상황
 				durationStr = ">>>> 에러났어요 : " + responseCode;
 				duration = 0;
 			}
 		} catch (Exception e) {
-//			durationStr = "길찾기 결과를 찾을 수 없음";
-//			// 오류상황 일단 3시간으로 측정
-//			duration = 10800;
+//			e.printStackTrace();
 		}
-		
 		try {
 			duration = Integer.parseInt(durationStr);
 		} catch (NumberFormatException e) {
-			System.out.println(durationStr + "!!!!!!!!!!!!!!!!!!!");
-			// 오류상황 일단 3시간으로 측정
-			// duration = 10800;
+			//System.out.println(durationStr + "!!!!!!!!!!!!!!!!!!!");
+			duration = 10800; // 오류상황 일단 3시간으로 측정
 		}
 		return duration;
 	}
-    private void getDailyTimeRate(List<Integer> numbers) {
-        // 10개의 숫자 배열
-        //double[] numbers = {45, 30, 55, 70, 20, 90, 10, 50, 80, 60};
-        
-    	// 전체 합을 계산
-    	Integer total = 0;
-        for (Integer number : numbers) {
-            total += number;
-        }
-        // 백분율을 계산 및 출력
-        for (Integer number : numbers) {
-        	Integer percentage = (number / total) * 100;
-            System.out.printf("%.2f%%\n", percentage);
-        }
-    }
-    private int getPercentage(int number, int total) {
-        // 백분율을 계산 및 출력
-    	int percentage = (number / total) * 100;
-        System.out.printf("%.2f%%\n", percentage);
-        return percentage;
-    }
-
 }
