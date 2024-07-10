@@ -8,6 +8,12 @@ public class Spot {
 	private String title;
 	private String mapx;
 	private String mapy;
-	private String spotTime;
+	private Integer spotTime;
 	private Integer type;
+	
+	private Integer weight;
+	
+	private Integer spotDayIdx;
+	private String spotDay;
+	private Integer spotOrder;
 }

@@ -238,7 +238,7 @@ function displayEditMode(){
 				htmlval+=`
 					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 					<div class="spot-move"> ${info.durationMin}분> </div>`;
-			}else{
+			}else{ //마지막 장소는 이동시간 표시 X
 				htmlval+=`
 					<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 					<div class="spot-move">  </div>`;
@@ -308,9 +308,19 @@ function displayEditModeAfterDragEnd(){
 			let[hours, minutes] = secToHoursAndMin(info.stayTime);
 			
 			//다음 장소로 이동시간(sec), 분단위로 변환하여 변수에 담기 
-			if((j+1) < daylength){
-				duration = durationHandler(info.lng,info.lat,details.dayDetailInfoEntity[j+1].lng,details.dayDetailInfoEntity[j+1].lat);
-				info.durationMin=Math.ceil(duration/60); // ceil : 소수점 올림
+			if( (j+1) < daylength){  // 마지막 장소
+				duration = durationHandler(info.lng, info.lat, details.dayDetailInfoEntity[j+1].lng,details.dayDetailInfoEntity[j+1].lat);
+				if(duration == 'trafficJam') {
+					prevDuration = 1800;
+				}else{
+					//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
+					//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
+			
+					prevDuration = duration;
+				} ;
+				
+				// *** info에 durationMin 속성 추가
+				info.durationMin=Math.ceil(duration/60);
 			}	
 			
 			//머무는 시간 계산하기 ex) 10:00 - 11:00
@@ -328,11 +338,6 @@ function displayEditModeAfterDragEnd(){
 				info.startTime =  addTime(details.dayDetailInfoEntity[j-1].endTime, prevDuration);
 				info.endTime = 	details.scheduleEnd;
 			}
-			
-			//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
-			//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
-			prevDuration = duration;
-			
 			
 			
 			//map에서 lng lat 값 넣기 KakaoMap Api
@@ -373,9 +378,24 @@ function displayEditModeAfterDragEnd(){
 			//이동시간 표시 및 자동차 아이콘 표시 
 			//마지막  상소일 경우 이동시간 hide
 			if( (j+1) < daylength){
-				htmlval+=`
+				if(!info.durationMin){// 길찾기 실패
+					if(duration == "trafficJam"){// 사고 있을 때
+						htmlval += `
+						<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/lost_duration.png" /></div>
+						<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${details.dayDetailInfoEntity[j+1].title}"  target="_blank"><span style="color: red;">사고지역!</span> 약 30분</a>
+						`;
+					}else{// 그냥 실패
+						htmlval += `
+							<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/lost_duration.png" /></div>
+							<a class="spot-move">개미가 길을 잃었어요.</a>
+						`;
+					}
+				}else{// 정상 케이스
+					htmlval += `
 					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
-					<div class="spot-move"> ${info.durationMin}분> </div>`;
+					<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${details.dayDetailInfoEntity[j+1].title}"  target="_blank">${info.durationMin} 분> </a>
+					`;
+				}
 			}else{
 				//마지막 장소일 경우 (보통 숙소)
 				htmlval+=`
@@ -406,19 +426,21 @@ function displayEditModeAfterDragEnd(){
 	$(".edit-tourlist .wrap-detaillist.flex").html(htmlval);
 	
 	var htmlVal = "";
-	$.each(spotArr, function(idx, element) {
+	if(!spotArr){	
+		$.each(spotArr, function(idx, element) {
 		
-		//element.id;
-		htmlVal += `
-			<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" >
-		 		<div class="spot-img "><img src="${element.img}" width="70" height="70"/></div>
-		 		<div class="flex">
-		 			<div class="spot-title wfull"> ${element.title}</div>
-		 			<div class="spot-type" >${element.placeCat}</div>
-		 		</div>
-		 		<img class="spot-trashcan" onclick="#" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
-			</div>
-		`; 
-	});
-	$('#spot-basket .wrap-basket').html(htmlVal);
+			//element.id;
+			htmlVal += `
+				<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" >
+			 		<div class="spot-img "><img src="${element.img}" width="70" height="70"/></div>
+			 		<div class="flex">
+			 			<div class="spot-title wfull"> ${element.title}</div>
+			 			<div class="spot-type" >${element.placeCat}</div>
+			 		</div>
+			 		<img class="spot-trashcan" onclick="#" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
+				</div>
+			`; 
+		});
+	$('#spot-basket .wrap-basket').html(htmlVal);}
+
 }

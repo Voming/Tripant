@@ -131,7 +131,15 @@ function displayInfo(){
 			//다음 장소로 이동시간(sec), 분단위로 변환하여 변수에 담기 
 			if( (j+1) < daylength){  // 마지막 장소
 				duration = durationHandler(info.lng, info.lat, details.dayDetailInfoEntity[j+1].lng,details.dayDetailInfoEntity[j+1].lat);
-				if(duration == '교통장애') return;
+				if(duration == 'trafficJam') {
+					prevDuration = 1800;
+				}else{
+					//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
+					//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
+			
+					prevDuration = duration;
+				} ;
+				
 				// *** info에 durationMin 속성 추가
 				info.durationMin=Math.ceil(duration/60);
 			}	
@@ -152,12 +160,10 @@ function displayInfo(){
 				info.endTime = 	details.scheduleEnd;
 			}
 			
-			//j번째 장소에서 다음 장소(j+1)로 이동하는데 걸리는 시간 변수에 담기 
-			//prevDuration은 j+1의 도착시각을 계산할 때 사용됨 ex) 11:30-12:00에서 11:30 부분
-			prevDuration = duration;
+
 			var textColor;
 			
-			info.placeType
+			info.placeType;
 			//장소 타입 설정하기
 			if (info.placeType == 1) {
 				info.placeCat = '관광지';
@@ -207,7 +213,7 @@ function displayInfo(){
 					if(duration == "trafficJam"){// 사고 있을 때
 						htmlval += `
 						<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/lost_duration.png" /></div>
-						<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${details.dayDetailInfoEntity[j+1].title}"  target="_blank"><p style="color: red;">사고지역!</p>약 30분</a>
+						<a class="spot-move" href="https://map.kakao.com/?target=car&sName=${info.title}&eName=${details.dayDetailInfoEntity[j+1].title}"  target="_blank"><span style="color: red;">사고지역!</span>약 30분</a>
 						`;
 					}else{// 그냥 실패
 						htmlval += `

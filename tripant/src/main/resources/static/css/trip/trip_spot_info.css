@@ -31,7 +31,10 @@
 .main-wrapper .tourlist .spot-img{grid-column:3; grid-row: 2 / 5; border-radius: 8px;}
 .main-wrapper .tourlist .spot-caricon{grid-column:1; grid-row: 5 ;}
 .main-wrapper .tourlist .spot-move{grid-column:2; grid-row: 5 ;}
-
+/* 공통 규격설정 */
+.main-wrapper .spot-move{
+	font-size: var(--font5);
+}
 /* background 이미지 규격 설정 */
 .main-wrapper .spot-number.backimg{
 	background-image: var(--img_cir_01_red);
@@ -68,7 +71,9 @@
  	background-color:  #fafafa;
  	border:2px solid var(--color_gray);
 	z-index:4;
+	font-size: var(--font5);
 }
+
 .main-wrapper .spot-type{
 	font-size: var(--font5);
 }

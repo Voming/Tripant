@@ -27,8 +27,7 @@ function deleteHandler() {
 							Swal.fire({
 					     	title: "성공",
 					      	text: "삭제되었습니다",
-	  		     		    confirmButtonColor: "#000000",
-			                animation:false		      	
+	  		     		    confirmButtonColor: "#000000"
 					    }).then(() => {
 							location.reload();
 						});
