@@ -44,7 +44,7 @@ function fontSwalHandler(){
 			</div>
 			<div class="list flex" th:if="${fontList} != null">
 				<div class="item flex" th:each="font : ${fontList}">
-					<div class="item pre" th:style="'width: 150px; height: 150px; border-radius: 0; background-size: contain; background-repeat: no-repeat; background-image: url(/'+${font.itemSrc}+');'"></div>
+					<div class="item pre" th:style="'width: 150px; height: 150px; border-radius: 0; background-size: contain; background-repeat: no-repeat; background-image: url('+@{/}+${font.itemSrc}+');'"></div>
 					<div class="item explain flex">
 						<div th:text="${font.itemName}"></div>
 						<div><input type="radio" name="font" th:value="${font.itemCode}"></div>
