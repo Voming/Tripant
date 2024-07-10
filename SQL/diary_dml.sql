@@ -559,6 +559,16 @@ AND DIARY_MEM_EMAIL = 'qothwls5@naver.com';
         WHERE BUY.MEM_EMAIL ='gyrua34@gmail.com'
         AND ROWNUM <= 10
     );
+    ----------폰트 구매 안보이게
+    SELECT ITEM.ITEM_CODE, ITEM.ITEM_NAME, ITEM.ITEM_COLOR
+    FROM BUY
+    JOIN ITEM ON BUY.ITEM_CODE = ITEM.ITEM_CODE
+    WHERE BUY.MEM_EMAIL = 'gyrua34@gmail.com'
+      AND ITEM.ITEM_CODE NOT IN ('F0', 'F1')
+      AND ROWNUM <= 10;
       
+----- 색상 변경 뒤에 33 붙여서
+ALTER table item modify item_color varchar2(10);
+update item set item_color = '13358F33' where item_code ='T9';
       commit;
       
