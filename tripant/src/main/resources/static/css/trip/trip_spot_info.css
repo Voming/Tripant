@@ -34,7 +34,7 @@
 
 /* background 이미지 규격 설정 */
 .main-wrapper .spot-number.backimg{
-	background-image: url('/images/location/circle1_red.png');
+	background-image: var(--img_cir_01_red);
 	background-size : contain ;
 	background-repeat : no-repeat;
 	color:white;

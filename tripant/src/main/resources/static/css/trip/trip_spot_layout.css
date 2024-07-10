@@ -113,12 +113,12 @@
 	margin-right: 10px;
 	width: 35px;
 	height: 55px;
-	background: url('/images/plan/spot_ck_bf.png') no-repeat 0 0px/contain;
+	background: var(--img_spot_ck_bf) no-repeat 0 0px/contain;
 }
 
 /* TODO id 바꿔주기 */
 .spot-tab-content input[type='checkbox']:checked+label {
-	background: url('/images/plan/spot_ck_af.png') no-repeat 0 1px/contain;
+	background: var(--img_spot_ck_af) no-repeat 0 1px/contain;
 }
 
 .spot-tab-content input[type="checkbox"] {

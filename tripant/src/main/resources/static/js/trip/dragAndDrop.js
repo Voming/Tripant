@@ -97,7 +97,7 @@ function dragAndDrop(){
 					}
 					var temp = JSON.parse(JSON.stringify( details.dayDetailInfoEntity[prev_j+1]));
 					//					var temp = {};
-					temp.contentid = spotArr[el_j].id;
+					temp.contentid = spotArr[el_j].contentid;
 					temp.title = spotArr[el_j].title;
 					temp.stayTime = spotArr[el_j].stayTime;
 					temp.placeType = spotArr[el_j].spottype;
@@ -109,10 +109,10 @@ function dragAndDrop(){
 					temp.memo = null;
 					
 					details.dayDetailInfoEntity[prev_j+1]=temp;
-					
+					// jjoggan*** 
+
 //					details.dayDetailInfoEntity.unshift(temp);
 					
-					console.log(details);
 					
 				}else{
 					//details.dayDetailInfoEntity.unshift(spotArr[el_j]);
@@ -124,7 +124,7 @@ function dragAndDrop(){
 					console.log(spotArr[el_j]);
 					var temp = JSON.parse(JSON.stringify( details.dayDetailInfoEntity[0]));
 //					var temp = {};
-					temp.contentid = spotArr[el_j].id;
+					temp.contentid = spotArr[el_j].contentid;
 					temp.title = spotArr[el_j].title;
 					temp.stayTime = spotArr[el_j].stayTime;
 					temp.placeType = spotArr[el_j].spottype;
@@ -135,10 +135,10 @@ function dragAndDrop(){
 					temp.address = spotArr[el_j].addr;
 					temp.memo = null;
 					details.dayDetailInfoEntity[0]=temp;
+					// jjoggan *** 
 					
 //					details.dayDetailInfoEntity.unshift(temp);
 					
-					console.log(details);
 				}
 				spotArr.splice(el_j,1);
 			}else{

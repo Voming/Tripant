@@ -58,7 +58,7 @@ async function memoClickHandler(el){
         $(el).siblings('.memo').text(memo);
     }
 }
-//스팟 삭제하기
+//장소 삭제하기(일정에 포함되어 있는 장소)
 function removeSpot(el){
 	spotTitle = $(el).prevAll('.spot-title').text();
 	var idx = $(el).parents('.spot-block').data('i');
@@ -106,6 +106,56 @@ function removeSpot(el){
 		dragAndDrop();
 	  }
 	});
+}
+//장소 삭제 (장소 추가 박스에 포함되어 있는 장소)
+function deleteSpotHandler(element){
+	var idx = $(element).parent().data('j');
+	var el = $(element).parent();
+	
+	//배열에서 삭제	
+	spotArr.splice(idx, 1);
+	$(element).parent().remove();
+	
+	// jjoggan*** 
+	afterSpotTreat(el);
+	
+	console.log("spotArr");
+	console.log(spotArr);
+}
+//장소 바구니에서 빠져나간 후 처리
+function afterSpotTreat(element){
+	var id = $(element).data('id');
+	console.log("jjoggan = id");
+	console.log(id);
+	
+	//체크 해제하기
+	var checkId = "#" + element.id;
+	$(checkId).attr("checked", false);
+	
+	//마커 삭제
+	setMarkersSpot(null);
+	markersSpot.length = 0;	
+	
+	//마커 다시 붙이기
+	$(".wrap-spotList").find('input:checked').each(function(index) {
+		var title = $(this).parent().find(".spot-name").attr("value");
+		var mapx = $(this).parent().find(".spot-x").attr("value");
+		var mapy = $(this).parent().find(".spot-y").attr("value");
+		addMarkerSpot(new kakao.maps.LatLng(mapy, mapx), title, $(this).attr("id"), index); // 마커 추가
+	});	
+
+	// 박스 리스트 삭제
+	$("#tab02 .selected-spot-box." + id).remove();
+	$("#tab02 .count-spot").html(markersSpot.length);
+	
+	// 박스 번호 다시 붙이기
+	$(".selected-spot-box").each(function(idx, thisElement) {
+		$(thisElement).find(".selected-spot-number").children().text(idx + 1);
+	});
+
+	// 장소 설정 정보 부분 업데이트
+	$(".count-spot").html(markersSpot.length);
+	
 }
 
 //편집페이지에서 장소 삭제하기
@@ -332,6 +382,7 @@ function displayEditModeAfterDragEnd(){
 					<div class="spot-caricon"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 					<div class="spot-move"> ${info.durationMin}분> </div>`;
 			}else{
+				//마지막 장소일 경우 (보통 숙소)
 				htmlval+=`
 					<div class="spot-caricon hide"><img style="width:20px;height: 20px;" src="${contextPath}images/icons/carIcon.png" /></div>
 					<div class="spot-move">  </div>`;
