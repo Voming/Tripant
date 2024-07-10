@@ -1,9 +1,13 @@
 $(loaededHandler);
 function loaededHandler(){
-	//찾기(검색) 버튼
-	//$('.btn-search').on("click",searchHandler);
 	// 결제 취소 버튼
 	$(".btn.cancel").on("click", payCancelHandler);
+}
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	// 엔터키가 눌렸을 때
+    	searchBtnHandler();
+    }
 }
 
 // 결제 취소

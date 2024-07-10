@@ -4,6 +4,13 @@ let pick = null;
 let search = null;
 let sort = null;
 
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	// 엔터키가 눌렸을 때
+    	searchBtnHandler();
+    }
+}
+
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			currentPage = $(thisElement).data("targetpage");
