@@ -226,29 +226,14 @@
 	<!-- 글 수정 -->
 	<update id="updateDiary" parameterType="DiaryPostEntity">
 		UPDATE DIARY
-			<set>
-				<if test="diaryTitle != null and !diaryTitle.equals('')">
-   					 DIARY_TITLE = #{diaryTitle},
-   				 </if>
-   				   <if test="diaryContent != null and !diaryContent.equals('')">
-   					DIARY_CONTENT = TO_CLOB(#{diaryContent}),
-   				</if>
-   		
-   				   <if test="diaryPlanId != null and !diaryPlanId.equals('')">
-   					DIARY_PLAN_ID = #{diaryPlanId},
-   				</if>
-   				  <if test="diaryDate != null">
-    				DIARY_DATE = TO_DATE(#{diaryDate}, 'YYYY-MM-DD') AS DIARY_DATE,
-    			</if>
-    			 <if test="diaryOpen != null">
-    				DIARY_OPEN = #{diaryOpen},
-    			</if>
-    			 <if test="diaryTheme != null">
-    				DIARY_THEME =#{diaryTheme}
-    			</if>
-    			<if test="diaryPlanId != null">
-                DIARY_PLAN_ID = #{diaryPlanId}
-            	</if>
+			<set> 
+				DIARY_TITLE = #{diaryTitle},
+   				DIARY_CONTENT = TO_CLOB(#{diaryContent}),		
+   				DIARY_PLAN_ID = #{diaryPlanId},
+   		    	DIARY_DATE = TO_DATE(#{diaryDate}, 'YYYY-MM-DD') AS DIARY_DATE,
+  				DIARY_OPEN = #{diaryOpen},
+    			DIARY_THEME =#{diaryTheme}
+    			DIARY_PLAN_ID = #{diaryPlanId}
     		</set>	
 			WHERE DIARY_ID = #{diaryId}
 			ND DIARY_MEM_EMAIL = #{memEmail};
@@ -275,15 +260,12 @@
 		VALUES (#{diaryId}, #{memEmail})
 	</insert>
 	<select id="selectBuyTheme" parameterType="string" resultType="BuyThemeEntity">
-		   SELECT ITEM_CODE, ITEM_NAME, ITEM_COLOR
-   				 FROM (
-     	 			  SELECT ITEM.ITEM_CODE, ITEM.ITEM_NAME, ITEM.ITEM_COLOR
-        				FROM BUY
-        				JOIN ITEM ON BUY.ITEM_CODE = ITEM.ITEM_CODE
-        				WHERE BUY.MEM_EMAIL = #{memEmail}
-        				AND ROWNUM <![CDATA[<=]]> 10
-    					)
-    	 
-      
+		     SELECT ITEM.ITEM_CODE, ITEM.ITEM_NAME, ITEM.ITEM_COLOR
+    			FROM BUY
+    			JOIN ITEM ON BUY.ITEM_CODE = ITEM.ITEM_CODE
+   				WHERE BUY.MEM_EMAIL = #{memEmail}
+      			AND ITEM.ITEM_CODE NOT IN ('F0', 'F1')
+      			AND ROWNUM <![CDATA[<=]]> 10
+
 	</select>
 </mapper>
