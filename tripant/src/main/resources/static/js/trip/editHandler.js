@@ -119,23 +119,19 @@ function deleteSpotHandler(element){
 	// jjoggan*** 
 	afterSpotTreat(el);
 	
-	console.log("spotArr");
-	console.log(spotArr);
 }
-//장소 바구니에서 빠져나간 후 처리
+// *** 장소 바구니에서 빠져나간 후 처리
 function afterSpotTreat(element){
 	var id = $(element).data('id');
-	console.log("jjoggan = id");
-	console.log(id);
 	
 	//체크 해제하기
-	var checkId = "#" + element.id;
-	$(checkId).attr("checked", false);
+	var checkId = "#" + id;
 	
+	$(checkId).prop("checked", false);
+	$(checkId).next().css("background", 'var(--img_spot_ck_bf)');
 	//마커 삭제
 	setMarkersSpot(null);
 	markersSpot.length = 0;	
-	
 	//마커 다시 붙이기
 	$(".wrap-spotList").find('input:checked').each(function(index) {
 		var title = $(this).parent().find(".spot-name").attr("value");
@@ -143,7 +139,6 @@ function afterSpotTreat(element){
 		var mapy = $(this).parent().find(".spot-y").attr("value");
 		addMarkerSpot(new kakao.maps.LatLng(mapy, mapx), title, $(this).attr("id"), index); // 마커 추가
 	});	
-
 	// 박스 리스트 삭제
 	$("#tab02 .selected-spot-box." + id).remove();
 	$("#tab02 .count-spot").html(markersSpot.length);

@@ -109,8 +109,8 @@ function dragAndDrop(){
 					temp.memo = null;
 					
 					details.dayDetailInfoEntity[prev_j+1]=temp;
-					// jjoggan*** 
-
+					// jjoggan *** 장소바구니, 장소 추가 설정 변경
+					afterSpotTreat(el);
 //					details.dayDetailInfoEntity.unshift(temp);
 					
 					
@@ -135,8 +135,8 @@ function dragAndDrop(){
 					temp.address = spotArr[el_j].addr;
 					temp.memo = null;
 					details.dayDetailInfoEntity[0]=temp;
-					// jjoggan *** 
-					
+					// jjoggan *** 장소바구니, 장소 추가 설정 변경
+					afterSpotTreat(el);
 //					details.dayDetailInfoEntity.unshift(temp);
 					
 				}

@@ -14,7 +14,7 @@
 				"address": "서울특별시 강남구 테헤란로8길 30",
 				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/39/1807239_image2_1.jpg",
 				"lng": "127.0318125811",
-				"lat": "37.4968855167",
+				"lat": "37.4968855167"
 			},
 			{
 				"placeType": "4",
@@ -26,8 +26,7 @@
 				"address": "서울특별시 서대문구 통일로 107-39",
 				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/12/1900512_image2_1.jpg",
 				"lng": "126.9660944402",
-				"lat": "37.5641931854",
-				"placeCat": "음식점"
+				"lat": "37.5641931854"
 			},
 			{
 				"placeType": "4",
@@ -39,8 +38,7 @@
 				"address": "서울특별시 마포구 양화로7길 6-12",
 				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/01/1288501_image2_1.jpg",
 				"lng": "126.9156105083",
-				"lat": "37.5516159646",
-				"placeCat": "음식점"
+				"lat": "37.5516159646"
 			},
 			{
 				"placeType": "5",
@@ -52,8 +50,7 @@
 				"address": "서울특별시 광진구 아차산로76가길 9 (광장동)",
 				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/94/3303794_image2_1.jpg",
 				"lng": "127.1074153861",
-				"lat": "37.5471171546",
-				"placeCat": "숙소"
+				"lat": "37.5471171546"
 			},
 			{
 				"placeType": "5",
@@ -66,7 +63,6 @@
 				"firstimage": "http://tong.visitkorea.or.kr/cms/resource/20/2684320_image2_1.jpeg",
 				"lng": "126.9842978496",
 				"lat": "37.5813970676",
-				"placeCat": "숙소"
 			}
 		]
 	},
