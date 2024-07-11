@@ -245,7 +245,11 @@ public class MypageController {
 
 	// 회원 탈퇴 페이지
 	@GetMapping("/quit")
-	public String myQuit() {
+	public String myQuit(Model model) {
+		String quitExplain = "1. 탈퇴 완료 시 해당 정보는 복구되지 않습니다.\n"
+				+ "2. 구매하신 상품은 환불 및 취소되지 않으며 잔여 폰트 기간은 소멸됩니다.\n"
+				+ "3. 작성한 여행기는 삭제되지 않습니다.\n";
+		model.addAttribute("quitExplain", quitExplain);
 		return "mypage/quit";
 	}
 	
