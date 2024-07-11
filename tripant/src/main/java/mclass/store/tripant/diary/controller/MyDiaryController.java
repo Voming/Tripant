@@ -32,6 +32,7 @@ public class MyDiaryController {
 
 	@Autowired
 	private DiaryService diaryService;
+	private Long diaryId;
 
 	@GetMapping("/diary") // 특정 사용자가 작성한 모든 글 조회
 	public ModelAndView mydiary(ModelAndView mv, Principal principal) {
@@ -167,7 +168,7 @@ public class MyDiaryController {
 		
 		diaryForm.setDiaryMemEmail(principal.getName());
 		diaryForm.setDiaryViews(diaryForm.getDiaryViews() == null ? 0 : diaryForm.getDiaryViews()); // 기본값 설정
-
+		diaryForm.setDiaryId(diaryForm.getDiaryId());
 		// DiaryPostEntity 저장 (diaryService를 통해 저장 후 diary 객체는 DB에 저장된 후 자동으로 생성된 ID가
 		// 채워짐)
 		diaryForm = diaryService.updateDiary(diaryForm);

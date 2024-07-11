@@ -150,7 +150,10 @@
 	</select>
 
 	<!-- 글 작성 등록 시키기 -->
-	<insert id="insertDiary" parameterType="DiaryBoardEntity">
+	<insert id="insertDiary" parameterType="DiaryBoardEntity"  useGeneratedKeys="true" keyProperty="diaryId">
+		<selectKey keyProperty="diaryId" resultType="int" order="BEFORE">
+			SELECT diary_seq.NEXTVAL diaryId FROM DUAL
+		</selectKey>
 		INSERT 
 			INTO DIARY ( DIARY_ID, DIARY_MEM_EMAIL,DIARY_PLAN_ID,
 						DIARY_TITLE, DIARY_CONTENT, DIARY_DATE, DIARY_OPEN,
@@ -158,9 +161,7 @@
 			VALUES
 					   (#{diaryId}, #{diaryMemEmail},#{diaryPlanId}, #{diaryTitle},
 						#{diaryContent},default, #{diaryOpen}, #{diaryViews},#{diaryTheme})
-		<selectKey keyProperty="diaryId" resultType="int" order="BEFORE">
-			SELECT diary_seq.NEXTVAL diaryId FROM DUAL
-		</selectKey>
+		
 	</insert>
 
 	<!-- 여행기 글 등록 시 이미지 url diary_save 테이블에 저장 시키기 -->
