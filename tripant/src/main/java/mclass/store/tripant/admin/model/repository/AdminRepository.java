@@ -55,6 +55,8 @@ public interface AdminRepository {
 	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId);
+	public Integer reportReset(String memEmail); //등급변경 회원 신고수 초기화
+	public Integer reportDelete(String memEmail); //비활성화->활성화시키면 신고 내역 초기화
 	
 	//신고수 정렬
 	public List<AdminBoardEntity> boardReport();

@@ -93,8 +93,11 @@ public class AdminController {
 		map.put("memRole", memRole);
 		map.put("memEmail", memEmail);
 		map.put("memEnabled", memEnabled);
-		int result = adminservice.adminMemInfo(map);
+	
 		
+		if(memEnabled==1 ) { adminservice.reportReset(memEmail); }
+		 
+		int result = adminservice.adminMemInfo(map);
 		return result;
 	}
 	
