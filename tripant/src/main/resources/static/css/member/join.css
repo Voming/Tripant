@@ -97,3 +97,7 @@
 .wrap-main .mem.join, .wrap-main .back {
 	text-align: center;
 }
+
+.wrap-main textarea{
+	line-height: 1.5em;
+}

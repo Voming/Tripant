@@ -429,7 +429,18 @@ function displayEditModeAfterDragEnd(){
 	$(".edit-tourlist .wrap-detaillist.flex").html(htmlval);
 	
 	var htmlVal = "";
-	if(!spotArr){	
+	console.log("spotArr.length");
+	console.log(spotArr);
+	
+	//if (!spotArr.length || spotArr[0].id === undefined) {
+	if (!spotArr.length || spotArr[0] === undefined) {
+	    // 이 블록은 spotArr이 길이가 0이거나, 길이가 1이지만 값이 없는 상태일 때 실행됩니다.
+	    console.log("%%%%%%%%%%%%%%%");
+	    $('#spot-basket .wrap-basket').find("*").remove();
+	    return;
+	} else {
+	    // 이 블록은 spotArr이 길이가 1 이상이고, 값이 있는 상태일 때 실행됩니다.
+	    console.log("^^^^^^^^^^^^^^^^^^");
 		$.each(spotArr, function(idx, element) {
 		
 			//element.id;
@@ -440,10 +451,12 @@ function displayEditModeAfterDragEnd(){
 			 			<div class="spot-title wfull"> ${element.title}</div>
 			 			<div class="spot-type" >${element.placeCat}</div>
 			 		</div>
-			 		<img class="spot-trashcan" onclick="#" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
+			 		<img class="spot-trashcan" onclick="deleteSpotHandler(this);" src="${contextPath}images/icons/trashcan.png" style="width:20px;height: 20px;">
 				</div>
 			`; 
 		});
-	$('#spot-basket .wrap-basket').html(htmlVal);}
+		$('#spot-basket .wrap-basket').html(htmlVal);
+	}
+
 	setBounds();//지도 범위 재설정
 }

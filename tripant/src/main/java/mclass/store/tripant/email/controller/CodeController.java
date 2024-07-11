@@ -61,7 +61,7 @@ public class CodeController {
 		String from = email;
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
-		String content = "인증번호: "+code; 
+		String content = "트립앤트 인증번호입니다.<br>"+code;
 		
 		// 이메일 전송 : SMTP 이용을 위함
 		Properties p = new Properties();
@@ -133,7 +133,7 @@ public class CodeController {
 		String from = email;
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
-		String content = "인증번호: "+code; 
+		String content = "트립앤트 인증번호입니다.<br>"+code;
 		
 		// 이메일 전송 : SMTP 이용을 위함
 		Properties p = new Properties();
@@ -193,7 +193,7 @@ public class CodeController {
 		String from = email;
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
-		String content = "인증번호: "+code; 
+		String content = "트립앤트 인증번호입니다.<br>"+code;
 		
 		// 이메일 전송 : SMTP 이용을 위함
 		Properties p = new Properties();

@@ -59,9 +59,9 @@ function dragAndDrop(){
 			var temp_i = ((prev_i) ? prev_i : after_i); 
 			//drop 위치가 같은 column인가
 			if( temp_i== el_i){
+// ++++++++++ 같은 컬럼
 				var details = detailListEditMode[el_i];
 				var daylength = details.dayDetailInfoEntity.length;  
-				// 같은 컬럼
 				var temp = JSON.parse(JSON.stringify( detailListEditMode[el_i].dayDetailInfoEntity[el_j]));
 				
 				if(prev_j >= 0){
@@ -86,8 +86,8 @@ function dragAndDrop(){
 					}
 					detailListEditMode[el_i].dayDetailInfoEntity[0] = temp;
 				}
-			}else if (el_i == 99){
-				//장소 추가
+			}/*else if (el_i == 99){
+//========== 장소 추가 (장소바구니 -> 일정)
 				var details = detailListEditMode[temp_i];
 				var daylength = details.dayDetailInfoEntity.length;  
 				if(prev_j >= 0){
@@ -141,48 +141,184 @@ function dragAndDrop(){
 					
 				}
 				spotArr.splice(el_j,1);
-			}else{
-				//컬럼이 다를 때
-				if(prev_j >= 0){
-					var details = detailListEditMode[prev_i];
-					var daylength = details.dayDetailInfoEntity.length
-					// prev 다음j 모든 객체를 +1 위치로 대입
-					for(var j=daylength-1; j > prev_j; j-- ){
-						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
-					}
-		
-					// 옮겨진 객체 el --> prev 다음j 위치에 대입 
-					detailListEditMode[temp_i].dayDetailInfoEntity[prev_j+1] = 
-						detailListEditMode[el_i].dayDetailInfoEntity[el_j];
-		
-					// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
+			}else if (temp_i == 99){
+//========== 일정에 있던 장소를 장소바구니로 옮길 때 (일정 -> 장소바구니)
+				var details = detailListEditMode[el_i];
+				console.log(temp_i);
+				//드랍위치가 0번째가 아닐 때
+				var temp_j =((prev_j) ? prev_j : after_j);
+				console.log(temp_j);
+				var temp = new Spot(JSON.parse(JSON.stringify(spotArr[temp_j]))) ; // 깊은 복사하기
+				
+				temp.addr = details.dayDetailInfoEntity[el_j].address;
+				temp.contentid = details.dayDetailInfoEntity[el_j].contentid;
+				temp.id = "spot-check" + details.dayDetailInfoEntity[el_j].contentid;   //확인해볼 것
+				temp.img = details.dayDetailInfoEntity[el_j].firstimage;
+				temp.mapx = details.dayDetailInfoEntity[el_j].lng;
+				temp.mapy = details.dayDetailInfoEntity[el_j].lat;
+				temp.placeCat = details.dayDetailInfoEntity[el_j].placeCat;
+				temp.spottype = details.dayDetailInfoEntity[el_j].spottype;
+				temp.stayTime = details.dayDetailInfoEntity[el_j].stayTime;
+				temp.title = details.dayDetailInfoEntity[el_j].title;
+
+				//jjoggan-console
+				console.log("temp.id");
+				console.log(temp.id);
+				
+				if(prev_j>=0){
+					//드랍위치가 0번째가 아닐 때
+					spotArr.splice(prev_j,0,temp); // 값추가
+				}else{
+					//드랍위치가 0번째 일 때
+					spotArr.splice(after_j,0,temp); // 값추가
+				}
+				details.dayDetailInfoEntity.splice(el_j,1); // 일정에서 제거
+				console.log("plz check!!!! ");
+				console.log(spotArr);
+				console.log(detailListEditMode);
+				
+			}*/else{
+// ++++++++++ 다른 컬럼
+				if(el_i!=99 && (temp_i==99 ||temp_i===undefined)){
+		//일정 -> 바구니
 					var details = detailListEditMode[el_i];
-					var daylength = details.dayDetailInfoEntity.length
-					for(var j=el_j+1; j < daylength; j++ ){
-						details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
+					var daylength = details.dayDetailInfoEntity.length;  
+					
+					var temp = JSON.parse(JSON.stringify(details.dayDetailInfoEntity[0]));
+					
+					var addr = details.dayDetailInfoEntity[el_j].address;
+					var contentid = details.dayDetailInfoEntity[el_j].contentid;
+					var id = "spot-check" + details.dayDetailInfoEntity[el_j].contentid;   //확인해볼 것
+					var img = details.dayDetailInfoEntity[el_j].firstimage;
+					var mapx = details.dayDetailInfoEntity[el_j].lng;
+					var mapy = details.dayDetailInfoEntity[el_j].lat;
+					var placeCat = details.dayDetailInfoEntity[el_j].placeCat;
+					var spottype = details.dayDetailInfoEntity[el_j].placeType;
+					var stayTime = details.dayDetailInfoEntity[el_j].stayTime;
+					var title = details.dayDetailInfoEntity[el_j].title;
+					
+					var tempSpot = new Spot(id,contentid,title,mapx,mapy,spottype,img,stayTime,placeCat);
+					tempSpot.addr = addr;
+					
+					if(prev_j===undefined){
+					// 배열값이 있는 상황에서 0번째 배열에 아무것도 없을 때도 0번째
+						spotArr.splice(0,0,tempSpot);
+					}else{
+					//1~n번째	
+						spotArr.splice(prev_j,0,tempSpot);
 					}
-					details.dayDetailInfoEntity.pop();
-				} else {
+					details.dayDetailInfoEntity.splice(el_j,1);
+					
+// console				displayEditModeAfterDragEnd();		
+					console.log("일정 -> 장바구니");
+					console.log("temp_i : "+temp_i);
+					console.log("el_i : "+el_i);
+					
+				}else if(el_i == 99 && temp_i!=99){
+		//바구니 -> 일정
+//========== 장소 추가 (바구니 -> 일정)
 					var details = detailListEditMode[temp_i];
-					var daylength = details.dayDetailInfoEntity.length
-					//drop 위치가 0번째인가 
-					// 맨앞
-					for(var j=daylength-1; j >= 0; j-- ){
-						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+					var daylength = details.dayDetailInfoEntity.length;  
+					if(prev_j >= 0){
+						// prev 다음j 모든 객체를 +1 위치로 대입
+						for(var j=daylength-1; j > prev_j; j-- ){
+							details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+						}
+						console.log("spotArr[el_j].contentid");
+						console.log(spotArr[el_j].contentid);
+						var temp = JSON.parse(JSON.stringify( details.dayDetailInfoEntity[0]));
+						temp.contentid = spotArr[el_j].contentid;
+						temp.title = spotArr[el_j].title;
+						temp.stayTime = spotArr[el_j].stayTime;
+						temp.placeType = spotArr[el_j].spottype;
+						temp.placeCat = spotArr[el_j].placeCat;
+						temp.lat = spotArr[el_j].mapy;
+						temp.lng = spotArr[el_j].mapx;
+						temp.firstimage = spotArr[el_j].img;
+						temp.address = spotArr[el_j].addr;
+						temp.memo = null;
+						
+						details.dayDetailInfoEntity[prev_j+1]=temp;
+						// jjoggan *** 장소바구니, 장소 추가 설정 변경
+						afterSpotTreat(el);
+						
+						
+					}else{
+						//0번째에 drop 하는가
+						for(var j=daylength-1; j >= 0; j-- ){
+							details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+						}
+						console.log(spotArr[el_j]);
+						var temp = JSON.parse(JSON.stringify( details.dayDetailInfoEntity[0]));
+						temp.contentid = spotArr[el_j].contentid;
+						temp.title = spotArr[el_j].title;
+						temp.stayTime = spotArr[el_j].stayTime;
+						temp.placeType = spotArr[el_j].spottype;
+						temp.placeCat = spotArr[el_j].placeCat;
+						temp.lat = spotArr[el_j].mapy;
+						temp.lng = spotArr[el_j].mapx;
+						temp.firstimage = spotArr[el_j].img;
+						temp.address = spotArr[el_j].addr;
+						temp.memo = null;
+						details.dayDetailInfoEntity[0]=temp;
+						// jjoggan *** 장소바구니, 장소 추가 설정 변경
+						afterSpotTreat(el);
+						
 					}
-					// 옮겨진 객체 el --> prev 다음j 위치에 대입 
-					detailListEditMode[temp_i].dayDetailInfoEntity[0] = 
-						detailListEditMode[el_i].dayDetailInfoEntity[el_j];
-					// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
-					var details = detailListEditMode[el_i];
-					var daylength = details.dayDetailInfoEntity.length
-					for(var j=el_j+1; j < daylength; j++ ){
-						details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
-					}
-					details.dayDetailInfoEntity.pop();
+					spotArr.splice(el_j,1);
+// console			
+					console.log("바구니 -> 일정");
+					console.log("temp_i : "+temp_i);
+					console.log("el_i : "+el_i);
+				}else if(el_i != 99 && temp_i!=99){
+		//일정 -> 일정
+//========== 컬럼이 다를 때 (일정 -> 일정)
+					if(prev_j >= 0){
+						var details = detailListEditMode[prev_i];
+						var daylength = details.dayDetailInfoEntity.length
+						// prev 다음j 모든 객체를 +1 위치로 대입
+						for(var j=daylength-1; j > prev_j; j-- ){
+							details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+						}
+			
+						// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+						detailListEditMode[temp_i].dayDetailInfoEntity[prev_j+1] = 
+							detailListEditMode[el_i].dayDetailInfoEntity[el_j];
+			
+						// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
+						var details = detailListEditMode[el_i];
+						var daylength = details.dayDetailInfoEntity.length
+						for(var j=el_j+1; j < daylength; j++ ){
+							details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
+						}
+						details.dayDetailInfoEntity.pop();
+					} else {
+						var details = detailListEditMode[temp_i];
+						var daylength = details.dayDetailInfoEntity.length
+						//drop 위치가 0번째인가 
+						// 맨앞
+						for(var j=daylength-1; j >= 0; j-- ){
+							details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
+						}
+						// 옮겨진 객체 el --> prev 다음j 위치에 대입 
+						detailListEditMode[temp_i].dayDetailInfoEntity[0] = 
+							detailListEditMode[el_i].dayDetailInfoEntity[el_j];
+						// 옮겨진 객체 el 다음 모든 객체를 -1 위치로 대입 
+						var details = detailListEditMode[el_i];
+						var daylength = details.dayDetailInfoEntity.length
+						for(var j=el_j+1; j < daylength; j++ ){
+							details.dayDetailInfoEntity[j-1] =  details.dayDetailInfoEntity[j];
+						}
+						details.dayDetailInfoEntity.pop();
+// console			
+						console.log("일정 -> 일정");
+						console.log("temp_i : "+temp_i);
+						console.log("el_i : "+el_i);
+					}	
 				}
 			}
-			console.log("detailListEditMode===2");
+			console.log("detailListEditMode===2 spot + arr");
+			console.log(spotArr);
 			console.log(detailListEditMode);
 			// *** 편집된 내용 다시 display
 			displayEditModeAfterDragEnd();
@@ -197,14 +333,14 @@ function dragAndDrop(){
 
     containers.forEach(container => {
         container.addEventListener('dragover', e => {
-            console.log("dragover");
+            //console.log("dragover");
             e.preventDefault()
             const afterElement = getDragAfterElement(container, e.clientY);
             const draggable = document.querySelector('.dragging')
             // container.appendChild(draggable)
-			console.log(draggable);
+/*			console.log(draggable);
 			console.log(afterElement);
-			console.log("========");
+			console.log("========");*/
 			after_i = $(afterElement).data("i");
 			after_j = $(afterElement).data("j");
             container.insertBefore(draggable, afterElement)
@@ -229,7 +365,7 @@ function dragAndDrop(){
     
 }// dragAndDrop()
 
-
+/*
 function dragendHandler(e)  {
 	console.log("dragend");
 	console.log(e.target);
@@ -342,4 +478,4 @@ function dragendHandler(e)  {
 	displayMarker();
 	//드래그 앤 드랍
 	dragAndDrop();
-}// dragendHandler()
+}// dragendHandler()*/
