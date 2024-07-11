@@ -13,7 +13,7 @@
 }	
 /* grid-items 규격설정 */	/*  */
 .main-wrapper .edit-tourlist .spot-number{grid-column:1; grid-row: 1 ; }
-.main-wrapper .edit-tourlist .spot-staytime{grid-column:3/5; grid-row: 2 ;width:165px;} 
+.main-wrapper .edit-tourlist .spot-staytime{grid-column:3; grid-row: 2 ;} 
 .main-wrapper .edit-tourlist .spot-type{grid-column:2; grid-row: 2 ;}
 .main-wrapper .edit-tourlist .spot-title{grid-column:2/4; grid-row: 1 ; padding-top:5px;}
 .main-wrapper .edit-tourlist .spot-memo{grid-column:4; grid-row: 2 ;}
@@ -45,6 +45,9 @@
 .main-wrapper .edit-tourlist .timerange-modal .flex{
 	align-items: center;
 }	
+.main-wrapper .edit-tourlist .timerange-modal .flex > p:last-child:hover{
+	cursor: pointer;	
+}
 .main-wrapper .edit-tourlist .timerange-modal input{
 	width: 40px;
 	margin: 0 10px;
