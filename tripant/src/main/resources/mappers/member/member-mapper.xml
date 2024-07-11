@@ -77,7 +77,7 @@
 	</select>
 	<!-- 회원 탈퇴 -->
 	<delete id="memQuit" parameterType="string">
-		delete from Member where mem_email=#{memEmail}
+		delete from member where mem_email=#{memEmail}
 	</delete>
 		
 </mapper>

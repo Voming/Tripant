@@ -8,7 +8,6 @@ function pwdCheckHandler(){
 		type: 'post', 
 		data: {memPassword: pwdInput}, 
 		success: function(result){
-			console.log(result);
 			if(result == 1){
 				$("#memPassword-yes").removeClass('hide');
 				$("#memPassword-no").addClass('hide');

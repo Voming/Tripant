@@ -101,3 +101,9 @@
 .wrap-main textarea{
 	line-height: 1.5em;
 }
+
+.wrap-main .inputlbl input, 
+.wrap-main .inputbtn input, 
+.wrap-main .inputchk input{
+	font-size: var(--font5);
+}

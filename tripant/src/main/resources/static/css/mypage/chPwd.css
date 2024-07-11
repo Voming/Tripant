@@ -2,7 +2,7 @@
 
 .wrap-main {
 	width: 960px;
-	margin: 120px auto;
+	margin: 180px auto;
 }
 
 .wrap-main * {
@@ -74,4 +74,10 @@
 .wrap-main .choose {
 	margin-top: 10px;
 	justify-content: space-between;
+}
+
+.wrap-main .inputlbl input, 
+.wrap-main .inputbtn input, 
+.wrap-main .inputchk input{
+	font-size: var(--font5);
 }

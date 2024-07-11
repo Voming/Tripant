@@ -1,5 +1,7 @@
 package mclass.store.tripant.trip.model.repository;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,7 @@ public interface TripListRepository {
 	List<TripShareEntity> share(Map<String, Object> map);
 	
 	//유저 추가
-	Integer add(Map<String, Object> map);
+	Integer add(Map<String, Object> map) throws SQLIntegrityConstraintViolationException;
 	
 	//유저 추가
 	Integer remove(Map<String, Object> map);

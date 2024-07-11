@@ -1,4 +1,6 @@
 function addAndRemoveHandler(){
+	$('.btn.remove').off("click");
+	$('.btn.add').off("click");
 	//유저삭제
 	$('.btn.remove').on('click',removeHandler);
 	//유저추가
@@ -12,14 +14,17 @@ function removeHandler(){
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
 		url: contextPath+"trip/remove/nick",
+		async:false,
 		method:"post",
 		context:this,//.btn.add
     	data: {planId:planId,removeNick: removeNick},
 		success : function(result) {
-			$(this).removeClass('remove');
-			$(this).addClass('add');
-			$(this).text('추가');
-			addAndRemoveHandler();
+			//if(result > 0){
+				$(this).removeClass('remove');
+				$(this).addClass('add');
+				$(this).text('추가');
+				addAndRemoveHandler();
+			//}
 		}
 	});
 }
@@ -31,14 +36,24 @@ function addHandler(){
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
 		url: contextPath+"trip/add/nick",
+		async:false,
 		method:"post",
 		context:this,//.btn.add
     	data: {planId:planId,addNick: addNick},
 		success : function(result) {
-			$(this).removeClass('add');
-			$(this).addClass('remove');
-			$(this).text('삭제');
-			addAndRemoveHandler();
+			if(result == 1){
+				$(this).removeClass('add');
+				$(this).addClass('remove');
+				$(this).text('삭제');
+				addAndRemoveHandler();
+			} else if (result == -2){
+				$(this).removeClass('add');
+				$(this).addClass('remove');
+				$(this).text('삭제');
+				addAndRemoveHandler();
+			} else if (result == -500){
+				alert("re try")
+			}
 		}
 	});
 }

@@ -1,6 +1,8 @@
 package mclass.store.tripant.trip.controller;
 
 import java.security.Principal;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,7 +75,16 @@ public class TripListController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("planId", planId);
 		map.put("addNick",addNick);
-		int result = tripListService.add(map);
+		int result = 0;
+		try {
+			result = tripListService.add(map);
+		} catch (SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+			result = -2;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result = -500;
+		}
 		return result;
 	}
 	
@@ -86,4 +98,11 @@ public class TripListController {
 		int result = tripListService.remove(map);
 		return result;
 	}
+	
+//	@ExceptionHandler(SQLException.class)
+//	public String exceptionHandler(SQLException e) {
+//		e.printStackTrace();
+//		return "-2";
+//	}
+//	
 }

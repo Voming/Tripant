@@ -11,3 +11,12 @@ update plan_spot set  spot_order = 5 where  TO_CHAR(spot_day,'yyyy-MM-dd') = '20
 
 commit;
 rollback;
+desc plan_member;
+select * from plan_member;
+delete from plan_member where plan_id = 13 and mem_email=(select mem_email from member where mem_nick='오오')
+;
+insert into plan_member values (13,(select mem_email from member where mem_nick='오오'),'0')
+;
+
+
+select * from member;

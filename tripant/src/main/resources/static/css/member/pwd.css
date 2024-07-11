@@ -70,3 +70,9 @@
 .wrap-main .btn.set {
 	width: 100%;
 }
+
+.wrap-main .inputlbl input, 
+.wrap-main .inputbtn input, 
+.wrap-main .inputchk input{
+	font-size: var(--font5);
+}

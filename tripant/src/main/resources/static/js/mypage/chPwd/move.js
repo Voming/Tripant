@@ -7,7 +7,7 @@ function saveClickHandler(){
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
-		url:contextPath+'save/pwd', 
+		url:contextPath+'my/pwd', 
 		type: 'post', 
 		data: $('#memPassword'), 
 		success: function(result){
@@ -19,6 +19,7 @@ function saveClickHandler(){
 					confirmButtonText: "확인"
 				}).then((swal) => {
 					if(swal.isConfirmed){
+						console.log(contextPath);
 						let form = document.getElementById('frm-chPwd');
 						form.action = contextPath+'logout';
 						form.method = 'POST';
