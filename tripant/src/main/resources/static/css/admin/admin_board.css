@@ -49,6 +49,10 @@
   	border-bottom:1px solid black;
   	align-items:center;
 } 
+.wrap-body .ad-content .col.list .title{
+	overflow: hidden;
+    white-space: nowrap;
+}
 
 .wrap-body .ad-content .list>li{
 	 margin:15px 0 15px 0; 

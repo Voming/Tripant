@@ -38,7 +38,7 @@
 			<li id="list"><th:block th:each="memBoard:${diaryMap.boardList}">
 					<ul class="col list">
 						<li th:text="${memBoard.diaryId}"></li>
-						<li th:text="${memBoard.diaryTitle}"></li>
+						<li class="title" th:text="${memBoard.diaryTitle}"></li>
 						<li th:text="${memBoard.memNick}"></li>
 						<li th:text="${memBoard.diaryDate}"></li>
 						<li th:text="${memBoard.diaryViews}"></li>
