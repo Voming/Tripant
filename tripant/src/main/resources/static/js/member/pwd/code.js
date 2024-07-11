@@ -17,6 +17,7 @@ function codeSendHandler(){
 					confirmButtonText: "확인"
 				}).then((swal) => {
 					if(swal.isConfirmed){
+						$("#memEmail").attr("readonly", true);
 						$(".inputbtn.check").removeClass('hide');
 					}
 				});
