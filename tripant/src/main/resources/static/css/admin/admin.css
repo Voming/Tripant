@@ -1,14 +1,17 @@
 @charset "UTF-8";
 .wrap-main *{
 	font-family: 'Binggrae';
+	
 }
 .wrap-main{
 	display:flex;
 	min-width: 1024px;
+	height:100vh; 
 }
 
 body{
 	margin:0;
+	overflow:hidden;
 }
 
 a{
