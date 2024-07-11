@@ -44,7 +44,9 @@ public class MyDiaryController {
 	@PostMapping("/diary/more") // 특정 사용자가 작성한 모든 글 조회 더보기
 	public String mydiaryMore(Model model, Principal principal, Integer clickNum) {
 		int maxNum = (clickNum + 1) * 4;
-		model.addAttribute("diaries", diaryService.selectMyDiaryList(principal.getName(), maxNum));
+		List<DiaryBoardEntity> list = diaryService.selectMyDiaryList(principal.getName(), maxNum);
+		
+		model.addAttribute("diaries", list);
 		return "diary/my/board_more_fragment";
 	}
 

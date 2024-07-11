@@ -16,18 +16,18 @@ function moreBtnClickHandler(thisElement){
 		, context: this
 		}).done(function(wrap_content) {
 			// 서버에서 받아온 wrap_content가 비어 있지 않은 경우에만 추가
-        if (wrap_content.trim() !== "") {
+//        if (wrap_content == "nomore") {
+//			// wrap_content가 빈 문자열인 경우 더보기 버튼을 제거
+//          $(".mydiary_more_btn").remove();
+//          console.log(".mydiary_more_btn");
+//        } else {
 			 // wrap_content를 .board-list 요소에 추가
             $(".board-list").append(wrap_content);
              console.log("board-list");
              //더보기 비활성화
-              // 추가된 항목의 개수를 diarymoreCount에 저장
-           // diarymoreCount = $(".wrap_content").find().length; 
-        } else {
-			// wrap_content가 빈 문자열인 경우 더보기 버튼을 제거
-          $(".mydiary_more_btn").remove();
-          console.log(".mydiary_more_btn");
-        }
+             // 추가된 항목의 개수를 diarymoreCount에 저장
+             // diarymoreCount = $(".wrap_content").find().length; 
+//        }
     });
 	}
 	// 이미지 꺼내기
