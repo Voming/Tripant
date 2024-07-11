@@ -72,3 +72,9 @@
 .wrap-main .flex.snslogo {
 	column-gap: 10px;
 }
+
+.wrap-main .inputlbl input, 
+.wrap-main .inputbtn input, 
+.wrap-main .inputchk input{
+	font-size: var(--font5);
+}
