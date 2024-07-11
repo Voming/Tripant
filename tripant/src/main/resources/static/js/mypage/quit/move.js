@@ -11,8 +11,8 @@ function quitClickHandler(){
 		showCancelButton: true, 
 		confirmButtonText: "탈퇴하기", 
 		confirmButtonColor: "#000000", 
-		cancelButtonText: "돌아가기", 
-		cancelButtonColor: "#ff0000"
+		cancelButtonText: `<p style="color: black;">돌아가기</p>`, 
+		cancelButtonColor: "#fff"
 	}).then((swal) => {
 		if(swal.isConfirmed){
 			$.ajax({
@@ -22,6 +22,7 @@ function quitClickHandler(){
 				type: 'post', 
 				data: {memPassword: memPassword}, 
 				success: function(result){
+					console.log(result);
 					if(result > 0){
 						Swal.fire({
 							html: "탈퇴 처리되었습니다.<br>메인 페이지로 이동합니다.", 
