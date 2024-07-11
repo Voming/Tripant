@@ -11,8 +11,8 @@
 		<li th:if="${item.itemSale} == null"></li>
 		<li th:text="${item.itemColor}" th:if="${item.itemColor} != null"></li>
 		<li th:if="${item.itemColor} == null"></li>
-		<li th:text="${item.itemSrc}" th:if="${item.itemSrc} != null"></li>
-		<li th:if="${item.itemSrc} == null"></li>
+		<li class="src"   th:text="${item.itemSrc}" th:if="${item.itemSrc} != null"></li>
+		<li class="src" th:if="${item.itemSrc} == null"></li>
 		<li><button type="button" class="btn update"><h5>수정</h5></button> <button type="button" class="btn delete"><h5>삭제</h5></button> </li>
 	</ul>
 </li>
