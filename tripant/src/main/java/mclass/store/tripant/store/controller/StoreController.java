@@ -74,10 +74,13 @@ public class StoreController {
 	// 장바구니에 담기
 	@PostMapping("/insert")
 	@ResponseBody
-	public String storeInsert(@RequestParam List<String> items, Principal principal) {
+	public String storeInsert(@RequestParam(required = false) List<String> items, Principal principal) {
 		String result;
 		if(principal == null) {
 			return "-1";
+		}
+		if(items == null) {
+			return "-2";
 		}
 		int size = items.size();
 		Map<String, Object> map = new HashMap<>();
