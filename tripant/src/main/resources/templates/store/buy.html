@@ -24,7 +24,6 @@
 					<div class="buy-name" th:text="${item.ITEM_NAME}"></div>
 					<div class="buy-price" th:text="${item.ITEM_PRICE_CHAR}+'원'" th:if="${item.ITEM_SALE} == null"></div>
 					<div class="buy-price" th:text="${item.SALE_PRICE}+'원'" th:if="${item.ITEM_SALE} != null"></div>
-					<div class="buy-price" th:text="${item.ITEM_PRICE_CHAR}+'원'"></div>
 					<div class="buy-date" th:text="${item.BUY_DATE}"></div>
 				</div>
 			</div>

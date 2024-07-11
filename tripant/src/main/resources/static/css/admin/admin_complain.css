@@ -83,7 +83,7 @@
 	width:20%;
 }
 
-
+/* 초기화버튼 */
 .wrap-body .btn-reset{
 	border-radius:8px;
 	border:none;
@@ -92,7 +92,7 @@
 	float:right;
 	background-color:black;
 	color:white;
-	margin-top:10px;
+	margin:10px 30px 0 0;
 }
 
 .wrap-body .btn-reset{

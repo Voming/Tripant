@@ -30,7 +30,16 @@ public class StoreService {
 	// 장바구니에 담기
 	@Transactional
 	public int insertItems(String memEmail, Map<String, Object> map) {
-		storeRepository.fontDel(memEmail);
+		List<String> list = (List<String>) map.get("list");
+		boolean isFont = false;
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).charAt(0) == 'F') {
+				isFont = true;
+			}
+		}
+		if(isFont) {
+			storeRepository.fontDel(memEmail);
+		}
 		int result = storeRepository.insertItems(map);
 		return result;
 	}

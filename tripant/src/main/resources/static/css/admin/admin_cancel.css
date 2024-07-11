@@ -32,7 +32,6 @@
 } 
 
 .wrap-body .ad-content .memberlist{
-	/* margin-top: 25px; */
 	margin: 0 auto;
 	width:100%;
 }
@@ -46,7 +45,7 @@
 
 
 .wrap-body .ad-content .list>li{
-	 margin:15px 0 15px 0; 
+	 margin:8.5px 0 8.5px 0; 
 }
 
 .boardlist> ul>li{
@@ -56,8 +55,6 @@
 
 .memberlist > li >ul{
 	 clear:both;
-	/*   padding:0px auto; 
-     position:relative;  */
 }
 
 .memberlist > li> ul >li{
@@ -99,7 +96,7 @@
 	border-radius:8px;
 	border:solid black 1px;
 	background-color:white;
-	height:30px;
+	height:33px;
 	width:80px;
 	cursor:pointer;
 }

@@ -14,7 +14,7 @@ function insertItemsHandler(){
 		}, 
 		success: function(data){
 			console.log(data);
-			if(data === "1"){
+			if(data == "1"){
 				Swal.fire({
 					html: "선택하신 상품이 장바구니에 담겼습니다.<br>장바구니로 이동하시겠습니까?", 
 					icon: "question", 
@@ -30,7 +30,7 @@ function insertItemsHandler(){
 						location.reload();
 					}
 				});
-			}else if(data === "-1"){
+			}else if(data == "-1"){
 				Swal.fire({
 					html: "로그인이 필요한 기능입니다.<br>로그인 페이지로 이동합니다.", 
 					icon: "info", 
@@ -40,6 +40,13 @@ function insertItemsHandler(){
 					if(swal.isConfirmed){
 						location.href = contextPath + "login";
 					}
+				});
+			}else if(data == "-2"){
+				Swal.fire({
+					html: "상품을 선택해주세요!", 
+					icon: "warning", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인"
 				});
 			}else{
 				Swal.fire({

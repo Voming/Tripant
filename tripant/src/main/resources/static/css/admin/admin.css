@@ -6,12 +6,10 @@
 .wrap-main{
 	display:flex;
 	min-width: 1024px;
-	height:100vh; 
 }
 
 body{
 	margin:0;
-	overflow:hidden;
 }
 
 a{
@@ -80,7 +78,7 @@ a{
 
 .wrap-main .wrap-sidebar{
 	width: 240px;
-    height: 1025px;
+    height: 885px;
     background: black;
     color:white;
 }
