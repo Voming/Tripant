@@ -27,9 +27,9 @@
                     <tr>
                         <td>
                             <select name="diaryPlanId" class="diary-writer-select-plan">
-                                <option value="">처음 생성했던 일정 이름을 골라주세요!</option>
+                                <!-- <option value="">처음 생성했던 일정 이름을 골라주세요!</option> -->
                                 <!-- Thymeleaf 반복문을 사용하여 계획 목록을 옵션으로 표시 -->
-                                <option th:each="plan : ${plans}" th:value="${plan.planId}" th:text="${plan.planTitle}">planTitle</option>
+                                <option selected th:value="${diary.diaryPlanId}"   th:text="${diary.diaryPlanTitle}">planTitle</option>
                             </select>
                         </td>
                     </tr>

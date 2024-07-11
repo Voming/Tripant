@@ -151,9 +151,7 @@
 
 	<!-- 글 작성 등록 시키기 -->
 	<insert id="insertDiary" parameterType="DiaryBoardEntity"  useGeneratedKeys="true" keyProperty="diaryId">
-		<selectKey keyProperty="diaryId" resultType="int" order="BEFORE">
-			SELECT diary_seq.NEXTVAL diaryId FROM DUAL
-		</selectKey>
+		
 		INSERT 
 			INTO DIARY ( DIARY_ID, DIARY_MEM_EMAIL,DIARY_PLAN_ID,
 						DIARY_TITLE, DIARY_CONTENT, DIARY_DATE, DIARY_OPEN,
@@ -161,7 +159,9 @@
 			VALUES
 					   (#{diaryId}, #{diaryMemEmail},#{diaryPlanId}, #{diaryTitle},
 						#{diaryContent},default, #{diaryOpen}, #{diaryViews},#{diaryTheme})
-		
+		<selectKey keyProperty="diaryId" resultType="int" order="BEFORE">
+			SELECT diary_seq.NEXTVAL diaryId FROM DUAL
+		</selectKey>
 	</insert>
 
 	<!-- 여행기 글 등록 시 이미지 url diary_save 테이블에 저장 시키기 -->
@@ -181,11 +181,12 @@
 	<!-- 특정 ID의 다이어리 조회  + 로그인한 계정이 눌렀는지 여부 -->
 	<select id="selectDiaryById" parameterType="map" resultMap="DiaryBoardEntityMap">
 		<!-- view_diary_member의 nick_name -->
-		SELECT t2.* 
+		SELECT T2.* 
+						, (SELECT PLAN_TITLE  FROM PLAN T3 WHERE T2.DIARY_PLAN_ID = T3.PLAN_ID )  DIARY_PLAN_TITLE
 			<if test="memEmail != null and !memEmail.equals('') ">
-            ,(SELECT COUNT(t1.DIARY_ID) FROM diary_likes t1 
-            WHERE t1.DIARY_ID = t2.DIARY_ID and t1.mem_email =#{memEmail})
-             is_my_likes
+            ,(SELECT COUNT(T1.DIARY_ID) FROM DIARY_LIKES T1 
+            WHERE T1.DIARY_ID = T2.DIARY_ID AND T1.MEM_EMAIL =#{memEmail})
+             IS_MY_LIKES
              </if>
 			FROM VIEW_DIARY_MEMBER t2
 			WHERE DIARY_ID = #{diaryId}

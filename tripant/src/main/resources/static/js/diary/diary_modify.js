@@ -70,7 +70,7 @@
 			contentType: "application/json",
 			data: JSON.stringify({
 				diaryPlanId: diaryPlanId,
-				diaryDiaryId: diaryId,
+				diaryId: diaryId,
 				diaryTitle: diaryTitle,
 				diaryTheme: diaryTheme,
 				diaryOpen: diaryOpen,

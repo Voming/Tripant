@@ -22,6 +22,8 @@ public class DiaryBoardEntity {
 	private Integer diaryId;
 	private String diaryMemEmail;
 	private Integer diaryPlanId;
+	private String diaryPlanTitle;
+	
 	private String diaryTitle;
 	private String diaryContent;
 //	private List<String> diaryContentArrList;

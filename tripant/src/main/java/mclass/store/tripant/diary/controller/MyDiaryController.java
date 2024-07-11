@@ -156,7 +156,7 @@ public class MyDiaryController {
 		model.addAttribute("themes", diaryService.selectBuyTheme(memEmail));
 		// 조회된 글 정보를 모델에 추가하여 폼에 전달
 		model.addAttribute("diary", diaryService.getDiaryById(diaryId, memEmail));
-		model.addAttribute("plans", diaryService.getAllPlans(memEmail));
+		//model.addAttribute("plans", diaryService.getAllPlans(memEmail));
 		model.addAttribute("loggedInUserEmail", memEmail);
 
 		// 수정 폼을 나타내는 HTML 파일 이름을 반환합니다.
