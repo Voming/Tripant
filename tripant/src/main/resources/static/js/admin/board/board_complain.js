@@ -33,10 +33,9 @@ function cickSetHandler(){
 				}
 	});
 } 
-var currentPage = 1;
-var totalPageCount = null;
-var startPageNum = null;
-var endPageNum = null;
+let currentPage = 1;
+let sort = null;
+let searchMem = null;
 
 /* 페이징 이동 함수 */
 function goPageHandler() {
@@ -47,12 +46,12 @@ function goPageHandler() {
 				url:contextPath+"admin/complain/search"
 				, method : "get"
 				, data : {
-						seachMem : seachMem,
+						searchMem : searchMem,
 						currentpage : currentpage}
 				, dataType : "json"
 				, success : function(result){
-					if(result.seachMem){
-						$("[name=search]").val(result.seachMem);
+					if(result.searchMem){
+						$("[name=search]").val(result.searchMem);
 					}
 					memListHandler(result);
 				}
