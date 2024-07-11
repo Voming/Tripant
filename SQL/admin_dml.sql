@@ -200,3 +200,9 @@ pivot(sum(count) for plan_area_code in
 7 as ulsan, 8 as sejong, 31 as gyeonggi , 33 as Chungbuk, 34 as Chungnam, 37 as Jeonbuk, 
 38 as Jeonam, 35 as Gyeongbuk, 36 as Gyeongnam, 39 as jeju, 32 as gangwon))
 ;
+
+select trunc(months_between(sysdate, to_date(to_char(mem_join_date, 'yyyy-MM'), 'yyyy-MM'))) as before, count(*) as num ,to_char(mem_join_date, 'yyyy-MM') as datelabel
+	 from member 
+	 where to_char(mem_join_date, 'yyyy-MM') in (to_char(sysdate,'yyyy-MM'), to_char(add_months(sysdate, -1),'yyyy-MM'), to_char(add_months(sysdate, -2),'yyyy-MM')
+	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM') , to_char(add_months(sysdate, -6),'yyyy-MM')) 
+	 group by to_char(mem_join_date, 'yyyy-MM');
