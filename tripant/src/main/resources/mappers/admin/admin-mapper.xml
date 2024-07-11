@@ -409,21 +409,7 @@
 		 ORDER BY item_code asc ) T1 ) T2
 		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
-		<!-- 페이지처리
-		<select id="selectPage" resultType="BoardListDto" parameterType="map">
-		SELECT T2.* FROM
-		(SELECT T1.*, ROWNUM RN FROM
-		(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED, b.MEM_QUIT_DATE
-            from member a
-            left join quit_member b
-            on a.MEM_EMAIL=b.MEM_EMAIL 
-		<if test='searchMem != null and searchMem !=""'>
-        <bind name="keyword" value="'%'+searchMem+'%'" />
-		WHERE mem_nick like #{keyword}
-		</if>
-		 ORDER BY MEM_JOIN_DATE DESC) T1 ) T2
-		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
-	</select> -->
+	
 	<!-- 상품정보 -->
 	<select id="itemInfo" resultType="map" parameterType="string">
 	select item_name, item_price, item_dur, item_sale, item_color, item_src from item where item_code = #{itemCode} 
@@ -460,7 +446,7 @@
 	 select trunc(months_between(sysdate, to_date(to_char(mem_join_date, 'yyyy-MM'), 'yyyy-MM'))) as before, count(*) as num 
 	 from member 
 	 where to_char(mem_join_date, 'yyyy-MM') in (to_char(sysdate,'yyyy-MM'), to_char(add_months(sysdate, -1),'yyyy-MM'), to_char(add_months(sysdate, -2),'yyyy-MM')
-	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM')) 
+	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM') , to_char(add_months(sysdate, -6),'yyyy-MM')) 
 	 group by to_char(mem_join_date, 'yyyy-MM')
 	 </select>
 	 <!--일정수 통계  -->
@@ -468,7 +454,7 @@
 	 select trunc(months_between(sysdate, to_date(to_char(PLAN_MAKE_DAY, 'yyyy-MM'), 'yyyy-MM'))) as before, count(*) as num 
 	 from plan 
 	 where to_char(PLAN_MAKE_DAY, 'yyyy-MM') in (to_char(sysdate,'yyyy-MM'), to_char(add_months(sysdate, -1),'yyyy-MM'), to_char(add_months(sysdate, -2),'yyyy-MM')
-	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM')) 
+	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM') , to_char(add_months(sysdate, -6),'yyyy-MM'))
 	 group by to_char(PLAN_MAKE_DAY, 'yyyy-MM')
 	 </select>
 	<!-- 게시글 지역 통계 -->
