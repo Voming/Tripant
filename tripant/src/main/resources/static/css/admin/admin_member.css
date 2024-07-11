@@ -5,15 +5,15 @@
 	width:100%;
 }
 
+.wrap-body .ad-content {
+	display:flex;
+	width:100%;
+}
+
 .wrap-body .ad-content>ul>li:first-child{
 	 text-align: center;
 	 /* 수직정렬 */
 	 vertical-align:middle;  
-}
-
-.wrap-body .ad-content {
-	display:flex;
-	width:100%;
 }
 
  .wrap-body .ad-search .search{
@@ -38,7 +38,7 @@
 } 
 
 .wrap-body .ad-content .list>li{
-	 margin:15px 0 15px 0; 
+	 margin:8px 0 8px 0; 
 	
 }
 
