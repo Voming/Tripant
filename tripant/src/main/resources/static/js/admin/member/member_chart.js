@@ -21,7 +21,7 @@ let month7 = today.getMonth()-5 ;  // 1월
 var myChart2 = new Chart(ctx2, {
 	type: 'line',
  	data: {
-  		labels:[year+"/"+month7,year+"/"+month6, year+"/"+month5, year+"/"+month4, year+"/"+month3, year+"/"+month2, year+"/"+month],
+  		labels:[year+"년"+month7+"월",year+"년"+month6+"월", year+"년"+month5+"월", year+"년"+month4+"월", year+"년"+month3+"월", year+"년"+month2+"월", year+"년"+month+"월"],
 	  	datasets: [{
 			 label: '신규가입',
 			 data: [count6,count5, count4, count3, count2, count1, count0],
