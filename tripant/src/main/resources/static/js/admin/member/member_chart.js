@@ -7,10 +7,21 @@ function memebrChart(){
 	
 var ctx2 = document.getElementById('myChart2').getContext('2d');
 
+let today = new Date();   
+
+let year = today.getFullYear(); // 년도
+let month = today.getMonth()+1 ;  // 7월
+let month2 = today.getMonth() ;  // 6월
+let month3 = today.getMonth()-1 ;  // 5월
+let month4 = today.getMonth()-2 ;  // 4월
+let month5 = today.getMonth()-3 ;  // 3월
+let month6 = today.getMonth()-4 ;  // 2월
+let month7 = today.getMonth()-5 ;  // 1월
+
 var myChart2 = new Chart(ctx2, {
 	type: 'line',
  	data: {
-  		labels:["6개월전","5달전", "4달전", "3달전", "2달전", "1달전", "이번달"],
+  		labels:[year+"/"+month7,year+"/"+month6, year+"/"+month5, year+"/"+month4, year+"/"+month3, year+"/"+month2, year+"/"+month],
 	  	datasets: [{
 			 label: '신규가입',
 			 data: [count6,count5, count4, count3, count2, count1, count0],

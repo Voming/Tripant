@@ -443,11 +443,16 @@
 	 -->
 	 <!-- 회원통계 -->
 	 <select id="chart" resultType="AdminChartEntity">
-	 select trunc(months_between(sysdate, to_date(to_char(mem_join_date, 'yyyy-MM'), 'yyyy-MM'))) as before, count(*) as num 
+	select trunc(months_between(sysdate, to_date(to_char(mem_join_date, 'yyyy-MM'), 'yyyy-MM'))) as before, count(*) as num 
 	 from member 
 	 where to_char(mem_join_date, 'yyyy-MM') in (to_char(sysdate,'yyyy-MM'), to_char(add_months(sysdate, -1),'yyyy-MM'), to_char(add_months(sysdate, -2),'yyyy-MM')
 	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM') , to_char(add_months(sysdate, -6),'yyyy-MM')) 
 	 group by to_char(mem_join_date, 'yyyy-MM')
+	<!--  select trunc(months_between(sysdate, to_date(to_char(mem_join_date, 'yyyy-MM'), 'yyyy-MM'))) as before, count(*) as num ,to_char(mem_join_date, 'yyyy-MM') as datelabel
+	 from member 
+	 where to_char(mem_join_date, 'yyyy-MM') in (to_char(sysdate,'yyyy-MM'), to_char(add_months(sysdate, -1),'yyyy-MM'), to_char(add_months(sysdate, -2),'yyyy-MM')
+	 , to_char(add_months(sysdate, -3),'yyyy-MM'), to_char(add_months(sysdate, -4),'yyyy-MM'), to_char(add_months(sysdate, -5),'yyyy-MM') , to_char(add_months(sysdate, -6),'yyyy-MM')) 
+	 group by to_char(mem_join_date, 'yyyy-MM') -->
 	 </select>
 	 <!--일정수 통계  -->
 	  <select id="plan" resultType="AdminChartEntity">
