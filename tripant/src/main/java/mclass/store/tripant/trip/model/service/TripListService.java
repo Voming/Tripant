@@ -1,5 +1,7 @@
 package mclass.store.tripant.trip.model.service;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +39,7 @@ public class TripListService {
 	}
 	
 	//유저 추가
-	public int add(Map<String, Object> map) {
+	public int add(Map<String, Object> map) throws SQLException{
 		return repository.add(map);
 	}
 	
