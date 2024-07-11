@@ -72,4 +72,9 @@
 	<select id="selectAreaPoint" parameterType="_int" resultType="AreaPointEntity">
 		SELECT AREA_X, AREA_Y FROM AREA WHERE AREA_CODE = #{areaCode}
 	</select>
+	
+	<select id="selectPlaceInfo" parameterType="_int" resultType="PlaceInfoEntity">
+		SELECT TYPE, CONTENTID, AREACODE, MAPX, MAPY
+		FROM PLACE WHERE CONTENTID = #{contentid}
+	</select>
 </mapper>
