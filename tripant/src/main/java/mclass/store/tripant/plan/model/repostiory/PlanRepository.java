@@ -2,6 +2,7 @@ package mclass.store.tripant.plan.model.repostiory;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,4 +26,5 @@ public interface PlanRepository {
 	List<PlaceboxEntity> selectStayFindList(String findArea, @Param("areaCode") int  areaCode, @Param("maxNum") int  maxNum); //장소명 검색 더보기
 	AreaPointEntity selectAreaPoint(int findArea);
 	PlaceInfoEntity selectPlaceInfo(int contentid);
+	int insertPlanning(Map<String, Object> planningMap);
 }

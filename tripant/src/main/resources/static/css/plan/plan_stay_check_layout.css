@@ -32,7 +32,7 @@
 /* 박스 */
 #tab02 .selected-stay-list {
 	overflow-y: auto;
-	max-height: 920px;
+	max-height: 830px;
 }
 
 #tab03 .selected-stay-box .wrap-box {

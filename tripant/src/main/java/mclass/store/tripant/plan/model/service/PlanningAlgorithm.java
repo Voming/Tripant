@@ -6,12 +6,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.GsonBuilder;
 
@@ -33,16 +36,20 @@ public class PlanningAlgorithm {
 
 	List<PlanSpotEntity> result = new ArrayList<>();
 
-	public void planning(CalendarPlanEntity calendarPlan, int areaCode) { 
+	public void planning(CalendarPlanEntity calendarPlan, int areaCode, String planTitle) { 
 		spotN = 0;
 		dayN = 0;
 		distribute = 0;
 		PlaceInfoEntity startPoint = planRepository.selectPlaceInfo(areaCode); // 출발 장소 좌표
+		
+		//String startDate = calendarPlan.get
 
 		// 날짜 별 정보(하루, 숙소)
 		List<PlanDate> dateArr = calendarPlan.getDateArr();
 		dayN = dateArr.size(); // 여행할 날짜 수
 		System.out.println("dayN : " + dayN);
+		String startDate = dateArr.get(0).getDate();
+		String endDate = dateArr.get(dateArr.size() -1).getDate();
 
 		// 선택 한 장소
 		List<Spot> spotArr = calendarPlan.getSpotArr();
@@ -198,8 +205,26 @@ public class PlanningAlgorithm {
 		System.out.println("출력");
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(result));
 		
-		//DB plan insert
+		Map<String, Object> allMap = new HashMap<>();
+		allMap.put("areaCode", areaCode);
+		allMap.put("planTitle", planTitle);
+		allMap.put("startDate", startDate);
+		allMap.put("endDate", endDate);
 		
+		allMap.put("planSchedule", dateArr);
+		
+		allMap.put("planSpot", result);
+		
+		
+		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(allMap));
+		
+		insertPlanning(allMap);
+		
+	}
+	
+	@Transactional
+	public int insertPlanning(Map<String, Object> planningMap) {
+		return planRepository.insertPlanning(planningMap);
 	}
 
 	// Nearest Neighbor 알고리즘을 구현하는 메서드입니다.

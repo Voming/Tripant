@@ -77,7 +77,7 @@
 /* 박스 */
 .tab-content #tab02 .spot-tab-content {
 	margin-top: 10px;
-	max-height: 760px;
+	max-height: 680px;
 	overflow-y: auto;
 }
 
