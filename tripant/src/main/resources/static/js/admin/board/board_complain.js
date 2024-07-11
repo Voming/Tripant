@@ -38,36 +38,34 @@ let sort = null;
 let searchMem = null;
 
 /* 페이징 이동 함수 */
-function goPageHandler() {
-			var currentpage = $(this).data("targetpage");
+function goPageHandler(thisElement) {
+			var currentPage = $(thisElement).data("targetpage");
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
 				url:contextPath+"admin/complain/search"
-				, method : "get"
+				, method : "post"
 				, data : {
 						searchMem : searchMem,
-						currentpage : currentpage}
-				, dataType : "json"
-				, success : function(result){
-					if(result.searchMem){
-						$("[name=search]").val(result.searchMem);
-					}
-					memListHandler(result);
+						currentPage : currentPage,
+						sort: sort
+						}
+				}).done(function(a){
+					if(a){
+						$(".wrap-list").replaceWith(a);
 				}
 			});
 	}
 
 //검색
-function searchBtnHandler(thisElement){
-	var targetPage = $(thisElement).data('targetpage');
+function searchBtnHandler(){
 	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
 		url: contextPath+"admin/complain/search",
 		 method:"post",
-		 data: {searchMem:searchMem,page: targetPage},
+		 data: {searchMem:searchMem,currentPage: currentPage, sort:sort},
 		 success : function(complainList) {
 			 $('.wrap-list').replaceWith(complainList);
 			}
@@ -97,16 +95,23 @@ function memListHandler(complainList){
 
 //신고수 정렬
 function clickReportHandler(){
+	sort='reports'
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
-		url: contextPath+"admin/report",
+		url: contextPath+"admin/complain/search",
+		data:{
+			currentPage: currentPage, 
+			searchMem:searchMem, 
+			sort: sort
+		},
 		 method:"post",
-		 success : function(report) {
-			 $('#list').html(ReportHandler(report));
-			}
+		 }).done(function(data){
+		if(data){
+			$('.wrap-list').replaceWith(data);
+		}
 	});
-}
+} 
 
 function ReportHandler(report){
 	var htmlVal = '';

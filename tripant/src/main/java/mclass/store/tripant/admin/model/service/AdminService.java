@@ -274,12 +274,46 @@ public class AdminService {
 	}	
 	
 	//신고게시글 검색
-	public  Map<String, Object> complainsearch(int num, int pageNum, int currentPageNum, String searchMem){
+	public  Map<String, Object> complainsearch(int num, int pageNum, int currentPageNum, String searchMem, String sort){
 		
 		Map<String, Object> result = null;
 		
 		//총 게시글 개수
 		int totalCount = admindao.boardCountSearch(searchMem);
+		
+		int startRownum = num * (currentPageNum - 1) + 1;
+		int endRownum = num * currentPageNum;
+		
+//		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
+		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
+		
+		//시작페이지
+		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
+				: (currentPageNum / pageNum) * pageNum + 1;
+		
+		//끝페이지
+		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
+		
+		List<AdminBoardEntity> complainList = admindao.complainsearch(startRownum, endRownum, searchMem,sort);
+		result = new HashMap<String, Object>();
+		result.put("complainBoard", complainList);
+		result.put("totalCount", totalCount);
+		result.put("totalPageCount", totalPageCount);
+		result.put("startPageNum", startPageNum);
+		result.put("endPageNum", endPageNum);
+		result.put("currentPage", currentPageNum);
+		result.put("searchMem", searchMem);
+		result.put("sort", sort);
+		
+		return result;
+	}
+	
+	//신고수 정렬
+	public  Map<String, Object> boardReport(int num, int pageNum, int currentPageNum, String searchMem){
+		Map<String, Object> result = null;
+		
+		//총 게시글 개수
+		int totalCount = admindao.boardCount();
 		
 		int startRownum = num * (currentPageNum - 1) + 1;
 		int endRownum = num * currentPageNum;
@@ -308,20 +342,15 @@ public class AdminService {
 	}
 	
 	//신고수 초기화
-	public Integer complainReset(Integer diaryId) {
-		return admindao.complainReset(diaryId);
-	}
-	@Transactional
-	public Integer reportReset(String memEmail) {
-		admindao.reportDelete(memEmail);
-		int result=admindao.reportReset(memEmail);
-		return result;
-	}
-	
-	//신고수 정렬
-	public List<AdminBoardEntity> boardReport(){
-		return admindao.boardReport();
-	}
+		public Integer complainReset(Integer diaryId) {
+			return admindao.complainReset(diaryId);
+		}
+		@Transactional
+		public Integer reportReset(String memEmail) {
+			admindao.reportDelete(memEmail);
+			int result=admindao.reportReset(memEmail);
+			return result;
+		}
 	
 	// 결제 취소 페이지
 	// 결제 목록

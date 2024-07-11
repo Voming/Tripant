@@ -6,9 +6,8 @@ function enterkey() {
     }
 }
 var currentPage = 1;
-var totalPageCount = null;
-var startPageNum = null;
-var endPageNum = null;
+let search = null;
+let sort = null;
 
 /* 페이징 이동 함수 */
 function goPageHandler() {
@@ -67,4 +66,24 @@ function memListHandler(searchList){
 	}
 	return htmlVal;
 } 
+
+function ClickNickHandler(){
+	sort='nick'
+	$.ajax({
+		beforeSend : csrfHandler,
+		error : ajaxErrorHandler,
+		url: contextPath+"admin/keyword",
+		data:{
+			currentPage: currentPage, 
+			search: search, 
+			sort: sort
+		},
+		 method:"post",
+	}).done(function(data){
+		if(data){
+			$('.wrap-list').replaceWith(data);
+		}
+	});
+} 
+
 

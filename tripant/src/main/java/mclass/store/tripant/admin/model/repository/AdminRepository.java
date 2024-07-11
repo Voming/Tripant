@@ -51,16 +51,16 @@ public interface AdminRepository {
 	public int boardCount();
 	public int boardCountSearch(String searchMem);
 	//신고게시글 검색
-	public List<AdminBoardEntity> complainsearch(String memNick);
+	public List<AdminBoardEntity> complainsearch(int startRownum, int endRownum,String searchMem, String sort);
+	//신고수 정렬
+	public List<AdminBoardEntity> boardReport(int startRownum, int endRownum,String searchMem);
+	public int complainReportSearchCount(String searchMem);
 	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId);
 	public Integer reportReset(String memEmail); //등급변경 회원 신고수 초기화
 	public Integer reportDelete(String memEmail); //비활성화->활성화시키면 신고 내역 초기화
 	
-	//신고수 정렬
-	public List<AdminBoardEntity> boardReport();
-
 	// 결제 취소 페이지
 	// 결제 목록
 	public List<AdminStoreEntity> payList(int startRownum, int endRownum,String searchMem);

@@ -127,35 +127,38 @@ public class AdminController {
 	//신고게시글
 	@GetMapping("/complain")
 	public String complain(Model model
-			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 	 , @RequestParam(required = false )String searchMem )throws MethodArgumentTypeMismatchException {
-		model.addAttribute("complainMap",adminservice.complainList(num, pageNum, currentPageNum,searchMem));
+		model.addAttribute("complainMap",adminservice.complainList(num, pageNum, currentPage,searchMem));
 		
 		return "admin/admin_complain";
 	}
 	
+	//신고게시글 검색
+		@PostMapping("/complain/search")
+		public String complainsearch(Model model
+				, @RequestParam( required = false, defaultValue = "1")Integer currentPageNum
+		 , @RequestParam(required = false )String searchMem
+		 ,@RequestParam(required = false ) String sort){
+			model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPageNum,searchMem,sort));
+			System.out.println(sort+"!!!!!!!!!!!!!");
+			return "admin/complain_fragment";
+		}
+		
+		//신고수 정렬
+		/*
+		 * @PostMapping("/report")
+		 * 
+		 * @ResponseBody public List<AdminBoardEntity> boardReport() { return
+		 * adminservice.boardReport(); }
+		 */
+		
 	//신고수 초기화
 	@PostMapping("/reset")
 	@ResponseBody
 	public int complainReset(Integer diaryId) {
 		int result=adminservice.complainReset(diaryId);
 		return result;
-	}
-	
-	//신고게시글 검색
-	@PostMapping("/complain/search")
-	public String complainsearch(Model model
-			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
-	 , @RequestParam(required = false )String searchMem ){
-		model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPageNum,searchMem));
-		return "admin/complain_fragment";
-	}
-	
-	//신고수 정렬
-	@PostMapping("/report")
-	@ResponseBody
-	public List<AdminBoardEntity> boardReport() {
-		return adminservice.boardReport();
 	}
 	
 	// 결제 취소 페이지
