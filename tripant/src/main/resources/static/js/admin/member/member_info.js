@@ -12,7 +12,7 @@ function ClickHandler(e) {
              <select name="selectRole" id="selectRole" style='font-family:Binggrae; font-size:13px; height:25px'>
                  <option value="1">휴면회원</option>
                  <option value="2" selected>일반회원</option>
-                 <option value="3">폰튼적용회원</option>
+                 <option value="3">폰트적용회원</option>
                  <option value="4">관리자</option>
              </select>
              <select name="selectRole" id="selectActive" style='font-family:Binggrae; font-size:13px; height:25px'>
