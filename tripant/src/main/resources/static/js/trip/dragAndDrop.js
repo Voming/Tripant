@@ -179,9 +179,36 @@ function dragAndDrop(){
 				
 			}*/else{
 // ++++++++++ 다른 컬럼
-				if(el_i!=99	&& temp_i==99 ||temp_i===undefined){
+				if(el_i!=99 && (temp_i==99 ||temp_i===undefined)){
 		//일정 -> 바구니
-
+					var details = detailListEditMode[el_i];
+					var daylength = details.dayDetailInfoEntity.length;  
+					
+					var temp = JSON.parse(JSON.stringify(details.dayDetailInfoEntity[0]));
+					
+					var addr = details.dayDetailInfoEntity[el_j].address;
+					var contentid = details.dayDetailInfoEntity[el_j].contentid;
+					var id = "spot-check" + details.dayDetailInfoEntity[el_j].contentid;   //확인해볼 것
+					var img = details.dayDetailInfoEntity[el_j].firstimage;
+					var mapx = details.dayDetailInfoEntity[el_j].lng;
+					var mapy = details.dayDetailInfoEntity[el_j].lat;
+					var placeCat = details.dayDetailInfoEntity[el_j].placeCat;
+					var spottype = details.dayDetailInfoEntity[el_j].placeType;
+					var stayTime = details.dayDetailInfoEntity[el_j].stayTime;
+					var title = details.dayDetailInfoEntity[el_j].title;
+					
+					var tempSpot = new Spot(id,contentid,title,mapx,mapy,spottype,img,stayTime,placeCat);
+					tempSpot.addr = addr;
+					
+					if(prev_j===undefined){
+					// 배열값이 있는 상황에서 0번째 배열에 아무것도 없을 때도 0번째
+						spotArr.splice(0,0,tempSpot);
+					}else{
+					//1~n번째	
+						spotArr.splice(prev_j,0,tempSpot);
+					}
+					details.dayDetailInfoEntity.splice(el_j,1);
+					
 // console				displayEditModeAfterDragEnd();		
 					console.log("일정 -> 장바구니");
 					console.log("temp_i : "+temp_i);

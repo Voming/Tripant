@@ -205,6 +205,7 @@ function displayInfo(){
 				htmlval += `
 				<div class="spot-img wfull hfull"><img class=" wfull hfull" src="${contextPath}images/icons/spot_sample.png" ></div>
 				`;
+				info.firstimage = contextPath+'images/icons/spot_sample.png';
 			 }
 			 		
 			//이동시간 표시 및 자동차 아이콘 표시
