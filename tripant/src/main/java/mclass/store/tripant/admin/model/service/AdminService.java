@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminChartEntity;
@@ -309,6 +310,12 @@ public class AdminService {
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId) {
 		return admindao.complainReset(diaryId);
+	}
+	@Transactional
+	public Integer reportReset(String memEmail) {
+		admindao.reportDelete(memEmail);
+		int result=admindao.reportReset(memEmail);
+		return result;
 	}
 	
 	//신고수 정렬

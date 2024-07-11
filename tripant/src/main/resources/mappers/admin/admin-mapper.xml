@@ -52,6 +52,14 @@
 	update member set mem_role=#{memRole} , mem_enabled=#{memEnabled} where mem_email=#{memEmail}
 	</update>
 	
+	<delete id="reportDelete" parameterType="string">
+	delete from diary_reports where diary_id in 
+	(select diary_id from diary join member on diary.diary_mem_email=member.mem_email 
+	where diary_mem_email=#{memEmail} and mem_enabled=0)
+	</delete>
+	<update id="reportReset" parameterType="string">
+	update member set mem_report_num=0 where mem_email=#{memEmail} and mem_enabled=0
+	</update>
 	<!--게시글 조회 -->
 	<select id="boardList" resultType="AdminBoardEntity"  parameterType="map">
 	SELECT T2.* FROM
