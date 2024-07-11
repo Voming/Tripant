@@ -55,7 +55,7 @@ function spotCkBtnClickHandler(thisElement) {
 	} else { //=====================================체크박스 선택=========================================
 		var stayTime = 7200;
 		spotArr[markersSpot.length] = new Spot(id,contentid, title, latx, lngy,spottype,img,stayTime,placeTypeS);  //전체 일정 만들기 장소 정보 저장
-		spotArr[markersSpot.length].title = title;
+		//spotArr[markersSpot.length].title = title;
 		spotArr[markersSpot.length].addr = addr;
 		
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가

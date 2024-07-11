@@ -23,7 +23,6 @@ function includeHandler(){
 		$.each(spotArr, function(idx, element) {
 			console.log("idx");
 			console.log(idx);
-			
 			//element.id;
 			htmlVal += `
 				<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" data-id="${element.id}">
@@ -44,6 +43,11 @@ function includeHandler(){
 	$('#edit-tourlist').removeClass('hide');
 	$('#spot-basket').removeClass('hide');
 	setBounds();//지도 범위 재설정
+	
+	// jjoggan ***
+	console.log("spotArr");
+	console.log(spotArr);
+	console.log(detailListEditMode);
 }
 
 //=================================================================
