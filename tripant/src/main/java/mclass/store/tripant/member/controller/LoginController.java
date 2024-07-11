@@ -86,7 +86,9 @@ public class LoginController {
 		String memEmail = (String) session.getAttribute("memEmail");
 		model.addAttribute("memEmail", memEmail);
 		MemberEntity memberEntity = memberService.login(memEmail);
-		model.addAttribute("memRole", memberEntity.getMemRole());
+		if(memberEntity != null) {
+			model.addAttribute("memRole", memberEntity.getMemRole());
+		}
 		return "common/exception";
 	}
 }
