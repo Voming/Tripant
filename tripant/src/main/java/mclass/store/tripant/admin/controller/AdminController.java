@@ -298,8 +298,8 @@ public class AdminController {
 		List<AdminChartEntity> list = adminservice.chart();
 		List<AdminChartEntity> list2 = adminservice.plan();
 		
-		int[] arr = new int[6];
-		int[] arr2 = new int[6];
+		int[] arr = new int[7];
+		int[] arr2 = new int[7];
 		
 		for(int i = 0; i < list.size(); i++) {
 			arr[list.get(i).getBefore()] = list.get(i).getNum();
@@ -309,7 +309,7 @@ public class AdminController {
 			arr2[list2.get(i).getBefore()] = list2.get(i).getNum();
 		}
 		
-		for(int i = 0; i < 6; i++) {
+		for(int i = 0; i < 7; i++) {
 			model.addAttribute("chart"+i, arr[i]);
 			model.addAttribute("plan"+i, arr2[i]);
 		}
