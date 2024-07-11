@@ -18,6 +18,12 @@ function loadedHandler() {
 
 	// 버튼 활성화
 	$('input[name=cart-pick]').on('click', btnActiveHandler);
+	// 전체 선택
+	$(document).bind('keypress', (event) =>{
+		if( event.which === 32 && event.shiftKey ) {
+			$("input[name=cart-pick]").prop("checked", true);
+		}
+	});
 
 	// 장바구니 삭제
 	$('.btn.del').on('click', cartDelHandler);
