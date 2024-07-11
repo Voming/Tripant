@@ -4,7 +4,7 @@ $(document).ready(function() {
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader(header, token);
 		},
-		alwaysOpen: true,
+		"alwaysShowCalendars": true,
 		"locale": {
 			"format": "YYYY.MM.DD",
 			"separator": " ~ ",

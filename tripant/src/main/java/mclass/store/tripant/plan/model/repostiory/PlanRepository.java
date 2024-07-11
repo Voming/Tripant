@@ -10,6 +10,7 @@ import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.place.domain.AreaNameEntity;
 import mclass.store.tripant.place.domain.AreaPointEntity;
 import mclass.store.tripant.place.domain.PlaceboxEntity;
+import mclass.store.tripant.plan.domain.PlaceInfoEntity;
 
 @Mapper
 public interface PlanRepository {
@@ -23,5 +24,5 @@ public interface PlanRepository {
 	List<PlaceboxEntity> selectSpotFindList(String findArea, @Param("areaCode") int areaCode, @Param("maxNum") int  maxNum); //장소명 검색 더보기
 	List<PlaceboxEntity> selectStayFindList(String findArea, @Param("areaCode") int  areaCode, @Param("maxNum") int  maxNum); //장소명 검색 더보기
 	AreaPointEntity selectAreaPoint(int findArea);
-	
+	PlaceInfoEntity selectPlaceInfo(int contentid);
 }

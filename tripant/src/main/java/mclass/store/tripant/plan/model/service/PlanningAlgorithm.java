@@ -15,13 +15,11 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.GsonBuilder;
 
-import mclass.store.tripant.place.domain.AreaEntity;
 import mclass.store.tripant.plan.domain.CalendarPlanEntity;
-import mclass.store.tripant.plan.domain.BeforDto;
+import mclass.store.tripant.plan.domain.PlaceInfoEntity;
 import mclass.store.tripant.plan.domain.PlanDate;
 import mclass.store.tripant.plan.domain.PlanSpotEntity;
 import mclass.store.tripant.plan.domain.Spot;
-import mclass.store.tripant.plan.domain.Stay;
 import mclass.store.tripant.plan.model.repostiory.PlanRepository;
 
 @Service
@@ -33,15 +31,13 @@ public class PlanningAlgorithm {
 	int dayN = 0;
 	int distribute = 0;
 
-	List<BeforDto> stayPointList = new ArrayList<>();
-	
 	List<PlanSpotEntity> result = new ArrayList<>();
 
 	public void planning(CalendarPlanEntity calendarPlan, int areaCode) { 
 		spotN = 0;
 		dayN = 0;
 		distribute = 0;
-		AreaEntity startPoint = planRepository.selectAreaInfo(areaCode); // 출발 장소 좌표
+		PlaceInfoEntity startPoint = planRepository.selectPlaceInfo(areaCode); // 출발 장소 좌표
 
 		// 날짜 별 정보(하루, 숙소)
 		List<PlanDate> dateArr = calendarPlan.getDateArr();
@@ -58,7 +54,7 @@ public class PlanningAlgorithm {
 		int minIndex = 0;
 		int min = 0;
 		for (int i = 0; i < spotN; i++) {
-			weight[i] = getWeight(startPoint.getAreaX(), startPoint.getAreaY(), spotArr.get(i).getMapx(),
+			weight[i] = getWeight(startPoint.getMapx(), startPoint.getMapy(), spotArr.get(i).getMapx(),
 					spotArr.get(i).getMapy());
 		}
 		min = weight[0]; // 가장 가까운 곳이 몇번째에 있는지
@@ -71,13 +67,12 @@ public class PlanningAlgorithm {
 		Collections.swap(spotArr, 0, minIndex); // 가장 가까운 곳을 첫번째로 위치 변경
 		// A-B 이동일때 이동시간 B에 저장함.
 		spotArr.get(0).setWeight(min);  // 출발지 - 첫번째 장소 이동시간을 첫번째 장소에 저장 
-		System.out.println(spotArr.get(0)); // 출발지 가장 가까운 장소
 
 		ArrayList<Spot> tour = nearestNeighbor(spotArr); //장소 한 줄 긋기===========================
 		spotArr = tour;  // 얕은 복사
 		calendarPlan.setSpotArr(spotArr);
 		
-		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
+		//System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
 		// 장소 분배하기=============================================================================
 		int idxDate = 0;  // 입력을 못한 날. 멈춘날 idx
 		int idxSpot = 0;  // 입력을 못한 장소. 멈춘장소 idx
@@ -119,9 +114,6 @@ public class PlanningAlgorithm {
 			dateArr.get(i).setSpotCnt(spotOrder-1);  // 하루 방문 장소는 장소만 cnt 하므로 spotOrder보다 1 작음
 		}
 		
-//		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(spotArr));
-//		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(dateArr));
-		
 		int spotShiftCntPlus = 0;
 		// 장소는 꽉, 장소가 텅빈 날짜 idxDate 를 저장
 		if(idxDate != 0 && idxDate < dateArr.size() ) {  //텅빈 날짜 수가 정상일때 
@@ -130,19 +122,15 @@ public class PlanningAlgorithm {
 			for(int i=dateArr.size()-1 ; i >= idxDate - spotShiftCntPlus; i--) {  // 9 ~ 4-0
 				int spotShiftIdx = spotArr.size() + i - idxDate - spotShiftCnt;  // 13+9-4-6-0
 
-				System.out.println("a~~~~~ i: "+ i);
-				System.out.println("a~~~~~"+ spotShiftIdx);
-				
 				// spotShiftIdx 번째 장소를 갖고 있던 날짜 index
 				Integer dayIdxSpotShift = spotArr.get(spotShiftIdx).getSpotDayIdx();
-				System.out.println("dayIdxSpotShift:"+dayIdxSpotShift);  // 절대 null 일수 없음.
+				//System.out.println("dayIdxSpotShift:"+dayIdxSpotShift);  // 절대 null 일수 없음.
 				// spotShiftIdx 번째 장소를 갖고 있던 날짜 의 spotCnt 방문장소 -1
 				int spotCnt = dateArr.get(dayIdxSpotShift).getSpotCnt();
 				dateArr.get(dayIdxSpotShift).setSpotCnt(--spotCnt);  // 장소를 1개 빼기
 				
-				System.out.println("a===== spotCnt : " + spotCnt);
 				if(spotCnt < 1) {  // 출발:1, 하루의 장소 개수가 1개도 남지 않았다면 추가 shift 해야함
-					System.out.println("======== 추가 shift !!!!");
+					//System.out.println("======== 추가 shift !!!!");
 					spotShiftCntPlus++;
 				}
 				
@@ -159,26 +147,58 @@ public class PlanningAlgorithm {
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
 		// 장소 분배하기 완료=============================================================================
 		
-		
-		//앞뒤로 출발지, 숙소 채우기
-		// spotOrder가 1번, spotCnt+2만큼 들어감
-		for (int i = 0; i < dayN - 1; i++) { // 여행날 -1 = 숙박장소 개수 , 여행 마지막날에는 숙박장소가 없음.
-			Stay stay = dateArr.get(i).getStay();
-
-			// id만 잘라내기
-			String idLongStr = stay.getId();
-			int id = Integer.parseInt(idLongStr.substring(10, idLongStr.length() - 1));
-
-			stayPointList.add(new BeforDto(dateArr.get(i).getDate(), id, stay.getType(), "", // 숙소는 머무는 시간 없음
-					stay.getMapx(), stay.getMapy()));
+		//insert 할 리스트 만들기
+		for (int i = 0; i < dateArr.size(); i++) {
+			if(i == 0) { // 첫째날 출발지 입력
+				result.add(new PlanSpotEntity(
+						dateArr.get(i).getDate(), //날짜
+						startPoint.getType(), //타입
+						startPoint.getContentid(), //id
+						1, //방문순서
+						"")); //머무는 시간
+			} else { // 둘째날이후로는 출발에 전날 숙소 입력
+				int stayId = Integer.parseInt(dateArr.get(i - 1).getStay().getId().substring(10, dateArr.get(i-1).getStay().getId().length()));
+				result.add(new PlanSpotEntity(
+						dateArr.get(i).getDate(), //날짜
+						dateArr.get(i -1).getStay().getType(), //타입
+						stayId, //id
+						1, //방문순서
+						"")); //머무는 시간
+			}
+			for (int j = 0; j < spotArr.size(); j++) {
+				if(spotArr.get(j).getSpotDay() == dateArr.get(i).getDate()) {
+					int spotId = Integer.parseInt(spotArr.get(j).getId().substring(10, spotArr.get(j).getId().length()));
+					//장소 입력
+					result.add(new PlanSpotEntity(
+							spotArr.get(j).getSpotDay(), //날짜
+							spotArr.get(j).getType(), //타입
+							spotId, //id
+							spotArr.get(j).getSpotOrder(), //순서
+							String.valueOf(spotArr.get(j).getSpotTime()))); //머무는 시간
+					
+					// 숙소 입력
+					if(spotArr.get(j).getSpotOrder() == (dateArr.get(i).getSpotCnt() +1)) { // 마지막 장소가 위에서 들어간 상태
+						if(i == dateArr.size() - 1) {   // 맨마지막 날 숙소는 들어가지 않음
+							System.out.println("마지막");
+						}else {
+							//마지막 날을 제외한 숙소 입력
+							int stayId = Integer.parseInt(dateArr.get(i).getStay().getId().substring(10, dateArr.get(i).getStay().getId().length()));
+							result.add(new PlanSpotEntity(
+									dateArr.get(i).getDate(), //날짜
+									dateArr.get(i).getStay().getType(), //타입
+									stayId, //id
+									spotArr.get(j).getSpotOrder() + 1, //방문순서
+									"")); //머무는 시간
+						}
+					}
+				}
+			}
 		}
-		System.out.println("stayPointList===");
-		System.out.println(stayPointList);
 		
-		for (int i = 0; i < spotArr.size(); i++) {
-			
-			
-		}
+		System.out.println("출력");
+		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(result));
+		
+		//DB plan insert
 		
 	}
 

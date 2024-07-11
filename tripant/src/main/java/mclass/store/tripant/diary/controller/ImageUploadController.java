@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.cloudinary.Cloudinary;
+
 import com.cloudinary.utils.ObjectUtils;
 import com.cloudinary.utils.StringUtils;
 import com.google.gson.Gson;
@@ -75,10 +76,12 @@ public class ImageUploadController {
 						config.put("api_key", apiKey);
 						config.put("api_secret", apiSecret);
 //						"http://res.cloudinary.com/dnhmep72p/image/upload/v1719391588/a4rpapbglkqd1g7lxipk.png
+					
 						Map<String, String> uploadResult = cloudinary.uploader().upload(f, ObjectUtils.emptyMap());
-						
+
 						System.out.println("==============================================");
 						System.out.println(uploadResult.get("url"));
+;
 						 // 업로드 성공 시 JSON 응답 생성
 						HashMap<String, String> map = new HashMap<String, String>();
 						
