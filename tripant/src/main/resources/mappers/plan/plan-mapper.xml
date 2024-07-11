@@ -7,7 +7,7 @@
 	</select>
 
 	<select id="selectMemCount" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER WHERE MEM_ROLE='ROLE_MEM'
+		SELECT COUNT(*) FROM MEMBER WHERE MEM_ROLE in ('ROLE_MEM', 'ROLE_VIP')
 	</select>
 
 	<select id="selectAreaNameList" resultType="AreaNameEntity">
