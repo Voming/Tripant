@@ -18,8 +18,8 @@ public interface AdminRepository {
 	//회원관리
 	//회원정보 한페이지에 나열
 	public List<AdminMemEntity> selectMemList(int startRownum, int endRownum, String searchMem);
-	//회원검색
-	public List<AdminMemEntity> selectMemListSearch(int startRownum, int endRownum, String searchMem);
+	//회원검색+정렬
+	public List<AdminMemEntity> selectMemListSearch(int startRownum, int endRownum, String searchMem,String sort);
 	
 	//회원 등급 변경 활성화 여부 
 	public Integer adminMemInfo(Map<String, Object> map);

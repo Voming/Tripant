@@ -6,33 +6,31 @@ function enterkey() {
     }
 }
 var currentPage = 1;
-let search = null;
+let searchMem = null;
 let sort = null;
 
 /* 페이징 이동 함수 */
-function goPageHandler() {
-			var targetPage = $(this).data("targetpage");
+function goPageHandler(thisElement) {
+			var targetPage = $(thisElement).data("targetpage");
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
 				url:contextPath+"admin/member/search"
-				, method : "get"
+				, method : "post"
 				, data : {
 						searchMem : searchMem,
-						page : targetPage}
-				, dataType : "json"
-				, success : function(result){
-					if(result.searchMem){
-						$("[name=search]").val(result.searchMem);
-					}
-					memListHandler(result);
+						page : targetPage,
+						sort:sort}
+				}).done(function(a){
+				if(a){
+					$(".wrap-list").replaceWith(a);
 				}
 			});
 	}
 
 /*검색+페이징1*/
-function searchBtnHandler(thisElement){
-	var targetPage = $(thisElement).data('targetpage');
+function searchBtnHandler(){
+	var targetPage = $().data('targetpage');
 	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
 		beforeSend : csrfHandler,
@@ -41,8 +39,9 @@ function searchBtnHandler(thisElement){
 		 method:"post",
 		 data: {
 			searchMem:searchMem
-		 , page: targetPage
-		 },
+		 	, page: targetPage, 
+		 	sort:sort
+			 },
 		 success : function(searchList) {
 			$('.wrap-list').replaceWith(searchList);
 		}
@@ -69,13 +68,14 @@ function memListHandler(searchList){
 
 function ClickNickHandler(){
 	sort='nick'
+	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
-		url: contextPath+"admin/keyword",
+		url: contextPath+"admin/member/search",
 		data:{
-			currentPage: currentPage, 
-			search: search, 
+			page: currentPage, 
+			searchMem: searchMem, 
 			sort: sort
 		},
 		 method:"post",

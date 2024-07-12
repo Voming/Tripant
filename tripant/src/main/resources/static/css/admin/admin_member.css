@@ -108,3 +108,8 @@
 	display: flex;
 	justify-content: center;
 }
+/*  정렬버튼 */
+.wrap-body .ad-content .col .btn.nick{
+	border: 0;
+	background-color: white;
+}
