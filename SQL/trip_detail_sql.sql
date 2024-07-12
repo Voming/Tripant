@@ -1,35 +1,42 @@
 --view 삭제 view 표시를 위해 이름 변경
 --drop view detailinfo;
-
+desc place;
 ------view 생성 --CREATE OR REPLACE VIEW 수정할 때 
 ----with read only : 읽기 전용 view 생성
 CREATE OR REPLACE VIEW V_DETAILINFO AS (
-select SPOT_PLAN_ID PLAN_ID, to_char(schedule_day,'YYYY-MM-DD(DY)') TRAVEL_DATE, SCHEDULE_START, SCHEDULE_END,SPOT_TYPE PLACE_TYPE,SPOT_CONTENTID CONTENTID, SPOT_ORDER TRAVEL_ORDER,SPOT_STAY_TIME STAY_TIME, SPOT_MEMO MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG,LAT from plan_schedule 
-left join (select * from plan_spot s left join (select contentid,title , add1 address,firstimage,mapx lng,mapy lat from place) p on s.spot_contentid = p.contentid ) on schedule_plan_id = spot_plan_id 
+select SPOT_PLAN_ID PLAN_ID, to_char(schedule_day,'YYYY-MM-DD(DY)') TRAVEL_DATE, SCHEDULE_START, SCHEDULE_END,TYPE PLACE_TYPE,SPOT_CONTENTID CONTENTID, SPOT_ORDER TRAVEL_ORDER,SPOT_STAY_TIME STAY_TIME, SPOT_MEMO MEMO, TITLE,ADDRESS, FIRSTIMAGE, LNG,LAT from plan_schedule 
+left join (select * from plan_spot s left join (select TYPE, contentid,title , add1 address,firstimage,mapx lng,mapy lat from place) p on s.spot_contentid = p.contentid ) on schedule_plan_id = spot_plan_id 
 where schedule_day = spot_day --order by PLAN_ID asc ,TRAVEL_DATE asc ,TRAVEL_ORDER ASC
 )with read only;
 
 --여행 세부일정 목록 불러오기 
 SELECT TRAVEL_DATE , SCHEDULE_START ,SCHEDULE_END ,CONTENTID ,PLACE_TYPE , STAY_TIME ,
-TRAVEL_ORDER ,NVL(MEMO,'MEMO가 없습니다') MEMO,TITLE ,ADDRESS ,FIRSTIMAGE ,LNG ,LAT  FROM V_DETAILINFO  ORDER BY TRAVEL_DATE ASC ,TRAVEL_ORDER ASC
+TRAVEL_ORDER ,MEMO,TITLE ,ADDRESS ,FIRSTIMAGE ,LNG ,LAT  FROM V_DETAILINFO  ORDER BY TRAVEL_DATE ASC ,TRAVEL_ORDER ASC
 ;
+
+--변경된 여행정보 넣기
+select * from plan where plan_id = 500;
+select type from place where contentid = 39;
+select * from plan_schedule;
+insert into plan_spot values((select plan_start_day from plan where plan_id = 62),62,(select type from place where contentid = 39), 39,1,default,null);
+
 
 --delete from plan_spot where spot_plan_id = 100;
 --편집된 일정 저장하기
 
 --trigger 생성
-CREATE OR REPLACE NONEDITIONABLE TRIGGER trg_plan_change
-    BEFORE INSERT ON plan_spot
-    REFERENCING OLD AS OLD NEW AS NEW
-    FOR EACH ROW
-DECLARE
-BEGIN
-    -- 새로운 레코드의 spot_plan_id와 동일한 레코드를 삭제합니다.
-    DELETE FROM plan_spot WHERE spot_plan_id = :NEW.spot_plan_id;
-END;
-/
+--CREATE OR REPLACE NONEDITIONABLE TRIGGER trg_plan_change
+--    BEFORE INSERT ON plan_spot
+--    REFERENCING OLD AS OLD NEW AS NEW
+--    FOR EACH ROW
+--DECLARE
+--BEGIN
+--    -- 새로운 레코드의 spot_plan_id와 동일한 레코드를 삭제합니다.
+--    DELETE FROM plan_spot WHERE spot_plan_id = :NEW.spot_plan_id;
+--END;
+--/
 ------------------
-drop TRIGGER trg_plan_change;
+--drop TRIGGER trg_plan_change;
 
 
 --세부 일정에서 띄울 여행일정의 기본 정보값 <여행 기본 정보 불러오기>

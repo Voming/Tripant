@@ -45,7 +45,7 @@
                 (
                 (SELECT SCHEDULE_DAY FROM PLAN_SCHEDULE WHERE SCHEDULE_PLAN_ID = #{planId} AND TO_CHAR(SCHEDULE_DAY,'yyyy-MM-dd') = SUBSTR(#{dtos.travelDate}, 1, 10)),
                 #{planId}, 
-                TO_NUMBER(#{dto.placeType}), 
+                (select type from place where contentid = #{dto.contentid}), 
                 #{dto.contentid},
                 #{dto.travelOrder},
                 #{dto.stayTime},
