@@ -6,8 +6,12 @@ select * from member;
 --UPDATE plan SET plan_delete_day = null  where plan_delete_day is not null;
 
 
---여행 삭제
+--여행 삭제 : 생성자
 UPDATE plan SET plan_delete_day=sysdate where plan_id = 21;
+
+--여행 삭제 : 공유자
+DELETE FROM PLAN_MEMBER WHERE MEM_EMAIL = 'gyrua34@gmail.com' AND PLAN_ID = 26;
+--select * from plan_member where mem_email = 'gyrua34@gmail.com' and plan_id = 26;
 
 
 --여행 목록 
@@ -16,7 +20,6 @@ from area a join (select p.* from plan_member pm join plan p on(pm.plan_id = p.p
 on a.area_code = t1.plan_area_code order by plan_id desc;
 select * from area;
 
-update;
 
 
 --여행 목록  + 로그인 유저가 일정 생정자인지 공유자인지 구분

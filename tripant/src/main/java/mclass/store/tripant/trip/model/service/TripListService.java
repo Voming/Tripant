@@ -26,6 +26,9 @@ public class TripListService {
 	public int delete(Integer planId)  throws DataAccessException{
 		return repository.delete(planId);
 	}
+	public int deleteRole(Map<String, Object> map)  throws DataAccessException{
+		return repository.deleteRole(map);
+	}
 	
 	//유저검색
 	public List<TripShareEntity> find(Map<String, Object> map) throws DataAccessException{

@@ -9,10 +9,14 @@
 			on a.area_code = t1.plan_area_code order by plan_id desc
 		</select>
 		
-	<!-- 삭제 -->	
+	<!-- 삭제 : 생성자 -->	
 		<update id="delete" parameterType="int" >
 			UPDATE PLAN SET plan_delete_day = SYSDATE WHERE plan_id = #{planId}
 		</update>
+	<!-- 삭제 : 공유자 -->
+		<delete id="deleteRole" parameterType="map" > 
+			DELETE FROM PLAN_MEMBER WHERE MEM_EMAIL = #{memEmail} AND PLAN_ID = #{planId}
+		</delete>
 		
 	<!-- 유저검색 -->
 		<select id="find" parameterType="map" resultType="TripShareEntity">

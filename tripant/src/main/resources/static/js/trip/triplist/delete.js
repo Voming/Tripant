@@ -3,6 +3,7 @@ function deleteHandler() {
 	//data로 id와 title받아오기
 	var planId =$(this).parents(".trip-list.wfull").data('plan-id');
 	var planTitle = $(this).parents(".trip-list.wfull").data('title');
+	var role = $(this).parents(".trip-list.wfull").data('role');
 	//data ajax로 넘기기
 	Swal.fire({
 		  title: "<h2>"+planTitle+"</h2>",
@@ -21,10 +22,10 @@ function deleteHandler() {
 				error : ajaxErrorHandler,
 	        	 url:contextPath+"trip/list/delete",
 	        	 method:"post",
-	        	 data: {planId:planId},
+	        	 data: {planId:planId, role:role},
 				 //success: 1이면 업데이트 완료 0이면 실패
 				 success : function(result) {
-					if(result == 1){
+					if(result >= 0){
 							Swal.fire({
 					     	title: "성공",
 					     	icon:"success",
@@ -33,7 +34,7 @@ function deleteHandler() {
 					    }).then(() => {
 							location.reload();
 						});
-					}else if(result == 0){
+					}else if(result == -2){
 							Swal.fire({
 							icon:"error",
 					     	title: "실패",

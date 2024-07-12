@@ -1,8 +1,6 @@
 package mclass.store.tripant.trip.controller;
 
 import java.security.Principal;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +35,26 @@ public class TripListController {
 	//여행 삭제
 	@PostMapping("/list/delete")//ajax
 	@ResponseBody
-	public int listDelete(Integer planId) {
-		int result =  tripListService.delete(planId);
+	public int listDelete(Integer planId ,String role,Principal principal) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("planId", planId);
+		map.put("memEmail",principal.getName());
+		
+		int result = 0;
+		try {
+			//생성자 : 1 , 공유자 : 0
+			if(role.equals("1")) {
+				//생성자
+				result = tripListService.delete(planId);
+			}else if(role.equals("0")) {
+				//공유자
+				result = tripListService.deleteRole(map);
+			}
+		} catch (DataAccessException e) {
+			result = -2;
+		}
+		
 		return result;
 	}
 	
@@ -100,11 +115,4 @@ public class TripListController {
 		}
 		return result;
 	}
-	
-//	@ExceptionHandler(SQLException.class)
-//	public String exceptionHandler(SQLException e) {
-//		e.printStackTrace();
-//		return "-2";
-//	}
-//	
 }
