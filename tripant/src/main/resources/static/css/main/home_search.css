@@ -41,7 +41,7 @@
 
 .wrap-body .search button{
 	border: 0;
-	background-color: var(--color_gray);
+	background-color: transparent;
 	position: absolute;
     top: 20%;
     right:20%;

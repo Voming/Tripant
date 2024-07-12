@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,7 +59,7 @@ public class AdminService {
 	}
 
 	//회원검색
-	public Map<String, Object> search(int num, int pageNum, int currentPageNum, String searchMem){
+	public Map<String, Object> search(int num, int pageNum, int currentPageNum, String searchMem, String sort){
 		
 		Map<String, Object> result = null;
 		
@@ -81,7 +80,7 @@ public class AdminService {
 		//끝페이지
 		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
 		
-		List<AdminMemEntity> memList = admindao.selectMemListSearch(startRownum, endRownum, searchMem);
+		List<AdminMemEntity> memList = admindao.selectMemListSearch(startRownum, endRownum, searchMem,sort);
 		result = new HashMap<String, Object>();
 		result.put("memList", memList);
 		result.put("totalCount", totalCount);
@@ -90,6 +89,7 @@ public class AdminService {
 		result.put("endPageNum", endPageNum);
 		result.put("currentPage", currentPageNum);
 		result.put("searchMem", searchMem);
+		result.put("sort", sort);
 
 		return result;
 	}
@@ -133,7 +133,7 @@ public class AdminService {
 		return result;
 	}
 	
-	//게시글 조건검색(select)
+	//게시글 조건검색(select)+정렬
 	public Map<String, Object> keywordSearch(int num, int pageNum, int currentPageNum,String pick,String search, String sort){
 		Map<String, Object> result = null;
 		

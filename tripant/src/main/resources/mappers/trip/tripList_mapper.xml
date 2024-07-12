@@ -30,7 +30,7 @@
 		
 	<!-- 유저 추가-->		
 		<insert id="add" parameterType="map" >
-			insert into plan_member values (#{planId},(select mem_email from member where mem_nick=#{addNick}),'0')
+			insert into plan_member values ((select mem_email from member where mem_nick=#{addNick}),#{planId},'0')
 		</insert>
 
 	<!-- 유저 삭제-->	

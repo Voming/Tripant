@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.dao.DataAccessException;
-
 import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminChartEntity;
 import mclass.store.tripant.admin.domain.AdminMemEntity;
@@ -18,15 +16,16 @@ public interface AdminRepository {
 	//회원관리
 	//회원정보 한페이지에 나열
 	public List<AdminMemEntity> selectMemList(int startRownum, int endRownum, String searchMem);
-	//회원검색
-	public List<AdminMemEntity> selectMemListSearch(int startRownum, int endRownum, String searchMem);
+	//회원수
+	public int totalCount();
+	
+	//회원검색+정렬
+	public List<AdminMemEntity> selectMemListSearch(int startRownum, int endRownum, String searchMem,String sort);
+	//회원수
+	public int totalCountSearch(String searchMem);
 	
 	//회원 등급 변경 활성화 여부 
 	public Integer adminMemInfo(Map<String, Object> map);
-	
-	//회원수
-	public int totalCount();
-	public int totalCountSearch(String searchMem);
 	
 	//게시글관리
 	//전체게시글
@@ -41,9 +40,10 @@ public interface AdminRepository {
 	//신고게시글
 	public List<AdminBoardEntity> complainList(int startRownum, int endRownum,String searchMem);
 	public int boardCount();
-	public int boardCountSearch(String searchMem);
+	
 	//신고게시글 검색+정렬
 	public List<AdminBoardEntity> complainsearch(int startRownum, int endRownum,String searchMem, String sort);
+	public int boardCountSearch(String searchMem);
 	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId);

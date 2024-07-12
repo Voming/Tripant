@@ -47,7 +47,7 @@ public class TripService {
 	
 	//spot 검색 정보 불러오기
 	public List<PlaceboxEntity> selectSpotFindList(String findArea, int areaCode,  int maxNum) {
-		return planRepository.selectSpotFindList(findArea, areaCode, maxNum);
+		return repository.selectAllFindList(findArea, areaCode, maxNum);
 	}
 
 	//

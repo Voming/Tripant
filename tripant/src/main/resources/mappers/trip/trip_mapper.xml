@@ -36,6 +36,20 @@
 		DELETE FROM PLAN_SPOT WHERE SPOT_PLAN_ID=#{planId}
 	</delete>
 	
+<!-- spot,stay 검색 -->	
+	<select id="selectAllFindList" parameterType="map" resultType="PlaceboxEntity">
+		SELECT * FROM (
+		SELECT ROWNUM NUM, SPOT.*
+		FROM(
+			SELECT TYPE, CONTENTID ,ADD1, AREACODE, NVL(FIRSTIMAGE,'/images/icons/spot_sample.png') as FIRSTIMAGE, MAPX, MAPY, MLEVEL, TEL, TITLE 
+			FROM PLACE 
+			WHERE AREACODE=#{areaCode} 
+			AND TYPE IN (1,2,3,4,5,6)
+			AND TITLE LIKE '%'||#{findArea}||'%' ORDER BY CONTENTID ) SPOT
+		)
+		WHERE NUM <![CDATA[<=]]> #{maxNum}
+	</select>
+	
 <!-- 편집된 일정 저장 -->
 	<insert id="saveChange" parameterType="java.util.HashMap">
 		INSERT ALL 

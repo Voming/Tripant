@@ -19,11 +19,8 @@ public interface TripRepository {
 	//여행 기본(포괄)정보 불러오기
 	Map<String,Object> planInfo(Integer planId); 
 	
-	//spot 정보 불러오기 
-	List<PlaceboxEntity> selectTypeList(int areaCode, int placeType, int maxNum); //더보기 클릭 시
-	
 	//spot 검색 정보 불러오기
-	List<PlaceboxEntity> selectSpotFindList(String findArea, @Param("areaCode") int areaCode, @Param("maxNum") int  maxNum); //장소명 검색 더보기
+	List<PlaceboxEntity> selectAllFindList(String findArea, @Param("areaCode") int areaCode, @Param("maxNum") int  maxNum); //장소명 검색 더보기
 	
 	//변경 전 삭제
 	Integer saveDelete(Integer planId);

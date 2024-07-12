@@ -16,7 +16,9 @@
 		<ul class="memberlist">
 			<li>	
 				<ul class="col">
-					<li>닉네임</li>
+					<li>닉네임
+					<button type="button" class="btn nick" onclick="ClickNickHandler();">▼</button>
+					</li>
 					<li>이메일</li>
 					<li>가입일자</li>
 					<li>등급</li>
@@ -45,19 +47,19 @@
 			<div class="paging_wrap">
 			<th:block th:if="${memMap.totalPageCount > 0}">
 				<div th:if="${memMap.startPageNum > 1}" class="goprepage">
-		            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${memMap.startPageNum - 1}">&lt;</button>
+		            <button type="button" onclick="goPageHandler(this);" class="btn gopage" th:data-targetpage="${memMap.startPageNum - 1}">&lt;</button>
 		        </div>
 		        <div th:each="page :  ${#numbers.sequence(memMap.startPageNum, memMap.endPageNum)}">
 			        <div th:if="${memMap.currentPage == page}" class="current_page">
 			            <button type="button" disabled class="btn gopage" th:data-targetpage="${page}" th:text="${page}"></button>
 			        </div>
 			        <div th:if="${memMap.currentPage != page}" class="gopage">
-			            <button type="button" onclick="searchBtnHandler(this);" class="btn gopage" th:data-targetpage="${page}" th:text="${page}"></button>
+			            <button type="button" onclick="goPageHandler(this);" class="btn gopage" th:data-targetpage="${page}" th:text="${page}"></button>
 			        </div>
 		        </div>
 		        
 		        <div th:if="${memMap.endPageNum < memMap.totalPageCount}">
-		            <button type="button" onclick="searchBtnHandler(this);" th:data-targetpage="${memMap.endPageNum + 1}" class="btn gopage">&gt;</button>
+		            <button type="button" onclick="goPageHandler(this);" th:data-targetpage="${memMap.endPageNum + 1}" class="btn gopage">&gt;</button>
 		        </div>
 		        </th:block>			
 			</div>
