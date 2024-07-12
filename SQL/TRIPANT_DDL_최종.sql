@@ -796,4 +796,17 @@ END;
 INSERT INTO area SELECT * FROM area_temp;
 SELECT * FROM area order by area_name;
 
+--다이어리 뷰
+create or replace view view_diary_member_plan
+as 
+(
+select d.*, m.mem_nick, p.plan_area_code
+-- add column
+from diary d
+left outer join member m on (d.diary_mem_email = m.mem_email)
+left outer join plan p on (d.diary_plan_id = p.plan_id)
+)
+with read only
+;
+
 commit;
