@@ -50,11 +50,11 @@ public interface AdminRepository {
 	public List<AdminBoardEntity> complainList(int startRownum, int endRownum,String searchMem);
 	public int boardCount();
 	public int boardCountSearch(String searchMem);
-	//신고게시글 검색
+	//신고게시글 검색+정렬
 	public List<AdminBoardEntity> complainsearch(int startRownum, int endRownum,String searchMem, String sort);
 	//신고수 정렬
-	public List<AdminBoardEntity> boardReport(int startRownum, int endRownum,String searchMem);
-	public int complainReportSearchCount(String searchMem);
+	//public List<AdminBoardEntity> boardReport(int startRownum, int endRownum,String searchMem);
+	//public int complainReportSearchCount(String searchMem);
 	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId);

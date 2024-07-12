@@ -134,24 +134,16 @@ public class AdminController {
 		return "admin/admin_complain";
 	}
 	
-	//신고게시글 검색
+	//신고게시글 검색+정렬
 		@PostMapping("/complain/search")
 		public String complainsearch(Model model
 				, @RequestParam( required = false, defaultValue = "1")Integer currentPageNum
 		 , @RequestParam(required = false )String searchMem
 		 ,@RequestParam(required = false ) String sort){
 			model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPageNum,searchMem,sort));
-			System.out.println(sort+"!!!!!!!!!!!!!");
+			System.out.println(searchMem+"!!!!!!!!!!!!!");
 			return "admin/complain_fragment";
 		}
-		
-		//신고수 정렬
-		/*
-		 * @PostMapping("/report")
-		 * 
-		 * @ResponseBody public List<AdminBoardEntity> boardReport() { return
-		 * adminservice.boardReport(); }
-		 */
 		
 	//신고수 초기화
 	@PostMapping("/reset")

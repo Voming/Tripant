@@ -96,6 +96,7 @@ function memListHandler(complainList){
 //신고수 정렬
 function clickReportHandler(){
 	sort='reports'
+	var searchMem = $("[name=search]").val().trim();
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -105,7 +106,7 @@ function clickReportHandler(){
 			searchMem:searchMem, 
 			sort: sort
 		},
-		 method:"post",
+		 	method:"post",
 		 }).done(function(data){
 		if(data){
 			$('.wrap-list').replaceWith(data);

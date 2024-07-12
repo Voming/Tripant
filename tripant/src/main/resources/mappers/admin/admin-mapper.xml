@@ -316,7 +316,7 @@
 	</delete>
 	
 	<!--신고수 정렬  -->
-	<select id="boardReport" parameterType="map" resultType="AdminBoardEntity">
+	<!-- <select id="boardReport" parameterType="map" resultType="AdminBoardEntity">
 	SELECT T2.* FROM
 		(SELECT T1.*, ROWNUM RN FROM
 	(select diary_id, diary_title,to_char(diary_date,'yyyy-MM-dd') diary_date,reports,mem_nick from 
@@ -343,9 +343,9 @@
 	</if>
 		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
-	
+	 -->
 	<!-- 검색+신고수 정렬 -->
-	<select id="complainReportSearchCount" resultType="_int" parameterType="string">
+<!-- 	<select id="complainReportSearchCount" resultType="_int" parameterType="string">
 	select count(*) from 
 	(select diary_id, diary_title,to_char(diary_date,'yyyy-MM-dd') diary_date,reports,mem_nick from 
 	((select a.diary_id, a.diary_title diary_title, a.diary_date diary_date ,a.diary_mem_email, b.reports
@@ -358,7 +358,7 @@
         <bind name="keyword" value="'%'+searchMem+'%'" /> 
         and mem_nick like #{keyword}
 	</if>
-	</select>
+	</select> -->
 	
 	<!-- 결제 취소 페이지 -->
 	<!-- 결제 목록 -->
