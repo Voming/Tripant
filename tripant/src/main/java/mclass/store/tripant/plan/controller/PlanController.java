@@ -1,6 +1,7 @@
 package mclass.store.tripant.plan.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,8 +111,9 @@ public class PlanController {
 	// -------------------------------------planning-------------------------------------------
 	@PostMapping("/planning")
 	@ResponseBody
-	public String planning(@RequestBody CalendarPlanEntity calendarPlan, @SessionAttribute(name = "areaCode") Integer areaCode, @SessionAttribute(name = "planTitle") String planTitle) {
-		planningAlgorithm.planning(calendarPlan, areaCode, planTitle);
+	public String planning(@RequestBody CalendarPlanEntity calendarPlan, Principal principal,  
+			@SessionAttribute(name = "areaCode") Integer areaCode, @SessionAttribute(name = "planTitle") String planTitle) {
+		planningAlgorithm.planning(calendarPlan, areaCode, planTitle, principal.getName());
 		return "aaa";
 	}
 
