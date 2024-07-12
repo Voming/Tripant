@@ -52,6 +52,7 @@ function restStaytab() {
 			<p class="stay-tab-id" value="" style ="display:none"></p> 
 			<p class="stay-tab-x" value="" style ="display:none"></p> 
 			<p class="stay-tab-y" value="" style ="display:none"></p> 
+			<p class="stay-tab-type" value="" style ="display:none"></p> 
 		</div>
 		`;
 		$(".modal-stay-list").append(modalVal);
@@ -79,6 +80,7 @@ function stayModalDoneBtnClickHandler() {
 		var tabId = $(this).children(".stay-tab-id").attr("value");
 		var tabX = $(this).children(".stay-tab-x").attr("value");
 		var tabY = $(this).children(".stay-tab-y").attr("value");
+		var type = $(this).children(".stay-tab-type").attr("value");
 
 		if (tabX != "") { //숙소가 등록된 상황
 			addMarkerStay(new kakao.maps.LatLng(tabY, tabX), tabName, tabId, markersStay.length); // 마커 추가
@@ -90,7 +92,7 @@ function stayModalDoneBtnClickHandler() {
 					element.stay.mapx = tabX;
 					element.stay.mapy = tabY;
 					element.stay.img = tabImg;
-					element.stay.type = staytype;
+					element.stay.type = type;
 					return true;
 				}
 			});
@@ -132,6 +134,7 @@ function displayStayTabList() {
 				$(this).children(".stay-tab-id").attr("value", element.stay.id);
 				$(this).children(".stay-tab-x").attr("value", element.stay.mapx);
 				$(this).children(".stay-tab-y").attr("value", element.stay.mapy);
+				$(this).children(".stay-type").attr("value", element.stay.type);
 			}
 		});
 	});
@@ -164,6 +167,7 @@ function stayTabBtnClickHandler(thisElement) {
 	$(thisElement).next().next().attr("value", stayBefor.id);
 	$(thisElement).next().next().next().attr("value", stayBefor.mapx);
 	$(thisElement).next().next().next().next().attr("value", stayBefor.mapy);
+	$(thisElement).next().next().next().next().next().attr("value", stayBefor.type);
 }
 
 //모달 전체 선택
@@ -177,6 +181,7 @@ function stayModalAllBtnClickHandler(thisElement) {
 		$(this).children(".stay-tab-id").attr("value", stayBefor.id);
 		$(this).children(".stay-tab-x").attr("value", stayBefor.mapx);
 		$(this).children(".stay-tab-y").attr("value", stayBefor.mapy);
+		$(this).children(".stay-tab-type").attr("value", stayBefor.type);
 	});
 }
 
@@ -235,6 +240,7 @@ function stayCkBtnClickHandler(thisElement) {
 	var latx = $(thisElement).parent().find(".stay-x").attr("value");
 	var lngy = $(thisElement).parent().find(".stay-y").attr("value");
 	var img = $(thisElement).parent().find(".stay-img").attr("src");
+	var type = $(thisElement).parent().find(".stay-type").attr("value");
 
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx); // 맵 위치로 변환
 	// 확대 크기 변경
@@ -245,7 +251,7 @@ function stayCkBtnClickHandler(thisElement) {
 	if ($(thisElement).is(":checked") == false) { // 체크박스 해제
 		//불가
 	} else { // 체크박스 선택
-		stayBefor = new Stay(id, title, latx, lngy, img);
+		stayBefor = new Stay(id, title, latx, lngy, img, type);
 
 		//모달 숙소 이름 변경
 		$(".modal-stay-name").html(title);

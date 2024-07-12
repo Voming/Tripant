@@ -10,6 +10,7 @@
 					<span class="spot-address" th:text="${spot.add1}" th:value="${spot.add1}"></span>
 					<span class="spot-x" th:value="${spot.mapx}" style ="display:none"></span> 
 					<span class="spot-y" th:value="${spot.mapy}" style ="display:none"></span> 
+					<span class="spot-type" th:value="${spot.type}" style ="display:none"></span> 
 				</div>
 				<input type="checkbox" th:data-spotid="${spot.contentid}"
 					th:id="|spot-check${spot.contentid}|"
