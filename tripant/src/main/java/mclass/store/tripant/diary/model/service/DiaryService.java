@@ -50,6 +50,11 @@ public class DiaryService {
 	public DiaryBoardEntity findById(Long id) {
 		return diaryRepository.findById(id);
 	}
+	
+	// 글 작성 페이지 등급별 나누기
+	public String isVip(String memEmail) {
+		return diaryRepository.isVip(memEmail);
+	}
 
 	// 여행기 글 등록하기, 여행기 글 등록 시 이미지 url 및 text 저장 
 	@Transactional
