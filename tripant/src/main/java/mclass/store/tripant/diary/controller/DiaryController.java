@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import jakarta.servlet.http.HttpServletRequest;
-import mclass.store.tripant.diary.domain.DiaryBoardEntity;
+
 import mclass.store.tripant.diary.model.service.DiaryService;
 
 import org.springframework.web.bind.annotation.RequestMapping;

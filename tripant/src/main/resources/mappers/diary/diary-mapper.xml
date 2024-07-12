@@ -216,7 +216,7 @@
 	<update id="incrementDiaryViews" parameterType="int">
 		UPDATE DIARY
 		SET 
-			DIARY_VIEWS = COALESCE(DIARY_VIEWS, 0) + 1
+			DIARY_VIEWS = DIARY_VIEWS +1
 		WHERE DIARY_ID = #{diaryId}
 	</update>
 

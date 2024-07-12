@@ -88,9 +88,9 @@ public class DiaryService {
 
 	// 조회수 증가
 	@Transactional
-	public DiaryBoardEntity getDiaryById(int diaryId, String memEmail) {
-		diaryRepository.incrementDiaryViews(diaryId);
-		return diaryRepository.selectDiaryById(diaryId, memEmail);
+	public int getDiaryById(int diaryId, String memEmail) {
+		
+		return diaryRepository.incrementDiaryViews(diaryId);
 	}
 
 	// 회원의 모든 여행 계획 가져오기(Mycontroller)
