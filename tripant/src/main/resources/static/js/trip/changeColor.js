@@ -134,6 +134,9 @@ function typeColor(placeType){
 			thisColor = '--bs-pink';
 			break;
 		case 4:
+			thisColor = '--bs-warning';
+			break;
+		case 100:
 			thisColor = '--bs-orange';
 			break;
 		default:

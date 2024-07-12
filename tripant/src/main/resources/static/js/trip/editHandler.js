@@ -69,6 +69,7 @@ function removeSpot(el){
 	Swal.fire({
 	  title: "<h2>"+spotTitle+"</h2>",
 	  text: "삭제하시겠습니까?",
+	  icon:'question',
 	  showCancelButton: true,
 	  confirmButtonColor: "#000000",
 	  cancelButtonColor: "#d33",

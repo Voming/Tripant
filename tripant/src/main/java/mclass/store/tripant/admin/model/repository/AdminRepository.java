@@ -1,7 +1,5 @@
 package mclass.store.tripant.admin.model.repository;
 
-
-
 import java.util.List;
 import java.util.Map;
 
@@ -34,16 +32,9 @@ public interface AdminRepository {
 	public List<AdminBoardEntity> boardList(int startRownum, int endRownum, String pick,String search);
 	public int diaryCount();
 	
-	//게시글 검색(select)
+	//게시글 검색(select) +정렬
 	public List<AdminBoardEntity> keywordSearch(int startRownum, int endRownum, String pick, String search, String sort);
 	public int keywordSearchCount(String pick,String search);
-	
-	//좋아요 많은 순으로 정렬
-//	public List<AdminBoardEntity> boardLike(int startRownum, int endRownum,String pick,String search);
-//	public int boardLikeSearchCount(String pick,String search);
-	//조회수 정렬
-//	public List<AdminBoardEntity> boardView(int startRownum, int endRownum,String pick,String search);
-//	public int boardViewSearchCount(String pick,String search);
 	
 	//신고게시글 관리
 	//신고게시글
