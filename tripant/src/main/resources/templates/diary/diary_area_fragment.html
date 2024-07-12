@@ -8,11 +8,27 @@
             window.location.href = contextPath + 'diary/read/' + diaryId;
         });
     });
+ 
     </script>
+    
 <body>
 	<div class="wrap-diary"  th:fragment="diaryitemlist"> 
+		<th:block th:if="${diaries} == null or ${#lists.size(diaries) ==0 }">
+			<script >
+				$(".diary_more_btn").hide();
+			//	var imageSrc = contextPath + "images/diary/nodiary.png";
+				var nodiary = '<div style="font-size:var(--font4); height: 250px; align-content: center;">글이 없습니다.</div>';
+				$(".wrap-diary").html(nodiary);
+				console.log(".diary_more_btn hide");
+			</script>
+		</th:block>
 		<!-- 공개글 데이터 가져오기  -->
-		<th:block th:if="${diaries != null}">
+		
+		<th:block th:if="${diaries} != null and ${#lists.size(diaries) != 0 }">
+			<script >
+				$(".diary_more_btn").show();
+				console.log(".diary_more_btn show");
+			</script>
 			<th:block th:each="diary :  ${diaries}">
 				<div class="wrap-d-content" id="click-diary" th:data-diaryid="${diary.diaryId}">
 					<div class="diary-img">
@@ -60,9 +76,7 @@
 						</div>
 					</div>
 				</div>
-				 <div th:if="${diary == null}">
-					<p>일기를 찾을 수 없습니다.</p>
-				</div>
+			<div class="empty diary" th:if="${diaris} != null"> 글이 없습니다. </div>
 			</th:block>
 		 </th:block>
 			

@@ -60,10 +60,11 @@ select * from place where areacode = 1 and CONTENTTYPEID='39' and cat3='A0502030
 
 ----plan_spot
 --1일차
-insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,4, 133328,1,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,4, 134686,2,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,4, 134691,3,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,5, 1870779,4,3600,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,100, 1,1,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,4, 133328,2,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,4, 134686,3,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,4, 134691,4,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 9999),9999,5, 1870779,5,3600,null);
 --2일차
 insert into plan_spot values((select plan_start_day+1 from plan where plan_id = 9999),9999,4, 135423,1,default,null);
 insert into plan_spot values((select plan_start_day+1 from plan where plan_id = 9999),9999,4, 135445,2,default,null);
@@ -98,10 +99,12 @@ insert into plan_schedule values((select plan_start_day+2 from plan where plan_i
 
 ----plan_spot
 --1일차
-insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,4, 133328,1,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,4, 134686,2,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,4, 134691,3,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,5, 1870779,4,default,null);
+select * from place where contentid = 134691;
+insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,100, 1,1,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,4, 133328,2,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,4, 134686,3,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,4, 134691,4,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 10000),10000,5, 1870779,5,default,null);
 
 --2일차
 insert into plan_spot values((select plan_start_day+1 from plan where plan_id = 10000),10000,4, 135423,1,default,null);
@@ -134,17 +137,14 @@ commit;
 insert into plan_member values (8888,'admin9@tripant.store','1');
 --plan_schedule DML    plan_id = 14 서울여행 세번째
 
-insert into plan_schedule values((select plan_start_day from plan where plan_id = 8888) ,8888,'10:00','22:00' );
-insert into plan_schedule values((select plan_start_day+1 from plan where plan_id = 8888) ,8888,'10:00','22:00'  );
-insert into plan_schedule values((select plan_start_day+2 from plan where plan_id = 8888) ,8888,'10:00','22:00'  );
 
-select* from place where type =3 and areacode = 39;
 ----plan_spot3085304
 --1일차
-insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,4, 2758900,1,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,4, 1986683,2,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,4, 2654138,3,default,null);
-insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,5, 905600,4,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,100, 39,1,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,4, 2758900,2,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,4, 1986683,3,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,4, 2654138,4,default,null);
+insert into plan_spot values((select plan_start_day from plan where plan_id = 8888),8888,5, 905600,5,default,null);
 --2일차
 insert into plan_spot values((select plan_start_day+1 from plan where plan_id = 8888),8888,4, 133990,1,default,null);
 insert into plan_spot values((select plan_start_day+1 from plan where plan_id = 8888),8888,4, 2905771,2,default,null);

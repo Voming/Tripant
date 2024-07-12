@@ -49,7 +49,7 @@ function reportHandler() {
 						}).then(() => {
 							location.href = contextPath + "diary";
 						});
-					} else if (result == 1) {
+					} else if (result == -2) {
 						Swal.fire({
 							title: "오류",
 							text: "이미 신고한 글입니다.",

@@ -60,6 +60,7 @@ function goPageHandler(thisElement) {
 //검색
 function searchBtnHandler(){
 	var searchMem = $("[name=search]").val().trim();
+	var currentPage = $().data("targetpage");
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -96,6 +97,8 @@ function memListHandler(complainList){
 //신고수 정렬
 function clickReportHandler(){
 	sort='reports'
+	var searchMem = $("[name=search]").val().trim();
+	var currentPage = $().data("targetpage");
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -105,7 +108,7 @@ function clickReportHandler(){
 			searchMem:searchMem, 
 			sort: sort
 		},
-		 method:"post",
+		 	method:"post",
 		 }).done(function(data){
 		if(data){
 			$('.wrap-list').replaceWith(data);

@@ -1,5 +1,6 @@
 var clicknum;
 var areaname;
+var diarymoreCount;
 $(document).ready(function() {
 	clicknum = 0;
 	// 초기화: 탭 전환
@@ -44,17 +45,20 @@ function tabMenuClickHandler() {
 		, context: this
 	}).done(function(wrap_content) {
 		$(".wrap-diary").replaceWith(wrap_content);
-		//TODO with voming
+		 	// wrap_content가 비어 있는 경우
+		 	console.log("wrap-diary");
+	
 		$.each($(""), function(idx, thisElement) {
 			var contentElement = $(thisElement).html();
 			console.log(thisElement);
 			console.log(idx);
+		
 		});
-	})
+
 
 	return false;
 }
-
+)}
 // 좋아요 아이콘 설정 및 해제
 function btnLikeClickHandler(thisElement, diaryId) {
 	console.log("btnLikeClickHandler 눌림");
@@ -131,6 +135,15 @@ function sortOptionChangeHandler(thisElement) {
 	}).done(function(wrap_content) {
 		//$('.area-tab-nav a').filter(':eq(0)').click(); // 첫 번째 탭 활성화
 		$(".wrap-diary").replaceWith(wrap_content);
+//		diarymoreCount = $(".wrap_content").find().length; 
+//		if(diarymoreCount < 0){
+//			$(".diary_more_btn").remove();
+		//	console.log("diary_more_btn");
+	//		$(".wrap-diary").html("<p>글이 없습니다.</p>"); 
+
+//		}else{
+//				$(".diary_more_btn").show(); 
+//		}
 	})
 
 }

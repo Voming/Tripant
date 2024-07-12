@@ -69,23 +69,23 @@ async function itemUpdateHandler(){
 				</div>
 				<div class="item-info flex">
 					<div>상품가격(원)</div>
-					<div><input type="number" min="0" id="item-price" name="item-price" value="${itemPrice}"></div>
+					<div><input type="number" min="0" max="99999" placeholder="0~99999" id="item-price" name="item-price" value="${itemPrice}" ></div>
 				</div>
 				<div class="item-info flex">
 					<div>상품기간(일)</div>
-					<div><input type="number" min="0" id="item-dur" name="item-dur" value="${itemDur}"></div>
+					<div><input type="number" min="0" max="999" placeholder="0~999" id="item-dur" name="item-dur" value="${itemDur}"></div>
 				</div>
 				<div class="item-info flex">
 					<div>상품할인율(%)</div>
-					<div><input type="number" min="0" id="item-sale" name="item-sale" value="${itemSale}"></div>
+					<div><input type="number" min="0" max="100" placeholder="0~100" id="item-sale" name="item-sale" value="${itemSale}"></div>
 				</div>
 				<div class="item-info flex">
 					<div style="font-size: var(--font5);">테마색상(헥사코드)</div>
-					<div><input type="text" id="item-color" name="item-color" value="${itemColor}"></div>
+					<div><input type="text" id="item-color" name="item-color" value="${itemColor}" placeholder="#제외한 숫자 6자 + 33"></div>
 				</div>
 				<div class="item-info flex">
 					<div>이미지경로</div>
-					<div><input type="text" id="item-src" name="item-src" value="${itemSrc}"></div>
+					<div><input type="text" id="item-src" name="item-src" value="${itemSrc}" placeholder="images/~로 시작"></div>
 				</div>
 			</div>
 		  `,
@@ -168,10 +168,13 @@ async function itemInsertHandler(){
 		confirmButtonColor:"black",
 		width:"390px",
 		html: `
+		<script>
+			
+		</script>
 		<div class="item-insert flex">
 			<div class="item-info flex">
 				<div>상품코드</div>
-				<div><input type="text" id="item-code" name="item-code"></div>
+				<div><input type="text" id="item-code" name="item-code" placeholder="테마는 T, 폰트는 F로 시작"></div>
 			</div>
 			<div class="item-info flex">
 				<div>상품명</div>
@@ -179,23 +182,23 @@ async function itemInsertHandler(){
 			</div>
 			<div class="item-info flex">
 				<div>상품가격(원)</div>
-				<div><input type="number" min="0" id="item-price" name="item-price"></div>
+				<div><input type="number" min="0" max="99999" placeholder="0~99999" id="item-price" name="item-price" placeholder="0~99999"></div>
 			</div>
 			<div class="item-info flex">
 				<div>상품기간(일)</div>
-				<div><input type="number" min="0" id="item-dur" name="item-dur"></div>
+				<div><input type="number" min="0" max="999" placeholder="0~999" id="item-dur" name="item-dur" placeholder="0~999"></div>
 			</div>
 			<div class="item-info flex">
 				<div>상품할인율(%)</div>
-				<div><input type="number" min="0" id="item-sale" name="item-sale"></div>
+				<div><input type="number" min="0" max="100" placeholder="0~100" id="item-sale" name="item-sale" placeholder="0~100"></div>
 			</div>
 			<div class="item-info flex">
 				<div style="font-size: var(--font5);">테마색상(헥사코드)</div>
-				<div><input type="text" id="item-color" name="item-color"></div>
+				<div><input type="text" id="item-color" name="item-color" placeholder="#제외한 숫자 6자 + 33"></div>
 			</div>
 			<div class="item-info flex">
 				<div>이미지경로</div>
-				<div><input type="text" id="item-src" name="item-src"></div>
+				<div><input type="text" id="item-src" name="item-src" placeholder="images/~로 시작"></div>
 			</div>
 		</div>
 	  `,
@@ -282,8 +285,11 @@ function itemDeleteHandler(){
 					html: "삭제하시겠습니까?", 
 					icon: "error", 
 					confirmButtonColor: "#000000", 
-					confirmButtonText: "확인",
+					confirmButtonText: "삭제하기",
 					confirmButtonTextFont:"Binggrae",
+					showCancelButton: true, 
+					cancelButtonColor: "#fff", 
+					cancelButtonText: `<p style="color: black;">돌아가기</p>`
 				}).then((swal) => {
 						if(swal.isConfirmed){
 							location.reload();

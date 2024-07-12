@@ -8,7 +8,9 @@
 <script th:inline="javascript">
 	const tabcode = /*[[${tabcode}]]*/'전체';
 	console.log("tabcode:"+tabcode);
-</script>
+
+	</script>
+
 <script type="text/javascript" th:src="@{/js/diary/diary_board.js}"></script>
 <body>
 	<header>
@@ -40,7 +42,7 @@
 				<div class="diary-tab-content">
 					<th:block th:each="num : ${#numbers.sequence(1,18)}">
 						<div th:id="'tab'+${num}">
-							<div class="wrap-diary" th:replace="~{diary/diary_area_fragment :: diaryitemlist}">	</div>
+							<div class="diaryitemlist" th:replace="~{diary/diary_area_fragment :: diaryitemlist}">	</div>
 						</div>
 					</th:block>
 				</div>

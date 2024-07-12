@@ -1,10 +1,9 @@
 package mclass.store.tripant.trip.model.service;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -19,32 +18,32 @@ public class TripListService {
 	private final TripListRepository repository;
 	
 	//여행목록
-	public List<TripListEntity> selectTripList(String memEmail){
+	public List<TripListEntity> selectTripList(String memEmail) throws DataAccessException{
 		return repository.selectTripList(memEmail);
 	}
 	
 	//여행삭제(planId -> PK)
-	public int delete(Integer planId) {
+	public int delete(Integer planId)  throws DataAccessException{
 		return repository.delete(planId);
 	}
 	
 	//유저검색
-	public List<TripShareEntity> find(Map<String, Object> map){
+	public List<TripShareEntity> find(Map<String, Object> map) throws DataAccessException{
 		return repository.find(map);
 	}
 	
 	//일정 공유 중인 맴버
-	public List<TripShareEntity> share(Map<String, Object> map){
+	public List<TripShareEntity> share(Map<String, Object> map) throws DataAccessException{
 		return repository.share(map);
 	}
 	
 	//유저 추가
-	public int add(Map<String, Object> map) throws SQLException{
+	public int add(Map<String, Object> map) throws DataAccessException{
 		return repository.add(map);
 	}
 	
 	//유저 삭제
-	public int remove(Map<String, Object> map) {
+	public int remove(Map<String, Object> map) throws DataAccessException{
 		return repository.remove(map);
 	}
 }

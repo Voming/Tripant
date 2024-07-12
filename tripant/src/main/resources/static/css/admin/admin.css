@@ -20,6 +20,10 @@ a{
 	cursor: pointer;
 }
 
+.wrap-list .ad-content{
+	min-height:670px;
+}
+
 /* 사이드바 */
 .wrap-main .wrap-sidebar{
 	padding:15px;

@@ -56,7 +56,7 @@ function dragAndDrop(){
 			console.log("======");
 						
 						
-			var temp_i = ((prev_i) ? prev_i : after_i); 
+			var temp_i = ((prev_i != undefined) ? prev_i : after_i); 
 			//drop 위치가 같은 column인가
 			if( temp_i== el_i){
 // ++++++++++ 같은 컬럼

@@ -18,5 +18,15 @@ delete from plan_member where plan_id = 13 and mem_email=(select mem_email from 
 insert into plan_member values (13,(select mem_email from member where mem_nick='오오'),'0')
 ;
 
+select * from place where type = 100;
 
-select * from member;
+--전남 무안군 무안읍 무안로 530
+
+select * from plan_spot where spot_plan_id =13 and to_char(spot_day,'dd')=16;
+
+insert into plan_spot values((select plan_start_day from plan where plan_id = 13),13,100, 1,1,default,null);
+update plan_spot set spot_order = 7 where spot_contentid =1870779 and to_char(spot_day,'dd')=16;
+delete from plan_spot where spot_type =100 and spot_plan_id =13;
+
+rollback;
+commit;

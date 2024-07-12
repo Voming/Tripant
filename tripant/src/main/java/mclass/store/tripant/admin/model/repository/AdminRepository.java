@@ -1,7 +1,5 @@
 package mclass.store.tripant.admin.model.repository;
 
-
-
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +23,7 @@ public interface AdminRepository {
 	//회원 등급 변경 활성화 여부 
 	public Integer adminMemInfo(Map<String, Object> map);
 	
-	//개수
+	//회원수
 	public int totalCount();
 	public int totalCountSearch(String searchMem);
 	
@@ -33,28 +31,18 @@ public interface AdminRepository {
 	//전체게시글
 	public List<AdminBoardEntity> boardList(int startRownum, int endRownum, String pick,String search);
 	public int diaryCount();
-	public int keywordSearchCount(String pick,String search);
 	
-	//게시글 검색(select)
+	//게시글 검색(select) +정렬
 	public List<AdminBoardEntity> keywordSearch(int startRownum, int endRownum, String pick, String search, String sort);
-	
-	//좋아요 많은 순으로 정렬
-	public List<AdminBoardEntity> boardLike(int startRownum, int endRownum,String pick,String search);
-	public int boardLikeSearchCount(String pick,String search);
-	//조회수 정렬
-	public List<AdminBoardEntity> boardView(int startRownum, int endRownum,String pick,String search);
-	public int boardViewSearchCount(String pick,String search);
+	public int keywordSearchCount(String pick,String search);
 	
 	//신고게시글 관리
 	//신고게시글
 	public List<AdminBoardEntity> complainList(int startRownum, int endRownum,String searchMem);
 	public int boardCount();
 	public int boardCountSearch(String searchMem);
-	//신고게시글 검색
+	//신고게시글 검색+정렬
 	public List<AdminBoardEntity> complainsearch(int startRownum, int endRownum,String searchMem, String sort);
-	//신고수 정렬
-	public List<AdminBoardEntity> boardReport(int startRownum, int endRownum,String searchMem);
-	public int complainReportSearchCount(String searchMem);
 	
 	//신고수 초기화
 	public Integer complainReset(Integer diaryId);

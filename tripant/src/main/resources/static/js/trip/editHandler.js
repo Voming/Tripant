@@ -42,9 +42,9 @@ async function memoClickHandler(el){
         input: "textarea",
         inputLabel: "메모작성",
         inputValue: memoText,
-        inputPlaceholder: "여행에 필요한 정보를 이곳에 작성해보세요. 최대 900자",
+        inputPlaceholder: "여행에 필요한 정보를 이곳에 작성해보세요. 최대 100자",
         inputAttributes: {
-            maxlength: "900"
+            maxlength: "100"
         },
         showCancelButton: true,
         confirmButtonColor: "#000000", 
@@ -69,6 +69,7 @@ function removeSpot(el){
 	Swal.fire({
 	  title: "<h2>"+spotTitle+"</h2>",
 	  text: "삭제하시겠습니까?",
+	  icon:'question',
 	  showCancelButton: true,
 	  confirmButtonColor: "#000000",
 	  cancelButtonColor: "#d33",
