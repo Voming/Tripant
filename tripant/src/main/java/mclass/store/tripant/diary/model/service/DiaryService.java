@@ -88,7 +88,7 @@ public class DiaryService {
 
 	// 조회수 증가
 	@Transactional
-	public int getDiaryById(int diaryId, String memEmail) {
+	public int incrementDiaryViews(int diaryId, String memEmail) {
 		
 		return diaryRepository.incrementDiaryViews(diaryId);
 	}
