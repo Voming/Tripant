@@ -22,7 +22,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import mclass.store.tripant.place.domain.PlaceboxEntity;
-import mclass.store.tripant.trip.domain.DayDetailInfoEntity;
 import mclass.store.tripant.trip.domain.DayEntity;
 import mclass.store.tripant.trip.model.service.TripService;
 
@@ -31,9 +30,6 @@ import mclass.store.tripant.trip.model.service.TripService;
 public class TripController {
 	@Autowired
 	private TripService service;
-	
-	@Autowired
-	private Gson gson;
 	
 	//map 위치간 이동시간
 	@Value("${kakao.map.rest.api}")
@@ -105,13 +101,12 @@ public class TripController {
 		//List<String> save1 =  gson.fromJson(gson.toJson(saveData), List.class); //
 		
 		List<DayEntity> dtos = Arrays.asList(mapper.readValue(saveData, DayEntity[].class));
-		
-		Map<String, Object> paramMap = new HashMap();
+		//Integer planId = Integer.parseInt(id);
+		Map<String, Object> paramMap = new HashMap<String, Object> ();
         paramMap.put("planId", planId);
         paramMap.put("dtos", dtos);
         
         Integer result = -1;
-        
         result = service.saveChange(paramMap);
         
 //        System.out.println(">>>>>>>>>>>>>>>>> result");

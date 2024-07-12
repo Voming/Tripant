@@ -118,6 +118,8 @@ function saveChanges(){
 				item.travelOrder = j + 1; 
 			}
 		}
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>planId");
+		console.log(planId);
 		saveData = JSON.stringify(detailListEditMode);
 		//jjoggan ***
 		$.ajax({
