@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.dao.DataAccessException;
 
 import mclass.store.tripant.diary.domain.BuyThemeEntity;
 import mclass.store.tripant.diary.domain.DiaryBoardEntity;
@@ -50,10 +51,10 @@ public interface DiaryRepository {
 	int deleteDiaryLike(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
 	// 여행기글 삭제
 
-	 int deleteDiaryById(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail) throws Exception;
+	 int deleteDiaryById(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail) throws DataAccessException;
 	
 	// 여행기글 신고 
-	 int reportsOne(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail) throws SQLIntegrityConstraintViolationException;
+	 int reportsOne(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail) throws DataAccessException;
 
 	 // 여행기 글 Previews text 꺼내기
 	 void previewsText(@Param("diaryId") int diaryId , @Param("memEmail") String memEmail);
