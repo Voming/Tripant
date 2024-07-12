@@ -4,7 +4,7 @@
 <div class= "wrap-list" th:fragment="goodsPage">
 	<div class="ad-search">
 				<th:block th:if="${goodsMap!=null and goodsMap.itemCode != null}">
-				<input class="search" type="text"  name="search" placeholder="상품명 검색" onkeyup="enterkey()"  th:value="${goodsMap.itemCode}">
+				<input class="search" type="text"  name="search" placeholder="상품코드 검색" onkeyup="enterkey()"  th:value="${goodsMap.itemCode}">
 				</th:block>
 				<th:block th:if="${goodsMap==null or  goodsMap.itemCode ==null}">
 				<input class="search" type="text"  name="search"onkeyup="enterkey()"  placeholder="상품코드 검색">

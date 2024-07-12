@@ -85,7 +85,7 @@ function goPageHandler() {
 				, method : "get"
 				, data : {
 						seachMem : seachMem,
-						currentpage : currentpage}
+						page : currentpage}
 				, dataType : "json"
 				, success : function(result){
 					if(result.seachMem){

@@ -110,14 +110,21 @@ function saveChanges(){
 			for(var j = 0 ;j < editmode.dayDetailInfoEntity.length; j++){
 				item = editmode.dayDetailInfoEntity[j];
 				
+				//dto에 없는 필드 제거
 				delete item.durationMin;
 				delete item.endTime;
 				delete item.startTime;
 				delete item.placeCat;
+				
+				if(item.memo == 'MEMO가 없습니다'){
+					item.memo = null; //
+				}
 				//변경된 방문순서 key에 넣어주기
 				item.travelOrder = j + 1; 
 			}
 		}
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>planId");
+		console.log(planId);
 		saveData = JSON.stringify(detailListEditMode);
 		//jjoggan ***
 		$.ajax({

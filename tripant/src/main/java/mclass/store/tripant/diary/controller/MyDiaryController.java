@@ -59,10 +59,10 @@ public class MyDiaryController {
 		model.addAttribute("themes", themes);
 		model.addAttribute("plans", diaryService.getAllPlans(principal.getName()));
 
-		System.out.println(principal.toString());
-		if (principal.toString().contains("MEM")) {
+		String memRole = diaryService.isVip(principal.getName());
+		if (memRole.contains("MEM")) {
 			return "diary/my/my_write";
-		} else if (principal.toString().contains("VIP")) {
+		} else if (memRole.contains("VIP")) {
 			return "diary/my/my_write_font";
 		} else {
 			return "redirect:/";

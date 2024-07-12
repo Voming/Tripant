@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .wrap-main {
 	width: 960px;
-	margin: 100px auto;
+	margin: 120px auto 290px auto;
 	/* padding: 0 240px; */
 	position: relative;
 }

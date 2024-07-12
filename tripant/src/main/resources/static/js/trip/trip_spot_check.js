@@ -12,7 +12,8 @@ function spotCkBtnClickHandler(thisElement) {
 	var img = $(thisElement).parent().find(".spot-img").attr("src");
 	var addr = $(thisElement).parent().find(".spot-address").attr("value");
 	var contentid = $(thisElement).parent().find(".spotcheck").data("spotid");
-
+	var type = $(thisElement).parent().find(".spot-type").attr("value");	
+	
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx); // 맵 위치로 변환
 	// 확대 크기 변경
 	map.setLevel(6);
@@ -54,7 +55,7 @@ function spotCkBtnClickHandler(thisElement) {
 
 	} else { //=====================================체크박스 선택=========================================
 		var stayTime = 7200;
-		spotArr[markersSpot.length] = new Spot(id,contentid, title, latx, lngy,spottype,img,stayTime,placeTypeS);  //전체 일정 만들기 장소 정보 저장
+		spotArr[markersSpot.length] = new Spot(id,contentid, title, latx, lngy,type,img,stayTime,placeTypeS);  //전체 일정 만들기 장소 정보 저장
 		//spotArr[markersSpot.length].title = title;
 		spotArr[markersSpot.length].addr = addr;
 		

@@ -33,7 +33,12 @@ function fontSwalHandler(){
 						<div th:text="${theme.itemName}"></div>
 						<div><input type="checkbox" name="theme" th:value="${theme.itemCode}"></div>
 					</div>
-					<div class="item price" th:text="${theme.itemPrice}+'원'"></div>
+					<div class="item price" th:text="${theme.itemPrice}+'원'" th:if="${theme.itemSale} == null"></div>
+					<div class="item price flex" th:if="${theme.itemSale} != null">
+						<div class="origin-price" th:text="${theme.itemPrice}+'원'"></div>
+						<div class="sale-proportion" th:text="${theme.itemSale}+'%'"></div>
+						<div class="sale-price" th:text="${theme.salePrice}+'원'"></div>
+					</div>
 				</div>
 			</div>
 			<div class="list flex none" th:if="${themeList} == null">다음에 나올 테마를 기대해주세요!</div>

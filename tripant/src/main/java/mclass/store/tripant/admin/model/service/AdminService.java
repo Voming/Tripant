@@ -167,74 +167,74 @@ public class AdminService {
 		return result;
 	}
 
-	//좋아요 정렬
-	public Map<String, Object> boardLikes(int num, int pageNum, int currentPageNum,String pick,String search) {
-		Map<String, Object> result = null;
-		
-		//총 게시글 개수
-		int totalCount = admindao.diaryCount();
-		
-		int startRownum = num * (currentPageNum - 1) + 1;
-		int endRownum = num * currentPageNum;
-		
-//		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
-		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		
-		//시작페이지
-		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
-				: (currentPageNum / pageNum) * pageNum + 1;
-		
-		//끝페이지
-		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
-		
-		List<AdminBoardEntity> boardList = admindao.boardLike(startRownum, endRownum, pick,search);
-		result = new HashMap<String, Object>();
-		result.put("boardList", boardList);
-		result.put("totalCount", totalCount);
-		result.put("totalPageCount", totalPageCount);
-		result.put("startPageNum", startPageNum);
-		result.put("endPageNum", endPageNum);
-		result.put("currentPage", currentPageNum);
-		result.put("pick", pick);
-		result.put("search", search);
-
-		return result;
-	}
+//	//좋아요 정렬
+//	public Map<String, Object> boardLikes(int num, int pageNum, int currentPageNum,String pick,String search) {
+//		Map<String, Object> result = null;
+//		
+//		//총 게시글 개수
+//		int totalCount = admindao.diaryCount();
+//		
+//		int startRownum = num * (currentPageNum - 1) + 1;
+//		int endRownum = num * currentPageNum;
+//		
+////		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
+//		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
+//		
+//		//시작페이지
+//		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
+//				: (currentPageNum / pageNum) * pageNum + 1;
+//		
+//		//끝페이지
+//		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
+//		
+//		List<AdminBoardEntity> boardList = admindao.boardLike(startRownum, endRownum, pick,search);
+//		result = new HashMap<String, Object>();
+//		result.put("boardList", boardList);
+//		result.put("totalCount", totalCount);
+//		result.put("totalPageCount", totalPageCount);
+//		result.put("startPageNum", startPageNum);
+//		result.put("endPageNum", endPageNum);
+//		result.put("currentPage", currentPageNum);
+//		result.put("pick", pick);
+//		result.put("search", search);
+//
+//		return result;
+//	}
 	
 	//조회수 정렬
-	public  Map<String, Object> boardView(int num, int pageNum, int currentPageNum,String pick,String search) {
-			
-		Map<String, Object> result = null;
-		
-		//총 게시글 개수
-		int totalCount = admindao.diaryCount();
-		
-		int startRownum = num * (currentPageNum - 1) + 1;
-		int endRownum = num * currentPageNum;
-		
-//		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
-		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		
-		//시작페이지
-		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
-				: (currentPageNum / pageNum) * pageNum + 1;
-		
-		//끝페이지
-		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
-		
-		List<AdminBoardEntity> boardList = admindao.boardView(startRownum, endRownum, pick,search);
-		result = new HashMap<String, Object>();
-		result.put("boardList", boardList);
-		result.put("totalCount", totalCount);
-		result.put("totalPageCount", totalPageCount);
-		result.put("startPageNum", startPageNum);
-		result.put("endPageNum", endPageNum);
-		result.put("currentPage", currentPageNum);
-		result.put("pick", pick);
-		result.put("search", search);
-
-		return result;
-	}
+//	public  Map<String, Object> boardView(int num, int pageNum, int currentPageNum,String pick,String search) {
+//			
+//		Map<String, Object> result = null;
+//		
+//		//총 게시글 개수
+//		int totalCount = admindao.diaryCount();
+//		
+//		int startRownum = num * (currentPageNum - 1) + 1;
+//		int endRownum = num * currentPageNum;
+//		
+////		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
+//		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
+//		
+//		//시작페이지
+//		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
+//				: (currentPageNum / pageNum) * pageNum + 1;
+//		
+//		//끝페이지
+//		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
+//		
+//		List<AdminBoardEntity> boardList = admindao.boardView(startRownum, endRownum, pick,search);
+//		result = new HashMap<String, Object>();
+//		result.put("boardList", boardList);
+//		result.put("totalCount", totalCount);
+//		result.put("totalPageCount", totalPageCount);
+//		result.put("startPageNum", startPageNum);
+//		result.put("endPageNum", endPageNum);
+//		result.put("currentPage", currentPageNum);
+//		result.put("pick", pick);
+//		result.put("search", search);
+//
+//		return result;
+//	}
 		
 	//신고게시글
 	public Map<String, Object> complainList(int num, int pageNum, int currentPageNum, String searchMem) {					
@@ -273,7 +273,7 @@ public class AdminService {
 		return result;
 	}	
 	
-	//신고게시글 검색
+	//신고게시글 검색+정렬
 	public  Map<String, Object> complainsearch(int num, int pageNum, int currentPageNum, String searchMem, String sort){
 		
 		Map<String, Object> result = null;
@@ -308,38 +308,35 @@ public class AdminService {
 		return result;
 	}
 	
-	//신고수 정렬
-	public  Map<String, Object> boardReport(int num, int pageNum, int currentPageNum, String searchMem){
-		Map<String, Object> result = null;
-		
-		//총 게시글 개수
-		int totalCount = admindao.boardCount();
-		
-		int startRownum = num * (currentPageNum - 1) + 1;
-		int endRownum = num * currentPageNum;
-		
-//		전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1)
-		int totalPageCount = (totalCount % num == 0) ? (totalCount / num) : (totalCount / num) + 1;
-		
-		//시작페이지
-		int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum / pageNum) - 1) * pageNum + 1
-				: (currentPageNum / pageNum) * pageNum + 1;
-		
-		//끝페이지
-		int endPageNum = (startPageNum + pageNum > totalPageCount) ? totalPageCount : startPageNum + pageNum - 1;
-		
-		List<AdminBoardEntity> complainList = admindao.complainList(startRownum, endRownum, searchMem);
-		result = new HashMap<String, Object>();
-		result.put("complainBoard", complainList);
-		result.put("totalCount", totalCount);
-		result.put("totalPageCount", totalPageCount);
-		result.put("startPageNum", startPageNum);
-		result.put("endPageNum", endPageNum);
-		result.put("currentPage", currentPageNum);
-		result.put("searchMem", searchMem);
-		
-		return result;
-	}
+	/*
+	 * //신고수 정렬 public Map<String, Object> boardReport(int num, int pageNum, int
+	 * currentPageNum, String searchMem){ Map<String, Object> result = null;
+	 * 
+	 * //총 게시글 개수 int totalCount = admindao.boardCount();
+	 * 
+	 * int startRownum = num * (currentPageNum - 1) + 1; int endRownum = num *
+	 * currentPageNum;
+	 * 
+	 * // 전체페이지수(총 게시글 개수/한 페이지 당 글 수) => (총 게시글 개수%한 페이지 당 글 수== 0)?(총 게시글 개수/한 페이지
+	 * 당 글 수):(총 게시글 개수/한 페이지 당 글 수+1) int totalPageCount = (totalCount % num == 0)
+	 * ? (totalCount / num) : (totalCount / num) + 1;
+	 * 
+	 * //시작페이지 int startPageNum = (currentPageNum % pageNum == 0) ? ((currentPageNum
+	 * / pageNum) - 1) * pageNum + 1 : (currentPageNum / pageNum) * pageNum + 1;
+	 * 
+	 * //끝페이지 int endPageNum = (startPageNum + pageNum > totalPageCount) ?
+	 * totalPageCount : startPageNum + pageNum - 1;
+	 * 
+	 * List<AdminBoardEntity> complainList = admindao.boardReport(startRownum,
+	 * endRownum, searchMem); result = new HashMap<String, Object>();
+	 * result.put("complainBoard", complainList); result.put("totalCount",
+	 * totalCount); result.put("totalPageCount", totalPageCount);
+	 * result.put("startPageNum", startPageNum); result.put("endPageNum",
+	 * endPageNum); result.put("currentPage", currentPageNum);
+	 * result.put("searchMem", searchMem);
+	 * 
+	 * return result; }
+	 */
 	
 	//신고수 초기화
 		public Integer complainReset(Integer diaryId) {

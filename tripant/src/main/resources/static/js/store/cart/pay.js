@@ -59,8 +59,8 @@ async function requestPayment() {
 						showCancelButton: true, 
 						confirmButtonText: "이동하기", 
 						confirmButtonColor: "#000000", 
-						cancelButtonText: "돌아가기", 
-						cancelButtonColor: "#ff0000"
+						cancelButtonText: `<p style="color: black;">돌아가기</p>`, 
+						cancelButtonColor: "#fff"
 					}).then((swal) => {
 						if(swal.isConfirmed){
 							location.href = contextPath + "store/buy";

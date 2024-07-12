@@ -24,7 +24,7 @@
 }
 
  .wrap-body .ad-search .search{
-	width:95%;
+	width:93%;
 	border-radius:20px;
 	height:30px;
 	border: solid black 1px;
@@ -38,7 +38,7 @@
 
 .wrap-body .ad-content .col{
   	display:flex;
-  	padding:15px 0 15px 0;  
+  	padding:10px 0 10px 0;  
   	border-bottom:1px solid black;
   	align-items:center;
 } 
@@ -110,7 +110,7 @@
 	background-color: white;
 	position: absolute;
 	top: 49%;
-    right:5%;
+    right:6.3%;
 }
 
 .paging_wrap {

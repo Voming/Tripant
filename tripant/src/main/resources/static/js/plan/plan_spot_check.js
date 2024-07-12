@@ -9,6 +9,7 @@ function spotCkBtnClickHandler(thisElement) {
 	var lngy = $(thisElement).parent().find(".spot-y").attr("value");
 	var img = $(thisElement).parent().find(".spot-img").attr("src");
 	var addr = $(thisElement).parent().find(".spot-address").attr("value");
+	var type = $(thisElement).parent().find(".spot-type").attr("value");
 
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx); // 맵 위치로 변환
 	// 확대 크기 변경
@@ -50,7 +51,7 @@ function spotCkBtnClickHandler(thisElement) {
 		timeInfoUpdate();// 총 시간 업데이트
 
 	} else { //=====================================체크박스 선택=========================================
-		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy, spottype);  //전체 일정 만들기 장소 정보 저장
+		calendarPlan.spotArr[markersSpot.length] = new Spot(id, title, latx, lngy, type);  //전체 일정 만들기 장소 정보 저장
 		addMarkerSpot(new kakao.maps.LatLng(lngy, latx), title, $(thisElement).attr("id"), markersSpot.length); // 마커 추가
 
 		//화면 리스트 추가

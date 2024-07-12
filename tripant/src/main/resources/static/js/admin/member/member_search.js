@@ -11,7 +11,7 @@ let sort = null;
 
 /* 페이징 이동 함수 */
 function goPageHandler() {
-			var currentpage = $(this).data("targetpage");
+			var targetPage = $(this).data("targetpage");
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -19,7 +19,7 @@ function goPageHandler() {
 				, method : "get"
 				, data : {
 						searchMem : searchMem,
-						currentpage : currentpage}
+						page : targetPage}
 				, dataType : "json"
 				, success : function(result){
 					if(result.searchMem){

@@ -17,12 +17,11 @@
 }
 
  .wrap-body .ad-search .search{
-	width:90%;
+	width:91.6%;
 	border-radius:20px;
 	height:30px;
 	border: solid black 1px;
 	margin:40px 0 20px 30px;
-	padding:5px; 
 } 
 
 .wrap-body .ad-content .memberlist{
@@ -39,7 +38,6 @@
 
 .wrap-body .ad-content .list>li{
 	 margin:8px 0 8px 0; 
-	
 }
 
 .boardlist> ul>li{
@@ -103,7 +101,7 @@
 	background-color: white;
 	position: absolute;
 	top: 49%;
-    right:8.5%;
+    right:7.5%;
 }
 
 .paging_wrap {

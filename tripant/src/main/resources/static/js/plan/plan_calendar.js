@@ -31,7 +31,7 @@ $(document).ready(function() {
 // 달력 취소 시 메인으로 돌아감
 $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
 	beforeSave = false;  //무조건 메인으로 돌아감
-	location.href = "/";
+	location.href = contextPath;
 });
 
 // 달력 기간 입력

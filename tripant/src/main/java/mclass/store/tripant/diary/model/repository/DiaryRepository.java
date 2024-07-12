@@ -29,6 +29,8 @@ public interface DiaryRepository {
 	// 나의 모든 글 조회
 	public List<DiaryBoardEntity> selectMyDiaryList(@Param("memEmail") String diaryMemEmail, @Param("maxNum") int maxNum);
 
+	// 글 작성 페이지 등급별 나누기
+	String isVip(String memEmail);
 	// 여행기 글 등록
 	public int insertDiary(DiaryBoardEntity diary);
 	// 여행기 이미지URL 및 텍스트 저장
