@@ -7,6 +7,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,12 +76,12 @@ public class DiaryService {
 	}
 
 	// 여행기 글 삭제
-	  public int deleteDiaryById(int diaryId, String memEmail)throws Exception {
+	  public int deleteDiaryById(int diaryId, String memEmail)throws DataAccessException {
 	    return diaryRepository.deleteDiaryById(diaryId,memEmail);
 	  } 
 
 	 // 여행기 글 신고하기
-	  public int reportsOne(int diaryId, String memEmail)  throws SQLIntegrityConstraintViolationException{
+	  public int reportsOne(int diaryId, String memEmail)  throws DataAccessException{
 		  return diaryRepository.reportsOne(diaryId, memEmail);
 	  }
 	  

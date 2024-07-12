@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.stereotype.Controller;
@@ -109,7 +111,7 @@ public class MyDiaryController {
 		try {
 
 			result = diaryService.deleteDiaryById(diaryId, principal.getName());
-		} catch (Exception e) {
+		} catch (DataAccessException e) {
 
 			e.printStackTrace();
 			result = -1;
@@ -124,9 +126,15 @@ public class MyDiaryController {
 		int result = 0;
 		try {
 			result = diaryService.reportsOne(diaryId, principal.getName());
-		} catch (SQLIntegrityConstraintViolationException e) {
+		}catch (DuplicateKeyException e) {
+			//DuplicateKeyException (좁은 범위)
 			e.printStackTrace();
-			result = -1;
+			result = -2;
+		}
+			catch (DataAccessException e) {
+			//	DataAccessException 더 넓은 범위
+				e.printStackTrace();
+			result = -3;
 		}
 		return result;
 	}
