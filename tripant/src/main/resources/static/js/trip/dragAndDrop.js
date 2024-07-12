@@ -22,19 +22,6 @@ function dragAndDrop(){
         });
 
         el.addEventListener('dragend', (e)=>  {
-			console.log("dragend");
-			console.log(e.target);
-			//var el = e.target;
-		    el.classList.remove('dragging')
-			console.log("************el");
-			console.log(el);
-		
-		    console.log("--------- prev");
-		    console.log($(el).prev().get(0));
-			
-			var el_i =$(el).data("i");
-			var el_j =$(el).data("j");
-			
 			// 같은 컬럼
 			// 아래 -> 위 (맨앞)
 			// 위-> 아래 (맨뒤)
@@ -44,16 +31,25 @@ function dragAndDrop(){
 			// (맨뒤)
 			            
 			var prev_i =$(el).prev().data("i");
-			var prev_j =$(el).prev().data("j");
-			
-			console.log("======");
-			console.log("el_i: "+ el_i);
-			console.log("el_j: "+ el_j);
-			console.log("prev_i: "+ prev_i);
-			console.log("prev_j: "+ prev_j);
-			console.log("after_i: "+ after_i);
-			console.log("after_j: "+ after_j);
-			console.log("======");
+			var prev_j =$(el).prev().data("j");			
+			var el_i =$(el).data("i");
+			var el_j =$(el).data("j");
+		    el.classList.remove('dragging');
+		    
+			//console.log("dragend");
+			//console.log(e.target);
+			//console.log("************el");
+			//console.log(el);
+		    //console.log("--------- prev");
+		    //console.log($(el).prev().get(0));
+			//console.log("======");
+			//console.log("el_i: "+ el_i);
+			//console.log("el_j: "+ el_j);
+			//console.log("prev_i: "+ prev_i);
+			//console.log("prev_j: "+ prev_j);
+			//console.log("after_i: "+ after_i);
+			//console.log("after_j: "+ after_j);
+			//console.log("======");
 						
 						
 			var temp_i = ((prev_i != undefined) ? prev_i : after_i); 
@@ -86,98 +82,7 @@ function dragAndDrop(){
 					}
 					detailListEditMode[el_i].dayDetailInfoEntity[0] = temp;
 				}
-			}/*else if (el_i == 99){
-//========== 장소 추가 (장소바구니 -> 일정)
-				var details = detailListEditMode[temp_i];
-				var daylength = details.dayDetailInfoEntity.length;  
-				if(prev_j >= 0){
-					// prev 다음j 모든 객체를 +1 위치로 대입
-					for(var j=daylength-1; j > prev_j; j-- ){
-						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
-					}
-					var temp = JSON.parse(JSON.stringify( details.dayDetailInfoEntity[prev_j+1]));
-					//					var temp = {};
-					temp.contentid = spotArr[el_j].contentid;
-					temp.title = spotArr[el_j].title;
-					temp.stayTime = spotArr[el_j].stayTime;
-					temp.placeType = spotArr[el_j].spottype;
-					temp.placeCat = spotArr[el_j].placeCat;
-					temp.lat = spotArr[el_j].mapy;
-					temp.lng = spotArr[el_j].mapx;
-					temp.firstimage = spotArr[el_j].img;
-					temp.address = spotArr[el_j].addr;
-					temp.memo = null;
-					
-					details.dayDetailInfoEntity[prev_j+1]=temp;
-					// jjoggan *** 장소바구니, 장소 추가 설정 변경
-					afterSpotTreat(el);
-//					details.dayDetailInfoEntity.unshift(temp);
-					
-					
-				}else{
-					//details.dayDetailInfoEntity.unshift(spotArr[el_j]);
-					
-					//0번째에 drop 하는가
-					for(var j=daylength-1; j >= 0; j-- ){
-						details.dayDetailInfoEntity[j+1] =  details.dayDetailInfoEntity[j];
-					}
-					console.log(spotArr[el_j]);
-					var temp = JSON.parse(JSON.stringify( details.dayDetailInfoEntity[0]));
-//					var temp = {};
-					temp.contentid = spotArr[el_j].contentid;
-					temp.title = spotArr[el_j].title;
-					temp.stayTime = spotArr[el_j].stayTime;
-					temp.placeType = spotArr[el_j].spottype;
-					temp.placeCat = spotArr[el_j].placeCat;
-					temp.lat = spotArr[el_j].mapy;
-					temp.lng = spotArr[el_j].mapx;
-					temp.firstimage = spotArr[el_j].img;
-					temp.address = spotArr[el_j].addr;
-					temp.memo = null;
-					details.dayDetailInfoEntity[0]=temp;
-					// jjoggan *** 장소바구니, 장소 추가 설정 변경
-					afterSpotTreat(el);
-//					details.dayDetailInfoEntity.unshift(temp);
-					
-				}
-				spotArr.splice(el_j,1);
-			}else if (temp_i == 99){
-//========== 일정에 있던 장소를 장소바구니로 옮길 때 (일정 -> 장소바구니)
-				var details = detailListEditMode[el_i];
-				console.log(temp_i);
-				//드랍위치가 0번째가 아닐 때
-				var temp_j =((prev_j) ? prev_j : after_j);
-				console.log(temp_j);
-				var temp = new Spot(JSON.parse(JSON.stringify(spotArr[temp_j]))) ; // 깊은 복사하기
-				
-				temp.addr = details.dayDetailInfoEntity[el_j].address;
-				temp.contentid = details.dayDetailInfoEntity[el_j].contentid;
-				temp.id = "spot-check" + details.dayDetailInfoEntity[el_j].contentid;   //확인해볼 것
-				temp.img = details.dayDetailInfoEntity[el_j].firstimage;
-				temp.mapx = details.dayDetailInfoEntity[el_j].lng;
-				temp.mapy = details.dayDetailInfoEntity[el_j].lat;
-				temp.placeCat = details.dayDetailInfoEntity[el_j].placeCat;
-				temp.spottype = details.dayDetailInfoEntity[el_j].spottype;
-				temp.stayTime = details.dayDetailInfoEntity[el_j].stayTime;
-				temp.title = details.dayDetailInfoEntity[el_j].title;
-
-				//jjoggan-console
-				console.log("temp.id");
-				console.log(temp.id);
-				
-				if(prev_j>=0){
-					//드랍위치가 0번째가 아닐 때
-					spotArr.splice(prev_j,0,temp); // 값추가
-				}else{
-					//드랍위치가 0번째 일 때
-					spotArr.splice(after_j,0,temp); // 값추가
-				}
-				details.dayDetailInfoEntity.splice(el_j,1); // 일정에서 제거
-				console.log("plz check!!!! ");
-				console.log(spotArr);
-				console.log(detailListEditMode);
-				
-			}*/else{
+			}else{
 // ++++++++++ 다른 컬럼
 				if(el_i!=99 && (temp_i==99 ||temp_i===undefined)){
 		//일정 -> 바구니
