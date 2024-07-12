@@ -43,4 +43,10 @@ input:focus {outline:none;}
 .main-wrapper .nothing{
 	color: var(--color_gray);
 	font-size: var(--font1);
+	/*24-07-12 가운데 정렬로 맞춤  */
+	height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
