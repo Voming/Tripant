@@ -5,6 +5,7 @@ import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -86,6 +87,7 @@ public class DiaryController {
 
 	// 글 상세보기
 	@GetMapping("/read/{diaryId}")
+	@Transactional
 	public String diartRead(@PathVariable int diaryId, Model model, Principal pricipal) {
 		String memEmail = null;
 		if (pricipal != null) {
@@ -99,5 +101,6 @@ public class DiaryController {
         model.addAttribute("theme", diaryService.selectBuyTheme(diaryId, memEmail));
 		return "diary/diary_read";
 	}
+	
 
 }
