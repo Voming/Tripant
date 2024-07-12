@@ -17,13 +17,13 @@ function restStayBox() {
 			<div class="selected-stay-box">
 				<div class="wrap-box flex">
 					<div class="wrap-stay-first">
-						<div class="selected-stay-number" style="background-color:var(--color_gray);">
+						<div class="selected-stay-number">
 							<p>${i + 1}</p>
 						</div>
 						<img class="box-stay-img" src="${contextPath}images/plan/stay_plus.png" alt="숙소이미지" style="width: 60px; height: 60px;">
 						<div class="box-stay-txt">
-							<span style="font-size:var(--font5); color:var(--color_gray);">${start} ~ ${end}</span>
-							<span class="box-title" style="font-size:var(--font6); color:pink;">숙소를 추가해주세요</span>
+							<span class="box-range">${start} ~ ${end}</span>
+							<span class="box-title">숙소를 추가해주세요</span>
 							<span class="box-start" value="${start}" style ="display:none"></span> 
 						</div>
 						<span class="box-id" value="" style ="display:none"></span> 
@@ -81,7 +81,7 @@ function stayModalDoneBtnClickHandler() {
 		var tabX = $(this).children(".stay-tab-x").attr("value");
 		var tabY = $(this).children(".stay-tab-y").attr("value");
 		var type = $(this).children(".stay-tab-type").attr("value");
-		
+
 		if (type != "") { //숙소가 등록된 상황
 			addMarkerStay(new kakao.maps.LatLng(tabY, tabX), tabName, tabId, markersStay.length); // 마커 추가
 			$.each(calendarPlan.dateArr, function(idx, element) {
@@ -107,7 +107,7 @@ function stayModalDoneBtnClickHandler() {
 	$(".count-stay").text(markersStay.length);
 	var dayTxt = markersStay.length + "일 / " + (calendarPlan.dateArr.length - 1) + "일";
 	$(".time-stay").text(dayTxt);
-	
+
 	console.log(calendarPlan);
 }
 
@@ -152,9 +152,13 @@ function displayStayBoxList() {
 				$(this).find(".box-id").attr("value", element.stay.id);
 				$(this).find(".box-stay-img").attr("src", element.stay.img);
 				$(this).find(".box-title").text(element.stay.title);
-				$(this).find(".box-stay-txt").children().css("color", "black"); //TODO 해당되는곳만 스타일 변경되게
-				$(this).find(".selected-stay-number").css("background-color", "var(--color_day3_pink)");
+
+				if (element.stay.id != null) {
+					$(this).parent().addClass("active");
+				}
 			}
+
+
 		});
 	});
 }
@@ -216,13 +220,13 @@ function stayDeleteBtnClickHandler(thisElement) {
 	displayStayBoxList();    // 저장되어있는 숙소 박스 리스트에 넣기 
 	displayStayTabList();    // 저장되어있는 숙소 탭 리스트에 넣기  
 	displayStayCheckList();  // 저장되어있는 숙소 체크박스 다시 활성화
-	
+
 	var checkStayCnt = 0;
-	
+
 	$(".wrap-box").each(function() {
 		var title = $(this).find(".box-title").text();
-		if(title != "숙소를 추가해주세요"){
-			checkStayCnt +=1;
+		if (title != "숙소를 추가해주세요") {
+			checkStayCnt += 1;
 		}
 	});
 
@@ -242,7 +246,7 @@ function stayCkBtnClickHandler(thisElement) {
 	var lngy = $(thisElement).parent().find(".stay-y").attr("value");
 	var img = $(thisElement).parent().find(".stay-img").attr("src");
 	var type = $(thisElement).parent().find(".stay-type").attr("value");
-	
+
 	var moveLatLon = new kakao.maps.LatLng(lngy, latx); // 맵 위치로 변환
 	// 확대 크기 변경
 	map.setLevel(6);
@@ -295,7 +299,7 @@ function stayResetStayList() {
 //===================================================마커=====================================================
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarkerStay(position, title, id, index) {
-	var imageSrc = contextPath+"images/location/location3.png";// 마커 이미지의 이미지 주소입니다
+	var imageSrc = contextPath + "images/location/location3.png";// 마커 이미지의 이미지 주소입니다
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(24, 26);
 	// 마커 이미지를 생성합니다    

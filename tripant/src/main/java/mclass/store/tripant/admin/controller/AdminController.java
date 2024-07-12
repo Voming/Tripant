@@ -66,9 +66,14 @@ public class AdminController {
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			, @RequestParam(required = false )String searchMem
 			,@RequestParam(required = false ) String sort
+			,@RequestParam(required = false ) String sortCount
 			) {
-		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem,sort));
-		System.out.println("!!!!!!!!"+sort);
+		if(sortCount.equals("1")) {
+			model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem,sort));
+		}else if (sortCount.equals("0")) {
+			model.addAttribute("memMap",adminservice.selectMemList( num, pageNum, currentPage, searchMem));
+		}
+		
 		return "admin/member_fragment";
 	}
 
@@ -118,9 +123,14 @@ public class AdminController {
 			,@RequestParam(required = false ) String search
 			,@RequestParam(required = false ) String pick
 			,@RequestParam(required = false ) String sort
+			,@RequestParam(required = false ) String sortCount
 			) {
-		Map<String, Object> map=adminservice.keywordSearch(num, pageNum, currentPage, pick, search, sort);
-		model.addAttribute("diaryMap",map);
+		if(sortCount.equals("1")) {
+			model.addAttribute("diaryMap",adminservice.keywordSearch(num, pageNum, currentPage, pick, search, sort));
+		}else if(sortCount.equals("0")) {
+			model.addAttribute("diaryMap",adminservice.boardList( num, pageNum, currentPage, pick,search));
+		}
+		
 		return "admin/board_fragment";
 	}
 	
@@ -139,8 +149,14 @@ public class AdminController {
 		public String complainsearch(Model model
 				, @RequestParam( required = false, defaultValue = "1")Integer currentPage
 		 , @RequestParam(required = false )String searchMem
-		 ,@RequestParam(required = false ) String sort){
-			model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPage,searchMem,sort));
+		 ,@RequestParam(required = false ) String sort
+		 ,@RequestParam(required = false ) String sortCount){
+			if(sortCount.equals("1")) {
+				model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPage,searchMem,sort));
+			}else if(sortCount.equals("0")) {
+				model.addAttribute("complainMap",adminservice.complainList(num, pageNum, currentPage,searchMem));
+			}
+			System.out.println("!!!!!!"+sortCount);
 			return "admin/complain_fragment";
 		}
 		

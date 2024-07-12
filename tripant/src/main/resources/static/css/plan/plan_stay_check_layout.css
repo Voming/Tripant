@@ -56,10 +56,11 @@
 	align-items: center;
 }
 
-#tab03 .wrap-box .selected-stay-number {
+/* 숙소 리스트 들어가기 전 */
+#tab03 .selected-stay-box .wrap-box .selected-stay-number {
 	font-size: var(--font5);
 	color: white;
-	background-color: var(--color_day5_skyblue);
+	background-color: var(--color_gray);
 	border-radius: 50%;
 	width: 22px;
 	height: 20px;
@@ -70,6 +71,30 @@
 	align-items: center;
 	text-align: center;
 }
+
+#tab03 .selected-stay-box .wrap-box .box-range {
+	font-size: var(--font5);
+	color: var(--color_gray);
+}
+
+#tab03 .selected-stay-box .wrap-box .box-title {
+	font-size: var(--font6);
+	color: pink;
+}
+
+/* 숙소 리스트 들어간 경우 */
+#tab03 .selected-stay-box.active .wrap-box .selected-stay-number {
+	background-color: var(--color_day3_pink);
+}
+
+#tab03 .selected-stay-box.active .wrap-box .box-range {
+	color: black;
+}
+
+#tab03 .selected-stay-box.active .wrap-box .box-title {
+	color: black;
+}
+/*  */
 
 #tab03 .selected-stay-box .wrap-box .box-stay-img {
 	object-fit: cover;
