@@ -65,7 +65,7 @@ function memListHandler(searchList){
 	}
 	return htmlVal;
 } 
-
+/* 닉네임 정렬*/
 function ClickNickHandler(){
 	sort='nick'
 	var searchMem = $("[name=search]").val().trim();

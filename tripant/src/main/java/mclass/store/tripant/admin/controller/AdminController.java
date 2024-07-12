@@ -23,7 +23,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import com.google.gson.Gson;
 
-import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminChartEntity;
 import mclass.store.tripant.admin.model.service.AdminService;
 
