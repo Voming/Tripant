@@ -82,6 +82,9 @@
 		INSERT ALL
 		INTO PLAN (PLAN_ID, PLAN_AREA_CODE, PLAN_TITLE, PLAN_START_DAY, PLAN_END_DAY, PLAN_MAKE_DAY) 
 			VALUES (SEQ_PLAN_ID.nextval, #{areaCode}, #{planTitle}, #{startDate}, #{endDate}, default)
+	
+		INTO PLAN_MEMBER (PLAN_ID, MEM_EMAIL, PLAN_MEM_ROLE) 
+			VALUES (SEQ_PLAN_ID.nextval, #{email}, 1)
 			
 		<foreach collection="planSchedule" item="schedule" >
 		INTO PLAN_SCHEDULE (SCHEDULE_PLAN_ID, SCHEDULE_DAY, SCHEDULE_START, SCHEDULE_END) VALUES 

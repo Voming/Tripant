@@ -312,9 +312,13 @@ public class AdminController {
 		return "admin/admin_mchart";
 	}
 	
-	@GetMapping("/bchart")
+	@GetMapping("/bchart") 
 	public String bchart(Model model) {
-		model.addAttribute("area", adminservice.area());
+		try {
+			model.addAttribute("area", adminservice.area());
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 		return "admin/admin_bchart";
 	}
 	

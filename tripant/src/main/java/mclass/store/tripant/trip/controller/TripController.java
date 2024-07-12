@@ -88,38 +88,56 @@ public class TripController {
 		model.addAttribute("spotList", spotList);
 		return "plan/spot_tab_content";
 	}
-	ObjectMapper mapper = new ObjectMapper();
+
 	//일정 저장 
-	//jjoggan TODO
+	ObjectMapper mapper = new ObjectMapper();
+
 	@PostMapping("/save/changes")
 	@ResponseBody
 	public Integer saveChanges(
 			@RequestParam String saveData, @RequestParam Integer planId 
 			) throws Exception {
-		System.out.println("-------------------------------");
-		//System.out.println(gson.toJson(URLEncoder.encode(saveData, "utf-8")));
-		//List<String> save1 =  gson.fromJson(gson.toJson(saveData), List.class); //
 		
 		List<DayEntity> dtos = Arrays.asList(mapper.readValue(saveData, DayEntity[].class));
-		//Integer planId = Integer.parseInt(id);
 		Map<String, Object> paramMap = new HashMap<String, Object> ();
         paramMap.put("planId", planId);
         paramMap.put("dtos", dtos);
         
         Integer result = -1;
         result = service.saveChange(paramMap);
-        
-//        System.out.println(">>>>>>>>>>>>>>>>> result");
-//        System.out.println(result);
-//		System.out.println(dtos.size() + " : " +dtos);
-		
-//        for(int i = 0 ; i < dtos.size() ;  i++) {
-//			List<DayDetailInfoEntity> dtoss = dtos.get(i).getDayDetailInfoEntity();
-//			for(int j = 0 ; j<dtoss.size();j++) {
-//				//System.out.println("++++++++ "+i);
-//				//System.out.println(dtoss.get(j));
-//			}
-//		}
+
 		return result;
 	}
+	
+//	@PostMapping("/save/changes")
+//	@ResponseBody
+//	public Integer saveChanges(
+//			@RequestParam String saveData, @RequestParam Integer planId 
+//			) throws Exception {
+//		System.out.println("-------------------------------");
+//		//System.out.println(gson.toJson(URLEncoder.encode(saveData, "utf-8")));
+//		//List<String> save1 =  gson.fromJson(gson.toJson(saveData), List.class); //
+//		
+//		List<DayEntity> dtos = Arrays.asList(mapper.readValue(saveData, DayEntity[].class));
+//		//Integer planId = Integer.parseInt(id);
+//		Map<String, Object> paramMap = new HashMap<String, Object> ();
+//        paramMap.put("planId", planId);
+//        paramMap.put("dtos", dtos);
+//        
+//        Integer result = -1;
+//        result = service.saveChange(paramMap);
+//        
+////        System.out.println(">>>>>>>>>>>>>>>>> result");
+////        System.out.println(result);
+////		System.out.println(dtos.size() + " : " +dtos);
+//		
+////        for(int i = 0 ; i < dtos.size() ;  i++) {
+////			List<DayDetailInfoEntity> dtoss = dtos.get(i).getDayDetailInfoEntity();
+////			for(int j = 0 ; j<dtoss.size();j++) {
+////				//System.out.println("++++++++ "+i);
+////				//System.out.println(dtoss.get(j));
+////			}
+////		}
+//		return result;
+//	}
 }

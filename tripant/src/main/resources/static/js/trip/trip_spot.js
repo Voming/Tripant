@@ -113,6 +113,10 @@ $(document).ready(function() {
 			spottype = 3;
 		} else if (placeTypeS == '음식점') {
 			spottype = 4;
+		}else if (placeTypeS == '숙소') {
+			spottype = 5;
+		}else if (placeTypeS == '캠핑장') {
+			spottype = 6;
 		}
 		spotId = "#spot-tab0" + spottype + " .wrap-spotList" //필요한 탭 content만 값 넣기
 

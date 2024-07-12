@@ -40,7 +40,7 @@ public class PlanningAlgorithm {
 	List<PlanDate> dateArr = new ArrayList<>();
 	List<Spot> spotArr = new ArrayList<>();
 
-	public void planning(CalendarPlanEntity calendarPlan, int areaCode, String planTitle) {
+	public void planning(CalendarPlanEntity calendarPlan, int areaCode, String planTitle, String memEmail) {
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
 		spotN = 0;
 		dayN = 0;
@@ -101,6 +101,8 @@ public class PlanningAlgorithm {
 		allMap.put("planSchedule", dateArr);
 
 		allMap.put("planSpot", result);
+		
+		allMap.put("email", memEmail);
 
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(allMap));
 

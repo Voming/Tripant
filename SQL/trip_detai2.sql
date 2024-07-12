@@ -28,5 +28,8 @@ insert into plan_spot values((select plan_start_day from plan where plan_id = 13
 update plan_spot set spot_order = 7 where spot_contentid =1870779 and to_char(spot_day,'dd')=16;
 delete from plan_spot where spot_type =100 and spot_plan_id =13;
 
+select * from plan;
+update plan set plan_delete_day = null where plan_delete_day is not null;
+
 rollback;
 commit;
