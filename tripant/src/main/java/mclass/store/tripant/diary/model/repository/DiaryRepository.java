@@ -43,7 +43,7 @@ public interface DiaryRepository {
 	DiaryBoardEntity selectDiaryById(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
 
 	// 글 카운트 증가 메서드
-	void incrementDiaryViews(@Param("diaryId") int diaryId);
+	int incrementDiaryViews(@Param("diaryId") int diaryId);
 	
 	// 한개의 여행기에 여러명의 이메일 계정들이 누른 하트 개수 + 로그인한 계정이 눌렀는지 여부
 	LikeEntity selectDiaryLike(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
