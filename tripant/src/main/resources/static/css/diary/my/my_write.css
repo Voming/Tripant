@@ -3,6 +3,7 @@
 .diary-write-wrap {
 	width: 960px;
 	margin: auto;
+	font-family: 'Binggrae';
 }
 /* table안에 display 줘서 가운데 고정 */
 .diary-write-table {
@@ -148,10 +149,21 @@ input[type="text"] {
 .btn_submit:hover {
 	background-color: #0056b3;
 }
-.diary-writer-select-plan{
-	width:100%; /* 옵션의 길이  */
-	
+.diary-writer-select-plan {
+	display:flex;
+	width:830px; /* 옵션의 길이  */
+	/* title box 선 주기 */
+	padding: 5px;
+	border: 1px solid #cccccc;
+	border-radius: 10px;
+	flex-wrap: wrap;
+    align-content: stretch;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 10px;
 }
 .diaryTitle{
 	width: 80%;
 }
+
