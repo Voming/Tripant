@@ -48,7 +48,7 @@ public class DiaryService {
 	}
 
 	// 특정 ID의 여행기 글 가져오기
-	public List<DiaryBoardEntity> selectDiaryById(int diaryId, String memEmail) {
+	public DiaryBoardEntity selectDiaryById(int diaryId, String memEmail) {
 		return diaryRepository.selectDiaryById(diaryId, memEmail);
 	}
 	

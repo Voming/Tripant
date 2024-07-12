@@ -42,7 +42,7 @@ public interface DiaryRepository {
 	
 	 //한개의 글 보기
 	// 특정 ID의 다이어리 조회 + 로그인한 계정이 눌렀는지 여부
-	 List<DiaryBoardEntity> selectDiaryById(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
+	 DiaryBoardEntity selectDiaryById(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
 
 	// 글 카운트 증가 메서드
 	int incrementDiaryViews(@Param("diaryId") int diaryId);
