@@ -104,7 +104,7 @@ function loadedHandler() {
 			cls_name = currentActive.replace(' active', '');
 			if (cls_name == 'nav-1') {  //현재 1=========
 				saveTimeInfo(); //시간 정보 저장
-			
+
 				checkLess = false;   //시간 테이블 범위 체크
 				timePerDateCheck();
 				if (checkLess) {
@@ -158,7 +158,7 @@ function loadedHandler() {
 			cls_name = $(this).find('a').attr("class");
 			if (cls_name === 'nav-1 active') { //현재 1=========
 				saveTimeInfo(); //시간 정보 저장
-				
+
 				checkLess = false;  //시간 테이블 범위 체크
 				timePerDateCheck();
 				if (checkLess) {
@@ -198,6 +198,14 @@ function loadedHandler() {
 					$(".main-wrapper").css("pointer-events", "none");
 					//새로고침 알림 막기
 					beforeSave = false;
+
+					Swal.fire({
+						icon: "success",
+						title: "<h3>일정 생성중입니다! \n 생성이 완료되면 나의 일정 페이지로 이동합니다.</h3>",
+						showConfirmButton: false,
+						timer: 5000
+					});
+					
 					// 일정 만들기 알고리즘 돌리기
 					const jsonString = JSON.stringify(calendarPlan);
 					$.ajax({
