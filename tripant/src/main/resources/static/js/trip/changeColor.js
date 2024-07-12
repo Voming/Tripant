@@ -136,11 +136,17 @@ function typeColor(placeType){
 		case 4:
 			thisColor = '--bs-warning';
 			break;
+		case 5:
+			thisColor = '--bs-purple';
+			break;
+		case 6:
+			thisColor = '--bs-cyan';
+			break;
 		case 100:
 			thisColor = '--bs-orange';
 			break;
 		default:
-			thisColor = '--bs-purple';
+			thisColor = '--bs-secondary';
 		}
 		return thisColor;
 }

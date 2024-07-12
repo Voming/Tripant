@@ -177,11 +177,17 @@ function displayInfo(){
 			} else if (info.placeType == 4) {
 				info.placeCat = '음식점';
 				textColor=typeColor(info.placeType);
+			} else if (info.placeType == 5){
+				info.placeCat = '숙소';
+				textColor=typeColor(info.placeType);
+			} else if (info.placeType == 6){
+				info.placeCat = '캠핑장';
+				textColor=typeColor(info.placeType);
 			} else if (info.placeType == 100){
 				info.placeCat = '개미출발!';
 				textColor=typeColor(info.placeType);
 			} else {
-				info.placeCat = '숙소';
+				info.placeCat = '기타';
 				textColor=typeColor(info.placeType);
 			}
 		
