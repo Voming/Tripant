@@ -18,14 +18,14 @@
 }
 
  .wrap-body .ad-search .search{
-	width:90%;
+	width:88%;
 	border-radius:20px;
 	border: solid black 1px;
 	height:30px;
-	margin:40px 0 20px 100px; 
+	margin:40px 0 20px 105px; 
 } 
 
-
+/* 찾기버튼 */
 .wrap-body .ad-search{
 	position:relative;
 }
@@ -35,7 +35,7 @@
 	background-color: white;
 	position: absolute;
 	top: 49%;
-    right:5%;
+    right:6.8%;
 }
 
 .wrap-body .ad-content .boardlist{
