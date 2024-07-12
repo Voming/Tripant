@@ -19,11 +19,9 @@
 
 
 	<!-- 일기 목록 영역 -->
-
 	<div class="myread-wrap">
-
-		<div class="diary-list"
-			th:style="' background: #' + ${diary.diaryTheme} + '; '">
+		<th:block th:if="${diary} != null">
+		<div class="diary-list" th:style="'background: #' + ${diary.diaryTheme}">
 			<!-- 글 신고하기, 공유하기, 케찹 아이콘으로 -->
 			<div class="menubar">
 				<ul class="menu">
@@ -32,7 +30,7 @@
 						<ul class="submenu" style="width: 100px;">
 							<li class="share" th:data-share="${diary.diaryId}"><a>
 									공유하기 </a></li>
-							<li class="report" th:data-diary-id="${diary.diaryId}"><a>
+							<li class="report" th:data-diary-id="${diary.diaryId}" th:if="${diary.diaryMemEmail != loggedInUserEmail}"><a>
 									신고하기 </a></li>
 							<!-- 로그인시 활성화 -->
 							<!-- 내가쓴 글에만 보이기 -->
@@ -68,13 +66,10 @@
 					<div th:utext="${diary.diaryContent}" class="diary-content">DiaryContent</div>
 				</div>
 			</div>
-			<div th:if="${diary == null}">
-				<p>일기를 찾을 수 없습니다.</p>
-			</div>
 		</div>
+
 		<!--  TODO 데이터 연결 -->
-		<div class="actions"
-			th:style="' background: #' + ${diary.diaryTheme} + ';'">
+		<div class="actions" th:style="'background: #' + ${diary.diaryTheme}">
 			<!-- 조회수 표시 -->
 			<div class="diary-view">
 				<div class="views-count">view</div>
@@ -99,7 +94,11 @@
 				<div th:if="${likes == null}" class="like-num" >0</div>
 			</div>
 		</div>
-
+		</th:block>
+		
+		<div th:if="${diary == null}">
+			<p>일기를 찾을 수 없습니다.</p>
+		</div>
 	</div>
 
 
