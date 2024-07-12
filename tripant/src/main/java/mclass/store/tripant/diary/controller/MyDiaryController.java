@@ -34,7 +34,7 @@ public class MyDiaryController {
 
 	@Autowired
 	private DiaryService diaryService;
-	private Long diaryId;
+	
 
 	@GetMapping("/diary") // 특정 사용자가 작성한 모든 글 조회
 	public ModelAndView mydiary(ModelAndView mv, Principal principal) {
@@ -165,7 +165,7 @@ public class MyDiaryController {
 
 		model.addAttribute("themes", diaryService.selectBuyTheme(memEmail));
 		// 조회된 글 정보를 모델에 추가하여 폼에 전달
-		model.addAttribute("diary", diaryService.getDiaryById(diaryId, memEmail));
+		model.addAttribute("diary", diaryService.selectDiaryById(diaryId, memEmail));
 		//model.addAttribute("plans", diaryService.getAllPlans(memEmail));
 		model.addAttribute("loggedInUserEmail", memEmail);
 
