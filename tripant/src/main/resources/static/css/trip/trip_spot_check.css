@@ -75,8 +75,6 @@
 	font-size: var(--font5);
 	display: flex;
 	line-height: 120%;
-	white-space: nowrap;
-    overflow: hidden;
     flex-direction: column;
 }
 
