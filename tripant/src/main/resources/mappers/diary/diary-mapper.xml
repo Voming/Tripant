@@ -149,6 +149,11 @@
 		
 	</select>
 
+	<!-- 글 작성 페이지 등급별 나누기 -->
+	<select id="isVip" parameterType="string" resultType="string">
+		select mem_role from member where mem_email = #{memEmail}
+	</select>
+	
 	<!-- 글 작성 등록 시키기 -->
 	<insert id="insertDiary" parameterType="DiaryBoardEntity"  useGeneratedKeys="true" keyProperty="diaryId">
 		
