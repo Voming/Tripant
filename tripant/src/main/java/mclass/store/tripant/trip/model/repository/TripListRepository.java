@@ -15,8 +15,11 @@ public interface TripListRepository {
 	//목록 
 	List<TripListEntity>  selectTripList(String memEmail) throws DataAccessException;
 	
-	//삭제
+	//삭제 : 생성자
 	Integer delete(Integer planId) throws DataAccessException;
+	
+	//삭제 : 공유자
+	Integer deleteRole(Map<String, Object> map) throws DataAccessException;
 	
 	//유저검색
 	List<TripShareEntity> find(Map<String, Object> map) throws DataAccessException;
