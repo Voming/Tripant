@@ -32,7 +32,7 @@
 	</select>
 	<!-- 로그인 기록 -->
 	<insert id="log" parameterType="map">
-		insert into log values(default, #{logIp}, #{memEmail}, #{logTf})
+		insert into log values(default, #{logIp}, #{logTf}, #{memEmail})
 	</insert>
 	<!-- 휴면 해제 -->
 	<update id="awake" parameterType="string">

@@ -794,6 +794,42 @@ END;
 
 -- 지역 정보 넣기
 INSERT INTO area SELECT * FROM area_temp;
-SELECT * FROM area order by area_name;
+
+DECLARE
+	vn_num1 NUMBER := 1;
+BEGIN
+	LOOP
+		INSERT INTO PLACE (TYPE, CONTENTID, CONTENTTYPEID, ADD1, AREACODE, MAPX, MAPY, TITLE, GETTIME) 
+SELECT 100, AREA_CODE, 100, AREA_ADRESS, AREA_CODE, AREA_X, AREA_Y, AREA_LANDMARK, '20240707' FROM AREA WHERE AREA_CODE = vn_num1;
+		vn_num1 := vn_num1 + 1;			
+		EXIT WHEN vn_num1 > 8;			
+	END LOOP;
+END;
+/
+
+DECLARE
+	vn_num1 NUMBER := 31;
+BEGIN
+	LOOP
+		INSERT INTO PLACE (TYPE, CONTENTID, CONTENTTYPEID, ADD1, AREACODE, MAPX, MAPY, TITLE, GETTIME) 
+SELECT 100, AREA_CODE, 100, AREA_ADRESS, AREA_CODE, AREA_X, AREA_Y, AREA_LANDMARK, '20240707' FROM AREA WHERE AREA_CODE = vn_num1;
+		vn_num1 := vn_num1 + 1;			
+		EXIT WHEN vn_num1 > 39;			
+	END LOOP;
+END;
+/
+
+--다이어리 뷰
+create or replace view view_diary_member_plan
+as 
+(
+select d.*, m.mem_nick, p.plan_area_code
+-- add column
+from diary d
+left outer join member m on (d.diary_mem_email = m.mem_email)
+left outer join plan p on (d.diary_plan_id = p.plan_id)
+)
+with read only
+;
 
 commit;
