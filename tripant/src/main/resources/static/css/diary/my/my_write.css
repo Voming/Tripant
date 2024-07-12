@@ -150,12 +150,18 @@ input[type="text"] {
 	background-color: #0056b3;
 }
 .diary-writer-select-plan {
-	display:block;
-	width:100%; /* 옵션의 길이  */
+	display:flex;
+	width:830px; /* 옵션의 길이  */
 	/* title box 선 주기 */
 	padding: 5px;
 	border: 1px solid #cccccc;
 	border-radius: 10px;
+	flex-wrap: wrap;
+    align-content: stretch;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 10px;
 }
 .diaryTitle{
 	width: 80%;
