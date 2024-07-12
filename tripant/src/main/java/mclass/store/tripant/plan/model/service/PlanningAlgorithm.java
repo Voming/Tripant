@@ -89,7 +89,7 @@ public class PlanningAlgorithm {
 		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
 
 		// insert 할 리스트 만들기
-		distributeSpot(); // insert할 내용 result에 맞춰서 담기==================================================
+		makePlanningMap(); // insert할 내용 result에 맞춰서 담기==================================================
 		
 		Map<String, Object> allMap = new HashMap<>();
 		
