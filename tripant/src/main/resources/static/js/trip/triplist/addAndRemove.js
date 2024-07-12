@@ -19,12 +19,24 @@ function removeHandler(){
 		context:this,//.btn.add
     	data: {planId:planId,removeNick: removeNick},
 		success : function(result) {
-			//if(result > 0){
+			if(result >= 0){
 				$(this).removeClass('remove');
 				$(this).addClass('add');
 				$(this).text('추가');
 				addAndRemoveHandler();
-			//}
+			}else if (result == -2){
+				Swal.fire({
+					  title: "<h2> 이미 삭제된 유저입니다.</h2>",
+					  showConfirmButton: false,
+					  timer:1500,
+					  icon: "info",
+				   	  confirmButtonTextFont:"Binggrae"
+					});					
+				$(this).removeClass('remove');
+				$(this).addClass('add');
+				$(this).text('추가');
+				addAndRemoveHandler();
+			}
 		}
 	});
 }
@@ -47,6 +59,13 @@ function addHandler(){
 				$(this).text('삭제');
 				addAndRemoveHandler();
 			} else if (result == -2){
+				Swal.fire({
+					  title: "<h2> 이미 추가된 유저입니다.</h2>",
+					  showConfirmButton: false,
+					  timer:1500,
+					  icon: "info",
+				   	  confirmButtonTextFont:"Binggrae"
+					});				
 				$(this).removeClass('add');
 				$(this).addClass('remove');
 				$(this).text('삭제');

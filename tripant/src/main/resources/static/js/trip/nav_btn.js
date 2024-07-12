@@ -64,6 +64,7 @@ function saveHandler(){
 	Swal.fire({
 	  title: "<h2>"+planTitle+"</h2>",
 	  text: "저장하시겠습니까?",
+	  icon:'question',
 	  showCancelButton: true,
 	  confirmButtonColor: "#000000",
 	  cancelButtonColor: "#d33",
@@ -123,8 +124,6 @@ function saveChanges(){
 				item.travelOrder = j + 1; 
 			}
 		}
-		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>planId");
-		console.log(planId);
 		saveData = JSON.stringify(detailListEditMode);
 		//jjoggan ***
 		$.ajax({
