@@ -16,7 +16,7 @@
 			 ORDER BY MEM_JOIN_DATE DESC ) T1 ) T2 
 		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
-	<!--회원검색 -->
+	<!--회원검색 +정렬-->
 	<select id="selectMemListSearch" resultType="AdminMemEntity" parameterType="map">
 	SELECT T2.*, (select to_char(T3.MEM_QUIT_DATE,'yyyy-MM-dd') from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
 		FROM (SELECT T1.*, ROWNUM RN FROM
@@ -27,7 +27,17 @@
 			<bind name="keyword" value="'%'+searchMem+'%'" />
 			where mem_nick like #{keyword}
 			</if>
-			 ORDER BY MEM_JOIN_DATE DESC ) T1 ) T2 
+			<if test='sort != null and sort !=""'>
+			<bind name="sortKey" value="'%'+sort+'%'" />
+			<choose>
+			<when test="sort.equals('nick')">
+				order by MEM_NICK  ) T1 ) T2
+			</when>
+		</choose>
+	</if>
+	<if test='sort == null or sort ==""'>
+		 ORDER BY MEM_JOIN_DATE DESC ) T1 ) T2 
+	</if>
 		WHERE RN BETWEEN #{startRownum} AND #{endRownum}
 	</select>
 	<!-- 총 멤버 수 -->
@@ -60,6 +70,7 @@
 	<update id="reportReset" parameterType="string">
 	update member set mem_report_num=0 where mem_email=#{memEmail} and mem_enabled=0
 	</update>
+	
 	<!--게시글 조회 -->
 	<select id="boardList" resultType="AdminBoardEntity"  parameterType="map">
 	SELECT T2.* FROM

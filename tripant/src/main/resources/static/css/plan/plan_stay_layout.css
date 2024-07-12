@@ -46,7 +46,7 @@
 
 .tab-content #frm-find-stay button {
 	border: 0;
-	background-color: white;
+	background-color: transparent;
 	position: absolute;
 	top: 13%;
 	right: 0%;

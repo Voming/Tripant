@@ -114,7 +114,7 @@ public class PlanController {
 	public String planning(@RequestBody CalendarPlanEntity calendarPlan, Principal principal,  
 			@SessionAttribute(name = "areaCode") Integer areaCode, @SessionAttribute(name = "planTitle") String planTitle) {
 		planningAlgorithm.planning(calendarPlan, areaCode, planTitle, principal.getName());
-		return "aaa";
+		return "trip/list";
 	}
 
 	// ---------------------------------numberFormatException-------------------------------------------
