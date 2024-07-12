@@ -50,14 +50,14 @@ public class AdminController {
 	private int pageNum = 5;
 	
 	//누른 현재 페이지 알아야함(어떻게 기준으로 삼을지..)
-//	private int currentPageNum = 1;  // 기본1  // @RequestParam(required = false, defaultValue = "1") 
+	//private int currentPage = 1;  // 기본1  // @RequestParam(required = false, defaultValue = "1") 
 	
 	@GetMapping("/member")
 	public String member(Model model
-			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			, @RequestParam(required = false )String searchMem) throws MethodArgumentTypeMismatchException 
 	{
-		model.addAttribute("memMap",adminservice.selectMemList( num, pageNum, currentPageNum, searchMem));
+		model.addAttribute("memMap",adminservice.selectMemList( num, pageNum, currentPage, searchMem));
 		return "admin/admin_member";
 	}
 	
@@ -65,10 +65,10 @@ public class AdminController {
 	//검색 // paging
 	@PostMapping("/member/search") 
 	public String  memberSearch(Model model 
-			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			, @RequestParam(required = false )String searchMem
 			) {
-		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPageNum, searchMem));
+		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem));
 		return "admin/member_fragment";
 	}
 
@@ -103,9 +103,9 @@ public class AdminController {
 	
 	//게시글
 	@GetMapping("/board")
-	public String board(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	public String board(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			, @RequestParam(required = false )String search, @RequestParam(required = false) String pick) throws MethodArgumentTypeMismatchException {
-		model.addAttribute("diaryMap",adminservice.boardList( num, pageNum, currentPageNum, pick,search));
+		model.addAttribute("diaryMap",adminservice.boardList( num, pageNum, currentPage, pick,search));
 		return "admin/admin_board";
 	}
 	
@@ -137,10 +137,10 @@ public class AdminController {
 	//신고게시글 검색+정렬
 		@PostMapping("/complain/search")
 		public String complainsearch(Model model
-				, @RequestParam( required = false, defaultValue = "1")Integer currentPageNum
+				, @RequestParam( required = false, defaultValue = "1")Integer currentPage
 		 , @RequestParam(required = false )String searchMem
 		 ,@RequestParam(required = false ) String sort){
-			model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPageNum,searchMem,sort));
+			model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPage,searchMem,sort));
 			System.out.println(searchMem+"!!!!!!!!!!!!!");
 			return "admin/complain_fragment";
 		}
@@ -155,9 +155,9 @@ public class AdminController {
 	
 	// 결제 취소 페이지
 	@GetMapping("/cancel")
-	public String cancel(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	public String cancel(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			 , @RequestParam(required = false )String searchMem) {
-		Map<String, Object> list = adminservice.payList(num, pageNum, currentPageNum,searchMem);
+		Map<String, Object> list = adminservice.payList(num, pageNum, currentPage,searchMem);
 		if(list != null) {
 			model.addAttribute("list", list);
 		}
@@ -209,9 +209,9 @@ public class AdminController {
 	
 	//결제취소 회원 검색
 	@PostMapping("/cancel/search")
-	public String cancelSearch(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	public String cancelSearch(Model model,  @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			 , @RequestParam(required = false )String searchMem){
-				 Map<String, Object> list = adminservice.cancelSearch(num, pageNum, currentPageNum,searchMem);
+				 Map<String, Object> list = adminservice.cancelSearch(num, pageNum, currentPage,searchMem);
 					if(list != null) {
 						model.addAttribute("list", list);
 					}
@@ -220,19 +220,19 @@ public class AdminController {
 	
 	// 상품관리 페이지
 	@GetMapping("/goods")
-	public String goods(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	public String goods(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			, @RequestParam(required = false )String itemCode)
 			throws MethodArgumentTypeMismatchException  {
-		model.addAttribute("goodsMap", adminservice.itemList(num, pageNum, currentPageNum,itemCode));
+		model.addAttribute("goodsMap", adminservice.itemList(num, pageNum, currentPage,itemCode));
 		return "admin/admin_goods";
 	}
 	
 	//상품검색
 	//ajax + fragment
 	@PostMapping("/goods/search")
-	public String itemsearch(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPageNum
+	public String itemsearch(Model model, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			, @RequestParam(required = false )String itemCode){
-		model.addAttribute("goodsMap", adminservice.itemListSearch(num, pageNum, currentPageNum,itemCode));
+		model.addAttribute("goodsMap", adminservice.itemListSearch(num, pageNum, currentPage,itemCode));
 		return "admin/goodspage_fragment";
 	}
 	
