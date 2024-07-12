@@ -59,7 +59,7 @@ async function requestPayment() {
 						showCancelButton: true, 
 						confirmButtonText: "이동하기", 
 						confirmButtonColor: "#000000", 
-						cancelButtonText: `<p style="color: black;>돌아가기</p>`, 
+						cancelButtonText: `<p style="color: black;">돌아가기</p>`, 
 						cancelButtonColor: "#fff"
 					}).then((swal) => {
 						if(swal.isConfirmed){
