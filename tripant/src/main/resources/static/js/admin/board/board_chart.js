@@ -1,6 +1,15 @@
 $(document).ready(function(){
 	boardChart();
 })
+let delay =50;
+let timer = null;
+$(window).on('resize', function(){
+	clearTimeout(timer);
+	timer = setTimeout(function(){
+        location.reload();
+	}, delay);
+});
+
 function boardChart(){
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
