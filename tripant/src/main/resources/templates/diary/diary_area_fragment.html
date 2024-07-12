@@ -16,7 +16,9 @@
 		<th:block th:if="${diaries} == null or ${#lists.size(diaries) ==0 }">
 			<script >
 				$(".diary_more_btn").hide();
-				$(".wrap-diary").html("<div><p>글이 없습니다.</p></div>");
+			//	var imageSrc = contextPath + "images/diary/nodiary.png";
+				var nodiary = '<div style="font-size:var(--font4); height: 250px; align-content: center;">글이 없습니다.</div>';
+				$(".wrap-diary").html(nodiary);
 				console.log(".diary_more_btn hide");
 			</script>
 		</th:block>

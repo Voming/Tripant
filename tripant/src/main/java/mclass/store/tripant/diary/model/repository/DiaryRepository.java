@@ -1,7 +1,7 @@
 package mclass.store.tripant.diary.model.repository;
 
 
-import java.sql.SQLIntegrityConstraintViolationException;
+
 import java.util.List;
 
 
