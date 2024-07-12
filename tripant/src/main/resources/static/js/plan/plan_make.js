@@ -193,6 +193,7 @@ function loadedHandler() {
 				if (markersStay.length < calendarPlan.dateArr.length - 1) {
 					alert("하루에 한 개 이상의 숙소에 방문해야해요. 숙소를 더 추가해주세요!");
 				} else {
+					console.log(calendarPlan);
 					// 일정 만들기 알고리즘 돌리기
 					const jsonString = JSON.stringify(calendarPlan);
 					$.ajax({
