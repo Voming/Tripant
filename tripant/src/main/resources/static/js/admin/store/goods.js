@@ -278,7 +278,17 @@ function itemDeleteHandler(){
 		method:"post",
 		data: {itemCode:itemCode},
 		success : function(result) {
-			 		location.reload();
+			Swal.fire({
+					html: "삭제하시겠습니까?", 
+					icon: "error", 
+					confirmButtonColor: "#000000", 
+					confirmButtonText: "확인",
+					confirmButtonTextFont:"Binggrae",
+				}).then((swal) => {
+						if(swal.isConfirmed){
+							location.reload();
+						}
+					});
 				},
 	 	error : function(request, status, error) {
 		 	if(request.responseText.indexOf('ORA-02292')){
