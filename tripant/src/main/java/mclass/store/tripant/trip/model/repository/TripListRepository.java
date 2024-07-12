@@ -1,11 +1,10 @@
 package mclass.store.tripant.trip.model.repository;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.dao.DataAccessException;
 
 import mclass.store.tripant.trip.domain.TripListEntity;
 import mclass.store.tripant.trip.domain.TripShareEntity;
@@ -14,20 +13,20 @@ import mclass.store.tripant.trip.domain.TripShareEntity;
 public interface TripListRepository {
 	//나의 일정
 	//목록 
-	List<TripListEntity>  selectTripList(String memEmail);
+	List<TripListEntity>  selectTripList(String memEmail) throws DataAccessException;
 	
 	//삭제
-	Integer delete(Integer planId);
+	Integer delete(Integer planId) throws DataAccessException;
 	
 	//유저검색
-	List<TripShareEntity> find(Map<String, Object> map);
+	List<TripShareEntity> find(Map<String, Object> map) throws DataAccessException;
 	
 	//일정 공유 중인 맴버
-	List<TripShareEntity> share(Map<String, Object> map);
+	List<TripShareEntity> share(Map<String, Object> map) throws DataAccessException;
 	
 	//유저 추가
-	Integer add(Map<String, Object> map) throws SQLIntegrityConstraintViolationException;
+	Integer add(Map<String, Object> map) throws DataAccessException;
 	
-	//유저 추가
-	Integer remove(Map<String, Object> map);
+	//유저 삭제
+	Integer remove(Map<String, Object> map) throws DataAccessException;
 }

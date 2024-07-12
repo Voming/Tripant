@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -71,20 +72,16 @@ public class TripListController {
 	//여행목록에 유저 추가
 	@PostMapping("/add/nick")//ajax
 	@ResponseBody
-	public int addNick(Integer planId,String addNick) {
+	public int addNick(Integer planId,String addNick)  {
 		Map<String, Object> map = new HashMap<>();
 		map.put("planId", planId);
 		map.put("addNick",addNick);
 		int result = 0;
 		try {
 			result = tripListService.add(map);
-		} catch (SQLIntegrityConstraintViolationException e) {
-			e.printStackTrace();
+		} catch (DataAccessException e) {
 			result = -2;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			result = -500;
-		}
+		} 
 		return result;
 	}
 	
@@ -95,7 +92,12 @@ public class TripListController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("planId", planId);
 		map.put("removeNick",removeNick);
-		int result = tripListService.remove(map);
+		int result = 0 ;
+		try {
+			result= tripListService.remove(map);
+		} catch (DataAccessException e) {
+			result = -2;
+		}
 		return result;
 	}
 	
