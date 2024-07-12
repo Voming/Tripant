@@ -4,6 +4,8 @@
 <link th:href="@{/css/main/home_example.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/main/home_search.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/main/home_modal.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <head th:replace="~{common/header :: head('트립앤트')}">
 </head>
 <script th:line="javascript" th:src="@{/js/main/plan_home.js}" ></script>
@@ -48,20 +50,34 @@
 					<li><button type="button" class="btn make">일정 만들기</button></li>
 				</ul>
 			</li>
-			<li class="make-img"><img th:src="@{/images/area/SEOUL.jpg}"
-				alt="서울">
+			<li class="make-img">
+				<div 
+					data-aos="flip-left"
+					data-aos-once="false"
+					data-aos-duration="800"
+				>
+					<img th:src="@{/images/area/SEOUL.jpg}" alt="서울">
+				</div>
 				<div class="make-info">
 					<p style="font-size: var(--font5);">생성된 일정 수</p>
 					<p style="font-size: var(--font3);" th:text="${planCount}"></p>
 					<p style="font-size: var(--font5);">여행자 수</p>
 					<p style="font-size: var(--font3);" th:text="${memCount}"></p>
-				</div></li>
+				</div>
+			</li>
 		</ul>
 		<div class="wrap-example">
 			<div class="wrap-example-content">
 				<ul class="example-content">
-					<li class="example-img"><img th:src="@{/images/area/JEJU.jpg}"
-						alt="제주"></li>
+					<li class="example-img">
+						<div 
+							data-aos="flip-left" 
+							data-aos-once="false"
+							data-aos-duration="800"
+						>
+							<img th:src="@{/images/area/JEJU.jpg}" alt="제주">
+						</div>
+					</li>
 					<li class="example-right">
 						<h2>여행을 준비하는 개미님은<br>트립앤트의 스케줄링을 통해<br>10시간 이상을 절약하셨어요</h2>
 						<h6>제주여행을 준비하는 개미님은 트립앤트 덕분에 위치, 동선, 영업일, 식사시간 등을<br>고려하며 평균 10시간에 걸쳐 며칠동안 짜야 할 일정 계획을 단 5분만에 만들었어요!</h6>
@@ -86,5 +102,9 @@
 		</div>
 	</div>
 	<div class="footer" th:insert="~{common/footer :: wrap-footer}"></div>
+	<!-- AOS 스크립트 시작 -->
+	<script>
+		AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
+	</script>
 </body>
 </html>
