@@ -60,6 +60,7 @@ function goPageHandler(thisElement) {
 //검색
 function searchBtnHandler(){
 	var searchMem = $("[name=search]").val().trim();
+	var currentPage = $().data("targetpage");
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -97,6 +98,7 @@ function memListHandler(complainList){
 function clickReportHandler(){
 	sort='reports'
 	var searchMem = $("[name=search]").val().trim();
+	var currentPage = $().data("targetpage");
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,

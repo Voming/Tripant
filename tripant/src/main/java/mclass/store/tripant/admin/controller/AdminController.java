@@ -114,7 +114,7 @@ public class AdminController {
 	@PostMapping("/keyword")
 	public String keywordSearch(
 			Model model
-			,@RequestParam(required = false, defaultValue = "1")Integer currentPage
+			,@RequestParam(name = "page" ,required = false, defaultValue = "1")Integer currentPage
 			,@RequestParam(required = false ) String search
 			,@RequestParam(required = false ) String pick
 			,@RequestParam(required = false ) String sort
