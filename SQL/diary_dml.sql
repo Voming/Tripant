@@ -114,6 +114,7 @@ left outer join member m on (d.diary_mem_email = m.mem_email)
 )
 with read only
 ;
+-----진짜 사용
 create or replace view view_diary_member_plan
 as 
 (
