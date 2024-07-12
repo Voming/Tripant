@@ -194,6 +194,10 @@ function loadedHandler() {
 					alert("하루에 한 개 이상의 숙소에 방문해야해요. 숙소를 더 추가해주세요!");
 				} else {
 					console.log(calendarPlan);
+					//클릭막기
+					$(".main-wrapper").css("pointer-events", "none");
+					//새로고침 알림 막기
+					beforeSave = false;
 					// 일정 만들기 알고리즘 돌리기
 					const jsonString = JSON.stringify(calendarPlan);
 					$.ajax({
@@ -205,7 +209,7 @@ function loadedHandler() {
 						data: jsonString,
 						traditional: true, //필수
 						success: function(data) {
-							console.log(data);
+							location.href = contextPath + data;
 						}
 					});
 				}
