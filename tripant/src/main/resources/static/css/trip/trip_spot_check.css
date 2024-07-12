@@ -2,10 +2,11 @@
 .schedule-wrapper #tab02 .spot.second {
 	margin-left: 10px;
 	height: 100%;
+	margin-top: 30px;
 }
 
 .schedule-wrapper #tab02 .spot.second .wrap-selected-spot {
-	overflow-y: auto;
+	/* overflow-y: auto; */
 	height: 100%;
 }
 /* 위에 글자들 */
