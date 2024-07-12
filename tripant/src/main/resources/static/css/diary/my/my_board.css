@@ -90,6 +90,7 @@
 	gap: 28px; /* 나란히 세우기 위함 */
 	width: 960px; /* 양옆 간격 유지 */
 	padding-bottom: 30px; /* 아래 간격 유지  */
+	min-height: 500px;/*footer 떠서 내리기  */
 }
 
 .mytitle-img {

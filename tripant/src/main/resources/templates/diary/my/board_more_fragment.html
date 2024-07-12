@@ -2,13 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="board_more"  th:fragment="board_more"> 
-<th:block th:if="${diaries} == null or ${#lists.size(diaries) ==0 }">
-	<script >
-	 $(".mydiary_more_btn").remove();
-	 console.log(".mydiary_more_btn");
+<th:block th:if="${diaries} == null or ${#lists.size(diaries) == 0 }">
+<script>
+	$(".mydiary_more_btn").remove();
+	console.log(".mydiary_more_btn");
+
 	</script>
 </th:block>
-<th:block th:if="${diaries} != null">
+<th:block th:if="${diaries} != null and ${#lists.size(diaries) != 0 }">
+
 	<th:block th:each="diary :  ${diaries}">
 		<div class="wrap-diary" th:data-diaryid="${diary.diaryId}">
 			<div class="diary-img">
