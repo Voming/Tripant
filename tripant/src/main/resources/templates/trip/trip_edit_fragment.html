@@ -11,11 +11,13 @@
 					<img class="search-btn" th:src="@{/images/icons/search.png}" alt="찾기">
 				</button>
 			</form>
-			<ul class="spot-tab-nav">
+			<ul class="spot-tab-nav flex">
 				<li><a href="#spot-tab01">관광지</a></li>
 				<li><a href="#spot-tab02">문화시설</a></li>
 				<li><a href="#spot-tab03">쇼핑</a></li>
 				<li><a href="#spot-tab04">음식점</a></li>
+				<li><a href="#spot-tab05">숙소</a></li>
+				<li><a href="#spot-tab06">캠핑장</a></li>
 			</ul>
 			<div class="spot-tab-content scrollbar">
 				<div id="spot-tab01">
@@ -30,16 +32,22 @@
 				<div id="spot-tab04">
 					<div class="wrap-spotList" th:replace="~{plan/spot_tab_content :: wrapspotlist}"></div>
 				</div>
+				<div id="spot-tab05">
+					<div class="wrap-spotList" th:replace="~{plan/spot_tab_content :: wrapspotlist}"></div>
+				</div>
+				<div id="spot-tab06">
+					<div class="wrap-spotList" th:replace="~{plan/spot_tab_content :: wrapspotlist}"></div>
+				</div>				
 			</div>
 		</div>
-		<div class="spot second flex">
-			<div class="wrap-selected-spot scrollbar">
+		<div class="spot second flex ">
+			<div class="wrap-selected-spot ">
 				<div class="selected-spot-info">
 					<p class="count-spot">0</p>
 					<p class="time-spot"></p>
 					<p class="reset-spot" onclick="spotResetBtnClickHandler();">장소 선택 초기화</p>
 				</div>
-				<div class="selected-spot-list"></div>
+				<div class="selected-spot-list scrollbar"></div>
 			</div>
 		</div>
 	</div>

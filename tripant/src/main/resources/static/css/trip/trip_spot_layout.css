@@ -166,3 +166,7 @@
 	background: black;
 	color: white;
 }
+/* spot,stay 모두 나열 */
+.schedule-wrapper  #tab02 .spot-tab-nav{
+	flex-wrap: wrap;
+}

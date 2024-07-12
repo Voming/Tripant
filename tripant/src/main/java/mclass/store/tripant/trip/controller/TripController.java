@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 
 import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.trip.domain.DayEntity;

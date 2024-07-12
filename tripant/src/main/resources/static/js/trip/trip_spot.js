@@ -27,7 +27,7 @@ function includeHandler(){
 			htmlVal += `
 				<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" data-id="${element.id}">
 			 		<div class="spot-img "><img src="${element.img}" style="width:70px ; height:70px;"/></div>
-			 		<div class="flex">
+			 		<div class="flex" style=" row-gap: 5px;">
 			 			<div class="spot-title wfull"> ${element.title}</div>
 			 			<div class="spot-type" >${element.placeCat}</div>
 			 		</div>
