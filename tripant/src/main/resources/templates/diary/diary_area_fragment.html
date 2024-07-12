@@ -14,7 +14,7 @@
 <body>
 	<div class="wrap-diary"  th:fragment="diaryitemlist"> 
 		<th:block th:if="${diaries} == null or ${#lists.size(diaries) ==0 }">
-			<script >
+		 	<script >
 				$(".diary_more_btn").hide();
 			//	var imageSrc = contextPath + "images/diary/nodiary.png";
 				var nodiary = '<div style="font-size:var(--font1); height: 250px; align-content: center; color: var(--color_gray);">글이 없습니다.</div>';
@@ -25,10 +25,11 @@
 		<!-- 공개글 데이터 가져오기  -->
 		
 		<th:block th:if="${diaries} != null and ${#lists.size(diaries) != 0 }">
-			<script >
+		<script >
 				$(".diary_more_btn").show();
 				console.log(".diary_more_btn show");
-			</script>
+				
+			</script> 
 			<th:block th:each="diary :  ${diaries}">
 				<div class="wrap-d-content" id="click-diary" th:data-diaryid="${diary.diaryId}">
 					<div class="diary-img">
