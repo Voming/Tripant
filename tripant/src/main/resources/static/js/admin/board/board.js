@@ -3,6 +3,7 @@ let currentPage = 1;
 let pick = null;
 let search = null;
 let sort = null;
+let count = 1;
 
 function enterkey() {
 	if (window.event.keyCode == 13) {
@@ -14,6 +15,7 @@ function enterkey() {
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			currentPage = $(thisElement).data("targetpage");
+			var sortCount =  count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -23,11 +25,13 @@ function goPageHandler(thisElement) {
 					page: currentPage, 
 					pick: pick, 
 					search: search, 
-					sort: sort
+					sort: sort,
+					sortCount:sortCount
 				}
 			}).done(function(a){
 				if(a){
 					$(".wrap-list").replaceWith(a);
+					count += 1;
 				}
 			});
 	}
@@ -37,6 +41,7 @@ function searchBtnHandler(){
 	pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	search = $("[name=search]").val();  //input 값
 	var currentPage = $().data('targetpage');
+	var sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -46,10 +51,12 @@ function searchBtnHandler(){
 			page: currentPage, 
 			pick: pick, 
 			search: search, 
-			sort: sort
+			sort: sort,
+			sortCount:sortCount
 		},
 		success : function(searchList) {
 				$('.wrap-list').replaceWith(searchList);
+				count += 1;
 			}
 	});
 }
@@ -77,6 +84,7 @@ function memListHandler(searchList){
 function ClickLikeHandler(){
 	sort = 'likes';
 	var currentPage = $().data('targetpage');
+	var sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -85,12 +93,14 @@ function ClickLikeHandler(){
 			page: currentPage, 
 			pick: pick, 
 			search: search, 
-			sort: sort
+			sort: sort,
+			sortCount:sortCount
 		},
 		 method:"post",
 	}).done(function(data){
 		if(data){
 			$('.wrap-list').replaceWith(data);
+			count += 1;
 		}
 	});
 } 
@@ -117,13 +127,15 @@ function LikeHandler(like){
 function ClickViewHandler(){
 	sort = 'view';
 	var currentPage = $().data('targetpage');
+	var sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		data:{
 			page: currentPage, 
 			pick: pick, 
 			search: search, 
-			sort: sort
+			sort: sort,
+			sortCount:sortCount
 		},
 		error : ajaxErrorHandler,
 		url:contextPath+"admin/keyword",
@@ -131,6 +143,7 @@ function ClickViewHandler(){
 	}).done(function(data){
 		if(data){
 			$('.wrap-list').replaceWith(data);
+			count += 1;
 		}
 	});
 } 
