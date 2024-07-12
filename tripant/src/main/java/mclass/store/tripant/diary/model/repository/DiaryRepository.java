@@ -39,8 +39,10 @@ public interface DiaryRepository {
 	List<WritePlanTitleEntity> selectPlanById(String memberEmail);
 	
 	DiaryBoardEntity findById(@Param("id") Long id);
+	
+	 //한개의 글 보기
 	// 특정 ID의 다이어리 조회 + 로그인한 계정이 눌렀는지 여부
-	DiaryBoardEntity selectDiaryById(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
+	 DiaryBoardEntity selectDiaryById(@Param("diaryId") int diaryId, @Param("memEmail") String memEmail);
 
 	// 글 카운트 증가 메서드
 	int incrementDiaryViews(@Param("diaryId") int diaryId);
@@ -72,5 +74,6 @@ public interface DiaryRepository {
 	 List<BuyThemeEntity> selectBuyTheme(@Param("diaryId") int diaryId ,@Param("memEmail") String memEmail);
 	// 글작성 시theme 꺼내기 
 	 public List<BuyThemeEntity> selectBuyTheme(String memEmail);
+	
 
 }

@@ -172,9 +172,10 @@
 	<!-- 여행기 글 등록 시 이미지 url diary_save 테이블에 저장 시키기 -->
 	<insert id="insertDiaryImage" parameterType="DiaryBoardEntity">
 		INSERT 
-			INTO DIARY_SAVE(DIARY_ID,DIARY_MEM_EMAIL,DIARY_IMAGE,DIARY_PREVIEW)
-			VALUES (#{diaryId}, #{diaryMemEmail}, #{diaryImage}, #{diaryPreview})
+			INTO DIARY_SAVE(DIARY_ID,DIARY_IMAGE,DIARY_PREVIEW)
+			VALUES (#{diaryId}, #{diaryImage}, #{diaryPreview})
 	</insert>
+	
 
 	<!-- 특정 ID의 PlAN 조회 -->
 	<select id="selectPlanById" parameterType="string" resultType="WritePlanTitleEntity">
@@ -272,6 +273,7 @@
 		VALUES (#{diaryId}, #{memEmail})
 	</insert>
 	<!--테마 변경 적용하기  -->
+	<!--글 작성할때 나타낼껏  -->
 	<select id="selectBuyTheme" parameterType="string" resultType="BuyThemeEntity">
 		     SELECT ITEM.ITEM_CODE, ITEM.ITEM_NAME, ITEM.ITEM_COLOR
     			FROM BUY

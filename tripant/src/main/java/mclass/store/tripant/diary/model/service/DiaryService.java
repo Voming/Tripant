@@ -48,8 +48,8 @@ public class DiaryService {
 	}
 
 	// 특정 ID의 여행기 글 가져오기
-	public DiaryBoardEntity findById(Long id) {
-		return diaryRepository.findById(id);
+	public DiaryBoardEntity selectDiaryById(int diaryId, String memEmail) {
+		return diaryRepository.selectDiaryById(diaryId, memEmail);
 	}
 	
 	// 글 작성 페이지 등급별 나누기

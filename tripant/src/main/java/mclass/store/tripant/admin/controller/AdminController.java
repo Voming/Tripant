@@ -5,7 +5,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import com.google.gson.Gson;
 
-import mclass.store.tripant.admin.domain.AdminBoardEntity;
 import mclass.store.tripant.admin.domain.AdminChartEntity;
 import mclass.store.tripant.admin.model.service.AdminService;
 
@@ -67,8 +65,10 @@ public class AdminController {
 	public String  memberSearch(Model model 
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			, @RequestParam(required = false )String searchMem
+			,@RequestParam(required = false ) String sort
 			) {
-		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem));
+		model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem,sort));
+		System.out.println("!!!!!!!!"+sort);
 		return "admin/member_fragment";
 	}
 
@@ -110,7 +110,7 @@ public class AdminController {
 	}
 	
 	//ajax
-	//게시글 조건검색(select)  
+	//게시글 조건검색(select)  +정렬
 	@PostMapping("/keyword")
 	public String keywordSearch(
 			Model model
@@ -141,7 +141,6 @@ public class AdminController {
 		 , @RequestParam(required = false )String searchMem
 		 ,@RequestParam(required = false ) String sort){
 			model.addAttribute("complainMap",adminservice.complainsearch(num, pageNum, currentPage,searchMem,sort));
-			System.out.println(searchMem+"!!!!!!!!!!!!!");
 			return "admin/complain_fragment";
 		}
 		

@@ -8,6 +8,7 @@
 }
 .main-wrapper .schedule-wrapper .plan-info{
 	flex-direction: column;
+    row-gap: 5px;
 }
 .main-wrapper .schedule-wrapper .plan-title{
 	font-size: var(--font2);
