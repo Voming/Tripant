@@ -229,3 +229,12 @@
 .list.flex::-webkit-scrollbar-corner {
    background: transparent;
 }
+
+
+.wrap-main #sale{
+	justify-content: space-between;
+}
+.wrap-main #sale > span:first-child{
+	padding-left: 65px;
+    color: red;
+}

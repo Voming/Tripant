@@ -1,15 +1,15 @@
 $(loadedHandler);
 function loadedHandler(){
 	//버튼:hover css
-	$('.btn').hover(function(){
-		if(!$(this).prop('disabled')){
+	$('.btn').hover(function() {
+		if (!$(this).prop('disabled')) {
+			$(this).css('background-color', 'lightgray');
+			$(this).css('color', 'black');
+		}
+	}, function() {
+		if (!$(this).prop('disabled')) {
 			$(this).css('background-color', 'black');
 			$(this).css('color', 'white');
-		}
-	}, function(){
-		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'var(--color_light_gray)');
-			$(this).css('color', 'black');
 		}
 	});
 	//닉네임 검사

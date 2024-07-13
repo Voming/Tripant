@@ -35,8 +35,10 @@ function fontSwalHandler(){
 					</div>
 					<div class="item price" th:text="${theme.itemPrice}+'원'" th:if="${theme.itemSale} == null"></div>
 					<div class="item price flex" th:if="${theme.itemSale} != null">
-						<div class="origin-price" th:text="${theme.itemPrice}+'원'"></div>
-						<div class="sale-proportion" th:text="${theme.itemSale}+'%'"></div>
+						<div id="sale">
+							<span class="sale-proportion" th:text="${theme.itemSale}+'%'"></span>
+							<span class="origin-price" th:text="${theme.itemPrice}+'원'"></span>
+						</div>
 						<div class="sale-price" th:text="${theme.salePrice}+'원'"></div>
 					</div>
 				</div>
@@ -56,8 +58,10 @@ function fontSwalHandler(){
 					</div>
 					<div class="item price" th:text="${font.itemPrice}+'원'" th:if="${font.itemSale} == null"></div>
 					<div class="item price flex" th:if="${font.itemSale} != null">
-						<div class="origin-price" th:text="${font.itemPrice}+'원'"></div>
-						<div class="sale-proportion" th:text="${font.itemSale}+'%'"></div>
+						<div id="sale">
+							<span class="sale-proportion" th:text="${font.itemSale}+'%'"></span>
+							<span class="origin-price" th:text="${font.itemPrice}+'원'"></span>
+						</div>
 						<div class="sale-price" th:text="${font.salePrice}+'원'"></div>
 					</div>
 				</div>
