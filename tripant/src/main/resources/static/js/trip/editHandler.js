@@ -272,9 +272,8 @@ function displayEditMode(){
 
 //드래그 앤 드롭 시 display
 function displayEditModeAfterDragEnd(){
-	// jjoggan TODO 
-	clearAll();
-	//clearPolylines();
+	// jjoggan 
+	clearAll(); //지도의 폴리라인과 마커 초기화
 	//html에 뿌릴 정보 백틱에 담기
 	var htmlval = "";
 	
@@ -435,16 +434,12 @@ function displayEditModeAfterDragEnd(){
 	
 	//if (!spotArr.length || spotArr[0].id === undefined) {
 	if (!spotArr.length || spotArr[0] === undefined) {
-	    // 이 블록은 spotArr이 길이가 0이거나, 길이가 1이지만 값이 없는 상태일 때 실행됩니다.
-	    console.log("%%%%%%%%%%%%%%%");
+	    //spotArr이 길이가 0이거나, 길이가 1이지만 값이 없는 상태일 때 실행
 	    $('#spot-basket .wrap-basket').find("*").remove();
 	    return;
 	} else {
-	    // 이 블록은 spotArr이 길이가 1 이상이고, 값이 있는 상태일 때 실행됩니다.
-	    console.log("^^^^^^^^^^^^^^^^^^");
+	    //spotArr이 길이가 1 이상이고, 값이 있는 상태일 때
 		$.each(spotArr, function(idx, element) {
-		
-			//element.id;
 			htmlVal += `
 				<div class="include-spot flex wfull draggable"  draggable ="true" data-i="99" data-j="${idx}" >
 			 		<div class="spot-img "><img src="${element.img}" width="70" height="70"/></div>
@@ -458,6 +453,5 @@ function displayEditModeAfterDragEnd(){
 		});
 		$('#spot-basket .wrap-basket').html(htmlVal);
 	}
-
 	setBounds();//지도 범위 재설정
 }

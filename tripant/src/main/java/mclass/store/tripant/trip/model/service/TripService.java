@@ -50,7 +50,7 @@ public class TripService {
 		return repository.selectAllFindList(findArea, areaCode, maxNum);
 	}
 
-	//
+	//일정 저장
 	@Transactional //repositoy 두 개를 한 몸처럼 다룸
 	public Integer saveChange(Map<String, Object> paramMap) {
 		Integer planId = (Integer) paramMap.get("planId");
