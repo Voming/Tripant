@@ -1,11 +1,14 @@
 function addAndRemoveHandler(){
+	//이벤트 초기화
 	$('.btn.remove').off("click");
 	$('.btn.add').off("click");
+	
 	//유저삭제
 	$('.btn.remove').on('click',removeHandler);
 	//유저추가
 	$('.btn.add').on('click',addHandler);
 }
+	
 //삭제
 function removeHandler(){
 	var removeNick =$(this).prev().text();
