@@ -45,5 +45,8 @@ function setEvent(){
 
 			$(this).siblings('.memo').css('opacity','1')
 		},memoNoHandler);
+	if( window.location.hash){
+		$(".edit").trigger('click');
+	}	
 
 }

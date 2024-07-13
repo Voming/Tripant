@@ -95,9 +95,12 @@ bounds  ; // 지도를 재설정할 범위를 가질 전역변수
 
 //planId값 url에서 가져오기
 const url = window.location.href;
-const parts = url.split('/'); // Split the URL by '/'
-const planId = parts.pop(); // Get the last element of the array
-
+/* 	const parts = url.split('/'); // Split the URL by '/'
+	var lastPart = parts.pop(); // Get the last element of the array
+	var subPart = lastPart.split('#'); 
+	const planId = subPart[0]; */
+var capture = url.match(/\/detail\/(\d+)(?:#|$)/);
+const planId = capture[1];
 //아래 자료형 참고
 class DayEntity {
 	tripIdx;  /*여행 총 며칠*/

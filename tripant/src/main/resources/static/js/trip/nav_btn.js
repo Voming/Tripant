@@ -139,6 +139,7 @@ function saveChanges(){
 				  showConfirmButton: false,
 				  timer: 1500
 				}).then(() => {
+				 	window.location.hash = '';
 					location.reload();
 				});
 	        }
