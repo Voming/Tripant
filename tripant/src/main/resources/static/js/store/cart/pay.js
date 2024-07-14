@@ -64,6 +64,8 @@ async function requestPayment() {
 					}).then((swal) => {
 						if(swal.isConfirmed){
 							location.href = contextPath + "store/buy";
+						}else{
+							location.reload();
 						}
 					});
 					return;

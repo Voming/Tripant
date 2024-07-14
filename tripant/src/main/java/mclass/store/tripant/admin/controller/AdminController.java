@@ -195,7 +195,8 @@ public class AdminController {
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
-		if(responseMap.get("pgCode").equals("2015")) {
+		System.out.println(responseMap);
+		if(responseMap.get("pgCode").equals("2015")||responseMap.get("type").toString().contains("already")) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("buyId", Integer.parseInt(buyId));
 			map.put("memEmail", memEmail);
