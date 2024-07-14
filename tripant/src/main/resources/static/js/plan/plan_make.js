@@ -202,7 +202,8 @@ function loadedHandler() {
 					Swal.fire({
 						icon: "success",
 						title: "<h3>일정 생성중입니다! \n 생성이 완료되면 나의 일정 페이지로 이동합니다.</h3>",
-						showConfirmButton: false
+						showConfirmButton: false,
+						allowOutsideClick: false
 					});
 					
 					// 일정 만들기 알고리즘 돌리기
