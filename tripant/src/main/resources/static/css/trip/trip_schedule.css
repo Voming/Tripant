@@ -8,14 +8,19 @@
 }
 .main-wrapper .schedule-wrapper .plan-info{
 	flex-direction: column;
-    row-gap: 10px;
+    row-gap: 5px;
 }
 .main-wrapper .schedule-wrapper .plan-title{
-	margin: 30px 0 10px 0 ;
+	margin-top: 20px ;
 }
 .main-wrapper .schedule-wrapper .plan-location{
 	margin-right : 15px;
+	font-size: vat(--font3);
+	font-weight: bold;
 } 
+.main-wrapper .schedule-wrapper .plan-info .plan-priod{
+	font-size: vat(--font4);
+}
 .main-wrapper .schedule-wrapper .list-box{
 	height: 100%;
 	padding:10px;
