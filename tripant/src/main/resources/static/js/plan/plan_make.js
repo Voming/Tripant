@@ -205,9 +205,9 @@ function loadedHandler() {
 						icon: "question",
 						showCancelButton: true,
 						cancelButtonText: "취소",
-						confirmButtonColor: "#3085d6",
+						confirmButtonColor: "#6E7881",
 						cancelButtonColor: "#d33",
-						confirmButtonText: "생성하기"
+						confirmButtonText: "확인"
 					}).then((result) => {
 						if (result.isConfirmed) {
 							doPlanning();

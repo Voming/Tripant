@@ -256,6 +256,8 @@ function stayCkBtnClickHandler(thisElement) {
 	if ($(thisElement).is(":checked") == false) { // 체크박스 해제
 		//불가
 	} else { // 체크박스 선택
+		//해제 불가
+		thisElement.disabled = true;
 		stayBefor = new Stay(id, title, latx, lngy, img, type);
 
 		//모달 숙소 이름 변경
