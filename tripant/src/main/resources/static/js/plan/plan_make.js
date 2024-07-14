@@ -205,8 +205,8 @@ function loadedHandler() {
 						icon: "question",
 						showCancelButton: true,
 						cancelButtonText: "취소",
-						confirmButtonColor: "#6E7881",
-						cancelButtonColor: "#d33",
+						confirmButtonColor: "#000",
+						cancelButtonColor: "#6E7881",
 						confirmButtonText: "확인"
 					}).then((result) => {
 						if (result.isConfirmed) {
