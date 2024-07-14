@@ -195,35 +195,52 @@ function loadedHandler() {
 					alert("하루에 한 개 이상의 숙소에 방문해야해요. 숙소를 더 추가해주세요!");
 				} else {
 					//클릭막기
-					$(".main-wrapper").css("pointer-events", "none");
+					//$(".main-wrapper").css("pointer-events", "none");
 					//새로고침 알림 막기
 					beforeSave = false;
 
 					Swal.fire({
-						icon: "success",
-						title: "<h3>일정 생성중입니다! \n 생성이 완료되면 나의 일정 페이지로 이동합니다.</h3>",
-						showConfirmButton: false,
-						allowOutsideClick: false
-					});
-					
-					// 일정 만들기 알고리즘 돌리기
-					const jsonString = JSON.stringify(calendarPlan);
-					$.ajax({
-						beforeSend: csrfHandler,
-						error: ajaxErrorHandler,
-						url: contextPath + "plan/planning",
-						method: "post",
-						contentType: "application/json",
-						data: jsonString,
-						//async: false,
-						traditional: true, //필수
-						success: function(data) {
-							location.href = contextPath + data;
+						title: "<h2>일정을 생성하시겠습니까?</h2>",
+						text: "나만의 일정을 만들어보세요",
+						icon: "question",
+						showCancelButton: true,
+						cancelButtonText: "취소",
+						confirmButtonColor: "#3085d6",
+						cancelButtonColor: "#d33",
+						confirmButtonText: "생성하기"
+					}).then((result) => {
+						if (result.isConfirmed) {
+							doPlanning();
 						}
 					});
 				}
 			}
 		});
+	});
+}
+
+function doPlanning(){
+	Swal.fire({
+		icon: "success",
+		title: "<h3>일정 생성중입니다! \n 생성이 완료되면 나의 일정 페이지로 이동합니다.</h3>",
+		showConfirmButton: false,
+		allowOutsideClick: false
+	});
+
+	// 일정 만들기 알고리즘 돌리기
+	const jsonString = JSON.stringify(calendarPlan);
+	$.ajax({
+		beforeSend: csrfHandler,
+		error: ajaxErrorHandler,
+		url: contextPath + "plan/planning",
+		method: "post",
+		contentType: "application/json",
+		data: jsonString,
+		//async: false,
+		traditional: true, //필수
+		success: function(data) {
+			window.location.href = contextPath + data;
+		}
 	});
 }
 
