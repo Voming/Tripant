@@ -190,10 +190,10 @@ function loadedHandler() {
 				}
 				return false;
 			} else if (cls_name === 'nav-3 active') { //현재 3=========
+			console.log(calendarPlan);
 				if (markersStay.length < calendarPlan.dateArr.length - 1) {
 					alert("하루에 한 개 이상의 숙소에 방문해야해요. 숙소를 더 추가해주세요!");
 				} else {
-					console.log(calendarPlan);
 					//클릭막기
 					$(".main-wrapper").css("pointer-events", "none");
 					//새로고침 알림 막기
@@ -202,8 +202,8 @@ function loadedHandler() {
 					Swal.fire({
 						icon: "success",
 						title: "<h3>일정 생성중입니다! \n 생성이 완료되면 나의 일정 페이지로 이동합니다.</h3>",
-						showConfirmButton: false,
-						allowOutsideClick: false
+						showConfirmButton: false
+						//allowOutsideClick: false
 					});
 					
 					// 일정 만들기 알고리즘 돌리기

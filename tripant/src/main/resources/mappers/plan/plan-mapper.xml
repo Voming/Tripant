@@ -81,20 +81,24 @@
 	<insert id="insertPlanning" parameterType="Map">
 		INSERT ALL
 		INTO PLAN (PLAN_ID, PLAN_AREA_CODE, PLAN_TITLE, PLAN_START_DAY, PLAN_END_DAY, PLAN_MAKE_DAY) 
-			VALUES (SEQ_PLAN_ID.nextval, #{areaCode}, #{planTitle}, #{startDate}, #{endDate}, default)
+			VALUES (#{planId}, #{areaCode}, #{planTitle}, #{startDate}, #{endDate}, default)
 	
 		INTO PLAN_MEMBER (PLAN_ID, MEM_EMAIL, PLAN_MEM_ROLE) 
-			VALUES (SEQ_PLAN_ID.nextval, #{email}, 1)
+			VALUES (#{planId}, #{email}, 1)
 			
 		<foreach collection="planSchedule" item="schedule" >
 		INTO PLAN_SCHEDULE (SCHEDULE_PLAN_ID, SCHEDULE_DAY, SCHEDULE_START, SCHEDULE_END) VALUES 
-				(SEQ_PLAN_ID.nextval, #{schedule.date}, #{schedule.startTime}, #{schedule.endTime})
+				(#{planId}, #{schedule.date}, #{schedule.startTime}, #{schedule.endTime})
 			</foreach>
 			
 			<foreach collection="planSpot" item="spot" >
 		INTO PLAN_SPOT (SPOT_PLAN_ID, SPOT_DAY, SPOT_TYPE, SPOT_CONTENTID, SPOT_ORDER, SPOT_STAY_TIME) VALUES 
-				(SEQ_PLAN_ID.nextval, #{spot.spotDay} , #{spot.spotType},  #{spot.spotContentid},  #{spot.spotOrder}, #{spot.spotStayTime})
+				(#{planId}, #{spot.spotDay} , #{spot.spotType},  #{spot.spotContentid},  #{spot.spotOrder}, #{spot.spotStayTime})
 			</foreach>
+			
+		<selectKey keyProperty="planId" resultType="int" order="BEFORE">
+			SELECT SEQ_PLAN_ID.NEXTVAL planId FROM DUAL
+		</selectKey>
 	    SELECT * FROM DUAL
 	</insert>
 </mapper>
