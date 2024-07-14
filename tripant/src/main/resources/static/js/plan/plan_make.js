@@ -215,6 +215,7 @@ function loadedHandler() {
 						method: "post",
 						contentType: "application/json",
 						data: jsonString,
+						async: false,
 						traditional: true, //필수
 						success: function(data) {
 							location.href = contextPath + data;
