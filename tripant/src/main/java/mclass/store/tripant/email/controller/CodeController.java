@@ -61,7 +61,18 @@ public class CodeController {
 		String from = email;
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
-		String content = "트립앤트 인증번호입니다.<br>"+code;
+		String content = "안녕하세요 Tripant입니다.<br>"
+				+ "이에 동의하지 않으실 경우 회원가입에 제한을 받을 수 있습니다.<br>"
+				+ "아래 인증번호를 회원가입 이메일 인증번호 확인란에 입력하고 인증을 받으세요.<br>"
+				+ "[이메일 인증번호]: <strong>"+code+"</strong><br>"
+						+ "본 메일은 발신전용 메일이며 문의에 대한 회신은 처리되지 않습니다.<br>"
+						+ "감사합니다.";
+//		안녕하세요 TripAnt입니다.
+//		이에 동의하지 않을살 경우 회원가입에 제한을 받을 수 있습니다.
+//		아래 인증키를 회원가입 이메일 인증키 확인란에 입력하고 인증을 받으세요.
+//		[이메일 인증키]: 볼드체(굵게)
+//		본 메일은 발신전용 메일이며 문의에 대한 회신은 처리되지 않습니다.
+//		감사합니다.
 		
 		// 이메일 전송 : SMTP 이용을 위함
 		Properties p = new Properties();
@@ -132,8 +143,12 @@ public class CodeController {
 		// 사용자 인증 이메일 발송 내용
 		String from = email;
 		String to = memEmail;
-		String subject = "[Tripant] 이메일 인증번호";
-		String content = "트립앤트 인증번호입니다.<br>"+code;
+		String subject = "[Tripant] 비밀번호 찾기 인증번호";
+		String content = "안녕하세요 Tripant입니다.<br>"
+				+ "아래 인증번호를 비밀번호 찾기 이메일 인증번호 확인란에 입력하고 인증을 받으세요.<br>"
+				+ "[이메일 인증번호]: <strong>"+code+"</strong><br>"
+						+ "본 메일은 발신전용 메일이며 문의에 대한 회신은 처리되지 않습니다.<br>"
+						+ "감사합니다.";
 		
 		// 이메일 전송 : SMTP 이용을 위함
 		Properties p = new Properties();
@@ -193,7 +208,11 @@ public class CodeController {
 		String from = email;
 		String to = memEmail;
 		String subject = "[Tripant] 이메일 인증번호";
-		String content = "트립앤트 인증번호입니다.<br>"+code;
+		String content = "안녕하세요 Tripant입니다.<br>"
+				+ "아래 인증번호를 휴면해제 이메일 인증번호 확인란에 입력하고 인증을 받으세요.<br>"
+				+ "[이메일 인증번호]: <strong>"+code+"</strong><br>"
+						+ "본 메일은 발신전용 메일이며 문의에 대한 회신은 처리되지 않습니다.<br>"
+						+ "감사합니다.";
 		
 		// 이메일 전송 : SMTP 이용을 위함
 		Properties p = new Properties();

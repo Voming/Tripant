@@ -50,6 +50,8 @@
 .wrap-main .title {
 	font-size: var(--font1);
 	margin-top: 15px;
+	border-bottom: inset;
+	padding-bottom: 10px;
 }
 .wrap-main .title span{
 	font-size: var(--font6);

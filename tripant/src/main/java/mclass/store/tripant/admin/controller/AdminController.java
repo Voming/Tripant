@@ -195,13 +195,8 @@ public class AdminController {
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
-		if(responseMap.get("pgCode").equals("2015")) {
-			Map<String, Object> map = new HashMap<>();
-			map.put("buyId", Integer.parseInt(buyId));
-			map.put("memEmail", memEmail);
-			adminservice.payCancel(map);
-			return -1;
-		}else {
+		System.out.println(responseMap);
+		try {
 			Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
 			String status = (String) cancellation.get("status");
 			int result;
@@ -219,6 +214,13 @@ public class AdminController {
 			}else {
 				return 0;
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Map<String, Object> map = new HashMap<>();
+			map.put("buyId", Integer.parseInt(buyId));
+			map.put("memEmail", memEmail);
+			adminservice.payCancel(map);
+			return -1;
 		}
 	}
 	
