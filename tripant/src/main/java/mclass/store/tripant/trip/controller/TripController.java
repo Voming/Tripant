@@ -108,7 +108,6 @@ public class TripController {
 		} catch (Exception e) {
 			result = -2;
 		}
-
 		return result;
 	}
 	
