@@ -48,7 +48,8 @@ async function memoClickHandler(el){
         },
         showCancelButton: true,
         confirmButtonColor: "#000000", 
-        confirmButtonText: "확인"
+        confirmButtonText: "확인",
+        cancelButtonText:"취소"
     });
     if (memo && memo.trim().length > 0) {
         Swal.fire("<h1>저장완료</h1>");
