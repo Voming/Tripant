@@ -129,10 +129,10 @@ function shareHandler() {
             <br>
             <div class='share-links'>
                 <a href='#' class='facebook-link'>
-                    <img src='/images/icons/facebook.png' alt='Facebook' width='20px;'> 페이스북으로 공유하기
+                    <img src='${contextPath}images/icons/facebook.png' alt='Facebook' width='20px;'> 페이스북으로 공유하기
                 </a>
                 <a href='#' class='twitter-link'>
-                    <img src='/images/icons/x.png' alt='X' width='18px;'> 공유하기
+                    <img src='${contextPath}images/icons/x.png' alt='X' width='18px;'> 공유하기
                 </a>
             </div>
         `,
