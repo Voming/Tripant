@@ -125,6 +125,7 @@ function displayDayTable() {
 	$(".time_btn").on("click", function() {
 		// 시간 정보 저장
 		saveTimeInfo();
+		timeInfoUpdate();
 		
 		checkLess = false;   //시간 테이블 범위 체크
 		timePerDateCheck();

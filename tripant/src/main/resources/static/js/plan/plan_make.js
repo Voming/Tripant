@@ -104,6 +104,7 @@ function loadedHandler() {
 			cls_name = currentActive.replace(' active', '');
 			if (cls_name == 'nav-1') {  //현재 1=========
 				saveTimeInfo(); //시간 정보 저장
+				timeInfoUpdate();
 
 				checkLess = false;   //시간 테이블 범위 체크
 				timePerDateCheck();
@@ -158,6 +159,7 @@ function loadedHandler() {
 			cls_name = $(this).find('a').attr("class");
 			if (cls_name === 'nav-1 active') { //현재 1=========
 				saveTimeInfo(); //시간 정보 저장
+				timeInfoUpdate();
 
 				checkLess = false;  //시간 테이블 범위 체크
 				timePerDateCheck();
