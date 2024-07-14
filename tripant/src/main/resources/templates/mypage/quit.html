@@ -11,13 +11,13 @@ function loadedHandler(){
 	//버튼:hover css
 	$('.btn').hover(function(){
 		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'black');
-			$(this).css('color', 'white');
+			$(this).css('background-color', 'lightgray');
+			$(this).css('color', 'black');
 		}
 	}, function(){
 		if(!$(this).prop('disabled')){
-			$(this).css('background-color', 'var(--color_light_gray)');
-			$(this).css('color', 'black');
+			$(this).css('background-color', 'black');
+			$(this).css('color', 'white');
 		}
 	});
 	//비밀번호 검사

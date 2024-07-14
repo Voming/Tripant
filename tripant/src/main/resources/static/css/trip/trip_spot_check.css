@@ -81,6 +81,9 @@
 .selected-spot-box .wrap-box .selected-spot-txt > span{
 	 overflow: hidden;
 }
+.selected-spot-box .wrap-box .selected-spot-txt >span:first-child{
+	font-weight: bold;
+}
 .selected-spot-box .wrap-box .time {
 	display: block;
 	width: 60px;

@@ -18,9 +18,15 @@
 	font-size: var(--font5);
 	border-radius: 8px;
 	border: 0;
-	padding: 5px 10px;
-	background-color: var(--color_light_gray);
+	padding: 5px;
+	background-color: black;
+	color: white;
 	width: 150px;
+}
+
+.wrap-main .btn:disabled{
+	background-color: lightgray;
+	color: white;
 }
 
 .wrap-main .flex {
