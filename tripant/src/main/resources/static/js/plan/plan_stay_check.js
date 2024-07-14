@@ -194,6 +194,16 @@ function stayModalAllBtnClickHandler(thisElement) {
 // 숙소 삭제 버튼
 function stayDeleteBtnClickHandler(thisElement) {
 	var boxStart = $(thisElement).parent().prev().find(".box-start").attr("value");
+	var deletID = $(thisElement).parent().prev().find(".box-id").attr("value");
+
+	$(".stay-box").each(function() {
+		var listId = $(this).children("input:checkbox").attr("id");
+		if (deletID == listId) {
+			//해제불가 원상복구
+			var id = "#" + deletID;
+			$(id).attr("disabled", false);
+		}
+	});
 
 	// 장소 정보 삭제
 	$.each(calendarPlan.dateArr, function(idx, element) {
@@ -223,7 +233,7 @@ function stayDeleteBtnClickHandler(thisElement) {
 
 	var checkStayCnt = 0;
 
-	$(".wrap-box").each(function() {
+	$(".selected-stay-box .wrap-box").each(function() {
 		var title = $(this).find(".box-title").text();
 		if (title != "숙소를 추가해주세요") {
 			checkStayCnt += 1;
@@ -256,6 +266,8 @@ function stayCkBtnClickHandler(thisElement) {
 	if ($(thisElement).is(":checked") == false) { // 체크박스 해제
 		//불가
 	} else { // 체크박스 선택
+		//해제 불가
+		thisElement.disabled = true;
 		stayBefor = new Stay(id, title, latx, lngy, img, type);
 
 		//모달 숙소 이름 변경
@@ -276,6 +288,13 @@ function stayCkBtnClickHandler(thisElement) {
 
 // 숙소 설정 초기화 버튼
 function stayResetBtnClickHandler() {
+	$(".stay-box").each(function() {
+		var listId = $(this).children("input:checkbox").attr("id");
+		//해제불가 원상복구
+		var id = "#" + listId;
+		$(id).attr("disabled", false);
+	});
+
 	$(".selected-stay-box").remove();
 	//체크박스 해제
 	$(".staycheck").prop("checked", false);
