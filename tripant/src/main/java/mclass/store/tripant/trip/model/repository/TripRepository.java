@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.dao.DataAccessException;
 
 import mclass.store.tripant.place.domain.PlaceboxEntity;
 import mclass.store.tripant.trip.domain.DayEntity;
@@ -26,6 +27,6 @@ public interface TripRepository {
 	Integer saveDelete(Integer planId);
 	
 	//변경정보 저장하기
-	Integer saveChange(Map<String, Object> paramMap);
+	Integer saveChange(Map<String, Object> paramMap) throws DataAccessException;
 	
 }

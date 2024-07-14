@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,7 +53,7 @@ public class TripService {
 
 	//일정 저장
 	@Transactional //repositoy 두 개를 한 몸처럼 다룸
-	public Integer saveChange(Map<String, Object> paramMap) {
+	public Integer saveChange(Map<String, Object> paramMap) throws DataAccessException {
 		Integer planId = (Integer) paramMap.get("planId");
 		repository.saveDelete(planId);
 		return repository.saveChange(paramMap);

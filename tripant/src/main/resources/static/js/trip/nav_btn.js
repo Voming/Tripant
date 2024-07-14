@@ -133,16 +133,27 @@ function saveChanges(){
 			method:"post",
 			data:{saveData : saveData ,planId:planId},
 			success : function(result) {
-				Swal.fire({
-				  icon: "success",
-				  title: "저장되었습니다.",
-				  showConfirmButton: false,
-				  timer: 1500
-				}).then(() => {
-				 	window.location.hash = '';
-					location.reload();
-				});
+				if(result == -2){
+					Swal.fire({
+					  icon: "error",
+					  title: "저장에 실패했습니다. 관리자에게 문의해주시길 바랍니다.",
+					  showConfirmButton: false,
+					  timer: 1500
+					}).then(() => {
+						//저장실패시 여행 목록페이지로 이동
+					 	window.location.href = contextPath + 'trip/list';
+					});
+				}else{
+					Swal.fire({
+					  icon: "success",
+					  title: "저장되었습니다.",
+					  showConfirmButton: false,
+					  timer: 1500
+					}).then(() => {
+					 	window.location.hash = '';
+						location.reload();
+					});
+				}
 	        }
 	});
-
 }

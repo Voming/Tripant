@@ -102,8 +102,12 @@ public class TripController {
         paramMap.put("planId", planId);
         paramMap.put("dtos", dtos);
         
-        Integer result = -1;
-        result = service.saveChange(paramMap);
+        Integer result = 0;
+        try {
+        	result = service.saveChange(paramMap);
+		} catch (Exception e) {
+			result = -2;
+		}
 
 		return result;
 	}
