@@ -237,20 +237,20 @@
 				DIARY_TITLE = #{diaryTitle},
    				DIARY_CONTENT = TO_CLOB(#{diaryContent}),		
   				DIARY_OPEN = #{diaryOpen},
-    			DIARY_THEME =#{diaryTheme},
-    			DIARY_PLAN_ID = #{diaryPlanId}
-			WHERE DIARY_ID = #{diaryId}
-			AND DIARY_MEM_EMAIL = #{diaryMemEmail}
+    			DIARY_THEME =#{diaryTheme}
+			WHERE
+			DIARY_ID = #{diaryId}
+			AND DIARY_MEM_EMAIL = #{diaryMemEmail} 
+			AND DIARY_PLAN_ID = #{diaryPlanId}
 	</update>
 	<!-- 여행기 글 등록 시 이미지 url diary_save 테이블에 저장 시키기 -->
 	<update id="updateDiaryImage" parameterType="DiaryBoardEntity">
 		UPDATE DIARY_SAVE
 			SET 
-				DIARY_ID = #{diaryId},
-				DIARY_MEM_EMAIL	= #{diaryMemEmail}, 
 				DIARY_IMAGE = #{diaryImage}, 
 				DIARY_PREVIEW =	 #{diaryPreview}
 			WHERE DIARY_ID = #{diaryId}
+		
 	</update>
 	<!-- 좋아요 누르기 -->
 	<insert id="insertDiaryLike" parameterType="map">
