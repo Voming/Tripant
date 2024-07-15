@@ -97,6 +97,15 @@ function stayModalDoneBtnClickHandler() {
 				}
 			});
 		}
+		
+		$(".stay-box").each(function() {
+		var listId = $(this).children("input:checkbox").attr("id");
+		if (tabId == listId) {
+			//해제불가 원상복구
+			var id = "#" + listId;
+			$(id).attr("disabled", true);
+		}
+	});
 	});
 
 	displayStayBoxList(); 	// 저장되어있는 숙소 박스 리스트에 넣기
@@ -267,8 +276,7 @@ function stayCkBtnClickHandler(thisElement) {
 	if ($(thisElement).is(":checked") == false) { // 체크박스 해제
 		//불가
 	} else { // 체크박스 선택
-		//해제 불가
-		thisElement.disabled = true;
+		
 		displayStayCheckList();
 		stayBefor = new Stay(id, title, latx, lngy, img, type);
 
