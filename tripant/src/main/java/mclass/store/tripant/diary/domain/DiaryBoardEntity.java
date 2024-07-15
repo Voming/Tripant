@@ -43,8 +43,6 @@ public class DiaryBoardEntity {
 //		// 추가로 UTF-8 - 4000byte List<String> diaryContentArrList
 //		this.diaryContentArrList = StringLengthApi.getMaxByteStringList(diaryContent, 4000, 1000);
 //		for (String item : diaryContentArrList) {
-//			System.out.println("---- : "+ item.getBytes().length);
-//			System.out.println(item);
 //		}
 //	}
 }

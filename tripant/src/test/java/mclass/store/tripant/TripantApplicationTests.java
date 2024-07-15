@@ -32,7 +32,6 @@ class TripantApplicationTests {
 		
 		// 주로 service 있는 객체를 만들어주는 역할
 //		this.service = new EmpService();
-		System.out.println("============@BeforeEach=====@test 돌릴 준비 완료");
 	}
 	@Test
 	void gethome() {

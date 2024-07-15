@@ -120,29 +120,6 @@ public class MypageController {
 			    .uri(URI.create("https://nid.naver.com/oauth2.0/token?grant_type=delete&"))
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		System.out.println("body >>>>>>>>>> " + gson.toJson(requestBody));
-		System.out.println("body >>>>>>>>>> " + HttpRequest.BodyPublishers.ofString(gson.toJson(requestBody)));
-		System.out.println("response >>>>>>>>>> " + response.body());
-
-//		String url = "https://nid.naver.com/oauth2.0/token"; /*URL*/
-//        url += "?client_id=" + naverClientId; /*Service Key*/
-//        url += "&client_secret=" + naverClientSecret; /*시도 이름(전국, 서울, 부산, 대구, 인천, 광주, 대전, 울산, 경기, 강원, 충북, 충남, 전북, 전남, 경북, 경남, 제주, 세종)*/
-//        url += "&access_token=" + map.get("MEM_TOKEN_NAVER"); /*xml 또는 json*/
-//        url += "&grant_type=delete";
-//        
-//        URL requestUrl = new URL(url);
-//        HttpURLConnection urlConnection = (HttpURLConnection) requestUrl.openConnection();
-//        urlConnection.setRequestMethod("GET");
-//        
-//        BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-//        String line = null;
-//        System.out.println("NAVER-URL--- RESPONSE");
-//        while ((line = br.readLine()) != null) {
-//            System.out.println(line);
-//        }
-//        
-//        br.close();
-//        urlConnection.disconnect();
 		
 		return result;
 	}
@@ -160,17 +137,13 @@ public class MypageController {
 //		=> https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&access_token=ACCESS_TOKEN&service_provider=NAVER
 //		
 //		**/		
-//		OAuthRequest oAuthRequest = new OAuthRequest(Verb.GET, getAccessTokenEndpoint, oauthService);
-//		oAuthRequest.addQuerystringParameter("client_id", CLIENT_ID);
 //        oAuthRequest.addQuerystringParameter("client_secret", CLIENT_SECRET);
 //        oAuthRequest.addQuerystringParameter("access_token", access_token);
-//        oAuthRequest.addQuerystringParameter("grant_type", "delete");
 //        oAuthRequest.addQuerystringParameter("service_provider", "NAVER");
 //		
 //		oauthService.signRequest(oauthToken, oAuthRequest);
 //		
 //		Response response = oAuthRequest.send();		
-//		System.out.println("\n[NAVER에 접근 토큰 삭제 요청결과]\n\t=>" + response.getBody());
 //	}
 	
 	
@@ -203,7 +176,6 @@ public class MypageController {
 				.method("POST", HttpRequest.BodyPublishers.ofString(gson.toJson(requestBody)))
 				.build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		System.out.println("구글갱신토큰 = "+response.body());
 		return "";
 	}
 	

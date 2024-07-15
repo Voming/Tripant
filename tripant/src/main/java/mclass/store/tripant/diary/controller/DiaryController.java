@@ -48,8 +48,6 @@ public class DiaryController {
 	// 최신순 정렬 // 전체 글보기(공개 글) (+더보기)
 	@PostMapping("/popular/latest")
 	public String getLatestDiaries(Model model, String areaname, Integer clickNum, Principal pricipal) {
-		System.out.println("latest:");
-		
 		String memEmail = null;
 		if (pricipal != null) {
 			memEmail = pricipal.getName();
@@ -62,7 +60,6 @@ public class DiaryController {
 	// 좋아요 정렬  // 전체 글보기(공개 글) (+더보기)
 	@PostMapping("/popular/likes")
 	public String selectLikesPopular(Model model, String areaname, Integer clickNum, Principal pricipal) {
-		System.out.println("likes:");
 		String memEmail = null;
 		if (pricipal != null) {
 			memEmail = pricipal.getName();
@@ -75,7 +72,6 @@ public class DiaryController {
 	// 조회수 정렬  // 전체 글보기(공개 글) (+더보기)
 	@PostMapping("/popular/views")
 	public String selectViewsPopular(Model model, String areaname, Integer clickNum, Principal pricipal) {
-		System.out.println("views:");
 		String memEmail = null;
 		if (pricipal != null) {
 			memEmail = pricipal.getName();

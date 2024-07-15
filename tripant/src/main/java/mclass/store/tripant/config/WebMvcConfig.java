@@ -16,7 +16,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //			@Override
 //			public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 //					throws Exception {
-//				System.out.println("preHandler");
 //				
 //				HttpSession session = request.getSession();
 //				

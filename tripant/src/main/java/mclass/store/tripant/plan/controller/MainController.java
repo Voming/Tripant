@@ -38,8 +38,6 @@ public class MainController {
 		mv.addObject("areaNameList", planService.selectAreaNameList());
 		
 		mv.setViewName("main/home");
-		//System.out.println("insertPlace : " + placeService.insertPlace());
-		//System.out.println("selectPlaceMapList : " + timeService.selectPlaceMapList(1));
 		//timeService.makeTimeList(); 
 		return mv;
 	}

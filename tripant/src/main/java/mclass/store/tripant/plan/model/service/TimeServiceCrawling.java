@@ -47,14 +47,11 @@ public class TimeServiceCrawling {
 
 		List<PlaceMapEntity[]> startendList = new ArrayList<>();// List[출발 정보, 도착 정보]
 
-//		System.out.println("======= " + ((n * n - 1) - n + 1)); // 만들어진 경우의 수 크기
 //		경우의 수 구하기
 		perm(placeList, output, visited, depth, n, r, startendList);
 
 		/*
-		 * 결과 확인 System.out.println(resultList.size()); for(PlaceMapEntity[] i :
 		 * resultList) { System.out.print("["); System.out.print(i[0].getContentid() +
-		 * " : " +i[1].getContentid()); System.out.println("]"); }
 		 */
 //		DB에 insert하기 전에 기존내용 지우기
 //		timeRepository.deleteAllPlaceMoveTime();
@@ -78,22 +75,18 @@ public class TimeServiceCrawling {
 
 			String duration = getduration(startLng, startLat, endLng, endLat);
 
-//			System.out.println("startLng : " + startLng + " startLat : " + startLat + " endLng : " + endLng + " endLat : " + endLat);
 			
 			if(duration != null && !duration.equals("")) { //길찾기 결과를 찾을 수 없을때 null이 반환됨
 				PlaceMoveTimeEntity calTime = new PlaceMoveTimeEntity(i[0].getType(), i[0].getContentid(),
 						i[1].getType(), i[1].getContentid(), String.valueOf(duration));
 
-//				System.out.println(calTime); //insert 할 정보
 				timeRepository.insertPlaceMoveTime(calTime);
 				timeResultList.add(calTime);
 			}
 			count++;
 			if(count % 100 == 0) {
-				System.out.println(count);
 			}
 		}
-		System.out.println("=============시간 계산이 끝났습니다=================");
 		return timeResultList;
 	}
 
@@ -126,7 +119,6 @@ public class TimeServiceCrawling {
 				while ((inputLine = br.readLine()) != null) {
 					response.append(inputLine);
 				}
-//				System.out.println("\n response \n " + response.toString());
 				br.close();
 
 				// JSON 파싱하여 duration 값만 추출
@@ -139,8 +131,6 @@ public class TimeServiceCrawling {
 			}
 		} catch (Exception e) {
 //			e.printStackTrace();
-//			System.out.println("\n\n >>>>>>>>>>>>>>>>ERROR 확인해주세요<<<<<<<<<<<<<<<<");
-//			System.out.println("길찾기 결과를 찾을 수 없음");
 		}
 		return duration;
 	}
@@ -157,8 +147,6 @@ public class TimeServiceCrawling {
 			startendList.add(output.clone()); // 깊은 복사
 			/*
 			 * 결과 확인 System.out.print("["); for(PlaceMapEntity i : output) {
-			 * System.out.print(i + " : " ); } System.out.println("]");
-			 * System.out.println();
 			 */
 			return;
 		}
