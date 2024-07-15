@@ -5,16 +5,16 @@ function enterkey() {
     	searchBtnHandler();
     }
 }
-var currentPage = 1;
+let currentPage = 1;
 let searchMem = null;
 let sort = null;
 let count = 1;
-
+let sortCount =  count % 2;
 
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			var targetPage = $(thisElement).data("targetpage");
-			var sortCount =  count % 2;
+			sortCount =  count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -35,9 +35,9 @@ function goPageHandler(thisElement) {
 
 /*검색+페이징1*/
 function searchBtnHandler(){
-	var targetPage = $().data('targetpage');
-	var searchMem = $("[name=search]").val().trim();
-	var sortCount =  count % 2;
+	var targetPage = $(this).data('targetpage');
+	searchMem = $("[name=search]").val().trim();
+	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -46,8 +46,8 @@ function searchBtnHandler(){
 		 data: {
 			searchMem:searchMem
 		 	, page: targetPage, 
-		 	sort:sort,
-		 	sortCount:sortCount
+		 		sort:sort,
+		 		sortCount:sortCount
 			 },
 		 success : function(searchList) {
 			$('.wrap-list').replaceWith(searchList);
@@ -75,8 +75,8 @@ function memListHandler(searchList){
 /* 닉네임 정렬*/
 function ClickNickHandler(){
 	sort='nick'
-	var searchMem = $("[name=search]").val().trim();
-	var sortCount =  count % 2;
+	searchMem = $("[name=search]").val().trim();
+	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,

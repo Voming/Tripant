@@ -4,7 +4,7 @@ let pick = null;
 let search = null;
 let sort = null;
 let count = 1;
-
+let sortCount =  count % 2;
 function enterkey() {
 	if (window.event.keyCode == 13) {
     	// 엔터키가 눌렸을 때
@@ -15,7 +15,7 @@ function enterkey() {
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			currentPage = $(thisElement).data("targetpage");
-			var sortCount =  count % 2;
+			sortCount = count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -39,8 +39,8 @@ function goPageHandler(thisElement) {
 function searchBtnHandler(){
 	pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	search = $("[name=search]").val();  //input 값
-	var currentPage = $().data('targetpage');
-	var sortCount =  count % 2;
+	currentPage = $(this).data('targetpage');
+	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -81,8 +81,8 @@ function memListHandler(searchList){
 //좋아요수 정렬
 function ClickLikeHandler(){
 	sort = 'likes';
-	var currentPage = $().data('targetpage');
-	var sortCount =  count % 2;
+	currentPage = $(this).data('targetpage');
+	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -124,8 +124,8 @@ function LikeHandler(like){
 //조회수 정렬
 function ClickViewHandler(){
 	sort = 'view';
-	var currentPage = $().data('targetpage');
-	var sortCount =  count % 2;
+	currentPage = $().data('targetpage');
+	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		data:{

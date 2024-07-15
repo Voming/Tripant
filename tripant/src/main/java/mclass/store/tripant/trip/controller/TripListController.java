@@ -84,7 +84,7 @@ public class TripListController {
 	}
 	
 	
-	//여행목록에 유저 추가
+	//여행목록에 일행 추가
 	@PostMapping("/add/nick")//ajax
 	@ResponseBody
 	public int addNick(Integer planId,String addNick)  {
@@ -100,7 +100,7 @@ public class TripListController {
 		return result;
 	}
 	
-	//여행목록의 유저 삭제
+	//여행목록의 일행 삭제
 	@PostMapping("/remove/nick")//ajax
 	@ResponseBody
 	public int removeNick(Integer planId,String removeNick) {

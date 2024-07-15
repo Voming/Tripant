@@ -103,57 +103,53 @@ function navHandler(){
 
 // 수정된 일정 DB에 저장하기
 function saveChanges(){
-		//안 쓰는 데이터 빼내기
-		//삭제할 key : durationMin, endTime, startTime
-		for(var i = 0 ; i < detailListEditMode.length;i++){
-			editmode = detailListEditMode[i];
+	
+	//여행일자별 장소 정보 선별
+	for(var i = 0 ; i < detailListEditMode.length;i++){  // 여행일자
+		editmode = detailListEditMode[i];
+		for(var j = 0 ;j < editmode.dayDetailInfoEntity.length; j++){  // 장소장소
+			item = editmode.dayDetailInfoEntity[j];
 			
-			for(var j = 0 ;j < editmode.dayDetailInfoEntity.length; j++){
-				item = editmode.dayDetailInfoEntity[j];
-				
-				//dto에 없는 필드 제거
-				delete item.durationMin;
-				delete item.endTime;
-				delete item.startTime;
-				delete item.placeCat;
-				
-				if(item.memo == 'MEMO가 없습니다'){
-					item.memo = null; //
-				}
-				//변경된 방문순서 key에 넣어주기
-				item.travelOrder = j + 1; 
-			}
+			//DB에 저장하지 않는 dto에 없는 필드 제거 : durationMin, endTime, startTime, placeCat
+			delete item.durationMin;
+			delete item.endTime;
+			delete item.startTime;
+			delete item.placeCat;
+			//변경된 방문 장소 순서 추가 : travelOrder
+			item.travelOrder = j + 1; 
+
+			if(item.memo == 'MEMO가 없습니다'){item.memo = null; }
 		}
-		saveData = JSON.stringify(detailListEditMode);
-		//jjoggan ***
-		$.ajax({
-			beforeSend : csrfHandler,
-			error : ajaxErrorHandler,
-			url: contextPath+"trip/save/changes",
-			method:"post",
-			data:{saveData : saveData ,planId:planId},
-			success : function(result) {
-				if(result == -2){
-					Swal.fire({
-					  icon: "error",
-					  title: "저장에 실패했습니다. 관리자에게 문의해주시길 바랍니다.",
-					  showConfirmButton: false,
-					  timer: 1500
-					}).then(() => {
-						//저장실패시 여행 목록페이지로 이동
-					 	window.location.href = contextPath + 'trip/list';
-					});
-				}else{
-					Swal.fire({
-					  icon: "success",
-					  title: "저장되었습니다.",
-					  showConfirmButton: false,
-					  timer: 1500
-					}).then(() => {
-					 	window.location.hash = '';
-						location.reload();
-					});
-				}
-	        }
+	}
+	//여행일자별 장소는 object-Array ==> JSON
+	saveData = JSON.stringify(detailListEditMode);
+	$.ajax({
+		beforeSend : csrfHandler, error : ajaxErrorHandler, 
+		url: contextPath+"trip/save/changes", method:"post",
+		data:{	saveData : saveData ,  // 여행일자별 장소 정보 - object-Array ==> JSON
+				planId : planId},  // Number
+		success : function(result) {
+			if(result == -2){//저장실패시 여행 목록페이지로 이동
+				Swal.fire({
+				  icon: "error",
+				  title: "저장에 실패했습니다. 관리자에게 문의해주시길 바랍니다.",
+				  showConfirmButton: false,
+				  timer: 1500
+				}).then(() => {
+					//저장실패시 여행 목록페이지로 이동
+				 	window.location.href = contextPath + 'trip/list';
+				});
+			}else{//저장 성공 시 페이지 reload
+				Swal.fire({
+				  icon: "success",
+				  title: "저장되었습니다.",
+				  showConfirmButton: false,
+				  timer: 1500
+				}).then(() => {
+				 	window.location.hash = '';
+					location.reload();
+				});
+			}
+        }
 	});
 }
