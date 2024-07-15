@@ -4,6 +4,7 @@ let pick = null;
 let search = null;
 let sort = null;
 let count = 0;
+let count2 = 0;
 let sortCount;
 
 function enterkey() {
@@ -81,6 +82,9 @@ function memListHandler(searchList){
 function ClickLikeHandler(){
 	sort = 'likes';
 	currentPage = $(this).data('targetpage');
+	if(count2 !=0){
+		count2=0
+	}
 	sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
@@ -123,7 +127,10 @@ function LikeHandler(like){
 function ClickViewHandler(){
 	sort = 'view';
 	currentPage = $(this).data('targetpage');
-	sortCount =  ++count % 2;
+	if(count!=0){
+		count=0
+	}
+	sortCount =  ++count2 % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		data:{
