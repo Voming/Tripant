@@ -61,7 +61,6 @@ public class DiaryService {
 	@Transactional
 	public DiaryBoardEntity save(DiaryBoardEntity diary) {
 		int result = diaryRepository.insertDiary(diary);
-		System.out.println("aaa"+diary.getDiaryId());		
 		diaryRepository.insertDiaryImage(diary);
 		return diary;
 	}
@@ -70,7 +69,6 @@ public class DiaryService {
 	@Transactional
 	public DiaryBoardEntity updateDiary(DiaryBoardEntity updatedDiary) {
 		int result = diaryRepository.updateDiary(updatedDiary);
-		System.out.println("bbb"+updatedDiary.getDiaryId());		
 		diaryRepository.updateDiaryImage(updatedDiary); 
 		return updatedDiary;
 	}

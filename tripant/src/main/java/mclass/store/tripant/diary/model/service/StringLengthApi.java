@@ -72,10 +72,6 @@ public class StringLengthApi {
 		// 참고 
 		String[] strArr2 = null;
 		strArr2 = StringLengthApi.getMaxByteStringArray(str, 4000, 1000);
-		for (int i = 0; i < strArr2.length; i++) {
-			System.out.println("---- "+ i + " : "+ strArr2[i].getBytes().length);
-			System.out.println(strArr2[i]);
-		}
 	}
 
 }

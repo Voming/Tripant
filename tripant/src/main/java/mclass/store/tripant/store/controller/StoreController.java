@@ -54,7 +54,6 @@ public class StoreController {
 	// 스토어 페이지
 	@GetMapping("")
 	public ModelAndView store(ModelAndView mv, Principal principal) {
-		System.out.println(principal);
 		mv.setViewName("store/home");
 		String memEmail;
 		if(principal != null) {

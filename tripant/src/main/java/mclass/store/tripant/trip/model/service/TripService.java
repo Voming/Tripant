@@ -94,7 +94,6 @@ public class TripService {
                 JSONObject jsonObject = new JSONObject(response.toString());
                 String resultCode = jsonObject.getJSONArray("routes").getJSONObject(0).getString("result_code");
                 if(resultCode.equals("106")) return "trafficJam"; //106 : 유고 정보 (도로 사고)
-                System.out.println(jsonObject);
                 duration = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("summary").getString("duration");
 				
 			}else {
@@ -102,7 +101,6 @@ public class TripService {
 			}
 		} catch (Exception e) {
 			duration = "1800";
-			System.out.println("\n\n >>>>>>>>>>>>>>>>ERROR 확인해주세요<<<<<<<<<<<<<<<<");
 		} 
 		return duration;
 	}

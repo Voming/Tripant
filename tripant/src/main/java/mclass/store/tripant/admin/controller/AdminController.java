@@ -156,7 +156,6 @@ public class AdminController {
 			}else if(sortCount.equals("0")) {
 				model.addAttribute("complainMap",adminservice.complainList(num, pageNum, currentPage,searchMem));
 			}
-			System.out.println("!!!!!!"+sortCount);
 			return "admin/complain_fragment";
 		}
 		
@@ -195,7 +194,6 @@ public class AdminController {
 			    .build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		Map<String, Object> responseMap = gson.fromJson(response.body(), Map.class);
-		System.out.println(responseMap);
 		try {
 			Map<String, Object> cancellation = gson.fromJson(gson.toJson(responseMap.get("cancellation")), Map.class);
 			String status = (String) cancellation.get("status");

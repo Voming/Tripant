@@ -91,7 +91,6 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			updateToken.put("memEmail", email);
 			updateToken.put("naverToken", userRequest.getAccessToken().getTokenValue());
 			memberRepository.updateToken(updateToken);
-			System.out.println("네이버 토큰 >>>>>>>>>>>>> "+userRequest.getAdditionalParameters());
 			
 			// 로그인 정보
 			MemberEntity memberEntity = memberRepository.login(email);
@@ -128,7 +127,6 @@ public class OAuth2SecurityService extends DefaultOAuth2UserService {
 			Map<String, Object> updateToken = new HashMap<>();
 			updateToken.put("memEmail", email);
 			updateToken.put("googleToken", userRequest.getAccessToken().getTokenValue());
-			System.out.println("구글 토큰 >>>>>>>> "+userRequest.getAccessToken().getTokenValue());
 			memberRepository.updateToken(updateToken);
 			
 			// 로그인 정보

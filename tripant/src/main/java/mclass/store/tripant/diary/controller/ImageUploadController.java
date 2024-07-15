@@ -40,7 +40,6 @@ public class ImageUploadController {
 	public String postCloudinary(MultipartHttpServletRequest multiFile) throws IOException {
 		
 		
-		System.out.println("들어옴");
 		// 내 클라우드 정보로 cloudinary 객체 생성 
 		// Cloudinary 설정
 		Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
@@ -52,7 +51,6 @@ public class ImageUploadController {
 		
 		//		String uploadPath = request.getServletContext().getRealPath("/resources/uploadfile");
 		String uploadPath = cloudinary.uploader().getUploadUrl(ObjectUtils.emptyMap());
-		System.out.println("uploadPath : " + uploadPath);
 		
 		File uploadPathFile = new File(uploadPath);
 		if(!uploadPathFile.exists()) {
@@ -79,8 +77,6 @@ public class ImageUploadController {
 					
 						Map<String, String> uploadResult = cloudinary.uploader().upload(f, ObjectUtils.emptyMap());
 
-						System.out.println("==============================================");
-						System.out.println(uploadResult.get("url"));
 ;
 						 // 업로드 성공 시 JSON 응답 생성
 						HashMap<String, String> map = new HashMap<String, String>();

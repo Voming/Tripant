@@ -41,7 +41,6 @@ public class PlanningAlgorithm {
 	List<Spot> spotArr = new ArrayList<>();
 
 	public void planning(CalendarPlanEntity calendarPlan, int areaCode, String planTitle, String memEmail) {
-		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
 		spotN = 0;
 		dayN = 0;
 		distribute = 0;
@@ -52,14 +51,12 @@ public class PlanningAlgorithm {
 		// 날짜 별 정보(하루, 숙소)
 		dateArr = calendarPlan.getDateArr();
 		dayN = dateArr.size(); // 여행할 날짜 수
-		System.out.println("dayN : " + dayN);
 		String startDate = dateArr.get(0).getDate();
 		String endDate = dateArr.get(dateArr.size() - 1).getDate();
 
 		// 선택 한 장소
 		spotArr = calendarPlan.getSpotArr();
 		spotN = spotArr.size(); // 정점 개수 -> 선택한 장소 수
-		System.out.println("spotN : " + spotN);
 
 		// 출발지에서 가장 가까운 장소 구하기
 		int weight[] = new int[spotN];
@@ -86,7 +83,6 @@ public class PlanningAlgorithm {
 
 		distributeSpot(); // 장소 분배하기(날짜에 채우기)==================================================
 		
-		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(calendarPlan));
 
 		// insert 할 리스트 만들기
 		makePlanningMap(); // insert할 내용 result에 맞춰서 담기==================================================
@@ -104,7 +100,6 @@ public class PlanningAlgorithm {
 		
 		allMap.put("email", memEmail);
 
-		System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(allMap));
 
 		insertPlanning(allMap);
 	}
@@ -146,7 +141,6 @@ public class PlanningAlgorithm {
 					// 숙소 입력
 					if (spotArr.get(j).getSpotOrder() == (dateArr.get(i).getSpotCnt() + 1)) { // 마지막 장소가 위에서 들어간 상태
 						if (i == dateArr.size() - 1) { // 맨마지막 날 숙소는 들어가지 않음
-							System.out.println("마지막");
 						} else {
 							// 마지막 날을 제외한 숙소 입력
 							int stayId = Integer.parseInt(dateArr.get(i).getStay().getId().substring(10,
@@ -173,16 +167,12 @@ public class PlanningAlgorithm {
 		for (int i = 0; i < dateArr.size(); i++, idxDate++) {
 			int dateTimeRange = dateArr.get(i).getDateTimeRange();
 			String spotDay = dateArr.get(i).getDate();
-			System.out.println("spotDay:" + spotDay);
 
 			// 장소가 모두 채워짐. 날짜에 채울 장소가 없어 반복문 빠져나감. 멈춘날 idxDate
 			if (idxSpot == spotArr.size()) {
-				System.out.println("=== 멈춘날 idxDate:" + idxDate); // 총 날짜 수 - idxDate = 텅빈 날짜 수
 				break;
 			}
 
-			System.out.println("===1:" + idxSpot);
-			System.out.println("===4:" + spotArr.size());
 
 			// 장소 관련 초기화
 			spotOrder = 1; // 출발지:1, 장소는 2 부터 시작
@@ -194,10 +184,8 @@ public class PlanningAlgorithm {
 				spanTimeSum += spotArr.get(j).getSpotTime();
 				// 하루 소요시간을 넘치는 경우 다음날(i) 장소 시작은 멈춘장소 idxSpot부터
 				if (dateTimeRange < (weightSum + spanTimeSum)) {
-					System.out.println("====2 : " + j);
 					break;
 				}
-				System.out.println("====3 : " + j);
 				spotArr.get(j).setSpotDayIdx(i); // 몇일차 -> 0부터 시작
 				spotArr.get(j).setSpotDay(spotDay); // 방문일
 				spotArr.get(j).setSpotOrder(++spotOrder); // 출발지:1, 장소는 2 부터로 전위증감
@@ -215,13 +203,11 @@ public class PlanningAlgorithm {
 
 				// spotShiftIdx 번째 장소를 갖고 있던 날짜 index
 				Integer dayIdxSpotShift = spotArr.get(spotShiftIdx).getSpotDayIdx();
-				// System.out.println("dayIdxSpotShift:"+dayIdxSpotShift); // 절대 null 일수 없음.
 				// spotShiftIdx 번째 장소를 갖고 있던 날짜 의 spotCnt 방문장소 -1
 				int spotCnt = dateArr.get(dayIdxSpotShift).getSpotCnt();
 				dateArr.get(dayIdxSpotShift).setSpotCnt(--spotCnt); // 장소를 1개 빼기
 
 				if (spotCnt < 1) { // 출발:1, 하루의 장소 개수가 1개도 남지 않았다면 추가 shift 해야함
-					// System.out.println("======== 추가 shift !!!!");
 					spotShiftCntPlus++;
 				}
 
@@ -265,8 +251,6 @@ public class PlanningAlgorithm {
 			tour.add(spots.get(nearest)); // 가장 가까운 장소를 경로에 추가합니다. -> 가까운 장소의 순서대로 배치됨
 			visited[nearest] = true; // 해당 장소를 방문했다고 표시합니다.
 		}
-//		System.out.println("tour!!!!!!!!!");
-//		System.out.println(tour);
 		return tour; // 최종 순회 경로를 반환합니다.
 	}
 
@@ -283,7 +267,6 @@ public class PlanningAlgorithm {
 		double startLat = Double.parseDouble(startLatStr);
 		double endLng = Double.parseDouble(endLngStr);
 		double endLat = Double.parseDouble(endLatStr);
-//		System.out.println(startLng + ":" + startLat + " - " + endLng + ":" + endLat);
 		String aurlStr = String.format(
 				"https://apis-navi.kakaomobility.com/v1/directions?origin=%f,%f&destination=%f,%f&priority=TIME&summary=true",
 				startLng, startLat, endLng, endLat);
@@ -327,7 +310,6 @@ public class PlanningAlgorithm {
 		try {
 			duration = Integer.parseInt(durationStr);
 		} catch (NumberFormatException e) {
-			// System.out.println(durationStr + "!!!!!!!!!!!!!!!!!!!");
 			duration = 10800; // 오류상황 일단 3시간으로 측정
 		}
 		return duration;

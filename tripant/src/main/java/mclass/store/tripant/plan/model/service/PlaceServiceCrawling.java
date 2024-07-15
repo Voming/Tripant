@@ -57,7 +57,6 @@ public class PlaceServiceCrawling {
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
 		LocalDate currentDate =  LocalDate.now();
 		String gettime = currentDate.format(dateFormat);
-		System.out.println("###########scheduled############" + gettime);
 
 		int numOfRows = 1000;
 		int pageNo = 0;
@@ -86,9 +85,7 @@ public class PlaceServiceCrawling {
 				NodeList nTotalCount = doc.getElementsByTagName("totalCount");
 				try {
 					totalCount = Integer.parseInt(nTotalCount.item(0).getTextContent());
-					System.out.println("totalCount:" + totalCount + ", totalPage " + (totalCount / numOfRows + 1) + ": pageNo:" + pageNo);
 				} catch (Exception e) {
-					System.out.println("!!!!!!!!!!!!!!!!!!!!!! ERROR 2 : " + totalCount);
 					e.printStackTrace();
 					totalCount = 0;
 					continue;
@@ -96,7 +93,6 @@ public class PlaceServiceCrawling {
 
 				// 포맷변경 ( 년월일 시분초)
 				String yesterday = currentDate.plusDays(-1).format(dateFormat);
-				System.out.println("1일 전 : " + yesterday);
 				
 				// 파싱할 tag
 				NodeList nList = doc.getElementsByTagName("item");
@@ -118,7 +114,6 @@ public class PlaceServiceCrawling {
 					//만약 주소가 없는 장소라면 insert 하지 않음
 					String add1 = getTagValue("addr1", eElement);
 					if (add1 == null || add1.length() == 0) {
-//					System.out.println("!!!!!!!!!!!!!!!!!!!!!! Add1  NULL");
 						continue;
 					}
 					String add2 = getTagValue("add2", eElement);
@@ -139,7 +134,6 @@ public class PlaceServiceCrawling {
 					String sigungucode = getTagValue("sigungucode", eElement);
 					String tel = getTagValue("tel", eElement);
 					if (tel != null && tel.length() > 40) {
-//					System.out.println("!!!!!!!!!!!!!!!!!!!!!! tel :" + tel);
 					}
 					tel = (tel != null && tel.length() > 40) ? tel.substring(0, 40) : tel;
 					String title = getTagValue("title", eElement);// 20
@@ -177,7 +171,6 @@ public class PlaceServiceCrawling {
 					dtolist.add(dto);
 				}
 
-				System.out.println("dtolist size : " + dtolist.size());
 				if (dtolist.size() > 0) {
 				
 					 // 200개씩 끊어서 입력
@@ -188,8 +181,6 @@ public class PlaceServiceCrawling {
 //						List<PlaceEntity> dataListSlice = dtolist.stream().skip(i).limit(limitCount).collect(Collectors.toList());
 						
 						int resultPerOnce = placeRepository.insertPlace(dataListSlice);
-				    	System.out.println("=====200씩==========" + i + "번째================");
-						System.out.println("DB result : " + resultPerOnce);
 						result += resultPerOnce;
 				        dataListSlice.clear();
 				        
@@ -198,7 +189,6 @@ public class PlaceServiceCrawling {
 					} while(i < dtolist.size());
 				}
 			} catch (Exception e) {
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!! ERROR 1 ??????");
 //				e.printStackTrace();
 			}
 		} // while
@@ -221,7 +211,6 @@ public class PlaceServiceCrawling {
 				result += getApi(arrType[arrTypeIdx], i, isModifiedData);
 				i = (i == 8) ? i = 31 : ++i;
 			}
-			System.out.println(arrTypeIdx + ": result : " + result);
 			arrTypeIdx++;
 		}
 
