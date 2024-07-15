@@ -3,8 +3,10 @@ let currentPage = 1;
 let pick = null;
 let search = null;
 let sort = null;
-let count = 1;
-let sortCount =  count % 2;
+let count = 0;
+let count2 = 0;
+let sortCount;
+
 function enterkey() {
 	if (window.event.keyCode == 13) {
     	// 엔터키가 눌렸을 때
@@ -15,7 +17,6 @@ function enterkey() {
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			currentPage = $(thisElement).data("targetpage");
-			sortCount = count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -40,7 +41,6 @@ function searchBtnHandler(){
 	pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	search = $("[name=search]").val();  //input 값
 	currentPage = $(this).data('targetpage');
-	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -82,7 +82,10 @@ function memListHandler(searchList){
 function ClickLikeHandler(){
 	sort = 'likes';
 	currentPage = $(this).data('targetpage');
-	sortCount =  count % 2;
+	if(count2 !=0){
+		count2=0
+	}
+	sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -98,7 +101,6 @@ function ClickLikeHandler(){
 	}).done(function(data){
 		if(data){
 			$('.wrap-list').replaceWith(data);
-			count += 1;
 		}
 	});
 } 
@@ -124,8 +126,11 @@ function LikeHandler(like){
 //조회수 정렬
 function ClickViewHandler(){
 	sort = 'view';
-	currentPage = $().data('targetpage');
-	sortCount =  count % 2;
+	currentPage = $(this).data('targetpage');
+	if(count!=0){
+		count=0
+	}
+	sortCount =  ++count2 % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		data:{
@@ -141,7 +146,6 @@ function ClickViewHandler(){
 	}).done(function(data){
 		if(data){
 			$('.wrap-list').replaceWith(data);
-			count += 1;
 		}
 	});
 } 

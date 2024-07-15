@@ -8,13 +8,12 @@ function enterkey() {
 let currentPage = 1;
 let searchMem = null;
 let sort = null;
-let count = 1;
-let sortCount =  count % 2;
+let count = 0;
+let sortCount;
 
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			var targetPage = $(thisElement).data("targetpage");
-			sortCount =  count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -37,7 +36,6 @@ function goPageHandler(thisElement) {
 function searchBtnHandler(){
 	var targetPage = $(this).data('targetpage');
 	searchMem = $("[name=search]").val().trim();
-	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -76,7 +74,7 @@ function memListHandler(searchList){
 function ClickNickHandler(){
 	sort='nick'
 	searchMem = $("[name=search]").val().trim();
-	sortCount =  count % 2;
+	sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -91,7 +89,6 @@ function ClickNickHandler(){
 	}).done(function(data){
 		if(data){
 			$('.wrap-list').replaceWith(data);
-			count += 1;
 		}
 	});
 } 

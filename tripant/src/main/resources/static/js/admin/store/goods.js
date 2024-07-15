@@ -322,7 +322,7 @@ var endPageNum = null;
 
 /* 페이징 이동 함수 */
 function goPageHandler() {
-			var currentpage = $(this).data("targetpage");
+			currentpage = $(this).data("targetpage");
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,

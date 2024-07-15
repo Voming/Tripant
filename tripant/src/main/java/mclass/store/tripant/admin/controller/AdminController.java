@@ -66,11 +66,11 @@ public class AdminController {
 			, @RequestParam(name = "page", required = false, defaultValue = "1")Integer currentPage
 			, @RequestParam(required = false )String searchMem
 			,@RequestParam(required = false ) String sort
-			,@RequestParam(required = false ) String sortCount
+			,@RequestParam(required = false ) Integer sortCount
 			) {
-		if(sortCount.equals("1")) {
+		if(sortCount==1) {
 			model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem,sort));
-		}else if (sortCount.equals("0")) {
+		}else if (sortCount==0) {
 			model.addAttribute("memMap",adminservice.selectMemList( num, pageNum, currentPage, searchMem));
 		}
 		
@@ -123,11 +123,11 @@ public class AdminController {
 			,@RequestParam(required = false ) String search
 			,@RequestParam(required = false ) String pick
 			,@RequestParam(required = false ) String sort
-			,@RequestParam(required = false ) String sortCount
+			,@RequestParam(required = false ) Integer sortCount
 			) {
-		if(sortCount.equals("1")) {
+		if(sortCount==1) {
 			model.addAttribute("diaryMap",adminservice.keywordSearch(num, pageNum, currentPage, pick, search, sort));
-		}else if(sortCount.equals("0")) {
+		}else if(sortCount==0) {
 			model.addAttribute("diaryMap",adminservice.boardList( num, pageNum, currentPage, pick,search));
 		}
 		
