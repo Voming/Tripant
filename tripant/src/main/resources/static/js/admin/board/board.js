@@ -31,7 +31,6 @@ function goPageHandler(thisElement) {
 			}).done(function(a){
 				if(a){
 					$(".wrap-list").replaceWith(a);
-					count += 1;
 				}
 			});
 	}
@@ -56,7 +55,6 @@ function searchBtnHandler(){
 		},
 		success : function(searchList) {
 				$('.wrap-list').replaceWith(searchList);
-				count += 1;
 			}
 	});
 }
