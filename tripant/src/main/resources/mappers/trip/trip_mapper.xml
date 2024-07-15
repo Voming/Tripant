@@ -50,7 +50,7 @@
 		WHERE NUM <![CDATA[<=]]> #{maxNum}
 	</select>
 	
-<!-- 편집된 일정 저장 -->
+<!-- 수정된 일정 저장 -->
 	<insert id="saveChange" parameterType="java.util.HashMap">
 		INSERT ALL 
         <foreach collection="dtos" item="dtos" >

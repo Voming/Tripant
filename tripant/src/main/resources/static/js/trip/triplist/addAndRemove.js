@@ -73,8 +73,6 @@ function addHandler(){
 				$(this).addClass('remove');
 				$(this).text('삭제');
 				addAndRemoveHandler();
-			} else if (result == -500){
-				alert("re try")
 			}
 		}
 	});

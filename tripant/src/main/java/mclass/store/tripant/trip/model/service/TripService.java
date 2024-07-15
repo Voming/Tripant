@@ -51,20 +51,21 @@ public class TripService {
 		return repository.selectAllFindList(findArea, areaCode, maxNum);
 	}
 
-	//일정 저장
-	@Transactional //repositoy 두 개를 한 몸처럼 다룸
+	//일정 저장 및 수정
+	@Transactional
 	public Integer saveChange(Map<String, Object> paramMap) throws DataAccessException {
-		Integer planId = (Integer) paramMap.get("planId");
-		repository.saveDelete(planId);
-		return repository.saveChange(paramMap);
+		// 기존 일정을 삭제
+		repository.saveDelete((Integer) paramMap.get("planId"));
+		// 일정을 추가
+		return repository.saveChange(paramMap);  // 
 	}
 	
 	//장소간 이동시간 구하기
 	public String getduration(
-			 String startLngStr,  //시작 경도 
-			 String startLatStr,  //시작 위도
-			 String endLngStr,    //도착 경도
-			 String endLatStr    //도착 위도
+			String startLngStr /* 시작 경도 */,
+			String startLatStr /* 시작 위도 */,
+			String endLngStr /* 도착 경도 */, 
+			String endLatStr /* 도착 위도 */   
 			 ) {
 		double startLng = Double.parseDouble(startLngStr);
 		double startLat = Double.parseDouble(startLatStr);

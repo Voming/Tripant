@@ -88,25 +88,24 @@ public class TripController {
 		return "plan/spot_tab_content";
 	}
 
-	//일정 저장 
-	ObjectMapper mapper = new ObjectMapper();
 
 	@PostMapping("/save/changes")
 	@ResponseBody
-	public Integer saveChanges(
-			@RequestParam String saveData, @RequestParam Integer planId 
+	public Integer saveChanges( @RequestParam String saveData  // (여행일자별 장소 정보 - object-Array ==> JSON) ==> String
+								, @RequestParam Integer planId  // Number ==> Integer
 			) throws Exception {
+		// 여행일자별 장소 정보 ((object-Array ==> JSON) ==> String) ==> List<DTO> 
+		List<DayEntity> dtos = Arrays.asList(new ObjectMapper().readValue(saveData, DayEntity[].class));
 		
-		List<DayEntity> dtos = Arrays.asList(mapper.readValue(saveData, DayEntity[].class));
 		Map<String, Object> paramMap = new HashMap<String, Object> ();
-        paramMap.put("planId", planId);
-        paramMap.put("dtos", dtos);
+        paramMap.put("planId", planId);  paramMap.put("dtos", dtos);
         
         Integer result = 0;
         try {
+        	// DB insert
         	result = service.saveChange(paramMap);
-		} catch (Exception e) {
-			result = -2;
+		} catch (Exception e) {  
+			result = -2; //저장실패시
 		}
 		return result;
 	}
