@@ -39,7 +39,7 @@ function goPageHandler(thisElement) {
 function searchBtnHandler(){
 	pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	search = $("[name=search]").val();  //input 값
-	var currentPage = $().data('targetpage');
+	var currentPage = $(this).data('targetpage');
 	var sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
@@ -81,7 +81,7 @@ function memListHandler(searchList){
 //좋아요수 정렬
 function ClickLikeHandler(){
 	sort = 'likes';
-	var currentPage = $().data('targetpage');
+	var currentPage = $(this).data('targetpage');
 	var sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,

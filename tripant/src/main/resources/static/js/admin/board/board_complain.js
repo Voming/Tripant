@@ -64,7 +64,7 @@ function goPageHandler(thisElement) {
 //검색
 function searchBtnHandler(){
 	var searchMem = $("[name=search]").val().trim();
-	var currentPage = $().data("targetpage");
+	var currentPage = $(this).data("targetpage");
 	var sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
@@ -105,7 +105,7 @@ function memListHandler(complainList){
 function clickReportHandler(){
 	sort='reports'
 	var searchMem = $("[name=search]").val().trim();
-	var currentPage = $().data("targetpage");
+	var currentPage = $(this).data("targetpage");
 	var sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
