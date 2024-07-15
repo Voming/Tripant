@@ -35,7 +35,7 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 		if(msg.contains("4021")) {
 			Map<String, Object> map = gson.fromJson(msg, Map.class);
 			request.getSession().setAttribute("memEmail", map.get("memEmail"));
-			response.sendRedirect(request.getContextPath()+"exception?code=4021");
+			response.sendRedirect(request.getContextPath()+"/exception?code=4021");
 			return;
 		}
 		// 각 경우에 취할 행동
