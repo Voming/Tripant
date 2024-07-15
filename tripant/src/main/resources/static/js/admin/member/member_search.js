@@ -9,12 +9,12 @@ let currentPage = 1;
 let searchMem = null;
 let sort = null;
 let count = 1;
-
+let sortCount =  count % 2;
 
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			var targetPage = $(thisElement).data("targetpage");
-			var sortCount =  count % 2;
+			sortCount =  count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -36,8 +36,8 @@ function goPageHandler(thisElement) {
 /*검색+페이징1*/
 function searchBtnHandler(){
 	var targetPage = $(this).data('targetpage');
-	  searchMem = $("[name=search]").val().trim();
-	var sortCount =  count % 2;
+	searchMem = $("[name=search]").val().trim();
+	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -76,7 +76,7 @@ function memListHandler(searchList){
 function ClickNickHandler(){
 	sort='nick'
 	searchMem = $("[name=search]").val().trim();
-	var sortCount =  count % 2;
+	sortCount =  count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
