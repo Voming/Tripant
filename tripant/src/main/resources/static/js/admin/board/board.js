@@ -16,7 +16,6 @@ function enterkey() {
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			currentPage = $(thisElement).data("targetpage");
-			sortCount = ++count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -41,7 +40,6 @@ function searchBtnHandler(){
 	pick=$("select[name=option] option:selected").val(); //선택한 option val값 
 	search = $("[name=search]").val();  //input 값
 	currentPage = $(this).data('targetpage');
-	sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,

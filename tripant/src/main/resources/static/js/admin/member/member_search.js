@@ -14,7 +14,6 @@ let sortCount;
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			var targetPage = $(thisElement).data("targetpage");
-			sortCount =  ++count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -37,7 +36,6 @@ function goPageHandler(thisElement) {
 function searchBtnHandler(){
 	var targetPage = $(this).data('targetpage');
 	searchMem = $("[name=search]").val().trim();
-	sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,

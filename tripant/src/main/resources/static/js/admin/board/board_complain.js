@@ -40,8 +40,7 @@ let count = 0;
 
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
-			var currentPage = $(thisElement).data("targetpage");
-			var sortCount =  ++count % 2;
+			currentPage = $(thisElement).data("targetpage");
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -62,8 +61,8 @@ function goPageHandler(thisElement) {
 
 //검색
 function searchBtnHandler(){
-	var searchMem = $("[name=search]").val().trim();
-	var currentPage = $(this).data("targetpage");
+	searchMem = $("[name=search]").val().trim();
+	currentPage = $(this).data("targetpage");
 	var sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
@@ -102,8 +101,8 @@ function memListHandler(complainList){
 //신고수 정렬
 function clickReportHandler(){
 	sort='reports'
-	var searchMem = $("[name=search]").val().trim();
-	var currentPage = $(this).data("targetpage");
+	searchMem = $("[name=search]").val().trim();
+	currentPage = $(this).data("targetpage");
 	var sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
