@@ -204,6 +204,7 @@ function stayDeleteBtnClickHandler(thisElement) {
 			$(id).attr("disabled", false);
 		}
 	});
+	displayStayCheckList();
 
 	// 장소 정보 삭제
 	$.each(calendarPlan.dateArr, function(idx, element) {
@@ -268,6 +269,7 @@ function stayCkBtnClickHandler(thisElement) {
 	} else { // 체크박스 선택
 		//해제 불가
 		thisElement.disabled = true;
+		displayStayCheckList();
 		stayBefor = new Stay(id, title, latx, lngy, img, type);
 
 		//모달 숙소 이름 변경
