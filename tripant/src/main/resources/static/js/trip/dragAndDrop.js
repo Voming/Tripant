@@ -218,13 +218,13 @@ function dragAndDrop() {
 
 	containers.forEach(container => {
 		container.addEventListener('dragover', e => {
-			e.preventDefault()
+			e.preventDefault();
 			const afterElement = getDragAfterElement(container, e.clientY);
-			const draggable = document.querySelector('.dragging')
+			const draggable = document.querySelector('.dragging');
 
 			after_i = $(afterElement).data("i");
 			after_j = $(afterElement).data("j");
-			container.insertBefore(draggable, afterElement)
+			container.insertBefore(draggable, afterElement);
 		})
 	});
 
