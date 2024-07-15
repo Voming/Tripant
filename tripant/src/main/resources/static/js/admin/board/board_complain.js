@@ -36,12 +36,12 @@ function cickSetHandler(){
 let currentPage = 1;
 let sort = null;
 let searchMem = null;
-let count = 1;
+let count = 0;
 
 /* 페이징 이동 함수 */
 function goPageHandler(thisElement) {
 			var currentPage = $(thisElement).data("targetpage");
-			var sortCount =  count % 2;
+			var sortCount =  ++count % 2;
 			$.ajax({
 				beforeSend : csrfHandler,
 				error : ajaxErrorHandler,
@@ -56,7 +56,6 @@ function goPageHandler(thisElement) {
 				}).done(function(a){
 					if(a){
 						$(".wrap-list").replaceWith(a);
-						count += 1;
 				}
 			});
 	}
@@ -65,7 +64,7 @@ function goPageHandler(thisElement) {
 function searchBtnHandler(){
 	var searchMem = $("[name=search]").val().trim();
 	var currentPage = $(this).data("targetpage");
-	var sortCount =  count % 2;
+	var sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -75,7 +74,6 @@ function searchBtnHandler(){
 		 sort:sort,sortCount:sortCount},
 		 success : function(complainList) {
 			 $('.wrap-list').replaceWith(complainList);
-			 count += 1;
 			}
 	});
 }
@@ -106,7 +104,7 @@ function clickReportHandler(){
 	sort='reports'
 	var searchMem = $("[name=search]").val().trim();
 	var currentPage = $(this).data("targetpage");
-	var sortCount =  count % 2;
+	var sortCount =  ++count % 2;
 	$.ajax({
 		beforeSend : csrfHandler,
 		error : ajaxErrorHandler,
@@ -121,7 +119,6 @@ function clickReportHandler(){
 		 }).done(function(data){
 		if(data){
 			$('.wrap-list').replaceWith(data);
-			count += 1;
 		}
 	});
 } 
