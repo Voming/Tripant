@@ -1,28 +1,29 @@
-//드래그 앤 드랍
-let after_i;
-let after_j;
-function dragAndDrop() {
-	/**
-	 * [x] 엘리먼트의 .draggable, .container의 배열로 선택자를 지정합니다.
-	 * [x] draggables를 전체를 루프하면서 dragstart, dragend를 이벤트를 발생시킵니다.
-	 * [x] dragstart, dragend 이벤트를 발생할때 .dragging라는 클래스를 토글시킨다.
-	 * [x] dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
-	 */
+	
+	//드래그 앤 드랍
+	let after_i;
+	let after_j;
+	function dragAndDrop() {
+		/**
+		 * [x] 엘리먼트의 .draggable, .container의 배열로 선택자를 지정합니다.
+		 * [x] draggables를 전체를 루프하면서 dragstart, dragend를 이벤트를 발생시킵니다.
+		 * [x] dragstart, dragend 이벤트를 발생할때 .dragging라는 클래스를 토글시킨다.
+		 * [x] dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
+		 */
+	
+		// $() 안의 선택자를 가진 모든 요소들을 선택함
+		const draggables = document.querySelectorAll('.packing .draggable');
+		const containers = document.querySelectorAll('.packing .container');
+	
+		draggables.forEach(el => {
+			el.addEventListener('dragstart', (e) => {
+				console.log("dragstart");
+				el.classList.add('dragging');
+			});
+	
+			el.addEventListener('dragend', (e) => {
 
-	//$자체에 함수? 선언 $() 안의 선택자를 가진 모든 요소들을 선택함
-	//const $ = (select) => document.querySelectorAll(select);
-	const draggables = document.querySelectorAll('.packing .draggable');
-	const containers = document.querySelectorAll('.packing .container');
-
-	draggables.forEach(el => {
-		el.addEventListener('dragstart', (e) => {
-			console.log("dragstart");
-			//e.target.classList.add('dragging');
-			el.classList.add('dragging');
-		});
-
-		el.addEventListener('dragend', (e) => {
-
+//$자체에 함수? 선언
+//const $ = (select) => document.querySelectorAll(select);
 			var prev_i = $(el).prev().data("i");
 			var prev_j = $(el).prev().data("j");
 			var el_i = $(el).data("i");
