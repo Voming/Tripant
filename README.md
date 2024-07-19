@@ -159,14 +159,12 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   <summary><h3>  📌 오예인 </h3></summary>
   
   ### 1. 주요 기능 및 시현
-  
-  ### 2. ERD
 
-  ### 3. 플로우 차트
+  ### 2. 플로우 차트
   
 <img src="Readme/관리자_플로우차트.png">
 
-  ### 4. 화면설계서
+  ### 3. 화면설계서
 <img src="Readme/관리자_화면설계서01.png">
 <img src="Readme/관리자_화면설계서02.png">
 <img src="Readme/관리자_화면설계서03.png">
@@ -179,7 +177,7 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 <img src="Readme/관리자_화면설계서09.png">
 <img src="Readme/관리자_화면설계서10.png">
 
-  ### 5.  ClassDiagram
+  ### 4.  ClassDiagram
 
   <img src="Readme/관리자_ClassDiagram.png">
   
