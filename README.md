@@ -169,6 +169,15 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   ### 4. 화면설계서
 <img src="Readme/관리자_화면설계서01.png">
 <img src="Readme/관리자_화면설계서02.png">
+<img src="Readme/관리자_화면설계서03.png">
+<img src="Readme/관리자_화면설계서04.png">
+<img src="Readme/관리자_화면설계서05.png">
+<img src="Readme/관리자_화면설계서06.png">
+<img src="Readme/관리자_화면설계서06.png">
+<img src="Readme/관리자_화면설계서07.png">
+<img src="Readme/관리자_화면설계서08.png">
+<img src="Readme/관리자_화면설계서09.png">
+<img src="Readme/관리자_화면설계서10.png">
 
   ### 5.  ClassDiagram
 </details>
