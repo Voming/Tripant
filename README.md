@@ -24,12 +24,13 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 ## 3️⃣ 개발환경
 <img src="Readme/tripant_개발환경_3.png">
 
-- **운영체제** : Window 10
-- **사용언어** : Java, JSP, HTML5, CSS, JavaScript
-- **DB** : JDBC, MyBatis, Oracle JOB
-- **Tool** : STS 3, ERD Cloud, Chrome Developer Tool, VS Code, Postman, SqlDevelope
-- **WAS** : Tomcat 9
-- **Collaboration** : GitHub, GitHub Desktop, Notion, Figma, Google Drive, ERD Cloud
+- **사용언어** : Java, HTML5, CSS3, JavaScript
+- **DB** :  OracleDB, PL/SQL, JOB 
+- **Tool** : STS4, VSCode, Sql Developer,Chrome Developer Tool, ERD-cloud, draw.io, figma, IntelliJ 
+- **WAS** :  Spring Boot 3 내장 Tomcat
+- **Collaboration** : GitHub, Github Desktop,Notion,Google Drive/Docs
+- **FrameWork/ Library** : Thymeleaf, JQuery, ckEditor(wysiwyg),FullCalendar, Date Picker, Spring Boot 3, lombok, Spring Security,Oauth2,MyBatis,Cloudinary(File Storage),aspectj-weaver, log4jdbc, log4j2, Jackson, Gson, Document
+- **API** : 한국관광공사_국문 관광정보 서비스_GW, Kakao Mobility Developers길찾기 API,Kakao Postcode API
 
 ## 4️⃣ 기능 구현 / 화면
 <details>
