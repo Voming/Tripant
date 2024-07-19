@@ -53,6 +53,44 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 </details>
 <details>
   <summary><h3>배소진</h3></summary>
+
+  ### 1. 주요 기능 및 시현
+ **<p>여행기 시현 </p>** 
+  
+ **<p>여행기 주요기능 </p>** 
+1. 여행기 탐색 : 조회순, 인기순, 최신순으로 정렬 공개된 여행기 리스트를 볼 수 있습니다. 
+2. 신고하기 : 적절하지 못한 글은 신고 할 수 있습니다. 게시글 신고 수 5개 이상은 게시글 삭제, 사용자 전체 게시글 신고수 합 5개 이상은 계정 정지가 됩니다.
+3. 좋아요, 조회수 : 마음에 드는 여행기는 좋아요를 남길 수 있습니다. 좋아요 수와 조회수는 관리자 페이지에서 분석하여 활용할 수 있습니다.
+4. 여행기 작성 및 수정 : 여행 중 경험한 일들을 글과 사진으로 기록할 수 있습니다. 스토어에서 테마 또는 폰트 구매 시 적용되어 글 작성 및 수정 할 수 있습니다.
+5. 공개 설정: 작성한 여행기는 다른 사용자들이 볼 수 있도록 공개하거나 비공개로 설정할 수 있습니다.
+
+  ### 2. ERD
+
+  <img src="Readme/여행기_ERD_21.png">
+
+  ### 3. 플로우 차트
+
+  <img src="Readme/여행기_플로우차트_14.png">
+
+  ### 4. 화면설계서
+  
+ <img src="Readme/여행기_화면설계서01_.png">
+  <img src="Readme/여행기_화면설계서02_.png">
+ <img src="Readme/여행기_화면설계서03_.png">
+ <img src="Readme/여행기_화면설계서04_.png">
+ <img src="Readme/여행기_화면설계서05_.png">
+ <img src="Readme/여행기_화면설계서06_.png">
+ <img src="Readme/여행기_화면설계서07_.png">
+ <img src="Readme/여행기_화면설계서08_.png">
+ <img src="Readme/여행기_화면설계서08_01_.png">
+ <img src="Readme/여행기_화면설계서09_.png">
+ <img src="Readme/여행기_화면설계서09_01_.png">
+ <img src="Readme/여행기_화면설계서10_.png">
+     <img src="Readme/여행기_화면설계서10_01_.png">
+     
+  ### 5.  ClassDiagram
+   <img src="Readme/여행기_ClassDiagram.png">
+   
 </details>
 <details>
   <summary><h3>오예인</h3></summary>
