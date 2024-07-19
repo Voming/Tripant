@@ -34,7 +34,7 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 
 ## 4️⃣ 기능 구현 / 화면
 <details>
-  <summary><h3>서재원</h3></summary>
+  <summary><h3> 📌 서재원</h3></summary>
   
   ### 1. 주요 기능 및 시현
   
@@ -47,13 +47,13 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   ### 5.  ClassDiagram
 </details>
 <details>
-  <summary><h3>김보민</h3></summary>
+  <summary><h3> 📌 김보민 </h3></summary>
 </details>
 <details>
-  <summary><h3>김은진</h3></summary>
+  <summary><h3> 📌 김은진</h3></summary>
 </details>
 <details>
-  <summary><h3>배소진</h3></summary>
+  <summary><h3> 📌 배소진 </h3></summary>
 
   ### 1. 주요 기능 및 시현
   
@@ -138,7 +138,7 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   ### 4. 화면설계서
   
  <img src="Readme/여행기_화면설계서01_.png">
-  <img src="Readme/여행기_화면설계서02_.png">
+ <img src="Readme/여행기_화면설계서02_.png">
  <img src="Readme/여행기_화면설계서03_.png">
  <img src="Readme/여행기_화면설계서04_.png">
  <img src="Readme/여행기_화면설계서05_.png">
@@ -149,14 +149,14 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
  <img src="Readme/여행기_화면설계서09_.png">
  <img src="Readme/여행기_화면설계서09_01_.png">
  <img src="Readme/여행기_화면설계서10_.png">
-     <img src="Readme/여행기_화면설계서10_01_.png">
+ <img src="Readme/여행기_화면설계서10_01_.png">
      
   ### 5.  ClassDiagram
    <img src="Readme/여행기_ClassDiagram.png">
    
 </details>
 <details>
-  <summary><h3>오예인</h3></summary>
+  <summary><h3>  📌 오예인 </h3></summary>
 </details>
 
 
@@ -192,11 +192,8 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 <https://www.figma.com/board/H19KR33mtEAFC4aA1jiaS3/%ED%94%8C%EB%A1%9C%EC%9A%B0%EC%B0%A8%ED%8A%B8?node-id=0-1>
 <br>
 
-## 6. 화면설계서
+## 6. ClassDiagram
 
-<br>
-
-## 7. ClassDiagram
 <img src="Readme/tripAnt_ClassDiagram.png">
 
 
