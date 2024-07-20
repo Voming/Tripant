@@ -1,4 +1,4 @@
-# Tripant
+![화면설계서_여행일정-장소추가9](https://github.com/user-attachments/assets/e450cffb-0b09-498c-b60e-e707bc6e0834)# Tripant
 ----
 트립앤트 
 KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
@@ -51,12 +51,20 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 </details>
 <details>
   <summary><h3> 📌 김은진</h3></summary>
-   ### 1. 주요 기능 및 시현
-  
-   <br>
-  > **여행목록 확인 및 삭제, 일행 추가와 삭제 **
+    ### 1. 주요 기능 및 시현
 
-   <div align=center>![여행목록v](https://github.com/user-attachments/assets/5c34b5d9-774d-4fde-a31c-04fb65a231c4)</div>
+ 
+ <br>
+
+> **여행목록 확인 및 삭제, 일행 추가와 삭제**
+
+
+  <div align=center>
+     
+  ![여행목록v](https://github.com/user-attachments/assets/5c34b5d9-774d-4fde-a31c-04fb65a231c4)
+   
+   </div>
+ 
   **주요기능 설명**
  
   *여행 및 일행 관리*
@@ -68,9 +76,14 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   - 생성자가 삭제할 경우 공유자들의 목록에서도 삭제되며 공유자일 경우 해당 유저의 목록에서만 여행이 삭제됩니다.
 
   <br>
+  
   > **여행 일별 상세내용 보기 **
 
-   <div align=center> </div>
+   <div align=center>
+   ![여행세부일정3](https://github.com/user-attachments/assets/added985-a5e8-42d6-9cf0-d99f3ca20795)
+
+   </div>
+   
   **주요기능 설명**
  
   *여행세부정보*
@@ -80,11 +93,16 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   - 이동 시간은 다음 장소 도착시각에 반영됩니다.
   - 이동시간을 클릭하면 카카오맵 길찾기 창을 열어줍니다.
   - 메모아이콘에 마우스를 올리면 작성된 메모를 확인할 수 있습니다.
-  - 
+    
   <br>
+  
   > **메모, 방문순서, 장소 추가 및 삭제, 머무는 시간 변경하기 **
 
-   <div align=center> </div>
+   <div align=center>
+   ![일정편집3](https://github.com/user-attachments/assets/aad6163c-9b95-4167-8aa7-f58f7041ee20)
+
+   </div>
+   
   **주요기능 설명**
  
   *여행편집*
@@ -98,30 +116,43 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   <br>
   > **여행장소 추가하기 **
 
-   <div align=center> </div>
-  **주요기능 설명**
+   <div align=center> 
+
+ ![장소추가3](https://github.com/user-attachments/assets/95f2ffa1-1de6-4edc-9b02-dc51f1642129)
  
+   </div>
+   
+  **주요기능 설명**
+  
   *장소추가*
   
   - 사용자는 일정을 생성할 때 빠뜨렸던 장소를 추가할 수 있습니다.
   - 검색을 하거나 태그를 통해 추가할 장소를 찾을 수 있습니다. 
   - 머무는 시간을 지정하고 드래그 앤 드롭을 통해 유저가 원하는 위치에 추가할 수 있습니다.
+    
   <br>
 
   ### 2. ERD
 
-  
+   <img src="Readme/여행일정-ERD.png">
 
   ### 3. 플로우 차트
 
-  
+   <img src="Readme/여행일정_플로우차트.png">
 
   ### 4. 화면설계서
-  
-
+  <img src="Readme/화면설계서_여행목록1.png">
+  <img src="Readme/화면설계서_여행목록2-공유.png">
+  <img src="Readme/화면설계서_여행삭제3.png">
+  <img src="Readme/화면설계서_여행일정보기4.png">
+  <img src="Readme/화면설계서_여행일정-일별보기5.png">
+  <img src="Readme/화면설계서_여행일정-편집6.png">
+  <img src="Readme/화면설계서_여행일정-메모편집7.png">
+  <img src="Readme/화면설계서_여행일정-저장8.png">
+  <img src="Readme/화면설계서_여행일정-장소추가9.png">
      
   ### 5.  ClassDiagram
-   
+  <img src="Readme/여행일정_클래스다이어그램.png">
 
  ### 6. 개발 이슈
 
