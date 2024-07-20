@@ -51,12 +51,13 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 </details>
 <details>
   <summary><h3> 📌 김은진</h3></summary>
-    ### 1. 주요 기능 및 시현
+  
+  ### 1. 주요 기능 및 시현
 
  
- <br>
+   <br>
 
-> **여행목록 확인 및 삭제, 일행 추가와 삭제**
+  > **여행목록 확인 및 삭제, 일행 추가와 삭제**
 
 
   <div align=center>
@@ -78,8 +79,8 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   <br>
   
   > **여행 일별 상세내용 보기 **
-
    <div align=center>
+     
    ![여행세부일정3](https://github.com/user-attachments/assets/added985-a5e8-42d6-9cf0-d99f3ca20795)
 
    </div>
@@ -97,8 +98,8 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   <br>
   
   > **메모, 방문순서, 장소 추가 및 삭제, 머무는 시간 변경하기 **
-
    <div align=center>
+     
    ![일정편집3](https://github.com/user-attachments/assets/aad6163c-9b95-4167-8aa7-f58f7041ee20)
 
    </div>
@@ -115,10 +116,9 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
     
   <br>
   > **여행장소 추가하기 **
-
    <div align=center> 
 
- ![장소추가3](https://github.com/user-attachments/assets/95f2ffa1-1de6-4edc-9b02-dc51f1642129)
+   ![장소추가3](https://github.com/user-attachments/assets/95f2ffa1-1de6-4edc-9b02-dc51f1642129)
  
    </div>
    
