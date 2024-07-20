@@ -166,7 +166,7 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 
    ### 6. 개발 이슈
 <img src ="Readme/여행기 게시판 -Cloudinary-0.png">
-<img src ="RReadme/여행기 게시판 -Cloudinary-01.png">
+<img src ="Readme/여행기 게시판 -Cloudinary-01.png">
 <img src ="Readme/여행기 게시판 -Cloudinary-02.png">
 <img src ="Readme/여행기 게시판 post-01.png">
 <img src ="Readme/여행기 게시판 post-02.png">
