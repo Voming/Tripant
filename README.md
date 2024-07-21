@@ -311,10 +311,10 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   > **정렬 기능**
 
 
-  <div>
+  <div align=center>
      
+  ![정렬 (1)](https://github.com/user-attachments/assets/76b53a3c-fc8b-4b20-ba61-d1c856ea1f2c)
 
-   
    </div>
  
   **주요기능 설명**
