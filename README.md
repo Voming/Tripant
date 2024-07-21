@@ -53,6 +53,25 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   
    <br>
 
+   
+  > **메인 지역 검색 및 여행기 이동**
+
+
+  <div align=center>
+
+  ![메인 지역 검색](https://github.com/user-attachments/assets/3852d891-cec2-450c-9936-65baa9680a63)
+  
+  </div>
+ 
+  **주요기능 설명**
+ 
+   *지역 검색 및 여행기 이동*
+  
+  - 검색어를 입력하면 해당 단어가 포함된 지역이 나타납니다.
+  - 지역 클릭시 여행기로 이동하여 해당 지역에 올라온 여행기 리스트를 볼 수 있습니다. 
+    
+  <br>
+
   > **일정 만들기 시작(로그인 체크) 및 지역과 제목 입력하기**
 
    <div align=center>
@@ -179,6 +198,14 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   <img src="Readme/일정-클래스다이어그램.png">
 
  ### 6. 개발 이슈
+  <img src="Readme/일정 개발이슈1.png">
+  <img src="Readme/일정 개발이슈2.png">
+  <img src="Readme/일정 개발이슈3.png">
+  <img src="Readme/일정 개발이슈4.png">
+  <img src="Readme/일정 개발이슈5.png">
+  <img src="Readme/일정 개발이슈6.png">
+  <img src="Readme/일정 개발이슈7.png">
+  <img src="Readme/일정 개발이슈8.png">
 
 </details>
 <details>
