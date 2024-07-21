@@ -363,7 +363,10 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 <br>
 
 ## 3. ERD
+
 <img src="Readme/tripAnt_ERD전체.png">
+
+<https://www.erdcloud.com/d/6PaqBmMRJg9eH3AHq>
 
 <br>
 
@@ -382,6 +385,13 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 
 ## 6. ClassDiagram
 
-<img src="Readme/tripAnt_ClassDiagram.png">
+<img src="Readme/member_config.png">
+<img src="Readme/trip.png">
+<img src="Readme/store.png">
+<img src="Readme/plan_place.png">
+<img src="Readme/diary.png">
+<img src="Readme/admin.png">
 
+## 7. SequenceDiagram
 
+<img src="Readme/SequenceDiagram.png">
