@@ -295,8 +295,7 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 
   <div align=center>
     
-
-   ![검색]( https://github.com/seojw0730/Tripant/issues/3#issue-2421196385)
+   ![검색](https://github.com/user-attachments/assets/4a0cc34a-8d3d-422e-819b-87e1a94d671f)
    </div>
  
   **주요기능 설명**
