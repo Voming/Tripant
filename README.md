@@ -115,7 +115,7 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 > **스토어**
 <div align=center>
   
-  
+  ![스토어](https://github.com/user-attachments/assets/0a78395d-1dab-4740-9825-7d75cf5d9acc)
 
 </div>
 
@@ -125,44 +125,69 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 
 - 여행기에 적용할 테마와 폰트 목록을 볼 수 있습니다.
 
+*폰트 미리보기*
+
+- 적용할 수 있는 추가 폰트를 미리 볼 수 있습니다.
+
+*장바구니 담기*
+
+- 선택한 상품을 장바구니에 담을 수 있습니다.
+
+*상품 결제*
+
+- 장바구니에서 선택한 상품을 구매할 수 있습니다.
+
+*구매내역*
+
+- 구매한 상품의 구매내역을 조회할 수 있습니다.
+
 <br>
 
   ### 2. ERD
 
-  <img src="Readme/여행기_ERD_21.png">
+  <img src="Readme/ERD_member,store.png">
 
   ### 3. 플로우 차트
 
-  <img src="Readme/여행기_플로우차트_14.png">
+  <img src="Readme/FlowChart_Login.png">
+  <img src="Readme/FlowChart_Join.png">
+  <img src="Readme/FlowChart_MyPage.png">
+  <img src="Readme/FlowChart_Store.png">
 
   ### 4. 화면설계서
   
- <img src="Readme/여행기_화면설계서01_.png">
- <img src="Readme/여행기_화면설계서02_.png">
- <img src="Readme/여행기_화면설계서03_.png">
- <img src="Readme/여행기_화면설계서04_.png">
- <img src="Readme/여행기_화면설계서05_.png">
- <img src="Readme/여행기_화면설계서06_.png">
- <img src="Readme/여행기_화면설계서07_.png">
- <img src="Readme/여행기_화면설계서08_.png">
- <img src="Readme/여행기_화면설계서08_01_.png">
- <img src="Readme/여행기_화면설계서09_.png">
- <img src="Readme/여행기_화면설계서09_01_.png">
- <img src="Readme/여행기_화면설계서10_.png">
- <img src="Readme/여행기_화면설계서10_01_.png">
+  <img src="Readme/Frame_Login_01.png">
+  <img src="Readme/Frame_Login_02.png">
+  <img src="Readme/Frame_Login_03.png">
+  <img src="Readme/Frame_Login_04.png">
+  <img src="Readme/Frame_Join_01.png">
+  <img src="Readme/Frame_Join_02.png">
+  <img src="Readme/Frame_Join_03.png">
+  <img src="Readme/Frame_Join_04.png">
+  <img src="Readme/Frame_Join_05.png">
+  <img src="Readme/Frame_Join_06.png">
+  <img src="Readme/Frame_Mypage_01.png">
+  <img src="Readme/Frame_Mypage_02.png">
+  <img src="Readme/Frame_Mypage_03.png">
+  <img src="Readme/Frame_Mypage_04.png">
+  <img src="Readme/Frame_Store_01.png">
+  <img src="Readme/Frame_Store_02.png">
+  <img src="Readme/Frame_Store_03.png">
+  <img src="Readme/Frame_Store_04.png">
+  <img src="Readme/Frame_Store_05.png">
      
   ### 5.  ClassDiagram
-   <img src="Readme/여행기_ClassDiagram.png">
+  <img src="Readme/member_config.png">
+  <img src="Readme/store.png">
 
    ### 6. 개발 이슈
-<img src ="Readme/여행기 게시판 -Cloudinary-0.png">
-<img src ="Readme/여행기 게시판 -Cloudinary-01.png">
-<img src ="Readme/여행기 게시판 -Cloudinary-02.png">
-<img src ="Readme/여행기 게시판 post-01.png">
-<img src ="Readme/여행기 게시판 post-02.png">
-<img src ="Readme/여행기 게시판 select -01.png">
-<img src ="Readme/여행기 게시판 DataAccesException -01.png">
-<img src ="Readme/여행기 게시판 DataAccesException -02.png">
+<img src ="Readme/Issue_Login_01.png">
+<img src ="Readme/Issue_Login_02.png">
+<img src ="Readme/Issue_SNSLogin_01.png">
+<img src ="Readme/Issue_SNSLogin_02.png">
+<img src ="Readme/Issue_Pay_01.png">
+<img src ="Readme/Issue_Pay_02.png">
+<img src ="Readme/Issue_Pay_03.png">
 
 </details>
 <details>
