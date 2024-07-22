@@ -37,7 +37,7 @@ function robotHandler() {
 						console.log("자동 가입 방지 봇 통과");
 						captcha = 1;
 						if(swal.isConfirmed){
-							location.href = "/login";
+							location.href = contextPath + "login";
 						}
 					});
 					break;

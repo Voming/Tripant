@@ -28,19 +28,19 @@ public class OAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler 
 			request.getSession().setAttribute("memType", map.get("memType"));
 			response.setContentType("text/html; charset=utf-8");
 			response.getWriter().append("<script type=\"text/javascript\">"
-					+ "location.href = \"/exception?code=4011\";"
+					+ "location.href = \""+request.getContextPath()+"/exception?code=4011\";"
 					+ "</script>").close();
 		}
 		if(exception instanceof OAuth2AuthenticationException) {
 			response.setContentType("text/html; charset=utf-8");
 			response.getWriter().append("<script type=\"text/javascript\">"
-					+ "location.href = \"/exception?code=4012\";"
+					+ "location.href = \""+request.getContextPath()+"/exception?code=4012\";"
 					+ "</script>").close();
 		}
 		if(exception.getMessage().equals("4021")) {
 			response.setContentType("text/html; charset=utf-8");
 			response.getWriter().append("<script type=\"text/javascript\">"
-					+ "location.href = \"/exception?code=4021\";"
+					+ "location.href = \""+request.getContextPath()+"/exception?code=4021\";"
 					+ "</script>").close();
 		}
 	}
