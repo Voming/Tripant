@@ -35,16 +35,135 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 ## 4️⃣ 기능 구현 / 화면
 <details>
   <summary><h3> 📌 서재원</h3></summary>
-  
+
   ### 1. 주요 기능 및 시현
+
+ 
+ <br>
+
+> **로그인 및 SNS로그인**
+ <div align=center>
   
+  ![로그인](https://github.com/user-attachments/assets/c4632c86-b45a-4282-a2f8-486f07e5dd75)
+
+ </div>
+
+**주요기능 설명**
+ 
+  *로그인*
+  
+  - 가입된 이메일로 로그인할 수 있습니다.
+  - 가입된 이메일이 SNS(카카오, 네이버, 구글) 계정에 등록된 이메일과 같다면 해당 서비스와 연동하여 로그인할 수 있습니다.
+
+  
+ <br>
+ 
+ >**회원가입** 
+<div align=center>
+   
+  ![회원가입](https://github.com/user-attachments/assets/bfd97c63-6221-4bfd-9b4f-6a4c263952ee)
+  ![회원가입_SNS](https://github.com/user-attachments/assets/1b451f15-2685-46ce-ad0c-42466e696b62)
+
+</div>
+
+**주요기능 설명**
+
+*회원가입*
+
+- 이메일 인증을 통해야 회원가입이 가능합니다.
+- 닉네임은 고유한 닉네임만 사용 가능합니다.
+- 닉네임과 비밀번호는 형식을 지켜야 합니다.
+- 리캡챠를 통해 보안을 한층 더 강화했습니다.
+
+*SNS회원가입*
+
+- SNS연동 시 해당 이메일로 가입 이력이 없다면 가입을 진행할 수 있습니다.
+- SNS로 가입 시 이메일 인증을 할 필요가 없습니다.
+
+<br>
+
+>**마이페이지**
+<div align=center>
+  
+  ![마이페이지](https://github.com/user-attachments/assets/2078a3b1-bac9-41ef-8bdf-94017efcfd5d)
+  ![마이페이지_닉네임변경](https://github.com/user-attachments/assets/acdb226b-ab99-40dd-8bd8-6e5112546066)
+  ![마이페이지_비밀번호변경](https://github.com/user-attachments/assets/a55912c9-e9db-4c14-9665-45cc0544b479)
+  ![마이페이지_회원탈퇴](https://github.com/user-attachments/assets/1c38f5fc-c10d-4905-a080-96ec25eaf6b1)
+
+</div>
+
+**주요기능 설명**
+
+*닉네임 변경*
+
+- 닉네임을 변경할 수 있습니다.
+- 다른 회원이 사용하거나 현재 사용중인 닉네임으로는 변경할 수 없습니다.
+
+*비밀번호 변경*
+
+ - 비밀번호를 변경할 수 있습니다.
+ - 현재 사용중인 비밀번호로는 변경할 수 없습니다.
+ - 비밀번호 변경 시 새로운 비밀번호로 다시 로그인 해야 합니다.
+
+*회원탈퇴*
+
+ - 트립앤트에서 탈퇴할 수 있습니다.
+ - 탈퇴 시 현재 사용중인 비밀번호를 입력해야 탈퇴가 가능합니다.
+
+<br>
+
+> **스토어**
+<div align=center>
+  
+  
+
+</div>
+
+**주요기능 설명**
+
+*상품 보기*
+
+- 여행기에 적용할 테마와 폰트 목록을 볼 수 있습니다.
+
+<br>
+
   ### 2. ERD
+
+  <img src="Readme/여행기_ERD_21.png">
 
   ### 3. 플로우 차트
 
-  ### 4. 화면설계서
+  <img src="Readme/여행기_플로우차트_14.png">
 
+  ### 4. 화면설계서
+  
+ <img src="Readme/여행기_화면설계서01_.png">
+ <img src="Readme/여행기_화면설계서02_.png">
+ <img src="Readme/여행기_화면설계서03_.png">
+ <img src="Readme/여행기_화면설계서04_.png">
+ <img src="Readme/여행기_화면설계서05_.png">
+ <img src="Readme/여행기_화면설계서06_.png">
+ <img src="Readme/여행기_화면설계서07_.png">
+ <img src="Readme/여행기_화면설계서08_.png">
+ <img src="Readme/여행기_화면설계서08_01_.png">
+ <img src="Readme/여행기_화면설계서09_.png">
+ <img src="Readme/여행기_화면설계서09_01_.png">
+ <img src="Readme/여행기_화면설계서10_.png">
+ <img src="Readme/여행기_화면설계서10_01_.png">
+     
   ### 5.  ClassDiagram
+   <img src="Readme/여행기_ClassDiagram.png">
+
+   ### 6. 개발 이슈
+<img src ="Readme/여행기 게시판 -Cloudinary-0.png">
+<img src ="Readme/여행기 게시판 -Cloudinary-01.png">
+<img src ="Readme/여행기 게시판 -Cloudinary-02.png">
+<img src ="Readme/여행기 게시판 post-01.png">
+<img src ="Readme/여행기 게시판 post-02.png">
+<img src ="Readme/여행기 게시판 select -01.png">
+<img src ="Readme/여행기 게시판 DataAccesException -01.png">
+<img src ="Readme/여행기 게시판 DataAccesException -02.png">
+
 </details>
 <details>
   <summary><h3> 📌 김보민 </h3></summary>
