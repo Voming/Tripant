@@ -58,8 +58,6 @@ public class SecurityConfig {
 					)
 		.csrf((csrf) -> csrf
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//				.disable()
-//				.ignoringRequestMatchers(new AntPathRequestMatcher("/post/cloudinary"))
 				)
 		.headers((headers) -> headers
 				.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))

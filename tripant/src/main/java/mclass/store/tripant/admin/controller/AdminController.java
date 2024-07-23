@@ -68,10 +68,15 @@ public class AdminController {
 			,@RequestParam(required = false ) String sort
 			,@RequestParam(required = false ) Integer sortCount
 			) {
-		if(sortCount==1) {
-			model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem,sort));
-		}else if (sortCount==0) {
-			model.addAttribute("memMap",adminservice.selectMemList( num, pageNum, currentPage, searchMem));
+		try {
+			if(sortCount==1) {
+				model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem,sort));
+			}else if (sortCount==0) {
+				model.addAttribute("memMap",adminservice.selectMemList( num, pageNum, currentPage, searchMem));
+			}
+		} catch (NullPointerException e) {
+			model.addAttribute("memMap", adminservice.search( num, pageNum, currentPage, searchMem,""));
+			 e.printStackTrace();
 		}
 		
 		return "admin/member_fragment";
