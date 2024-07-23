@@ -30,7 +30,8 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
 - **WAS** :  Spring Boot 3 내장 Tomcat
 - **Collaboration** : GitHub, Github Desktop,Notion,Google Drive/Docs
 - **FrameWork/ Library** : Thymeleaf, JQuery, ckEditor(wysiwyg),FullCalendar, Date Picker, Spring Boot 3, lombok, Spring Security,Oauth2,MyBatis,Cloudinary(File Storage),aspectj-weaver, log4jdbc, log4j2, Jackson, Gson, Document
-- **API** : 한국관광공사_국문 관광정보 서비스_GW, Kakao Mobility Developers길찾기 API,Kakao Postcode API
+- **API** : 한국관광공사_국문 관광정보 서비스_GW, Kakao Mobility Developers 길찾기 API, Kakao Postcode API, Kakao Login API, Naver Login API, Google Login API, PortOne API, Google Recaptcha v2
+
 
 ## 4️⃣ 기능 구현 / 화면
 <details>
