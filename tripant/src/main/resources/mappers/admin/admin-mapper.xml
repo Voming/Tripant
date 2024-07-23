@@ -4,7 +4,7 @@
 
 	<!-- 회원관리 -->
  	<select id="selectMemList" resultType="AdminMemEntity" parameterType="map">
-	SELECT T2.*, (select to_char(T3.MEM_QUIT_DATE,'yyyy-MM-dd') from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
+	SELECT T2.*
 		FROM (SELECT T1.*, ROWNUM RN FROM
 			(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, 	
                     to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED
@@ -18,7 +18,7 @@
 	</select>
 	<!--회원검색 +정렬-->
 	<select id="selectMemListSearch" resultType="AdminMemEntity" parameterType="map">
-	SELECT T2.*, (select to_char(T3.MEM_QUIT_DATE,'yyyy-MM-dd') from quit_member T3 where T3.MEM_EMAIL = T2.MEM_EMAIL) MEM_QUIT_DATE
+	SELECT T2.*
 		FROM (SELECT T1.*, ROWNUM RN FROM
 			(select a.MEM_EMAIL  MEM_EMAIL  ,a.MEM_NICK MEM_NICK, 	
                     to_char(a.MEM_JOIN_DATE,'yyyy-MM-dd') MEM_JOIN_DATE, a.MEM_ROLE  MEM_ROLE , a.MEM_ENABLED MEM_ENABLED
