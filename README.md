@@ -459,7 +459,7 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   <img src="Readme/화면설계서_여행일정-장소추가9.png">
      
   ### 5.  ClassDiagram
-  <img src="Readme/여행일정_클래스다이어그램.png">
+  <img src="Readme/나의 일정-클래스다이어그램.png">
 
  ### 6. 개발 이슈
   <img src="Readme/나의 일정 - 개발이슈 목차.png">
