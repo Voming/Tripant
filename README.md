@@ -462,7 +462,16 @@ KH 정보 교육원 자바공공데이터 융합과정 FINAL_PROJECT
   <img src="Readme/여행일정_클래스다이어그램.png">
 
  ### 6. 개발 이슈
-
+  <img src="Readme/나의 일정 - 개발이슈 목차.png">
+  <img src="Readme/나의 일정 - 일행추가 - 개발이슈.png">
+  <img src="Readme/나의 일정 - 일정보기 - 지도 -개발이슈.png">
+  <img src="Readme/나의 일정 - 일정보기 - 시간 -개발이슈.png">
+  <img src="Readme/나의 일정 - 일정편집 - 개발이슈0.png">
+  <img src="Readme/나의 일정 - 일정편집 - DD-개발이슈1.png">
+  <img src="Readme/나의 일정 - 일정편집 - DD-개발이슈-2.png">
+  <img src="Readme/나의 일정 - 일정편집 - DD-개발이슈3.png">
+  <img src="Readme/나의 일정 - 일정편집 - 저장 - 개발이슈1.png">
+  <img src="Readme/나의 일정 - 일정편집 - 저장 - 개발이슈2.png">
 </details>
 <details>
   <summary><h3> 📌 배소진 </h3></summary>
